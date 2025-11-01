@@ -31,23 +31,6 @@ def money_to_float(s: Optional[str]) -> Optional[float]:
         return None
     return float(m.group(1).replace(",", ""))
 
-def split_age_sex(token: Optional[str]):
-    if not token:
-        return None, None
-    token = token.strip().lower()
-    age = None
-    sex = None
-    if token and token[0].isdigit():
-        age = int(re.match(r"(\d+)", token).group(1))
-    if token and token[-1].isalpha():
-        sex = token[-1].upper()
-    return age, sex
-
-def kmh(distance_m: Optional[float], time_s: Optional[float]) -> Optional[float]:
-    if distance_m and time_s and time_s > 0:
-        return (distance_m / time_s) * 3.6
-    return None
-
 def safe_concat_frames(frames: List[pd.DataFrame], on_keys: List[str], how: str = "left") -> pd.DataFrame:
     base = None
     for f in frames:
