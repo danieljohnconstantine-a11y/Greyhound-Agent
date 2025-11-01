@@ -3,7 +3,7 @@ import pandas as pd
 from typing import Dict, List, Any, Optional
 from .utils import clean_text
 
-# "Box 1: 3-1-0  Track 15: 4-3-2  Distance 10: 2-1-1"
+# Example line: "Box 1: 3-1-0  Track 15: 4-3-2  Distance 10: 2-1-1"
 RE_BOX_LINE   = re.compile(r"Box\s*(\d+):\s*(\d+)-(\d+)-(\d+)", re.IGNORECASE)
 RE_TRACK_LINE = re.compile(r"Track\s*(\d+):\s*(\d+)-(\d+)-(\d+)", re.IGNORECASE)
 RE_DIST_LINE  = re.compile(r"Distance\s*(\d+):\s*(\d+)-(\d+)-(\d+)", re.IGNORECASE)
@@ -41,7 +41,6 @@ def parse_box_history(text: str, box_bias_map: Optional[dict] = None) -> pd.Data
                 r["DistanceWins"] = int(m.group(2))
                 r["DistancePlaces"] = int(m.group(3))
 
-            # Optional bias from map (track-specific logic can be added later)
             if box_bias_map and r.get("Box") is not None:
                 r["BoxBiasFactor"] = box_bias_map.get(str(r["Box"]), 0)
 
