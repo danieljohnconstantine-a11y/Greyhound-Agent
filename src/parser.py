@@ -1,98 +1,80 @@
-import pandas as pd
 import re
+import pandas as pd
+from typing import List, Dict, Any, Optional
+from .utils import clean_text, to_float, money_to_float, split_age_sex
 
-def parse_race_form(text):
-    lines = text.splitlines()
-    dogs = []
-    current_race = {}
-    race_number = 0
 
-    for line in lines:
-        line = line.strip()
+HEADER_CORE = [
+"Track", "RaceNumber", "RaceDate", "RaceTime", "Distance",
+"Box", "DogName", "Trainer", "SexAge", "Weight",
+"Starts", "Wins", "Seconds", "Thirds", "CareerPrizeMoney", "CareerBest",
+"RTC", "DLR", "DLW", "SourcePDF"
+]
 
-        # Match race header
-        header_match = re.match(r"Race No\s+(\d{1,2}) Oct (\d{2}) (\d{2}:\d{2}[AP]M) ([A-Za-z ]+)\s+(\d+)m", line)
-        if header_match:
-            race_number += 1
-            day, year, time, track, distance = header_match.groups()
-            current_race = {
-                "RaceNumber": race_number,
-                "RaceDate": f"2025-10-{day.zfill(2)}",
-                "RaceTime": time,
-                "Track": track.strip(),
-                "Distance": int(distance)
-            }
-            continue
 
-        # Match dog entry with glued form number
-        dog_match = re.match(
-            r"""^(\d+)\.?\s*([0-9]{3,6})?([A-Za-z'’\- ]+)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z'’\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
-            line
-        )
+# Example patterns (tune to your PDFs)
+RE_RACE_HEADER = re.compile(r"Race No\s*(\d+)\s*(\d{1,2} \w+ \d{2}) (\d{1,2}:\d{2}[AP]M) ([A-Za-z ]+) (\d{3,4})m")
+RE_DOG_LINE = re.compile(
+r"^(\d+)\.\s*([0-9]{0,6})?([A-Za-z'’\- ]+)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z'’\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)"
+)
 
-        if dog_match:
-            (
-                box, form_number, raw_name, sex_age, weight, draw, trainer,
-                wins, places, starts, prize, rtc, dlr, dlw
-            ) = dog_match.groups()
 
-            dog_name = raw_name.strip()
-            if form_number and dog_name.startswith(form_number[-2:]):
-                dog_name = dog_name[len(form_number[-2:]):].strip()
 
-            dogs.append({
-                "Box": int(box),
-                "DogName": dog_name,
-                "FormNumber": form_number or "",
-                "Trainer": trainer.strip(),
-                "SexAge": sex_age,
-                "Weight": float(weight),
-                "Draw": int(draw),
-                "CareerWins": int(wins),
-                "CareerPlaces": int(places),
-                "CareerStarts": int(starts),
-                "PrizeMoney": float(prize.replace(",", "")),
-                "RTC": rtc,
-                "DLR": dlr,
-                "DLW": dlw,
-                **current_race
-            })
-            continue
 
-        # Match Best/Sectional/Last3 block
-        time_match = re.match(
-            r"""Best:\s*(\d+\.\d+)\s+Sectional:\s*(\d+\.\d+)\s+Last3:\s*
+def parse_race_form(text: str, source_pdf: Optional[str] = None) -> pd.DataFrame:
+lines = [clean_text(x) for x in text.splitlines()]
+dogs: List[Dict[str, Any]] = []
+current = {}
 
-\[(.*?)\]
 
-""",
-            line
-        )
-        if time_match and dogs:
-            dogs[-1]["BestTimeSec"] = float(time_match.group(1))
-            dogs[-1]["SectionalSec"] = float(time_match.group(2))
-            try:
-                last3 = [float(t.strip()) for t in time_match.group(3).split(",")]
-                dogs[-1]["Last3TimesSec"] = last3
-            except:
-                dogs[-1]["Last3TimesSec"] = []
+race_number = 0
+for line in lines:
+if not line:
+continue
 
-        # Match Margins block
-        margin_match = re.match(
-            r"""Margins:\s*
 
-\[(.*?)\]
+h = RE_RACE_HEADER.search(line)
+if h:
+race_number = int(h.group(1))
+date = h.group(2)
+rtime = h.group(3)
+track = h.group(4).strip()
+distance = int(h.group(5))
+current = {
+"RaceNumber": race_number,
+"RaceDate": date,
+"RaceTime": rtime,
+"Track": track,
+"Distance": distance,
+}
+continue
 
-""",
-            line
-        )
-        if margin_match and dogs:
-            try:
-                margins = [float(m.strip()) for m in margin_match.group(1).split(",")]
-                dogs[-1]["Margins"] = margins
-            except:
-                dogs[-1]["Margins"] = []
 
-    df = pd.DataFrame(dogs)
-    print(f"✅ Parsed {len(df)} dogs")
-    return df
+m = RE_DOG_LINE.search(line)
+if m:
+box = int(m.group(1))
+form_number = (m.group(2) or "").strip()
+raw_name = (m.group(3) or "").strip()
+sex_age = (m.group(4) or "").strip()
+weight = to_float(m.group(5))
+draw = int(m.group(6)) # unused but kept
+trainer = (m.group(7) or "").strip()
+wins, places, starts = int(m.group(8)), int(m.group(9)), int(m.group(10))
+prize = money_to_float(m.group(11))
+rtc, dlr, dlw = m.group(12), m.group(13), m.group(14)
+
+
+dog_name = raw_name
+d: Dict[str, Any] = {
+**current,
+"Box": box,
+"DogName": dog_name,
+"Trainer": trainer,
+"SexAge": sex_age,
+"Weight": weight,
+"Starts": starts,
+"Wins": wins,
+"Seconds": places,
+"Thirds": 0, # not present in this line; optional further parse elsewhere
+"CareerPrizeMoney": prize,
+return pd.DataFrame(dogs, columns=HEADER_CORE)
