@@ -1,32 +1,76 @@
-# src/utils.py - Utility functions
-import os
+import re
+import math
+import pandas as pd
+from typing import Optional
 
-def setup_environment():
-    """Setup and validate environment"""
-    print("🔧 Setting up environment...")
-    
-    # Ensure outputs directory exists
-    from config import OUTPUT_DIR
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-        print(f"✅ Created outputs directory: {OUTPUT_DIR}")
-    else:
-        print(f"✅ Outputs directory exists: {OUTPUT_DIR}")
-    
-    return True
 
-def find_pdf_files():
-    """Find all PDF files in data directory"""
-    from config import PDF_DIR
-    
-    if os.path.exists(PDF_DIR):
-        pdf_files = [os.path.join(PDF_DIR, f) for f in os.listdir(PDF_DIR) if f.lower().endswith('.pdf')]
-        if pdf_files:
-            print(f"📁 Found {len(pdf_files)} PDF files")
-            return pdf_files
-        else:
-            print("❌ No PDF files found in data folder!")
-    else:
-        print("❌ Data folder not found!")
-    
-    return []
+SPACE_RE = re.compile(r"\s+")
+CURRENCY_RE = re.compile(r"\$([\d,]+(?:\.\d{2})?)")
+FLOAT_RE = re.compile(r"([0-9]+(?:\.[0-9]+)?)")
+
+
+
+
+def clean_text(s: str) -> str:
+if not s:
+return ""
+s = s.replace("\xa0", " ").replace("\u200b", " ")
+return SPACE_RE.sub(" ", s).strip()
+
+
+
+
+def to_float(s: Optional[str]) -> Optional[float]:
+if s is None:
+return None
+m = FLOAT_RE.search(s)
+if not m:
+return None
+try:
+return float(m.group(1))
+except:
+return None
+
+
+
+
+def money_to_float(s: Optional[str]) -> Optional[float]:
+if not s:
+return None
+m = CURRENCY_RE.search(s)
+if not m:
+return None
+return float(m.group(1).replace(",", ""))
+
+
+
+
+def split_age_sex(token: str):
+# Examples: "2d", "3b", "2f" (age-digit + sex-letter), fallback to None
+if not token:
+return None, None
+token = token.strip().lower()
+age = None
+sex = None
+if token and token[0].isdigit():
+age = int(re.match(r"(\d+)", token).group(1))
+if token and token[-1].isalpha():
+sex = token[-1].upper()
+return age, sex
+
+
+
+
+def safe_concat_frames(frames, on_keys, how="left"):
+import pandas as pd
+base = None
+for f in frames:
+if f is None or f.empty:
+continue
+if base is None:
+base = f.copy()
+else:
+base = pd.merge(base, f, on=on_keys, how=how, suffixes=("", "_dup"))
+# Remove any _dup leftover columns
+for c in list(base.columns):
+return None
