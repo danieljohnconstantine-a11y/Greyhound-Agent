@@ -58,7 +58,7 @@ def export_to_excel(df, output_path, filename=None):
     
     # Check computed fields
     computed_fields = ["BestTimeSec", "SectionalSec", "Last3TimesSec", "Margins", "FinalScore"]
-    print("\n   Computed/Derived Fields:")
+    print(f"\n   Computed/Derived Fields:")
     for field in computed_fields:
         if field in df.columns:
             unique_count = df[field].nunique()
@@ -67,6 +67,46 @@ def export_to_excel(df, output_path, filename=None):
                 print(f"   ⚠️  {field}: ALL {len(df)} dogs have identical value (not unique)")
             else:
                 print(f"   ✅ {field}: {unique_count} unique values, {null_count} missing")
+    
+    # Anomaly detection
+    print(f"\n   Anomaly Detection:")
+    anomalies_found = False
+    
+    # Check for missing critical fields
+    critical_fields = ["DogName", "Track", "RaceNumber", "Distance", "Box"]
+    for field in critical_fields:
+        if field in df.columns:
+            missing = df[field].isnull().sum()
+            if missing > 0:
+                print(f"   ⚠️  {field}: {missing} dogs have missing values")
+                anomalies_found = True
+    
+    # Check for duplicate dog names in same race
+    duplicates = df.groupby(["Track", "RaceNumber", "DogName"]).size()
+    duplicates = duplicates[duplicates > 1]
+    if len(duplicates) > 0:
+        print(f"   ⚠️  Found {len(duplicates)} duplicate dog entries in same race")
+        anomalies_found = True
+    
+    # Check for unrealistic values
+    if "Weight" in df.columns:
+        zero_weight = (df["Weight"] == 0).sum()
+        if zero_weight > 0:
+            print(f"   ⚠️  {zero_weight} dogs have Weight = 0 (missing data)")
+            anomalies_found = True
+    
+    if "PrizeMoney" in df.columns:
+        zero_prize = (df["PrizeMoney"] == 0).sum()
+        if zero_prize > 0:
+            print(f"   ℹ️  {zero_prize} dogs have PrizeMoney = 0 (may be normal for new dogs)")
+    
+    if "CareerStarts" in df.columns:
+        zero_starts = (df["CareerStarts"] == 0).sum()
+        if zero_starts > 0:
+            print(f"   ℹ️  {zero_starts} dogs have CareerStarts = 0 (new/unraced dogs)")
+    
+    if not anomalies_found:
+        print(f"   ✅ No critical anomalies detected")
     
     # Save to Excel
     if filename is None:
