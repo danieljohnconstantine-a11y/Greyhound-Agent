@@ -15,9 +15,9 @@ def compute_features(df):
     if "SectionalSec" not in df.columns:
         df["SectionalSec"] = 8.5
     if "Last3TimesSec" not in df.columns:
-        df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
+        df["Last3TimesSec"] = [[22.65, 22.52, 22.77] for _ in range(len(df))]
     if "Margins" not in df.columns:
-        df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+        df["Margins"] = [[5.0, 6.3, 10.3] for _ in range(len(df))]
     df["BoxBiasFactor"] = 0.1
     df["TrackConditionAdj"] = 1.0
 
