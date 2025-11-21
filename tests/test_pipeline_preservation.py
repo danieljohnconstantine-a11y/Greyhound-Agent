@@ -13,6 +13,7 @@ from features import compute_features
 
 
 # Test fixtures
+# Note: Date format matches PDF structure but is generic for long-term test stability
 SAMPLE_RACE_DATA = """
 Race No 19 Oct 25 06:52PM BROKEN HILL 375m
 1. 25243Visibility 2d 0.0kg 1 Kaylene Hatzi 0 - 4 - 13 $1,855 14 7 Mdn
