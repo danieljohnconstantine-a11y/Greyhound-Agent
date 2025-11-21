@@ -116,7 +116,16 @@ def export_to_excel(df, output_path, filename=None):
     # Ensure directory exists
     os.makedirs(output_path, exist_ok=True)
     
-    df.to_excel(filepath, index=False, engine='openpyxl')
+    try:
+        # Use openpyxl engine for Excel export (requires: pip install openpyxl)
+        df.to_excel(filepath, index=False, engine='openpyxl')
+    except ImportError:
+        raise ImportError(
+            "openpyxl is required for Excel export. Install with: pip install openpyxl"
+        )
+    except Exception as e:
+        raise Exception(f"Failed to export Excel file: {str(e)}")
+    
     print(f"\n✅ EXCEL SAVED: {filepath}")
     print(f"   Columns exported: {len(df.columns)}")
     print(f"   Rows exported: {len(df)}")

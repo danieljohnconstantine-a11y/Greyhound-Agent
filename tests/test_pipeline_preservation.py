@@ -12,17 +12,18 @@ from parser import parse_race_form
 from features import compute_features
 
 
-def test_parser_preserves_unique_fields():
-    """Test that parser extracts unique values for each dog"""
-    # Use format that matches actual PDFs (no 'x' in form number)
-    sample_text = """
+# Test fixtures
+SAMPLE_RACE_DATA = """
 Race No 19 Oct 25 06:52PM BROKEN HILL 375m
 1. 25243Visibility 2d 0.0kg 1 Kaylene Hatzi 0 - 4 - 13 $1,855 14 7 Mdn
 2. 54825Vision 3d 0.0kg 3 Judith Hurley 1 - 3 - 9 $1,720 7 5 192
 3. 34657Wings 3b 0.0kg 5 Clayton Trengove 1 - 3 - 11 $1,565 12 7 64
 """
-    
-    df = parse_race_form(sample_text)
+
+
+def test_parser_preserves_unique_fields():
+    """Test that parser extracts unique values for each dog"""
+    df = parse_race_form(SAMPLE_RACE_DATA)
     
     # Verify we got all dogs
     assert len(df) == 3, f"Expected 3 dogs, got {len(df)}"
