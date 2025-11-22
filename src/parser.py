@@ -80,12 +80,18 @@ def parse_race_form(text):
 
         # Check if this is a dog name header (all caps, short line)
         # This marks the start of a dog's detailed section
-        if line.upper() == line and len(line) > 0 and len(line.split()) <= 5:
+        # Improved matching: exact match or very close match, excluding generic headers
+        if line.upper() == line and 3 <= len(line) <= 50 and len(line.split()) <= 5:
+            # Exclude common non-dog headers
+            if any(keyword in line for keyword in ['RACE', 'PRIZE', 'DISTANCE', 'TRACK', 'HORSE', 'WINNER']):
+                continue
+            
             # Try to match this to a known dog
-            line_normalized = line.replace("'", "").replace("-", " ").replace("  ", " ")
+            line_normalized = line.replace("'", "").replace("-", " ").replace("  ", " ").strip()
             for dog_idx, dog in enumerate(dogs):
-                dog_name_normalized = dog["DogName"].upper().replace("'", "").replace("-", " ")
-                if dog_name_normalized in line_normalized or line_normalized in dog_name_normalized:
+                dog_name_normalized = dog["DogName"].upper().replace("'", "").replace("-", " ").strip()
+                # More strict matching: the line should be the dog name (with minor variations)
+                if dog_name_normalized == line_normalized:
                     current_dog_section_index = dog_idx
                     break
 
@@ -146,8 +152,8 @@ def parse_race_form(text):
         if race_times:
             # BestTimeSec: minimum race time (best performance)
             dogs[dog_index]["BestTimeSec"] = min(race_times)
-            # Last3TimesSec: most recent 3 race times
-            dogs[dog_index]["Last3TimesSec"] = race_times[:3] if len(race_times) >= 3 else race_times
+            # Last3TimesSec: most recent 3 race times (last 3 in the list, as they're in chronological order)
+            dogs[dog_index]["Last3TimesSec"] = race_times[-3:] if len(race_times) >= 3 else race_times
         
         if sec_times:
             # SectionalSec: minimum sectional time (best sectional)
