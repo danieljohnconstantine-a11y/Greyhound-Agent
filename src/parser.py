@@ -1,7 +1,16 @@
 import pandas as pd
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 def parse_race_form(text):
+    """Parse race form text and return DataFrame with error logging."""
+    lines = text.splitlines()
+    dogs = []
+    current_race = {}
+    race_number = 0
+    parse_warnings = []
     lines = text.splitlines()
     dogs = []
     current_race = {}
@@ -69,12 +78,14 @@ def parse_race_form(text):
             line
         )
         if time_match and dogs:
-            dogs[-1]["BestTimeSec"] = float(time_match.group(1))
-            dogs[-1]["SectionalSec"] = float(time_match.group(2))
             try:
+                dogs[-1]["BestTimeSec"] = float(time_match.group(1))
+                dogs[-1]["SectionalSec"] = float(time_match.group(2))
                 last3 = [float(t.strip()) for t in time_match.group(3).split(",")]
                 dogs[-1]["Last3TimesSec"] = last3
-            except:
+            except Exception as e:
+                logger.warning(f"Error parsing time data: {e}")
+                parse_warnings.append(f"Time parsing error: {e}")
                 dogs[-1]["Last3TimesSec"] = []
 
         # Match Margins block
@@ -90,9 +101,20 @@ def parse_race_form(text):
             try:
                 margins = [float(m.strip()) for m in margin_match.group(1).split(",")]
                 dogs[-1]["Margins"] = margins
-            except:
+            except Exception as e:
+                logger.warning(f"Error parsing margin data: {e}")
+                parse_warnings.append(f"Margin parsing error: {e}")
                 dogs[-1]["Margins"] = []
 
+    if not dogs:
+        logger.error("No dogs were parsed from the text")
+        return pd.DataFrame()
+    
     df = pd.DataFrame(dogs)
+    logger.info(f"Parsed {len(df)} dogs")
     print(f"✅ Parsed {len(df)} dogs")
+    
+    if parse_warnings:
+        logger.warning(f"Encountered {len(parse_warnings)} parsing warnings")
+    
     return df
