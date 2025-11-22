@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import logging
 
 def compute_features(df):
     df = df.copy()
@@ -9,20 +10,54 @@ def compute_features(df):
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
     df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
 
-    # Placeholder values — replace with parsed metrics later
-    df["BestTimeSec"] = 22.5
-    df["SectionalSec"] = 8.5
-    df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
-    df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+    # Use actual parsed time data with fallback to reasonable defaults only when missing
+    # Log when using fallback values
+    missing_best_time = df["BestTimeSec"].isna()
+    missing_sectional = df["SectionalSec"].isna()
+    missing_last3 = df["Last3TimesSec"].isna()
+    missing_margins = df["Margins"].isna()
+    
+    if missing_best_time.any():
+        logging.warning(f"⚠️ Using fallback BestTimeSec for {missing_best_time.sum()} dogs (calculating from distance)")
+        # Calculate fallback based on distance and typical speeds
+        df.loc[missing_best_time, "BestTimeSec"] = df.loc[missing_best_time, "Distance"] / 16.0  # ~57.6 km/h typical
+    
+    if missing_sectional.any():
+        logging.warning(f"⚠️ Using fallback SectionalSec for {missing_sectional.sum()} dogs")
+        # Sectional is typically ~37-38% of race time for first 100-200m
+        df.loc[missing_sectional, "SectionalSec"] = df.loc[missing_sectional, "BestTimeSec"] * 0.375
+    
+    if missing_last3.any():
+        logging.warning(f"⚠️ Using fallback Last3TimesSec for {missing_last3.sum()} dogs")
+        # Generate slight variations around BestTimeSec for consistency calculation
+        df.loc[missing_last3, "Last3TimesSec"] = df.loc[missing_last3].apply(
+            lambda row: [row["BestTimeSec"], row["BestTimeSec"] * 1.01, row["BestTimeSec"] * 0.99] if pd.notna(row["BestTimeSec"]) else [],
+            axis=1
+        )
+    
+    if missing_margins.any():
+        logging.warning(f"⚠️ Using fallback Margins for {missing_margins.sum()} dogs")
+        # Default to moderate margins if missing
+        df.loc[missing_margins, "Margins"] = df.loc[missing_margins].apply(lambda _: [5.0, 6.0, 7.0], axis=1)
+    
+    # Set fallback values for other features not in parsed data
     df["BoxBiasFactor"] = 0.1
     df["TrackConditionAdj"] = 1.0
 
-    # Derived metrics
+    # Derived metrics with safe handling for lists
     df["Speed_kmh"] = (df["Distance"] / df["BestTimeSec"]) * 3.6
     df["EarlySpeedIndex"] = df["Distance"] / df["SectionalSec"]
-    df["FinishConsistency"] = df["Last3TimesSec"].apply(lambda x: np.std(x))
-    df["MarginAvg"] = df["Margins"].apply(lambda x: np.mean(x))
-    df["FormMomentum"] = df["Margins"].apply(lambda x: np.mean(np.diff(x)) if len(x) >= 2 else 0)
+    
+    # Safe handling for list operations
+    df["FinishConsistency"] = df["Last3TimesSec"].apply(
+        lambda x: np.std(x) if isinstance(x, list) and len(x) > 0 else 0.0
+    )
+    df["MarginAvg"] = df["Margins"].apply(
+        lambda x: np.mean(x) if isinstance(x, list) and len(x) > 0 else 5.0
+    )
+    df["FormMomentum"] = df["Margins"].apply(
+        lambda x: np.mean(np.diff(x)) if isinstance(x, list) and len(x) >= 2 else 0
+    )
 
     # Consistency Index
     df["ConsistencyIndex"] = df.apply(
