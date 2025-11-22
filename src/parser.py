@@ -26,7 +26,7 @@ def parse_race_form(text):
     
     # Track which dog's detailed section we're currently in
     current_dog_section_index = -1
-    dog_timing_data = {}  # Index -> {race_times: [(time, distance)], sec_times: [(time, distance)]}
+    dog_timing_data = {}  # Index -> {race_times: [(time, distance)], sec_times: [(time, distance)], box_history: [(box_pos, won)]}
     previous_line_distance = None  # Track distance from previous line
 
     for i, line in enumerate(lines):
@@ -88,7 +88,7 @@ def parse_race_form(text):
             })
             
             # Initialize timing data collection for this dog
-            dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "name": dog_name}
+            dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "name": dog_name}
             continue
 
         # Check if this is a dog name header (all caps, short line)
@@ -132,6 +132,20 @@ def parse_race_form(text):
                     dog_timing_data[current_dog_section_index]["race_times"].append(
                         (total_seconds, line_distance)
                     )
+                    
+                    # Extract Box Position (BP) from the same line if available
+                    # Pattern: " BP 2 " or " BP 10 "
+                    bp_match = re.search(r' BP (\d+)', line)
+                    if bp_match:
+                        box_pos = int(bp_match.group(1))
+                        # Determine if dog won: look for "Prize Won" (indicates placed)
+                        # More precise: check if this is first place
+                        # API ~1.0 typically means won, API < 0.5 means lost badly
+                        # For now, use Prize Won as indicator of placing/winning
+                        won = "Prize Won" in line
+                        dog_timing_data[current_dog_section_index]["box_history"].append(
+                            (box_pos, won)
+                        )
             
             # Pattern: "Sec Time 5.28" (sectional time in seconds)
             # Both Race Time and Sec Time can appear on the same line with the same distance
@@ -230,6 +244,55 @@ def parse_race_form(text):
                 if similar_distance_sectionals:
                     dogs[dog_index]["SectionalSec"] = min(similar_distance_sectionals)
                 # Otherwise: skip (leave as NaN)
+        
+        # Calculate box preference/bias for this dog
+        box_history = timing.get("box_history", [])
+        if box_history and "Box" in dogs[dog_index]:
+            current_box = dogs[dog_index]["Box"]
+            
+            # Group boxes into categories
+            # Typically: 1-3 (inside), 4-6 (mid), 7-10 (outside)
+            def get_box_group(box):
+                if box <= 3:
+                    return "inside"
+                elif box <= 6:
+                    return "mid"
+                else:
+                    return "outside"
+            
+            current_box_group = get_box_group(current_box)
+            
+            # Calculate win rate for each box group
+            box_group_stats = {"inside": {"races": 0, "wins": 0}, 
+                              "mid": {"races": 0, "wins": 0}, 
+                              "outside": {"races": 0, "wins": 0}}
+            
+            for box_pos, won in box_history:
+                group = get_box_group(box_pos)
+                box_group_stats[group]["races"] += 1
+                if won:
+                    box_group_stats[group]["wins"] += 1
+            
+            # Calculate win rates
+            overall_wins = sum(stats["wins"] for stats in box_group_stats.values())
+            overall_races = sum(stats["races"] for stats in box_group_stats.values())
+            overall_win_rate = overall_wins / overall_races if overall_races > 0 else 0
+            
+            # Win rate in current box group
+            current_group_stats = box_group_stats[current_box_group]
+            current_group_win_rate = (current_group_stats["wins"] / current_group_stats["races"] 
+                                     if current_group_stats["races"] > 0 else overall_win_rate)
+            
+            # BoxBiasFactor: difference from overall win rate
+            # Positive = performs better in this box group
+            # Negative = performs worse in this box group
+            box_bias = current_group_win_rate - overall_win_rate
+            
+            # Store in dog data
+            dogs[dog_index]["BoxBiasFactor"] = box_bias
+        else:
+            # No box history or current box - use neutral bias
+            dogs[dog_index]["BoxBiasFactor"] = 0.0
 
     df = pd.DataFrame(dogs)
     

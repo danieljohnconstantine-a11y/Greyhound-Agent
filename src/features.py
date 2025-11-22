@@ -82,7 +82,12 @@ def compute_features(df):
                 if unique_values == 1:
                     raise ValueError(f"❌ ERROR: All {non_empty_count} dogs with Margins values have the same value. This indicates a parsing failure.")
     
-    df["BoxBiasFactor"] = 0.1
+    # BoxBiasFactor: Use parsed value if available, otherwise default to 0.0
+    if "BoxBiasFactor" not in df.columns:
+        df["BoxBiasFactor"] = 0.0
+        print("⚠️ WARNING: BoxBiasFactor not found in parsed data. Setting to 0.0 (neutral).")
+    
+    # TrackConditionAdj: Track-level constant (1.0 = neutral conditions)
     df["TrackConditionAdj"] = 1.0
 
     # Derived metrics - handle NaN values in timing data
