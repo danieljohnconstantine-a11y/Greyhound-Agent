@@ -10,11 +10,6 @@ def parse_race_form(text):
     dogs = []
     current_race = {}
     race_number = 0
-    parse_warnings = []
-    lines = text.splitlines()
-    dogs = []
-    current_race = {}
-    race_number = 0
 
     for line in lines:
         line = line.strip()
@@ -85,7 +80,6 @@ def parse_race_form(text):
                 dogs[-1]["Last3TimesSec"] = last3
             except Exception as e:
                 logger.warning(f"Error parsing time data: {e}")
-                parse_warnings.append(f"Time parsing error: {e}")
                 dogs[-1]["Last3TimesSec"] = []
 
         # Match Margins block
@@ -103,7 +97,6 @@ def parse_race_form(text):
                 dogs[-1]["Margins"] = margins
             except Exception as e:
                 logger.warning(f"Error parsing margin data: {e}")
-                parse_warnings.append(f"Margin parsing error: {e}")
                 dogs[-1]["Margins"] = []
 
     if not dogs:
@@ -113,8 +106,5 @@ def parse_race_form(text):
     df = pd.DataFrame(dogs)
     logger.info(f"Parsed {len(df)} dogs")
     print(f"✅ Parsed {len(df)} dogs")
-    
-    if parse_warnings:
-        logger.warning(f"Encountered {len(parse_warnings)} parsing warnings")
     
     return df
