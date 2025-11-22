@@ -46,11 +46,41 @@ def compute_features(df):
                 if unique_values == 1:
                     raise ValueError(f"❌ ERROR: All {non_nan_count} dogs with SectionalSec values have the same value ({df['SectionalSec'].dropna().iloc[0]}). This indicates a parsing failure.")
     
-    # Placeholder values for other fields — replace with parsed metrics later
+    # Preserve parsed Last3TimesSec values if they exist, otherwise set to empty list
     if "Last3TimesSec" not in df.columns:
-        df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
+        df["Last3TimesSec"] = [[] for _ in range(len(df))]
+        print("⚠️ WARNING: Last3TimesSec not found in parsed data - setting to empty lists")
+    else:
+        # Check for missing values
+        empty_count = df["Last3TimesSec"].apply(lambda x: len(x) == 0 if isinstance(x, list) else True).sum()
+        if empty_count > 0:
+            print(f"⚠️ WARNING: {empty_count} dogs have missing/empty Last3TimesSec values")
+        # Check if all values are the same (indicating parsing failure)
+        if len(df) > 1:
+            non_empty = df["Last3TimesSec"].apply(lambda x: tuple(x) if isinstance(x, list) and len(x) > 0 else None)
+            non_empty_count = non_empty.notna().sum()
+            if non_empty_count > 1:
+                unique_values = non_empty.dropna().nunique()
+                if unique_values == 1:
+                    raise ValueError(f"❌ ERROR: All {non_empty_count} dogs with Last3TimesSec values have the same value. This indicates a parsing failure.")
+    
+    # Preserve parsed Margins values if they exist, otherwise set to empty list
     if "Margins" not in df.columns:
-        df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+        df["Margins"] = [[] for _ in range(len(df))]
+        print("⚠️ WARNING: Margins not found in parsed data - setting to empty lists")
+    else:
+        # Check for missing values
+        empty_count = df["Margins"].apply(lambda x: len(x) == 0 if isinstance(x, list) else True).sum()
+        if empty_count > 0:
+            print(f"⚠️ WARNING: {empty_count} dogs have missing/empty Margins values")
+        # Check if all values are the same (indicating parsing failure)
+        if len(df) > 1:
+            non_empty = df["Margins"].apply(lambda x: tuple(x) if isinstance(x, list) and len(x) > 0 else None)
+            non_empty_count = non_empty.notna().sum()
+            if non_empty_count > 1:
+                unique_values = non_empty.dropna().nunique()
+                if unique_values == 1:
+                    raise ValueError(f"❌ ERROR: All {non_empty_count} dogs with Margins values have the same value. This indicates a parsing failure.")
     
     df["BoxBiasFactor"] = 0.1
     df["TrackConditionAdj"] = 1.0
@@ -70,9 +100,20 @@ def compute_features(df):
         np.nan
     )
     
-    df["FinishConsistency"] = df["Last3TimesSec"].apply(lambda x: np.std(x))
-    df["MarginAvg"] = df["Margins"].apply(lambda x: np.mean(x))
-    df["FormMomentum"] = df["Margins"].apply(lambda x: np.mean(np.diff(x)) if len(x) >= 2 else 0)
+    # FinishConsistency: only calculate if Last3TimesSec has at least 2 values
+    df["FinishConsistency"] = df["Last3TimesSec"].apply(
+        lambda x: np.std(x) if isinstance(x, list) and len(x) >= 2 else 0
+    )
+    
+    # MarginAvg: only calculate if Margins has at least 1 value
+    df["MarginAvg"] = df["Margins"].apply(
+        lambda x: np.mean(x) if isinstance(x, list) and len(x) > 0 else 0
+    )
+    
+    # FormMomentum: only calculate if Margins has at least 2 values
+    df["FormMomentum"] = df["Margins"].apply(
+        lambda x: np.mean(np.diff(x)) if isinstance(x, list) and len(x) >= 2 else 0
+    )
 
     # Consistency Index
     df["ConsistencyIndex"] = df.apply(

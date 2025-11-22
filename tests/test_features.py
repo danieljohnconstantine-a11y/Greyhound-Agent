@@ -1,5 +1,5 @@
 """
-Tests for features.py - specifically for BestTimeSec and SectionalSec handling
+Tests for features.py - specifically for timing and margin data handling
 """
 import pandas as pd
 import numpy as np
@@ -204,6 +204,135 @@ def test_final_score_with_nan_timing():
     print("✅ test_final_score_with_nan_timing passed")
 
 
+def test_missing_last3_and_margins():
+    """Test that missing Last3TimesSec and Margins columns are handled with empty lists"""
+    df = pd.DataFrame({
+        'Box': [1, 2, 3],
+        'DogName': ['Dog1', 'Dog2', 'Dog3'],
+        'Distance': [435, 435, 435],
+        'CareerStarts': [10, 20, 30],
+        'CareerWins': [2, 5, 8],
+        'PrizeMoney': [1000, 2000, 3000],
+        'DLR': [5, 7, 10]
+    })
+    
+    result = compute_features(df)
+    
+    # Should create columns with empty lists
+    assert 'Last3TimesSec' in result.columns
+    assert 'Margins' in result.columns
+    assert all(isinstance(x, list) and len(x) == 0 for x in result['Last3TimesSec'])
+    assert all(isinstance(x, list) and len(x) == 0 for x in result['Margins'])
+    
+    # Derived metrics should be 0
+    assert all(x == 0 for x in result['FinishConsistency'])
+    assert all(x == 0 for x in result['MarginAvg'])
+    assert all(x == 0 for x in result['FormMomentum'])
+    
+    print("✅ test_missing_last3_and_margins passed")
+
+
+def test_unique_last3_and_margins():
+    """Test that unique Last3TimesSec and Margins values are preserved"""
+    df = pd.DataFrame({
+        'Box': [1, 2, 3],
+        'DogName': ['Dog1', 'Dog2', 'Dog3'],
+        'Distance': [435, 435, 435],
+        'CareerStarts': [10, 20, 30],
+        'CareerWins': [2, 5, 8],
+        'PrizeMoney': [1000, 2000, 3000],
+        'DLR': [5, 7, 10],
+        'Last3TimesSec': [[22.5, 22.6, 22.7], [23.1, 23.2], [24.0, 24.1, 24.2]],
+        'Margins': [[1.0, 2.0, 3.0], [4.0, 5.0], [6.0, 7.0, 8.0]]
+    })
+    
+    result = compute_features(df)
+    
+    # Values should be preserved
+    assert result['Last3TimesSec'].iloc[0] == [22.5, 22.6, 22.7]
+    assert result['Margins'].iloc[0] == [1.0, 2.0, 3.0]
+    
+    # Derived metrics should be calculated
+    assert result['FinishConsistency'].iloc[0] > 0  # Should have std dev
+    assert result['MarginAvg'].iloc[0] == 2.0
+    assert result['FormMomentum'].iloc[0] == 1.0  # (2-1 + 3-2)/2 = 1
+    
+    print("✅ test_unique_last3_and_margins passed")
+
+
+def test_identical_last3_raises_error():
+    """Test that identical Last3TimesSec values across all dogs raises ValueError"""
+    df = pd.DataFrame({
+        'Box': [1, 2, 3],
+        'DogName': ['Dog1', 'Dog2', 'Dog3'],
+        'Distance': [435, 435, 435],
+        'CareerStarts': [10, 20, 30],
+        'CareerWins': [2, 5, 8],
+        'PrizeMoney': [1000, 2000, 3000],
+        'DLR': [5, 7, 10],
+        'Last3TimesSec': [[22.5, 22.6, 22.7], [22.5, 22.6, 22.7], [22.5, 22.6, 22.7]]  # All the same!
+    })
+    
+    try:
+        compute_features(df)
+        assert False, "Should have raised ValueError"
+    except ValueError as e:
+        assert "All 3 dogs with Last3TimesSec values have the same value" in str(e)
+        print("✅ test_identical_last3_raises_error passed")
+
+
+def test_identical_margins_raises_error():
+    """Test that identical Margins values across all dogs raises ValueError"""
+    df = pd.DataFrame({
+        'Box': [1, 2, 3],
+        'DogName': ['Dog1', 'Dog2', 'Dog3'],
+        'Distance': [435, 435, 435],
+        'CareerStarts': [10, 20, 30],
+        'CareerWins': [2, 5, 8],
+        'PrizeMoney': [1000, 2000, 3000],
+        'DLR': [5, 7, 10],
+        'Margins': [[5.0, 6.3, 10.3], [5.0, 6.3, 10.3], [5.0, 6.3, 10.3]]  # All the same!
+    })
+    
+    try:
+        compute_features(df)
+        assert False, "Should have raised ValueError"
+    except ValueError as e:
+        assert "All 3 dogs with Margins values have the same value" in str(e)
+        print("✅ test_identical_margins_raises_error passed")
+
+
+def test_partial_empty_last3_and_margins():
+    """Test that some dogs can have empty Last3TimesSec and Margins"""
+    df = pd.DataFrame({
+        'Box': [1, 2, 3],
+        'DogName': ['Dog1', 'Dog2', 'Dog3'],
+        'Distance': [435, 435, 435],
+        'CareerStarts': [10, 20, 30],
+        'CareerWins': [2, 5, 8],
+        'PrizeMoney': [1000, 2000, 3000],
+        'DLR': [5, 7, 10],
+        'Last3TimesSec': [[22.5, 22.6, 22.7], [], [24.0, 24.1, 24.2]],
+        'Margins': [[1.0, 2.0, 3.0], [4.0, 5.0], []]
+    })
+    
+    result = compute_features(df)
+    
+    # Dog1 should have all derived metrics
+    assert result['FinishConsistency'].iloc[0] > 0
+    assert result['MarginAvg'].iloc[0] > 0
+    
+    # Dog2 should have empty Last3 metrics but valid Margins metrics
+    assert result['FinishConsistency'].iloc[1] == 0
+    assert result['MarginAvg'].iloc[1] > 0
+    
+    # Dog3 should have valid Last3 metrics but empty Margins metrics
+    assert result['FinishConsistency'].iloc[2] > 0
+    assert result['MarginAvg'].iloc[2] == 0
+    
+    print("✅ test_partial_empty_last3_and_margins passed")
+
+
 if __name__ == '__main__':
     print("Running features.py tests...\n")
     
@@ -214,5 +343,10 @@ if __name__ == '__main__':
     test_single_dog_no_error()
     test_partial_nan_values()
     test_final_score_with_nan_timing()
+    test_missing_last3_and_margins()
+    test_unique_last3_and_margins()
+    test_identical_last3_raises_error()
+    test_identical_margins_raises_error()
+    test_partial_empty_last3_and_margins()
     
     print("\n✅ All tests passed!")
