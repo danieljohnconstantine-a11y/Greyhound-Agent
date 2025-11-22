@@ -15,7 +15,8 @@ def parse_race_form(text):
     3. Match race times to distances from preceding line
     4. Filter best time for the specific distance the dog is racing at
     5. Fallback: Legacy "Best:" and "Sectional:" format (backward compatibility)
-    6. Validation: Filter out invalid values (0, negative, or unrealistic times)
+    6. Validation: Filter out invalid values (race times: 10-200s, sectionals: 1-15s)
+       - Sectionals measure first 100-200m, so >15s likely indicates incidents/errors
     7. Ensure no silent failures, log extraction results
     """
     lines = text.splitlines()
@@ -115,7 +116,8 @@ def parse_race_form(text):
             if distance_match:
                 previous_line_distance = int(distance_match.group(1))
             
-            race_time_processed = False  # Flag to track if we processed race time on this line
+            # Store distance for this line's timing data (both Race Time and Sec Time can use it)
+            line_distance = previous_line_distance
             
             # Pattern: "Race Time 0:30.92" (mm:ss.ss format)
             race_time_match = re.search(r'Race Time (\d+):(\d+\.\d+)', line)
@@ -128,24 +130,26 @@ def parse_race_form(text):
                     # Store race time with distance (if we just saw a distance in a recent line)
                     # Note: distance might be None if not found recently
                     dog_timing_data[current_dog_section_index]["race_times"].append(
-                        (total_seconds, previous_line_distance)
+                        (total_seconds, line_distance)
                     )
-                    race_time_processed = True
-                # Reset distance after processing race time
-                previous_line_distance = None
             
             # Pattern: "Sec Time 5.28" (sectional time in seconds)
-            # Only process if we didn't already process race time (they appear on same line)
+            # Both Race Time and Sec Time can appear on the same line with the same distance
             sec_time_match = re.search(r'Sec Time (\d+\.\d+)', line)
-            if sec_time_match and not race_time_processed:
+            if sec_time_match:
                 sec_time = float(sec_time_match.group(1))
-                # Validate: sectional times should be between 1 and 30 seconds
-                if 1 <= sec_time <= 30:
-                    # Store sectional time with distance
+                # Validate: sectional times should be between 1 and 15 seconds
+                # Sectionals measure first 100-200m, so even slow dogs should be under 12-14s
+                # Values above 15s likely indicate incidents, falls, or data errors
+                if 1 <= sec_time <= 15:
+                    # Store sectional time with distance (same distance as race time if both on same line)
                     dog_timing_data[current_dog_section_index]["sec_times"].append(
-                        (sec_time, previous_line_distance)
+                        (sec_time, line_distance)
                     )
-                    previous_line_distance = None
+            
+            # Reset distance after processing this line's timing data
+            if race_time_match or sec_time_match:
+                previous_line_distance = None
 
         # Legacy: Match Best/Sectional/Last3 block (for backward compatibility)
         time_match = re.search(r'Best:\s*(\d+\.\d+)\s+Sectional:\s*(\d+\.\d+)', line)
@@ -155,7 +159,7 @@ def parse_race_form(text):
             # Validate before assigning
             if 10 <= best_time <= 200:
                 dogs[-1]["BestTimeSec"] = best_time
-            if 1 <= sec_time <= 30:
+            if 1 <= sec_time <= 15:  # Sectionals should be under 15s (typically first 100-200m)
                 dogs[-1]["SectionalSec"] = sec_time
             # Also check for Last3
             last3_match = re.search(r'Last3:\s*\[([\d., ]+)\]', line)
