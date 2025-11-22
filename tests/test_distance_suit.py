@@ -23,15 +23,10 @@ def test_distance_suitability_basic():
     # At 400m: Dog A has 0.8 win rate, Dog B has 0.4
     # Max is 0.8, so Dog A should be 1.0, Dog B should be 0.5
     
-    print("\nTest results:")
-    print(result[['DogName', 'Distance', 'CareerWins', 'CareerStarts', 'DistanceSuit']])
-    
     # Verify normalization: max DistanceSuit per distance should be 1.0
     for distance in result['Distance'].unique():
         max_suit = result[result['Distance'] == distance]['DistanceSuit'].max()
         assert max_suit == 1.0, f"Max DistanceSuit at {distance}m should be 1.0, got {max_suit}"
-    
-    print("✅ Basic DistanceSuit test passed")
 
 
 def test_distance_suitability_no_starts():
@@ -45,16 +40,11 @@ def test_distance_suitability_no_starts():
     
     result = compute_distance_suitability(test_data)
     
-    print("\nNo starts test:")
-    print(result[['DogName', 'Distance', 'CareerWins', 'CareerStarts', 'DistanceSuit']])
-    
     # New Dog with no starts should have win rate of 0.5 (default)
     # Veteran Dog has 0.5 win rate (10/20)
     # Both should normalize to 1.0 since they have the same effective win rate
     new_dog_suit = result[result['DogName'] == 'New Dog']['DistanceSuit'].iloc[0]
     assert new_dog_suit == 1.0, f"New dog DistanceSuit should be 1.0, got {new_dog_suit}"
-    
-    print("✅ No starts test passed")
 
 
 def test_distance_suitability_multiple_distances():
@@ -68,9 +58,6 @@ def test_distance_suitability_multiple_distances():
     
     result = compute_distance_suitability(test_data)
     
-    print("\nMultiple distances test:")
-    print(result[['DogName', 'Distance', 'CareerWins', 'CareerStarts', 'DistanceSuit']])
-    
     # At 520m: Dog A has 0.5 win rate (best) -> 1.0, Dog B has 0.25 -> 0.5
     # At 400m: Dog B has 0.5 win rate (best) -> 1.0, Dog A has 0.25 -> 0.5
     
@@ -79,8 +66,6 @@ def test_distance_suitability_multiple_distances():
     
     assert dog_a_520 == 1.0, f"Dog A at 520m should be 1.0, got {dog_a_520}"
     assert dog_b_400 == 1.0, f"Dog B at 400m should be 1.0, got {dog_b_400}"
-    
-    print("✅ Multiple distances test passed")
 
 
 def test_distance_suitability_missing_distance():
@@ -93,13 +78,8 @@ def test_distance_suitability_missing_distance():
     
     result = compute_distance_suitability(test_data)
     
-    print("\nMissing Distance test:")
-    print(result[['DogName', 'CareerWins', 'CareerStarts', 'DistanceSuit']])
-    
     # Should default all to 0.5
     assert all(result['DistanceSuit'] == 0.5), "All DistanceSuit values should be 0.5 when Distance is missing"
-    
-    print("✅ Missing Distance test passed")
 
 
 def test_compute_features_integration():
@@ -128,9 +108,6 @@ def test_compute_features_integration():
     
     result = compute_features(test_data)
     
-    print("\nIntegration test:")
-    print(result[['DogName', 'Distance', 'CareerWins', 'CareerStarts', 'DistanceSuit', 'FinalScore']])
-    
     # Verify DistanceSuit is in result
     assert 'DistanceSuit' in result.columns
     
@@ -140,8 +117,6 @@ def test_compute_features_integration():
     # Best performer should have DistanceSuit of 1.0
     best_dog_suit = result[result['CareerWins'] == 10]['DistanceSuit'].iloc[0]
     assert best_dog_suit == 1.0, f"Best performer should have DistanceSuit of 1.0, got {best_dog_suit}"
-    
-    print("✅ Integration test passed")
 
 
 if __name__ == "__main__":

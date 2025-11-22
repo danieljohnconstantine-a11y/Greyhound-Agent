@@ -29,17 +29,19 @@ def compute_distance_suitability(df):
         'CareerStarts': 'first'
     }).reset_index()
     
-    # Calculate win rate
-    dog_distance_stats['WinRate'] = dog_distance_stats.apply(
-        lambda row: row['CareerWins'] / row['CareerStarts'] if row['CareerStarts'] > 0 else 0.5,
-        axis=1
+    # Calculate win rate using vectorized operations
+    dog_distance_stats['WinRate'] = np.where(
+        dog_distance_stats['CareerStarts'] > 0,
+        dog_distance_stats['CareerWins'] / dog_distance_stats['CareerStarts'],
+        0.5
     )
     
     # Normalize win rates per distance so best performer gets 1.0
     distance_max_winrate = dog_distance_stats.groupby('Distance')['WinRate'].transform('max')
-    dog_distance_stats['DistanceSuit'] = dog_distance_stats.apply(
-        lambda row: row['WinRate'] / distance_max_winrate[row.name] if distance_max_winrate[row.name] > 0 else 0.5,
-        axis=1
+    dog_distance_stats['DistanceSuit'] = np.where(
+        distance_max_winrate > 0,
+        dog_distance_stats['WinRate'] / distance_max_winrate,
+        0.5
     )
     
     # Merge back to original dataframe
