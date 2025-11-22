@@ -9,17 +9,61 @@ def compute_features(df):
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
     df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
 
-    # Placeholder values — replace with parsed metrics later
-    df["BestTimeSec"] = 22.5
-    df["SectionalSec"] = 8.5
-    df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
-    df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+    # Preserve parsed BestTimeSec and SectionalSec values if they exist, otherwise set to NaN
+    if "BestTimeSec" not in df.columns:
+        df["BestTimeSec"] = np.nan
+        print("⚠️ WARNING: BestTimeSec not found in parsed data - setting to NaN")
+    else:
+        df["BestTimeSec"] = pd.to_numeric(df["BestTimeSec"], errors="coerce")
+        # Check for missing values
+        missing_count = df["BestTimeSec"].isna().sum()
+        if missing_count > 0:
+            print(f"⚠️ WARNING: {missing_count} dogs have missing BestTimeSec values")
+        # Check if all values are the same (indicating parsing failure)
+        if len(df) > 1 and df["BestTimeSec"].notna().sum() > 1:
+            unique_values = df["BestTimeSec"].dropna().nunique()
+            if unique_values == 1:
+                raise ValueError(f"❌ ERROR: All {len(df)} dogs have the same BestTimeSec value ({df['BestTimeSec'].dropna().iloc[0]}). This indicates a parsing failure.")
+    
+    if "SectionalSec" not in df.columns:
+        df["SectionalSec"] = np.nan
+        print("⚠️ WARNING: SectionalSec not found in parsed data - setting to NaN")
+    else:
+        df["SectionalSec"] = pd.to_numeric(df["SectionalSec"], errors="coerce")
+        # Check for missing values
+        missing_count = df["SectionalSec"].isna().sum()
+        if missing_count > 0:
+            print(f"⚠️ WARNING: {missing_count} dogs have missing SectionalSec values")
+        # Check if all values are the same (indicating parsing failure)
+        if len(df) > 1 and df["SectionalSec"].notna().sum() > 1:
+            unique_values = df["SectionalSec"].dropna().nunique()
+            if unique_values == 1:
+                raise ValueError(f"❌ ERROR: All {len(df)} dogs have the same SectionalSec value ({df['SectionalSec'].dropna().iloc[0]}). This indicates a parsing failure.")
+    
+    # Placeholder values for other fields — replace with parsed metrics later
+    if "Last3TimesSec" not in df.columns:
+        df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
+    if "Margins" not in df.columns:
+        df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+    
     df["BoxBiasFactor"] = 0.1
     df["TrackConditionAdj"] = 1.0
 
-    # Derived metrics
-    df["Speed_kmh"] = (df["Distance"] / df["BestTimeSec"]) * 3.6
-    df["EarlySpeedIndex"] = df["Distance"] / df["SectionalSec"]
+    # Derived metrics - handle NaN values in timing data
+    # Speed_kmh: only calculate if BestTimeSec is valid
+    df["Speed_kmh"] = np.where(
+        (df["BestTimeSec"].notna()) & (df["BestTimeSec"] > 0),
+        (df["Distance"] / df["BestTimeSec"]) * 3.6,
+        np.nan
+    )
+    
+    # EarlySpeedIndex: only calculate if SectionalSec is valid
+    df["EarlySpeedIndex"] = np.where(
+        (df["SectionalSec"].notna()) & (df["SectionalSec"] > 0),
+        df["Distance"] / df["SectionalSec"],
+        np.nan
+    )
+    
     df["FinishConsistency"] = df["Last3TimesSec"].apply(lambda x: np.std(x))
     df["MarginAvg"] = df["Margins"].apply(lambda x: np.mean(x))
     df["FormMomentum"] = df["Margins"].apply(lambda x: np.mean(np.diff(x)) if len(x) >= 2 else 0)
@@ -88,13 +132,13 @@ def compute_features(df):
                 "TrackConditionAdj": 0.05
             }
 
-    # FinalScore calculation
+    # FinalScore calculation - handle NaN values by treating them as 0
     final_scores = []
     for _, row in df.iterrows():
         w = get_weights(row["Distance"])
         score = (
-            row["EarlySpeedIndex"] * w["EarlySpeedIndex"] +
-            row["Speed_kmh"] * w["Speed_kmh"] +
+            (row["EarlySpeedIndex"] if pd.notna(row["EarlySpeedIndex"]) else 0) * w["EarlySpeedIndex"] +
+            (row["Speed_kmh"] if pd.notna(row["Speed_kmh"]) else 0) * w["Speed_kmh"] +
             row["ConsistencyIndex"] * w["ConsistencyIndex"] +
             row["FinishConsistency"] * w["FinishConsistency"] +
             (row["PrizeMoney"] / 1000) * w["PrizeMoney"] +
