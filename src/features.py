@@ -2,6 +2,10 @@ import pandas as pd
 import numpy as np
 import logging
 
+# Constants for fallback calculations
+TYPICAL_SPEED_MS = 16.0  # ~57.6 km/h - typical greyhound racing speed in m/s
+SECTIONAL_TIME_RATIO = 0.375  # Sectional time is typically ~37.5% of total race time
+
 def compute_features(df):
     df = df.copy()
 
@@ -20,12 +24,12 @@ def compute_features(df):
     if missing_best_time.any():
         logging.warning(f"⚠️ Using fallback BestTimeSec for {missing_best_time.sum()} dogs (calculating from distance)")
         # Calculate fallback based on distance and typical speeds
-        df.loc[missing_best_time, "BestTimeSec"] = df.loc[missing_best_time, "Distance"] / 16.0  # ~57.6 km/h typical
+        df.loc[missing_best_time, "BestTimeSec"] = df.loc[missing_best_time, "Distance"] / TYPICAL_SPEED_MS
     
     if missing_sectional.any():
         logging.warning(f"⚠️ Using fallback SectionalSec for {missing_sectional.sum()} dogs")
         # Sectional is typically ~37-38% of race time for first 100-200m
-        df.loc[missing_sectional, "SectionalSec"] = df.loc[missing_sectional, "BestTimeSec"] * 0.375
+        df.loc[missing_sectional, "SectionalSec"] = df.loc[missing_sectional, "BestTimeSec"] * SECTIONAL_TIME_RATIO
     
     if missing_last3.any():
         logging.warning(f"⚠️ Using fallback Last3TimesSec for {missing_last3.sum()} dogs")

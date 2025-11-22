@@ -16,10 +16,11 @@ def parse_race_form(text):
 
         # Match race header - updated to handle different date formats
         # Format: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
+        # Where 22 is race number, Nov is month, 25 is year (2025)
         header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Z\s]+?)\s+(\d+)m", line, re.IGNORECASE)
         if header_match:
+            race_num_str, month, year_suffix, time, track, distance = header_match.groups()
             race_number += 1
-            race_num, month, day, time, track, distance = header_match.groups()
             
             # Convert month abbreviation to number
             month_map = {
@@ -29,12 +30,15 @@ def parse_race_form(text):
             }
             month_num = month_map.get(month.lower()[:3], '01')
             
-            # Assume 20xx year based on day - if day is 2-digit like 25, it's 2025
-            year = f"20{day}"
+            # Construct full year from 2-digit suffix (e.g., '25' -> '2025')
+            year = f"20{year_suffix}"
             
+            # Use the race number from the PDF or our counter
+            # The date is year-month-day format, but we don't have the day from this format
+            # So we'll use day 01 as a placeholder
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"{year}-{month_num}-{race_num.zfill(2)}",
+                "RaceDate": f"{year}-{month_num}-01",  # Using day 01 as placeholder
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
