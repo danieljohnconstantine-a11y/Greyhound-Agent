@@ -31,14 +31,19 @@ def parse_race_form(text):
     for i, line in enumerate(lines):
         line = line.strip()
 
-        # Match race header
-        header_match = re.match(r"Race No\s+(\d{1,2}) Oct (\d{2}) (\d{2}:\d{2}[AP]M) ([A-Za-z ]+)\s+(\d+)m", line)
+        # Match race header - flexible format for different months and date formats
+        # Format: "Race No  1 Oct 16 04:00PM Angle Park 530m" or "Race No 07 Sep 25 06:04PM Q STRAIGHT 300m"
+        header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+?)\s+(\d+)m", line)
         if header_match:
             race_number += 1
-            day, year, time, track, distance = header_match.groups()
+            race_num, month, day, time, track, distance = header_match.groups()
+            # Map month abbreviations to numbers
+            month_map = {'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
+                        'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'}
+            month_num = month_map.get(month, '01')
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"2025-10-{day.zfill(2)}",
+                "RaceDate": f"2025-{month_num}-{day.zfill(2)}",
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
