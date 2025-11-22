@@ -40,3 +40,10 @@ Thumbs.db
 *.log
 *.tmp
 /tmp/
+
+# Output artifacts (keep directory structure but ignore generated files)
+outputs/*.csv
+outputs/*.log
+outputs/*.txt
+outputs/*.xlsx
+

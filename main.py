@@ -7,6 +7,9 @@ from datetime import datetime
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
 
+# ✅ Ensure outputs directory exists FIRST before logging setup
+os.makedirs('outputs', exist_ok=True)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -43,9 +46,8 @@ def extract_text_from_pdf(pdf_path):
 logger.info("🚀 Starting Greyhound Analytics")
 print("🚀 Starting Greyhound Analytics")
 
-# ✅ Ensure outputs directory exists before any file operations
-os.makedirs('outputs', exist_ok=True)
-logger.info("Ensured outputs directory exists")
+# ✅ Verify outputs directory exists (already created above for logging)
+logger.info("Outputs directory ready")
 
 # ✅ Find all PDFs in data folder
 pdf_folder = "data"
