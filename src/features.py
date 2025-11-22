@@ -9,20 +9,116 @@ def compute_features(df):
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
     df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
 
-    # Placeholder values — replace with parsed metrics later
-    df["BestTimeSec"] = 22.5
-    df["SectionalSec"] = 8.5
-    df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
-    df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
-    df["BoxBiasFactor"] = 0.1
+    # Preserve parsed BestTimeSec and SectionalSec values if they exist, otherwise set to NaN
+    if "BestTimeSec" not in df.columns:
+        df["BestTimeSec"] = np.nan
+        print("⚠️ WARNING: BestTimeSec not found in parsed data - setting to NaN")
+    else:
+        df["BestTimeSec"] = pd.to_numeric(df["BestTimeSec"], errors="coerce")
+        # Check for missing values
+        missing_count = df["BestTimeSec"].isna().sum()
+        if missing_count > 0:
+            print(f"⚠️ WARNING: {missing_count} dogs have missing BestTimeSec values")
+        # Check if all values are the same (indicating parsing failure)
+        # Only check if we have at least 2 non-NaN values
+        if len(df) > 1:
+            non_nan_count = df["BestTimeSec"].notna().sum()
+            if non_nan_count > 1:
+                unique_values = df["BestTimeSec"].dropna().nunique()
+                if unique_values == 1:
+                    raise ValueError(f"❌ ERROR: All {non_nan_count} dogs with BestTimeSec values have the same value ({df['BestTimeSec'].dropna().iloc[0]}). This indicates a parsing failure.")
+    
+    if "SectionalSec" not in df.columns:
+        df["SectionalSec"] = np.nan
+        print("⚠️ WARNING: SectionalSec not found in parsed data - setting to NaN")
+    else:
+        df["SectionalSec"] = pd.to_numeric(df["SectionalSec"], errors="coerce")
+        # Check for missing values
+        missing_count = df["SectionalSec"].isna().sum()
+        if missing_count > 0:
+            print(f"⚠️ WARNING: {missing_count} dogs have missing SectionalSec values")
+        # Check if all values are the same (indicating parsing failure)
+        # Only check if we have at least 2 non-NaN values
+        if len(df) > 1:
+            non_nan_count = df["SectionalSec"].notna().sum()
+            if non_nan_count > 1:
+                unique_values = df["SectionalSec"].dropna().nunique()
+                if unique_values == 1:
+                    raise ValueError(f"❌ ERROR: All {non_nan_count} dogs with SectionalSec values have the same value ({df['SectionalSec'].dropna().iloc[0]}). This indicates a parsing failure.")
+    
+    # Preserve parsed Last3TimesSec values if they exist, otherwise set to empty list
+    if "Last3TimesSec" not in df.columns:
+        df["Last3TimesSec"] = [[] for _ in range(len(df))]
+        print("⚠️ WARNING: Last3TimesSec not found in parsed data - setting to empty lists")
+    else:
+        # Check for missing values
+        empty_count = df["Last3TimesSec"].apply(lambda x: len(x) == 0 if isinstance(x, list) else True).sum()
+        if empty_count > 0:
+            print(f"⚠️ WARNING: {empty_count} dogs have missing/empty Last3TimesSec values")
+        # Check if all values are the same (indicating parsing failure)
+        if len(df) > 1:
+            non_empty = df["Last3TimesSec"].apply(lambda x: tuple(x) if isinstance(x, list) and len(x) > 0 else None)
+            non_empty_count = non_empty.notna().sum()
+            if non_empty_count > 1:
+                unique_values = non_empty.dropna().nunique()
+                if unique_values == 1:
+                    raise ValueError(f"❌ ERROR: All {non_empty_count} dogs with Last3TimesSec values have the same value. This indicates a parsing failure.")
+    
+    # Preserve parsed Margins values if they exist, otherwise set to empty list
+    if "Margins" not in df.columns:
+        df["Margins"] = [[] for _ in range(len(df))]
+        print("⚠️ WARNING: Margins not found in parsed data - setting to empty lists")
+    else:
+        # Check for missing values
+        empty_count = df["Margins"].apply(lambda x: len(x) == 0 if isinstance(x, list) else True).sum()
+        if empty_count > 0:
+            print(f"⚠️ WARNING: {empty_count} dogs have missing/empty Margins values")
+        # Check if all values are the same (indicating parsing failure)
+        if len(df) > 1:
+            non_empty = df["Margins"].apply(lambda x: tuple(x) if isinstance(x, list) and len(x) > 0 else None)
+            non_empty_count = non_empty.notna().sum()
+            if non_empty_count > 1:
+                unique_values = non_empty.dropna().nunique()
+                if unique_values == 1:
+                    raise ValueError(f"❌ ERROR: All {non_empty_count} dogs with Margins values have the same value. This indicates a parsing failure.")
+    
+    # BoxBiasFactor: Use parsed value if available, otherwise default to 0.0
+    if "BoxBiasFactor" not in df.columns:
+        df["BoxBiasFactor"] = 0.0
+        print("⚠️ WARNING: BoxBiasFactor not found in parsed data. Setting to 0.0 (neutral).")
+    
+    # TrackConditionAdj: Track-level constant (1.0 = neutral conditions)
     df["TrackConditionAdj"] = 1.0
 
-    # Derived metrics
-    df["Speed_kmh"] = (df["Distance"] / df["BestTimeSec"]) * 3.6
-    df["EarlySpeedIndex"] = df["Distance"] / df["SectionalSec"]
-    df["FinishConsistency"] = df["Last3TimesSec"].apply(lambda x: np.std(x))
-    df["MarginAvg"] = df["Margins"].apply(lambda x: np.mean(x))
-    df["FormMomentum"] = df["Margins"].apply(lambda x: np.mean(np.diff(x)) if len(x) >= 2 else 0)
+    # Derived metrics - handle NaN values in timing data
+    # Speed_kmh: only calculate if BestTimeSec is valid
+    df["Speed_kmh"] = np.where(
+        (df["BestTimeSec"].notna()) & (df["BestTimeSec"] > 0),
+        (df["Distance"] / df["BestTimeSec"]) * 3.6,
+        np.nan
+    )
+    
+    # EarlySpeedIndex: only calculate if SectionalSec is valid
+    df["EarlySpeedIndex"] = np.where(
+        (df["SectionalSec"].notna()) & (df["SectionalSec"] > 0),
+        df["Distance"] / df["SectionalSec"],
+        np.nan
+    )
+    
+    # FinishConsistency: only calculate if Last3TimesSec has at least 2 values
+    df["FinishConsistency"] = df["Last3TimesSec"].apply(
+        lambda x: np.std(x) if isinstance(x, list) and len(x) >= 2 else 0
+    )
+    
+    # MarginAvg: only calculate if Margins has at least 1 value
+    df["MarginAvg"] = df["Margins"].apply(
+        lambda x: np.mean(x) if isinstance(x, list) and len(x) > 0 else 0
+    )
+    
+    # FormMomentum: only calculate if Margins has at least 2 values
+    df["FormMomentum"] = df["Margins"].apply(
+        lambda x: np.mean(np.diff(x)) if isinstance(x, list) and len(x) >= 2 else 0
+    )
 
     # Consistency Index
     df["ConsistencyIndex"] = df.apply(
@@ -88,13 +184,13 @@ def compute_features(df):
                 "TrackConditionAdj": 0.05
             }
 
-    # FinalScore calculation
+    # FinalScore calculation - handle NaN values by treating them as 0
     final_scores = []
     for _, row in df.iterrows():
         w = get_weights(row["Distance"])
         score = (
-            row["EarlySpeedIndex"] * w["EarlySpeedIndex"] +
-            row["Speed_kmh"] * w["Speed_kmh"] +
+            (row["EarlySpeedIndex"] if pd.notna(row["EarlySpeedIndex"]) else 0) * w["EarlySpeedIndex"] +
+            (row["Speed_kmh"] if pd.notna(row["Speed_kmh"]) else 0) * w["Speed_kmh"] +
             row["ConsistencyIndex"] * w["ConsistencyIndex"] +
             row["FinishConsistency"] * w["FinishConsistency"] +
             (row["PrizeMoney"] / 1000) * w["PrizeMoney"] +
