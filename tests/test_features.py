@@ -3,13 +3,16 @@ Tests for features.py - specifically for BestTimeSec and SectionalSec handling
 """
 import pandas as pd
 import numpy as np
-import sys
-import os
 
-# Add src to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-
-from src.features import compute_features
+# Use relative import
+try:
+    from src.features import compute_features
+except ImportError:
+    # If run from tests directory
+    import sys
+    import os
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+    from src.features import compute_features
 
 
 def test_missing_timing_columns():

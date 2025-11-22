@@ -20,10 +20,13 @@ def compute_features(df):
         if missing_count > 0:
             print(f"⚠️ WARNING: {missing_count} dogs have missing BestTimeSec values")
         # Check if all values are the same (indicating parsing failure)
-        if len(df) > 1 and df["BestTimeSec"].notna().sum() > 1:
-            unique_values = df["BestTimeSec"].dropna().nunique()
-            if unique_values == 1:
-                raise ValueError(f"❌ ERROR: All {len(df)} dogs have the same BestTimeSec value ({df['BestTimeSec'].dropna().iloc[0]}). This indicates a parsing failure.")
+        # Only check if we have at least 2 non-NaN values
+        if len(df) > 1:
+            non_nan_count = df["BestTimeSec"].notna().sum()
+            if non_nan_count > 1:
+                unique_values = df["BestTimeSec"].dropna().nunique()
+                if unique_values == 1:
+                    raise ValueError(f"❌ ERROR: All {len(df)} dogs have the same BestTimeSec value ({df['BestTimeSec'].dropna().iloc[0]}). This indicates a parsing failure.")
     
     if "SectionalSec" not in df.columns:
         df["SectionalSec"] = np.nan
@@ -35,10 +38,13 @@ def compute_features(df):
         if missing_count > 0:
             print(f"⚠️ WARNING: {missing_count} dogs have missing SectionalSec values")
         # Check if all values are the same (indicating parsing failure)
-        if len(df) > 1 and df["SectionalSec"].notna().sum() > 1:
-            unique_values = df["SectionalSec"].dropna().nunique()
-            if unique_values == 1:
-                raise ValueError(f"❌ ERROR: All {len(df)} dogs have the same SectionalSec value ({df['SectionalSec'].dropna().iloc[0]}). This indicates a parsing failure.")
+        # Only check if we have at least 2 non-NaN values
+        if len(df) > 1:
+            non_nan_count = df["SectionalSec"].notna().sum()
+            if non_nan_count > 1:
+                unique_values = df["SectionalSec"].dropna().nunique()
+                if unique_values == 1:
+                    raise ValueError(f"❌ ERROR: All {len(df)} dogs have the same SectionalSec value ({df['SectionalSec'].dropna().iloc[0]}). This indicates a parsing failure.")
     
     # Placeholder values for other fields — replace with parsed metrics later
     if "Last3TimesSec" not in df.columns:
