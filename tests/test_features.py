@@ -95,7 +95,7 @@ def test_identical_timing_values_raises_error():
         compute_features(df)
         assert False, "Should have raised ValueError"
     except ValueError as e:
-        assert "All 3 dogs have the same BestTimeSec value" in str(e)
+        assert "All 3 dogs with BestTimeSec values have the same value" in str(e)
         print("✅ test_identical_timing_values_raises_error passed")
 
 
@@ -117,7 +117,7 @@ def test_identical_sectional_values_raises_error():
         compute_features(df)
         assert False, "Should have raised ValueError"
     except ValueError as e:
-        assert "All 3 dogs have the same SectionalSec value" in str(e)
+        assert "All 3 dogs with SectionalSec values have the same value" in str(e)
         print("✅ test_identical_sectional_values_raises_error passed")
 
 

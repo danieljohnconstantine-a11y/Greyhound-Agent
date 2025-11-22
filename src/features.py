@@ -26,7 +26,7 @@ def compute_features(df):
             if non_nan_count > 1:
                 unique_values = df["BestTimeSec"].dropna().nunique()
                 if unique_values == 1:
-                    raise ValueError(f"❌ ERROR: All {len(df)} dogs have the same BestTimeSec value ({df['BestTimeSec'].dropna().iloc[0]}). This indicates a parsing failure.")
+                    raise ValueError(f"❌ ERROR: All {non_nan_count} dogs with BestTimeSec values have the same value ({df['BestTimeSec'].dropna().iloc[0]}). This indicates a parsing failure.")
     
     if "SectionalSec" not in df.columns:
         df["SectionalSec"] = np.nan
@@ -44,7 +44,7 @@ def compute_features(df):
             if non_nan_count > 1:
                 unique_values = df["SectionalSec"].dropna().nunique()
                 if unique_values == 1:
-                    raise ValueError(f"❌ ERROR: All {len(df)} dogs have the same SectionalSec value ({df['SectionalSec'].dropna().iloc[0]}). This indicates a parsing failure.")
+                    raise ValueError(f"❌ ERROR: All {non_nan_count} dogs with SectionalSec values have the same value ({df['SectionalSec'].dropna().iloc[0]}). This indicates a parsing failure.")
     
     # Placeholder values for other fields — replace with parsed metrics later
     if "Last3TimesSec" not in df.columns:
