@@ -1,6 +1,10 @@
 import pandas as pd
 import re
 
+# Distance tolerance constants for matching race times to current race distance
+DISTANCE_EXACT_MATCH_TOLERANCE = 10  # meters
+DISTANCE_SIMILAR_MATCH_TOLERANCE = 50  # meters
+
 def parse_race_form(text):
     """
     Enhanced parser that extracts timing data from race history.
@@ -106,6 +110,8 @@ def parse_race_form(text):
             if distance_match:
                 previous_line_distance = int(distance_match.group(1))
             
+            race_time_processed = False  # Flag to track if we processed race time on this line
+            
             # Pattern: "Race Time 0:30.92" (mm:ss.ss format)
             race_time_match = re.search(r'Race Time (\d+):(\d+\.\d+)', line)
             if race_time_match:
@@ -119,14 +125,14 @@ def parse_race_form(text):
                     dog_timing_data[current_dog_section_index]["race_times"].append(
                         (total_seconds, previous_line_distance)
                     )
-                # Reset previous_line_distance after processing race time
-                # This ensures we don't reuse old distance for next race time
+                    race_time_processed = True
+                # Reset distance after processing race time
                 previous_line_distance = None
             
             # Pattern: "Sec Time 5.28" (sectional time in seconds)
-            # Don't reset previous_line_distance here as race time comes first on same line
+            # Only process if we didn't already process race time (they appear on same line)
             sec_time_match = re.search(r'Sec Time (\d+\.\d+)', line)
-            if sec_time_match and not race_time_match:  # Only if we didn't already process race time
+            if sec_time_match and not race_time_processed:
                 sec_time = float(sec_time_match.group(1))
                 # Validate: sectional times should be between 1 and 30 seconds
                 if 1 <= sec_time <= 30:
@@ -134,7 +140,7 @@ def parse_race_form(text):
                     dog_timing_data[current_dog_section_index]["sec_times"].append(
                         (sec_time, previous_line_distance)
                     )
-                    previous_line_distance = None  # Reset after use
+                    previous_line_distance = None
 
         # Legacy: Match Best/Sectional/Last3 block (for backward compatibility)
         time_match = re.search(r'Best:\s*(\d+\.\d+)\s+Sectional:\s*(\d+\.\d+)', line)
@@ -171,10 +177,10 @@ def parse_race_form(text):
         dog_race_distance = dogs[dog_index]["Distance"]  # The distance this dog is racing today
         
         if race_times:
-            # Filter race times for the same distance (within 10m tolerance)
+            # Filter race times for the same distance (within exact match tolerance)
             same_distance_times = [
                 time for time, dist in race_times 
-                if dist is not None and abs(dist - dog_race_distance) <= 10
+                if dist is not None and abs(dist - dog_race_distance) <= DISTANCE_EXACT_MATCH_TOLERANCE
             ]
             
             # If we have times at the same distance, use those
@@ -184,10 +190,10 @@ def parse_race_form(text):
                 # Last3TimesSec: most recent 3 race times at this distance
                 dogs[dog_index]["Last3TimesSec"] = same_distance_times[-3:] if len(same_distance_times) >= 3 else same_distance_times
             else:
-                # Try wider tolerance (within 50m) for similar distances
+                # Try wider tolerance for similar distances
                 similar_distance_times = [
                     time for time, dist in race_times 
-                    if dist is not None and abs(dist - dog_race_distance) <= 50
+                    if dist is not None and abs(dist - dog_race_distance) <= DISTANCE_SIMILAR_MATCH_TOLERANCE
                 ]
                 if similar_distance_times:
                     dogs[dog_index]["BestTimeSec"] = min(similar_distance_times)
@@ -196,10 +202,10 @@ def parse_race_form(text):
                 # Don't use times from vastly different distances as it's misleading
         
         if sec_times:
-            # Filter sectional times for the same distance
+            # Filter sectional times for the same distance (exact match tolerance)
             same_distance_sectionals = [
                 time for time, dist in sec_times 
-                if dist is not None and abs(dist - dog_race_distance) <= 10
+                if dist is not None and abs(dist - dog_race_distance) <= DISTANCE_EXACT_MATCH_TOLERANCE
             ]
             
             # If we have sectionals at the same distance, use those
@@ -207,10 +213,10 @@ def parse_race_form(text):
                 # SectionalSec: minimum sectional time at this distance
                 dogs[dog_index]["SectionalSec"] = min(same_distance_sectionals)
             else:
-                # Try wider tolerance (within 50m)
+                # Try wider tolerance for similar distances
                 similar_distance_sectionals = [
                     time for time, dist in sec_times 
-                    if dist is not None and abs(dist - dog_race_distance) <= 50
+                    if dist is not None and abs(dist - dog_race_distance) <= DISTANCE_SIMILAR_MATCH_TOLERANCE
                 ]
                 if similar_distance_sectionals:
                     dogs[dog_index]["SectionalSec"] = min(similar_distance_sectionals)
