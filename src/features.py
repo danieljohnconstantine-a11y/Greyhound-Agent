@@ -89,6 +89,11 @@ def compute_features(df):
     
     # TrackConditionAdj: Track-level constant (1.0 = neutral conditions)
     df["TrackConditionAdj"] = 1.0
+    
+    # RestFactor: Use parsed value if available, otherwise default to 0.8
+    if "RestFactor" not in df.columns:
+        df["RestFactor"] = 0.8
+        print("⚠️ WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).")
 
     # Derived metrics - handle NaN values in timing data
     # Speed_kmh: only calculate if BestTimeSec is valid
@@ -137,7 +142,15 @@ def compute_features(df):
 
     # Fallbacks
     df["TrainerStrikeRate"] = df.get("TrainerStrikeRate", pd.Series([0.15] * len(df)))
-    df["RestFactor"] = df.get("RestFactor", pd.Series([0.8] * len(df)))
+    
+    # RestFactor: Use parsed value if available, otherwise default to 0.8
+    if "RestFactor" not in df.columns:
+        df["RestFactor"] = 0.8
+        print("⚠️ WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).")
+    else:
+        # Log statistics
+        rest_count = df["RestFactor"].notna().sum()
+        print(f"ℹ️ INFO: RestFactor found for {rest_count}/{len(df)} dogs.")
 
     # Overexposure Penalty
     df["OverexposedPenalty"] = df["CareerStarts"].apply(lambda x: -0.1 if x > 80 else 0)

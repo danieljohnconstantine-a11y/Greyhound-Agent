@@ -88,7 +88,7 @@ def parse_race_form(text):
             })
             
             # Initialize timing data collection for this dog
-            dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "name": dog_name}
+            dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
             continue
 
         # Check if this is a dog name header (all caps, short line)
@@ -146,6 +146,33 @@ def parse_race_form(text):
                         dog_timing_data[current_dog_section_index]["box_history"].append(
                             (box_pos, won)
                         )
+                    
+                    # Extract race date from the beginning of the line
+                    # Common formats: "07Oct24", "15Nov24", etc.
+                    date_match = re.search(r'(\d{1,2})(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(\d{2})', line)
+                    if date_match:
+                        day = int(date_match.group(1))
+                        month_str = date_match.group(2)
+                        year_short = int(date_match.group(3))
+                        
+                        # Convert month string to number
+                        month_map = {
+                            "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
+                            "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12
+                        }
+                        month = month_map.get(month_str, 1)
+                        
+                        # Assume 20xx for year (e.g., 24 -> 2024)
+                        year = 2000 + year_short
+                        
+                        # Store race date
+                        from datetime import date as date_obj
+                        try:
+                            race_date = date_obj(year, month, day)
+                            dog_timing_data[current_dog_section_index]["race_dates"].append(race_date)
+                        except ValueError:
+                            # Invalid date - skip
+                            pass
             
             # Pattern: "Sec Time 5.28" (sectional time in seconds)
             # Both Race Time and Sec Time can appear on the same line with the same distance
