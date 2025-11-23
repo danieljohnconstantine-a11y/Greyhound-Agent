@@ -140,8 +140,32 @@ def compute_features(df):
     # Distance Suitability
     df["DistanceSuit"] = df["Distance"].apply(lambda x: 1.0 if x in [515, 595] else 0.7)
 
-    # Fallbacks
-    df["TrainerStrikeRate"] = df.get("TrainerStrikeRate", pd.Series([0.15] * len(df)))
+    # Calculate TrainerStrikeRate based on aggregated trainer performance
+    if "Trainer" in df.columns and "CareerWins" in df.columns and "CareerStarts" in df.columns:
+        # Group by trainer and calculate strike rate (total wins / total starts)
+        trainer_stats = df.groupby("Trainer").agg({
+            "CareerWins": "sum",
+            "CareerStarts": "sum"
+        })
+        
+        # Calculate strike rate for each trainer
+        trainer_stats["StrikeRate"] = trainer_stats["CareerWins"] / trainer_stats["CareerStarts"]
+        
+        # Handle division by zero (trainers with no starts)
+        trainer_stats["StrikeRate"] = trainer_stats["StrikeRate"].fillna(0.15)  # Default if no data
+        
+        # Map trainer strike rates back to dogs
+        df["TrainerStrikeRate"] = df["Trainer"].map(trainer_stats["StrikeRate"])
+        
+        # Fill any NaN values with default
+        df["TrainerStrikeRate"] = df["TrainerStrikeRate"].fillna(0.15)
+        
+        print(f"✓ Calculated TrainerStrikeRate for {len(trainer_stats)} unique trainers")
+        print(f"  Range: {df['TrainerStrikeRate'].min():.4f} to {df['TrainerStrikeRate'].max():.4f}")
+        print(f"  Mean: {df['TrainerStrikeRate'].mean():.4f}")
+    else:
+        df["TrainerStrikeRate"] = 0.15
+        print("⚠️ WARNING: Cannot calculate TrainerStrikeRate - missing required columns. Setting to 0.15 (default).")
     
     # RestFactor: Use parsed value if available, otherwise default to 0.8
     if "RestFactor" not in df.columns:
