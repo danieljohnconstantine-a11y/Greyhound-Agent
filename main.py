@@ -4,6 +4,7 @@ import pdfplumber
 import os
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
+from src.excel_export import create_color_coded_outputs  # ✅ Excel color-coding
 
 def extract_text_from_pdf(pdf_path):
     text = ""
@@ -65,6 +66,10 @@ picks = picks[ordered_cols]
 
 picks.to_csv("outputs/picks.csv", index=False)
 print("🎯 Saved top picks → outputs/picks.csv")
+
+# ✅ Create color-coded Excel outputs
+print("\n🎨 Creating color-coded Excel files...")
+create_color_coded_outputs(combined_df)
 
 # ✅ Display top picks
 print("\n🏁 Top Picks Across All Tracks:")
