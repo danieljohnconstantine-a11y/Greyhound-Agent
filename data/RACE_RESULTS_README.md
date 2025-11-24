@@ -5,7 +5,7 @@ This directory contains actual race results used for validating and optimizing p
 ## Files
 
 ### race_results_nov_2025.csv
-Race results from November 18-23, 2025 across multiple Australian tracks.
+Race results from October-November 2025 across multiple Australian tracks.
 
 **Format:**
 - `Track`: Track name (e.g., Bendigo, Sandown Park, Angle Park)
@@ -20,19 +20,24 @@ Race results from November 18-23, 2025 across multiple Australian tracks.
 - `WinnerTime`: Winning time in seconds
 
 **Tracks Included:**
-- Horsham (Nov 18) - 12 races
-- Warragul (Nov 18) - 12 races
-- Angle Park (Nov 18, 22) - 20 races
-- Launceston (Nov 18) - 10 races
-- Bendigo (Nov 22) - 10 races
-- Sandown Park (Nov 22) - 12 races
-- Cannington (Nov 22) - 11 races
-- Q Lakeside (Nov 22) - 10 races
-- Sandown (Nov 22) - 12 races
-- Healesville (Nov 23) - 12 races
-- Sale (Nov 23) - 12 races
+- **October 2025:**
+  - Bendigo (Oct 16) - 11 races
+- **November 2025:**
+  - Horsham (Nov 18) - 12 races
+  - Warragul (Nov 18) - 12 races
+  - Angle Park (Nov 18, 22) - 20 races
+  - Launceston (Nov 18) - 10 races
+  - Bendigo (Nov 22) - 10 races
+  - Sandown Park (Nov 22) - 12 races
+  - Cannington (Nov 22) - 11 races
+  - Q Lakeside (Nov 22) - 10 races
+  - Sandown (Nov 22) - 12 races
+  - Dubbo (Nov 22) - 12 races
+  - Wentworth Park (Nov 22) - 10 races
+  - Healesville (Nov 23) - 12 races
+  - Sale (Nov 23) - 12 races
 
-**Total:** 133 races across 11 tracks
+**Total:** 166 races across 13 tracks
 
 ## Usage
 
@@ -53,5 +58,5 @@ The analyzer will:
 
 Race results collected from:
 - Official Australian greyhound racing results
-- Multiple dates: November 18, 22, 23, 2025
-- Various tracks across SA, VIC, WA, QLD, TAS
+- Date range: October 16 - November 23, 2025
+- Various tracks across NSW, SA, VIC, WA, QLD, TAS
