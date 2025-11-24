@@ -44,7 +44,7 @@ def parse_race_form(text):
             month_num = month_map.get(month, '01')
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"2025-{month_num}-{day.zfill(2)}",
+                "RaceDate": f"2024-{month_num}-{day.zfill(2)}",
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
