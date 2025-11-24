@@ -21,6 +21,7 @@ Race results from October-November 2025 across multiple Australian tracks.
 
 **Tracks Included:**
 - **October 2025:**
+  - Angle Park (Oct 16) - 12 races
   - Bendigo (Oct 16) - 11 races
 - **November 2025:**
   - Horsham (Nov 18) - 12 races
@@ -37,7 +38,7 @@ Race results from October-November 2025 across multiple Australian tracks.
   - Healesville (Nov 23) - 12 races
   - Sale (Nov 23) - 12 races
 
-**Total:** 166 races across 13 tracks
+**Total:** 178 races across 14 tracks
 
 ## Usage
 

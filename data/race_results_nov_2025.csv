@@ -23,18 +23,18 @@ Warragul,2025-11-18,9,4,3,1,8,,,
 Warragul,2025-11-18,10,5,4,8,1,,,
 Warragul,2025-11-18,11,2,10,6,4,,,
 Warragul,2025-11-18,12,6,3,1,4,,,
-Angle Park,2025-10-16,1,5,2,4,8,,,
-Angle Park,2025-10-16,2,5,7,8,9,,,
-Angle Park,2025-10-16,3,5,7,1,2,,,
-Angle Park,2025-10-16,4,3,1,7,5,,,
-Angle Park,2025-10-16,5,6,8,5,2,,,
-Angle Park,2025-10-16,6,3,6,2,8,,,
-Angle Park,2025-10-16,7,2,8,3,1,,,
-Angle Park,2025-10-16,8,1,6,8,7,,,
-Angle Park,2025-10-16,9,4,5,2,7,,,
-Angle Park,2025-10-16,10,2,1,4,7,,,
-Angle Park,2025-10-16,11,1,2,4,6,,,
-Angle Park,2025-10-16,12,2,4,1,8,,,
+Angle Park,2025-10-16,1,5,2,4,8,342,,
+Angle Park,2025-10-16,2,5,7,8,9,342,,
+Angle Park,2025-10-16,3,5,7,1,2,342,,
+Angle Park,2025-10-16,4,3,1,7,5,342,,
+Angle Park,2025-10-16,5,6,8,5,2,342,,
+Angle Park,2025-10-16,6,3,6,2,8,342,,
+Angle Park,2025-10-16,7,2,8,3,1,342,,
+Angle Park,2025-10-16,8,1,6,8,7,342,,
+Angle Park,2025-10-16,9,4,5,2,7,342,,
+Angle Park,2025-10-16,10,2,1,4,7,342,,
+Angle Park,2025-10-16,11,1,2,4,6,342,,
+Angle Park,2025-10-16,12,2,4,1,8,342,,
 Wentworth Park,2025-11-22,1,1,8,6,2,,,
 Wentworth Park,2025-11-22,2,4,8,2,6,,,
 Wentworth Park,2025-11-22,3,8,6,1,4,,,
@@ -57,3 +57,123 @@ Dubbo,2025-11-22,9,4,2,3,7,,,
 Dubbo,2025-11-22,10,6,7,8,4,,,
 Dubbo,2025-11-22,11,3,2,7,4,,,
 Dubbo,2025-11-22,12,7,4,1,5,,,
+Bendigo,2025-10-16,1,4,1,2,6,,,
+Bendigo,2025-10-16,2,4,2,8,6,,,
+Bendigo,2025-10-16,3,6,8,1,4,,,
+Bendigo,2025-10-16,4,1,2,7,5,,,
+Bendigo,2025-10-16,5,6,2,1,3,,,
+Bendigo,2025-10-16,6,8,4,6,3,,,
+Bendigo,2025-10-16,7,2,6,1,3,,,
+Bendigo,2025-10-16,8,6,1,7,3,,,
+Bendigo,2025-10-16,9,7,8,2,4,,,
+Bendigo,2025-10-16,10,1,7,2,4,,,
+Bendigo,2025-10-16,11,6,8,1,3,,,
+Bendigo,2025-11-22,1,4,5,8,1,,,
+Bendigo,2025-11-22,2,1,6,4,8,,,
+Bendigo,2025-11-22,3,1,8,2,4,,,
+Bendigo,2025-11-22,4,1,4,7,8,,,
+Bendigo,2025-11-22,5,4,1,8,2,,,
+Bendigo,2025-11-22,6,2,8,6,7,,,
+Bendigo,2025-11-22,7,4,8,3,1,,,
+Bendigo,2025-11-22,8,4,3,6,2,,,
+Bendigo,2025-11-22,9,5,8,2,7,,,
+Bendigo,2025-11-22,10,2,4,7,3,,,
+Sandown Park,2025-11-22,1,3,6,1,2,,,
+Sandown Park,2025-11-22,2,7,3,8,6,,,
+Sandown Park,2025-11-22,3,5,8,1,4,,,
+Sandown Park,2025-11-22,4,2,6,8,4,,,
+Sandown Park,2025-11-22,5,4,5,3,2,,,
+Sandown Park,2025-11-22,6,3,1,5,6,,,
+Sandown Park,2025-11-22,7,3,8,4,6,,,
+Sandown Park,2025-11-22,8,5,6,4,8,,,
+Sandown Park,2025-11-22,9,1,4,2,3,,,
+Sandown Park,2025-11-22,10,1,2,5,7,,,
+Sandown Park,2025-11-22,11,4,5,6,8,,,
+Sandown Park,2025-11-22,12,1,5,3,2,,,
+Angle Park,2025-11-18,1,2,,,,,342,DAWN SAID SO,20.46
+Angle Park,2025-11-18,2,7,,,,,342,LITTLE DONKEY,20.12
+Angle Park,2025-11-18,3,2,,,,,342,PIPPA'S HERO,19.84
+Angle Park,2025-11-18,4,8,,,,,342,SEARING LASS,20.19
+Angle Park,2025-11-18,5,1,,,,,342,MAFIA MISTRESS,20.07
+Angle Park,2025-11-18,6,1,,,,,342,ASTON BIDEN,20.05
+Angle Park,2025-11-18,7,4,,,,,342,OUR BOY TURBO,20.38
+Angle Park,2025-11-18,8,1,,,,,342,FAR OUT LEXI,20.07
+Angle Park,2025-11-18,9,1,,,,,342,STARBURST CANDY,20.17
+Angle Park,2025-11-18,10,7,,,,,342,HE'S NO DIVA,20.03
+Angle Park,2025-11-22,1,2,,,,,342,BRISTOL MOSS,20.49
+Angle Park,2025-11-22,2,1,,,,,342,SWIFT ASCENT,20.49
+Angle Park,2025-11-22,3,8,,,,,342,HE'S A PROFIT,20.34
+Angle Park,2025-11-22,4,9,,,,,342,LITTLE DONKEY,20.02
+Angle Park,2025-11-22,5,7,,,,,342,QUANTUM,19.81
+Angle Park,2025-11-22,6,10,,,,,342,LOVING IT SWEET,19.68
+Angle Park,2025-11-22,7,8,,,,,342,ANTECEDENT,20.13
+Angle Park,2025-11-22,8,1,,,,,342,ZINFANDEL AUSTIN,20.05
+Angle Park,2025-11-22,9,1,,,,,342,RITZA RIOT,20.20
+Angle Park,2025-11-22,10,7,,,,,342,ALLINGA MERCURY,19.90
+Launceston,2025-11-18,1,4,,,,,515,LEYTON,30.13
+Launceston,2025-11-18,2,2,,,,,278,DEADLY TALENT,16.19
+Launceston,2025-11-18,3,8,,,,,278,TOOL SHINER,16.27
+Launceston,2025-11-18,4,7,,,,,278,PARIS DANGER,16.31
+Launceston,2025-11-18,5,5,,,,,278,BIG TEXAN,16.22
+Launceston,2025-11-18,6,6,,,,,278,WELLINGTON ROSES,16.26
+Launceston,2025-11-18,7,6,,,,,515,PARTY POPPER,29.73
+Launceston,2025-11-18,8,2,,,,,515,IS IT ME,29.76
+Launceston,2025-11-18,9,8,,,,,278,BLACKPOOL ARIES,16.44
+Launceston,2025-11-18,10,2,,,,,278,TRICK,15.97
+Cannington,2025-11-22,1,3,,,,,520,CLEARY MAGIC,30.04
+Cannington,2025-11-22,2,8,,,,,520,MISS TENNESSEE,30.13
+Cannington,2025-11-22,3,5,,,,,520,JUST A PIASTRI,29.96
+Cannington,2025-11-22,4,3,,,,,601,RAPIDO JEDI,34.73
+Cannington,2025-11-22,5,7,,,,,520,OUR OZZIE SALUTE,29.94
+Cannington,2025-11-22,6,1,,,,,520,OUR BENSON,30.02
+Cannington,2025-11-22,7,2,,,,,520,BURNT PASSION,30.11
+Cannington,2025-11-22,8,1,,,,,520,ASTON RULER,29.77
+Cannington,2025-11-22,9,1,,,,,715,IRON WORKS,42.06
+Cannington,2025-11-22,10,4,,,,,601,ANOTHER JAMES,35.14
+Cannington,2025-11-22,11,5,,,,,381,JUST MUST,21.89
+Q Lakeside,2025-11-22,1,2,,,,,457,CASH RIOT,25.50
+Q Lakeside,2025-11-22,2,2,,,,,457,ZIPPING KRAVITZ,25.22
+Q Lakeside,2025-11-22,3,2,,,,,642,FIREBIRD,36.11
+Q Lakeside,2025-11-22,4,4,,,,,457,TYPHOON NEV,25.66
+Q Lakeside,2025-11-22,5,7,,,,,457,POP'S MAESTRO,25.70
+Q Lakeside,2025-11-22,6,2,,,,,457,ZIPPING URBAN,25.12
+Q Lakeside,2025-11-22,7,5,,,,,550,VILLAIN OF MAGIC,30.44
+Q Lakeside,2025-11-22,8,4,,,,,457,SUPER SCRUB,25.07
+Q Lakeside,2025-11-22,9,8,,,,,457,ON HOLIDAYS,25.42
+Q Lakeside,2025-11-22,10,8,,,,,457,BIG EASY AL,25.76
+Sandown,2025-11-22,1,3,,,,,515,BEBOP JAZZ,29.42
+Sandown,2025-11-22,2,7,,,,,715,FADE TO BLACK,41.94
+Sandown,2025-11-22,3,5,,,,,715,PAYBACK,42.12
+Sandown,2025-11-22,4,2,,,,,715,AYDEN'S WARRIOR,41.69
+Sandown,2025-11-22,5,4,,,,,515,DAYSEA'S RORY,29.25
+Sandown,2025-11-22,6,3,,,,,515,VALENZUELA,29.26
+Sandown,2025-11-22,7,3,,,,,515,INTREPIDUS,29.23
+Sandown,2025-11-22,8,5,,,,,515,DASHING SLAY,29.24
+Sandown,2025-11-22,9,1,,,,,515,CANYA MAYHEM,29.14
+Sandown,2025-11-22,10,1,,,,,515,ACCREDITED,29.07
+Sandown,2025-11-22,11,4,,,,,515,SPRITELY SIAN,29.55
+Sandown,2025-11-22,12,1,,,,,515,PAW ZURI,29.28
+Healesville,2025-11-23,1,4,9,1,6,,,
+Healesville,2025-11-23,2,2,4,8,7,,,
+Healesville,2025-11-23,3,1,7,6,2,,,
+Healesville,2025-11-23,4,1,8,2,4,,,
+Healesville,2025-11-23,5,8,7,6,3,,,
+Healesville,2025-11-23,6,3,1,7,5,,,
+Healesville,2025-11-23,7,4,3,1,7,,,
+Healesville,2025-11-23,8,6,1,3,2,,,
+Healesville,2025-11-23,9,7,8,5,2,,,
+Healesville,2025-11-23,10,8,2,7,1,,,
+Healesville,2025-11-23,11,4,7,8,1,,,
+Healesville,2025-11-23,12,8,4,5,1,,,
+Sale,2025-11-23,1,1,8,4,6,,,
+Sale,2025-11-23,2,1,8,5,2,,,
+Sale,2025-11-23,3,8,5,7,3,,,
+Sale,2025-11-23,4,5,1,3,9,,,
+Sale,2025-11-23,5,8,5,1,6,,,
+Sale,2025-11-23,6,8,7,6,2,,,
+Sale,2025-11-23,7,4,1,5,6,,,
+Sale,2025-11-23,8,2,1,6,4,,,
+Sale,2025-11-23,9,1,5,8,7,,,
+Sale,2025-11-23,10,2,3,5,8,,,
+Sale,2025-11-23,11,6,5,7,3,,,
+Sale,2025-11-23,12,5,2,4,3,,,
