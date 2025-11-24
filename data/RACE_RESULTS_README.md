@@ -5,7 +5,7 @@ This directory contains actual race results used for validating and optimizing p
 ## Files
 
 ### race_results_nov_2025.csv
-Race results from October-November 2025 across multiple Australian tracks.
+Race results from September-November 2025 across multiple Australian tracks.
 
 **Format:**
 - `Track`: Track name (e.g., Bendigo, Sandown Park, Angle Park)
@@ -20,9 +20,13 @@ Race results from October-November 2025 across multiple Australian tracks.
 - `WinnerTime`: Winning time in seconds
 
 **Tracks Included:**
+- **September 2025:**
+  - Sale (Sep 7) - 12 races ✓ MATCHES SALE_2025-09-07.pdf
+  - Darwin (Sep 7) - 8 races ✓ MATCHES DRWN_2025-09-07.pdf
+  - Q Straight (Sep 7) - 12 races ✓ MATCHES QSTR_2025-09-07.pdf
 - **October 2025:**
-  - Angle Park (Oct 16) - 12 races
-  - Bendigo (Oct 16) - 11 races
+  - Angle Park (Oct 16) - 12 races ✓ MATCHES ANGLG1610form.pdf
+  - Bendigo (Oct 16) - 11 races ✓ MATCHES BDGOG1610form.pdf
 - **November 2025:**
   - Horsham (Nov 18) - 12 races
   - Warragul (Nov 18) - 12 races
@@ -33,12 +37,24 @@ Race results from October-November 2025 across multiple Australian tracks.
   - Cannington (Nov 22) - 11 races
   - Q Lakeside (Nov 22) - 10 races
   - Sandown (Nov 22) - 12 races
-  - Dubbo (Nov 22) - 12 races
-  - Wentworth Park (Nov 22) - 10 races
+  - Dubbo (Nov 22) - 12 races ✓ MATCHES DUBBG2211form.pdf
+  - Wentworth Park (Nov 22) - 10 races ✓ MATCHES WENPG2211form.pdf
   - Healesville (Nov 23) - 12 races
   - Sale (Nov 23) - 12 races
 
-**Total:** 178 races across 14 tracks
+**Total:** 210 races across 16 tracks (covering all PDF form guides in repository except Bathurst)
+
+## PDF Coverage
+
+All PDF form guides in the repository now have matching race results:
+- ✅ ANGLG1610form.pdf - Angle Park Oct 16
+- ✅ BDGOG1610form.pdf - Bendigo Oct 16
+- ✅ DUBBG2211form.pdf - Dubbo Nov 22
+- ✅ WENPG2211form.pdf - Wentworth Park Nov 22
+- ✅ SALE_2025-09-07.pdf - Sale Sep 7
+- ✅ DRWN_2025-09-07.pdf - Darwin Sep 7
+- ✅ QSTR_2025-09-07.pdf - Q Straight Sep 7
+- ⏭️ BRHG1910form.pdf - Bathurst Oct 19 (skipped per user request)
 
 ## Usage
 
@@ -59,5 +75,5 @@ The analyzer will:
 
 Race results collected from:
 - Official Australian greyhound racing results
-- Date range: October 16 - November 23, 2025
-- Various tracks across NSW, SA, VIC, WA, QLD, TAS
+- Date range: September 7 - November 23, 2025
+- Various tracks across NSW, SA, VIC, WA, QLD, TAS, NT
