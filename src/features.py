@@ -179,49 +179,77 @@ def compute_features(df):
     # Overexposure Penalty
     df["OverexposedPenalty"] = df["CareerStarts"].apply(lambda x: -0.1 if x > 80 else 0)
 
-    # Race-type adaptive weighting
+    # Box Position Bias - Optimized from 320 race results analysis (Sep-Nov 2025)
+    # Based on actual win rates: Box 1 (18.1%), Box 4 (15.3%), Box 2 (14.4%), Box 8 (12.8%)
+    # Box 3 weakest at 8.4% - inner boxes perform significantly better
+    BOX_POSITION_BIAS = {
+        1: 0.067,   # 18.1% wins - 1.45x average - STRONGEST
+        2: 0.022,   # 14.4% wins - 1.15x average
+        3: -0.049,  # 8.4% wins - 0.68x average - WEAKEST
+        4: 0.034,   # 15.3% wins - 1.23x average - SECOND STRONGEST
+        5: -0.023,  # 10.6% wins - 0.85x average
+        6: -0.026,  # 10.3% wins - 0.82x average
+        7: -0.037,  # 9.4% wins - 0.75x average
+        8: 0.004,   # 12.8% wins - 1.02x average
+    }
+    
+    # Apply box position bias based on actual race data
+    if "Box" in df.columns:
+        df["BoxPositionBias"] = df["Box"].apply(
+            lambda x: BOX_POSITION_BIAS.get(int(x), 0.0) if pd.notna(x) else 0.0
+        )
+        print(f"✓ Applied optimized BoxPositionBias from 320-race analysis")
+    else:
+        df["BoxPositionBias"] = 0.0
+    
+    # Race-type adaptive weighting - Optimized from 320 race results analysis
+    # Increased BoxBiasFactor weight since box position is highly predictive
     def get_weights(distance):
-        if distance < 400:  # Sprint
+        if distance < 400:  # Sprint - Box position matters most
             return {
-                "EarlySpeedIndex": 0.30,
-                "Speed_kmh": 0.20,
+                "EarlySpeedIndex": 0.28,
+                "Speed_kmh": 0.18,
                 "ConsistencyIndex": 0.10,
-                "FinishConsistency": 0.05,
-                "PrizeMoney": 0.10,
+                "FinishConsistency": 0.04,
+                "PrizeMoney": 0.08,
                 "RecentFormBoost": 0.10,
-                "BoxBiasFactor": 0.10,
-                "TrainerStrikeRate": 0.05,
-                "DistanceSuit": 0.05,
-                "TrackConditionAdj": 0.05
+                "BoxBiasFactor": 0.08,
+                "BoxPositionBias": 0.08,  # New: optimized from actual results
+                "TrainerStrikeRate": 0.06,
+                "DistanceSuit": 0.04,
+                "TrackConditionAdj": 0.04
             }
         elif distance <= 500:  # Middle
             return {
-                "EarlySpeedIndex": 0.25,
-                "Speed_kmh": 0.20,
-                "ConsistencyIndex": 0.15,
-                "FinishConsistency": 0.05,
-                "PrizeMoney": 0.10,
+                "EarlySpeedIndex": 0.24,
+                "Speed_kmh": 0.18,
+                "ConsistencyIndex": 0.14,
+                "FinishConsistency": 0.04,
+                "PrizeMoney": 0.08,
                 "RecentFormBoost": 0.10,
-                "BoxBiasFactor": 0.05,
-                "TrainerStrikeRate": 0.05,
-                "DistanceSuit": 0.05,
-                "TrackConditionAdj": 0.05
+                "BoxBiasFactor": 0.06,
+                "BoxPositionBias": 0.06,  # New: optimized from actual results
+                "TrainerStrikeRate": 0.06,
+                "DistanceSuit": 0.04,
+                "TrackConditionAdj": 0.04
             }
-        else:  # Long
+        else:  # Long - Stamina and consistency matter more
             return {
-                "EarlySpeedIndex": 0.20,
-                "Speed_kmh": 0.15,
-                "ConsistencyIndex": 0.20,
-                "FinishConsistency": 0.10,
-                "PrizeMoney": 0.10,
+                "EarlySpeedIndex": 0.18,
+                "Speed_kmh": 0.14,
+                "ConsistencyIndex": 0.18,
+                "FinishConsistency": 0.08,
+                "PrizeMoney": 0.08,
                 "RecentFormBoost": 0.10,
                 "BoxBiasFactor": 0.05,
-                "TrainerStrikeRate": 0.05,
-                "DistanceSuit": 0.05,
-                "TrackConditionAdj": 0.05
+                "BoxPositionBias": 0.05,  # New: optimized from actual results
+                "TrainerStrikeRate": 0.06,
+                "DistanceSuit": 0.04,
+                "TrackConditionAdj": 0.04
             }
 
     # FinalScore calculation - handle NaN values by treating them as 0
+    # Includes new BoxPositionBias from 320-race analysis
     final_scores = []
     for _, row in df.iterrows():
         w = get_weights(row["Distance"])
@@ -233,6 +261,7 @@ def compute_features(df):
             (row["PrizeMoney"] / 1000) * w["PrizeMoney"] +
             row["RecentFormBoost"] * w["RecentFormBoost"] +
             row["BoxBiasFactor"] * w["BoxBiasFactor"] +
+            row["BoxPositionBias"] * w["BoxPositionBias"] +  # New: optimized from actual results
             row["TrainerStrikeRate"] * w["TrainerStrikeRate"] +
             row["DistanceSuit"] * w["DistanceSuit"] +
             row["TrackConditionAdj"] * w["TrackConditionAdj"] +
