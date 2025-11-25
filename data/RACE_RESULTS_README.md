@@ -55,14 +55,33 @@ Race results from September-November 2025 across multiple Australian tracks.
 ## PDF Coverage
 
 All PDF form guides in the repository now have matching race results:
-- ✅ ANGLG1610form.pdf - Angle Park Oct 16
-- ✅ BDGOG1610form.pdf - Bendigo Oct 16
-- ✅ DUBBG2211form.pdf - Dubbo Nov 22
-- ✅ WENPG2211form.pdf - Wentworth Park Nov 22
+
+**September 2025:**
 - ✅ SALE_2025-09-07.pdf - Sale Sep 7
 - ✅ DRWN_2025-09-07.pdf - Darwin Sep 7
 - ✅ QSTR_2025-09-07.pdf - Q Straight Sep 7
+
+**October 2025:**
+- ✅ ANGLG1610form.pdf - Angle Park Oct 16
+- ✅ BDGOG1610form.pdf - Bendigo Oct 16
 - ⏭️ BRHG1910form.pdf - Bathurst Oct 19 (skipped per user request)
+
+**November 22, 2025:**
+- ✅ DUBBG2211form.pdf - Dubbo Nov 22
+- ✅ WENPG2211form.pdf - Wentworth Park Nov 22
+
+**November 23, 2025:**
+- ✅ RICHG2311form.pdf - Richmond Nov 23
+- ✅ GRAFG2311form.pdf - Grafton Nov 23
+- ✅ BRHG2311form.pdf - Broken Hill Nov 23
+- ✅ HEALG2311form.pdf - Healesville Nov 23
+- ✅ MTGG2311form.pdf - Mount Gambier Nov 23
+- ✅ CAPAG2311form.pdf - BetDeluxe Capalaba Nov 23
+- ✅ SALEG2311form.pdf - Sale Nov 23
+- ✅ ROCKG2311form.pdf - BetDeluxe Rockhampton Nov 23
+- ✅ GAWLG2311form.pdf - Gawler Nov 23
+- ✅ QPRKG2311form.pdf - Q2 Parklands Nov 23
+- ✅ DRWNG2311form.pdf - Darwin Nov 23
 
 ## Usage
 
