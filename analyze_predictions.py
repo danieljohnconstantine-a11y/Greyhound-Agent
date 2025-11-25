@@ -521,9 +521,17 @@ def main(winners_data=None, analysis_date=None):
         analysis_date = DEFAULT_ANALYSIS_DATE
     
     print("🔍 Loading predictions from outputs/todays_form_color.xlsx...")
+    print(f"   Analyzing date: {analysis_date}")
     
     # Load predictions
     df_all, top_picks = load_predictions('outputs/todays_form_color.xlsx', analysis_date)
+    
+    if len(top_picks) == 0:
+        print(f"\n❌ No predictions found for date {analysis_date}")
+        print("   Available dates in file:")
+        df_check = pd.read_excel('outputs/todays_form_color.xlsx')
+        print(f"   {df_check['RaceDate'].unique()}")
+        return None
     
     print(f"✅ Loaded {len(top_picks)} races with predictions")
     print(f"   Tracks: {', '.join(top_picks['Track'].unique())}")
