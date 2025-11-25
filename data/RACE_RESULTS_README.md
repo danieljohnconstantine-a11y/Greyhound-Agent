@@ -41,8 +41,16 @@ Race results from September-November 2025 across multiple Australian tracks.
   - Wentworth Park (Nov 22) - 10 races ✓ MATCHES WENPG2211form.pdf
   - Healesville (Nov 23) - 12 races
   - Sale (Nov 23) - 12 races
+  - **Richmond (Nov 23) - 11 races** ✨ NEW
+  - **Grafton (Nov 23) - 11 races** ✨ NEW
+  - **Broken Hill (Nov 23) - 9 races** ✨ NEW
+  - **Mount Gambier (Nov 23) - 11 races** ✨ NEW
+  - **BetDeluxe Capalaba (Nov 23) - 11 races** ✨ NEW
+  - **BetDeluxe Rockhampton (Nov 23) - 12 races** ✨ NEW
+  - **Gawler (Nov 23) - 9 races** ✨ NEW
+  - **Q2 Parklands (Nov 23) - 12 races** ✨ NEW
 
-**Total:** 210 races across 16 tracks (covering all PDF form guides in repository except Bathurst)
+**Total:** 320 races across 24 tracks (expanded from 210 races)
 
 ## PDF Coverage
 
