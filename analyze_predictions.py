@@ -15,6 +15,12 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 import sys
+from datetime import datetime
+
+
+# Constants
+VARIANCE_THRESHOLD = 1e-10  # Threshold for detecting low variance
+DEFAULT_ANALYSIS_DATE = '2024-11-25'  # Default date to analyze
 
 
 # Current weights from src/features.py for reference
@@ -58,12 +64,20 @@ CURRENT_WEIGHTS = {
 }
 
 
-def load_predictions(excel_path):
-    """Load predictions from Excel file and identify top pick per race."""
+def load_predictions(excel_path, analysis_date=None):
+    """Load predictions from Excel file and identify top pick per race.
+    
+    Args:
+        excel_path: Path to Excel file with predictions
+        analysis_date: Date to filter for (defaults to DEFAULT_ANALYSIS_DATE)
+    """
     df = pd.read_excel(excel_path)
     
-    # Filter for 25/11/2024 (25/11/25)
-    df = df[df['RaceDate'] == '2024-11-25'].copy()
+    # Filter for specified date
+    if analysis_date is None:
+        analysis_date = DEFAULT_ANALYSIS_DATE
+    
+    df = df[df['RaceDate'] == analysis_date].copy()
     
     # Sort by Track, RaceNumber, and FinalScore (descending)
     df_sorted = df.sort_values(['Track', 'RaceNumber', 'FinalScore'], 
@@ -181,7 +195,7 @@ def analyze_scoring_variables(df_all, comparison_results):
             continue
         
         # Skip if no variance (all identical values)
-        if correct_vals.std() < 1e-10 and incorrect_vals.std() < 1e-10:
+        if correct_vals.std() < VARIANCE_THRESHOLD and incorrect_vals.std() < VARIANCE_THRESHOLD:
             continue
         
         # Calculate statistics
@@ -199,7 +213,7 @@ def analyze_scoring_variables(df_all, comparison_results):
         # T-test for statistical significance
         try:
             # Skip if variance is too low (identical values)
-            if correct_vals.std() < 1e-10 and incorrect_vals.std() < 1e-10:
+            if correct_vals.std() < VARIANCE_THRESHOLD and incorrect_vals.std() < VARIANCE_THRESHOLD:
                 t_stat, p_value = 0.0, 1.0
             else:
                 t_stat, p_value = stats.ttest_ind(correct_vals, incorrect_vals, equal_var=False)
@@ -209,7 +223,7 @@ def analyze_scoring_variables(df_all, comparison_results):
         # Effect size (Cohen's d)
         pooled_std = np.sqrt((correct_std**2 + incorrect_std**2) / 2)
         # Handle edge case where both groups have identical values
-        if pooled_std < 1e-10:
+        if pooled_std < VARIANCE_THRESHOLD:
             cohens_d = 0.0
         else:
             cohens_d = mean_diff / pooled_std
@@ -318,14 +332,24 @@ def generate_recommendations(variable_analysis, accuracy):
     return recommendations
 
 
-def format_markdown_output(comparison_results, accuracy, variable_analysis, recommendations, df_all):
+def format_markdown_output(comparison_results, accuracy, variable_analysis, recommendations, df_all, analysis_date=None):
     """Format all results as Markdown for output."""
+    
+    if analysis_date is None:
+        analysis_date = DEFAULT_ANALYSIS_DATE
+    
+    # Format date for display (convert YYYY-MM-DD to DD/MM/YYYY)
+    try:
+        date_obj = datetime.strptime(analysis_date, '%Y-%m-%d')
+        display_date = date_obj.strftime('%d/%m/%Y')
+    except:
+        display_date = analysis_date
     
     correct_count = comparison_results['Correct'].sum()
     total_races = len(comparison_results)
     incorrect_count = total_races - correct_count
     
-    md = f"""# 🏁 Greyhound Prediction Accuracy Analysis - 25/11/2024
+    md = f"""# 🏁 Greyhound Prediction Accuracy Analysis - {display_date}
 
 ## 📊 Overall Performance
 
@@ -483,18 +507,23 @@ def format_markdown_output(comparison_results, accuracy, variable_analysis, reco
     return md
 
 
-def main(winners_data=None):
+def main(winners_data=None, analysis_date=None):
     """Main analysis function.
     
     Args:
         winners_data: Optional dict or string of actual winners.
                      If None, will prompt for input or use command line args.
+        analysis_date: Optional date string (YYYY-MM-DD) to analyze.
+                      Defaults to DEFAULT_ANALYSIS_DATE.
     """
+    
+    if analysis_date is None:
+        analysis_date = DEFAULT_ANALYSIS_DATE
     
     print("🔍 Loading predictions from outputs/todays_form_color.xlsx...")
     
     # Load predictions
-    df_all, top_picks = load_predictions('outputs/todays_form_color.xlsx')
+    df_all, top_picks = load_predictions('outputs/todays_form_color.xlsx', analysis_date)
     
     print(f"✅ Loaded {len(top_picks)} races with predictions")
     print(f"   Tracks: {', '.join(top_picks['Track'].unique())}")
@@ -570,7 +599,8 @@ def main(winners_data=None):
         accuracy, 
         variable_analysis, 
         recommendations,
-        df_all
+        df_all,
+        analysis_date
     )
     
     # Print to console
@@ -579,16 +609,45 @@ def main(winners_data=None):
     print("="*60)
     
     # Save to file
-    output_file = 'outputs/prediction_analysis_25nov2024.md'
+    # Generate filename from analysis date
+    date_str = analysis_date.replace('-', '')
+    output_file = f'outputs/prediction_analysis_{date_str}.md'
     with open(output_file, 'w') as f:
         f.write(markdown_output)
     
     print(f"\n📄 Analysis saved to: {output_file}")
     
+    # Also save detailed comparison results
+    comparison_file = f'outputs/prediction_comparison_{date_str}.csv'
+    comparison_results.to_csv(comparison_file, index=False)
+    print(f"📄 Detailed comparison saved to: {comparison_file}")
+    
     return markdown_output
 
 
 if __name__ == "__main__":
+    # Check for help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help', 'help']:
+        print("""
+Greyhound Prediction Accuracy Analysis
+======================================
+
+Usage:
+  python analyze_predictions.py [winners_file]
+  python analyze_predictions.py -h|--help
+
+Arguments:
+  winners_file    Optional file containing actual race winners
+                  Format: Track Name, R#, Box#
+                  
+Examples:
+  python analyze_predictions.py actual_winners.txt
+  python analyze_predictions.py example_winners.txt
+  
+If no file is provided, you can enter data interactively.
+        """)
+        sys.exit(0)
+    
     main()
 
 
