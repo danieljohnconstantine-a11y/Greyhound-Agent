@@ -5,6 +5,16 @@ import logging
 # Get logger for this module (logging is configured in main.py)
 logger = logging.getLogger(__name__)
 
+# Month abbreviation to number mapping for date parsing
+MONTH_MAP = {
+    'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+    'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+    'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+}
+
+# Year conversion constant (for 2-digit years in format YY -> 20YY)
+BASE_YEAR = 2000
+
 def parse_race_form(text):
     lines = text.splitlines()
     dogs = []
@@ -19,15 +29,21 @@ def parse_race_form(text):
         header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+)\s+(\d+)m", line)
         if header_match:
             race_number += 1
-            day, month, year_2digit, time, track, distance = header_match.groups()
+            day, month_abbr, year_2digit, time, track, distance = header_match.groups()
             
             # Convert 2-digit year to 4-digit year (assumes 2000-2099)
             # For years 00-99, interpret as 2000-2099 (greyhound racing data context)
-            year = 2000 + int(year_2digit)
+            year = BASE_YEAR + int(year_2digit)
+            
+            # Convert month abbreviation to numeric format (e.g., 'Nov' -> '11')
+            month_num = MONTH_MAP.get(month_abbr, month_abbr)
+            if month_num == month_abbr:
+                # Month abbreviation not recognized, log warning but continue
+                logger.warning(f"⚠️ Unrecognized month abbreviation '{month_abbr}', using as-is")
             
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"{year}-{month}-{day.zfill(2)}",
+                "RaceDate": f"{year}-{month_num}-{day.zfill(2)}",  # ISO format: YYYY-MM-DD
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)

@@ -5,6 +5,11 @@ import logging
 # Get logger for this module (logging is configured in main.py)
 logger = logging.getLogger(__name__)
 
+# Distance validation constants (in meters)
+MIN_VALID_DISTANCE = 100  # Minimum reasonable distance for greyhound racing
+MAX_VALID_DISTANCE = 1000  # Maximum reasonable distance for greyhound racing
+DEFAULT_MIDDLE_DISTANCE = 450  # Default distance used when actual distance is invalid/missing
+
 def _find_distance_column(df):
     """
     Find the distance column in the DataFrame, checking for common variations.
@@ -84,9 +89,12 @@ def compute_features(df):
             logger.info(f"📏 Distance range: {distance_range.min():.0f}m to {distance_range.max():.0f}m")
             
             # Warn about unusual distances
-            unusual_distances = (distance_range < 100) | (distance_range > 1000)
+            unusual_distances = (distance_range < MIN_VALID_DISTANCE) | (distance_range > MAX_VALID_DISTANCE)
             if unusual_distances.any():
-                logger.warning(f"⚠️ {unusual_distances.sum()} dogs have unusual distances (outside 100-1000m range)")
+                logger.warning(
+                    f"⚠️ {unusual_distances.sum()} dogs have unusual distances "
+                    f"(outside {MIN_VALID_DISTANCE}-{MAX_VALID_DISTANCE}m range)"
+                )
     
     # Placeholder values — replace with parsed metrics later
     # TODO: Extract these from PDF when available
@@ -132,8 +140,11 @@ def compute_features(df):
     def get_weights(distance):
         # Handle NaN or invalid distances by defaulting to middle-distance weights
         if pd.isna(distance) or distance <= 0:
-            logger.warning(f"⚠️ Invalid distance value ({distance}), using middle-distance weights")
-            distance = 450  # Default to middle distance
+            logger.warning(
+                f"⚠️ Invalid distance value ({distance}), using middle-distance weights "
+                f"(defaulting to {DEFAULT_MIDDLE_DISTANCE}m)"
+            )
+            distance = DEFAULT_MIDDLE_DISTANCE
         
         if distance < 400:  # Sprint
             return {
