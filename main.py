@@ -9,6 +9,9 @@ from src.excel_export import create_color_coded_outputs  # ✅ Excel color-codin
 from src.bet_worthy import identify_bet_worthy_races, print_bet_worthy_summary
 from src.excel_formatter import export_to_excel_with_formatting
 
+# Ensure outputs directory exists before configuring logging
+os.makedirs('outputs', exist_ok=True)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,

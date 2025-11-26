@@ -107,12 +107,19 @@ def load_or_create_winner_data(df):
         winners_list = []
         np.random.seed(42)  # For reproducibility
         
+        # Calculate max score range for normalization
+        max_score = df['FinalScore'].max()
+        min_score = df['FinalScore'].min()
+        score_range = max_score - min_score if max_score > min_score else 1.0
+        
         for (track, race_num), group in df.groupby(['Track', 'RaceNumber']):
             # Sort by score and add randomness
             group = group.copy()
             group['random_factor'] = np.random.random(len(group))
-            # Weight: 70% score, 30% random
-            group['weighted_score'] = group['FinalScore'] * 0.7 + group['random_factor'] * 30
+            # Weight: 70% score (normalized), 30% random (normalized to same scale)
+            # Normalize FinalScore to 0-1 range, then scale random to match
+            normalized_score = (group['FinalScore'] - min_score) / score_range
+            group['weighted_score'] = normalized_score * 0.7 + group['random_factor'] * 0.3
             
             winner = group.nlargest(1, 'weighted_score').iloc[0]
             winners_list.append({

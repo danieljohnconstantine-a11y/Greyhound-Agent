@@ -48,37 +48,36 @@ def parse_race_form(text):
         line = line.strip()
 
         # Match race header - flexible format for different months and date formats
-        # Format: "Race No  1 Oct 16 04:00PM Angle Park 530m" or "Race No 07 Sep 25 06:04PM Q STRAIGHT 300m"
+        # Format: "Race No  1 Oct 16 04:00PM Angle Park 530m"
+        # Groups: (day_of_race, month_abbr, year_2digit, time, track, distance)
+        # Example: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
+        # Captures: day=22, month=Nov, year=25, time=07:21PM, track=WENTWORTH PARK, distance=520
         header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+?)\s+(\d+)m", line)
         if header_match:
             race_number += 1
-            race_num, month, day, time, track, distance = header_match.groups()
+            day_of_race, month_abbr, year_2digit, time, track, distance = header_match.groups()
             
-            # Convert 2-digit year (day is actually year in the regex) to 4-digit year
-            year = BASE_YEAR + int(day)
+            # Convert 2-digit year to 4-digit year (e.g., '25' -> 2025)
+            year = BASE_YEAR + int(year_2digit)
             
             # Convert month abbreviation to numeric format using MONTH_MAP
-            month_num = MONTH_MAP.get(month, None)
+            month_num = MONTH_MAP.get(month_abbr, None)
             if month_num is None:
                 # Month abbreviation not recognized, use default and log error
                 logger.error(
-                    f"❌ Unrecognized month abbreviation '{month}' in race header. "
+                    f"❌ Unrecognized month abbreviation '{month_abbr}' in race header. "
                     f"Using '01' (January) as fallback. Please update MONTH_MAP if this is a valid month."
                 )
                 month_num = '01'  # Default to January to maintain valid ISO date format
             
-            # Extract day from race_num (which is actually the day in current parse)
-            # The regex groups are: race_num (day), month, day (year), time, track, distance
-            actual_day = race_num  # First capture group is the day
-            
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"{year}-{month_num}-{actual_day.zfill(2)}",  # ISO format: YYYY-MM-DD
+                "RaceDate": f"{year}-{month_num}-{day_of_race.zfill(2)}",  # ISO format: YYYY-MM-DD
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
             }
-            logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{actual_day.zfill(2)}")
+            logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{day_of_race.zfill(2)}")
             current_dog_section_index = -1  # Reset dog section when new race starts
             continue
 
