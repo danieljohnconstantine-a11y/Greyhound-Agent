@@ -1,6 +1,14 @@
 import pandas as pd
 import numpy as np
 
+# Scoring adjustment constants for missing timing data
+# When timing data is unavailable, we boost other indicators to compensate
+TIMING_MISSING_FULL_BOOST = 1.4  # 40% boost when both speed/early timing missing
+TIMING_MISSING_PARTIAL_BOOST = 1.2  # 20% boost when only one timing metric missing
+BOX_POSITION_BOOST = 1.5  # 50% boost to box position importance when timing unavailable
+# Rationale: Dogs without timing data shouldn't be penalized for missing info;
+# box position becomes more important predictor in absence of timing metrics
+
 def compute_features(df):
     df = df.copy()
 
@@ -270,7 +278,7 @@ def compute_features(df):
 
     # Box Position Bias - Updated from 449 race results analysis (Sep-Nov 2025)
     # Combining 320 historical + 129 races from Nov 26, 2025
-    # Nov 26 data: Box 1 (19.4%), Box 2 (19.4%), Box 8 (17.1%), Box 6 (11.6%), Box 7 (11.6%)
+    # Nov 26 data: Box 1 (19.4%), Box 2 (19.4%), Box 8 (17.1%)
     # Box 3 still weakest at 7.0%
     # Average expected: 12.5% (1/8 boxes)
     BOX_POSITION_BIAS = {
@@ -279,8 +287,8 @@ def compute_features(df):
         3: -0.055,  # ~7% wins - 0.56x average - WEAKEST
         4: 0.015,   # ~10% wins - 0.80x average
         5: -0.020,  # ~9% wins - 0.72x average
-        6: 0.000,   # ~12% wins - average
-        7: 0.000,   # ~12% wins - average
+        6: 0.000,   # ~12% wins - 0.96x average (near average)
+        7: 0.000,   # ~12% wins - 0.96x average (near average)
         8: 0.050,   # ~17% wins - 1.36x average - THIRD STRONGEST
     }
     
@@ -289,7 +297,7 @@ def compute_features(df):
         df["BoxPositionBias"] = df["Box"].apply(
             lambda x: BOX_POSITION_BIAS.get(int(x), 0.0) if pd.notna(x) else 0.0
         )
-        print(f"✓ Applied optimized BoxPositionBias from 320-race analysis")
+        print(f"✓ Applied optimized BoxPositionBias from 449-race analysis")
     else:
         df["BoxPositionBias"] = 0.0
     
@@ -390,9 +398,9 @@ def compute_features(df):
         timing_weight_adjustment = 1.0
         if not has_speed and not has_early:
             # Boost career-based indicators when no timing available
-            timing_weight_adjustment = 1.4  # 40% boost to compensate
+            timing_weight_adjustment = TIMING_MISSING_FULL_BOOST
         elif not has_speed or not has_early:
-            timing_weight_adjustment = 1.2  # 20% boost for partial data
+            timing_weight_adjustment = TIMING_MISSING_PARTIAL_BOOST
         
         # Calculate base scores from non-timing features
         base_score = (
@@ -401,7 +409,7 @@ def compute_features(df):
             (row["PrizeMoney"] / 1000) * w["PrizeMoney"] * timing_weight_adjustment +
             row["RecentFormBoost"] * w["RecentFormBoost"] +
             row["BoxBiasFactor"] * w["BoxBiasFactor"] +
-            row["BoxPositionBias"] * w["BoxPositionBias"] * 1.5 +  # Boost box position significantly
+            row["BoxPositionBias"] * w["BoxPositionBias"] * BOX_POSITION_BOOST +
             row["TrainerStrikeRate"] * w["TrainerStrikeRate"] * timing_weight_adjustment +
             row["DistanceSuit"] * w["DistanceSuit"] +
             row["TrackConditionAdj"] * w["TrackConditionAdj"] +
