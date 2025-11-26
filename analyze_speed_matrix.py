@@ -351,7 +351,7 @@ def generate_summary_report(stats_df, weight_matrix, results, df):
     
     report = {
         'analysis_date': datetime.now().isoformat(),
-        'race_date': '2025-11-25',
+        'race_date': '2024-11-25',
         'total_races': int(len(df.groupby(['Track', 'RaceNumber']))),
         'total_runners': int(len(df)),
         'total_winners': int(df['IsWinner'].sum()),

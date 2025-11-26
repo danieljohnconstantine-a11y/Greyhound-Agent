@@ -2,8 +2,8 @@
 SPEED MATRIX ANALYSIS SUMMARY
 ================================================================================
 
-Analysis Date: 2025-11-26T01:35:00.537517
-Race Date: 2025-11-25
+Analysis Date: 2025-11-26T01:39:54.459726
+Race Date: 2024-11-25
 Total Races: 137
 Total Runners: 1043
 Total Winners Tagged: 137

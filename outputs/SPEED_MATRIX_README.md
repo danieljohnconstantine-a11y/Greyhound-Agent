@@ -1,11 +1,11 @@
 # Speed Matrix Analysis - Documentation
 
 ## Overview
-This document describes the speed matrix optimization analysis performed on greyhound racing data for 25/11/2025.
+This document describes the speed matrix optimization analysis performed on greyhound racing data for 25/11/2024.
 
 ## Analysis Date
 **Performed:** 2025-11-26  
-**Race Data:** 2025-11-25 (25th November 2025)
+**Race Data:** 2024-11-25 (25th November 2024)
 
 ## Methodology
 
@@ -152,7 +152,7 @@ Re-run the analysis periodically with fresh data:
 RestFactor (d = 1.409) shows a very large effect size, indicating strong predictive power.
 
 ### Limitations
-- Analysis based on single day's data (25/11/2025)
+- Analysis based on single day's data (25/11/2024)
 - Results may vary by track, distance, and conditions
 - Regular updates recommended to maintain accuracy
 - Simulated winner data used for demonstration only
