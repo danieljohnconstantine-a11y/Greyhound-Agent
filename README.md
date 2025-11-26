@@ -30,6 +30,8 @@ The Excel output (`todays_form_color.xlsx`) includes color highlighting to ident
 A race is considered bet-worthy if **any** of the following conditions are met:
 
 1. **Score Margin Percentage**: The top pick's score margin vs. the next highest is ≥ 7% (configurable)
+   - Calculated as: `(top_score - second_score) / top_score * 100`
+   - Example: Top score 50, second score 45 → margin is 10%
 2. **Top Pick Confidence**: The model confidence (FinalScore) for the top pick is ≥ 35 (configurable)
 3. **Absolute Score Margin**: The absolute score difference between top and second pick is ≥ 3.0 (configurable)
 

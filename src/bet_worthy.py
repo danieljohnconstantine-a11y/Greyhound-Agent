@@ -6,6 +6,8 @@ and should receive color highlighting in the output Excel file.
 
 Bet-worthy races are those where:
 1. The top pick's score margin vs. the next highest is above a threshold (default: 7%)
+   - Margin is calculated as: (top_score - second_score) / top_score * 100
+   - This represents how much smaller the second score is relative to the top score
 2. OR the model confidence for the top pick is above a threshold (default: 35%)
 
 Thresholds can be adjusted via the configuration constants below.
@@ -32,12 +34,19 @@ def calculate_score_margin_percent(top_score, second_score):
     """
     Calculate the percentage margin between top and second scores.
     
+    This calculates how much smaller the second score is relative to the top score:
+    margin = (top_score - second_score) / top_score * 100
+    
+    For example:
+    - If top_score=50 and second_score=45, margin is 10% (second is 10% behind first)
+    - If top_score=40 and second_score=40, margin is 0%
+    
     Args:
         top_score: Score of the top pick
         second_score: Score of the second pick
         
     Returns:
-        Percentage margin (0-100) where 100 means second_score is 0
+        Percentage margin (0-100) representing how much second_score lags behind top_score
     """
     if top_score <= 0:
         return 0.0

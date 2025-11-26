@@ -112,7 +112,8 @@ def export_to_excel_with_formatting(df, bet_worthy_races, output_path):
             try:
                 if cell.value:
                     max_length = max(max_length, len(str(cell.value)))
-            except:
+            except (TypeError, AttributeError) as e:
+                # Skip cells that can't be converted to string
                 pass
         
         adjusted_width = min(max_length + 2, 50)  # Cap at 50 for very long values
