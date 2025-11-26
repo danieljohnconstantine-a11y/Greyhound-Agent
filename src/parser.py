@@ -1,9 +1,24 @@
 import pandas as pd
 import re
+import logging
+
+# Get logger for this module (logging is configured in main.py if needed)
+logger = logging.getLogger(__name__)
 
 # Distance tolerance constants for matching race times to current race distance
 DISTANCE_EXACT_MATCH_TOLERANCE = 10  # meters
 DISTANCE_SIMILAR_MATCH_TOLERANCE = 50  # meters
+
+# Month abbreviation to number mapping for date parsing
+MONTH_MAP = {
+    'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+    'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+    'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+}
+
+# Year conversion constant (for 2-digit years in format YY -> 20YY)
+# Assumes all greyhound racing data is from 2000-2099 (current era)
+BASE_YEAR = 2000
 
 def parse_race_form(text):
     """
@@ -38,17 +53,32 @@ def parse_race_form(text):
         if header_match:
             race_number += 1
             race_num, month, day, time, track, distance = header_match.groups()
-            # Map month abbreviations to numbers
-            month_map = {'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
-                        'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'}
-            month_num = month_map.get(month, '01')
+            
+            # Convert 2-digit year (day is actually year in the regex) to 4-digit year
+            year = BASE_YEAR + int(day)
+            
+            # Convert month abbreviation to numeric format using MONTH_MAP
+            month_num = MONTH_MAP.get(month, None)
+            if month_num is None:
+                # Month abbreviation not recognized, use default and log error
+                logger.error(
+                    f"❌ Unrecognized month abbreviation '{month}' in race header. "
+                    f"Using '01' (January) as fallback. Please update MONTH_MAP if this is a valid month."
+                )
+                month_num = '01'  # Default to January to maintain valid ISO date format
+            
+            # Extract day from race_num (which is actually the day in current parse)
+            # The regex groups are: race_num (day), month, day (year), time, track, distance
+            actual_day = race_num  # First capture group is the day
+            
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"2024-{month_num}-{day.zfill(2)}",
+                "RaceDate": f"{year}-{month_num}-{actual_day.zfill(2)}",  # ISO format: YYYY-MM-DD
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
             }
+            logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{actual_day.zfill(2)}")
             current_dog_section_index = -1  # Reset dog section when new race starts
             continue
 
@@ -324,6 +354,25 @@ def parse_race_form(text):
 
     df = pd.DataFrame(dogs)
     
+    # Normalize column names: strip whitespace and ensure consistent casing
+    df.columns = df.columns.str.strip()
+    
+    # Log parsing results
+    logger.info(f"✅ Parsed {len(df)} dogs across {race_number} races")
+    logger.info(f"📊 Columns in parsed DataFrame: {df.columns.tolist()}")
+    
+    # Check for critical columns and log warnings if missing
+    critical_columns = ['Distance', 'DogName', 'Box', 'Track', 'RaceNumber']
+    missing_critical = [col for col in critical_columns if col not in df.columns]
+    if missing_critical:
+        logger.warning(f"⚠️ Missing critical columns: {missing_critical}")
+    
+    # Log sample of Distance values to verify parsing
+    if 'Distance' in df.columns:
+        logger.info(f"📏 Distance values (sample): {df['Distance'].unique()[:5].tolist()}")
+    else:
+        logger.error("❌ 'Distance' column is MISSING from parsed DataFrame!")
+    
     # Validation: Count how many dogs have timing data
     if len(df) > 0:
         best_time_count = df["BestTimeSec"].notna().sum() if "BestTimeSec" in df.columns else 0
@@ -333,7 +382,9 @@ def parse_race_form(text):
         
         if best_time_count == 0:
             print(f"   ⚠️  WARNING: No BestTimeSec data extracted from any dog")
+            logger.warning("No BestTimeSec data extracted from any dog")
         if sec_time_count == 0:
             print(f"   ⚠️  WARNING: No SectionalSec data extracted from any dog")
+            logger.warning("No SectionalSec data extracted from any dog")
     
     return df
