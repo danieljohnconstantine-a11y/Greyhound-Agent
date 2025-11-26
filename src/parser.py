@@ -22,11 +22,24 @@ def parse_race_form(text):
                 'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
                 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
             }
-            month_num = month_map.get(month, '01')
+            month_num = month_map.get(month, None)
+            
+            # Skip if invalid month
+            if month_num is None:
+                print(f"⚠️ Warning: Unknown month '{month}' in race header, skipping")
+                continue
+            
+            # Convert 2-digit year to 4-digit (assumes 2000s for 00-99)
+            # Years 00-49 -> 2000-2049, Years 50-99 -> 1950-1999
+            year_int = int(year)
+            if year_int < 50:
+                full_year = f"20{year}"
+            else:
+                full_year = f"19{year}"
             
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"20{year}-{month_num}-{day.zfill(2)}",
+                "RaceDate": f"{full_year}-{month_num}-{day.zfill(2)}",
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
