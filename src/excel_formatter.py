@@ -93,6 +93,10 @@ def export_to_excel_with_formatting(df, bet_worthy_races, output_path):
         
         # Write each cell in the row
         for col_idx, (col_name, value) in enumerate(row_data.items(), start=1):
+            # Convert lists to strings for Excel compatibility
+            if isinstance(value, (list, tuple)):
+                value = str(value)
+            
             cell = ws.cell(row=row_idx, column=col_idx, value=value)
             cell.border = border
             

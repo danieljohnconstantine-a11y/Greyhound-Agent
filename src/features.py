@@ -7,7 +7,12 @@ def compute_features(df):
     # Ensure numeric types
     df["DLR"] = pd.to_numeric(df["DLR"], errors="coerce")
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
-    df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
+    
+    # Handle Distance - use default if not present or invalid
+    if "Distance" not in df.columns:
+        df["Distance"] = 500  # Default distance
+    else:
+        df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce").fillna(500)
 
     # Placeholder values — replace with parsed metrics later
     df["BestTimeSec"] = 22.5
