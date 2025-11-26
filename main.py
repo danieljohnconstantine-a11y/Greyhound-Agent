@@ -2,11 +2,23 @@ import pandas as pd
 import numpy as np
 import pdfplumber
 import os
+import logging
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
 from src.excel_export import create_color_coded_outputs  # ✅ Excel color-coding
 from src.bet_worthy import identify_bet_worthy_races, print_bet_worthy_summary
 from src.excel_formatter import export_to_excel_with_formatting
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('outputs/greyhound_analytics.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 def extract_text_from_pdf(pdf_path):
     text = ""
@@ -16,6 +28,7 @@ def extract_text_from_pdf(pdf_path):
     return text
 
 # 🚀 Start pipeline
+logger.info("🚀 Starting Greyhound Analytics")
 print("🚀 Starting Greyhound Analytics")
 
 # ✅ Find all PDFs in data folder
@@ -86,5 +99,4 @@ print("\n🏁 Top Picks Across All Tracks:")
 for _, row in picks.iterrows():
     print(f"{row.Track} | Race {row.RaceNumber} | {row.DogName} | Score: {round(row.FinalScore, 3)}")
 
-print("\n📌 Press Enter to exit...")
-input()
+logger.info("✅ Greyhound Analytics pipeline completed successfully")
