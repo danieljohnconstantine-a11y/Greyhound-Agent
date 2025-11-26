@@ -121,22 +121,55 @@ def parse_race_form(text):
             dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
             continue
 
-        # Check if this is a dog name header (all caps, short line)
+        # Check if this is a dog name header (dog name in caps at start of line)
         # This marks the start of a dog's detailed section
-        # Improved matching: exact match or very close match, excluding generic headers
-        if line.upper() == line and 3 <= len(line) <= 50 and len(line.split()) <= 5:
+        # IMPROVED: Use fuzzy/prefix matching to handle lines like "RUBY'S MATE j50s j350s t50s t350s"
+        # where the dog name appears at the start but has extra lowercase text after it
+        # Note: Don't require entire line to be uppercase - just check if it starts with uppercase chars
+        first_word = line.split()[0] if line.split() else ""
+        looks_like_header = (
+            len(line) >= 3 and 
+            first_word.upper() == first_word and  # First word is uppercase
+            len(first_word) >= 2 and
+            first_word[0].isalpha()  # Starts with a letter (not a number like race position)
+        )
+        
+        if looks_like_header:
             # Exclude common non-dog headers
-            if any(keyword in line for keyword in ['RACE', 'PRIZE', 'DISTANCE', 'TRACK', 'HORSE', 'WINNER']):
+            if any(keyword in line.upper() for keyword in ['RACE', 'PRIZE', 'DISTANCE', 'TRACK', 'HORSE', 'WINNER', 'MARGIN', 'LENGTHS', 'SETTLED', 'SECOND', 'THIRD', 'FOURTH']):
                 continue
             
-            # Try to match this to a known dog
-            line_normalized = line.replace("'", "").replace("-", " ").replace("  ", " ").strip()
+            # Try to match this to a known dog using prefix/fuzzy matching
+            line_normalized = line.replace("'", "").replace("-", " ").replace("  ", " ").strip().upper()
+            
+            best_match_idx = -1
+            best_match_len = 0
+            
             for dog_idx, dog in enumerate(dogs):
                 dog_name_normalized = dog["DogName"].upper().replace("'", "").replace("-", " ").strip()
-                # More strict matching: the line should be the dog name (with minor variations)
+                
+                # Method 1: Exact match (original behavior)
                 if dog_name_normalized == line_normalized:
-                    current_dog_section_index = dog_idx
-                    break
+                    best_match_idx = dog_idx
+                    best_match_len = len(dog_name_normalized)
+                    break  # Exact match is best, stop searching
+                
+                # Method 2: Prefix match - dog name appears at the start of the line
+                # E.g., "RUBYS MATE J50S J350S" starts with "RUBYS MATE"
+                if line_normalized.startswith(dog_name_normalized + " ") or line_normalized.startswith(dog_name_normalized + "\t"):
+                    # Only update if this is a longer/better match
+                    if len(dog_name_normalized) > best_match_len:
+                        best_match_idx = dog_idx
+                        best_match_len = len(dog_name_normalized)
+                
+                # Method 3: Check if the line starts with the dog name (no space required for longer names)
+                elif len(dog_name_normalized) >= 5 and line_normalized.startswith(dog_name_normalized):
+                    if len(dog_name_normalized) > best_match_len:
+                        best_match_idx = dog_idx
+                        best_match_len = len(dog_name_normalized)
+            
+            if best_match_idx >= 0:
+                current_dog_section_index = best_match_idx
 
         # Extract timing data from race history lines
         # Only attribute to a dog if we know which dog's section we're in
