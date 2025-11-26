@@ -1,5 +1,21 @@
 import pandas as pd
 import re
+import logging
+
+# Get logger for this module (logging is configured in main.py)
+logger = logging.getLogger(__name__)
+
+# Month abbreviation to number mapping for date parsing
+MONTH_MAP = {
+    'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+    'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+    'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+}
+
+# Year conversion constant (for 2-digit years in format YY -> 20YY)
+# Assumes all greyhound racing data is from 2000-2099 (current era)
+# This is appropriate since we're processing recent/current race forms, not historical data
+BASE_YEAR = 2000
 
 def parse_race_form(text):
     lines = text.splitlines()
@@ -10,18 +26,35 @@ def parse_race_form(text):
     for line in lines:
         line = line.strip()
 
-        # Match race header
-        header_match = re.match(r"Race No\s+(\d{1,2}) Oct (\d{2}) (\d{2}:\d{2}[AP]M) ([A-Za-z ]+)\s+(\d+)m", line)
+        # Match race header - accepts any 3-letter month abbreviation
+        # Examples: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
+        header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+)\s+(\d+)m", line)
         if header_match:
             race_number += 1
-            day, year, time, track, distance = header_match.groups()
+            day, month_abbr, year_2digit, time, track, distance = header_match.groups()
+            
+            # Convert 2-digit year to 4-digit year (assumes 2000-2099)
+            # For years 00-99, interpret as 2000-2099 (greyhound racing data context)
+            year = BASE_YEAR + int(year_2digit)
+            
+            # Convert month abbreviation to numeric format (e.g., 'Nov' -> '11')
+            month_num = MONTH_MAP.get(month_abbr, None)
+            if month_num is None:
+                # Month abbreviation not recognized, use default and log error
+                logger.error(
+                    f"❌ Unrecognized month abbreviation '{month_abbr}' in race header. "
+                    f"Using '01' (January) as fallback. Please update MONTH_MAP if this is a valid month."
+                )
+                month_num = '01'  # Default to January to maintain valid ISO date format
+            
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"2025-10-{day.zfill(2)}",
+                "RaceDate": f"{year}-{month_num}-{day.zfill(2)}",  # ISO format: YYYY-MM-DD
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
             }
+            logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m")
             continue
 
         # Match dog entry with glued form number
@@ -94,5 +127,25 @@ def parse_race_form(text):
                 dogs[-1]["Margins"] = []
 
     df = pd.DataFrame(dogs)
+    
+    # Normalize column names: strip whitespace and ensure consistent casing
+    df.columns = df.columns.str.strip()
+    
+    # Log parsing results
+    logger.info(f"✅ Parsed {len(df)} dogs across {race_number} races")
+    logger.info(f"📊 Columns in parsed DataFrame: {df.columns.tolist()}")
+    
+    # Check for critical columns and log warnings if missing
+    critical_columns = ['Distance', 'DogName', 'Box', 'Track', 'RaceNumber']
+    missing_critical = [col for col in critical_columns if col not in df.columns]
+    if missing_critical:
+        logger.warning(f"⚠️ Missing critical columns: {missing_critical}")
+    
+    # Log sample of Distance values to verify parsing
+    if 'Distance' in df.columns:
+        logger.info(f"📏 Distance values (sample): {df['Distance'].unique()[:5].tolist()}")
+    else:
+        logger.error("❌ 'Distance' column is MISSING from parsed DataFrame!")
+    
     print(f"✅ Parsed {len(df)} dogs")
     return df
