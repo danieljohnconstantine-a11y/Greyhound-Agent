@@ -1,15 +1,96 @@
 import pandas as pd
 import numpy as np
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
+
+def _find_distance_column(df):
+    """
+    Find the distance column in the DataFrame, checking for common variations.
+    Returns the column name if found, None otherwise.
+    
+    Handles variations like: 'Distance', 'distance', 'RaceDistance', ' Distance ', etc.
+    """
+    # Normalize column names for comparison (strip whitespace, lowercase)
+    normalized_cols = {col.strip().lower(): col for col in df.columns}
+    
+    # Try exact matches first (case-insensitive, whitespace-stripped)
+    distance_variations = ['distance', 'racedistance', 'race_distance', 'dist']
+    
+    for variation in distance_variations:
+        if variation in normalized_cols:
+            actual_col = normalized_cols[variation]
+            logger.info(f"✅ Found distance column: '{actual_col}'")
+            return actual_col
+    
+    # If not found, log all available columns for manual review
+    logger.error("❌ Could not find 'Distance' column in DataFrame!")
+    logger.error(f"   Available columns: {df.columns.tolist()}")
+    return None
 
 def compute_features(df):
+    """
+    Compute features for greyhound race prediction.
+    
+    Robustly handles missing or alternative distance columns with helpful error messages.
+    Normalizes numeric columns to handle various data formats.
+    """
     df = df.copy()
+    
+    logger.info(f"🔧 Starting feature computation for {len(df)} dogs")
+    
+    # Find and validate Distance column
+    distance_col = _find_distance_column(df)
+    if distance_col is None:
+        raise ValueError(
+            "CRITICAL ERROR: 'Distance' column not found in DataFrame. "
+            "Cannot compute features without distance information. "
+            f"Available columns: {df.columns.tolist()}. "
+            "Please check the PDF parsing pipeline to ensure race distance is being extracted."
+        )
+    
+    # If the column name is not exactly 'Distance', rename it for consistency
+    if distance_col != 'Distance':
+        logger.info(f"🔄 Renaming '{distance_col}' to 'Distance' for consistency")
+        df = df.rename(columns={distance_col: 'Distance'})
 
-    # Ensure numeric types
-    df["DLR"] = pd.to_numeric(df["DLR"], errors="coerce")
-    df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
-    df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
-
+    # Ensure numeric types with robust error handling
+    numeric_columns = {
+        'DLR': 'Days Last Run',
+        'CareerStarts': 'Career Starts',
+        'Distance': 'Distance'
+    }
+    
+    for col, description in numeric_columns.items():
+        if col in df.columns:
+            original_type = df[col].dtype
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+            # Log conversion issues
+            null_count = df[col].isna().sum()
+            if null_count > 0:
+                logger.warning(f"⚠️ {null_count} invalid values in '{col}' ({description}) converted to NaN")
+            logger.debug(f"   Converted {col} from {original_type} to numeric")
+        else:
+            logger.warning(f"⚠️ Expected column '{col}' ({description}) not found in DataFrame")
+    
+    # Validate Distance values are reasonable (should be between 100m and 1000m for greyhound racing)
+    if 'Distance' in df.columns:
+        valid_distances = df['Distance'].notna()
+        if valid_distances.sum() == 0:
+            logger.error("❌ All Distance values are NaN after conversion!")
+        else:
+            distance_range = df.loc[valid_distances, 'Distance']
+            logger.info(f"📏 Distance range: {distance_range.min():.0f}m to {distance_range.max():.0f}m")
+            
+            # Warn about unusual distances
+            unusual_distances = (distance_range < 100) | (distance_range > 1000)
+            if unusual_distances.any():
+                logger.warning(f"⚠️ {unusual_distances.sum()} dogs have unusual distances (outside 100-1000m range)")
+    
     # Placeholder values — replace with parsed metrics later
+    # TODO: Extract these from PDF when available
     df["BestTimeSec"] = 22.5
     df["SectionalSec"] = 8.5
     df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
@@ -17,7 +98,8 @@ def compute_features(df):
     df["BoxBiasFactor"] = 0.1
     df["TrackConditionAdj"] = 1.0
 
-    # Derived metrics
+    # Derived metrics - all dependent on Distance being numeric and non-null
+    # These calculations are now robust to Distance column variations and format issues
     df["Speed_kmh"] = (df["Distance"] / df["BestTimeSec"]) * 3.6
     df["EarlySpeedIndex"] = df["Distance"] / df["SectionalSec"]
     df["FinishConsistency"] = df["Last3TimesSec"].apply(lambda x: np.std(x))
@@ -36,8 +118,9 @@ def compute_features(df):
         axis=1
     )
 
-    # Distance Suitability
-    df["DistanceSuit"] = df["Distance"].apply(lambda x: 1.0 if x in [515, 595] else 0.7)
+    # Distance Suitability - handles numeric Distance column robustly
+    # Assumes Distance is in meters (e.g., 515m, 595m are common greyhound racing distances)
+    df["DistanceSuit"] = df["Distance"].apply(lambda x: 1.0 if pd.notna(x) and x in [515, 595] else 0.7)
 
     # Fallbacks
     df["TrainerStrikeRate"] = df.get("TrainerStrikeRate", pd.Series([0.15] * len(df)))
@@ -46,8 +129,13 @@ def compute_features(df):
     # Overexposure Penalty
     df["OverexposedPenalty"] = df["CareerStarts"].apply(lambda x: -0.1 if x > 80 else 0)
 
-    # Race-type adaptive weighting
+    # Race-type adaptive weighting - handles NaN distances gracefully
     def get_weights(distance):
+        # Handle NaN or invalid distances by defaulting to middle-distance weights
+        if pd.isna(distance) or distance <= 0:
+            logger.warning(f"⚠️ Invalid distance value ({distance}), using middle-distance weights")
+            distance = 450  # Default to middle distance
+        
         if distance < 400:  # Sprint
             return {
                 "EarlySpeedIndex": 0.30,
@@ -108,6 +196,10 @@ def compute_features(df):
         final_scores.append(score)
 
     df["FinalScore"] = final_scores
+    
+    logger.info(f"✅ Feature computation completed successfully for {len(df)} dogs")
+    logger.info(f"📊 Final score range: {df['FinalScore'].min():.2f} to {df['FinalScore'].max():.2f}")
+    
     return df
 
 def generate_trifecta_table(df):

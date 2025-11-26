@@ -1,5 +1,10 @@
 import pandas as pd
 import re
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
 
 def parse_race_form(text):
     lines = text.splitlines()
@@ -10,18 +15,20 @@ def parse_race_form(text):
     for line in lines:
         line = line.strip()
 
-        # Match race header
-        header_match = re.match(r"Race No\s+(\d{1,2}) Oct (\d{2}) (\d{2}:\d{2}[AP]M) ([A-Za-z ]+)\s+(\d+)m", line)
+        # Match race header - accepts any 3-letter month abbreviation
+        # Examples: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
+        header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+)\s+(\d+)m", line)
         if header_match:
             race_number += 1
-            day, year, time, track, distance = header_match.groups()
+            day, month, year, time, track, distance = header_match.groups()
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"2025-10-{day.zfill(2)}",
+                "RaceDate": f"20{year}-{month}-{day.zfill(2)}",  # More flexible date format
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
             }
+            logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m")
             continue
 
         # Match dog entry with glued form number
@@ -94,5 +101,25 @@ def parse_race_form(text):
                 dogs[-1]["Margins"] = []
 
     df = pd.DataFrame(dogs)
+    
+    # Normalize column names: strip whitespace and ensure consistent casing
+    df.columns = df.columns.str.strip()
+    
+    # Log parsing results
+    logger.info(f"✅ Parsed {len(df)} dogs across {race_number} races")
+    logger.info(f"📊 Columns in parsed DataFrame: {df.columns.tolist()}")
+    
+    # Check for critical columns and log warnings if missing
+    critical_columns = ['Distance', 'DogName', 'Box', 'Track', 'RaceNumber']
+    missing_critical = [col for col in critical_columns if col not in df.columns]
+    if missing_critical:
+        logger.warning(f"⚠️ Missing critical columns: {missing_critical}")
+    
+    # Log sample of Distance values to verify parsing
+    if 'Distance' in df.columns:
+        logger.info(f"📏 Distance values (sample): {df['Distance'].unique()[:5].tolist()}")
+    else:
+        logger.error("❌ 'Distance' column is MISSING from parsed DataFrame!")
+    
     print(f"✅ Parsed {len(df)} dogs")
     return df
