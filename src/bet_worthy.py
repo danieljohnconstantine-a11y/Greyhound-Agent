@@ -48,7 +48,7 @@ def calculate_score_margin_percent(top_score, second_score):
     Returns:
         Percentage margin (0-100) representing how much second_score lags behind top_score
     """
-    if top_score <= 0:
+    if top_score == 0:
         return 0.0
     margin = ((top_score - second_score) / top_score) * 100
     return max(0.0, margin)
@@ -78,13 +78,19 @@ def is_race_bet_worthy(race_dogs_df):
     
     top_score = sorted_dogs.iloc[0]['FinalScore']
     
+    # Calculate margin if we have at least 2 dogs
+    margin_percent = 0.0
+    if len(sorted_dogs) >= 2:
+        second_score = sorted_dogs.iloc[1]['FinalScore']
+        margin_percent = calculate_score_margin_percent(top_score, second_score)
+    
     # Check condition 2: Top pick confidence threshold
     if top_score >= MIN_TOP_PICK_CONFIDENCE:
-        return True, f"Top pick confidence {top_score:.2f} >= {MIN_TOP_PICK_CONFIDENCE}", 0.0, top_score
+        return True, f"Top pick confidence {top_score:.2f} >= {MIN_TOP_PICK_CONFIDENCE}", margin_percent, top_score
     
-    # Need at least 2 dogs for margin calculations
+    # Need at least 2 dogs for margin-based checks
     if len(sorted_dogs) < 2:
-        return False, "Only one dog in race", 0.0, top_score
+        return False, "Only one dog in race", margin_percent, top_score
     
     second_score = sorted_dogs.iloc[1]['FinalScore']
     
@@ -92,11 +98,9 @@ def is_race_bet_worthy(race_dogs_df):
     if MIN_SCORE_MARGIN_ABSOLUTE is not None:
         absolute_margin = top_score - second_score
         if absolute_margin >= MIN_SCORE_MARGIN_ABSOLUTE:
-            return True, f"Absolute margin {absolute_margin:.2f} >= {MIN_SCORE_MARGIN_ABSOLUTE}", 0.0, top_score
+            return True, f"Absolute margin {absolute_margin:.2f} >= {MIN_SCORE_MARGIN_ABSOLUTE}", margin_percent, top_score
     
     # Check condition 1: Percentage margin threshold
-    margin_percent = calculate_score_margin_percent(top_score, second_score)
-    
     if margin_percent >= MIN_SCORE_MARGIN_PERCENT:
         return True, f"Score margin {margin_percent:.1f}% >= {MIN_SCORE_MARGIN_PERCENT}%", margin_percent, top_score
     
