@@ -15,6 +15,11 @@ OUTPUTS_DIR = Path("outputs")
 DATA_FILE = OUTPUTS_DIR / "todays_form_color.xlsx"
 WINNER_DATA_FILE = OUTPUTS_DIR / "actual_winners_25_11_25.csv"
 
+# Normalization constants
+# PrizeMoney normalization threshold - adjust based on racing jurisdiction
+# For Australian racing, typical prize pools range from $1k-$500k
+PRIZE_MONEY_DIVISOR = 1000  # Convert to thousands for better scaling
+
 # All numeric variables used in scoring
 SCORE_VARIABLES = [
     'Speed_kmh',
@@ -87,9 +92,15 @@ def load_or_create_winner_data(df):
         winners = pd.read_csv(WINNER_DATA_FILE)
         return winners
     else:
+        print("\n" + "!" * 80)
+        print("WARNING: ACTUAL WINNER DATA NOT FOUND")
+        print("!" * 80)
         print(f"\nWinner data file not found: {WINNER_DATA_FILE}")
-        print("Creating template with randomized winners for demonstration...")
-        print("NOTE: For accurate results, please provide actual winner data!")
+        print("\nCreating template with SIMULATED (randomized) winners for demonstration...")
+        print("\n*** IMPORTANT: Results with simulated data are NOT RELIABLE ***")
+        print("*** For production use, you MUST provide actual race results ***")
+        print("\nNOTE: For accurate results, please provide actual winner data!")
+        print("!" * 80)
         
         # For demonstration, pick random winners with some bias toward higher scores
         # This simulates more realistic results
@@ -291,9 +302,9 @@ def apply_new_weights(df, weight_matrix):
             if var in df.columns and pd.notna(row[var]):
                 try:
                     value = float(row[var])
-                    # Normalize large values (like PrizeMoney)
-                    if var == 'PrizeMoney' and value > 1000:
-                        value = value / 1000
+                    # Normalize large values (like PrizeMoney) using configured divisor
+                    if var == 'PrizeMoney' and value > PRIZE_MONEY_DIVISOR:
+                        value = value / PRIZE_MONEY_DIVISOR
                     score += value * weight
                 except:
                     pass
