@@ -2,8 +2,7 @@ import pandas as pd
 import numpy as np
 import logging
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+# Get logger for this module (logging is configured in main.py)
 logger = logging.getLogger(__name__)
 
 def _find_distance_column(df):

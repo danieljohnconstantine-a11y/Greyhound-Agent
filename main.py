@@ -6,8 +6,11 @@ import logging
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+# Configure logging once for the entire application
+logging.basicConfig(
+    level=logging.INFO, 
+    format='%(levelname)s: %(message)s'
+)
 logger = logging.getLogger(__name__)
 
 def extract_text_from_pdf(pdf_path):

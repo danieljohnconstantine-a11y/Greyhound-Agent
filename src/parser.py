@@ -2,8 +2,7 @@ import pandas as pd
 import re
 import logging
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+# Get logger for this module (logging is configured in main.py)
 logger = logging.getLogger(__name__)
 
 def parse_race_form(text):
@@ -20,10 +19,15 @@ def parse_race_form(text):
         header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+)\s+(\d+)m", line)
         if header_match:
             race_number += 1
-            day, month, year, time, track, distance = header_match.groups()
+            day, month, year_2digit, time, track, distance = header_match.groups()
+            
+            # Convert 2-digit year to 4-digit year (assumes 2000-2099)
+            # For years 00-99, interpret as 2000-2099 (greyhound racing data context)
+            year = 2000 + int(year_2digit)
+            
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"20{year}-{month}-{day.zfill(2)}",  # More flexible date format
+                "RaceDate": f"{year}-{month}-{day.zfill(2)}",
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
