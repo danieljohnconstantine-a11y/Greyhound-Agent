@@ -23,7 +23,14 @@ Automated parsing and scoring of greyhound racing forms with intelligent bet-wor
 
 ## Bet-Worthy Race Highlighting
 
-The Excel output (`todays_form_color.xlsx`) includes color highlighting to identify races that meet "bet-worthy" criteria. These races are highlighted in **light yellow** to make them easy to identify.
+The Excel output (`todays_form_color.xlsx`) includes color highlighting to identify races that meet "bet-worthy" criteria. Within each bet-worthy race, dogs are color-coded by their predicted position based on FinalScore:
+
+- **🟢 Green (Light Green)**: 1st place - Top pick (highest FinalScore)
+- **🟠 Orange (Light Orange)**: 2nd place - Second pick
+- **🔴 Red (Light Pink)**: 3rd place - Third pick
+- **🟡 Yellow (Light Yellow)**: Other dogs in bet-worthy races
+
+Non-bet-worthy races remain **white** (no highlighting).
 
 ### What Makes a Race "Bet-Worthy"?
 
@@ -60,11 +67,11 @@ MIN_SCORE_MARGIN_ABSOLUTE = 3.0
 You can customize the highlight colors in `src/excel_formatter.py`:
 
 ```python
-# Background color for bet-worthy races (hex color code)
-BET_WORTHY_FILL_COLOR = "FFFF99"  # Light yellow
-
-# Font color for bet-worthy races
-BET_WORTHY_FONT_COLOR = "000000"  # Black
+# Position-based colors for bet-worthy races
+FIRST_PLACE_COLOR = "90EE90"   # Light green (top pick)
+SECOND_PLACE_COLOR = "FFD580"  # Light orange (second pick)
+THIRD_PLACE_COLOR = "FFB6C1"   # Light red/pink (third pick)
+OTHER_BET_WORTHY_COLOR = "FFFF99"  # Light yellow (other dogs)
 ```
 
 ## Dependencies
