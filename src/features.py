@@ -1,6 +1,61 @@
 import pandas as pd
 import numpy as np
 
+def compute_distance_suitability(df):
+    """
+    Compute per-dog, per-distance win rates from historical data.
+    
+    For each dog-distance combination, calculate the win rate (CareerWins / CareerStarts).
+    Normalize so the best performer at each distance gets 1.0, others scale between 0 and 1.
+    Default to 0.5 for dogs without historical data at a specific distance.
+    """
+    # Ensure numeric types for calculation
+    df = df.copy()
+    
+    # Check if required columns exist
+    if "Distance" not in df.columns:
+        # If Distance is missing, use a default value for all dogs
+        df["DistanceSuit"] = 0.5
+        return df
+    
+    df["CareerWins"] = pd.to_numeric(df["CareerWins"], errors="coerce").fillna(0)
+    df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce").fillna(0)
+    df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
+    
+    # Calculate win rate for each dog-distance combination
+    # Group by DogName and Distance to get aggregated stats
+    dog_distance_stats = df.groupby(['DogName', 'Distance']).agg({
+        'CareerWins': 'first',  # Use first since all rows for same dog should have same career stats
+        'CareerStarts': 'first'
+    }).reset_index()
+    
+    # Calculate win rate using vectorized operations
+    dog_distance_stats['WinRate'] = np.where(
+        dog_distance_stats['CareerStarts'] > 0,
+        dog_distance_stats['CareerWins'] / dog_distance_stats['CareerStarts'],
+        0.5
+    )
+    
+    # Normalize win rates per distance so best performer gets 1.0
+    distance_max_winrate = dog_distance_stats.groupby('Distance')['WinRate'].transform('max')
+    dog_distance_stats['DistanceSuit'] = np.where(
+        distance_max_winrate > 0,
+        dog_distance_stats['WinRate'] / distance_max_winrate,
+        0.5
+    )
+    
+    # Merge back to original dataframe
+    df = df.merge(
+        dog_distance_stats[['DogName', 'Distance', 'DistanceSuit']], 
+        on=['DogName', 'Distance'], 
+        how='left'
+    )
+    
+    # Fill any missing values with default 0.5
+    df['DistanceSuit'] = df['DistanceSuit'].fillna(0.5)
+    
+    return df
+
 def compute_features(df):
     df = df.copy()
 
@@ -36,8 +91,8 @@ def compute_features(df):
         axis=1
     )
 
-    # Distance Suitability
-    df["DistanceSuit"] = df["Distance"].apply(lambda x: 1.0 if x in [515, 595] else 0.7)
+    # Distance Suitability - NEW: compute per-dog, per-distance win rates
+    df = compute_distance_suitability(df)
 
     # Fallbacks
     df["TrainerStrikeRate"] = df.get("TrainerStrikeRate", pd.Series([0.15] * len(df)))
