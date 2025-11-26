@@ -38,10 +38,14 @@ def parse_race_form(text):
             year = BASE_YEAR + int(year_2digit)
             
             # Convert month abbreviation to numeric format (e.g., 'Nov' -> '11')
-            month_num = MONTH_MAP.get(month_abbr, month_abbr)
-            if month_num == month_abbr:
-                # Month abbreviation not recognized, log warning but continue
-                logger.warning(f"⚠️ Unrecognized month abbreviation '{month_abbr}', using as-is")
+            month_num = MONTH_MAP.get(month_abbr, None)
+            if month_num is None:
+                # Month abbreviation not recognized, use default and log error
+                logger.error(
+                    f"❌ Unrecognized month abbreviation '{month_abbr}' in race header. "
+                    f"Using '01' (January) as fallback. Please update MONTH_MAP if this is a valid month."
+                )
+                month_num = '01'  # Default to January to maintain valid ISO date format
             
             current_race = {
                 "RaceNumber": race_number,
