@@ -4,6 +4,8 @@ import pdfplumber
 import os
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
+from src.bet_worthy import identify_bet_worthy_races, print_bet_worthy_summary
+from src.excel_formatter import export_to_excel_with_formatting
 
 def extract_text_from_pdf(pdf_path):
     text = ""
@@ -44,9 +46,17 @@ for pdf_file in pdf_files:
 combined_df = pd.concat(all_dogs, ignore_index=True)
 print(f"🐾 Total dogs parsed: {len(combined_df)}")
 
-# ✅ Save full parsed form
+# ✅ Save full parsed form as CSV (for backward compatibility)
 combined_df.to_csv("outputs/todays_form.csv", index=False)
 print("📄 Saved parsed form → outputs/todays_form.csv")
+
+# 🎯 Identify bet-worthy races based on configurable criteria
+bet_worthy_races = identify_bet_worthy_races(combined_df)
+print_bet_worthy_summary(bet_worthy_races)
+
+# 📊 Save full parsed form as Excel with color highlighting for bet-worthy races
+excel_output_path = "outputs/todays_form_color.xlsx"
+export_to_excel_with_formatting(combined_df, bet_worthy_races, excel_output_path)
 
 # ✅ Save ranked dogs
 ranked = combined_df.sort_values(["Track", "RaceNumber", "FinalScore"], ascending=[True, True, False])

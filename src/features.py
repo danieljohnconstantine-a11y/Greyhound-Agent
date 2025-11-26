@@ -7,15 +7,64 @@ def compute_features(df):
     # Ensure numeric types
     df["DLR"] = pd.to_numeric(df["DLR"], errors="coerce")
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
-    df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
+    
+    # Handle Distance - use default if not present or invalid
+    if "Distance" not in df.columns:
+        df["Distance"] = 500  # Default distance
+    else:
+        df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce").fillna(500)
 
-    # Placeholder values — replace with parsed metrics later
-    df["BestTimeSec"] = 22.5
-    df["SectionalSec"] = 8.5
-    df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
-    df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
-    df["BoxBiasFactor"] = 0.1
-    df["TrackConditionAdj"] = 1.0
+    # Use parsed metrics if available, otherwise use placeholder defaults
+    # BestTimeSec - use parsed value or estimate from distance
+    if "BestTimeSec" not in df.columns or df["BestTimeSec"].isna().all():
+        # Estimate based on typical greyhound speed (~60 km/h = 16.67 m/s)
+        df["BestTimeSec"] = df["Distance"] / (60 / 3.6)  # distance (m) / speed (m/s) = time (s)
+    else:
+        # Fill missing values with estimate
+        df["BestTimeSec"] = df["BestTimeSec"].fillna(df["Distance"] / (60 / 3.6))
+    
+    # SectionalSec - use parsed value or estimate
+    if "SectionalSec" not in df.columns or df["SectionalSec"].isna().all():
+        # Estimate: sectional is typically ~40% of total race time
+        df["SectionalSec"] = df["BestTimeSec"] * 0.4
+    else:
+        df["SectionalSec"] = df["SectionalSec"].fillna(df["BestTimeSec"] * 0.4)
+    
+    # Last3TimesSec - use parsed value or create default
+    def create_default_last3(best_time):
+        """Create default Last3TimesSec with small variations"""
+        return [best_time * 1.01, best_time * 0.99, best_time * 1.02]
+    
+    if "Last3TimesSec" not in df.columns or df["Last3TimesSec"].isna().all():
+        # Create default based on BestTimeSec with small variations
+        df["Last3TimesSec"] = df["BestTimeSec"].apply(create_default_last3)
+    else:
+        # Fill missing with default
+        df["Last3TimesSec"] = df.apply(
+            lambda row: row["Last3TimesSec"] if isinstance(row.get("Last3TimesSec"), list) 
+            else create_default_last3(row["BestTimeSec"]),
+            axis=1
+        )
+    
+    # Margins - use parsed value or create default
+    DEFAULT_MARGINS = [5.0, 6.3, 10.3]
+    
+    if "Margins" not in df.columns or df["Margins"].isna().all():
+        # Create default margins based on typical race gaps
+        df["Margins"] = [DEFAULT_MARGINS] * len(df)
+    else:
+        # Fill missing with default
+        df["Margins"] = df["Margins"].apply(
+            lambda x: x if isinstance(x, list) else DEFAULT_MARGINS
+        )
+    
+    # BoxBiasFactor - use distance-specific bias if available, otherwise default
+    if "BoxBiasFactor" not in df.columns:
+        df["BoxBiasFactor"] = 0.1
+    
+    # TrackConditionAdj - default to neutral
+    if "TrackConditionAdj" not in df.columns:
+        df["TrackConditionAdj"] = 1.0
 
     # Derived metrics
     df["Speed_kmh"] = (df["Distance"] / df["BestTimeSec"]) * 3.6
