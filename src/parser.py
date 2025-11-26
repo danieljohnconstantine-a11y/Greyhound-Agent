@@ -13,6 +13,8 @@ MONTH_MAP = {
 }
 
 # Year conversion constant (for 2-digit years in format YY -> 20YY)
+# Assumes all greyhound racing data is from 2000-2099 (current era)
+# This is appropriate since we're processing recent/current race forms, not historical data
 BASE_YEAR = 2000
 
 def parse_race_form(text):

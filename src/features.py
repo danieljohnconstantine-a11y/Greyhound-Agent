@@ -10,6 +10,9 @@ MIN_VALID_DISTANCE = 100  # Minimum reasonable distance for greyhound racing
 MAX_VALID_DISTANCE = 1000  # Maximum reasonable distance for greyhound racing
 DEFAULT_MIDDLE_DISTANCE = 450  # Default distance used when actual distance is invalid/missing
 
+# Optimal distances for distance suitability scoring (in meters)
+OPTIMAL_DISTANCES = [515, 595]  # Common optimal race distances for greyhound racing
+
 def _find_distance_column(df):
     """
     Find the distance column in the DataFrame, checking for common variations.
@@ -127,7 +130,9 @@ def compute_features(df):
 
     # Distance Suitability - handles numeric Distance column robustly
     # Assumes Distance is in meters (e.g., 515m, 595m are common greyhound racing distances)
-    df["DistanceSuit"] = df["Distance"].apply(lambda x: 1.0 if pd.notna(x) and x in [515, 595] else 0.7)
+    df["DistanceSuit"] = df["Distance"].apply(
+        lambda x: 1.0 if pd.notna(x) and x in OPTIMAL_DISTANCES else 0.7
+    )
 
     # Fallbacks
     df["TrainerStrikeRate"] = df.get("TrainerStrikeRate", pd.Series([0.15] * len(df)))
@@ -139,7 +144,8 @@ def compute_features(df):
     # Race-type adaptive weighting - handles NaN distances gracefully
     def get_weights(distance):
         # Handle NaN or invalid distances by defaulting to middle-distance weights
-        if pd.isna(distance) or distance <= 0:
+        # Valid distances should be within MIN_VALID_DISTANCE to MAX_VALID_DISTANCE range
+        if pd.isna(distance) or distance < MIN_VALID_DISTANCE or distance > MAX_VALID_DISTANCE:
             logger.warning(
                 f"⚠️ Invalid distance value ({distance}), using middle-distance weights "
                 f"(defaulting to {DEFAULT_MIDDLE_DISTANCE}m)"
