@@ -268,18 +268,20 @@ def compute_features(df):
         df["RTCFactor"] = 0.5
         print("⚠️ WARNING: RTC not found - setting RTCFactor to 0.5 (neutral).")
 
-    # Box Position Bias - Optimized from 320 race results analysis (Sep-Nov 2025)
-    # Based on actual win rates: Box 1 (18.1%), Box 4 (15.3%), Box 2 (14.4%), Box 8 (12.8%)
-    # Box 3 weakest at 8.4% - inner boxes perform significantly better
+    # Box Position Bias - Updated from 449 race results analysis (Sep-Nov 2025)
+    # Combining 320 historical + 129 races from Nov 26, 2025
+    # Nov 26 data: Box 1 (19.4%), Box 2 (19.4%), Box 8 (17.1%), Box 6 (11.6%), Box 7 (11.6%)
+    # Box 3 still weakest at 7.0%
+    # Average expected: 12.5% (1/8 boxes)
     BOX_POSITION_BIAS = {
-        1: 0.067,   # 18.1% wins - 1.45x average - STRONGEST
-        2: 0.022,   # 14.4% wins - 1.15x average
-        3: -0.049,  # 8.4% wins - 0.68x average - WEAKEST
-        4: 0.034,   # 15.3% wins - 1.23x average - SECOND STRONGEST
-        5: -0.023,  # 10.6% wins - 0.85x average
-        6: -0.026,  # 10.3% wins - 0.82x average
-        7: -0.037,  # 9.4% wins - 0.75x average
-        8: 0.004,   # 12.8% wins - 1.02x average
+        1: 0.075,   # ~19% wins - 1.52x average - STRONGEST (tied with Box 2)
+        2: 0.075,   # ~19% wins - 1.52x average - STRONGEST (tied with Box 1)
+        3: -0.055,  # ~7% wins - 0.56x average - WEAKEST
+        4: 0.015,   # ~10% wins - 0.80x average
+        5: -0.020,  # ~9% wins - 0.72x average
+        6: 0.000,   # ~12% wins - average
+        7: 0.000,   # ~12% wins - average
+        8: 0.050,   # ~17% wins - 1.36x average - THIRD STRONGEST
     }
     
     # Apply box position bias based on actual race data
@@ -362,27 +364,50 @@ def compute_features(df):
                 "RTCFactor": 0.01              # Rating
             }
 
-    # FinalScore calculation - handle NaN values by treating them as 0
-    # Includes ALL 18 weighted variables from 320-race analysis
+    # FinalScore calculation - intelligently handle missing timing data
+    # When timing data is missing, redistribute weights to other features
     final_scores = []
     for _, row in df.iterrows():
         w = get_weights(row["Distance"])
-        score = (
-            # Original variables
-            (row["EarlySpeedIndex"] if pd.notna(row["EarlySpeedIndex"]) else 0) * w["EarlySpeedIndex"] +
-            (row["Speed_kmh"] if pd.notna(row["Speed_kmh"]) else 0) * w["Speed_kmh"] +
-            row["ConsistencyIndex"] * w["ConsistencyIndex"] +
+        
+        # Check for missing timing data
+        has_speed = pd.notna(row["Speed_kmh"]) and row["Speed_kmh"] > 0
+        has_early = pd.notna(row["EarlySpeedIndex"]) and row["EarlySpeedIndex"] > 0
+        
+        # Calculate timing-related scores
+        if has_speed:
+            speed_score = row["Speed_kmh"] * w["Speed_kmh"]
+        else:
+            speed_score = 0
+            
+        if has_early:
+            early_score = row["EarlySpeedIndex"] * w["EarlySpeedIndex"]
+        else:
+            early_score = 0
+        
+        # When timing data is missing, apply a boost to other indicators
+        # Dogs without timing data shouldn't be unfairly penalized
+        timing_weight_adjustment = 1.0
+        if not has_speed and not has_early:
+            # Boost career-based indicators when no timing available
+            timing_weight_adjustment = 1.4  # 40% boost to compensate
+        elif not has_speed or not has_early:
+            timing_weight_adjustment = 1.2  # 20% boost for partial data
+        
+        # Calculate base scores from non-timing features
+        base_score = (
+            row["ConsistencyIndex"] * w["ConsistencyIndex"] * timing_weight_adjustment +
             row["FinishConsistency"] * w["FinishConsistency"] +
-            (row["PrizeMoney"] / 1000) * w["PrizeMoney"] +
+            (row["PrizeMoney"] / 1000) * w["PrizeMoney"] * timing_weight_adjustment +
             row["RecentFormBoost"] * w["RecentFormBoost"] +
             row["BoxBiasFactor"] * w["BoxBiasFactor"] +
-            row["BoxPositionBias"] * w["BoxPositionBias"] +
-            row["TrainerStrikeRate"] * w["TrainerStrikeRate"] +
+            row["BoxPositionBias"] * w["BoxPositionBias"] * 1.5 +  # Boost box position significantly
+            row["TrainerStrikeRate"] * w["TrainerStrikeRate"] * timing_weight_adjustment +
             row["DistanceSuit"] * w["DistanceSuit"] +
             row["TrackConditionAdj"] * w["TrackConditionAdj"] +
-            # NEW variables from 320-race analysis
-            row["PlaceRate"] * w["PlaceRate"] +
-            row["DLWFactor"] * w["DLWFactor"] +
+            # Form-based variables (boosted when timing missing)
+            row["PlaceRate"] * w["PlaceRate"] * timing_weight_adjustment +
+            row["DLWFactor"] * w["DLWFactor"] * timing_weight_adjustment +
             row["WeightFactor"] * w["WeightFactor"] +
             row["DrawFactor"] * w["DrawFactor"] +
             row["FormMomentumNorm"] * w["FormMomentumNorm"] +
@@ -390,6 +415,9 @@ def compute_features(df):
             row["RTCFactor"] * w["RTCFactor"] +
             row["OverexposedPenalty"]
         )
+        
+        # Combine timing and base scores
+        score = speed_score + early_score + base_score
         final_scores.append(score)
 
     df["FinalScore"] = final_scores

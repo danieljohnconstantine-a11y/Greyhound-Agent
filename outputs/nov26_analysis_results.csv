@@ -1,0 +1,130 @@
+Track,Race,OurPick,OurDog,OurScore,ActualWinner,ActualTop3,IsWinner,IsTop3
+Temora,1,10,Chasin' Sal,19.321034846280998,1,"[1, 7, 4]",False,False
+Temora,2,2,Geani Bale,20.188086326785655,1,"[1, 4, 3]",False,False
+Temora,3,1,Lumeah Poppy,19.92022891137401,8,"[8, 3, 5]",False,False
+Temora,4,4,Aston Wrapper,19.75603011043619,8,"[8, 1, 6]",False,False
+Temora,5,2,Lone Dazzler,18.75804173879174,1,"[1, 8, 7]",False,False
+Temora,6,2,Dolly's Hope,20.31556351660298,8,"[8, 7, 2]",False,True
+Temora,7,8,My Three Boys,20.034536971157287,8,"[8, 7, 5]",True,True
+Temora,8,5,Lucy Valentine,20.626866683616758,1,"[1, 7, 8]",False,False
+Temora,9,5,Mala Angel,20.817367169201276,5,"[5, 1, 8]",True,True
+Temora,10,2,Run Bindi Run,19.737588307469537,8,"[8, 2, 1]",False,True
+Taree,1,2,Sugar Drop Baby,18.446617282414053,3,"[3, 8, 4]",False,False
+Taree,2,1,Coin Counter,21.339103169311247,1,"[1, 8, 2]",True,True
+Gunnedah,1,10,Palawa Nightfire,20.77656810160719,7,"[7, 2, 5]",False,False
+Gunnedah,2,4,Beau Bush,23.10644509567119,4,"[4, 2, 8]",True,True
+Gunnedah,3,4,Barefoot Chaos,21.37739089091011,2,"[2, 6, 3]",False,False
+Gunnedah,4,7,Hong Kong Phooey,18.559116088931837,3,"[3, 5, 9]",False,False
+Gunnedah,5,3,Naughty Evie,18.5412346608541,7,"[7, 2, 3]",False,True
+Gunnedah,6,5,Kiarni Phoenix,24.828866550873958,7,"[7, 4, 6]",False,False
+Gunnedah,7,1,Fearless Parker,21.806101860497886,7,"[7, 4, 1]",False,True
+Gunnedah,8,2,Raven Nighthawk,21.591077719989936,6,"[6, 1, 8]",False,False
+Gunnedah,9,1,Rutland Jack,20.656184880756772,5,"[5, 2, 1]",False,True
+Gunnedah,10,5,Fidel Pronto,22.53722106024151,5,"[5, 7, 3]",True,True
+Gunnedah,11,4,Nanna Berridge,25.74801393409637,6,"[6, 2, 3]",False,False
+Gunnedah,12,10,Not Much Kuna,20.63739990108245,2,"[2, 6, 1]",False,False
+Richmond,1,4,Tap Out Kitty,18.848970195039172,1,"[1, 6, 4]",False,True
+Richmond,2,8,No Brothers,18.25701167308187,7,"[7, 8, 4]",False,True
+Richmond,3,8,Ripper Joe,19.13178318270515,8,"[8, 7, 3]",True,True
+Richmond,4,5,Rosacky Sky,21.52675165491452,8,"[8, 6, 7]",False,False
+Richmond,5,5,Maximus Meridius,21.62541433781717,8,"[8, 6, 2]",False,False
+Richmond,6,2,Spin Around Blue,22.060333256246384,2,"[2, 3, 1]",True,True
+Richmond,7,6,Aussie Lantern,40.59616394139664,8,"[8, 7, 1]",False,False
+Richmond,8,3,Milo Rules,40.56627947974931,6,"[6, 4, 3]",False,True
+Richmond,9,4,Alira,40.42959900481731,6,"[6, 5, 7]",False,False
+Richmond,10,3,She Brutal,40.02445968882179,1,"[1, 2, 6]",False,False
+Richmond,11,8,Stumpy Jones,40.13312097746887,1,"[1, 2, 8]",False,True
+Richmond,12,2,Nirmada,22.803078634227266,5,"[5, 2, 6]",False,True
+Healesville,1,4,Black Chakra,20.99013477422283,7,"[7, 8, 1]",False,False
+Healesville,2,1,Ebony Commando,24.476859147505245,2,"[2, 4, 6]",False,False
+Healesville,3,8,Whatever It Is,24.301200825044337,6,"[6, 4, 1]",False,False
+Healesville,4,6,Night Ralf,24.30843204305845,1,"[1, 4, 7]",False,False
+Healesville,5,7,Cindy Cabang,21.98969337973266,4,"[4, 6, 7]",False,True
+Healesville,6,1,Search History,30.593803872796897,2,"[2, 8, 5]",False,False
+Healesville,7,7,Soda Turkey,20.403975724418896,1,"[1, 7, 2]",False,True
+Healesville,8,5,Thermal Ignition,28.897075810899917,3,"[3, 2, 5]",False,True
+Healesville,9,2,Skeeter Mikado,24.63492747543462,8,"[8, 2, 4]",False,True
+Healesville,10,1,Why Not Hayden,25.32532903258125,6,"[6, 1, 8]",False,True
+Healesville,11,6,Head Hunter,26.58364778762884,1,"[1, 2, 8]",False,False
+Healesville,12,1,Zippi Mustang,25.6889853688374,8,"[8, 4, 2]",False,False
+Gawler,1,4,Swiper,15.559273918597926,1,"[1, 6, 4]",False,True
+Gawler,2,1,Adhana Lulu,25.724438533777466,7,"[7, 5, 2]",False,False
+Gawler,3,1,Spring Marrishia,17.147413636194635,2,"[2, 4, 1]",False,True
+Gawler,4,1,Todd's Luka,22.468856668774837,2,"[2, 5, 8]",False,False
+Gawler,5,7,Son Of Maple,23.55334757700071,1,"[1, 5, 2]",False,False
+Gawler,6,9,Joker's Queen,23.025996407050087,9,"[9, 8, 4]",True,True
+Gawler,7,2,Minh Jack,24.93710830606143,7,"[7, 4, 1]",False,False
+Gawler,8,6,Steel Skies,23.00542629374718,2,"[2, 5, 8]",False,False
+Gawler,9,8,Sebon Disco,16.80072580675993,2,"[2, 9, 8]",False,True
+Gawler,10,1,Federal Lady,27.197569154876188,1,"[1, 6, 8]",True,True
+Capalaba,1,1,Zabdon Cream Bun,49.379751826801396,4,"[4, 8, 7]",False,False
+Capalaba,2,7,Pierre Hayze,50.62914004411753,3,"[3, 6, 7]",False,True
+Capalaba,3,1,Untrained Eye,49.6948362856617,6,"[6, 5, 4]",False,False
+Capalaba,4,3,Astro Lee,54.34226785801966,6,"[6, 4, 7]",False,False
+Capalaba,5,10,Solo Rupee,51.63687105513115,8,"[8, 5, 7]",False,False
+Capalaba,6,1,Up Beat,52.38264379998562,7,"[7, 4, 6]",False,False
+Capalaba,7,2,Ellie Rhee Court,53.30312341575386,1,"[1, 4, 7]",False,False
+Capalaba,8,3,Art Of Deception,54.32809899769865,2,"[2, 8, 3]",False,True
+Capalaba,9,3,Ricky Bobby,50.802195745005854,2,"[2, 7, 4]",False,False
+Capalaba,10,3,Zipping Sweeny,56.809068839984015,1,"[1, 2, 8]",False,False
+Capalaba,11,5,Gold Tip,52.807621130455146,7,"[7, 4, 1]",False,False
+Capalaba,12,2,Haunted Town,52.91725924962607,8,"[8, 1, 5]",False,False
+Bendigo,1,5,Les Norton,23.759453149156414,2,"[2, 3, 4]",False,False
+Bendigo,2,2,Murray River,20.191485424830915,3,"[3, 2, 4]",False,True
+Bendigo,3,4,Perfect Gloss,19.351125385205837,5,"[5, 6, 8]",False,False
+Bendigo,4,4,Cruising Amy,19.789079410095187,5,"[5, 1, 2]",False,False
+Bendigo,5,5,Kiptum,22.442996891022496,6,"[6, 7, 3]",False,False
+Bendigo,6,1,Warden Ozzie,25.561505548212995,2,"[2, 8, 6]",False,False
+Bendigo,7,7,Another Beverage,22.476224607070336,3,"[3, 6, 1]",False,False
+Bendigo,8,3,Tornado Jack,24.871810186724012,4,"[4, 8, 1]",False,False
+Bendigo,9,1,Autumn Angel,19.677526328962905,2,"[2, 4, 3]",False,False
+Bendigo,10,2,Charge On,20.475250046301305,2,"[2, 3, 7]",True,True
+Bendigo,11,5,Bit Of Romance,22.675687186008844,7,"[7, 1, 6]",False,False
+Bendigo,12,1,Perfect Revenge,19.9774942153923,3,"[3, 6, 4]",False,False
+Lakeside,1,2,Recruit,46.97330363941287,6,"[6, 3, 4]",False,False
+Lakeside,2,6,Lakoda Miley,27.348515446889163,5,"[5, 2, 7]",False,False
+Lakeside,3,3,Humpty Hugh,33.66826351272805,8,"[8, 2, 7]",False,False
+Lakeside,4,8,Strong Boy,45.897871006704044,1,"[1, 8, 5]",False,True
+Lakeside,5,3,Showtime Donald,29.029210297471877,8,"[8, 2, 3]",False,True
+Lakeside,6,3,Havoc,28.269414337666547,1,"[1, 7, 4]",False,False
+Lakeside,7,8,Tuta Interval,35.10126254480287,1,"[1, 6, 7]",False,False
+Lakeside,8,7,Goldstar Koda,30.720862640966875,2,"[2, 1, 8]",False,False
+Lakeside,9,8,Millie Beach,48.88805708785045,1,"[1, 2, 8]",False,True
+Lakeside,10,8,Big Reveal,28.90310192474394,8,"[8, 3, 2]",True,True
+Lakeside,11,6,Tarawi Lola,30.010279467695792,1,"[1, 8, 5]",False,False
+Lakeside,12,2,Tuta Knight,47.90139976634134,3,"[3, 4, 8]",False,False
+Darwin,1,5,Tanaya,17.206232268765216,6,"[6, 4, 5]",False,True
+Darwin,2,8,Impress Tilly,19.636004027829124,1,"[1, 7, 2]",False,False
+Darwin,3,8,Omar Monelli,21.258667484080874,8,"[8, 4, 5]",True,True
+Darwin,4,5,Dundee Piper,19.096008109792923,2,"[2, 1, 5]",False,True
+Darwin,5,8,Infamous,17.6922390773763,6,"[6, 8, 3]",False,True
+Darwin,6,8,Sydney Surcharge,21.88708122275917,4,"[4, 8, 1]",False,True
+Darwin,7,2,Kelmar Indi,18.068292060570098,8,"[8, 4, 7]",False,False
+Darwin,8,2,Luka Magic,19.99264947736581,7,"[7, 2, 1]",False,True
+Darwin,9,2,Zelda Chaos,20.03448201110504,2,"[2, 3, 4]",True,True
+Darwin,10,1,Texas Diva,24.28369434779909,2,"[2, 4, 1]",False,True
+Darwin,11,4,Happy Intention,18.325091385343814,2,"[2, 1, 5]",False,False
+Ballarat,1,1,Ivory Panke,0.2294,4,"[4, 7, 2]",False,False
+Ballarat,2,1,Paw Quiver,0.18714999999999998,2,"[2, 8, 4]",False,False
+Ballarat,3,1,Oklahoma Bale,0.18714999999999998,3,"[3, 8, 1]",False,True
+Ballarat,4,4,Pulchritudinous,18.354403341474608,5,"[5, 7, 4]",False,True
+Ballarat,5,6,Lady Breanna,20.445800505671112,2,"[2, 1, 8]",False,False
+Ballarat,6,9,Spring Coin,24.223287263898627,1,"[1, 6, 4]",False,False
+Ballarat,7,6,Riversdale Mick,24.129197553442268,6,"[6, 3, 4]",True,True
+Ballarat,8,3,Ultimate Warrior,22.987561194615164,6,"[6, 4, 1]",False,False
+Ballarat,9,2,Ivory Nara,0.21365,1,"[1, 5, 6]",False,False
+Ballarat,10,6,Tawny Tears,1.7463199999999999,6,"[6, 1, 2]",True,True
+Ballarat,11,6,Tommy Tequila,23.38696206634602,1,"[1, 2, 7]",False,False
+Ballarat,12,6,Smooth Collinda,24.21249106499189,2,"[2, 7, 8]",False,False
+Sale,1,10,Brindle Motion,22.81759265064735,5,"[5, 6, 8]",False,False
+Sale,2,6,Boil The Billy,22.568639418124366,8,"[8, 1, 0]",False,False
+Sale,3,7,Our Glad,23.201803554547176,8,"[8, 4, 1]",False,False
+Sale,4,4,Jumping Oreo,22.948301227494937,2,"[2, 1, 7]",False,False
+Sale,5,4,Doctor Minty,23.39634190855548,8,"[8, 4, 3]",False,True
+Sale,6,3,Arlunya,24.06098344706861,8,"[8, 2, 4]",False,False
+Sale,7,5,Torbek,18.887035866298145,2,"[2, 8, 3]",False,False
+Sale,8,2,Madalia Tipper,19.55705729700695,7,"[7, 4, 5]",False,False
+Sale,9,4,Sweet Trilby,22.85001619381744,5,"[5, 7, 8]",False,False
+Sale,10,5,Lucky Harper,23.12981828996665,7,"[7, 2, 8]",False,False
+Sale,11,6,Akina Crusader,25.0502900424944,4,"[4, 7, 1]",False,False
+Sale,12,3,Ace Of Pace,24.400379395448077,7,"[7, 8, 1]",False,False
