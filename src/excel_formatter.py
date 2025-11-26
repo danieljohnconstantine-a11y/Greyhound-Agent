@@ -95,14 +95,13 @@ def export_to_excel_with_formatting(df, bet_worthy_races, output_path):
             # Get all dogs in this race
             race_dogs = df[(df['Track'] == track) & (df['RaceNumber'] == race_num)].copy()
             
-            # Sort by FinalScore descending to get positions
+            # Sort by FinalScore descending and take top 3
             if 'FinalScore' in race_dogs.columns:
-                race_dogs = race_dogs.sort_values('FinalScore', ascending=False)
+                race_dogs = race_dogs.sort_values('FinalScore', ascending=False).head(3)
                 
                 # Assign positions (1, 2, 3) to top 3 dogs
                 for position, (idx, dog) in enumerate(race_dogs.iterrows(), start=1):
-                    if position <= 3:
-                        dog_positions[(track, race_num, idx)] = position
+                    dog_positions[(track, race_num, idx)] = position
     
     # Write headers
     headers = list(df.columns)
