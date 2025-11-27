@@ -510,6 +510,87 @@ def compute_features(df):
         df["BestTimePercentile"] = 0.5
     
     # ========================================================================
+    # "LUCK FACTOR" QUANTIFICATION - Added Nov 27, 2025
+    # Based on analysis showing some outcomes are more random than predictable
+    # These factors help identify when our predictions are MORE reliable
+    # ========================================================================
+    
+    # === FIELD SIMILARITY INDEX (FSI) ===
+    # When dogs have very similar scores, the race is more unpredictable
+    # High FSI = high uncertainty = luck plays bigger role
+    if "EarlySpeedIndex" in df.columns and "BestTimeSec" in df.columns:
+        # Calculate score variance within each race
+        df["FieldSpeedStd"] = df.groupby(["Track", "RaceNumber"])["EarlySpeedIndex"].transform("std")
+        df["FieldTimeStd"] = df.groupby(["Track", "RaceNumber"])["BestTimeSec"].transform("std")
+        # Normalize: High std = more predictable (clear differences)
+        df["FieldSimilarityIndex"] = df.apply(
+            lambda row: 0.8 if (pd.notna(row.get("FieldSpeedStd")) and row.get("FieldSpeedStd", 0) > 3) or 
+                               (pd.notna(row.get("FieldTimeStd")) and row.get("FieldTimeStd", 0) > 1.5)
+                        else 1.0 if (pd.notna(row.get("FieldSpeedStd")) and row.get("FieldSpeedStd", 0) > 1.5)
+                        else 1.1,  # High similarity = more unpredictable = reduce confidence
+            axis=1
+        )
+        print(f"✓ Calculated FieldSimilarityIndex (luck factor) for {len(df)} dogs")
+    else:
+        df["FieldSimilarityIndex"] = 1.0
+        df["FieldSpeedStd"] = np.nan
+        df["FieldTimeStd"] = np.nan
+    
+    # === UPSET PROBABILITY ===
+    # Tracks with high entropy (more even box distribution) have more upsets
+    # Track-specific upset likelihood based on historical box volatility
+    TRACK_UPSET_PROBABILITY = {
+        # Low upset tracks (more predictable)
+        "Angle Park": 0.85,      # Box 1 dominance makes it predictable
+        "Meadows": 0.87,
+        "Temora": 0.88,
+        "Healesville": 0.90,
+        # Medium upset tracks
+        "Bendigo": 0.95,
+        "Sale": 0.95,
+        "Richmond": 0.95,
+        "Wentworth Park": 0.95,
+        "Ladbrokes Q Straight": 0.95,
+        "Warrnambool": 0.95,
+        # High upset tracks (more unpredictable)
+        "Casino": 1.05,          # High entropy = more random
+        "Hobart": 1.05,
+        "Mount Gambier": 1.05,
+        "Shepparton": 1.05,
+        "Warragul": 1.05,
+        "DEFAULT": 1.0
+    }
+    
+    def get_upset_probability(track_name):
+        if pd.isna(track_name):
+            return 1.0
+        track_str = str(track_name).strip()
+        for key in TRACK_UPSET_PROBABILITY:
+            if key.lower() in track_str.lower() or track_str.lower() in key.lower():
+                return TRACK_UPSET_PROBABILITY[key]
+        return TRACK_UPSET_PROBABILITY["DEFAULT"]
+    
+    df["TrackUpsetFactor"] = df["Track"].apply(get_upset_probability)
+    print(f"✓ Applied TrackUpsetFactor (track-specific luck factor)")
+    
+    # === COMPETITOR DENSITY ===
+    # Races with 8 competitive dogs are harder than races with only 3-4 real contenders
+    if "EarlySpeedIndex" in df.columns:
+        # Count dogs with above-average speed in each race
+        df["CompetitorDensity"] = df.groupby(["Track", "RaceNumber"])["EarlySpeedIndex"].transform(
+            lambda x: ((x > x.median()).sum() / len(x)) if len(x) > 0 else 0.5
+        )
+        # More competitors = harder to predict = reduce confidence
+        df["CompetitorAdjustment"] = df["CompetitorDensity"].apply(
+            lambda d: 0.9 if pd.notna(d) and d > 0.6 else  # Very competitive field
+                     1.0 if pd.notna(d) and d > 0.4 else   # Normal field
+                     1.1                                     # Weak field = easier to pick
+        )
+    else:
+        df["CompetitorDensity"] = 0.5
+        df["CompetitorAdjustment"] = 1.0
+    
+    # ========================================================================
     # COMPREHENSIVE WEIGHT SYSTEM - 25+ Variables
     # Derived from ML analysis of 2,467 dogs across 386 races
     # All weights sum to 1.0 for each distance category
@@ -727,6 +808,20 @@ def compute_features(df):
         
         # Apply any penalties
         total_score += row.get("OverexposedPenalty", 0)
+        
+        # === APPLY LUCK FACTORS ===
+        # These reduce/increase confidence based on predictability indicators
+        field_similarity = row.get("FieldSimilarityIndex", 1.0)
+        track_upset = row.get("TrackUpsetFactor", 1.0)
+        competitor_adj = row.get("CompetitorAdjustment", 1.0)
+        
+        # Combine luck factors (multiplicative)
+        luck_adjustment = field_similarity * (1 / track_upset) * competitor_adj
+        
+        # Apply luck adjustment (affects separation, not base score)
+        # High luck_adjustment = more predictable = score stands
+        # Low luck_adjustment = less predictable = scores compressed toward mean
+        total_score = total_score * (0.8 + 0.2 * luck_adjustment)
         
         # Scale to 0-100 range for readability
         final_score = total_score * 100
