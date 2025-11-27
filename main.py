@@ -6,7 +6,7 @@ import logging
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
 from src.excel_export import create_color_coded_outputs  # ✅ Excel color-coding
-from src.bet_worthy import identify_bet_worthy_races, print_bet_worthy_summary
+from src.bet_worthy import identify_bet_worthy_races, print_bet_worthy_summary, get_selective_picks
 from src.excel_formatter import export_to_excel_with_formatting
 
 # Ensure outputs directory exists before configuring logging
@@ -31,8 +31,8 @@ def extract_text_from_pdf(pdf_path):
     return text
 
 # 🚀 Start pipeline
-logger.info("🚀 Starting Greyhound Analytics")
-print("🚀 Starting Greyhound Analytics")
+logger.info("🚀 Starting Greyhound Analytics - Enhanced Selective Betting v2.0")
+print("🚀 Starting Greyhound Analytics - Enhanced Selective Betting v2.0")
 
 # ✅ Find all PDFs in data folder
 pdf_folder = "data"
@@ -67,8 +67,11 @@ print(f"🐾 Total dogs parsed: {len(combined_df)}")
 combined_df.to_csv("outputs/todays_form.csv", index=False)
 print("📄 Saved parsed form → outputs/todays_form.csv")
 
-# 🎯 Identify bet-worthy races based on configurable criteria
-bet_worthy_races = identify_bet_worthy_races(combined_df)
+# 🎯 Identify bet-worthy races using SELECTIVE BETTING (TIER1 + TIER2 only)
+print("\n" + "="*80)
+print("🎯 SELECTIVE BETTING ANALYSIS")
+print("="*80)
+bet_worthy_races = identify_bet_worthy_races(combined_df, selective_mode=True)
 print_bet_worthy_summary(bet_worthy_races)
 
 # 📊 Save full parsed form as Excel with color highlighting for bet-worthy races
@@ -80,7 +83,7 @@ ranked = combined_df.sort_values(["Track", "RaceNumber", "FinalScore"], ascendin
 ranked.to_csv("outputs/ranked.csv", index=False)
 print("📊 Saved ranked dogs → outputs/ranked.csv")
 
-# ✅ Save top picks across all tracks
+# ✅ Save ALL top picks across all tracks
 picks = ranked.groupby(["Track", "RaceNumber"]).head(1).reset_index(drop=True)
 picks = picks.sort_values("FinalScore", ascending=False)
 
@@ -91,15 +94,53 @@ ordered_cols = priority_cols + remaining_cols
 picks = picks[ordered_cols]
 
 picks.to_csv("outputs/picks.csv", index=False)
-print("🎯 Saved top picks → outputs/picks.csv")
+print("🎯 Saved all picks → outputs/picks.csv")
+
+# ✅ Save SELECTIVE picks (TIER1 + TIER2 only) - Higher Win Rate Strategy
+selective_picks = get_selective_picks(combined_df, bet_worthy_races)
+if len(selective_picks) > 0:
+    # Reorder columns for selective picks
+    selective_priority = ["Track", "RaceNumber", "Box", "DogName", "FinalScore", "Tier", "ExpectedWinRate", "ScoreMargin"]
+    selective_remaining = [col for col in selective_picks.columns if col not in selective_priority]
+    selective_ordered = [c for c in selective_priority if c in selective_picks.columns] + selective_remaining
+    selective_picks = selective_picks[selective_ordered]
+    selective_picks.to_csv("outputs/selective_picks.csv", index=False)
+    print(f"🔥 Saved selective picks → outputs/selective_picks.csv ({len(selective_picks)} races)")
+    
+    # Calculate expected stats
+    tier1_count = len(selective_picks[selective_picks['Tier'] == 'TIER1'])
+    tier2_count = len(selective_picks[selective_picks['Tier'] == 'TIER2'])
+    expected_wins = tier1_count * 0.30 + tier2_count * 0.25
+    print(f"   Expected wins: {expected_wins:.1f} ({expected_wins/len(selective_picks)*100:.1f}% win rate)")
+else:
+    print("⚠️  No selective picks meeting TIER1/TIER2 criteria found")
 
 # ✅ Create color-coded Excel outputs
 print("\n🎨 Creating color-coded Excel files...")
 create_color_coded_outputs(combined_df)
 
-# ✅ Display top picks
-print("\n🏁 Top Picks Across All Tracks:")
-for _, row in picks.iterrows():
-    print(f"{row.Track} | Race {row.RaceNumber} | {row.DogName} | Score: {round(row.FinalScore, 3)}")
+# ✅ Display SELECTIVE picks (Recommended Bets)
+print("\n" + "="*80)
+print("🏁 RECOMMENDED BETS (Selective Picks - TIER1 & TIER2 Only)")
+print("="*80)
+if len(selective_picks) > 0:
+    for _, row in selective_picks.iterrows():
+        tier_emoji = "🔥" if row.get('Tier') == 'TIER1' else "✅"
+        print(f"{tier_emoji} {row.Track} | Race {row.RaceNumber} | Box {row.Box} | {row.DogName} | Score: {round(row.FinalScore, 2)} | {row.get('Tier', 'N/A')}")
+else:
+    print("No races meeting selective betting criteria today.")
+
+# ✅ Display ALL picks for reference
+print("\n📋 All Top Picks (for reference):")
+for _, row in picks.head(20).iterrows():
+    # Check if this pick is in selective bets
+    is_selective = False
+    for _, sr in selective_picks.iterrows() if len(selective_picks) > 0 else []:
+        if sr['Track'] == row.Track and sr['RaceNumber'] == row.RaceNumber:
+            is_selective = True
+            break
+    marker = "⭐" if is_selective else "  "
+    print(f"{marker} {row.Track} | Race {row.RaceNumber} | {row.DogName} | Score: {round(row.FinalScore, 3)}")
 
 logger.info("✅ Greyhound Analytics pipeline completed successfully")
+print("\n✅ Pipeline complete! Check outputs/selective_picks.csv for recommended bets.")
