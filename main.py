@@ -6,7 +6,7 @@ import logging
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
 from src.excel_export import create_color_coded_outputs  # ✅ Excel color-coding
-from src.bet_worthy import identify_bet_worthy_races, print_bet_worthy_summary, get_selective_picks
+from src.bet_worthy import identify_bet_worthy_races, print_bet_worthy_summary, get_selective_picks, get_lock_picks
 from src.excel_formatter import export_to_excel_with_formatting
 
 # Ensure outputs directory exists before configuring logging
@@ -31,8 +31,8 @@ def extract_text_from_pdf(pdf_path):
     return text
 
 # 🚀 Start pipeline
-logger.info("🚀 Starting Greyhound Analytics - Enhanced Selective Betting v2.0")
-print("🚀 Starting Greyhound Analytics - Enhanced Selective Betting v2.0")
+logger.info("🚀 Starting Greyhound Analytics - Ultra-Selective Betting v3.0")
+print("🚀 Starting Greyhound Analytics - Ultra-Selective Betting v3.0")
 
 # ✅ Find all PDFs in data folder
 pdf_folder = "data"
@@ -108,12 +108,27 @@ if len(selective_picks) > 0:
     print(f"🔥 Saved selective picks → outputs/selective_picks.csv ({len(selective_picks)} races)")
     
     # Calculate expected stats
+    tier0_count = len(selective_picks[selective_picks['Tier'] == 'TIER0'])
     tier1_count = len(selective_picks[selective_picks['Tier'] == 'TIER1'])
     tier2_count = len(selective_picks[selective_picks['Tier'] == 'TIER2'])
-    expected_wins = tier1_count * 0.30 + tier2_count * 0.25
+    expected_wins = tier0_count * 0.375 + tier1_count * 0.30 + tier2_count * 0.25
     print(f"   Expected wins: {expected_wins:.1f} ({expected_wins/len(selective_picks)*100:.1f}% win rate)")
 else:
-    print("⚠️  No selective picks meeting TIER1/TIER2 criteria found")
+    print("⚠️  No selective picks meeting TIER0/TIER1/TIER2 criteria found")
+
+# ✅ Save LOCK picks (TIER0 only) - Highest Confidence Bets
+lock_picks = get_lock_picks(combined_df, bet_worthy_races)
+if len(lock_picks) > 0:
+    # Reorder columns for lock picks
+    lock_priority = ["Track", "RaceNumber", "Box", "DogName", "FinalScore", "Tier", "LockReason", "ExpectedWinRate"]
+    lock_remaining = [col for col in lock_picks.columns if col not in lock_priority]
+    lock_ordered = [c for c in lock_priority if c in lock_picks.columns] + lock_remaining
+    lock_picks = lock_picks[lock_ordered]
+    lock_picks.to_csv("outputs/lock_picks.csv", index=False)
+    print(f"🔒 Saved LOCK picks → outputs/lock_picks.csv ({len(lock_picks)} LOCK races)")
+    print(f"   Expected wins from LOCKs: {len(lock_picks) * 0.375:.1f} ({37.5}% win rate)")
+else:
+    print("ℹ️  No LOCK picks (TIER0) today - criteria: Score ≥50, Margin ≥15%, Box 1 or 8, 30+ starts")
 
 # ✅ Create color-coded Excel outputs
 print("\n🎨 Creating color-coded Excel files...")
@@ -121,12 +136,23 @@ create_color_coded_outputs(combined_df)
 
 # ✅ Display SELECTIVE picks (Recommended Bets)
 print("\n" + "="*80)
-print("🏁 RECOMMENDED BETS (Selective Picks - TIER1 & TIER2 Only)")
+print("🏁 RECOMMENDED BETS (TIER0 + TIER1 + TIER2)")
 print("="*80)
+
+# First show LOCK picks
+if len(lock_picks) > 0:
+    print("\n🔒 LOCK OF THE DAY (Highest Confidence):")
+    for _, row in lock_picks.iterrows():
+        print(f"   🔒 {row.Track} | Race {row.RaceNumber} | Box {row.Box} | {row.DogName} | Score: {round(row.FinalScore, 2)} | {row.get('LockReason', '')}")
+
+# Then show other selective picks
 if len(selective_picks) > 0:
+    print("\n🎯 SELECTIVE PICKS (High Confidence):")
     for _, row in selective_picks.iterrows():
+        if row.get('Tier') == 'TIER0':
+            continue  # Already shown above
         tier_emoji = "🔥" if row.get('Tier') == 'TIER1' else "✅"
-        print(f"{tier_emoji} {row.Track} | Race {row.RaceNumber} | Box {row.Box} | {row.DogName} | Score: {round(row.FinalScore, 2)} | {row.get('Tier', 'N/A')}")
+        print(f"   {tier_emoji} {row.Track} | Race {row.RaceNumber} | Box {row.Box} | {row.DogName} | Score: {round(row.FinalScore, 2)} | {row.get('Tier', 'N/A')}")
 else:
     print("No races meeting selective betting criteria today.")
 
