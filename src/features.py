@@ -300,75 +300,91 @@ def compute_features(df):
     else:
         df["BoxPositionBias"] = 0.0
     
-    # Race-type adaptive weighting - Optimized from 320 race results analysis
-    # Expanded to include ALL available variables for comprehensive scoring
+    # Race-type adaptive weighting - ML-OPTIMIZED from 386 race winner analysis
+    # Derived using logistic regression on 2,467 dogs from 30 PDFs
+    # Key finding: DrawFactor/BoxPositionBias (41%) is THE most important predictor
     # Weights adjusted to sum to 1.0 (100%) for each distance category
     def get_weights(distance):
-        if distance < 400:  # Sprint - Box position and early speed matter most
+        if distance < 400:  # Sprint - Box/draw position matters MOST
             return {
-                "EarlySpeedIndex": 0.20,      # Critical for sprints
-                "Speed_kmh": 0.14,             # Raw speed important
-                "ConsistencyIndex": 0.08,      # Win rate
-                "FinishConsistency": 0.03,     # Time consistency
-                "PrizeMoney": 0.05,            # Class indicator
-                "RecentFormBoost": 0.08,       # Recent racing activity
-                "BoxBiasFactor": 0.06,         # Dog's box preference
-                "BoxPositionBias": 0.06,       # Position win rate from 320 races
-                "TrainerStrikeRate": 0.04,     # Trainer success
-                "DistanceSuit": 0.03,          # Distance preference
-                "TrackConditionAdj": 0.02,     # Track conditions
-                # NEW VARIABLES (from 320-race analysis)
-                "PlaceRate": 0.04,             # Consistency in placing
-                "DLWFactor": 0.05,             # Days since last win
-                "WeightFactor": 0.03,          # Optimal weight range
-                "DrawFactor": 0.03,            # Draw position advantage
-                "FormMomentumNorm": 0.03,      # Form trending direction
-                "MarginFactor": 0.02,          # Average winning margins
-                "RTCFactor": 0.01              # Rating
+                # ML-DERIVED: Draw/Box position is 41% of winner prediction!
+                "DrawFactor": 0.22,            # #1 predictor - box position advantage
+                "BoxPositionBias": 0.20,       # Box win rates from 386 races
+                # Career indicators (27.5% of signal)
+                "CareerPlaces": 0.08,          # #2 predictor - placing consistency
+                "CareerStarts": 0.06,          # Experience level
+                "ConsistencyIndex": 0.05,      # Win rate
+                "TrainerStrikeRate": 0.05,     # Trainer success rate
+                # Timing (17.6% of signal) - critical for sprints
+                "SectionalSec": 0.07,          # Early speed - #4 predictor
+                "EarlySpeedIndex": 0.06,       # Break/early pace
+                "Speed_kmh": 0.04,             # Raw speed
+                "BestTimeSec": 0.02,           # Best time at distance
+                # Form indicators (5.1% of signal)
+                "DLWFactor": 0.04,             # Days since last win
+                "FinishConsistency": 0.01,     # Time consistency
+                "RecentFormBoost": 0.01,       # Recent racing
+                # Lower impact factors
+                "BoxBiasFactor": 0.02,         # Dog's box preference
+                "PlaceRate": 0.01,             # Place rate
+                "DLR": 0.02,                   # Days since last race
+                "PrizeMoney": 0.02,            # Class indicator
+                "RTCFactor": 0.01,             # Rating
+                "DistanceSuit": 0.01,          # Distance preference
             }
-        elif distance <= 500:  # Middle - More balanced approach
+        elif distance <= 500:  # Middle - Box still most important, more balanced
             return {
-                "EarlySpeedIndex": 0.16,       # Still important
-                "Speed_kmh": 0.14,             # Sustained speed
-                "ConsistencyIndex": 0.12,      # Win rate more important
-                "FinishConsistency": 0.04,     # Time consistency
-                "PrizeMoney": 0.06,            # Class indicator
-                "RecentFormBoost": 0.08,       # Recent form
-                "BoxBiasFactor": 0.05,         # Box preference
-                "BoxPositionBias": 0.05,       # Position win rate
-                "TrainerStrikeRate": 0.04,     # Trainer success
-                "DistanceSuit": 0.03,          # Distance preference
-                "TrackConditionAdj": 0.02,     # Track conditions
-                # NEW VARIABLES
-                "PlaceRate": 0.05,             # Placing consistency
+                # ML-DERIVED weights (adjusted for middle distances)
+                "DrawFactor": 0.18,            # Still #1 but less dominant at distance
+                "BoxPositionBias": 0.16,       # Box win rates
+                # Career indicators (more important at distance)
+                "CareerPlaces": 0.10,          # Placing consistency
+                "CareerStarts": 0.08,          # Experience
+                "ConsistencyIndex": 0.06,      # Win rate
+                "TrainerStrikeRate": 0.05,     # Trainer success
+                # Timing (sustained effort matters)
+                "SectionalSec": 0.06,          # Early speed
+                "EarlySpeedIndex": 0.05,       # Break speed
+                "Speed_kmh": 0.04,             # Raw speed
+                "BestTimeSec": 0.02,           # Best time
+                # Form indicators
                 "DLWFactor": 0.04,             # Recent winning
-                "WeightFactor": 0.03,          # Weight factor
-                "DrawFactor": 0.03,            # Draw advantage
-                "FormMomentumNorm": 0.03,      # Form direction
-                "MarginFactor": 0.02,          # Margins
-                "RTCFactor": 0.01              # Rating
+                "FinishConsistency": 0.02,     # Time consistency
+                "RecentFormBoost": 0.02,       # Recent form
+                # Other factors
+                "BoxBiasFactor": 0.02,         # Box preference
+                "PlaceRate": 0.02,             # Place rate
+                "DLR": 0.02,                   # Days last race
+                "PrizeMoney": 0.03,            # Class
+                "RTCFactor": 0.01,             # Rating
+                "DistanceSuit": 0.02,          # Distance preference
             }
-        else:  # Long - Stamina, consistency and form matter more
+        else:  # Long - Stamina & consistency matter more, box still important
             return {
-                "EarlySpeedIndex": 0.12,       # Less critical for long races
-                "Speed_kmh": 0.10,             # Sustainable pace
-                "ConsistencyIndex": 0.14,      # Very important for stamina
-                "FinishConsistency": 0.06,     # Time consistency important
-                "PrizeMoney": 0.06,            # Class indicator
-                "RecentFormBoost": 0.08,       # Recent form
-                "BoxBiasFactor": 0.04,         # Less impact at distance
-                "BoxPositionBias": 0.04,       # Less impact at distance
-                "TrainerStrikeRate": 0.04,     # Trainer success
-                "DistanceSuit": 0.04,          # Distance preference more important
-                "TrackConditionAdj": 0.03,     # Track conditions
-                # NEW VARIABLES - Higher weights for form indicators
-                "PlaceRate": 0.06,             # Placing consistency key for stamina
-                "DLWFactor": 0.05,             # Recent winning important
-                "WeightFactor": 0.04,          # Weight affects stamina
-                "DrawFactor": 0.03,            # Draw still matters
-                "FormMomentumNorm": 0.04,      # Form direction important
-                "MarginFactor": 0.02,          # Margins
-                "RTCFactor": 0.01              # Rating
+                # ML-DERIVED weights (adjusted for long distances)
+                "DrawFactor": 0.14,            # Less critical at distance
+                "BoxPositionBias": 0.12,       # Box win rates
+                # Career indicators (MOST important for stamina races)
+                "CareerPlaces": 0.12,          # Placing consistency crucial
+                "CareerStarts": 0.10,          # Experience vital for distance
+                "ConsistencyIndex": 0.08,      # Win rate very important
+                "TrainerStrikeRate": 0.05,     # Trainer for stayers
+                # Timing (sustainable pace)
+                "SectionalSec": 0.05,          # Early speed less critical
+                "EarlySpeedIndex": 0.04,       # Break speed
+                "Speed_kmh": 0.04,             # Sustained speed
+                "BestTimeSec": 0.02,           # Best time
+                # Form indicators (more important for distance)
+                "DLWFactor": 0.05,             # Recent winning
+                "FinishConsistency": 0.03,     # Consistency key
+                "RecentFormBoost": 0.02,       # Recent form
+                # Other factors
+                "BoxBiasFactor": 0.02,         # Box preference
+                "PlaceRate": 0.03,             # Place rate important
+                "DLR": 0.02,                   # Days last race
+                "PrizeMoney": 0.04,            # Class indicator
+                "RTCFactor": 0.01,             # Rating
+                "DistanceSuit": 0.02,          # Distance suitability
             }
 
     # FinalScore calculation - intelligently handle missing timing data
