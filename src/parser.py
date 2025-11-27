@@ -9,6 +9,43 @@ logger = logging.getLogger(__name__)
 DISTANCE_EXACT_MATCH_TOLERANCE = 10  # meters
 DISTANCE_SIMILAR_MATCH_TOLERANCE = 50  # meters
 
+# Distance conversion: enable converting times from different distances
+# Formula: converted_time = original_time * (target_distance / original_distance)
+# This assumes consistent average speed (m/s) across distances, which is reasonable for greyhounds
+ENABLE_DISTANCE_CONVERSION = True
+# Maximum distance difference to convert from (beyond this, conversion is unreliable)
+MAX_DISTANCE_CONVERSION_DIFF = 200  # meters (e.g., can convert 400m time to 500m, but not 300m to 600m)
+
+def convert_time_to_distance(original_time, original_distance, target_distance):
+    """
+    Convert a race time from one distance to an estimated time at another distance.
+    
+    Uses linear scaling based on average speed:
+    - Speed (m/s) = original_distance / original_time
+    - Estimated time = target_distance / speed = original_time * (target_distance / original_distance)
+    
+    This is an approximation - actual times may vary due to:
+    - Track conditions
+    - Dog's stamina (sprint vs distance specialists)
+    - Box position effects
+    
+    Args:
+        original_time: Time in seconds at original distance
+        original_distance: Original distance in meters
+        target_distance: Target distance to convert to in meters
+        
+    Returns:
+        Estimated time at target distance in seconds
+    """
+    if original_distance <= 0 or original_time <= 0:
+        return None
+    
+    # Calculate speed and convert
+    speed_mps = original_distance / original_time
+    converted_time = target_distance / speed_mps
+    
+    return round(converted_time, 2)
+
 # Month abbreviation to number mapping for date parsing
 MONTH_MAP = {
     'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
@@ -311,8 +348,32 @@ def parse_race_form(text):
                 if similar_distance_times:
                     dogs[dog_index]["BestTimeSec"] = min(similar_distance_times)
                     dogs[dog_index]["Last3TimesSec"] = similar_distance_times[-3:] if len(similar_distance_times) >= 3 else similar_distance_times
-                # Otherwise: skip this dog's BestTimeSec (leave it as NaN)
-                # Don't use times from vastly different distances as it's misleading
+                
+                # DISTANCE CONVERSION: If no similar-distance times, convert from other distances
+                elif ENABLE_DISTANCE_CONVERSION:
+                    # Get all times with valid distances within conversion range
+                    convertible_times = [
+                        (time, dist) for time, dist in race_times 
+                        if dist is not None and abs(dist - dog_race_distance) <= MAX_DISTANCE_CONVERSION_DIFF
+                    ]
+                    
+                    if convertible_times:
+                        # Convert each time to the target distance
+                        converted_times = []
+                        for orig_time, orig_dist in convertible_times:
+                            converted = convert_time_to_distance(orig_time, orig_dist, dog_race_distance)
+                            if converted is not None:
+                                converted_times.append(converted)
+                        
+                        if converted_times:
+                            # Use the best (fastest) converted time
+                            dogs[dog_index]["BestTimeSec"] = min(converted_times)
+                            # Mark as converted for transparency
+                            dogs[dog_index]["TimeConverted"] = True
+                            # Last3 from converted times
+                            dogs[dog_index]["Last3TimesSec"] = converted_times[-3:] if len(converted_times) >= 3 else converted_times
+                            logger.info(f"Converted timing for {dogs[dog_index].get('DogName', 'Unknown')}: "
+                                       f"{len(convertible_times)} times from other distances -> {min(converted_times):.2f}s at {dog_race_distance}m")
         
         if sec_times:
             # Filter sectional times for the same distance (exact match tolerance)
@@ -333,7 +394,8 @@ def parse_race_form(text):
                 ]
                 if similar_distance_sectionals:
                     dogs[dog_index]["SectionalSec"] = min(similar_distance_sectionals)
-                # Otherwise: skip (leave as NaN)
+                # Note: We don't convert sectional times as they're for the initial portion of the race
+                # and don't scale linearly with total distance
         
         # Calculate box preference/bias for this dog
         box_history = timing.get("box_history", [])
