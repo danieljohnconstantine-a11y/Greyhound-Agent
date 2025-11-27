@@ -276,20 +276,19 @@ def compute_features(df):
         df["RTCFactor"] = 0.5
         print("⚠️ WARNING: RTC not found - setting RTCFactor to 0.5 (neutral).")
 
-    # Box Position Bias - Updated from 449 race results analysis (Sep-Nov 2025)
-    # Combining 320 historical + 129 races from Nov 26, 2025
-    # Nov 26 data: Box 1 (19.4%), Box 2 (19.4%), Box 8 (17.1%)
-    # Box 3 still weakest at 7.0%
+    # Box Position Bias - Updated from 386 race results analysis (Sep-Nov 2025)
+    # Full re-scan with improved PDF parsing (90.3% timing data coverage)
+    # Data source: data/race_results_nov_2025.csv
     # Average expected: 12.5% (1/8 boxes)
     BOX_POSITION_BIAS = {
-        1: 0.075,   # ~19% wins - 1.52x average - STRONGEST (tied with Box 2)
-        2: 0.075,   # ~19% wins - 1.52x average - STRONGEST (tied with Box 1)
-        3: -0.055,  # ~7% wins - 0.56x average - WEAKEST
-        4: 0.015,   # ~10% wins - 0.80x average
-        5: -0.020,  # ~9% wins - 0.72x average
-        6: 0.000,   # ~12% wins - 0.96x average (near average)
-        7: 0.000,   # ~12% wins - 0.96x average (near average)
-        8: 0.050,   # ~17% wins - 1.36x average - THIRD STRONGEST
+        1: 0.045,   # 18.1% wins (70/386) - STRONGEST - 1.45x average
+        2: 0.022,   # 15.3% wins (59/386) - SECOND STRONGEST - 1.22x average
+        3: -0.036,  # 8.0% wins (31/386) - WEAKEST - 0.64x average
+        4: 0.002,   # 12.7% wins (49/386) - NEAR AVERAGE
+        5: -0.021,  # 9.8% wins (38/386) - BELOW AVERAGE
+        6: -0.005,  # 11.9% wins (46/386) - SLIGHTLY BELOW AVERAGE
+        7: -0.023,  # 9.6% wins (37/386) - BELOW AVERAGE
+        8: 0.014,   # 14.2% wins (55/386) - THIRD STRONGEST - 1.14x average
     }
     
     # Apply box position bias based on actual race data
@@ -297,7 +296,7 @@ def compute_features(df):
         df["BoxPositionBias"] = df["Box"].apply(
             lambda x: BOX_POSITION_BIAS.get(int(x), 0.0) if pd.notna(x) else 0.0
         )
-        print(f"✓ Applied optimized BoxPositionBias from 449-race analysis")
+        print(f"✓ Applied optimized BoxPositionBias from 386-race analysis")
     else:
         df["BoxPositionBias"] = 0.0
     
