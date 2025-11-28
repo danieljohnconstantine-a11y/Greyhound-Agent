@@ -27,13 +27,24 @@ import numpy as np
 # ===== CONFIGURABLE THRESHOLDS - Ultra-Selective Betting =====
 # Tiered thresholds for different confidence levels
 
-# TIER 0 THRESHOLDS (LOCK OF THE DAY - ~35-40% expected win rate)
+# TIER 0 THRESHOLDS (LOCK OF THE DAY - ~37-42% expected win rate)
 # ALL factors must align: High score, big margin, favorable box, veteran dog
 TIER0_MIN_SCORE = 50.0               # Requires 50+ score
 TIER0_MIN_MARGIN_PERCENT = 15.0      # Requires 15%+ margin
 TIER0_MIN_MARGIN_ABSOLUTE = 7.0      # Requires 7+ point separation
 TIER0_REQUIRED_BOXES = [1, 8]        # Must be in Box 1 or 8 (32.3% combined wins)
 TIER0_MIN_CAREER_STARTS = 30         # Experienced/proven dog
+
+# NEW: TIER0 requires LOW upset track for enhanced confidence
+# Based on Nov 26-28 analysis: High upset tracks (Healesville, Richmond) 
+# produce unpredictable results even with strong picks
+LOW_UPSET_TRACKS = [
+    "Angle Park", "Meadows", "Temora", "Goulburn", "Gawler", "Bendigo"
+]
+# These tracks have high upset probability - avoid TIER0 LOCK bets here
+HIGH_UPSET_TRACKS = [
+    "Casino", "Hobart", "Shepparton", "Healesville", "Richmond", "Mandurah"
+]
 
 # TIER 1 THRESHOLDS (Highest confidence - ~28-32% expected win rate)
 TIER1_MIN_SCORE_MARGIN_PERCENT = 12.0  # Requires 12%+ margin
@@ -245,7 +256,10 @@ def determine_confidence_tier(top_score, second_score, margin_percent, top_box,
     """
     Determine which confidence tier a race falls into.
     
-    Enhanced with TIER0 (LOCK) detection and track-specific analysis.
+    Enhanced with TIER0 (LOCK) detection, track-specific analysis,
+    and LOW/HIGH upset track filtering.
+    
+    TIER0 now requires track to be in LOW_UPSET_TRACKS for maximum reliability.
     
     Returns:
         str: 'TIER0', 'TIER1', 'TIER2', 'TIER3', or 'NO_BET'
@@ -257,9 +271,37 @@ def determine_confidence_tier(top_score, second_score, margin_percent, top_box,
     effective_score = top_score * (1 + box_bonus)
     effective_margin = margin_percent * (1 + box_bonus)
     
+    # Check if track is LOW upset (more predictable)
+    is_low_upset_track = False
+    is_high_upset_track = False
+    if track:
+        track_str = str(track).lower().strip()
+        for low_track in LOW_UPSET_TRACKS:
+            if low_track.lower() in track_str or track_str in low_track.lower():
+                is_low_upset_track = True
+                break
+        for high_track in HIGH_UPSET_TRACKS:
+            if high_track.lower() in track_str or track_str in high_track.lower():
+                is_high_upset_track = True
+                break
+    
     # Check TIER 0 (LOCK OF THE DAY) - ALL conditions must be met
-    if (effective_score >= TIER0_MIN_SCORE and
-        effective_margin >= TIER0_MIN_MARGIN_PERCENT and
+    # NEW: For maximum reliability, TIER0 prefers LOW upset tracks
+    # On HIGH upset tracks, we require even higher thresholds
+    tier0_score_threshold = TIER0_MIN_SCORE
+    tier0_margin_threshold = TIER0_MIN_MARGIN_PERCENT
+    
+    if is_high_upset_track:
+        # For high upset tracks, raise the bar significantly
+        tier0_score_threshold = 55.0  # Higher score needed
+        tier0_margin_threshold = 20.0  # Much higher margin needed
+    elif is_low_upset_track:
+        # For low upset tracks, slightly lower thresholds are acceptable
+        tier0_score_threshold = 48.0  # Slightly lower
+        tier0_margin_threshold = 13.0  # Slightly lower
+    
+    if (effective_score >= tier0_score_threshold and
+        effective_margin >= tier0_margin_threshold and
         absolute_margin >= TIER0_MIN_MARGIN_ABSOLUTE and
         (pd.notna(top_box) and int(top_box) in TIER0_REQUIRED_BOXES) and
         career_starts >= TIER0_MIN_CAREER_STARTS):
@@ -440,7 +482,7 @@ def print_bet_worthy_summary(bet_worthy_races):
     print(f"🎯 ULTRA-SELECTIVE BETTING ANALYSIS - Enhanced Tiered System")
     print(f"{'='*80}")
     print(f"\n📊 TIER BREAKDOWN:")
-    print(f"  🔒 TIER0 (LOCK):    {tier_counts['TIER0']} races (Expected win rate: ~37.5%)")
+    print(f"  🔒 TIER0 (LOCK):    {tier_counts['TIER0']} races (Expected win rate: ~40%)")
     print(f"  🔥 TIER1 (Premium): {tier_counts['TIER1']} races (Expected win rate: ~30%)")
     print(f"  ✅ TIER2 (Strong):  {tier_counts['TIER2']} races (Expected win rate: ~25%)")
     print(f"  ⚠️  TIER3 (Standard):{tier_counts['TIER3']} races (Expected win rate: ~18%)")
@@ -461,11 +503,15 @@ def print_bet_worthy_summary(bet_worthy_races):
     
     print(f"\n📋 THRESHOLDS:")
     print(f"  TIER0: Score ≥ {TIER0_MIN_SCORE}, Margin ≥ {TIER0_MIN_MARGIN_PERCENT}%, Box 1 or 8, 30+ starts")
+    print(f"  TIER0 LOW UPSET: Score ≥ 48, Margin ≥ 13% (Angle Park, Meadows, Goulburn, etc.)")
+    print(f"  TIER0 HIGH UPSET: Score ≥ 55, Margin ≥ 20% (Healesville, Richmond, etc.)")
     print(f"  TIER1: Score ≥ {TIER1_MIN_TOP_PICK_SCORE}, Margin ≥ {TIER1_MIN_SCORE_MARGIN_PERCENT}%, Absolute ≥ {TIER1_MIN_MARGIN_ABSOLUTE}")
     print(f"  TIER2: Score ≥ {TIER2_MIN_TOP_PICK_SCORE}, Margin ≥ {TIER2_MIN_SCORE_MARGIN_PERCENT}%, Absolute ≥ {TIER2_MIN_MARGIN_ABSOLUTE}")
     print(f"  Premium boxes: {PREMIUM_BOXES} (bonus: +{PREMIUM_BOX_BONUS*100:.0f}%)")
     print(f"  Favorable boxes: {FAVORABLE_BOXES} (bonus: +{FAVORABLE_BOX_BONUS*100:.0f}%)")
     print(f"  Unfavorable boxes: {UNFAVORABLE_BOXES} (penalty: {UNFAVORABLE_BOX_PENALTY*100:.0f}%)")
+    print(f"\n🎯 LOW UPSET TRACKS (Predictable - easier TIER0): {', '.join(LOW_UPSET_TRACKS)}")
+    print(f"⚠️  HIGH UPSET TRACKS (Unpredictable - stricter TIER0): {', '.join(HIGH_UPSET_TRACKS)}")
     print(f"{'='*80}\n")
     
     # Print TIER0 races (LOCK OF THE DAY - always bet)

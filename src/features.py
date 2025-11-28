@@ -648,6 +648,43 @@ def compute_features(df):
         df["CompetitorDensity"] = 0.5
         df["CompetitorAdjustment"] = 1.0
     
+    # === FIELD SIZE FACTOR (NEW - Nov 28) ===
+    # Smaller fields (5-6 dogs) favor inside boxes more
+    # Full 8-dog fields have more competition, Box 8 rail advantage matters more
+    # Analysis: In 5-dog fields, Box 1 wins 28%+; in 8-dog fields, more even distribution
+    df["FieldSize"] = df.groupby(["Track", "RaceNumber"])["DogName"].transform("count")
+    
+    # Field size adjustment for box scoring
+    if "Box" in df.columns:
+        def get_field_size_adjustment(row):
+            field_size = row.get("FieldSize", 8)
+            box = row.get("Box", 4)
+            if pd.isna(box) or pd.isna(field_size):
+                return 0.0
+            box = int(box)
+            field_size = int(field_size)
+            
+            # Small fields (5-6 dogs): Inside boxes have even bigger advantage
+            if field_size <= 6:
+                if box <= 2:
+                    return 0.02  # +2% boost to Box 1-2
+                elif box <= 4:
+                    return 0.01  # Small boost to Box 3-4
+                else:
+                    return -0.01  # Penalty to outer boxes
+            # Large fields (8+ dogs): Box 8 rail advantage is stronger
+            elif field_size >= 8:
+                if box == 8:
+                    return 0.01  # +1% boost to Box 8
+                elif box <= 2:
+                    return 0.005  # Slight Box 1-2 advantage still
+            return 0.0
+        
+        df["FieldSizeAdjustment"] = df.apply(get_field_size_adjustment, axis=1)
+        print(f"✓ Calculated FieldSizeAdjustment based on field size")
+    else:
+        df["FieldSizeAdjustment"] = 0.0
+    
     # ========================================================================
     # COMPREHENSIVE WEIGHT SYSTEM - 25+ Variables
     # Derived from ML analysis of 2,467 dogs across 386 races
@@ -811,7 +848,8 @@ def compute_features(df):
             row.get("BoxPlaceRate", 0) * w.get("BoxPlaceRate", 0) * BOX_POSITION_BOOST +
             row.get("BoxTop3Rate", 0) * w.get("BoxTop3Rate", 0) * BOX_POSITION_BOOST +
             row.get("RailPreference", 0) * w.get("RailPreference", 0) +
-            row.get("BoxBiasFactor", 0) * w.get("BoxBiasFactor", 0)
+            row.get("BoxBiasFactor", 0) * w.get("BoxBiasFactor", 0) +
+            row.get("FieldSizeAdjustment", 0) * BOX_POSITION_BOOST  # NEW: Field size adjustment
         )
         
         # 2. CAREER/EXPERIENCE SCORE (25-30%) - boosted when timing missing
