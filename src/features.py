@@ -333,6 +333,39 @@ def compute_features(df):
         (6, 1): 0.028,  # 11/386 = 2.8%
     }
     
+    # === TRACK-SPECIFIC BOX 1 BIAS ===
+    # Based on Nov 26-28 analysis (400+ races)
+    # Some tracks have significantly higher Box 1 win rates than the 18% average
+    TRACK_BOX1_ADJUSTMENT = {
+        # Strong Box 1 tracks (>30% Box 1 win rate) - Extra boost
+        "Goulburn": 0.08,        # 41.7% Box 1 win rate
+        "Angle Park": 0.08,      # 50% Box 1 win rate (Nov 27)
+        "Meadows": 0.06,         # 42% Box 1 win rate (Nov 27)
+        "Bendigo": 0.05,         # 33% Box 1 win rate (Nov 28)
+        "Gawler": 0.05,          # 33% Box 1 win rate (Nov 28)
+        "Temora": 0.05,          # 22% Box 1 win rate (Nov 27)
+        # Normal Box 1 tracks (15-25%) - Small adjustment
+        "Wentworth Park": 0.02,  # 30% Box 1 win rate
+        "Ladbrokes Q": 0.02,     # 30% Box 1 win rate
+        "Warragul": 0.02,        # 25% Box 1 win rate
+        "Wagga": 0.02,           # 27% Box 1 win rate
+        # Weak Box 1 tracks (<15%) - Reduce Box 1 advantage
+        "Healesville": -0.03,    # 0% Box 1 (Nov 28) - Outlier day
+        "Richmond": -0.02,       # 0% Box 1 (Nov 28) - Outlier day
+        "Mandurah": -0.02,       # 9% Box 1 (Nov 28)
+        "DEFAULT": 0.0
+    }
+    
+    def get_track_box1_adjustment(track_name):
+        """Get track-specific Box 1 adjustment based on historical data."""
+        if pd.isna(track_name):
+            return 0.0
+        track_str = str(track_name).strip()
+        for key in TRACK_BOX1_ADJUSTMENT:
+            if key.lower() in track_str.lower() or track_str.lower() in key.lower():
+                return TRACK_BOX1_ADJUSTMENT[key]
+        return TRACK_BOX1_ADJUSTMENT["DEFAULT"]
+    
     # Apply BOX_WIN_RATE as BoxPositionBias (normalized to ±0.05 range)
     if "Box" in df.columns:
         df["BoxPositionBias"] = df["Box"].apply(
@@ -346,12 +379,30 @@ def compute_features(df):
         df["BoxTop3Rate"] = df["Box"].apply(
             lambda x: (BOX_TOP3_RATE.get(int(x), 0.375) - 0.375) / 3 if pd.notna(x) else 0.0
         )
+        
+        # === TRACK-SPECIFIC BOX 1 ADJUSTMENT ===
+        # Apply extra bonus/penalty for Box 1 based on track historical data
+        # This is added AFTER the base BoxPositionBias calculation
+        if "Track" in df.columns:
+            df["TrackBox1Adjustment"] = df.apply(
+                lambda row: get_track_box1_adjustment(row.get("Track", "")) 
+                            if pd.notna(row.get("Box")) and int(row.get("Box", 0)) == 1 
+                            else 0.0,
+                axis=1
+            )
+            # Add track-specific adjustment to Box 1 dogs only
+            df["BoxPositionBias"] = df["BoxPositionBias"] + df["TrackBox1Adjustment"]
+            print(f"✓ Applied track-specific Box 1 adjustments from Nov 26-28 analysis")
+        else:
+            df["TrackBox1Adjustment"] = 0.0
+        
         print(f"✓ Applied comprehensive BoxPositionBias from 386-race analysis")
         print(f"  Win/Place/Top3 rates analyzed for all 8 boxes")
     else:
         df["BoxPositionBias"] = 0.0
         df["BoxPlaceRate"] = 0.0
         df["BoxTop3Rate"] = 0.0
+        df["TrackBox1Adjustment"] = 0.0
     
     # === AGE FACTOR ===
     # Greyhounds typically peak at 2-3.5 years (24-42 months)
@@ -539,25 +590,32 @@ def compute_features(df):
     # === UPSET PROBABILITY ===
     # Tracks with high entropy (more even box distribution) have more upsets
     # Track-specific upset likelihood based on historical box volatility
+    # Updated with Nov 28 data analysis
     TRACK_UPSET_PROBABILITY = {
-        # Low upset tracks (more predictable)
-        "Angle Park": 0.85,      # Box 1 dominance makes it predictable
-        "Meadows": 0.87,
-        "Temora": 0.88,
-        "Healesville": 0.90,
+        # Low upset tracks (more predictable) - Box 1 dominance
+        "Angle Park": 0.80,      # 50% Box 1 wins (Nov 27) - Very predictable
+        "Meadows": 0.85,         # 42% Box 1 wins (Nov 27)
+        "Temora": 0.85,          # 41% Box 1 wins (Nov 28) 
+        "Goulburn": 0.85,        # 41.7% Box 1 wins (Nov 28) - NEW
+        "Gawler": 0.87,          # 33% Box 1 wins (Nov 28) - NEW
+        "Bendigo": 0.88,         # 33% Box 1 wins (Nov 28) - Moved from Medium
         # Medium upset tracks
-        "Bendigo": 0.95,
+        "Wentworth Park": 0.92,
+        "Ladbrokes Q Straight": 0.92,
+        "Ladbrokes Gardens": 0.92,
+        "Warragul": 0.95,        # Moved from High upset
+        "Wagga": 0.95,           # NEW
         "Sale": 0.95,
-        "Richmond": 0.95,
-        "Wentworth Park": 0.95,
-        "Ladbrokes Q Straight": 0.95,
         "Warrnambool": 0.95,
         # High upset tracks (more unpredictable)
         "Casino": 1.05,          # High entropy = more random
         "Hobart": 1.05,
         "Mount Gambier": 1.05,
         "Shepparton": 1.05,
-        "Warragul": 1.05,
+        "Healesville": 1.02,     # 0% Box 1 wins (Nov 28) - Moved from Low
+        "Richmond": 1.02,        # 0% Box 1 wins (Nov 28) - Moved from Medium
+        "Mandurah": 1.02,        # 9% Box 1 wins (Nov 28) - NEW
+        "Townsville": 1.00,      # NEW
         "DEFAULT": 1.0
     }
     
