@@ -119,9 +119,11 @@ def parse_race_form(text):
             continue
 
         # Match dog entry with glued form number
-        # Form number can contain digits and 'x' character (e.g., "8x324")
+        # Form number can contain digits, 'x' and 'f' characters (e.g., "8x324", "67f67")
+        # BUG FIX: Added 'f' to form number pattern - many dogs have 'f' in their form number
+        # which was causing them to not be parsed (e.g., "67f67Lil Patti" was missed)
         dog_match = re.match(
-            r"""^(\d+)\.?\s*([0-9x]{3,6})?([A-Za-z''\- ]+)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+            r"""^(\d+)\.?\s*([0-9xf]{2,7})?([A-Za-z''\- ]+)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
             line
         )
 
