@@ -283,15 +283,17 @@ def compute_features(df):
     
     # === WIN RATE Analysis (primary predictor) ===
     # Average expected: 12.5% (1/8 boxes)
+    # UPDATED v3.5: Based on 476 races (Nov 26-29, 2025)
+    # Nov 29 showed Box 1 at 22.2%, Box 4 at 16.7%, Box 7 at 5.6%
     BOX_WIN_RATE = {
-        1: 0.181,   # 18.1% wins (70/386) - STRONGEST - 1.45x average
-        2: 0.153,   # 15.3% wins (59/386) - #2 - 1.22x average
+        1: 0.200,   # INCREASED: 20.0% wins - Nov 29 showed 22.2% (up from 18.1%)
+        2: 0.140,   # DECREASED: 14.0% wins - Nov 29 showed 12.2% (was 15.3%)
         3: 0.080,   # 8.0% wins (31/386) - WEAKEST - 0.64x average
-        4: 0.127,   # 12.7% wins (49/386) - Near average
+        4: 0.150,   # INCREASED: 15.0% wins - Nov 29 showed 16.7% (was 12.7%)
         5: 0.098,   # 9.8% wins (38/386) - Below average
         6: 0.119,   # 11.9% wins (46/386) - Slightly below
-        7: 0.096,   # 9.6% wins (37/386) - Below average
-        8: 0.142,   # 14.2% wins (55/386) - #3 - 1.14x average
+        7: 0.065,   # DECREASED: 6.5% wins - Nov 29 showed 5.6% (was 9.6%)
+        8: 0.148,   # INCREASED: 14.8% wins - Nov 29 showed 14.4% (was 14.2%)
     }
     
     # === PLACE RATE Analysis (2nd place) ===
@@ -334,25 +336,44 @@ def compute_features(df):
     }
     
     # === TRACK-SPECIFIC BOX 1 BIAS ===
-    # Based on Nov 26-28 analysis (400+ races)
-    # Some tracks have significantly higher Box 1 win rates than the 18% average
+    # Based on Nov 26-29 analysis (476+ races)
+    # v3.5 UPDATE: Added Nov 29 track data, added Taree, updated Cannington/Sandown
     TRACK_BOX1_ADJUSTMENT = {
-        # Strong Box 1 tracks (>30% Box 1 win rate) - Extra boost
+        # STRONG Box 1 tracks (>35% Box 1 win rate) - Extra boost
+        "Cannington": 0.10,      # 41.7% Box 1 (Nov 29) - NEW
         "Goulburn": 0.08,        # 41.7% Box 1 win rate
         "Angle Park": 0.08,      # 50% Box 1 win rate (Nov 27)
+        "Sandown": 0.06,         # 33.3% Box 1 (Nov 29) - NEW
         "Meadows": 0.06,         # 42% Box 1 win rate (Nov 27)
+        # GOOD Box 1 tracks (25-35%) - Medium boost
+        "Wentworth Park": 0.05,  # 30% Box 1 (Nov 29) - INCREASED
+        "Dubbo": 0.05,           # 27.3% Box 1 (Nov 29) - NEW
         "Bendigo": 0.05,         # 33% Box 1 win rate (Nov 28)
         "Gawler": 0.05,          # 33% Box 1 win rate (Nov 28)
         "Temora": 0.05,          # 22% Box 1 win rate (Nov 27)
         # Normal Box 1 tracks (15-25%) - Small adjustment
-        "Wentworth Park": 0.02,  # 30% Box 1 win rate
+        "Lakeside": 0.02,        # 20% Box 1 (Nov 29)
         "Ladbrokes Q": 0.02,     # 30% Box 1 win rate
         "Warragul": 0.02,        # 25% Box 1 win rate
         "Wagga": 0.02,           # 27% Box 1 win rate
-        # Weak Box 1 tracks (<15%) - Reduce Box 1 advantage
+        # WEAK Box 1 tracks (<15%) - Reduce Box 1 advantage
+        "Taree": -0.03,          # 9.1% Box 1 (Nov 29) - NEW (upset track)
+        "Gardens": -0.03,        # 8.3% Box 1 (Nov 29) - NEW
+        "Ballarat": -0.03,       # 8.3% Box 1 (Nov 29) - NEW
         "Healesville": -0.03,    # 0% Box 1 (Nov 28) - Outlier day
         "Richmond": -0.02,       # 0% Box 1 (Nov 28) - Outlier day
         "Mandurah": -0.02,       # 9% Box 1 (Nov 28)
+        "DEFAULT": 0.0
+    }
+    
+    # === TRACK-SPECIFIC BOX 4 BOOST (NEW in v3.5) ===
+    # Nov 29 showed Box 4 winning 16.7% overall - above 12.7% historical
+    # Some tracks have strong Box 4 performance
+    TRACK_BOX4_ADJUSTMENT = {
+        "Cannington": 0.05,      # Box 4 won 25% on Nov 29
+        "Ballarat": 0.03,        # Box 4 active at this track
+        "Gardens": 0.03,         # Box 4 won 16.7% on Nov 29
+        "Wentworth Park": 0.02,  # Box 4 competitive
         "DEFAULT": 0.0
     }
     
@@ -365,6 +386,16 @@ def compute_features(df):
             if key.lower() in track_str.lower() or track_str.lower() in key.lower():
                 return TRACK_BOX1_ADJUSTMENT[key]
         return TRACK_BOX1_ADJUSTMENT["DEFAULT"]
+    
+    def get_track_box4_adjustment(track_name):
+        """Get track-specific Box 4 adjustment based on Nov 29 data."""
+        if pd.isna(track_name):
+            return 0.0
+        track_str = str(track_name).strip()
+        for key in TRACK_BOX4_ADJUSTMENT:
+            if key.lower() in track_str.lower() or track_str.lower() in key.lower():
+                return TRACK_BOX4_ADJUSTMENT[key]
+        return TRACK_BOX4_ADJUSTMENT["DEFAULT"]
     
     # Apply BOX_WIN_RATE as BoxPositionBias (normalized to ±0.05 range)
     if "Box" in df.columns:
@@ -392,11 +423,22 @@ def compute_features(df):
             )
             # Add track-specific adjustment to Box 1 dogs only
             df["BoxPositionBias"] = df["BoxPositionBias"] + df["TrackBox1Adjustment"]
-            print(f"✓ Applied track-specific Box 1 adjustments from Nov 26-28 analysis")
+            
+            # === TRACK-SPECIFIC BOX 4 ADJUSTMENT (v3.5) ===
+            df["TrackBox4Adjustment"] = df.apply(
+                lambda row: get_track_box4_adjustment(row.get("Track", "")) 
+                            if pd.notna(row.get("Box")) and int(row.get("Box", 0)) == 4 
+                            else 0.0,
+                axis=1
+            )
+            df["BoxPositionBias"] = df["BoxPositionBias"] + df["TrackBox4Adjustment"]
+            
+            print(f"✓ Applied track-specific Box 1 & Box 4 adjustments from Nov 26-29 analysis")
         else:
             df["TrackBox1Adjustment"] = 0.0
+            df["TrackBox4Adjustment"] = 0.0
         
-        print(f"✓ Applied comprehensive BoxPositionBias from 386-race analysis")
+        print(f"✓ Applied comprehensive BoxPositionBias from 476-race analysis (v3.5)")
         print(f"  Win/Place/Top3 rates analyzed for all 8 boxes")
     else:
         df["BoxPositionBias"] = 0.0
@@ -822,32 +864,39 @@ def compute_features(df):
     # === UPSET PROBABILITY ===
     # Tracks with high entropy (more even box distribution) have more upsets
     # Track-specific upset likelihood based on historical box volatility
-    # Updated with Nov 28 data analysis
+    # Updated v3.5 with Nov 29 data analysis
     TRACK_UPSET_PROBABILITY = {
         # Low upset tracks (more predictable) - Box 1 dominance
         "Angle Park": 0.80,      # 50% Box 1 wins (Nov 27) - Very predictable
+        "Cannington": 0.82,      # 41.7% Box 1 (Nov 29) - NEW - Very predictable
+        "Sandown": 0.85,         # 33.3% Box 1 (Nov 29) - NEW
         "Meadows": 0.85,         # 42% Box 1 wins (Nov 27)
         "Temora": 0.85,          # 41% Box 1 wins (Nov 28) 
-        "Goulburn": 0.85,        # 41.7% Box 1 wins (Nov 28) - NEW
-        "Gawler": 0.87,          # 33% Box 1 wins (Nov 28) - NEW
-        "Bendigo": 0.88,         # 33% Box 1 wins (Nov 28) - Moved from Medium
+        "Goulburn": 0.85,        # 41.7% Box 1 wins (Nov 28)
+        "Gawler": 0.87,          # 33% Box 1 wins (Nov 28)
+        "Bendigo": 0.88,         # 33% Box 1 wins (Nov 28)
         # Medium upset tracks
+        "Dubbo": 0.90,           # 27.3% Box 1 (Nov 29) - NEW
         "Wentworth Park": 0.92,
+        "Lakeside": 0.92,        # 20% Box 1 (Nov 29) - NEW
         "Ladbrokes Q Straight": 0.92,
         "Ladbrokes Gardens": 0.92,
-        "Warragul": 0.95,        # Moved from High upset
-        "Wagga": 0.95,           # NEW
+        "Warragul": 0.95,
+        "Wagga": 0.95,
         "Sale": 0.95,
         "Warrnambool": 0.95,
         # High upset tracks (more unpredictable)
+        "Taree": 1.08,           # 9.1% Box 1 (Nov 29) - NEW - Very unpredictable (0/11 wins)
+        "Gardens": 1.05,         # 8.3% Box 1 (Nov 29) - NEW
+        "Ballarat": 1.05,        # 8.3% Box 1 (Nov 29) - NEW
         "Casino": 1.05,          # High entropy = more random
         "Hobart": 1.05,
         "Mount Gambier": 1.05,
         "Shepparton": 1.05,
         "Healesville": 1.02,     # 0% Box 1 wins (Nov 28) - Moved from Low
         "Richmond": 1.02,        # 0% Box 1 wins (Nov 28) - Moved from Medium
-        "Mandurah": 1.02,        # 9% Box 1 wins (Nov 28) - NEW
-        "Townsville": 1.00,      # NEW
+        "Mandurah": 1.02,        # 9% Box 1 wins (Nov 28)
+        "Townsville": 1.00,
         "DEFAULT": 1.0
     }
     
