@@ -283,17 +283,17 @@ def compute_features(df):
     
     # === WIN RATE Analysis (primary predictor) ===
     # Average expected: 12.5% (1/8 boxes)
-    # UPDATED v3.5: Based on 476 races (Nov 26-29, 2025)
-    # Nov 29 showed Box 1 at 22.2%, Box 4 at 16.7%, Box 7 at 5.6%
+    # UPDATED v3.6: Based on 566 races (Nov 26-29, 2025) 
+    # Nov 29 showed: Box 1=22.2%, Box 2=12.2%, Box 4=16.7%, Box 7=5.6%
     BOX_WIN_RATE = {
-        1: 0.200,   # INCREASED: 20.0% wins - Nov 29 showed 22.2% (up from 18.1%)
-        2: 0.140,   # DECREASED: 14.0% wins - Nov 29 showed 12.2% (was 15.3%)
-        3: 0.080,   # 8.0% wins (31/386) - WEAKEST - 0.64x average
-        4: 0.150,   # INCREASED: 15.0% wins - Nov 29 showed 16.7% (was 12.7%)
-        5: 0.098,   # 9.8% wins (38/386) - Below average
-        6: 0.119,   # 11.9% wins (46/386) - Slightly below
-        7: 0.065,   # DECREASED: 6.5% wins - Nov 29 showed 5.6% (was 9.6%)
-        8: 0.148,   # INCREASED: 14.8% wins - Nov 29 showed 14.4% (was 14.2%)
+        1: 0.210,   # v3.6: INCREASED to 21.0% - Nov 29 showed 22.2%
+        2: 0.120,   # v3.6: DECREASED to 12.0% - Nov 29 showed only 12.2%!
+        3: 0.080,   # 8.0% wins - WEAKEST
+        4: 0.155,   # v3.6: INCREASED to 15.5% - Nov 29 showed 16.7%
+        5: 0.098,   # 9.8% wins - Below average
+        6: 0.122,   # v3.6: INCREASED slightly to 12.2% - Nov 29 showed 12.2%
+        7: 0.055,   # v3.6: DECREASED to 5.5% - Nov 29 showed only 5.6%!
+        8: 0.160,   # v3.6: INCREASED to 16.0% - Nov 29 showed 14.4%
     }
     
     # === PLACE RATE Analysis (2nd place) ===
@@ -578,21 +578,48 @@ def compute_features(df):
         df["ClassRating"] = 0.5
     
     # ========================================================================
-    # ENHANCEMENT #1: GRADE-BASED SCORING
+    # ENHANCEMENT #1: GRADE-BASED SCORING (v3.6 - Speed-Adjusted)
     # Maiden/Novice races (low career starts) are more unpredictable
     # In these races, career stats are less reliable predictors
+    # v3.6 UPDATE: Dogs with proven fast times should not be penalized as much
     # ========================================================================
     # Grade Factor: Experienced dogs' stats are more reliable predictors
     # Analysis: Dogs with <10 starts have 35% more variance in outcomes
     if "CareerStarts" in df.columns:
-        df["GradeFactor"] = df["CareerStarts"].apply(
-            lambda x: 0.7 if pd.notna(x) and x <= 5 else      # Maiden - highly unpredictable
-                     0.85 if pd.notna(x) and x <= 10 else     # Novice - somewhat unpredictable
-                     0.95 if pd.notna(x) and x <= 20 else     # Intermediate - more reliable
-                     1.0 if pd.notna(x) and x <= 50 else      # Experienced - most reliable
-                     0.95                                      # Veteran - slight decline in predictability
-        )
-        print(f"✓ Calculated GradeFactor for race grade adjustment")
+        def calculate_grade_factor(row):
+            starts = row.get("CareerStarts", 0)
+            best_time = row.get("BestTimeSec", None)
+            
+            # Base grade factor from career starts
+            if pd.isna(starts):
+                base_factor = 0.9
+            elif starts <= 5:
+                base_factor = 0.75  # Maiden - unpredictable (raised from 0.7)
+            elif starts <= 10:
+                base_factor = 0.88  # Novice - somewhat unpredictable (raised from 0.85)
+            elif starts <= 20:
+                base_factor = 0.95  # Intermediate - more reliable
+            elif starts <= 50:
+                base_factor = 1.0   # Experienced - most reliable
+            else:
+                base_factor = 0.95  # Veteran - slight decline
+            
+            # v3.6: If the dog has FAST times, reduce the novice penalty
+            # Dogs with proven speed are less unpredictable even with few starts
+            if pd.notna(best_time) and best_time > 0 and pd.notna(starts) and starts <= 10:
+                # Fast time = less than 19 seconds for most distances
+                # This indicates the dog has shown real ability
+                if best_time < 18:
+                    base_factor = min(1.0, base_factor + 0.15)  # Big boost for very fast
+                elif best_time < 20:
+                    base_factor = min(1.0, base_factor + 0.10)  # Moderate boost for fast
+                elif best_time < 22:
+                    base_factor = min(1.0, base_factor + 0.05)  # Small boost for decent
+            
+            return base_factor
+        
+        df["GradeFactor"] = df.apply(calculate_grade_factor, axis=1)
+        print(f"✓ Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)")
     else:
         df["GradeFactor"] = 0.9
     
@@ -829,8 +856,12 @@ def compute_features(df):
     
     # === BEST TIME PERCENTILE ===
     # Rank dogs by best time within race
+    # LOWER BestTimeSec = FASTER = should get HIGHER percentile rank
     if "BestTimeSec" in df.columns:
-        df["BestTimePercentile"] = df.groupby(["Track", "RaceNumber"])["BestTimeSec"].rank(pct=True, ascending=True, na_option="top")
+        # Use ascending=False so that lower (faster) times get higher percentile
+        # na_option="bottom" so dogs without timing data get lowest rank
+        df["BestTimePercentile"] = df.groupby(["Track", "RaceNumber"])["BestTimeSec"].rank(pct=True, ascending=False, na_option="bottom")
+        print(f"✓ Calculated BestTimePercentile (lower time = higher rank)")
     else:
         df["BestTimePercentile"] = 0.5
     
