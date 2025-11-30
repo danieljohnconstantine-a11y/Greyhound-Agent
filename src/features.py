@@ -9,6 +9,14 @@ BOX_POSITION_BOOST = 1.5  # 50% boost to box position importance when timing una
 # Rationale: Dogs without timing data shouldn't be penalized for missing info;
 # box position becomes more important predictor in absence of timing metrics
 
+# v3.6 GradeFactor speed thresholds
+# These represent proven fast times that indicate a novice dog has real ability
+# Based on typical greyhound race times (300m: 17-18s, 400m: 22-24s, 500m: 29-31s)
+# Using conservative thresholds that work across most sprint/middle distances
+NOVICE_VERY_FAST_TIME = 18.0   # Very fast - significant skill demonstrated (+15% grade boost)
+NOVICE_FAST_TIME = 20.0        # Fast - good ability shown (+10% grade boost)
+NOVICE_DECENT_TIME = 22.0      # Decent - some potential (+5% grade boost)
+
 def compute_features(df):
     df = df.copy()
 
@@ -607,13 +615,12 @@ def compute_features(df):
             # v3.6: If the dog has FAST times, reduce the novice penalty
             # Dogs with proven speed are less unpredictable even with few starts
             if pd.notna(best_time) and best_time > 0 and pd.notna(starts) and starts <= 10:
-                # Fast time = less than 19 seconds for most distances
-                # This indicates the dog has shown real ability
-                if best_time < 18:
+                # Use defined constants for time thresholds
+                if best_time < NOVICE_VERY_FAST_TIME:
                     base_factor = min(1.0, base_factor + 0.15)  # Big boost for very fast
-                elif best_time < 20:
+                elif best_time < NOVICE_FAST_TIME:
                     base_factor = min(1.0, base_factor + 0.10)  # Moderate boost for fast
-                elif best_time < 22:
+                elif best_time < NOVICE_DECENT_TIME:
                     base_factor = min(1.0, base_factor + 0.05)  # Small boost for decent
             
             return base_factor
