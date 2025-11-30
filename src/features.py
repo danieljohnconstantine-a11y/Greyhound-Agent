@@ -512,6 +512,44 @@ def compute_features(df):
     else:
         df["RailPreference"] = 0.0
     
+    # ========================================================================
+    # BOX PENALTY FACTOR (v3.7) - CRITICAL FIX
+    # Problem: Boxes with very low win rates (Box 3, 5, 7) are still getting 
+    # high scores because other factors (WinStreakFactor, BestTimePercentile)
+    # override the small additive BoxPositionBias penalty.
+    # 
+    # Solution: Add a MULTIPLICATIVE penalty for low-win-rate boxes.
+    # This ensures dogs in bad boxes can't score too high regardless of other factors.
+    # 
+    # Based on BOX_WIN_RATE analysis:
+    # - Box 1: 21.0% (1.68x average) -> 1.12x bonus
+    # - Box 7: 5.5% (0.44x average) -> 0.75x penalty
+    # - Box 3: 8.0% (0.64x average) -> 0.80x penalty
+    # ========================================================================
+    if "Box" in df.columns:
+        def get_box_penalty_factor(box):
+            if pd.isna(box):
+                return 1.0
+            box = int(box)
+            # Multiplicative factor based on box win rate vs average (12.5%)
+            # Higher win rate boxes get bonus, lower get penalty
+            BOX_PENALTY_FACTORS = {
+                1: 1.12,   # 21.0% win rate - strong bonus
+                2: 0.97,   # 12.0% win rate - slight penalty  
+                3: 0.80,   # 8.0% win rate - significant penalty
+                4: 1.05,   # 15.5% win rate - slight bonus
+                5: 0.90,   # 9.8% win rate - moderate penalty
+                6: 0.97,   # 12.2% win rate - slight penalty
+                7: 0.75,   # 5.5% win rate - STRONG penalty (v3.7 fix!)
+                8: 1.08,   # 16.0% win rate - good bonus
+            }
+            return BOX_PENALTY_FACTORS.get(box, 1.0)
+        
+        df["BoxPenaltyFactor"] = df["Box"].apply(get_box_penalty_factor)
+        print(f"✓ Calculated BoxPenaltyFactor (v3.7: Box 1=1.12x, Box 7=0.75x, Box 3=0.80x)")
+    else:
+        df["BoxPenaltyFactor"] = 1.0
+    
     # === SPEED vs STAMINA CLASSIFICATION ===
     # Based on BestTimeSec and Distance, classify dog as sprinter/stayer
     if "BestTimeSec" in df.columns and "Distance" in df.columns:
@@ -1364,6 +1402,11 @@ def compute_features(df):
         # Enhancement #11: Trainer Momentum (hot streak trainers)
         trainer_momentum = row.get("TrainerMomentum", 1.0)
         
+        # Enhancement #12 (v3.7): Box Penalty Factor - CRITICAL FIX
+        # Multiplicative penalty for boxes with very low win rates (Box 3, 7)
+        # This prevents dogs in bad boxes from scoring too high
+        box_penalty = row.get("BoxPenaltyFactor", 1.0)
+        
         # Combine all enhancement factors (multiplicative)
         enhancement_multiplier = (
             grade_factor *
@@ -1372,14 +1415,15 @@ def compute_features(df):
             pace_box_factor *
             trainer_tier *
             surface_factor *
-            win_streak_bonus *        # NEW: Enhanced winning streak
-            closer_bonus *            # NEW: Closer bonus at long distances
-            trainer_momentum          # NEW: Trainer hot streak
+            win_streak_bonus *        # Enhanced winning streak
+            closer_bonus *            # Closer bonus at long distances
+            trainer_momentum *        # Trainer hot streak
+            box_penalty               # v3.7: Box penalty factor (Box 7=0.75x, Box 3=0.82x)
         )
         
         # Apply enhancement multiplier (centered around 1.0)
-        # Range: Best case with all new factors = ~1.95x
-        # Range: Worst case with all penalties = ~0.35x
+        # Range: Best case with all new factors = ~2.0x
+        # Range: Worst case with all penalties = ~0.30x (including box penalty)
         total_score = total_score * enhancement_multiplier
         
         # Scale to 0-100 range for readability
