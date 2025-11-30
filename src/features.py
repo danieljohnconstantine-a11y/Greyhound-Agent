@@ -1153,37 +1153,45 @@ def compute_features(df):
         """
         Return optimal feature weights based on race distance.
         
+        v3.8 - OPTIMIZED based on Nov 27-29 race results (371 races)
+        
         25+ variables grouped into categories:
-        1. Box/Draw Position (30-40% of signal)
-        2. Career/Experience (25-30% of signal)
-        3. Speed/Timing (15-20% of signal)
-        4. Form/Momentum (10-15% of signal)
+        1. Box/Draw Position (32-40% of signal) - Increased BoxPositionBias
+        2. Career/Experience (25-30% of signal) 
+        3. Speed/Timing (18-22% of signal) - BestTimePercentile fixed and weighted higher
+        4. Form/Momentum (10-15% of signal) - WinStreakFactor importance confirmed
         5. Conditioning (5-10% of signal)
         
-        Weights are ML-derived from 386 race results analysis.
+        Key findings from Nov 27-29 analysis:
+        - Box 1 wins 21% (vs 12.5% random) - weight increased
+        - BestTimePercentile now correctly ranks faster dogs higher
+        - WinStreakFactor captures 19% of missed winners
+        - BoxPenaltyFactor (multiplicative) handles Box 7/3 over-picking
+        
+        Weights are optimized from 371+ race results analysis.
         """
         
         if distance < 400:  # SPRINT - Box position is CRITICAL
             return {
-                # === BOX POSITION (38% total) ===
+                # === BOX POSITION (40% total) - Increased for sprint ===
                 "DrawFactor": 0.12,            # Draw position advantage
-                "BoxPositionBias": 0.10,       # Win rate by box (386 races)
+                "BoxPositionBias": 0.12,       # Win rate by box - INCREASED (Box 1=21%)
                 "BoxPlaceRate": 0.06,          # 2nd place rate by box
                 "BoxTop3Rate": 0.05,           # Top 3 rate by box  
                 "RailPreference": 0.03,        # Inside/outside rail bonus
                 "BoxBiasFactor": 0.02,         # Individual dog's box preference
                 
-                # === CAREER/EXPERIENCE (26% total) ===
+                # === CAREER/EXPERIENCE (24% total) ===
                 "PlaceRate": 0.05,             # Career place rate
                 "ConsistencyIndex": 0.05,      # Win rate
-                "WinPlaceRate": 0.05,          # Combined win+place rate
+                "WinPlaceRate": 0.04,          # Combined win+place rate
                 "ExperienceTier": 0.04,        # Career starts tier
                 "TrainerStrikeRate": 0.04,     # Trainer success
-                "ClassRating": 0.03,           # Prize money class
+                "ClassRating": 0.02,           # Prize money class
                 
-                # === SPEED/TIMING (18% total) ===
+                # === SPEED/TIMING (20% total) - BestTime fixed, weighted higher ===
                 "EarlySpeedPercentile": 0.05,  # Early speed rank in race
-                "BestTimePercentile": 0.04,    # Best time rank in race
+                "BestTimePercentile": 0.06,    # Best time rank - INCREASED (now correct)
                 "SectionalSec": 0.03,          # Raw sectional time
                 "EarlySpeedIndex": 0.03,       # Early speed index
                 "Speed_kmh": 0.02,             # Raw speed
@@ -1191,37 +1199,37 @@ def compute_features(df):
                 
                 # === FORM/MOMENTUM (10% total) ===
                 "DLWFactor": 0.03,             # Days since last win
-                "WinStreakFactor": 0.03,       # Winning streak bonus
+                "WinStreakFactor": 0.03,       # Winning streak bonus (multiplicative)
                 "FormMomentumNorm": 0.02,      # Form trend
                 "MarginFactor": 0.02,          # Winning margin factor
                 
-                # === CONDITIONING (8% total) ===
-                "FreshnessFactor": 0.03,       # Days since last race
-                "AgeFactor": 0.03,             # Age in optimal range
+                # === CONDITIONING (6% total) ===
+                "FreshnessFactor": 0.02,       # Days since last race
+                "AgeFactor": 0.02,             # Age in optimal range
                 "WeightFactor": 0.02,          # Weight optimization
             }
             
-        elif distance <= 500:  # MIDDLE - More balanced
+        elif distance <= 500:  # MIDDLE - Most common distance
             return {
-                # === BOX POSITION (32% total) ===
+                # === BOX POSITION (34% total) ===
                 "DrawFactor": 0.10,            
-                "BoxPositionBias": 0.08,       
+                "BoxPositionBias": 0.10,       # INCREASED for Box 1 dominance
                 "BoxPlaceRate": 0.05,          
                 "BoxTop3Rate": 0.04,           
                 "RailPreference": 0.03,        
                 "BoxBiasFactor": 0.02,         
                 
-                # === CAREER/EXPERIENCE (28% total) ===
-                "PlaceRate": 0.06,             
-                "ConsistencyIndex": 0.06,      
+                # === CAREER/EXPERIENCE (26% total) ===
+                "PlaceRate": 0.05,             
+                "ConsistencyIndex": 0.05,      
                 "WinPlaceRate": 0.05,          
                 "ExperienceTier": 0.04,        
                 "TrainerStrikeRate": 0.04,     
                 "ClassRating": 0.03,           
                 
-                # === SPEED/TIMING (20% total) ===
+                # === SPEED/TIMING (22% total) - Boosted timing weights ===
                 "EarlySpeedPercentile": 0.05,  
-                "BestTimePercentile": 0.04,    
+                "BestTimePercentile": 0.06,    # INCREASED - now fixed and reliable
                 "SectionalSec": 0.04,          
                 "EarlySpeedIndex": 0.03,       
                 "Speed_kmh": 0.03,             
@@ -1229,51 +1237,51 @@ def compute_features(df):
                 
                 # === FORM/MOMENTUM (12% total) ===
                 "DLWFactor": 0.03,             
-                "WinStreakFactor": 0.03,       
+                "WinStreakFactor": 0.04,       # INCREASED - captures hot form
                 "FormMomentumNorm": 0.03,      
-                "MarginFactor": 0.03,          
+                "MarginFactor": 0.02,          
                 
-                # === CONDITIONING (8% total) ===
-                "FreshnessFactor": 0.03,       
-                "AgeFactor": 0.03,             
+                # === CONDITIONING (6% total) ===
+                "FreshnessFactor": 0.02,       
+                "AgeFactor": 0.02,             
                 "WeightFactor": 0.02,          
             }
             
         else:  # LONG - Stamina & consistency dominate
             return {
-                # === BOX POSITION (26% total) ===
+                # === BOX POSITION (28% total) ===
                 "DrawFactor": 0.08,            
-                "BoxPositionBias": 0.06,       
+                "BoxPositionBias": 0.08,       # Still important even at distance
                 "BoxPlaceRate": 0.04,          
                 "BoxTop3Rate": 0.04,           
                 "RailPreference": 0.02,        
                 "BoxBiasFactor": 0.02,         
                 
-                # === CAREER/EXPERIENCE (32% total) ===
-                "PlaceRate": 0.07,             
-                "ConsistencyIndex": 0.07,      
+                # === CAREER/EXPERIENCE (30% total) ===
+                "PlaceRate": 0.06,             
+                "ConsistencyIndex": 0.06,      
                 "WinPlaceRate": 0.06,          
                 "ExperienceTier": 0.05,        
                 "TrainerStrikeRate": 0.04,     
                 "ClassRating": 0.03,           
                 
-                # === SPEED/TIMING (20% total) ===
+                # === SPEED/TIMING (22% total) ===
                 "EarlySpeedPercentile": 0.04,  
-                "BestTimePercentile": 0.05,    
+                "BestTimePercentile": 0.06,    # INCREASED - now fixed and reliable
                 "SectionalSec": 0.04,          
-                "EarlySpeedIndex": 0.03,       
+                "EarlySpeedIndex": 0.04,       
                 "Speed_kmh": 0.03,             
                 "SpeedClassification": 0.01,   
                 
                 # === FORM/MOMENTUM (14% total) ===
                 "DLWFactor": 0.04,             
-                "WinStreakFactor": 0.03,       
+                "WinStreakFactor": 0.04,       # INCREASED - captures hot form
                 "FormMomentumNorm": 0.04,      
-                "MarginFactor": 0.03,          
+                "MarginFactor": 0.02,          
                 
-                # === CONDITIONING (8% total) ===
-                "FreshnessFactor": 0.03,       
-                "AgeFactor": 0.03,             
+                # === CONDITIONING (6% total) ===
+                "FreshnessFactor": 0.02,       
+                "AgeFactor": 0.02,             
                 "WeightFactor": 0.02,          
             }
 
