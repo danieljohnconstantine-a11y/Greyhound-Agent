@@ -1418,7 +1418,7 @@ def compute_features(df):
             win_streak_bonus *        # Enhanced winning streak
             closer_bonus *            # Closer bonus at long distances
             trainer_momentum *        # Trainer hot streak
-            box_penalty               # v3.7: Box penalty factor (Box 7=0.75x, Box 3=0.82x)
+            box_penalty               # v3.7: Box penalty factor (Box 7=0.75x, Box 3=0.80x)
         )
         
         # Apply enhancement multiplier (centered around 1.0)
