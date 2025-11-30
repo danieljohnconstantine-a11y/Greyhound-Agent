@@ -291,17 +291,18 @@ def compute_features(df):
     
     # === WIN RATE Analysis (primary predictor) ===
     # Average expected: 12.5% (1/8 boxes)
-    # UPDATED v3.6: Based on 566 races (Nov 26-29, 2025) 
-    # Nov 29 showed: Box 1=22.2%, Box 2=12.2%, Box 4=16.7%, Box 7=5.6%
+    # UPDATED v3.9: Based on 335 races (Nov 28-30, 2025)
+    # Critical finding: Box 2 was MASSIVELY under-valued (actual 16.2% vs 12% matrix)
+    # Box 7 was OVER-penalized (actual 9.1% vs 5.5% matrix)
     BOX_WIN_RATE = {
-        1: 0.210,   # v3.6: INCREASED to 21.0% - Nov 29 showed 22.2%
-        2: 0.120,   # v3.6: DECREASED to 12.0% - Nov 29 showed only 12.2%!
-        3: 0.080,   # 8.0% wins - WEAKEST
-        4: 0.155,   # v3.6: INCREASED to 15.5% - Nov 29 showed 16.7%
-        5: 0.098,   # 9.8% wins - Below average
-        6: 0.122,   # v3.6: INCREASED slightly to 12.2% - Nov 29 showed 12.2%
-        7: 0.055,   # v3.6: DECREASED to 5.5% - Nov 29 showed only 5.6%!
-        8: 0.160,   # v3.6: INCREASED to 16.0% - Nov 29 showed 14.4%
+        1: 0.195,   # v3.9: REDUCED from 21.0% - Nov 30 showed only 15.5%, 3-day avg 19.5%
+        2: 0.160,   # v3.9: INCREASED from 12.0% - Nov 30 showed 23.8%! 3-day avg 16.2%
+        3: 0.087,   # v3.9: Slight increase - 3-day avg 8.7%
+        4: 0.135,   # v3.9: REDUCED from 15.5% - 3-day avg 13.5%
+        5: 0.088,   # v3.9: Slight reduction - 3-day avg 8.8%
+        6: 0.092,   # v3.9: REDUCED from 12.2% - 3-day avg 9.2%
+        7: 0.091,   # v3.9: INCREASED from 5.5% - Nov 30 showed 9.7%, 3-day avg 9.1%
+        8: 0.150,   # v3.9: Slight reduction - 3-day avg 15.0%
     }
     
     # === PLACE RATE Analysis (2nd place) ===
@@ -344,37 +345,44 @@ def compute_features(df):
     }
     
     # === TRACK-SPECIFIC BOX 1 BIAS ===
-    # Based on Nov 26-29 analysis (476+ races)
-    # v3.5 UPDATE: Added Nov 29 track data, added Taree, updated Cannington/Sandown
+    # v3.9 UPDATE: Based on Nov 28-30 analysis (335 races)
+    # Added new tracks from Nov 30 analysis
     TRACK_BOX1_ADJUSTMENT = {
         # STRONG Box 1 tracks (>35% Box 1 win rate) - Extra boost
-        "Cannington": 0.10,      # 41.7% Box 1 (Nov 29) - NEW
+        "Cannington": 0.10,      # 41.7% Box 1 (Nov 29)
         "Goulburn": 0.08,        # 41.7% Box 1 win rate
         "Angle Park": 0.08,      # 50% Box 1 win rate (Nov 27)
-        "Sandown": 0.06,         # 33.3% Box 1 (Nov 29) - NEW
+        "Sandown": 0.06,         # 33.3% Box 1 (Nov 29)
         "Meadows": 0.06,         # 42% Box 1 win rate (Nov 27)
         # GOOD Box 1 tracks (25-35%) - Medium boost
-        "Wentworth Park": 0.05,  # 30% Box 1 (Nov 29) - INCREASED
-        "Dubbo": 0.05,           # 27.3% Box 1 (Nov 29) - NEW
+        "Capalaba": 0.05,        # v3.9: 30% success (Nov 30)
+        "Wentworth Park": 0.05,  # 30% Box 1 (Nov 29)
+        "Dubbo": 0.05,           # 27.3% Box 1 (Nov 29)
         "Bendigo": 0.05,         # 33% Box 1 win rate (Nov 28)
         "Gawler": 0.05,          # 33% Box 1 win rate (Nov 28)
         "Temora": 0.05,          # 22% Box 1 win rate (Nov 27)
+        "Broken Hill": 0.03,     # v3.9: 25% success (Nov 30)
         # Normal Box 1 tracks (15-25%) - Small adjustment
+        "Grafton": 0.02,         # v3.9: 16.7% success (Nov 30)
+        "Mount Gambier": 0.02,   # v3.9: 18.2% success (Nov 30)
+        "Sale": 0.01,            # v3.9: 16.7% success (Nov 30)
         "Lakeside": 0.02,        # 20% Box 1 (Nov 29)
         "Ladbrokes Q": 0.02,     # 30% Box 1 win rate
         "Warragul": 0.02,        # 25% Box 1 win rate
         "Wagga": 0.02,           # 27% Box 1 win rate
         # WEAK Box 1 tracks (<15%) - Reduce Box 1 advantage
-        "Taree": -0.03,          # 9.1% Box 1 (Nov 29) - NEW (upset track)
-        "Gardens": -0.03,        # 8.3% Box 1 (Nov 29) - NEW
-        "Ballarat": -0.03,       # 8.3% Box 1 (Nov 29) - NEW
+        "Rockhampton": -0.05,    # v3.9: 0% success (Nov 30) - VERY unpredictable!
+        "Darwin": -0.04,         # v3.9: 9.1% success (Nov 30)
+        "Taree": -0.03,          # 9.1% Box 1 (Nov 29) - upset track
+        "Gardens": -0.03,        # 8.3% Box 1 (Nov 29)
+        "Ballarat": -0.03,       # 8.3% Box 1 (Nov 29)
         "Healesville": -0.03,    # 0% Box 1 (Nov 28) - Outlier day
-        "Richmond": -0.02,       # 0% Box 1 (Nov 28) - Outlier day
+        "Richmond": -0.02,       # 16.7% Box 1 (Nov 30) - improved
         "Mandurah": -0.02,       # 9% Box 1 (Nov 28)
         "DEFAULT": 0.0
     }
     
-    # === TRACK-SPECIFIC BOX 4 BOOST (NEW in v3.5) ===
+    # === TRACK-SPECIFIC BOX 4 BOOST (v3.5) ===
     # Nov 29 showed Box 4 winning 16.7% overall - above 12.7% historical
     # Some tracks have strong Box 4 performance
     TRACK_BOX4_ADJUSTMENT = {
@@ -547,22 +555,25 @@ def compute_features(df):
             if pd.isna(box):
                 return 1.0
             box = int(box)
-            # Multiplicative factor based on box win rate vs average (12.5%)
-            # Higher win rate boxes get bonus, lower get penalty
+            # v3.9 UPDATE: Recalibrated based on Nov 28-30 actual results (335 races)
+            # Key changes:
+            # - Box 1 penalty REDUCED (was over-picking Box 1)
+            # - Box 2 now gets BONUS (was under-valued!)
+            # - Box 7 penalty REDUCED (was too harsh)
             BOX_PENALTY_FACTORS = {
-                1: 1.12,   # 21.0% win rate - strong bonus
-                2: 0.97,   # 12.0% win rate - slight penalty  
-                3: 0.80,   # 8.0% win rate - significant penalty
-                4: 1.05,   # 15.5% win rate - slight bonus
-                5: 0.90,   # 9.8% win rate - moderate penalty
-                6: 0.97,   # 12.2% win rate - slight penalty
-                7: 0.75,   # 5.5% win rate - STRONG penalty (v3.7 fix!)
-                8: 1.08,   # 16.0% win rate - good bonus
+                1: 1.08,   # v3.9: REDUCED from 1.12 - Box 1 over-picked
+                2: 1.03,   # v3.9: INCREASED from 0.97 - Box 2 under-valued!
+                3: 0.82,   # v3.9: Slight increase from 0.80
+                4: 1.02,   # v3.9: REDUCED from 1.05
+                5: 0.88,   # v3.9: Slight reduction
+                6: 0.92,   # v3.9: Slight reduction
+                7: 0.82,   # v3.9: INCREASED from 0.75 - was too harsh!
+                8: 1.05,   # v3.9: Reduced from 1.08
             }
             return BOX_PENALTY_FACTORS.get(box, 1.0)
         
         df["BoxPenaltyFactor"] = df["Box"].apply(get_box_penalty_factor)
-        print(f"✓ Calculated BoxPenaltyFactor (v3.7: Box 1=1.12x, Box 7=0.75x, Box 3=0.80x)")
+        print(f"✓ Calculated BoxPenaltyFactor (v3.9: Box 1=1.08x, Box 2=1.03x, Box 7=0.82x)")
     else:
         df["BoxPenaltyFactor"] = 1.0
     
@@ -954,39 +965,45 @@ def compute_features(df):
         df["FieldTimeStd"] = np.nan
     
     # === UPSET PROBABILITY ===
-    # Tracks with high entropy (more even box distribution) have more upsets
-    # Track-specific upset likelihood based on historical box volatility
-    # Updated v3.5 with Nov 29 data analysis
+    # v3.9 UPDATE: Based on Nov 28-30 analysis (335 races)
+    # Added Rockhampton (0% accuracy!) and Darwin (9.1% accuracy)
     TRACK_UPSET_PROBABILITY = {
         # Low upset tracks (more predictable) - Box 1 dominance
         "Angle Park": 0.80,      # 50% Box 1 wins (Nov 27) - Very predictable
-        "Cannington": 0.82,      # 41.7% Box 1 (Nov 29) - NEW - Very predictable
-        "Sandown": 0.85,         # 33.3% Box 1 (Nov 29) - NEW
+        "Cannington": 0.82,      # 41.7% Box 1 (Nov 29) - Very predictable
+        "Sandown": 0.85,         # 33.3% Box 1 (Nov 29)
         "Meadows": 0.85,         # 42% Box 1 wins (Nov 27)
         "Temora": 0.85,          # 41% Box 1 wins (Nov 28) 
         "Goulburn": 0.85,        # 41.7% Box 1 wins (Nov 28)
+        "Capalaba": 0.87,        # v3.9: 30% success (Nov 30) - predictable
         "Gawler": 0.87,          # 33% Box 1 wins (Nov 28)
         "Bendigo": 0.88,         # 33% Box 1 wins (Nov 28)
         # Medium upset tracks
-        "Dubbo": 0.90,           # 27.3% Box 1 (Nov 29) - NEW
+        "Broken Hill": 0.90,     # v3.9: 25% success (Nov 30)
+        "Dubbo": 0.90,           # 27.3% Box 1 (Nov 29)
         "Wentworth Park": 0.92,
-        "Lakeside": 0.92,        # 20% Box 1 (Nov 29) - NEW
+        "Lakeside": 0.92,        # 20% Box 1 (Nov 29)
         "Ladbrokes Q Straight": 0.92,
+        "Parklands": 0.92,       # v3.9: 20% success (Nov 30)
         "Ladbrokes Gardens": 0.92,
+        "Grafton": 0.95,         # v3.9: 16.7% success (Nov 30)
         "Warragul": 0.95,
         "Wagga": 0.95,
-        "Sale": 0.95,
+        "Sale": 0.95,            # v3.9: 16.7% success (Nov 30)
+        "Mount Gambier": 0.95,   # v3.9: 18.2% success (Nov 30) - moved from high
         "Warrnambool": 0.95,
         # High upset tracks (more unpredictable)
-        "Taree": 1.08,           # 9.1% Box 1 (Nov 29) - NEW - Very unpredictable (0/11 wins)
-        "Gardens": 1.05,         # 8.3% Box 1 (Nov 29) - NEW
-        "Ballarat": 1.05,        # 8.3% Box 1 (Nov 29) - NEW
+        "Rockhampton": 1.15,     # v3.9: 0% accuracy (Nov 30) - VERY UNPREDICTABLE!
+        "Darwin": 1.10,          # v3.9: 9.1% accuracy (Nov 30) - unpredictable
+        "Taree": 1.08,           # 9.1% Box 1 (Nov 29) - Very unpredictable (0/11 wins)
+        "Murray Bridge": 1.05,   # v3.9: Not processed but volatile
+        "Gardens": 1.05,         # 8.3% Box 1 (Nov 29)
+        "Ballarat": 1.05,        # 8.3% Box 1 (Nov 29)
         "Casino": 1.05,          # High entropy = more random
         "Hobart": 1.05,
-        "Mount Gambier": 1.05,
         "Shepparton": 1.05,
-        "Healesville": 1.02,     # 0% Box 1 wins (Nov 28) - Moved from Low
-        "Richmond": 1.02,        # 0% Box 1 wins (Nov 28) - Moved from Medium
+        "Healesville": 1.02,     # Improved 25% on Nov 30
+        "Richmond": 1.02,        # Improved 16.7% on Nov 30
         "Mandurah": 1.02,        # 9% Box 1 wins (Nov 28)
         "Townsville": 1.00,
         "DEFAULT": 1.0
@@ -1145,27 +1162,31 @@ def compute_features(df):
     
     # ========================================================================
     # COMPREHENSIVE WEIGHT SYSTEM - 25+ Variables
-    # Derived from ML analysis of 2,467 dogs across 386 races
-    # All weights sum to 1.0 for each distance category
+    # v3.9 UPDATE: Based on 335 races (Nov 28-30, 2025)
     # ========================================================================
     
     def get_weights(distance):
         """
         Return optimal feature weights based on race distance.
         
-        v3.8 - OPTIMIZED based on Nov 27-29 race results (371 races)
+        v3.9 - CRITICAL REBALANCE based on Nov 28-30 race results (335 races)
+        
+        Key changes from v3.8:
+        - Box 1 weight REDUCED (was over-picking by 50%)
+        - Box 2 weight INCREASED (was under-valued by 4%)
+        - Box 7 penalty REDUCED (was too harsh)
         
         25+ variables grouped into categories:
-        1. Box/Draw Position (32-40% of signal) - Increased BoxPositionBias
-        2. Career/Experience (25-30% of signal) 
-        3. Speed/Timing (18-22% of signal) - BestTimePercentile fixed and weighted higher
-        4. Form/Momentum (10-15% of signal) - WinStreakFactor importance confirmed
-        5. Conditioning (5-10% of signal)
+        1. Box/Draw Position (30-38% of signal) - Rebalanced for Box 2
+        2. Career/Experience (26-30% of signal) 
+        3. Speed/Timing (18-22% of signal) - BestTimePercentile reliable
+        4. Form/Momentum (10-15% of signal) - WinStreakFactor confirmed
+        5. Conditioning (5-8% of signal) - Reduced (noisy factors)
         
-        Key findings from Nov 27-29 analysis:
-        - Box 1 wins 21% (vs 12.5% random) - weight increased
-        - BestTimePercentile now correctly ranks faster dogs higher
-        - WinStreakFactor captures 19% of missed winners
+        Key findings from Nov 28-30 analysis:
+        - Box 1 wins 19.5% (vs 21% in matrix) - REDUCED weight
+        - Box 2 wins 16.2% (vs 12% in matrix) - INCREASED weight
+        - Box 7 wins 9.1% (vs 5.5% in matrix) - INCREASED weight
         - BoxPenaltyFactor (multiplicative) handles Box 7/3 over-picking
         
         Weights are optimized from 371+ race results analysis.
