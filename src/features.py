@@ -456,22 +456,38 @@ def compute_features(df):
     
     # === AGE FACTOR ===
     # Greyhounds typically peak at 2-3.5 years (24-42 months)
-    # Parse age from SexAge field (e.g., "2y" or "3m")
+    # Parse age from SexAge field
+    # Format variations:
+    # - "2d" = 2 years old, dog (male)
+    # - "3b" = 3 years old, bitch (female)
+    # - "1b", "4d", "5b" etc.
+    # - Some PDFs may use "2y", "24m" format
     if "SexAge" in df.columns:
         def parse_age_months(sex_age):
             if pd.isna(sex_age):
                 return 30  # Default to prime age
-            s = str(sex_age).lower()
+            s = str(sex_age).lower().strip()
             try:
-                if 'y' in s:
-                    years = int(s.replace('m', '').replace('f', '').replace('d', '').split('y')[0])
+                # Format 1: "Nd" or "Nb" (e.g., "2d", "3b") - most common in our PDFs
+                # N is age in years, d=dog, b=bitch
+                if s[-1] in ['d', 'b'] and s[:-1].isdigit():
+                    years = int(s[:-1])
                     return years * 12
-                elif 'm' in s:
-                    months = int(s.replace('m', '').replace('f', '').replace('d', ''))
-                    return months
-            except:
-                return 30  # Default
-            return 30
+                # Format 2: "Ny" (e.g., "2y", "3y") - years
+                elif 'y' in s:
+                    years = int(s.replace('y', '').replace('m', '').replace('f', '').replace('d', '').replace('b', ''))
+                    return years * 12
+                # Format 3: "NNm" (e.g., "24m", "36m") - months
+                elif 'm' in s and not s.endswith('d') and not s.endswith('b'):
+                    months_str = ''.join(filter(str.isdigit, s))
+                    if months_str:
+                        return int(months_str)
+                # Format 4: Just a number (assume years)
+                elif s.isdigit():
+                    return int(s) * 12
+            except Exception as e:
+                pass
+            return 30  # Default to prime age
         
         df["AgeMonths"] = df["SexAge"].apply(parse_age_months)
         # Age factor: peak 24-42 months, declining after 48+
