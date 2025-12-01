@@ -390,7 +390,7 @@ def compute_features(df):
         "Ballarat": 0.03,        # Box 4 active at this track
         "Gardens": 0.03,         # Box 4 won 16.7% on Nov 29
         "Wentworth Park": 0.02,  # Box 4 competitive
-        "Broken Hill": 0.05,     # v4.0: Box 4 wins 33.3%!
+        "Broken Hill": 0.05,     # v4.0: Box 4 wins 33.3%
         "Grafton": 0.04,         # v4.0: Box 4 wins 27.3%
         "Bendigo": 0.03,         # v4.0: Box 4 wins 21.2%
         "Q Straight": 0.03,      # v4.0: Box 4 wins 25%
@@ -553,11 +553,12 @@ def compute_features(df):
         """Get track-specific adjustment for ANY box based on historical patterns."""
         if pd.isna(track_name) or pd.isna(box):
             return 0.0
-        track_str = str(track_name).strip()
+        track_str = str(track_name).strip().lower()
         box = int(box)
         
         for key in TRACK_COMPREHENSIVE_ADJUSTMENTS:
-            if key.lower() in track_str.lower() or track_str.lower() in key.lower():
+            key_lower = key.lower()
+            if key_lower in track_str or track_str in key_lower:
                 adjustments = TRACK_COMPREHENSIVE_ADJUSTMENTS[key]
                 return adjustments.get(box, 0.0)
         return 0.0

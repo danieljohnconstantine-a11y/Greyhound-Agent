@@ -230,10 +230,9 @@ Based on analysis of 386+ races (Nov 2025)
 | v3.7 | 20.3% | BoxPenaltyFactor (multiplicative) |
 | v3.8 | 17.3% | Weight optimization (Nov 30 outlier) |
 | v3.9 | ~20% | Box 2 boost, Box 7 penalty reduction |
-| **v4.0** | **TBD** | **TrackComprehensiveAdjustment for 25 tracks** | |
-| v3.9 | TBD | Box 2 boost, Box 7 penalty reduction |
+| **v4.0** | **TBD** | **TrackComprehensiveAdjustment for 25 tracks** |
 
 ---
 
 *Generated: December 1, 2025*
-*Based on: 335+ races from Nov 28-30, 2025*
+*Based on: 386 races from Nov 2025*
