@@ -390,8 +390,177 @@ def compute_features(df):
         "Ballarat": 0.03,        # Box 4 active at this track
         "Gardens": 0.03,         # Box 4 won 16.7% on Nov 29
         "Wentworth Park": 0.02,  # Box 4 competitive
+        "Broken Hill": 0.05,     # v4.0: Box 4 wins 33.3%!
+        "Grafton": 0.04,         # v4.0: Box 4 wins 27.3%
+        "Bendigo": 0.03,         # v4.0: Box 4 wins 21.2%
+        "Q Straight": 0.03,      # v4.0: Box 4 wins 25%
         "DEFAULT": 0.0
     }
+    
+    # ========================================================================
+    # v4.0: COMPREHENSIVE TRACK-SPECIFIC SCORING
+    # Based on deep-dive analysis of 386+ races (Nov 2025)
+    # 
+    # PROBLEM: Darwin (9.1%) and Rockhampton (0%) have very low accuracy
+    # SOLUTION: Track-specific box adjustments for ALL boxes, not just Box 1/4
+    # 
+    # Key findings:
+    # - Box 8 dominant: Healesville, Sale, Grafton, BetDeluxe Capalaba, Temora
+    # - Box 7 dominant: Wentworth Park, Q2 Parklands, Gunnedah  
+    # - Box 6 dominant: Warragul, Richmond, Mount Gambier, Capalaba
+    # - Box 2 dominant: Dubbo, Gawler, Ballarat
+    # - Box 1 dominant: Darwin, BetDeluxe Rockhampton, Lakeside
+    # ========================================================================
+    
+    TRACK_COMPREHENSIVE_ADJUSTMENTS = {
+        # === HIGH BOX 8 TRACKS ===
+        # These tracks favor Box 8 significantly above average (14.2%)
+        "Temora": {
+            1: 0.10,    # 40% Box 1 - very strong
+            8: 0.15,    # 50% Box 8 - STRONGEST
+            2: -0.05, 3: -0.05, 4: -0.05, 6: -0.05, 7: -0.05  # Penalize others
+        },
+        "BetDeluxe Capalaba": {
+            8: 0.12,    # 36.4% Box 8
+            3: 0.02, 6: 0.02,  # Also decent
+            4: -0.05, 5: -0.05  # Weak
+        },
+        "Wentworth Park": {
+            7: 0.08,    # 30% Box 7
+            8: 0.08,    # 30% Box 8
+            5: -0.05, 6: -0.05  # Weak
+        },
+        "Grafton": {
+            8: 0.08,    # 27.3% Box 8
+            4: 0.06,    # 27.3% Box 4
+            2: -0.05, 5: -0.05  # Weak
+        },
+        "Healesville": {
+            8: 0.05,    # 22.2% Box 8
+            1: 0.03, 4: 0.03,  # Also decent
+            5: -0.05  # Weak
+        },
+        "Sale": {
+            8: 0.05,    # 22.9% Box 8
+            2: 0.03,    # 18.8% Box 2
+            3: -0.05, 6: -0.03  # Weak
+        },
+        
+        # === HIGH BOX 7/6 TRACKS ===
+        "Q2 Parklands": {
+            7: 0.05,    # 16.7% Box 7 (top box)
+            2: 0.02,    # 16.7% Box 2
+            # High entropy track - reduce all adjustments
+        },
+        "Gunnedah": {
+            7: 0.10,    # 33.3% Box 7 - STRONG
+            1: -0.05, 8: -0.05  # Weak Box 1 here
+        },
+        "Warragul": {
+            6: 0.12,    # 41.7% Box 6 - VERY STRONG
+            3: -0.05, 7: -0.05, 8: -0.05  # Weak
+        },
+        "Richmond": {
+            6: 0.05,    # 21.7% Box 6 (top)
+            1: 0.04,    # 21.7% Box 1 (tied)
+            2: -0.04, 3: -0.04, 4: -0.04  # Weak
+        },
+        "Mount Gambier": {
+            6: 0.08,    # 27.3% Box 6
+            1: 0.02, 2: 0.02, 8: 0.02,  # Spread out
+            3: -0.05, 7: -0.05  # Weak
+        },
+        "Capalaba": {
+            6: 0.03,    # 16.7% Box 6 (top)
+            5: -0.05  # Weak
+        },
+        
+        # === HIGH BOX 2 TRACKS ===
+        "Gawler": {
+            2: 0.12,    # 36.8% Box 2 - STRONGEST
+            1: 0.06,    # 26.3% Box 1
+            5: -0.05, 6: -0.05, 8: -0.05  # Weak
+        },
+        "Dubbo": {
+            2: 0.08,    # 25% Box 2
+            1: -0.05   # 0% Box 1 - VERY WEAK
+        },
+        "Ballarat": {
+            1: 0.06, 2: 0.06,  # Both 25%
+            7: -0.05, 8: -0.05  # Weak
+        },
+        "Angle Park": {
+            2: 0.06, 5: 0.06,  # Both 25%
+            7: -0.05, 8: -0.05  # Weak
+        },
+        "Bendigo": {
+            2: 0.05,    # 21.2% Box 2
+            4: 0.05,    # 21.2% Box 4
+            7: -0.03, 8: -0.04  # Weak
+        },
+        
+        # === PROBLEMATIC TRACKS - Darwin and Rockhampton ===
+        # These need special handling due to 0-9% accuracy
+        "Darwin": {
+            # Equal Box 1 and Box 2 at 21.1% - reduce Box 1 over-picking
+            1: 0.02,    # Slight boost (was 21.1%)
+            2: 0.05,    # INCREASED BOOST (was 21.1% but we under-picked)
+            4: 0.02, 6: 0.02,  # Also decent at 15.8%
+            3: -0.03, 5: -0.03, 7: -0.03  # Weak boxes
+        },
+        "BetDeluxe Rockhampton": {
+            # Box 1 wins 33.3% but we're getting 0% accuracy!
+            # Problem: Not picking Box 1 enough or wrong dogs in Box 1
+            1: 0.10,    # STRONG BOOST for Box 1
+            5: 0.02, 8: 0.02,  # Secondary (16.7% each)
+            7: -0.05  # Very weak
+        },
+        "Rockhampton": {
+            # Same as BetDeluxe Rockhampton
+            1: 0.10,
+            5: 0.02, 8: 0.02,
+            7: -0.05
+        },
+        
+        # === HIGH BOX 1 TRACKS (Reinforce existing) ===
+        "Lakeside": {
+            1: 0.15,    # 41.7% Box 1 - VERY STRONG
+            8: 0.06,    # 25% Box 8
+            4: -0.05, 7: -0.05  # Weak
+        },
+        
+        # === OTHER TRACKS ===
+        "Horsham": {
+            5: 0.06,    # 25% Box 5 (unusual)
+            6: -0.05  # Weak
+        },
+        "Q Straight": {
+            4: 0.06,    # 25% Box 4
+            8: -0.05  # Weak
+        },
+        "Sandown Park": {
+            1: 0.06, 3: 0.06,  # Both 25%
+            6: -0.05, 8: -0.05  # Weak
+        },
+        "Broken Hill": {
+            4: 0.10,    # 33.3% Box 4 - STRONG
+            1: 0.04, 5: 0.04,  # Also decent
+            3: -0.05, 7: -0.05, 8: -0.05  # Weak
+        },
+    }
+    
+    def get_track_comprehensive_adjustment(track_name, box):
+        """Get track-specific adjustment for ANY box based on historical patterns."""
+        if pd.isna(track_name) or pd.isna(box):
+            return 0.0
+        track_str = str(track_name).strip()
+        box = int(box)
+        
+        for key in TRACK_COMPREHENSIVE_ADJUSTMENTS:
+            if key.lower() in track_str.lower() or track_str.lower() in key.lower():
+                adjustments = TRACK_COMPREHENSIVE_ADJUSTMENTS[key]
+                return adjustments.get(box, 0.0)
+        return 0.0
     
     def get_track_box1_adjustment(track_name):
         """Get track-specific Box 1 adjustment based on historical data."""
@@ -449,18 +618,33 @@ def compute_features(df):
             )
             df["BoxPositionBias"] = df["BoxPositionBias"] + df["TrackBox4Adjustment"]
             
-            print(f"✓ Applied track-specific Box 1 & Box 4 adjustments from Nov 26-29 analysis")
+            # === v4.0: COMPREHENSIVE TRACK-SPECIFIC BOX ADJUSTMENT ===
+            # Applies to ALL boxes (1-8) based on track-specific winner patterns
+            # This is the key fix for Darwin (9.1%) and Rockhampton (0%) accuracy
+            df["TrackComprehensiveAdjustment"] = df.apply(
+                lambda row: get_track_comprehensive_adjustment(row.get("Track", ""), row.get("Box"))
+                            if pd.notna(row.get("Box")) 
+                            else 0.0,
+                axis=1
+            )
+            df["BoxPositionBias"] = df["BoxPositionBias"] + df["TrackComprehensiveAdjustment"]
+            
+            print(f"✓ Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.0)")
+            print(f"  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration")
+            print(f"  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora")
         else:
             df["TrackBox1Adjustment"] = 0.0
             df["TrackBox4Adjustment"] = 0.0
+            df["TrackComprehensiveAdjustment"] = 0.0
         
-        print(f"✓ Applied comprehensive BoxPositionBias from 476-race analysis (v3.5)")
+        print(f"✓ Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)")
         print(f"  Win/Place/Top3 rates analyzed for all 8 boxes")
     else:
         df["BoxPositionBias"] = 0.0
         df["BoxPlaceRate"] = 0.0
         df["BoxTop3Rate"] = 0.0
         df["TrackBox1Adjustment"] = 0.0
+        df["TrackComprehensiveAdjustment"] = 0.0
     
     # === AGE FACTOR ===
     # Greyhounds typically peak at 2-3.5 years (24-42 months)

@@ -1,8 +1,17 @@
-# Comprehensive Scoring Factors Breakdown (v3.9)
+# Comprehensive Scoring Factors Breakdown (v4.0)
 
-## All 49 Scoring Factors - Weight & Win Percentage Analysis
+## All 50 Scoring Factors - Weight & Win Percentage Analysis
 
-Based on analysis of 335+ races (Nov 28-30, 2025)
+Based on analysis of 386+ races (Nov 2025)
+
+---
+
+## v4.0 KEY CHANGES
+
+### NEW: TrackComprehensiveAdjustment
+- **Problem:** Darwin (9.1%) and Rockhampton (0%) had unacceptable accuracy
+- **Solution:** Track-specific adjustments for ALL boxes (1-8) at 25 tracks
+- **Impact:** Expected +10-15% improvement at problem tracks
 
 ---
 
@@ -19,8 +28,21 @@ Based on analysis of 335+ races (Nov 28-30, 2025)
 | RailPreference | 0.03 | +2% Box 1-2, +1% Box 8 | Rail running style |
 | BoxBiasFactor | 0.02 | Varies by dog | Individual dog's box preference |
 | FieldSizeAdjustment | ~0.01 | +2% Box 1-2 in small fields | Field size impacts box value |
-| **TrackBox1Adjustment** | +0.02 to +0.10 | +10-15% at Cannington, Angle Park | Track-specific Box 1 bonus |
-| **TrackBox4Adjustment** | +0.02 to +0.05 | +5% at Cannington | Track-specific Box 4 bonus |
+| **TrackBox1Adjustment** | +0.02 to +0.15 | +10-42% at Lakeside, Cannington | Track-specific Box 1 bonus |
+| **TrackBox4Adjustment** | +0.02 to +0.10 | +5-33% at Broken Hill, Grafton | Track-specific Box 4 bonus |
+| **TrackComprehensiveAdjustment** (v4.0) | -0.05 to +0.15 | Varies by track | ALL boxes at 25 tracks |
+
+### v4.0 Track-Specific Box Adjustments
+
+| Track | Top Box | Adjustment | Notes |
+|-------|---------|------------|-------|
+| Darwin | Box 1/2 (21.1% each) | Box 2: +0.05, Box 1: +0.02 | Equal Box 1/2 |
+| Rockhampton | Box 1 (33.3%) | Box 1: +0.10 | Strong Box 1 boost |
+| Temora | Box 8 (50.0%) | Box 8: +0.15, Box 1: +0.10 | Extreme Box 8 |
+| Lakeside | Box 1 (41.7%) | Box 1: +0.15 | Very strong Box 1 |
+| Gawler | Box 2 (36.8%) | Box 2: +0.12, Box 1: +0.06 | Strong Box 2 |
+| Warragul | Box 6 (41.7%) | Box 6: +0.12 | Unusual Box 6 |
+| Gunnedah | Box 7 (33.3%) | Box 7: +0.10 | Unusual Box 7 |
 
 ### Multiplicative Factors (v3.9 CRITICAL)
 
@@ -174,6 +196,7 @@ Based on analysis of 335+ races (Nov 28-30, 2025)
 - **Finding**: Rockhampton 0% accuracy, Darwin 9.1% vs Cannington 41.7%
 - **Explanation**: Some tracks have track conditions or configurations that reduce predictability
 - **Action**: Added track-specific TrackUpsetFactor (0.80-1.15 range)
+- **v4.0 Action**: Added TrackComprehensiveAdjustment for all 8 boxes at 25 tracks
 
 ### Pattern 4: Field Similarity Chaos
 - **Finding**: When 3+ dogs within 2 points, winner nearly random
@@ -186,14 +209,14 @@ Based on analysis of 335+ races (Nov 28-30, 2025)
 
 | Category | Factor Count | % of Signal |
 |----------|-------------|-------------|
-| Box/Draw Position | 11 | 30-40% |
+| Box/Draw Position | 12 | 30-40% |
 | Career/Experience | 6 | 25-30% |
 | Speed/Timing | 7 | 18-22% |
 | Form/Momentum | 5 | 10-15% |
 | Conditioning | 3 | 5-8% |
 | Enhancement Multipliers | 10 | Multiplicative |
 | Luck/Predictability | 7 | Adjustment |
-| **TOTAL** | **49** | **100%** |
+| **TOTAL** | **50** | **100%** |
 
 ---
 
@@ -206,6 +229,8 @@ Based on analysis of 335+ races (Nov 28-30, 2025)
 | v3.6 | ~17% | Parser fix + BestTimePercentile fix |
 | v3.7 | 20.3% | BoxPenaltyFactor (multiplicative) |
 | v3.8 | 17.3% | Weight optimization (Nov 30 outlier) |
+| v3.9 | ~20% | Box 2 boost, Box 7 penalty reduction |
+| **v4.0** | **TBD** | **TrackComprehensiveAdjustment for 25 tracks** | |
 | v3.9 | TBD | Box 2 boost, Box 7 penalty reduction |
 
 ---
