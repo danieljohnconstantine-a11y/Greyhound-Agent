@@ -350,3 +350,66 @@ TRACK_COMPREHENSIVE_ADJUSTMENTS = {
 *Generated: December 1, 2025*
 *Based on: 386 races from November 2025*
 *Version: v4.0 Track-Specific Scoring Update*
+
+---
+
+## v4.2 UPDATE - Nov 30 Actual Results Analysis
+
+### Critical Findings from Nov 30 (132 races, 12 tracks)
+
+Based on deep analysis comparing our predictions vs actual Nov 30 results, we identified **MAJOR scoring issues** at 5 tracks:
+
+| Track | Our Accuracy | Problem |
+|-------|--------------|---------|
+| Q Parklands | 10.0% | Box 2 won 40% but we picked Box 1/8 (30% each) |
+| Darwin | 9.1% | Box 7 won 36.4% but we picked Box 1 (64%!) |
+| Rockhampton | 0.0% | Box 1 won 33.3% but we picked Box 8 (42%) |
+| Richmond | 0.0% | Box 2 won 41.7% but we picked Box 1 (42%) |
+| Maitland | N/A | PDF not processed - now fixed |
+
+### Root Cause Analysis
+
+**1. Q PARKLANDS**
+- Actual: Box 2 won 40% (4/10), Box 6 won 20%
+- We predicted: Box 1 (30%), Box 8 (30%)
+- **FIX**: Strong Box 2 boost (+0.12), Box 1 penalty (-0.06), Box 8 penalty (-0.06)
+
+**2. DARWIN**  
+- Actual: Box 7 won 36.4% (4/11), Box 2 won 27.3% (3/11)
+- We predicted: Box 1 (64%!)
+- **FIX**: Strong Box 7 boost (+0.12), Box 2 boost (+0.10), MAJOR Box 1 penalty (-0.10)
+
+**3. ROCKHAMPTON**
+- Actual: Box 1 won 33.3% (4/12), Box 3 won 25% (3/12)
+- We predicted: Box 8 (42%), Box 4 (25%)
+- **FIX**: Box 1 boost (+0.12), Box 3 boost (+0.08), MAJOR Box 8 penalty (-0.10), Box 4 penalty (-0.08)
+
+**4. RICHMOND**
+- Actual: Box 2 won 41.7% (5/12), Box 7/8 won 16.7% each
+- We predicted: Box 1 (42%)
+- **FIX**: Strong Box 2 boost (+0.14), Box 7 boost (+0.05), MAJOR Box 1 penalty (-0.08)
+
+**5. MAITLAND**
+- Actual results: R1-6837, R2-7243, R3-6135, R4-8471, R5-2187, R6-7216, R7-1286, R8-5642, R9-8217, R10-4631
+- Box 6 won 30%, Box 8 won 20%, Box 2 won 20%
+- **FIX**: Box 6 boost (+0.10), Box 8 boost (+0.06), Box 2 boost (+0.06), Box 1 penalty (-0.04)
+
+### v4.2 Track-Specific Factor Weights
+
+| Track | Primary Factors | Notes |
+|-------|-----------------|-------|
+| Q Parklands | DLWFactor (+0.08), ConsistencyIndex (+0.06), PlaceRate (+0.05) | Form > Speed |
+| Darwin | CloserBonus (+0.10), DLWFactor (+0.08), ConsistencyIndex (+0.06) | Outside closer wins! |
+| Rockhampton | DLWFactor (+0.10), ConsistencyIndex (+0.08), BoxPositionBias (+0.06) | Form > Speed |
+| Richmond | DLWFactor (+0.08), ConsistencyIndex (+0.07), PlaceRate (+0.05) | Form dominates |
+| Maitland | DLWFactor (+0.06), ConsistencyIndex (+0.05), BestTimePercentile (+0.05) | Balanced |
+
+### Expected Improvement
+
+With v4.2 adjustments, we expect:
+- Q Parklands: 10.0% → 25%+ (Box 2 now boosted)
+- Darwin: 9.1% → 30%+ (Box 7/2 now prioritized)
+- Rockhampton: 0.0% → 30%+ (Box 1/3 properly weighted)
+- Richmond: 0.0% → 35%+ (Box 2 now dominant)
+- Maitland: Will now be processed with correct box weights
+

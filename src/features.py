@@ -345,8 +345,8 @@ def compute_features(df):
     }
     
     # === TRACK-SPECIFIC BOX 1 BIAS ===
-    # v3.9 UPDATE: Based on Nov 28-30 analysis (335 races)
-    # Added new tracks from Nov 30 analysis
+    # v4.2 UPDATE: MAJOR OVERHAUL based on Nov 30 analysis (132 races)
+    # Critical finding: We over-predicted Box 1 at Darwin (64% picks, 9% wins) and Richmond (42% picks, 8% wins)
     TRACK_BOX1_ADJUSTMENT = {
         # STRONG Box 1 tracks (>35% Box 1 win rate) - Extra boost
         "Cannington": 0.10,      # 41.7% Box 1 (Nov 29)
@@ -355,6 +355,7 @@ def compute_features(df):
         "Sandown": 0.06,         # 33.3% Box 1 (Nov 29)
         "Meadows": 0.06,         # 42% Box 1 win rate (Nov 27)
         # GOOD Box 1 tracks (25-35%) - Medium boost
+        "Rockhampton": 0.04,     # v4.2: Box 1 won 33.3% on Nov 30 (better than before)
         "Capalaba": 0.05,        # v3.9: 30% success (Nov 30)
         "Wentworth Park": 0.05,  # 30% Box 1 (Nov 29)
         "Dubbo": 0.05,           # 27.3% Box 1 (Nov 29)
@@ -370,14 +371,16 @@ def compute_features(df):
         "Ladbrokes Q": 0.02,     # 30% Box 1 win rate
         "Warragul": 0.02,        # 25% Box 1 win rate
         "Wagga": 0.02,           # 27% Box 1 win rate
-        # WEAK Box 1 tracks (<15%) - Reduce Box 1 advantage
-        "Rockhampton": -0.05,    # v3.9: 0% success (Nov 30) - VERY unpredictable!
-        "Darwin": -0.04,         # v3.9: 9.1% success (Nov 30)
+        # WEAK Box 1 tracks (<15%) - Reduce Box 1 advantage  
+        # v4.2: MAJOR PENALTIES for tracks where we massively over-predict Box 1
+        "Darwin": -0.08,         # v4.2: Box 1 only 9.1% but we picked 64%! MAJOR PENALTY
+        "Richmond": -0.08,       # v4.2: Box 1 only 8.3% but we picked 42%! MAJOR PENALTY
+        "Q Parklands": -0.06,    # v4.2: Box 1 only 10% but we picked 30%! 
+        "Q2 Parklands": -0.06,   # v4.2: Same as Q Parklands
         "Taree": -0.03,          # 9.1% Box 1 (Nov 29) - upset track
         "Gardens": -0.03,        # 8.3% Box 1 (Nov 29)
         "Ballarat": -0.03,       # 8.3% Box 1 (Nov 29)
         "Healesville": -0.03,    # 0% Box 1 (Nov 28) - Outlier day
-        "Richmond": -0.02,       # 16.7% Box 1 (Nov 30) - improved
         "Mandurah": -0.02,       # 9% Box 1 (Nov 28)
         "DEFAULT": 0.0
     }
@@ -447,10 +450,20 @@ def compute_features(df):
         },
         
         # === HIGH BOX 7/6 TRACKS ===
+        # v4.2: Updated based on Nov 30 actual results
         "Q2 Parklands": {
-            7: 0.05,    # 16.7% Box 7 (top box)
-            2: 0.02,    # 16.7% Box 2
-            # High entropy track - reduce all adjustments
+            # Nov 30 ACTUAL: Box 2 won 40% (4/10), Box 6 won 20%
+            # WE PREDICTED: Box 1 (30%), Box 8 (30%) - COMPLETELY WRONG!
+            # FIX: Strong Box 2 boost, Box 6 secondary, penalize Box 1/8
+            2: 0.12,    # v4.2: Box 2 won 40%! MAJOR BOOST
+            6: 0.06,    # v4.2: Box 6 won 20%
+            1: -0.06,   # v4.2: Box 1 only won 10% but we over-picked
+            8: -0.06,   # v4.2: Box 8 won 10% but we over-picked 30%!
+            4: 0.02,    # v4.2: Secondary (10%)
+        },
+        "Q Parklands": {
+            # Same as Q2 Parklands
+            2: 0.12, 6: 0.06, 1: -0.06, 8: -0.06, 4: 0.02,
         },
         "Gunnedah": {
             7: 0.10,    # 33.3% Box 7 - STRONG
@@ -461,9 +474,14 @@ def compute_features(df):
             3: -0.05, 7: -0.05, 8: -0.05  # Weak
         },
         "Richmond": {
-            6: 0.05,    # 21.7% Box 6 (top)
-            1: 0.04,    # 21.7% Box 1 (tied)
-            2: -0.04, 3: -0.04, 4: -0.04  # Weak
+            # v4.2: Nov 30 ACTUAL: Box 2 won 41.7% (5/12), Box 7/8 won 16.7% each
+            # WE PREDICTED: Box 1 (42%), Box 2 (17%) - WRONG BOX!
+            # FIX: Strong Box 2 boost, add Box 7 bonus, penalize Box 1
+            2: 0.14,    # v4.2: Box 2 won 41.7%! MAJOR BOOST
+            7: 0.05,    # v4.2: Box 7 won 16.7%
+            8: 0.05,    # v4.2: Box 8 won 16.7%
+            1: -0.08,   # v4.2: Box 1 only won 8.3% but we over-picked 42%!
+            4: -0.05,   # v4.2: Box 4 weak
         },
         "Mount Gambier": {
             6: 0.08,    # 27.3% Box 6
@@ -500,26 +518,32 @@ def compute_features(df):
         },
         
         # === PROBLEMATIC TRACKS - Darwin and Rockhampton ===
-        # These need special handling due to 0-9% accuracy
+        # v4.2: MAJOR OVERHAUL based on Nov 30 actual results
         "Darwin": {
-            # Equal Box 1 and Box 2 at 21.1% - reduce Box 1 over-picking
-            1: 0.02,    # Slight boost (was 21.1%)
-            2: 0.05,    # INCREASED BOOST (was 21.1% but we under-picked)
-            4: 0.02, 6: 0.02,  # Also decent at 15.8%
-            3: -0.03, 5: -0.03, 7: -0.03  # Weak boxes
+            # Nov 30 ACTUAL: Box 7 won 36.4% (4/11), Box 2 won 27.3% (3/11)
+            # WE PREDICTED: Box 1 (64%!!) - MASSIVELY WRONG!
+            # FIX: Strong Box 7 boost, Box 2 secondary, MAJOR Box 1 penalty
+            7: 0.12,    # v4.2: Box 7 won 36.4%! MAJOR BOOST
+            2: 0.10,    # v4.2: Box 2 won 27.3%! STRONG BOOST
+            3: 0.04,    # v4.2: Box 3 won 18.2%
+            1: -0.10,   # v4.2: Box 1 only won 9.1% but we picked 64%!!! MAJOR PENALTY
+            8: 0.02,    # v4.2: Box 8 won 9.1%
+            4: -0.03, 5: -0.03, 6: -0.03  # Weak boxes
         },
         "BetDeluxe Rockhampton": {
-            # Box 1 wins 33.3% but we're getting 0% accuracy!
-            # Problem: Not picking Box 1 enough or wrong dogs in Box 1
-            1: 0.10,    # STRONG BOOST for Box 1
-            5: 0.02, 8: 0.02,  # Secondary (16.7% each)
-            7: -0.05  # Very weak
+            # Nov 30 ACTUAL: Box 1 won 33.3% (4/12), Box 3 won 25% (3/12)
+            # WE PREDICTED: Box 8 (42%), Box 4 (25%) - WRONG BOXES!
+            # FIX: Strong Box 1/3 boost, MAJOR Box 8/4 penalty
+            1: 0.12,    # v4.2: Box 1 won 33.3%! MAJOR BOOST
+            3: 0.08,    # v4.2: Box 3 won 25%! STRONG BOOST
+            6: 0.04,    # v4.2: Box 6 won 16.7%
+            8: -0.10,   # v4.2: Box 8 won 16.7% but we over-picked 42%! MAJOR PENALTY
+            4: -0.08,   # v4.2: Box 4 won 0% but we picked 25%! STRONG PENALTY
+            2: -0.05, 5: -0.03, 7: -0.05  # Weak boxes
         },
         "Rockhampton": {
             # Same as BetDeluxe Rockhampton
-            1: 0.10,
-            5: 0.02, 8: 0.02,
-            7: -0.05
+            1: 0.12, 3: 0.08, 6: 0.04, 8: -0.10, 4: -0.08, 2: -0.05, 5: -0.03, 7: -0.05
         },
         
         # === HIGH BOX 1 TRACKS (Reinforce existing) ===
@@ -547,6 +571,19 @@ def compute_features(df):
             1: 0.04, 5: 0.04,  # Also decent
             3: -0.05, 7: -0.05, 8: -0.05  # Weak
         },
+        
+        # v4.2: MAITLAND - Based on Nov 30 results (10 races)
+        # Results: R1-6837, R2-7243, R3-6135, R4-8471, R5-2187, R6-7216, R7-1286, R8-5642, R9-8217, R10-4631
+        # Box 6 won 3/10 (30%), Box 8 won 2/10 (20%), Box 2 won 2/10 (20%)
+        # Box 1 only won 1/10 (10%) - we probably over-predicted Box 1
+        "Maitland": {
+            6: 0.10,    # v4.2: Box 6 won 30%! MAJOR BOOST
+            8: 0.06,    # v4.2: Box 8 won 20%
+            2: 0.06,    # v4.2: Box 2 won 20%
+            1: -0.04,   # v4.2: Box 1 only won 10%, penalize
+            7: 0.04,    # v4.2: Box 7 won 10%
+            3: -0.02, 4: -0.02, 5: -0.02  # Weak boxes
+        },
     }
     
     # ========================================================================
@@ -568,9 +605,21 @@ def compute_features(df):
         # BOX 2 DOMINANT TRACKS - Form/Consistency Advantage
         # Prioritize: DLWFactor, ConsistencyIndex, PlaceRate
         "Dubbo": {"DLWFactor": 0.06, "ConsistencyIndex": 0.05, "PlaceRate": 0.04, "TrainerStrikeRate": 0.04},
-        "Ladbrokes Q2 Parklands": {"DLWFactor": 0.05, "ConsistencyIndex": 0.05, "PlaceRate": 0.04},
         "Nowra": {"DLWFactor": 0.05, "ConsistencyIndex": 0.05, "PlaceRate": 0.04},
-        "Darwin": {"DLWFactor": 0.06, "ConsistencyIndex": 0.05, "PlaceRate": 0.04, "BoxPositionBias": 0.02},  # Special handling
+        
+        # v4.2: Q PARKLANDS - Box 2 dominant (40% Nov 30)
+        # Reduce Box 1 bias, boost form/consistency factors
+        "Ladbrokes Q2 Parklands": {"DLWFactor": 0.08, "ConsistencyIndex": 0.06, "PlaceRate": 0.05, "BestTimePercentile": 0.03},
+        "Q2 Parklands": {"DLWFactor": 0.08, "ConsistencyIndex": 0.06, "PlaceRate": 0.05, "BestTimePercentile": 0.03},
+        "Q Parklands": {"DLWFactor": 0.08, "ConsistencyIndex": 0.06, "PlaceRate": 0.05, "BestTimePercentile": 0.03},
+        
+        # v4.2: RICHMOND - Box 2 dominant (41.7% Nov 30)
+        # Strong form bias, penalize speed-only picks
+        "Richmond": {"DLWFactor": 0.08, "ConsistencyIndex": 0.07, "PlaceRate": 0.05, "TrainerStrikeRate": 0.04},
+        
+        # v4.2: DARWIN - Box 7 dominant (36.4% Nov 30), Box 2 secondary (27.3%)
+        # COMPLETE OVERHAUL: Prioritize closer + form, NOT inside speed
+        "Darwin": {"CloserBonus": 0.10, "DLWFactor": 0.08, "ConsistencyIndex": 0.06, "FormMomentumNorm": 0.05},
         
         # BOX 8 DOMINANT TRACKS - Closer Advantage
         # Prioritize: CloserBonus, BestTimePercentile at distance
@@ -593,9 +642,29 @@ def compute_features(df):
         "Wentworth Park": {"CloserBonus": 0.08, "FormMomentumNorm": 0.05, "BestTimePercentile": 0.04, "AgeFactor": 0.03},
         "Mandurah": {"CloserBonus": 0.07, "FormMomentumNorm": 0.05, "BestTimePercentile": 0.04},
         
-        # PROBLEMATIC TRACKS - Special handling
-        "Rockhampton": {"BoxPositionBias": 0.10, "BestTimePercentile": 0.08, "DLWFactor": 0.05},  # Strong Box 1 focus
-        "BetDeluxe Rockhampton": {"BoxPositionBias": 0.10, "BestTimePercentile": 0.08, "DLWFactor": 0.05},
+        # v4.2: PROBLEMATIC TRACKS - MAJOR OVERHAUL based on Nov 30 actual results
+        # ROCKHAMPTON: Box 1 (33.3%) + Box 3 (25%) - Inside track advantage
+        # We were picking Box 8/4 (0% wins there) - PENALIZE outside speed, BOOST inside form
+        "Rockhampton": {
+            "DLWFactor": 0.10,           # v4.2: Form matters more than speed here
+            "ConsistencyIndex": 0.08,    # v4.2: Consistent dogs win
+            "BoxPositionBias": 0.06,     # v4.2: Still boost Box 1
+            "BestTimePercentile": 0.02,  # v4.2: REDUCED - speed alone doesn't work here
+        },
+        "BetDeluxe Rockhampton": {
+            "DLWFactor": 0.10,
+            "ConsistencyIndex": 0.08, 
+            "BoxPositionBias": 0.06,
+            "BestTimePercentile": 0.02,
+        },
+        
+        # MAITLAND: Need to add once PDF is processed
+        "Maitland": {
+            "DLWFactor": 0.06,
+            "ConsistencyIndex": 0.05,
+            "BestTimePercentile": 0.05,
+            "PlaceRate": 0.04,
+        },
     }
     
     def get_track_factor_adjustments(track_name):
