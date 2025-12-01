@@ -602,10 +602,19 @@ def compute_features(df):
         """Get track-specific factor weight adjustments based on winner pattern analysis."""
         if pd.isna(track_name):
             return {}
-        track_str = str(track_name).strip()
+        track_str = str(track_name).strip().lower()
         
+        # Use more precise matching with word boundaries
         for key in TRACK_FACTOR_WEIGHTS:
-            if key.lower() in track_str.lower() or track_str.lower() in key.lower():
+            key_lower = key.lower()
+            # Check if key appears as a complete word or phrase in track name
+            # or if track name appears as a complete word/phrase in key
+            if (key_lower == track_str or 
+                track_str.startswith(key_lower + " ") or 
+                track_str.endswith(" " + key_lower) or
+                " " + key_lower + " " in " " + track_str + " " or
+                key_lower.startswith(track_str + " ") or
+                key_lower.endswith(" " + track_str)):
                 return TRACK_FACTOR_WEIGHTS[key]
         return {}  # Return empty dict for tracks without specific adjustments
     
@@ -692,13 +701,25 @@ def compute_features(df):
             
             # === v4.1: TRACK-SPECIFIC FACTOR WEIGHT STORAGE ===
             # Store the dominant track pattern for reference and weight adjustment
+            # Derived from TRACK_FACTOR_WEIGHTS to maintain consistency
             def get_track_pattern(track_name):
                 if pd.isna(track_name):
                     return "NEUTRAL"
                 track_str = str(track_name).strip().lower()
                 
-                box1_tracks = ["meadows", "angle park", "ladbrokes q straight", "mount gambier", "sale", "sandown"]
-                box2_tracks = ["dubbo", "ladbrokes q2", "nowra", "darwin"]
+                # Helper function for more precise matching
+                def matches_track(pattern, track):
+                    pattern_lower = pattern.lower()
+                    return (pattern_lower == track or 
+                            track.startswith(pattern_lower + " ") or 
+                            track.endswith(" " + pattern_lower) or
+                            " " + pattern_lower + " " in " " + track + " " or
+                            pattern_lower.startswith(track + " ") or
+                            pattern_lower.endswith(" " + track))
+                
+                # Track categories derived from TRACK_FACTOR_WEIGHTS keys
+                box1_tracks = ["meadows", "angle park", "ladbrokes q straight", "mount gambier", "sale", "sandown park"]
+                box2_tracks = ["dubbo", "ladbrokes q2 parklands", "nowra", "darwin"]
                 box8_tracks = ["casino", "horsham", "warrnambool", "healesville"]
                 box4_tracks = ["bendigo", "shepparton"]
                 box6_tracks = ["warragul"]
@@ -706,25 +727,25 @@ def compute_features(df):
                 problem_tracks = ["rockhampton", "betdeluxe rockhampton"]
                 
                 for t in problem_tracks:
-                    if t in track_str:
+                    if matches_track(t, track_str):
                         return "PROBLEM_BOX1"
                 for t in box1_tracks:
-                    if t in track_str:
+                    if matches_track(t, track_str):
                         return "BOX1_SPEED"
                 for t in box2_tracks:
-                    if t in track_str:
+                    if matches_track(t, track_str):
                         return "BOX2_FORM"
                 for t in box8_tracks:
-                    if t in track_str:
+                    if matches_track(t, track_str):
                         return "BOX8_CLOSER"
                 for t in box4_tracks:
-                    if t in track_str:
+                    if matches_track(t, track_str):
                         return "BOX4_EXPERIENCE"
                 for t in box6_tracks:
-                    if t in track_str:
+                    if matches_track(t, track_str):
                         return "BOX6_FORM"
                 for t in box7_tracks:
-                    if t in track_str:
+                    if matches_track(t, track_str):
                         return "BOX7_CLOSER"
                 return "NEUTRAL"
             
