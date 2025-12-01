@@ -932,24 +932,25 @@ def compute_features(df):
                 return 1.0
             box = int(box)
             # v3.9 UPDATE: Recalibrated based on Nov 28-30 actual results (335 races)
-            # Key changes:
-            # - Box 1 penalty REDUCED (was over-picking Box 1)
-            # - Box 2 now gets BONUS (was under-valued!)
-            # - Box 7 penalty REDUCED (was too harsh)
+            # v4.3 Key changes for improved winning %:
+            # - Box 1 penalty FURTHER REDUCED (still over-picking)
+            # - Box 2 now gets STRONGER BONUS (proven undervalued 2 days in a row)
+            # - Box 7 penalty MAINTAINED with slight increase for form-based tracks
+            # - Box 8 penalty factor INCREASED (strong rail advantage at many tracks)
             BOX_PENALTY_FACTORS = {
-                1: 1.08,   # v3.9: REDUCED from 1.12 - Box 1 over-picked
-                2: 1.03,   # v3.9: INCREASED from 0.97 - Box 2 under-valued!
-                3: 0.82,   # v3.9: Slight increase from 0.80
-                4: 1.02,   # v3.9: REDUCED from 1.05
-                5: 0.88,   # v3.9: Slight reduction
-                6: 0.92,   # v3.9: Slight reduction
-                7: 0.82,   # v3.9: INCREASED from 0.75 - was too harsh!
-                8: 1.05,   # v3.9: Reduced from 1.08
+                1: 1.05,   # v4.3: FURTHER REDUCED from 1.08 - still over-picking Box 1
+                2: 1.08,   # v4.3: INCREASED from 1.03 - proven undervalued!
+                3: 0.80,   # v4.3: Slight penalty - trap box
+                4: 1.04,   # v4.3: INCREASED from 1.02 - middle boxes performing
+                5: 0.90,   # v4.3: Slight increase from 0.88
+                6: 0.95,   # v4.3: INCREASED from 0.92 - performing better
+                7: 0.85,   # v4.3: INCREASED from 0.82 - closer advantage at some tracks
+                8: 1.08,   # v4.3: INCREASED from 1.05 - rail advantage matters
             }
             return BOX_PENALTY_FACTORS.get(box, 1.0)
         
         df["BoxPenaltyFactor"] = df["Box"].apply(get_box_penalty_factor)
-        print(f"✓ Calculated BoxPenaltyFactor (v3.9: Box 1=1.08x, Box 2=1.03x, Box 7=0.82x)")
+        print(f"✓ Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)")
     else:
         df["BoxPenaltyFactor"] = 1.0
     
@@ -1452,21 +1453,21 @@ def compute_features(df):
         df["FieldSizeAdjustment"] = 0.0
     
     # ========================================================================
-    # ENHANCEMENT #9: INCREASED WINNING STREAK BONUS
+    # ENHANCEMENT #9: INCREASED WINNING STREAK BONUS (v4.3 UPDATE)
     # Analysis of missed winners showed 19% had 2+ consecutive wins (hot streak)
-    # Increase bonus from 1.08x to 1.25x for dogs on winning streaks
+    # v4.3: FURTHER INCREASE bonus - hot form is critical predictor
     # ========================================================================
     if "DLW" in df.columns:
         df["WinStreakFactorV2"] = df["DLW"].apply(
-            lambda x: 1.30 if pd.notna(x) and x <= 7 else     # Hot streak - 2+ wins within week
-                     1.20 if pd.notna(x) and x <= 14 else    # Recent winner - strong form
-                     1.05 if pd.notna(x) and x <= 28 else    # Within a month - slight edge
-                     0.95 if pd.notna(x) and x <= 60 else    # Going cold
-                     0.85                                     # Long time since win
+            lambda x: 1.40 if pd.notna(x) and x <= 7 else     # v4.3: Hot streak - CRITICAL (was 1.30)
+                     1.28 if pd.notna(x) and x <= 14 else    # v4.3: Recent winner (was 1.20)
+                     1.10 if pd.notna(x) and x <= 28 else    # v4.3: Within month (was 1.05)
+                     0.92 if pd.notna(x) and x <= 60 else    # v4.3: Going cold (was 0.95)
+                     0.80                                     # v4.3: Long time (was 0.85)
         )
         # Replace old WinStreakFactor with enhanced version
         df["WinStreakFactor"] = df["WinStreakFactorV2"]
-        print(f"✓ Enhanced WinStreakFactor (1.30x for hot streaks)")
+        print(f"✓ Enhanced WinStreakFactor v4.3 (1.40x for hot streaks, 1.28x for recent wins)")
     
     # ========================================================================
     # ENHANCEMENT #10: CLOSER BONUS FOR BOX 7-8 AT LONG DISTANCES
@@ -1606,35 +1607,35 @@ def compute_features(df):
                 "WeightFactor": 0.02,          # Weight optimization
             }
             
-        elif distance <= 500:  # MIDDLE - Most common distance
+        elif distance <= 500:  # MIDDLE - Most common distance (v4.3 UPDATE)
             return {
-                # === BOX POSITION (34% total) ===
-                "DrawFactor": 0.10,            
-                "BoxPositionBias": 0.10,       # INCREASED for Box 1 dominance
+                # === BOX POSITION (32% total) - v4.3 REBALANCED ===
+                "DrawFactor": 0.08,            # v4.3: REDUCED from 0.10
+                "BoxPositionBias": 0.08,       # v4.3: REDUCED - less Box 1 bias
                 "BoxPlaceRate": 0.05,          
                 "BoxTop3Rate": 0.04,           
-                "RailPreference": 0.03,        
-                "BoxBiasFactor": 0.02,         
+                "RailPreference": 0.04,        # v4.3: INCREASED for rail advantage
+                "BoxBiasFactor": 0.03,         # v4.3: INCREASED
                 
-                # === CAREER/EXPERIENCE (26% total) ===
-                "PlaceRate": 0.05,             
-                "ConsistencyIndex": 0.05,      
+                # === CAREER/EXPERIENCE (28% total) - v4.3 BOOSTED ===
+                "PlaceRate": 0.06,             # v4.3: INCREASED - key predictor
+                "ConsistencyIndex": 0.06,      # v4.3: INCREASED - winners are consistent
                 "WinPlaceRate": 0.05,          
                 "ExperienceTier": 0.04,        
                 "TrainerStrikeRate": 0.04,     
                 "ClassRating": 0.03,           
                 
-                # === SPEED/TIMING (22% total) - Boosted timing weights ===
+                # === SPEED/TIMING (20% total) - v4.3 SLIGHTLY REDUCED ===
                 "EarlySpeedPercentile": 0.05,  
-                "BestTimePercentile": 0.06,    # INCREASED - now fixed and reliable
+                "BestTimePercentile": 0.05,    # v4.3: REDUCED from 0.06 - form matters more
                 "SectionalSec": 0.04,          
                 "EarlySpeedIndex": 0.03,       
-                "Speed_kmh": 0.03,             
+                "Speed_kmh": 0.02,             # v4.3: REDUCED
                 "SpeedClassification": 0.01,   
                 
-                # === FORM/MOMENTUM (12% total) ===
-                "DLWFactor": 0.03,             
-                "WinStreakFactor": 0.04,       # INCREASED - captures hot form
+                # === FORM/MOMENTUM (14% total) - v4.3 INCREASED ===
+                "DLWFactor": 0.04,             # v4.3: INCREASED - recent wins matter
+                "WinStreakFactor": 0.05,       # v4.3: INCREASED - hot form critical
                 "FormMomentumNorm": 0.03,      
                 "MarginFactor": 0.02,          
                 
