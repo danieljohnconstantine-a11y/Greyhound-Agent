@@ -1,5 +1,5 @@
 import os
-from parser import parse_pdf_form
+from parser import parse_race_form
 from exporter import export_to_excel
 
 INPUT_DIR = "inputs"
@@ -36,7 +36,7 @@ def main():
         print("PROCESSING PDFS...")
         print("--------------------------------------------------")
         print(f"PARSING {filename}...")
-        result = parse_pdf_form(text)
+        result = parse_race_form(text)
         races = result.get("races", [])
 
         for race in races:
