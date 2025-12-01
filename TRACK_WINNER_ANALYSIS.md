@@ -117,11 +117,146 @@ Box 7: -0.05
 
 ---
 
-## Common Winner Factor Combinations
+## Common Winner Factor Combinations Per Track
 
-Based on analysis across all tracks, winners typically share:
+Based on analysis of 484+ races from November 2025, here are the **specific factor combinations** that winners share at each track type:
 
-### Top Predictive Factors
+---
+
+### 🔥 BOX 1 DOMINANT TRACKS - Speed/Inside Advantage
+
+**Key Tracks:** Meadows (41.7%), Angle Park (33.3%), Ladbrokes Q Straight (30%), Mount Gambier (27.3%), Mandurah (27.3%), Sale (25%), Sandown Park (25%)
+
+**Common Winner Profile:**
+- ✅ **BestTimePercentile**: Top 25% fastest dog in race (+45% win boost)
+- ✅ **EarlySpeedPercentile**: Top 25% early pace (+30% boost)
+- ✅ **BoxPositionBias**: Box 1 position (+8-15% boost)
+- ✅ **WinStreakFactor**: Won within 7-14 days (+30% boost)
+
+**Recommended Factor Weights:**
+| Factor | Weight | Win % When Favorable |
+|--------|--------|---------------------|
+| BestTimePercentile | 0.08 | +45% |
+| EarlySpeedPercentile | 0.06 | +30% |
+| BoxPositionBias | 0.05 | +21% |
+| WinStreakFactor | 0.04 | +30% |
+
+---
+
+### 🔵 BOX 2 DOMINANT TRACKS - Second Position Advantage
+
+**Key Tracks:** Dubbo (25%), Ladbrokes Q2 Parklands (18.2%), Nowra (20%)
+
+**Common Winner Profile:**
+- ✅ **DLWFactor**: Recent winner (within 14 days) (+23% boost)
+- ✅ **ConsistencyIndex**: >30% career win rate (+35% boost)
+- ✅ **PlaceRate**: >40% career place rate (+25% boost)
+- ✅ **TrainerStrikeRate**: Elite trainer 25%+ strike rate (+15% boost)
+
+**Recommended Factor Weights:**
+| Factor | Weight | Win % When Favorable |
+|--------|--------|---------------------|
+| DLWFactor | 0.06 | +23% |
+| ConsistencyIndex | 0.05 | +35% |
+| PlaceRate | 0.04 | +25% |
+| TrainerStrikeRate | 0.04 | +15% |
+
+---
+
+### 🟢 BOX 8 DOMINANT TRACKS - Outside/Closer Advantage
+
+**Key Tracks:** Casino (27.3%), Horsham (16.7%), Sale (25%), Warrnambool (25%), Healesville (25%)
+
+**Common Winner Profile:**
+- ✅ **CloserBonus**: Strong late closing speed at 500m+ distance (+8% boost)
+- ✅ **BestTimePercentile**: Fast overall time (+45% boost)
+- ✅ **ExperienceTier**: 16-40 career starts (peak experience) (+10% boost)
+- ✅ **Distance Suitability**: Longer distances (500m+) favor Box 8
+
+**Recommended Factor Weights:**
+| Factor | Weight | Win % When Favorable |
+|--------|--------|---------------------|
+| CloserBonus | 0.08 | +8% |
+| BestTimePercentile | 0.06 | +45% |
+| ExperienceTier | 0.04 | +10% |
+| DistanceSuit | 0.04 | +10% |
+
+---
+
+### 🟡 BOX 4 DOMINANT TRACKS - Middle Inside Position
+
+**Key Tracks:** Bendigo (28.6%), Ladbrokes Q2 Parklands (27.3%), Healesville (25%), Shepparton (25%)
+
+**Common Winner Profile:**
+- ✅ **ExperienceTier**: 16-40 career starts (peak) (+10% boost)
+- ✅ **ConsistencyIndex**: >25% career win rate (+30% boost)
+- ✅ **BestTimePercentile**: Top 30% fastest (+40% boost)
+- ✅ **FormMomentum**: Improving form trend (+15% boost)
+
+**Recommended Factor Weights:**
+| Factor | Weight | Win % When Favorable |
+|--------|--------|---------------------|
+| ExperienceTier | 0.06 | +10% |
+| ConsistencyIndex | 0.05 | +30% |
+| BestTimePercentile | 0.04 | +40% |
+| FormMomentum | 0.03 | +15% |
+
+---
+
+### 🟣 BOX 6 DOMINANT TRACKS - Middle Outside Position
+
+**Key Tracks:** Warragul (29.2%), Shepparton (25%), Warrnambool (25%)
+
+**Common Winner Profile:**
+- ✅ **ExperienceTier**: Veteran dogs (30+ starts) handle wide runs (+8% boost)
+- ✅ **FormMomentum**: Improving margins (positive trend) (+15% boost)
+- ✅ **TrainerStrikeRate**: Elite trainers place Box 6 strategically (+15% boost)
+- ✅ **FreshnessFactor**: 6-10 days rest optimal (+10% boost)
+
+**Recommended Factor Weights:**
+| Factor | Weight | Win % When Favorable |
+|--------|--------|---------------------|
+| ExperienceTier | 0.06 | +8% |
+| FormMomentum | 0.05 | +15% |
+| TrainerStrikeRate | 0.04 | +15% |
+| FreshnessFactor | 0.03 | +10% |
+
+---
+
+### 🟠 BOX 7 DOMINANT TRACKS - Wide Runner Position
+
+**Key Tracks:** Casino (27.3%), Wentworth Park (25%), Mandurah (27.3%)
+
+**Common Winner Profile:**
+- ✅ **CloserBonus**: Strong closing ability (+10% boost)
+- ✅ **FormMomentum**: Peak form momentum (+15% boost)
+- ✅ **BestTimePercentile**: Must be fast to overcome wide draw (+40% boost)
+- ✅ **AgeFactor**: Peak age 24-36 months (+5% boost)
+
+**Recommended Factor Weights:**
+| Factor | Weight | Win % When Favorable |
+|--------|--------|---------------------|
+| CloserBonus | 0.08 | +10% |
+| FormMomentum | 0.05 | +15% |
+| BestTimePercentile | 0.04 | +40% |
+| AgeFactor | 0.03 | +5% |
+
+---
+
+## Factor Importance Summary Table
+
+| Track Type | Factor 1 | Factor 2 | Factor 3 | Factor 4 |
+|------------|----------|----------|----------|----------|
+| **Box 1 Dominant** | BestTimePercentile (+0.08) | EarlySpeedPercentile (+0.06) | BoxPositionBias (+0.05) | WinStreakFactor (+0.04) |
+| **Box 2 Dominant** | DLWFactor (+0.06) | ConsistencyIndex (+0.05) | PlaceRate (+0.04) | TrainerStrikeRate (+0.04) |
+| **Box 8 Dominant** | CloserBonus (+0.08) | BestTimePercentile (+0.06) | ExperienceTier (+0.04) | DistanceSuit (+0.04) |
+| **Box 4 Dominant** | ExperienceTier (+0.06) | ConsistencyIndex (+0.05) | BestTimePercentile (+0.04) | FormMomentum (+0.03) |
+| **Box 6 Dominant** | ExperienceTier (+0.06) | FormMomentum (+0.05) | TrainerStrikeRate (+0.04) | FreshnessFactor (+0.03) |
+| **Box 7 Dominant** | CloserBonus (+0.08) | FormMomentum (+0.05) | BestTimePercentile (+0.04) | AgeFactor (+0.03) |
+
+---
+
+### Top Predictive Factors (All Tracks)
 
 1. **BestTimePercentile** (fastest in race): +45% win rate boost
 2. **Box Position** (1, 2, or 8): +21% vs random
@@ -133,10 +268,11 @@ Based on analysis across all tracks, winners typically share:
 
 | Pattern | Tracks | Strategy |
 |---------|--------|----------|
-| Box 1 + Fast Time | Lakeside, Rockhampton, Gawler | Heavy Box 1 boost |
-| Box 2 + Recent Winner | Darwin, Bendigo, Dubbo | Boost Box 2, check DLW |
-| Box 8 + Closer | Temora, Capalaba, Grafton | Box 8 at long distances |
-| Box 6/7 + Experience | Warragul, Richmond, Wentworth Park | Middle boxes matter |
+| Box 1 + Fast Time | Meadows, Angle Park, Lakeside, Rockhampton | Heavy Box 1 boost + BestTimePercentile |
+| Box 2 + Recent Winner | Darwin, Dubbo, Bendigo | Boost Box 2 + DLWFactor + ConsistencyIndex |
+| Box 8 + Closer | Casino, Sale, Warrnambool, Healesville | Box 8 at 500m+ + CloserBonus |
+| Box 4 + Experience | Bendigo, Healesville, Shepparton | ExperienceTier + ConsistencyIndex |
+| Box 6/7 + Experience | Warragul, Wentworth Park, Mandurah | FormMomentum + CloserBonus |
 
 ---
 

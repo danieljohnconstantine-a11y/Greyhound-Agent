@@ -1,17 +1,31 @@
-# Comprehensive Scoring Factors Breakdown (v4.0)
+# Comprehensive Scoring Factors Breakdown (v4.1)
 
-## All 50 Scoring Factors - Weight & Win Percentage Analysis
+## All 51 Scoring Factors - Weight & Win Percentage Analysis
 
-Based on analysis of 386+ races (Nov 2025)
+Based on analysis of 484+ races (Nov 2025)
 
 ---
 
-## v4.0 KEY CHANGES
+## v4.1 KEY CHANGES
 
-### NEW: TrackComprehensiveAdjustment
-- **Problem:** Darwin (9.1%) and Rockhampton (0%) had unacceptable accuracy
-- **Solution:** Track-specific adjustments for ALL boxes (1-8) at 25 tracks
-- **Impact:** Expected +10-15% improvement at problem tracks
+### NEW: Track-Specific Factor Weights
+- **Problem:** Different tracks favor different winning profiles
+- **Solution:** Track-specific factor weight adjustments based on dominant box patterns
+- **Categories:**
+  - BOX1_SPEED: Prioritize BestTimePercentile, EarlySpeedPercentile
+  - BOX2_FORM: Prioritize DLWFactor, ConsistencyIndex, PlaceRate
+  - BOX8_CLOSER: Prioritize CloserBonus, BestTimePercentile (at distance)
+  - BOX4_EXPERIENCE: Prioritize ExperienceTier, ConsistencyIndex
+  - BOX6_FORM: Prioritize ExperienceTier, FormMomentum
+  - BOX7_CLOSER: Prioritize CloserBonus, FormMomentum
+
+### NEW: TrackPattern Classification
+- Each track is classified into one of 7 patterns
+- Pattern determines which factors get weight boosts
+
+### TrackComprehensiveAdjustment (v4.0)
+- Track-specific adjustments for ALL boxes (1-8) at 25 tracks
+- Expected +10-15% improvement at problem tracks
 
 ---
 

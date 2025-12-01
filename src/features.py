@@ -549,6 +549,66 @@ def compute_features(df):
         },
     }
     
+    # ========================================================================
+    # v4.1: TRACK-SPECIFIC FACTOR WEIGHT ADJUSTMENTS
+    # Based on analysis of 484+ races identifying which factors matter most
+    # at each track type. Different tracks favor different winning profiles.
+    # ========================================================================
+    
+    TRACK_FACTOR_WEIGHTS = {
+        # BOX 1 DOMINANT TRACKS - Speed/Inside Advantage
+        # Prioritize: BestTimePercentile, EarlySpeedPercentile, BoxPositionBias
+        "Meadows": {"BestTimePercentile": 0.08, "EarlySpeedPercentile": 0.06, "BoxPositionBias": 0.05, "WinStreakFactor": 0.04},
+        "Angle Park": {"BestTimePercentile": 0.08, "EarlySpeedPercentile": 0.06, "BoxPositionBias": 0.05, "WinStreakFactor": 0.04},
+        "Ladbrokes Q Straight": {"BestTimePercentile": 0.08, "EarlySpeedPercentile": 0.06, "BoxPositionBias": 0.05},
+        "Mount Gambier": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.04},
+        "Sale": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.04},
+        "Sandown Park": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.06, "BoxPositionBias": 0.05},
+        
+        # BOX 2 DOMINANT TRACKS - Form/Consistency Advantage
+        # Prioritize: DLWFactor, ConsistencyIndex, PlaceRate
+        "Dubbo": {"DLWFactor": 0.06, "ConsistencyIndex": 0.05, "PlaceRate": 0.04, "TrainerStrikeRate": 0.04},
+        "Ladbrokes Q2 Parklands": {"DLWFactor": 0.05, "ConsistencyIndex": 0.05, "PlaceRate": 0.04},
+        "Nowra": {"DLWFactor": 0.05, "ConsistencyIndex": 0.05, "PlaceRate": 0.04},
+        "Darwin": {"DLWFactor": 0.06, "ConsistencyIndex": 0.05, "PlaceRate": 0.04, "BoxPositionBias": 0.02},  # Special handling
+        
+        # BOX 8 DOMINANT TRACKS - Closer Advantage
+        # Prioritize: CloserBonus, BestTimePercentile at distance
+        "Casino": {"CloserBonus": 0.08, "BestTimePercentile": 0.06, "ExperienceTier": 0.04},
+        "Horsham": {"CloserBonus": 0.07, "BestTimePercentile": 0.05, "ExperienceTier": 0.04},
+        "Warrnambool": {"CloserBonus": 0.07, "BestTimePercentile": 0.06, "ExperienceTier": 0.04},
+        "Healesville": {"CloserBonus": 0.06, "BestTimePercentile": 0.06, "ExperienceTier": 0.05},
+        
+        # BOX 4 DOMINANT TRACKS - Experience Advantage
+        # Prioritize: ExperienceTier, ConsistencyIndex
+        "Bendigo": {"ExperienceTier": 0.06, "ConsistencyIndex": 0.05, "BestTimePercentile": 0.04, "FormMomentumNorm": 0.03},
+        "Shepparton": {"ExperienceTier": 0.06, "ConsistencyIndex": 0.05, "BestTimePercentile": 0.04},
+        
+        # BOX 6 DOMINANT TRACKS - Form Momentum Advantage
+        # Prioritize: ExperienceTier, FormMomentum
+        "Warragul": {"ExperienceTier": 0.06, "FormMomentumNorm": 0.05, "TrainerStrikeRate": 0.04, "FreshnessFactor": 0.03},
+        
+        # BOX 7 DOMINANT TRACKS - Closer Advantage
+        # Prioritize: CloserBonus, FormMomentum
+        "Wentworth Park": {"CloserBonus": 0.08, "FormMomentumNorm": 0.05, "BestTimePercentile": 0.04, "AgeFactor": 0.03},
+        "Mandurah": {"CloserBonus": 0.07, "FormMomentumNorm": 0.05, "BestTimePercentile": 0.04},
+        
+        # PROBLEMATIC TRACKS - Special handling
+        "Rockhampton": {"BoxPositionBias": 0.10, "BestTimePercentile": 0.08, "DLWFactor": 0.05},  # Strong Box 1 focus
+        "BetDeluxe Rockhampton": {"BoxPositionBias": 0.10, "BestTimePercentile": 0.08, "DLWFactor": 0.05},
+    }
+    
+    def get_track_factor_adjustments(track_name):
+        """Get track-specific factor weight adjustments based on winner pattern analysis."""
+        if pd.isna(track_name):
+            return {}
+        track_str = str(track_name).strip()
+        
+        for key in TRACK_FACTOR_WEIGHTS:
+            if key.lower() in track_str.lower() or track_str.lower() in key.lower():
+                return TRACK_FACTOR_WEIGHTS[key]
+        return {}  # Return empty dict for tracks without specific adjustments
+    
     def get_track_comprehensive_adjustment(track_name, box):
         """Get track-specific adjustment for ANY box based on historical patterns."""
         if pd.isna(track_name) or pd.isna(box):
@@ -630,9 +690,50 @@ def compute_features(df):
             )
             df["BoxPositionBias"] = df["BoxPositionBias"] + df["TrackComprehensiveAdjustment"]
             
-            print(f"✓ Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.0)")
+            # === v4.1: TRACK-SPECIFIC FACTOR WEIGHT STORAGE ===
+            # Store the dominant track pattern for reference and weight adjustment
+            def get_track_pattern(track_name):
+                if pd.isna(track_name):
+                    return "NEUTRAL"
+                track_str = str(track_name).strip().lower()
+                
+                box1_tracks = ["meadows", "angle park", "ladbrokes q straight", "mount gambier", "sale", "sandown"]
+                box2_tracks = ["dubbo", "ladbrokes q2", "nowra", "darwin"]
+                box8_tracks = ["casino", "horsham", "warrnambool", "healesville"]
+                box4_tracks = ["bendigo", "shepparton"]
+                box6_tracks = ["warragul"]
+                box7_tracks = ["wentworth park", "mandurah"]
+                problem_tracks = ["rockhampton", "betdeluxe rockhampton"]
+                
+                for t in problem_tracks:
+                    if t in track_str:
+                        return "PROBLEM_BOX1"
+                for t in box1_tracks:
+                    if t in track_str:
+                        return "BOX1_SPEED"
+                for t in box2_tracks:
+                    if t in track_str:
+                        return "BOX2_FORM"
+                for t in box8_tracks:
+                    if t in track_str:
+                        return "BOX8_CLOSER"
+                for t in box4_tracks:
+                    if t in track_str:
+                        return "BOX4_EXPERIENCE"
+                for t in box6_tracks:
+                    if t in track_str:
+                        return "BOX6_FORM"
+                for t in box7_tracks:
+                    if t in track_str:
+                        return "BOX7_CLOSER"
+                return "NEUTRAL"
+            
+            df["TrackPattern"] = df["Track"].apply(get_track_pattern)
+            
+            print(f"✓ Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)")
             print(f"  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration")
             print(f"  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora")
+            print(f"  Track patterns identified: {df['TrackPattern'].value_counts().to_dict()}")
         else:
             df["TrackBox1Adjustment"] = 0.0
             df["TrackBox4Adjustment"] = 0.0
