@@ -604,8 +604,8 @@ def compute_features(df):
         
         # BOX 2 DOMINANT TRACKS - Form/Consistency Advantage
         # Prioritize: DLWFactor, ConsistencyIndex, PlaceRate
-        "Dubbo": {"DLWFactor": 0.06, "ConsistencyIndex": 0.05, "PlaceRate": 0.04, "TrainerStrikeRate": 0.04},
-        "Nowra": {"DLWFactor": 0.05, "ConsistencyIndex": 0.05, "PlaceRate": 0.04},
+        "Dubbo": {"DLWFactor": 0.08, "ConsistencyIndex": 0.07, "PlaceRate": 0.06, "TrainerStrikeRate": 0.04, "RecentPlaceStreak": 0.04},  # v4.4: BOOSTED - Box 5 50% Dec 1
+        "Nowra": {"CloserBonus": 0.10, "DLWFactor": 0.08, "ConsistencyIndex": 0.06, "PlaceRate": 0.05},  # v4.4: BOOSTED - Box 7 27.3% Dec 1
         
         # v4.2: Q PARKLANDS - Box 2 dominant (40% Nov 30)
         # Reduce Box 1 bias, boost form/consistency factors
@@ -640,7 +640,7 @@ def compute_features(df):
         # BOX 7 DOMINANT TRACKS - Closer Advantage
         # Prioritize: CloserBonus, FormMomentum
         "Wentworth Park": {"CloserBonus": 0.08, "FormMomentumNorm": 0.05, "BestTimePercentile": 0.04, "AgeFactor": 0.03},
-        "Mandurah": {"CloserBonus": 0.07, "FormMomentumNorm": 0.05, "BestTimePercentile": 0.04},
+        "Mandurah": {"BestTimePercentile": 0.08, "EarlySpeedPercentile": 0.07, "BoxPositionBias": 0.06, "WinStreakFactor": 0.05},  # v4.4: SPEED TRACK - Box 1 36.4% Dec 1
         
         # v4.2: PROBLEMATIC TRACKS - MAJOR OVERHAUL based on Nov 30 actual results
         # ROCKHAMPTON: Box 1 (33.3%) + Box 3 (25%) - Inside track advantage
@@ -1453,21 +1453,49 @@ def compute_features(df):
         df["FieldSizeAdjustment"] = 0.0
     
     # ========================================================================
-    # ENHANCEMENT #9: INCREASED WINNING STREAK BONUS (v4.3 UPDATE)
+    # ENHANCEMENT #9: INCREASED WINNING STREAK BONUS (v4.4 UPDATE)
     # Analysis of missed winners showed 19% had 2+ consecutive wins (hot streak)
-    # v4.3: FURTHER INCREASE bonus - hot form is critical predictor
+    # v4.4: MAXIMUM INCREASE bonus - hot form is THE CRITICAL predictor
     # ========================================================================
     if "DLW" in df.columns:
         df["WinStreakFactorV2"] = df["DLW"].apply(
-            lambda x: 1.40 if pd.notna(x) and x <= 7 else     # v4.3: Hot streak - CRITICAL (was 1.30)
-                     1.28 if pd.notna(x) and x <= 14 else    # v4.3: Recent winner (was 1.20)
-                     1.10 if pd.notna(x) and x <= 28 else    # v4.3: Within month (was 1.05)
-                     0.92 if pd.notna(x) and x <= 60 else    # v4.3: Going cold (was 0.95)
-                     0.80                                     # v4.3: Long time (was 0.85)
+            lambda x: 1.50 if pd.notna(x) and x <= 7 else     # v4.4: Hot streak - MAXIMUM BOOST (was 1.40)
+                     1.32 if pd.notna(x) and x <= 14 else    # v4.4: Recent winner (was 1.28)
+                     1.15 if pd.notna(x) and x <= 28 else    # v4.4: Within month (was 1.10)
+                     0.90 if pd.notna(x) and x <= 60 else    # v4.4: Going cold (was 0.92)
+                     0.75                                     # v4.4: Long time (was 0.80)
         )
         # Replace old WinStreakFactor with enhanced version
         df["WinStreakFactor"] = df["WinStreakFactorV2"]
-        print(f"✓ Enhanced WinStreakFactor v4.3 (1.40x for hot streaks, 1.28x for recent wins)")
+        print(f"✓ Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)")
+    
+    # ========================================================================
+    # ENHANCEMENT #9B: RECENT PLACE STREAK (v4.4 NEW)
+    # Dogs that have been placing consistently in last 3 races show good form
+    # Even if not winning, consistent placing indicates competitiveness
+    # ========================================================================
+    if "Last3Finishes" in df.columns:
+        def calc_recent_place_streak(finishes):
+            if not isinstance(finishes, list) or len(finishes) == 0:
+                return 1.0
+            
+            # Count top-3 finishes in last 3 races
+            places = sum(1 for f in finishes[:3] if pd.notna(f) and f <= 3)
+            
+            if places >= 3:
+                return 1.12  # v4.4: All 3 recent races in top 3 - strong form
+            elif places == 2:
+                return 1.06  # v4.4: 2 of 3 in top 3 - good form
+            elif places == 1:
+                return 1.03  # v4.4: 1 of 3 in top 3 - some form
+            else:
+                return 0.98  # v4.4: No top-3 finishes - losing form
+        
+        df["RecentPlaceStreak"] = df["Last3Finishes"].apply(calc_recent_place_streak)
+        print(f"✓ Added RecentPlaceStreak v4.4 (1.12x for 3/3 places, 1.06x for 2/3)")
+    else:
+        df["RecentPlaceStreak"] = 1.0
+        print("⚠️ WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0")
     
     # ========================================================================
     # ENHANCEMENT #10: CLOSER BONUS FOR BOX 7-8 AT LONG DISTANCES
@@ -1617,25 +1645,26 @@ def compute_features(df):
                 "RailPreference": 0.04,        # v4.3: INCREASED for rail advantage
                 "BoxBiasFactor": 0.03,         # v4.3: INCREASED
                 
-                # === CAREER/EXPERIENCE (28% total) - v4.3 BOOSTED ===
-                "PlaceRate": 0.06,             # v4.3: INCREASED - key predictor
-                "ConsistencyIndex": 0.06,      # v4.3: INCREASED - winners are consistent
+                # === CAREER/EXPERIENCE (30% total) - v4.4 MAXIMUM BOOST ===
+                "PlaceRate": 0.07,             # v4.4: INCREASED - placing dogs win more
+                "ConsistencyIndex": 0.08,      # v4.4: MAXIMUM BOOST - winners are VERY consistent
                 "WinPlaceRate": 0.05,          
                 "ExperienceTier": 0.04,        
                 "TrainerStrikeRate": 0.04,     
-                "ClassRating": 0.03,           
+                "ClassRating": 0.02,           # v4.4: REDUCED - less important
                 
-                # === SPEED/TIMING (20% total) - v4.3 SLIGHTLY REDUCED ===
+                # === SPEED/TIMING (18% total) - v4.4 FURTHER REDUCED ===
                 "EarlySpeedPercentile": 0.05,  
-                "BestTimePercentile": 0.05,    # v4.3: REDUCED from 0.06 - form matters more
+                "BestTimePercentile": 0.04,    # v4.4: REDUCED further - form > speed
                 "SectionalSec": 0.04,          
                 "EarlySpeedIndex": 0.03,       
-                "Speed_kmh": 0.02,             # v4.3: REDUCED
+                "Speed_kmh": 0.01,             # v4.4: REDUCED
                 "SpeedClassification": 0.01,   
                 
-                # === FORM/MOMENTUM (14% total) - v4.3 INCREASED ===
-                "DLWFactor": 0.04,             # v4.3: INCREASED - recent wins matter
-                "WinStreakFactor": 0.05,       # v4.3: INCREASED - hot form critical
+                # === FORM/MOMENTUM (17% total) - v4.4 MAXIMUM INCREASE ===
+                "DLWFactor": 0.05,             # v4.4: INCREASED - recent wins critical
+                "WinStreakFactor": 0.06,       # v4.4: MAXIMUM - hot form is THE key
+                "RecentPlaceStreak": 0.03,     # v4.4: NEW - consistent placing shows form
                 "FormMomentumNorm": 0.03,      
                 "MarginFactor": 0.02,          
                 
@@ -1829,6 +1858,23 @@ def compute_features(df):
         # This prevents dogs in bad boxes from scoring too high
         box_penalty = row.get("BoxPenaltyFactor", 1.0)
         
+        # Enhancement #13 (v4.4): Hot Trainer + Hot Form COMBO BONUS
+        # When both trainer and dog are on hot streaks, amplify the effect
+        recent_place_streak = row.get("RecentPlaceStreak", 1.0)
+        dlw = row.get("DLW", 999)
+        trainer_strike_rate = row.get("TrainerStrikeRate", 0)
+        
+        hot_combo_bonus = 1.0
+        # Hot dog (DLW ≤ 7) + Hot trainer (25%+ strike rate) = MAXIMUM CONFIDENCE
+        if pd.notna(dlw) and dlw <= 7 and pd.notna(trainer_strike_rate) and trainer_strike_rate >= 0.25:
+            hot_combo_bonus = 1.15  # v4.4: +15% when both hot
+        # Hot dog + good trainer (20%+ strike rate) = HIGH CONFIDENCE  
+        elif pd.notna(dlw) and dlw <= 7 and pd.notna(trainer_strike_rate) and trainer_strike_rate >= 0.20:
+            hot_combo_bonus = 1.08  # v4.4: +8% when dog hot, trainer good
+        # Recent placer + hot trainer = GOOD CONFIDENCE
+        elif recent_place_streak >= 1.06 and pd.notna(trainer_strike_rate) and trainer_strike_rate >= 0.25:
+            hot_combo_bonus = 1.06  # v4.4: +6% when both showing form
+        
         # Combine all enhancement factors (multiplicative)
         enhancement_multiplier = (
             grade_factor *
@@ -1840,7 +1886,9 @@ def compute_features(df):
             win_streak_bonus *        # Enhanced winning streak
             closer_bonus *            # Closer bonus at long distances
             trainer_momentum *        # Trainer hot streak
-            box_penalty               # v3.7: Box penalty factor (Box 7=0.75x, Box 3=0.80x)
+            box_penalty *             # v3.7: Box penalty factor (Box 7=0.75x, Box 3=0.80x)
+            recent_place_streak *     # v4.4: Recent placing consistency
+            hot_combo_bonus           # v4.4: Hot trainer + hot form combo
         )
         
         # Apply enhancement multiplier (centered around 1.0)

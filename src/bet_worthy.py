@@ -27,13 +27,13 @@ import numpy as np
 # ===== CONFIGURABLE THRESHOLDS - Ultra-Selective Betting =====
 # Tiered thresholds for different confidence levels
 
-# TIER 0 THRESHOLDS (LOCK OF THE DAY - ~37-42% expected win rate)
+# TIER 0 THRESHOLDS (LOCK OF THE DAY - ~40-45% expected win rate)
 # ALL factors must align: High score, big margin, favorable box, veteran dog
 TIER0_MIN_SCORE = 50.0               # Requires 50+ score
-TIER0_MIN_MARGIN_PERCENT = 15.0      # Requires 15%+ margin
-TIER0_MIN_MARGIN_ABSOLUTE = 7.0      # Requires 7+ point separation
-TIER0_REQUIRED_BOXES = [1, 8]        # Must be in Box 1 or 8 (32.3% combined wins)
-TIER0_MIN_CAREER_STARTS = 30         # Experienced/proven dog
+TIER0_MIN_MARGIN_PERCENT = 18.0      # v4.4: INCREASED from 15% - ultra-selective
+TIER0_MIN_MARGIN_ABSOLUTE = 8.0      # v4.4: INCREASED from 7 - bigger separation
+TIER0_REQUIRED_BOXES = [1, 2, 8]     # v4.4: Added Box 2 (19.7% win rate Dec 1)
+TIER0_MIN_CAREER_STARTS = 25         # v4.4: REDUCED from 30 - allow proven performers
 
 # NEW: TIER0 requires LOW upset track for enhanced confidence
 # Based on Nov 26-28 analysis: High upset tracks (Healesville, Richmond) 
