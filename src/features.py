@@ -9,11 +9,15 @@ def compute_features(df):
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
     df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
 
-    # Placeholder values — replace with parsed metrics later
-    df["BestTimeSec"] = 22.5
-    df["SectionalSec"] = 8.5
-    df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
-    df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+    # Provide defaults only if fields don't already exist from parsing
+    if "BestTimeSec" not in df.columns:
+        df["BestTimeSec"] = 22.5
+    if "SectionalSec" not in df.columns:
+        df["SectionalSec"] = 8.5
+    if "Last3TimesSec" not in df.columns:
+        df["Last3TimesSec"] = [[22.65, 22.52, 22.77] for _ in range(len(df))]
+    if "Margins" not in df.columns:
+        df["Margins"] = [[5.0, 6.3, 10.3] for _ in range(len(df))]
     df["BoxBiasFactor"] = 0.1
     df["TrackConditionAdj"] = 1.0
 
