@@ -1,0 +1,42 @@
+================================================================================
+SPEED MATRIX ANALYSIS SUMMARY
+================================================================================
+
+Analysis Date: 2025-11-26T01:41:34.049507
+Race Date: 2024-11-25
+Total Races: 137
+Total Runners: 1043
+Total Winners Tagged: 137
+
+--------------------------------------------------------------------------------
+PREDICTION ACCURACY
+--------------------------------------------------------------------------------
+
+Old Speed Matrix:
+  Winners Picked: 40/137
+  Accuracy: 29.2%
+
+New Speed Matrix:
+  Winners Picked: 19/137
+  Accuracy: 13.87%
+
+Improvement:
+  Additional Winners: -21
+  Percentage Point Change: -15.33pp
+
+--------------------------------------------------------------------------------
+TOP 10 WEIGHTED VARIABLES
+--------------------------------------------------------------------------------
+
+ 1. RestFactor                - 50.50% (separation: 1.409)
+ 2. FinishConsistency         -  8.31% (separation: 0.232)
+ 3. DrawFactor                -  6.07% (separation: 0.169)
+ 4. EarlySpeedIndex           -  5.50% (separation: 0.153)
+ 5. BoxPositionBias           -  4.95% (separation: 0.138)
+ 6. DLW                       -  4.44% (separation: 0.124)
+ 7. DLWFactor                 -  2.46% (separation: 0.069)
+ 8. PlaceRate                 -  2.34% (separation: 0.065)
+ 9. CareerWins                -  2.16% (separation: 0.060)
+10. RecentFormBoost           -  2.07% (separation: 0.058)
+
+================================================================================
