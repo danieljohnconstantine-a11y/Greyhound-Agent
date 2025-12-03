@@ -4,6 +4,7 @@ import pdfplumber
 import os
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
+from src.exporter import export_to_excel  # ✅ Excel export with validation
 
 def extract_text_from_pdf(pdf_path):
     text = ""
@@ -65,6 +66,9 @@ picks = picks[ordered_cols]
 
 picks.to_csv("outputs/picks.csv", index=False)
 print("🎯 Saved top picks → outputs/picks.csv")
+
+# ✅ Export to Excel with all fields and validation
+export_to_excel(combined_df, "outputs", "greyhound_analysis_full.xlsx")
 
 # ✅ Display top picks
 print("\n🏁 Top Picks Across All Tracks:")
