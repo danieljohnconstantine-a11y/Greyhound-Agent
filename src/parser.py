@@ -1,9 +1,61 @@
 import pandas as pd
 import re
+import logging
+
+# Get logger for this module (logging is configured in main.py if needed)
+logger = logging.getLogger(__name__)
 
 # Distance tolerance constants for matching race times to current race distance
 DISTANCE_EXACT_MATCH_TOLERANCE = 10  # meters
 DISTANCE_SIMILAR_MATCH_TOLERANCE = 50  # meters
+
+# Distance conversion: enable converting times from different distances
+# Formula: converted_time = original_time * (target_distance / original_distance)
+# This assumes consistent average speed (m/s) across distances, which is reasonable for greyhounds
+ENABLE_DISTANCE_CONVERSION = True
+# Maximum distance difference to convert from (beyond this, conversion is unreliable)
+MAX_DISTANCE_CONVERSION_DIFF = 200  # meters (e.g., can convert 400m time to 500m, but not 300m to 600m)
+
+def convert_time_to_distance(original_time, original_distance, target_distance):
+    """
+    Convert a race time from one distance to an estimated time at another distance.
+    
+    Uses linear scaling based on average speed:
+    - Speed (m/s) = original_distance / original_time
+    - Estimated time = target_distance / speed = original_time * (target_distance / original_distance)
+    
+    This is an approximation - actual times may vary due to:
+    - Track conditions
+    - Dog's stamina (sprint vs distance specialists)
+    - Box position effects
+    
+    Args:
+        original_time: Time in seconds at original distance
+        original_distance: Original distance in meters
+        target_distance: Target distance to convert to in meters
+        
+    Returns:
+        Estimated time at target distance in seconds
+    """
+    if original_distance <= 0 or original_time <= 0:
+        return None
+    
+    # Calculate speed and convert
+    speed_mps = original_distance / original_time
+    converted_time = target_distance / speed_mps
+    
+    return round(converted_time, 2)
+
+# Month abbreviation to number mapping for date parsing
+MONTH_MAP = {
+    'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+    'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+    'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+}
+
+# Year conversion constant (for 2-digit years in format YY -> 20YY)
+# Assumes all greyhound racing data is from 2000-2099 (current era)
+BASE_YEAR = 2000
 
 def parse_race_form(text):
     """
@@ -33,29 +85,45 @@ def parse_race_form(text):
         line = line.strip()
 
         # Match race header - flexible format for different months and date formats
-        # Format: "Race No  1 Oct 16 04:00PM Angle Park 530m" or "Race No 07 Sep 25 06:04PM Q STRAIGHT 300m"
+        # Format: "Race No  1 Oct 16 04:00PM Angle Park 530m"
+        # Groups: (day_of_race, month_abbr, year_2digit, time, track, distance)
+        # Example: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
+        # Captures: day=22, month=Nov, year=25, time=07:21PM, track=WENTWORTH PARK, distance=520
         header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+?)\s+(\d+)m", line)
         if header_match:
             race_number += 1
-            race_num, month, day, time, track, distance = header_match.groups()
-            # Map month abbreviations to numbers
-            month_map = {'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
-                        'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'}
-            month_num = month_map.get(month, '01')
+            day_of_race, month_abbr, year_2digit, time, track, distance = header_match.groups()
+            
+            # Convert 2-digit year to 4-digit year (e.g., '25' -> 2025)
+            year = BASE_YEAR + int(year_2digit)
+            
+            # Convert month abbreviation to numeric format using MONTH_MAP
+            month_num = MONTH_MAP.get(month_abbr, None)
+            if month_num is None:
+                # Month abbreviation not recognized, use default and log error
+                logger.error(
+                    f"❌ Unrecognized month abbreviation '{month_abbr}' in race header. "
+                    f"Using '01' (January) as fallback. Please update MONTH_MAP if this is a valid month."
+                )
+                month_num = '01'  # Default to January to maintain valid ISO date format
+            
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"2024-{month_num}-{day.zfill(2)}",
+                "RaceDate": f"{year}-{month_num}-{day_of_race.zfill(2)}",  # ISO format: YYYY-MM-DD
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
             }
+            logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{day_of_race.zfill(2)}")
             current_dog_section_index = -1  # Reset dog section when new race starts
             continue
 
         # Match dog entry with glued form number
-        # Form number can contain digits and 'x' character (e.g., "8x324")
+        # Form number can contain digits, 'x' and 'f' characters (e.g., "8x324", "67f67")
+        # BUG FIX: Added 'f' to form number pattern - many dogs have 'f' in their form number
+        # which was causing them to not be parsed (e.g., "67f67Lil Patti" was missed)
         dog_match = re.match(
-            r"""^(\d+)\.?\s*([0-9x]{3,6})?([A-Za-z''\- ]+)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+            r"""^(\d+)\.?\s*([0-9xf]{2,7})?([A-Za-z''\- ]+)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
             line
         )
 
@@ -92,22 +160,55 @@ def parse_race_form(text):
             dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
             continue
 
-        # Check if this is a dog name header (all caps, short line)
+        # Check if this is a dog name header (dog name in caps at start of line)
         # This marks the start of a dog's detailed section
-        # Improved matching: exact match or very close match, excluding generic headers
-        if line.upper() == line and 3 <= len(line) <= 50 and len(line.split()) <= 5:
+        # IMPROVED: Use fuzzy/prefix matching to handle lines like "RUBY'S MATE j50s j350s t50s t350s"
+        # where the dog name appears at the start but has extra lowercase text after it
+        # Note: Don't require entire line to be uppercase - just check if it starts with uppercase chars
+        first_word = line.split()[0] if line.split() else ""
+        looks_like_header = (
+            len(line) >= 3 and 
+            first_word.upper() == first_word and  # First word is uppercase
+            len(first_word) >= 2 and
+            first_word[0].isalpha()  # Starts with a letter (not a number like race position)
+        )
+        
+        if looks_like_header:
             # Exclude common non-dog headers
-            if any(keyword in line for keyword in ['RACE', 'PRIZE', 'DISTANCE', 'TRACK', 'HORSE', 'WINNER']):
+            if any(keyword in line.upper() for keyword in ['RACE', 'PRIZE', 'DISTANCE', 'TRACK', 'HORSE', 'WINNER', 'MARGIN', 'LENGTHS', 'SETTLED', 'SECOND', 'THIRD', 'FOURTH']):
                 continue
             
-            # Try to match this to a known dog
-            line_normalized = line.replace("'", "").replace("-", " ").replace("  ", " ").strip()
+            # Try to match this to a known dog using prefix/fuzzy matching
+            line_normalized = line.replace("'", "").replace("-", " ").replace("  ", " ").strip().upper()
+            
+            best_match_idx = -1
+            best_match_len = 0
+            
             for dog_idx, dog in enumerate(dogs):
                 dog_name_normalized = dog["DogName"].upper().replace("'", "").replace("-", " ").strip()
-                # More strict matching: the line should be the dog name (with minor variations)
+                
+                # Method 1: Exact match (original behavior)
                 if dog_name_normalized == line_normalized:
-                    current_dog_section_index = dog_idx
-                    break
+                    best_match_idx = dog_idx
+                    best_match_len = len(dog_name_normalized)
+                    break  # Exact match is best, stop searching
+                
+                # Method 2: Prefix match - dog name appears at the start of the line
+                # E.g., "RUBYS MATE J50S J350S" starts with "RUBYS MATE"
+                if line_normalized.startswith(dog_name_normalized + " ") or line_normalized.startswith(dog_name_normalized + "\t"):
+                    # Only update if this is a longer/better match
+                    if len(dog_name_normalized) > best_match_len:
+                        best_match_idx = dog_idx
+                        best_match_len = len(dog_name_normalized)
+                
+                # Method 3: Check if the line starts with the dog name (no space required for longer names)
+                elif len(dog_name_normalized) >= 5 and line_normalized.startswith(dog_name_normalized):
+                    if len(dog_name_normalized) > best_match_len:
+                        best_match_idx = dog_idx
+                        best_match_len = len(dog_name_normalized)
+            
+            if best_match_idx >= 0:
+                current_dog_section_index = best_match_idx
 
         # Extract timing data from race history lines
         # Only attribute to a dog if we know which dog's section we're in
@@ -249,8 +350,32 @@ def parse_race_form(text):
                 if similar_distance_times:
                     dogs[dog_index]["BestTimeSec"] = min(similar_distance_times)
                     dogs[dog_index]["Last3TimesSec"] = similar_distance_times[-3:] if len(similar_distance_times) >= 3 else similar_distance_times
-                # Otherwise: skip this dog's BestTimeSec (leave it as NaN)
-                # Don't use times from vastly different distances as it's misleading
+                
+                # DISTANCE CONVERSION: If no similar-distance times, convert from other distances
+                elif ENABLE_DISTANCE_CONVERSION:
+                    # Get all times with valid distances within conversion range
+                    convertible_times = [
+                        (time, dist) for time, dist in race_times 
+                        if dist is not None and abs(dist - dog_race_distance) <= MAX_DISTANCE_CONVERSION_DIFF
+                    ]
+                    
+                    if convertible_times:
+                        # Convert each time to the target distance
+                        converted_times = []
+                        for orig_time, orig_dist in convertible_times:
+                            converted = convert_time_to_distance(orig_time, orig_dist, dog_race_distance)
+                            if converted is not None:
+                                converted_times.append(converted)
+                        
+                        if converted_times:
+                            # Use the best (fastest) converted time
+                            dogs[dog_index]["BestTimeSec"] = min(converted_times)
+                            # Mark as converted for transparency
+                            dogs[dog_index]["TimeConverted"] = True
+                            # Last3 from converted times
+                            dogs[dog_index]["Last3TimesSec"] = converted_times[-3:] if len(converted_times) >= 3 else converted_times
+                            logger.info(f"Converted timing for {dogs[dog_index].get('DogName', 'Unknown')}: "
+                                       f"{len(convertible_times)} times from other distances -> {min(converted_times):.2f}s at {dog_race_distance}m")
         
         if sec_times:
             # Filter sectional times for the same distance (exact match tolerance)
@@ -271,7 +396,8 @@ def parse_race_form(text):
                 ]
                 if similar_distance_sectionals:
                     dogs[dog_index]["SectionalSec"] = min(similar_distance_sectionals)
-                # Otherwise: skip (leave as NaN)
+                # Note: We don't convert sectional times as they're for the initial portion of the race
+                # and don't scale linearly with total distance
         
         # Calculate box preference/bias for this dog
         box_history = timing.get("box_history", [])
@@ -324,6 +450,25 @@ def parse_race_form(text):
 
     df = pd.DataFrame(dogs)
     
+    # Normalize column names: strip whitespace and ensure consistent casing
+    df.columns = df.columns.str.strip()
+    
+    # Log parsing results
+    logger.info(f"✅ Parsed {len(df)} dogs across {race_number} races")
+    logger.info(f"📊 Columns in parsed DataFrame: {df.columns.tolist()}")
+    
+    # Check for critical columns and log warnings if missing
+    critical_columns = ['Distance', 'DogName', 'Box', 'Track', 'RaceNumber']
+    missing_critical = [col for col in critical_columns if col not in df.columns]
+    if missing_critical:
+        logger.warning(f"⚠️ Missing critical columns: {missing_critical}")
+    
+    # Log sample of Distance values to verify parsing
+    if 'Distance' in df.columns:
+        logger.info(f"📏 Distance values (sample): {df['Distance'].unique()[:5].tolist()}")
+    else:
+        logger.error("❌ 'Distance' column is MISSING from parsed DataFrame!")
+    
     # Validation: Count how many dogs have timing data
     if len(df) > 0:
         best_time_count = df["BestTimeSec"].notna().sum() if "BestTimeSec" in df.columns else 0
@@ -333,7 +478,9 @@ def parse_race_form(text):
         
         if best_time_count == 0:
             print(f"   ⚠️  WARNING: No BestTimeSec data extracted from any dog")
+            logger.warning("No BestTimeSec data extracted from any dog")
         if sec_time_count == 0:
             print(f"   ⚠️  WARNING: No SectionalSec data extracted from any dog")
+            logger.warning("No SectionalSec data extracted from any dog")
     
     return df
