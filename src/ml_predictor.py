@@ -353,7 +353,8 @@ def load_historical_data(data_dir='data'):
     Returns:
         tuple: (list of race DataFrames, list of winning boxes)
     """
-    from src.parser import parse_pdf
+    import pdfplumber
+    from src.parser import parse_race_form
     from src.features import compute_features
     import glob
     
@@ -386,31 +387,33 @@ def load_historical_data(data_dir='data'):
     
     for pdf_file in sorted(pdf_files):
         try:
-            # Parse PDF
-            parsed_data = parse_pdf(pdf_file)
-            if not parsed_data:
-                continue
+            # Extract text from PDF using pdfplumber
+            with pdfplumber.open(pdf_file) as pdf:
+                text = ""
+                for page in pdf.pages:
+                    text += page.extract_text() + "\n"
             
-            # Process each race
-            for race_info in parsed_data:
-                track = race_info.get('track', '')
-                race_num = race_info.get('race_number', '')
-                df_race = race_info.get('race_data')
+            # Parse the extracted text
+            df_all_dogs = parse_race_form(text)
+            if df_all_dogs is None or df_all_dogs.empty:
+                continue
                 
-                if df_race is None or df_race.empty:
-                    continue
-                
-                # Compute features
-                df_race = compute_features(df_race)
-                
-                # Match with results
-                key = f"{track}_R{race_num}"
-                if key in all_results:
-                    race_data.append(df_race)
-                    winners.append(all_results[key])
+            # Compute features for all dogs
+            df_all_dogs = compute_features(df_all_dogs)
+            
+            # Group by race and match with results
+            if 'Track' in df_all_dogs.columns and 'RaceNumber' in df_all_dogs.columns:
+                for (track, race_num), df_race in df_all_dogs.groupby(['Track', 'RaceNumber']):
+                    # Match with results
+                    key = f"{track}_R{race_num}"
+                    if key in all_results:
+                        race_data.append(df_race)
+                        winners.append(all_results[key])
         
         except Exception as e:
             print(f"⚠️  Error processing {pdf_file}: {e}")
+            import traceback
+            traceback.print_exc()
             continue
     
     print(f"✅ Successfully loaded {len(race_data)} races with results")
