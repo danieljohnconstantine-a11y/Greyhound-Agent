@@ -34,8 +34,16 @@ def demo_hybrid_prediction(pdf_file=None, model_path='models/greyhound_ml_v1.pkl
     
     # Check if model exists
     if not os.path.exists(model_path):
-        print(f"\n❌ ML model not found: {model_path}")
-        print("   Please run: python train_ml_model.py")
+        print(f"\n❌ ML model not found at: {model_path}")
+        print(f"\n   Current directory: {os.getcwd()}")
+        print(f"   Looking for model at: {os.path.abspath(model_path)}")
+        print(f"\n   To train the ML model:")
+        print(f"   - Windows: Double-click train_ml.bat")
+        print(f"   - Command line: python train_ml_model.py")
+        print(f"\n   The training will:")
+        print(f"   1. Create the 'models' directory if needed")
+        print(f"   2. Train on all PDFs and results CSVs in data/")
+        print(f"   3. Save model to {model_path}")
         return
     
     # Load ML model

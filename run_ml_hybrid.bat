@@ -8,15 +8,6 @@ echo v4.4 + Machine Learning
 echo ========================================
 echo.
 
-REM Check if model exists
-if not exist "models\greyhound_ml_v1.pkl" (
-    echo ERROR: ML model not found!
-    echo Please run train_ml.bat first to train the model
-    echo.
-    pause
-    exit /b 1
-)
-
 REM Check if data folder exists
 if not exist "data\" (
     echo ERROR: data folder not found!
@@ -27,6 +18,8 @@ if not exist "data\" (
 
 echo Running ML hybrid predictions...
 echo Only bets when v4.4 AND ML both agree (35-40%% win rate expected)
+echo.
+echo Note: If model not found, script will show instructions to train it
 echo.
 
 REM Run hybrid predictions
