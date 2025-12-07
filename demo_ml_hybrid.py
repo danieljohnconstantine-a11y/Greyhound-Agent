@@ -12,7 +12,8 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(__file__))
 
-from src.parser import parse_pdf
+import pdfplumber
+from src.parser import parse_race_form
 from src.features import compute_features
 from src.scorer import score_race
 from src.bet_worthy import detect_bet_worthy
@@ -64,7 +65,14 @@ def demo_hybrid_prediction(pdf_file=None, model_path='models/greyhound_ml_v1.pkl
     # Parse PDF
     print(f"\n🔍 Parsing race data...")
     try:
-        parsed_data = parse_pdf(pdf_file)
+        # Extract text from PDF
+        text = ""
+        with pdfplumber.open(pdf_file) as pdf:
+            for page in pdf.pages:
+                text += page.extract_text() + "\n"
+        
+        # Parse race form
+        parsed_data = parse_race_form(text)
         if not parsed_data:
             print("   ❌ Failed to parse PDF")
             return
