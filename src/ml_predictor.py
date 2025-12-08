@@ -370,14 +370,19 @@ def load_historical_data(data_dir='data'):
         df_results = pd.read_csv(results_file)
         for _, row in df_results.iterrows():
             track = row.get('Track', row.get('track', ''))
-            race_num = row.get('Race', row.get('race', ''))
+            race_num = row.get('RaceNumber', row.get('Race', row.get('race', '')))
             winner = row.get('Winner', row.get('winner', ''))
             
-            # Extract box number from winner (e.g., "2" from "2546")
-            if isinstance(winner, str) and winner:
+            # Extract box number from winner
+            if isinstance(winner, (int, float)):
+                winner_box = int(winner)
+            elif isinstance(winner, str) and winner:
                 winner_box = int(winner[0])
-                key = f"{track}_R{race_num}"
-                all_results[key] = winner_box
+            else:
+                continue
+                
+            key = f"{track}_R{race_num}"
+            all_results[key] = winner_box
     
     print(f"📊 Loaded {len(all_results)} race results")
     
