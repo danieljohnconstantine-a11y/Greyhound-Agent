@@ -145,7 +145,7 @@ class GreyhoundMLPredictor:
             X_race, _ = self.prepare_features(race_df)
             
             # Create labels: 1 for winner, 0 for others
-            y_race = (race_df['BoxDraw'] == winner_box).astype(int)
+            y_race = (race_df['Box'] == winner_box).astype(int)
             
             X_list.append(X_race)
             y_list.append(y_race)
