@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import pdfplumber
 import os
+import sys
+import glob
 import logging
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
@@ -34,20 +36,45 @@ def extract_text_from_pdf(pdf_path):
 logger.info("🚀 Starting Greyhound Analytics - Ultra-Selective Betting v3.0")
 print("🚀 Starting Greyhound Analytics - Ultra-Selective Betting v3.0")
 
-# ✅ Find all PDFs in data folder
-pdf_folder = "data"
-pdf_files = [f for f in os.listdir(pdf_folder) if f.lower().endswith(".pdf")]
-pdf_files.sort(key=lambda x: os.path.getmtime(os.path.join(pdf_folder, x)), reverse=True)
-
-if not pdf_files:
-    print("❌ No PDF files found in data folder.")
-    exit()
+# ✅ Determine PDF files to process
+# If command-line arguments provided, use those files
+# Otherwise, use all PDFs in the data folder
+if len(sys.argv) > 1:
+    # Command-line arguments provided (e.g., data_predictions\*.pdf)
+    pdf_paths = []
+    for arg in sys.argv[1:]:
+        # Handle wildcards
+        if '*' in arg or '?' in arg:
+            pdf_paths.extend(glob.glob(arg))
+        else:
+            pdf_paths.append(arg)
+    
+    # Filter to only .pdf files and verify they exist
+    pdf_paths = [p for p in pdf_paths if p.lower().endswith('.pdf') and os.path.exists(p)]
+    
+    if not pdf_paths:
+        print("❌ No valid PDF files found from command-line arguments.")
+        print(f"   Arguments: {sys.argv[1:]}")
+        exit()
+    
+    print(f"📁 Processing {len(pdf_paths)} PDF file(s) from command line")
+else:
+    # No arguments - use default data folder
+    pdf_folder = "data"
+    pdf_files = [f for f in os.listdir(pdf_folder) if f.lower().endswith(".pdf")]
+    pdf_files.sort(key=lambda x: os.path.getmtime(os.path.join(pdf_folder, x)), reverse=True)
+    pdf_paths = [os.path.join(pdf_folder, f) for f in pdf_files]
+    
+    if not pdf_paths:
+        print("❌ No PDF files found in data folder.")
+        exit()
+    
+    print(f"📁 Processing {len(pdf_paths)} PDF file(s) from data/ folder")
 
 all_dogs = []
 
 # ✅ Process each PDF
-for pdf_file in pdf_files:
-    pdf_path = os.path.join(pdf_folder, pdf_file)
+for pdf_path in pdf_paths:
     print(f"📄 Processing: {pdf_path}")
     raw_text = extract_text_from_pdf(pdf_path)
     df = parse_race_form(raw_text)
