@@ -40,6 +40,23 @@ if errorlevel 1 (
     exit /b 1
 )
 
+REM Verify the model file was actually created
+if not exist "models\greyhound_ml_v1.pkl" (
+    echo.
+    echo ========================================
+    echo WARNING: Training script completed but model file not found!
+    echo ========================================
+    echo.
+    echo Expected location: models\greyhound_ml_v1.pkl
+    echo Current directory: %CD%
+    echo.
+    echo Please check the training output above for errors.
+    echo The script may have encountered an issue during the save step.
+    echo.
+    pause
+    exit /b 1
+)
+
 echo.
 echo ========================================
 echo Training complete!

@@ -39,7 +39,7 @@ def main():
             print("❌ No race data found. Please ensure:")
             print("   - PDF files in data/ folder (*form.pdf)")
             print("   - Results CSVs in data/ folder (results_*.csv)")
-            return
+            sys.exit(1)
         
         print(f"\n✅ Data loaded successfully:")
         print(f"   Total races: {len(race_data)}")
@@ -59,7 +59,7 @@ def main():
         print(f"❌ Error loading data: {e}")
         import traceback
         traceback.print_exc()
-        return
+        sys.exit(1)
     
     # Step 2: Initialize ML predictor
     print("\n🤖 STEP 2: Initializing ML predictor...")
@@ -112,7 +112,7 @@ def main():
         print(f"❌ Error during training: {e}")
         import traceback
         traceback.print_exc()
-        return
+        sys.exit(1)
     
     # Step 4: Save model
     print("\n💾 STEP 4: Saving trained model...")
@@ -125,9 +125,17 @@ def main():
         predictor.save_model(model_path)
         print(f"✅ Model saved successfully: {model_path}")
         print(f"   File size: {os.path.getsize(model_path) / 1024:.1f} KB")
+        
+        # Verify file was created
+        if not os.path.exists(model_path):
+            print(f"❌ ERROR: Model file not found after save: {model_path}")
+            print(f"   Current directory: {os.getcwd()}")
+            sys.exit(1)
     except Exception as e:
         print(f"❌ Error saving model: {e}")
-        return
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
     
     # Step 5: Usage instructions
     print("\n" + "=" * 70)
