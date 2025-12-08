@@ -9,11 +9,20 @@ echo v4.4 + Machine Learning
 echo ========================================
 echo.
 
-REM Check if data_predictions folder exists
+REM Create data_predictions folder if it doesn't exist
 if not exist "data_predictions\" (
-    echo ERROR: data_predictions folder not found!
+    echo Creating data_predictions folder...
+    mkdir data_predictions
     echo.
-    echo Please create 'data_predictions' folder and add today's race PDFs
+)
+
+REM Check if there are any PDFs in data_predictions
+dir /b data_predictions\*form.pdf >nul 2>&1
+if errorlevel 1 (
+    echo ERROR: No race PDFs found in data_predictions folder!
+    echo.
+    echo Please add today's race form PDFs to the 'data_predictions' folder
+    echo Example: BDGOG0812form.pdf, MAITG0812form.pdf
     echo.
     echo Folder structure:
     echo   data_predictions\  - Today's races (for predictions)
