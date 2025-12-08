@@ -118,7 +118,7 @@ def demo_hybrid_prediction(pdf_file=None, model_path='models/greyhound_ml_v1.pkl
     print(f"   Tier: {v4_4_tier}")
     if v4_4_recommended:
         print(f"   Recommended: Box {v4_4_recommended}")
-        top_dog = df_scored[df_scored['BoxDraw'] == v4_4_recommended].iloc[0]
+        top_dog = df_scored[df_scored['Box'] == v4_4_recommended].iloc[0]
         print(f"   Dog: {top_dog.get('DogName', 'Unknown')}")
         print(f"   Score: {rule_based_scores.max():.1f}")
         print(f"   Margin: {bet_worthy_info.get('margin_pct', 0):.1f}%")
@@ -135,7 +135,7 @@ def demo_hybrid_prediction(pdf_file=None, model_path='models/greyhound_ml_v1.pkl
         top_3_ml = ml_confidence.nlargest(3)
         for idx, (dog_idx, conf) in enumerate(top_3_ml.items(), 1):
             dog = df_race.loc[dog_idx]
-            print(f"   #{idx} Box {dog['BoxDraw']}: {dog.get('DogName', 'Unknown'):20} "
+            print(f"   #{idx} Box {dog['Box']}: {dog.get('DogName', 'Unknown'):20} "
                   f"Confidence: {conf:.1f}%")
     except Exception as e:
         print(f"   ❌ Error getting ML predictions: {e}")
@@ -157,7 +157,7 @@ def demo_hybrid_prediction(pdf_file=None, model_path='models/greyhound_ml_v1.pkl
             print(f"✅ BET (Both systems agree!)")
             print(f"\n💰 RECOMMENDED BET:")
             print(f"   Box: {hybrid_result['recommended_box']}")
-            dog = df_race[df_race['BoxDraw'] == hybrid_result['recommended_box']].iloc[0]
+            dog = df_race[df_race['Box'] == hybrid_result['recommended_box']].iloc[0]
             print(f"   Dog: {dog.get('DogName', 'Unknown')}")
             print(f"   v4.4 Score: {hybrid_result['rule_based_score']:.1f}")
             print(f"   v4.4 Margin: {hybrid_result['margin_pct']:.1f}%")
