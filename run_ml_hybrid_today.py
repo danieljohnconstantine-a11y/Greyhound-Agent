@@ -24,7 +24,7 @@ from src.features import compute_features
 from src.scorer import score_race
 from src.bet_worthy import detect_bet_worthy
 from src.ml_predictor import GreyhoundMLPredictor
-from src.excel_output import create_color_coded_outputs
+from src.excel_export import create_color_coded_outputs
 
 def main():
     print("=" * 80)

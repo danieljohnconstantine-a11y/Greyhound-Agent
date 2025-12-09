@@ -626,3 +626,37 @@ def get_lock_picks(df, bet_worthy_races):
         return result.sort_values('FinalScore', ascending=False)
     else:
         return pd.DataFrame()
+
+
+def detect_bet_worthy(df_race, track=None):
+    """
+    Wrapper function for ML hybrid compatibility.
+    Analyzes a single race and returns bet-worthy information.
+    
+    Args:
+        df_race: DataFrame containing dogs from a single race
+        track: Optional track name
+    
+    Returns:
+        dict with keys:
+            - 'tier': Tier classification (TIER0, TIER1, TIER2, TIER3, or NONE)
+            - 'recommended_box': Box number of recommended bet (or None)
+            - 'margin_pct': Score margin percentage
+            - 'top_score': Highest score in race
+    """
+    result = is_race_bet_worthy(df_race, selective_mode=True, track=track)
+    
+    if result:
+        return {
+            'tier': result.get('tier', 'NONE'),
+            'recommended_box': result.get('top_box'),
+            'margin_pct': result.get('margin', 0.0),
+            'top_score': result.get('top_score', 0.0)
+        }
+    else:
+        return {
+            'tier': 'NONE',
+            'recommended_box': None,
+            'margin_pct': 0.0,
+            'top_score': 0.0
+        }
