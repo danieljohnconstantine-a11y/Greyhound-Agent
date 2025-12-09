@@ -17,26 +17,28 @@ if not exist "data_predictions\" (
 )
 
 REM Check if there are any PDFs in data_predictions
-dir /b data_predictions\*form.pdf >nul 2>&1
-if errorlevel 1 (
-    echo ERROR: No race PDFs found in data_predictions folder!
+set PDF_COUNT=0
+for %%f in (data_predictions\*form.pdf) do set /a PDF_COUNT+=1
+if %PDF_COUNT%==0 (
+    echo WARNING: No race PDFs found in data_predictions folder!
     echo.
     echo Please add today's race form PDFs to the 'data_predictions' folder
     echo Example: BDGOG0812form.pdf, MAITG0812form.pdf
     echo.
-    echo Folder structure:
-    echo   data_predictions\  - Today's races (for predictions)
-    echo   data\              - Historical races (for ML training)
+    echo The script will continue anyway - the Python script will check again.
     echo.
-    pause
-    exit /b 1
 )
 
+echo.
 echo Running ML hybrid predictions on today's races...
 echo.
 echo Note: This combines v4.4 rule-based scoring with ML predictions
 echo       Only shows bets when BOTH systems strongly agree
 echo       Expected: 35-40%% win rate (vs 28-30%% v4.4 alone)
+echo.
+echo Folder structure:
+echo   data_predictions\  - Today's races (for predictions)
+echo   data\              - Historical races (for ML training)
 echo.
 
 REM Run ML hybrid predictions
