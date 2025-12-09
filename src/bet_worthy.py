@@ -644,19 +644,14 @@ def detect_bet_worthy(df_race, track=None):
             - 'margin_pct': Score margin percentage
             - 'top_score': Highest score in race
     """
-    result = is_race_bet_worthy(df_race, selective_mode=True, track=track)
+    # is_race_bet_worthy returns a tuple: (is_worthy, reason, margin, top_score, tier, top_box, expected_win_rate, career_starts)
+    is_worthy, reason, margin_pct, top_score, tier, top_box, expected_win_rate, career_starts = is_race_bet_worthy(
+        df_race, selective_mode=True, track=track
+    )
     
-    if result:
-        return {
-            'tier': result.get('tier', 'NONE'),
-            'recommended_box': result.get('top_box'),
-            'margin_pct': result.get('margin', 0.0),
-            'top_score': result.get('top_score', 0.0)
-        }
-    else:
-        return {
-            'tier': 'NONE',
-            'recommended_box': None,
-            'margin_pct': 0.0,
-            'top_score': 0.0
-        }
+    return {
+        'tier': tier if tier else 'NONE',
+        'recommended_box': top_box if is_worthy else None,
+        'margin_pct': margin_pct,
+        'top_score': top_score
+    }
