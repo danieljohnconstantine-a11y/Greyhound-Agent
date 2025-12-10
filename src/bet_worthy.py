@@ -652,9 +652,12 @@ def detect_bet_worthy(df_race, track=None):
     )
     
     # Ensure all return values are Python scalars, not numpy/pandas types
+    # Convert top_box to int first to avoid DataFrame ambiguity error
+    top_box_int = int(top_box) if pd.notna(top_box) else 0
+    
     return {
         'tier': str(tier) if tier else 'NONE',
-        'recommended_box': int(top_box) if (is_worthy and top_box and top_box != 0) else None,
+        'recommended_box': top_box_int if (is_worthy and top_box_int != 0) else None,
         'margin_pct': float(margin_pct),
         'top_score': float(top_score)
     }
