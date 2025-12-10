@@ -300,10 +300,14 @@ def determine_confidence_tier(top_score, second_score, margin_percent, top_box,
         tier0_score_threshold = 48.0  # Slightly lower
         tier0_margin_threshold = 13.0  # Slightly lower
     
+    # Convert to Python types to avoid DataFrame ambiguity
+    top_box_valid = bool(pd.notna(top_box)) if not isinstance(top_box, (int, float)) else (top_box is not None)
+    top_box_int_check = int(top_box) if top_box_valid else 0
+    
     if (effective_score >= tier0_score_threshold and
         effective_margin >= tier0_margin_threshold and
         absolute_margin >= TIER0_MIN_MARGIN_ABSOLUTE and
-        (pd.notna(top_box) and int(top_box) in TIER0_REQUIRED_BOXES) and
+        top_box_valid and top_box_int_check in TIER0_REQUIRED_BOXES and
         career_starts >= TIER0_MIN_CAREER_STARTS):
         return 'TIER0'
     
