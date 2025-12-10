@@ -111,7 +111,7 @@ def main():
                 rule_based_scores = df_scored['FinalScore']
                 
                 # Detect TIER0 with v4.4
-                bet_worthy_info = detect_bet_worthy(df_scored)
+                bet_worthy_info = detect_bet_worthy(df_scored, track=track)
                 v4_4_tier = bet_worthy_info.get('tier', 'NONE')
                 v4_4_recommended = bet_worthy_info.get('recommended_box')
                 
@@ -146,7 +146,7 @@ def main():
                         print(f"      ⚠️  Race {race_num}: No hybrid bet (ML: {hybrid_result['ml_confidence']:.1f}%, v4.4: {hybrid_result['margin_pct']:.1f}%)")
                     
                     # Also store v4.4-only pick for comparison
-                    if v4_4_recommended:
+                    if v4_4_recommended is not None:
                         dog_v44 = df_scored[df_scored['Box'] == v4_4_recommended].iloc[0]
                         v44_pick = {
                             'Track': track,

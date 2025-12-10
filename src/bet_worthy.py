@@ -361,10 +361,12 @@ def is_race_bet_worthy(race_dogs_df, selective_mode=True, track=None, ultra_sele
         return False, "No dogs in race", 0.0, 0.0, 'NO_BET', 0, 0.0, 0
     
     top_score = sorted_dogs.iloc[0]['FinalScore']
-    top_box = sorted_dogs.iloc[0].get('Box', 0)
-    career_starts = sorted_dogs.iloc[0].get('CareerStarts', 0)
-    if pd.isna(career_starts):
-        career_starts = 0
+    # Ensure top_box is a scalar value, not a Series
+    top_box_value = sorted_dogs.iloc[0].get('Box', 0)
+    top_box = int(top_box_value) if pd.notna(top_box_value) else 0
+    # Ensure career_starts is a scalar value
+    career_starts_value = sorted_dogs.iloc[0].get('CareerStarts', 0)
+    career_starts = int(career_starts_value) if pd.notna(career_starts_value) and career_starts_value != '' else 0
     
     # Extract track from data if not provided
     if track is None:
@@ -649,9 +651,10 @@ def detect_bet_worthy(df_race, track=None):
         df_race, selective_mode=True, track=track
     )
     
+    # Ensure all return values are Python scalars, not numpy/pandas types
     return {
-        'tier': tier if tier else 'NONE',
-        'recommended_box': top_box if is_worthy else None,
-        'margin_pct': margin_pct,
-        'top_score': top_score
+        'tier': str(tier) if tier else 'NONE',
+        'recommended_box': int(top_box) if (is_worthy and top_box and top_box != 0) else None,
+        'margin_pct': float(margin_pct),
+        'top_score': float(top_score)
     }
