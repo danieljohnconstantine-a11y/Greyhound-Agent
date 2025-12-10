@@ -64,7 +64,7 @@ class GreyhoundMLPredictor:
         # Core features from v4.4 scoring
         feature_cols = [
             # Box/Position
-            'BoxDraw', 'DrawFactor',
+            'Box', 'DrawFactor',
             
             # Speed/Timing
             'BestTimeSec', 'SectionalSec', 'Speed_kmh',
@@ -265,7 +265,7 @@ class GreyhoundMLPredictor:
         
         # Create combined predictions DataFrame
         predictions = pd.DataFrame({
-            'Box': race_df['BoxDraw'],
+            'Box': race_df['Box'],
             'DogName': race_df.get('DogName', ''),
             'RuleBased_Score': rule_based_scores,
             'ML_Confidence': ml_confidence
@@ -288,16 +288,16 @@ class GreyhoundMLPredictor:
         tier = None
         
         if is_tier0 and ml_agrees:
-            recommended = race_df.loc[top_idx, 'BoxDraw']
+            recommended = race_df.loc[top_idx, 'Box']
             tier = 'HYBRID_TIER0'
             print(f"✅ HYBRID TIER0: Box {recommended} "
                   f"(v4.4: {top_score:.1f}, margin: {margin_pct:.1f}%, "
                   f"ML: {top_ml_confidence:.1f}%)")
         elif is_tier0:
-            print(f"⚠️  v4.4 TIER0 but ML low confidence: Box {race_df.loc[top_idx, 'BoxDraw']} "
+            print(f"⚠️  v4.4 TIER0 but ML low confidence: Box {race_df.loc[top_idx, 'Box']} "
                   f"(ML: {top_ml_confidence:.1f}% < {ml_threshold}%)")
         elif ml_agrees:
-            print(f"⚠️  ML confident but v4.4 margin too low: Box {race_df.loc[top_idx, 'BoxDraw']} "
+            print(f"⚠️  ML confident but v4.4 margin too low: Box {race_df.loc[top_idx, 'Box']} "
                   f"(margin: {margin_pct:.1f}% < {tier0_threshold}%)")
         
         predictions = predictions.sort_values('ML_Confidence', ascending=False)
