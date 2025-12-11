@@ -264,12 +264,24 @@ def determine_confidence_tier(top_score, second_score, margin_percent, top_box,
     Returns:
         str: 'TIER0', 'TIER1', 'TIER2', 'TIER3', or 'NO_BET'
     """
-    absolute_margin = top_score - second_score
+    # Convert all values to Python types immediately to avoid DataFrame ambiguity
+    try:
+        top_score_float = float(top_score)
+        second_score_float = float(second_score)
+        margin_percent_float = float(margin_percent)
+        career_starts_int = int(career_starts)
+    except (TypeError, ValueError, AttributeError):
+        top_score_float = 0.0
+        second_score_float = 0.0
+        margin_percent_float = 0.0
+        career_starts_int = 0
+    
+    absolute_margin = top_score_float - second_score_float
     box_bonus = get_box_adjustment(top_box, track)
     
     # Apply box bonus to effective score
-    effective_score = top_score * (1 + box_bonus)
-    effective_margin = margin_percent * (1 + box_bonus)
+    effective_score = top_score_float * (1 + box_bonus)
+    effective_margin = margin_percent_float * (1 + box_bonus)
     
     # Check if track is LOW upset (more predictable)
     is_low_upset_track = False
@@ -314,7 +326,7 @@ def determine_confidence_tier(top_score, second_score, margin_percent, top_box,
         effective_margin >= tier0_margin_threshold and
         absolute_margin >= TIER0_MIN_MARGIN_ABSOLUTE and
         top_box_valid and top_box_int_check in TIER0_REQUIRED_BOXES and
-        career_starts >= TIER0_MIN_CAREER_STARTS):
+        career_starts_int >= TIER0_MIN_CAREER_STARTS):
         return 'TIER0'
     
     # Check TIER 1 (Highest confidence)
@@ -329,9 +341,9 @@ def determine_confidence_tier(top_score, second_score, margin_percent, top_box,
         absolute_margin >= TIER2_MIN_MARGIN_ABSOLUTE):
         return 'TIER2'
     
-    # Check TIER 3 (Standard confidence)
-    if (top_score >= MIN_TOP_PICK_CONFIDENCE or
-        margin_percent >= MIN_SCORE_MARGIN_PERCENT or
+    # Check TIER 3 (Standard confidence) - use converted Python types
+    if (top_score_float >= MIN_TOP_PICK_CONFIDENCE or
+        margin_percent_float >= MIN_SCORE_MARGIN_PERCENT or
         (MIN_SCORE_MARGIN_ABSOLUTE is not None and absolute_margin >= MIN_SCORE_MARGIN_ABSOLUTE)):
         return 'TIER3'
     
