@@ -370,7 +370,12 @@ def is_race_bet_worthy(race_dogs_df, selective_mode=True, track=None, ultra_sele
     if len(sorted_dogs) < 1:
         return False, "No dogs in race", 0.0, 0.0, 'NO_BET', 0, 0.0, 0
     
-    top_score = sorted_dogs.iloc[0]['FinalScore']
+    # Convert top_score to Python float immediately to avoid DataFrame ambiguity
+    try:
+        top_score = float(sorted_dogs.iloc[0]['FinalScore'])
+    except (TypeError, ValueError, AttributeError):
+        top_score = 0.0
+    
     # Ensure top_box is a scalar value, not a Series
     # Use try-except to handle any pandas type conversions safely
     try:
@@ -394,7 +399,11 @@ def is_race_bet_worthy(race_dogs_df, selective_mode=True, track=None, ultra_sele
     margin_percent = 0.0
     second_score = 0.0
     if len(sorted_dogs) >= 2:
-        second_score = sorted_dogs.iloc[1]['FinalScore']
+        # Convert second_score to Python float immediately to avoid DataFrame ambiguity
+        try:
+            second_score = float(sorted_dogs.iloc[1]['FinalScore'])
+        except (TypeError, ValueError, AttributeError):
+            second_score = 0.0
         margin_percent = calculate_score_margin_percent(top_score, second_score)
     
     # Determine confidence tier (now includes track-specific analysis)
