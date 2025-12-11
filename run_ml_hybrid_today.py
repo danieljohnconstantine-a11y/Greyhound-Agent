@@ -79,118 +79,206 @@ def main():
         print(f"   • {os.path.basename(pdf_file)}")
     print()
     
-    # Process all PDFs
+    # Process all PDFs with enhanced error tracking
     all_ml_picks = []
     all_v44_picks = []
     all_ml_predictions = []  # All ML predictions for every dog
     hybrid_bet_count = 0
     v44_bet_count = 0
     
-    for pdf_file in pdf_files:
-        print(f"🔍 Processing: {os.path.basename(pdf_file)}")
+    # Enhanced error tracking
+    error_log = []
+    total_pdfs = len(pdf_files)
+    successful_pdfs = 0
+    failed_pdfs = 0
+    total_races = 0
+    successful_races = 0
+    failed_races = 0
+    
+    for pdf_idx, pdf_file in enumerate(pdf_files, 1):
+        pdf_name = os.path.basename(pdf_file)
+        print(f"🔍 Processing ({pdf_idx}/{total_pdfs}): {pdf_name}")
         
         try:
             # Extract text from PDF
             text = ""
-            with pdfplumber.open(pdf_file) as pdf:
-                for page in pdf.pages:
-                    text += page.extract_text() + "\n"
-            
-            # Parse race form
-            parsed_data = parse_race_form(text)
-            if not parsed_data:
-                print(f"   ⚠️  No races found in PDF")
+            try:
+                with pdfplumber.open(pdf_file) as pdf:
+                    for page in pdf.pages:
+                        text += page.extract_text() + "\n"
+            except Exception as e:
+                error_msg = f"PDF extraction failed for {pdf_name}: {type(e).__name__}: {str(e)}"
+                error_log.append(error_msg)
+                print(f"   ❌ {error_msg}")
+                failed_pdfs += 1
                 continue
             
-            print(f"   Found {len(parsed_data)} races")
+            # Parse race form
+            try:
+                parsed_data = parse_race_form(text)
+                if not parsed_data:
+                    error_msg = f"No races found in {pdf_name}"
+                    error_log.append(error_msg)
+                    print(f"   ⚠️  {error_msg}")
+                    failed_pdfs += 1
+                    continue
+            except Exception as e:
+                error_msg = f"Race parsing failed for {pdf_name}: {type(e).__name__}: {str(e)}"
+                error_log.append(error_msg)
+                print(f"   ❌ {error_msg}")
+                failed_pdfs += 1
+                continue
+            
+            print(f"   ✅ Parsed {len(parsed_data)} dogs")
+            successful_pdfs += 1
             
             # Process each race
             for race_info in parsed_data:
                 track = race_info['track']
                 race_num = race_info['race_number']
                 df_race = race_info['race_data']
+                total_races += 1
                 
-                # Compute features
-                df_race = compute_features(df_race)
-                
-                # Score with v4.4 system
-                df_scored = score_race(df_race, track)
-                rule_based_scores = df_scored['FinalScore']
-                
-                # Detect TIER0 with v4.4
-                bet_worthy_info = detect_bet_worthy(df_scored, track=track)
-                v4_4_tier = bet_worthy_info.get('tier', 'NONE')
-                v4_4_recommended = bet_worthy_info.get('recommended_box')
-                
-                # Get ML hybrid prediction
                 try:
-                    hybrid_result = predictor.hybrid_predict(
-                        df_race,
-                        rule_based_scores,
-                        tier0_threshold=18,  # v4.4 TIER0 margin threshold
-                        ml_threshold=75      # ML confidence threshold (75%)
-                    )
+                    # Compute features
+                    try:
+                        df_race = compute_features(df_race)
+                    except Exception as e:
+                        error_msg = f"{pdf_name} Race {race_num}: Feature computation failed - {type(e).__name__}: {str(e)}"
+                        error_log.append(error_msg)
+                        print(f"      ❌ {error_msg}")
+                        failed_races += 1
+                        continue
                     
-                    # Store ALL ML predictions (for every dog in race)
-                    all_preds = hybrid_result.get('all_predictions')
-                    if all_preds is not None and not all_preds.empty:
-                        for _, pred_row in all_preds.iterrows():
-                            ml_pred = {
+                    # Score with v4.4 system
+                    try:
+                        df_scored = score_race(df_race, track)
+                        rule_based_scores = df_scored['FinalScore']
+                    except Exception as e:
+                        error_msg = f"{pdf_name} Race {race_num}: v4.4 scoring failed - {type(e).__name__}: {str(e)}"
+                        error_log.append(error_msg)
+                        print(f"      ❌ {error_msg}")
+                        failed_races += 1
+                        continue
+                    
+                    # Detect TIER0 with v4.4
+                    try:
+                        bet_worthy_info = detect_bet_worthy(df_scored, track=track)
+                        v4_4_tier = bet_worthy_info.get('tier', 'NONE')
+                        v4_4_recommended = bet_worthy_info.get('recommended_box')
+                    except Exception as e:
+                        error_msg = f"{pdf_name} Race {race_num}: Bet-worthy detection failed - {type(e).__name__}: {str(e)}"
+                        error_log.append(error_msg)
+                        print(f"      ❌ {error_msg}")
+                        print(f"         DataFrame types: {df_scored.dtypes.to_dict() if hasattr(df_scored, 'dtypes') else 'N/A'}")
+                        failed_races += 1
+                        continue
+                    
+                    # Get ML hybrid prediction
+                    try:
+                        hybrid_result = predictor.hybrid_predict(
+                            df_race,
+                            rule_based_scores,
+                            tier0_threshold=18,  # v4.4 TIER0 margin threshold
+                            ml_threshold=75      # ML confidence threshold (75%)
+                        )
+                        
+                        # Store ALL ML predictions (for every dog in race)
+                        all_preds = hybrid_result.get('all_predictions')
+                        if all_preds is not None and not all_preds.empty:
+                            for _, pred_row in all_preds.iterrows():
+                                ml_pred = {
+                                    'Track': track,
+                                    'RaceNumber': race_num,
+                                    'Box': pred_row['Box'],
+                                    'DogName': pred_row.get('DogName', 'Unknown'),
+                                    'ML_Confidence': pred_row['ML_Confidence'],
+                                    'v4.4_Score': pred_row['RuleBased_Score'],
+                                    'Rank': None  # Will be set later after sorting
+                                }
+                                all_ml_predictions.append(ml_pred)
+                        
+                        # Store ML hybrid pick if it qualifies
+                        if hybrid_result['tier'] == 'HYBRID_TIER0':
+                            dog = df_race[df_race['Box'] == hybrid_result['recommended_box']].iloc[0]
+                            ml_pick = {
                                 'Track': track,
                                 'RaceNumber': race_num,
-                                'Box': pred_row['Box'],
-                                'DogName': pred_row.get('DogName', 'Unknown'),
-                                'ML_Confidence': pred_row['ML_Confidence'],
-                                'v4.4_Score': pred_row['RuleBased_Score'],
-                                'Rank': None  # Will be set later after sorting
+                                'Box': hybrid_result['recommended_box'],
+                                'DogName': dog.get('DogName', 'Unknown'),
+                                'v4.4_Score': hybrid_result['rule_based_score'],
+                                'v4.4_Margin': hybrid_result['margin_pct'],
+                                'ML_Confidence': hybrid_result['ml_confidence'],
+                                'Tier': 'HYBRID_TIER0',
+                                'Recommendation': '✅ STRONG BET (ML + v4.4 Agree)',
+                                'ExpectedWinRate': '35-40%'
                             }
-                            all_ml_predictions.append(ml_pred)
-                    
-                    # Store ML hybrid pick if it qualifies
-                    if hybrid_result['tier'] == 'HYBRID_TIER0':
-                        dog = df_race[df_race['Box'] == hybrid_result['recommended_box']].iloc[0]
-                        ml_pick = {
-                            'Track': track,
-                            'RaceNumber': race_num,
-                            'Box': hybrid_result['recommended_box'],
-                            'DogName': dog.get('DogName', 'Unknown'),
-                            'v4.4_Score': hybrid_result['rule_based_score'],
-                            'v4.4_Margin': hybrid_result['margin_pct'],
-                            'ML_Confidence': hybrid_result['ml_confidence'],
-                            'Tier': 'HYBRID_TIER0',
-                            'Recommendation': '✅ STRONG BET (ML + v4.4 Agree)',
-                            'ExpectedWinRate': '35-40%'
-                        }
-                        all_ml_picks.append(ml_pick)
-                        hybrid_bet_count += 1
-                        print(f"      ✅ Race {race_num}: HYBRID BET - Box {hybrid_result['recommended_box']} ({dog.get('DogName', 'Unknown')})")
-                    else:
-                        print(f"      ⚠️  Race {race_num}: No hybrid bet (ML: {hybrid_result['ml_confidence']:.1f}%, v4.4: {hybrid_result['margin_pct']:.1f}%)")
-                    
-                    # Also store v4.4-only pick for comparison
-                    if v4_4_recommended is not None:
-                        dog_v44 = df_scored[df_scored['Box'] == v4_4_recommended].iloc[0]
-                        v44_pick = {
-                            'Track': track,
-                            'RaceNumber': race_num,
-                            'Box': v4_4_recommended,
-                            'DogName': dog_v44.get('DogName', 'Unknown'),
-                            'FinalScore': rule_based_scores.max(),
-                            'Tier': v4_4_tier,
-                            'Margin': bet_worthy_info.get('margin_pct', 0),
-                            'Recommendation': 'v4.4 Pick',
-                            'ExpectedWinRate': '28-30%'
-                        }
-                        all_v44_picks.append(v44_pick)
-                        v44_bet_count += 1
-                    
+                            all_ml_picks.append(ml_pick)
+                            hybrid_bet_count += 1
+                            print(f"      ✅ Race {race_num}: HYBRID BET - Box {hybrid_result['recommended_box']} ({dog.get('DogName', 'Unknown')})")
+                        else:
+                            print(f"      ⚠️  Race {race_num}: No hybrid bet (ML: {hybrid_result['ml_confidence']:.1f}%, v4.4: {hybrid_result['margin_pct']:.1f}%)")
+                        
+                        # Also store v4.4-only pick for comparison
+                        if v4_4_recommended is not None:
+                            dog_v44 = df_scored[df_scored['Box'] == v4_4_recommended].iloc[0]
+                            v44_pick = {
+                                'Track': track,
+                                'RaceNumber': race_num,
+                                'Box': v4_4_recommended,
+                                'DogName': dog_v44.get('DogName', 'Unknown'),
+                                'FinalScore': rule_based_scores.max(),
+                                'Tier': v4_4_tier,
+                                'Margin': bet_worthy_info.get('margin_pct', 0),
+                                'Recommendation': 'v4.4 Pick',
+                                'ExpectedWinRate': '28-30%'
+                            }
+                            all_v44_picks.append(v44_pick)
+                            v44_bet_count += 1
+                        
+                        successful_races += 1
+                        
+                    except Exception as e:
+                        error_msg = f"{pdf_name} Race {race_num}: ML prediction failed - {type(e).__name__}: {str(e)}"
+                        error_log.append(error_msg)
+                        print(f"      ❌ {error_msg}")
+                        failed_races += 1
+                        continue
+                        
                 except Exception as e:
-                    print(f"      ⚠️  Race {race_num}: ML error - {e}")
+                    error_msg = f"{pdf_name} Race {race_num}: Unexpected error - {type(e).__name__}: {str(e)}"
+                    error_log.append(error_msg)
+                    print(f"      ❌ {error_msg}")
+                    failed_races += 1
                     continue
                 
         except Exception as e:
-            print(f"   ❌ Error processing PDF: {e}")
+            error_msg = f"{pdf_name}: Unexpected PDF-level error - {type(e).__name__}: {str(e)}"
+            error_log.append(error_msg)
+            print(f"   ❌ {error_msg}")
+            failed_pdfs += 1
             continue
+    
+    # Print error summary
+    print()
+    print("=" * 80)
+    print("📊 PROCESSING SUMMARY")
+    print("=" * 80)
+    print(f"   PDFs: {successful_pdfs}/{total_pdfs} successful, {failed_pdfs} failed")
+    print(f"   Races: {successful_races}/{total_races} successful, {failed_races} failed")
+    
+    if error_log:
+        print()
+        print("=" * 80)
+        print("⚠️  ERROR LOG - All Issues Encountered:")
+        print("=" * 80)
+        for idx, error in enumerate(error_log, 1):
+            print(f"{idx}. {error}")
+        print()
+        print(f"Total errors: {len(error_log)}")
+    else:
+        print(f"   ✅ No errors encountered!")
+    print()
     
     print()
     print("=" * 80)
