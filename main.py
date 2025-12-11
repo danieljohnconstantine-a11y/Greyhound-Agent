@@ -14,14 +14,23 @@ from src.excel_formatter import export_to_excel_with_formatting
 # Ensure outputs directory exists before configuring logging
 os.makedirs('outputs', exist_ok=True)
 
-# Configure logging
+# Configure logging with UTF-8 encoding for Windows console compatibility
+log_file_handler = logging.FileHandler('outputs/greyhound_analytics.log', encoding='utf-8')
+log_file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+
+# StreamHandler for console - use UTF-8 encoding to handle emoji characters
+log_console_handler = logging.StreamHandler()
+log_console_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+# Set UTF-8 encoding on stdout to handle Unicode characters on Windows
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('outputs/greyhound_analytics.log'),
-        logging.StreamHandler()
-    ]
+    handlers=[log_file_handler, log_console_handler]
 )
 logger = logging.getLogger(__name__)
 
