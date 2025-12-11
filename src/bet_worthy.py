@@ -303,13 +303,10 @@ def determine_confidence_tier(top_score, second_score, margin_percent, top_box,
     # Convert to Python types to avoid DataFrame ambiguity
     # Ensure top_box is a Python int/float, not pandas type
     try:
-        if pd.notna(top_box):
-            top_box_int_check = int(top_box)
-            top_box_valid = True
-        else:
-            top_box_int_check = 0
-            top_box_valid = False
-    except (TypeError, ValueError):
+        # Avoid calling pd.notna() directly in conditional to prevent DataFrame ambiguity
+        top_box_int_check = int(top_box) if top_box is not None and str(top_box) != 'nan' else 0
+        top_box_valid = top_box_int_check != 0
+    except (TypeError, ValueError, AttributeError):
         top_box_int_check = 0
         top_box_valid = False
     
@@ -375,11 +372,19 @@ def is_race_bet_worthy(race_dogs_df, selective_mode=True, track=None, ultra_sele
     
     top_score = sorted_dogs.iloc[0]['FinalScore']
     # Ensure top_box is a scalar value, not a Series
-    top_box_value = sorted_dogs.iloc[0].get('Box', 0)
-    top_box = int(top_box_value) if pd.notna(top_box_value) else 0
+    # Use try-except to handle any pandas type conversions safely
+    try:
+        top_box_value = sorted_dogs.iloc[0].get('Box', 0)
+        top_box = int(top_box_value) if top_box_value is not None and str(top_box_value) != 'nan' else 0
+    except (TypeError, ValueError, AttributeError):
+        top_box = 0
+    
     # Ensure career_starts is a scalar value
-    career_starts_value = sorted_dogs.iloc[0].get('CareerStarts', 0)
-    career_starts = int(career_starts_value) if pd.notna(career_starts_value) and career_starts_value != '' else 0
+    try:
+        career_starts_value = sorted_dogs.iloc[0].get('CareerStarts', 0)
+        career_starts = int(career_starts_value) if career_starts_value is not None and str(career_starts_value) != 'nan' and career_starts_value != '' else 0
+    except (TypeError, ValueError, AttributeError):
+        career_starts = 0
     
     # Extract track from data if not provided
     if track is None:
@@ -432,7 +437,8 @@ def is_race_bet_worthy(race_dogs_df, selective_mode=True, track=None, ultra_sele
     else:
         reason = f"❌ NO_BET: Score {top_score:.1f} < {MIN_TOP_PICK_CONFIDENCE}, Margin {margin_percent:.1f}% < {MIN_SCORE_MARGIN_PERCENT}%"
     
-    return is_worthy, reason, margin_percent, top_score, tier, int(top_box) if pd.notna(top_box) else 0, expected_win_rate, int(career_starts)
+    # top_box and career_starts are already converted to int above, so just return them directly
+    return is_worthy, reason, margin_percent, top_score, tier, top_box, expected_win_rate, career_starts
 
 
 def identify_bet_worthy_races(df, selective_mode=True, ultra_selective=False):
@@ -666,9 +672,17 @@ def detect_bet_worthy(df_race, track=None):
     
     # Ensure all return values are Python scalars, not numpy/pandas types
     # Convert is_worthy to bool to avoid DataFrame ambiguity
-    is_worthy_bool = bool(is_worthy) if pd.notna(is_worthy) else False
+    # Avoid pd.notna() which can trigger ambiguity errors
+    try:
+        is_worthy_bool = bool(is_worthy) if is_worthy is not None else False
+    except (TypeError, ValueError, AttributeError):
+        is_worthy_bool = False
+    
     # Convert top_box to int to avoid DataFrame ambiguity error
-    top_box_int = int(top_box) if pd.notna(top_box) else 0
+    try:
+        top_box_int = int(top_box) if top_box is not None and str(top_box) != 'nan' else 0
+    except (TypeError, ValueError, AttributeError):
+        top_box_int = 0
     
     return {
         'tier': str(tier) if tier else 'NONE',
