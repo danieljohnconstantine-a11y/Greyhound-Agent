@@ -82,6 +82,7 @@ def main():
     # Process all PDFs
     all_ml_picks = []
     all_v44_picks = []
+    all_ml_predictions = []  # All ML predictions for every dog
     hybrid_bet_count = 0
     v44_bet_count = 0
     
@@ -129,6 +130,21 @@ def main():
                         tier0_threshold=18,  # v4.4 TIER0 margin threshold
                         ml_threshold=75      # ML confidence threshold (75%)
                     )
+                    
+                    # Store ALL ML predictions (for every dog in race)
+                    all_preds = hybrid_result.get('all_predictions')
+                    if all_preds is not None and not all_preds.empty:
+                        for _, pred_row in all_preds.iterrows():
+                            ml_pred = {
+                                'Track': track,
+                                'RaceNumber': race_num,
+                                'Box': pred_row['Box'],
+                                'DogName': pred_row.get('DogName', 'Unknown'),
+                                'ML_Confidence': pred_row['ML_Confidence'],
+                                'v4.4_Score': pred_row['RuleBased_Score'],
+                                'Rank': None  # Will be set later after sorting
+                            }
+                            all_ml_predictions.append(ml_pred)
                     
                     # Store ML hybrid pick if it qualifies
                     if hybrid_result['tier'] == 'HYBRID_TIER0':
@@ -232,6 +248,57 @@ def main():
         print("   (Waiting for both v4.4 AND ML to strongly agree)")
         print()
     
+    # Save ALL ML predictions to Excel (sorted by confidence)
+    if all_ml_predictions:
+        df_all_ml = pd.DataFrame(all_ml_predictions)
+        # Sort by ML confidence (highest to lowest)
+        df_all_ml = df_all_ml.sort_values('ML_Confidence', ascending=False).reset_index(drop=True)
+        
+        # Add rank column (1 = highest confidence)
+        df_all_ml['Rank'] = range(1, len(df_all_ml) + 1)
+        
+        # Reorder columns
+        df_all_ml = df_all_ml[['Rank', 'Track', 'RaceNumber', 'Box', 'DogName', 'ML_Confidence', 'v4.4_Score']]
+        
+        excel_all_path = 'outputs/ml_all_predictions.xlsx'
+        
+        # Create Excel with formatting
+        with pd.ExcelWriter(excel_all_path, engine='openpyxl') as writer:
+            df_all_ml.to_excel(writer, sheet_name='All ML Predictions', index=False)
+            
+            # Get workbook and worksheet
+            workbook = writer.book
+            worksheet = writer.sheets['All ML Predictions']
+            
+            # Auto-adjust column widths
+            for idx, col in enumerate(df_all_ml.columns, 1):
+                max_length = max(
+                    df_all_ml[col].astype(str).apply(len).max(),
+                    len(col)
+                )
+                worksheet.column_dimensions[chr(64 + idx)].width = min(max_length + 2, 50)
+            
+            # Add header formatting
+            from openpyxl.styles import Font, PatternFill, Alignment
+            for cell in worksheet[1]:
+                cell.font = Font(bold=True, color="FFFFFF")
+                cell.fill = PatternFill(start_color="70AD47", end_color="70AD47", fill_type="solid")
+                cell.alignment = Alignment(horizontal="center", vertical="center")
+            
+            # Highlight top predictions (ML confidence >= 75%)
+            for row in range(2, len(df_all_ml) + 2):
+                confidence_cell = worksheet.cell(row=row, column=6)  # ML_Confidence column
+                if float(confidence_cell.value) >= 75:
+                    for col in range(1, 8):
+                        cell = worksheet.cell(row=row, column=col)
+                        cell.fill = PatternFill(start_color="D9EAD3", end_color="D9EAD3", fill_type="solid")
+        
+        print(f"✅ All ML predictions saved to: {excel_all_path}")
+        print(f"   Total predictions: {len(df_all_ml)} (sorted by ML confidence)")
+        print(f"   Top ML pick overall: {df_all_ml.iloc[0]['Track']} R{df_all_ml.iloc[0]['RaceNumber']} "
+              f"Box {df_all_ml.iloc[0]['Box']} ({df_all_ml.iloc[0]['ML_Confidence']:.1f}%)")
+        print()
+    
     # Save v4.4 picks for comparison
     if all_v44_picks:
         df_v44 = pd.DataFrame(all_v44_picks)
@@ -243,11 +310,17 @@ def main():
     print("✅ ML HYBRID ANALYSIS COMPLETE")
     print("=" * 80)
     print()
+    print("📁 OUTPUT FILES:")
+    print("   1. outputs/ml_hybrid_picks.xlsx - High-confidence bets (ML + v4.4 agree)")
+    print("   2. outputs/ml_all_predictions.xlsx - ALL ML predictions ranked by confidence")
+    print("   3. outputs/v44_picks_comparison.csv - All v4.4 picks for comparison")
+    print()
     print("💡 KEY INSIGHTS:")
     print("   • ML Hybrid is MORE SELECTIVE but MORE ACCURATE")
     print("   • Only bets when v4.4 (18%+ margin) AND ML (75%+ confidence) agree")
     print("   • Target: 35-40% win rate vs 28-30% v4.4 alone")
     print("   • Fewer bets = higher quality picks")
+    print("   • ml_all_predictions.xlsx shows EVERY dog ranked by ML confidence")
     print()
     print(f"📁 Check outputs folder for:")
     if all_ml_picks:
