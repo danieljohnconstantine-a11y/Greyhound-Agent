@@ -301,8 +301,17 @@ def determine_confidence_tier(top_score, second_score, margin_percent, top_box,
         tier0_margin_threshold = 13.0  # Slightly lower
     
     # Convert to Python types to avoid DataFrame ambiguity
-    top_box_valid = bool(pd.notna(top_box)) if not isinstance(top_box, (int, float)) else (top_box is not None)
-    top_box_int_check = int(top_box) if top_box_valid else 0
+    # Ensure top_box is a Python int/float, not pandas type
+    try:
+        if pd.notna(top_box):
+            top_box_int_check = int(top_box)
+            top_box_valid = True
+        else:
+            top_box_int_check = 0
+            top_box_valid = False
+    except (TypeError, ValueError):
+        top_box_int_check = 0
+        top_box_valid = False
     
     if (effective_score >= tier0_score_threshold and
         effective_margin >= tier0_margin_threshold and
