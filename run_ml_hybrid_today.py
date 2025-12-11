@@ -113,43 +113,47 @@ def main():
                 failed_pdfs += 1
                 continue
             
-            # Parse race form
+            # Parse race form - returns a DataFrame with all dogs
             try:
-                parsed_data = parse_race_form(text)
-                if not parsed_data:
+                df_all = parse_race_form(text)
+                if df_all is None or len(df_all) == 0:
                     error_msg = f"No races found in {pdf_name}"
                     error_log.append(error_msg)
                     print(f"   ⚠️  {error_msg}")
                     failed_pdfs += 1
                     continue
             except Exception as e:
+                import traceback
                 error_msg = f"Race parsing failed for {pdf_name}: {type(e).__name__}: {str(e)}"
+                error_log.append(error_msg)
+                print(f"   ❌ {error_msg}")
+                print(f"   Full traceback:")
+                traceback.print_exc()
+                failed_pdfs += 1
+                continue
+            
+            # Convert DLR to numeric to avoid type errors
+            df_all["DLR"] = pd.to_numeric(df_all["DLR"], errors="coerce")
+            
+            # Apply enhanced scoring to all dogs
+            try:
+                df_all = compute_features(df_all)
+            except Exception as e:
+                error_msg = f"{pdf_name}: Feature computation failed - {type(e).__name__}: {str(e)}"
                 error_log.append(error_msg)
                 print(f"   ❌ {error_msg}")
                 failed_pdfs += 1
                 continue
             
-            print(f"   ✅ Parsed {len(parsed_data)} dogs")
+            print(f"   ✅ Parsed {len(df_all)} dogs")
             successful_pdfs += 1
             
-            # Process each race
-            for race_info in parsed_data:
-                track = race_info['track']
-                race_num = race_info['race_number']
-                df_race = race_info['race_data']
+            # Process each race - group by Track and RaceNumber
+            races = df_all.groupby(['Track', 'RaceNumber'])
+            for (track, race_num), df_race in races:
                 total_races += 1
                 
                 try:
-                    # Compute features
-                    try:
-                        df_race = compute_features(df_race)
-                    except Exception as e:
-                        error_msg = f"{pdf_name} Race {race_num}: Feature computation failed - {type(e).__name__}: {str(e)}"
-                        error_log.append(error_msg)
-                        print(f"      ❌ {error_msg}")
-                        failed_races += 1
-                        continue
-                    
                     # Score with v4.4 system
                     try:
                         df_scored = score_race(df_race, track)
@@ -167,10 +171,13 @@ def main():
                         v4_4_tier = bet_worthy_info.get('tier', 'NONE')
                         v4_4_recommended = bet_worthy_info.get('recommended_box')
                     except Exception as e:
+                        import traceback
                         error_msg = f"{pdf_name} Race {race_num}: Bet-worthy detection failed - {type(e).__name__}: {str(e)}"
                         error_log.append(error_msg)
                         print(f"      ❌ {error_msg}")
                         print(f"         DataFrame types: {df_scored.dtypes.to_dict() if hasattr(df_scored, 'dtypes') else 'N/A'}")
+                        print(f"         Full traceback:")
+                        traceback.print_exc()
                         failed_races += 1
                         continue
                     

@@ -403,9 +403,13 @@ def is_race_bet_worthy(race_dogs_df, selective_mode=True, track=None, ultra_sele
     except (TypeError, ValueError, AttributeError):
         career_starts = 0
     
-    # Extract track from data if not provided
+    # Extract track from data if not provided - convert to Python string to avoid DataFrame ambiguity
     if track is None:
-        track = sorted_dogs.iloc[0].get('Track', None)
+        try:
+            track_value = sorted_dogs.iloc[0].get('Track', None)
+            track = str(track_value) if track_value is not None and str(track_value) != 'nan' else None
+        except (TypeError, ValueError, AttributeError):
+            track = None
     
     # Calculate margin if we have at least 2 dogs
     margin_percent = 0.0
