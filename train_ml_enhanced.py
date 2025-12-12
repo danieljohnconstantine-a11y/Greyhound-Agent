@@ -203,7 +203,7 @@ def main():
         predictor = AdvancedGreyhoundMLPredictor()
         
         # Train with enhanced data (race_data_list and winners_list)
-        predictor.train(race_data_list, winners_list)
+        predictor.train_models(race_data_list, winners_list)
         
         print("\n✅ Enhanced model training complete!")
         
