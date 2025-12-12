@@ -124,9 +124,10 @@ def main():
     print("-" * 80)
     
     try:
-        historical_data = load_historical_data()
+        # load_historical_data returns (race_data_list, winners_list)
+        race_data_list, winners_list = load_historical_data()
         
-        if historical_data is None or len(historical_data) == 0:
+        if race_data_list is None or len(race_data_list) == 0:
             print("❌ ERROR: No historical data found")
             print("   Please ensure you have:")
             print("   1. Race PDFs in data/ folder")
@@ -134,9 +135,18 @@ def main():
             return 1
         
         print(f"✅ Loaded historical data:")
-        print(f"   Total races: {len(historical_data)}")
-        print(f"   Total dogs: {len(historical_data) * 8}")  # Approximate
-        print(f"   Date range: {historical_data['Date'].min()} to {historical_data['Date'].max()}")
+        print(f"   Total races: {len(race_data_list)}")
+        print(f"   Total dogs: {sum(len(race_df) for race_df in race_data_list)}")
+        
+        # Get date range from first and last race DataFrames if available
+        if len(race_data_list) > 0 and 'Date' in race_data_list[0].columns:
+            all_dates = []
+            for race_df in race_data_list:
+                if 'Date' in race_df.columns:
+                    all_dates.extend(race_df['Date'].tolist())
+            if all_dates:
+                all_dates = pd.Series(all_dates)
+                print(f"   Date range: {all_dates.min()} to {all_dates.max()}")
         
     except Exception as e:
         print(f"❌ Error loading historical data: {e}")
@@ -150,25 +160,34 @@ def main():
         print("-" * 80)
         
         try:
-            print("Adding weather and track condition features to dataset...")
-            historical_data = integrate_weather_features(historical_data, weather_manager)
-            print(f"✅ Weather/track features added")
+            print("Adding weather and track condition features to each race...")
+            # Apply weather features to each race DataFrame in the list
+            race_data_list_enhanced = []
+            for race_df in race_data_list:
+                race_df_enhanced = integrate_weather_features(race_df, weather_manager)
+                race_data_list_enhanced.append(race_df_enhanced)
+            race_data_list = race_data_list_enhanced
+            
+            print(f"✅ Weather/track features added to {len(race_data_list)} races")
             print(f"   Total features now: 80+")
             
-            # Show sample of new features
-            weather_feature_cols = [col for col in historical_data.columns 
-                                   if any(x in col.lower() for x in ['temperature', 'humidity', 'rainfall', 'wind', 'track_rating', 'ideal', 'heat', 'wet'])]
-            
-            if weather_feature_cols:
-                print(f"   New weather/track features: {len(weather_feature_cols)}")
-                for col in weather_feature_cols[:5]:  # Show first 5
-                    print(f"     - {col}")
-                if len(weather_feature_cols) > 5:
-                    print(f"     ... and {len(weather_feature_cols) - 5} more")
+            # Show sample of new features from first race
+            if len(race_data_list) > 0:
+                weather_feature_cols = [col for col in race_data_list[0].columns 
+                                       if any(x in col.lower() for x in ['temperature', 'humidity', 'rainfall', 'wind', 'track_rating', 'ideal', 'heat', 'wet'])]
+                
+                if weather_feature_cols:
+                    print(f"   New weather/track features: {len(weather_feature_cols)}")
+                    for col in weather_feature_cols[:5]:  # Show first 5
+                        print(f"     - {col}")
+                    if len(weather_feature_cols) > 5:
+                        print(f"     ... and {len(weather_feature_cols) - 5} more")
             
         except Exception as e:
             print(f"⚠️  Warning: Could not integrate weather features: {e}")
             print("   Continuing with ML v2.0 features only")
+            import traceback
+            traceback.print_exc()
     else:
         print("\n⚠️  STEP 3: Skipping weather integration (manager not available)")
         print("   Training with ML v2.0 features only")
@@ -183,8 +202,8 @@ def main():
         # Initialize predictor (will use enhanced features)
         predictor = AdvancedGreyhoundMLPredictor()
         
-        # Train with enhanced data
-        predictor.train(historical_data)
+        # Train with enhanced data (race_data_list and winners_list)
+        predictor.train(race_data_list, winners_list)
         
         print("\n✅ Enhanced model training complete!")
         
