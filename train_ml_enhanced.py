@@ -203,7 +203,7 @@ def main():
         predictor = AdvancedGreyhoundMLPredictor()
         
         # Train with enhanced data (race_data_list and winners_list)
-        predictor.train_models(race_data_list, winners_list)
+        predictor.train_track_specific(race_data_list, winners_list)
         
         print("\n✅ Enhanced model training complete!")
         
@@ -235,7 +235,7 @@ def main():
     
     print("\n📊 MODEL SUMMARY:")
     print(f"   Version: ML v2.1 Enhanced (Weather & Track Conditions)")
-    print(f"   Training data: {len(historical_data)} races")
+    print(f"   Training data: {len(race_data_list)} races")
     print(f"   Track-specific models: {len(predictor.track_models)}")
     print(f"   Total features: 80+ (70+ ML + 10+ weather/track)")
     print(f"   Ensemble algorithms: 2-4 (RF, GB, XGB, LGB - if available)")
