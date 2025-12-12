@@ -32,6 +32,33 @@ from src.ml_predictor import load_historical_data
 import pandas as pd
 import numpy as np
 from datetime import datetime
+import traceback
+import logging
+
+# Set up enhanced logging
+log_file = "logs/train_ml_enhanced.log"
+os.makedirs("logs", exist_ok=True)
+
+# Configure logging to both file and console
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file, mode='w', encoding='utf-8'),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+logger = logging.getLogger(__name__)
+
+def log_exception(msg, exc_info=True):
+    """Enhanced exception logging with full details"""
+    logger.error(msg, exc_info=exc_info)
+    if exc_info:
+        print("\n" + "="*80)
+        print("DETAILED ERROR INFORMATION:")
+        print("="*80)
+        traceback.print_exc()
+        print("="*80 + "\n")
 
 def integrate_weather_features(df, weather_manager):
     """
@@ -123,6 +150,15 @@ def main():
     print("  ✅ 80+ total features (70+ from v2.0 + 10+ weather/track)")
     print("  ✅ Expected: +1-2% win rate improvement")
     print("=" * 80)
+    print(f"\n📝 DETAILED LOG FILE: {os.path.abspath(log_file)}")
+    print("   All errors and diagnostics are being saved to this file for review")
+    print("=" * 80)
+    
+    logger.info("="*80)
+    logger.info("Enhanced ML Training v2.1 - Session Started")
+    logger.info(f"Python version: {sys.version}")
+    logger.info(f"Working directory: {os.getcwd()}")
+    logger.info("="*80)
     
     # Step 1: Initialize weather/track data manager
     print("\n🌤️  STEP 1: Initializing weather & track condition data...")
@@ -373,42 +409,111 @@ def main():
         print("\n   Starting training process...")
         
         # Train with enhanced data (race_data_list and winners_list)
-        predictor.train_track_specific(race_data_list, winners_list)
+        try:
+            logger.info(f"Calling train_track_specific with {len(race_data_list)} races and {len(winners_list)} winners")
+            predictor.train_track_specific(race_data_list, winners_list)
+            logger.info("Training completed successfully")
+        except Exception as train_error:
+            logger.error(f"Error during train_track_specific execution: {train_error}")
+            logger.error(f"Error occurred at line: {train_error.__traceback__.tb_lineno if train_error.__traceback__ else 'unknown'}")
+            raise  # Re-raise to be caught by outer exception handlers
         
         print("\n✅ Enhanced model training complete!")
+        logger.info("Enhanced model training complete!")
         
     except AttributeError as e:
-        print(f"\n❌ ATTRIBUTE ERROR during training: {e}")
+        error_msg = f"ATTRIBUTE ERROR during training: {e}"
+        print(f"\n❌ {error_msg}")
+        logger.error(error_msg)
         print(f"   This typically means a method or attribute doesn't exist")
         print(f"   Predictor type: {type(predictor).__name__}")
         print(f"   Available methods: {[m for m in dir(predictor) if not m.startswith('_') and callable(getattr(predictor, m))]}")
-        import traceback
-        print("\n📋 FULL TRACEBACK:")
-        traceback.print_exc()
+        log_exception("AttributeError details:")
+        
+        # Additional diagnostic info
+        logger.debug(f"Predictor class: {predictor.__class__.__module__}.{predictor.__class__.__name__}")
+        logger.debug(f"Predictor MRO: {[c.__name__ for c in predictor.__class__.__mro__]}")
         return 1
+        
     except TypeError as e:
-        print(f"\n❌ TYPE ERROR during training: {e}")
+        error_msg = f"TYPE ERROR during training: {e}"
+        print(f"\n❌ {error_msg}")
+        logger.error(error_msg)
         print(f"   This typically means wrong argument types were passed")
         print(f"   race_data_list type: {type(race_data_list).__name__}")
         print(f"   winners_list type: {type(winners_list).__name__}")
-        import traceback
-        print("\n📋 FULL TRACEBACK:")
-        traceback.print_exc()
+        
+        # Sample data types for debugging
+        if race_data_list:
+            logger.debug(f"First race type: {type(race_data_list[0])}")
+            logger.debug(f"First race shape: {race_data_list[0].shape if hasattr(race_data_list[0], 'shape') else 'N/A'}")
+        if winners_list:
+            logger.debug(f"First winner type: {type(winners_list[0])}")
+            logger.debug(f"First winner value: {winners_list[0]}")
+        
+        log_exception("TypeError details:")
         return 1
+        
     except ValueError as e:
-        print(f"\n❌ VALUE ERROR during training: {e}")
+        error_msg = f"VALUE ERROR during training: {e}"
+        print(f"\n❌ {error_msg}")
+        logger.error(error_msg)
         print(f"   This typically means invalid data values")
-        import traceback
-        print("\n📋 FULL TRACEBACK:")
-        traceback.print_exc()
+        
+        # Log data statistics
+        logger.debug(f"Race data list length: {len(race_data_list)}")
+        logger.debug(f"Winners list length: {len(winners_list)}")
+        if race_data_list:
+            try:
+                dogs_per_race = [len(race) for race in race_data_list if race is not None]
+                logger.debug(f"Dogs per race stats - min: {min(dogs_per_race)}, max: {max(dogs_per_race)}, avg: {sum(dogs_per_race)/len(dogs_per_race):.1f}")
+            except:
+                pass
+        
+        log_exception("ValueError details:")
         return 1
+        
+    except KeyError as e:
+        error_msg = f"KEY ERROR during training: {e}"
+        print(f"\n❌ {error_msg}")
+        logger.error(error_msg)
+        print(f"   This means a required column/key is missing from the data")
+        
+        # Log available columns
+        if race_data_list and len(race_data_list) > 0:
+            first_race = race_data_list[0]
+            if hasattr(first_race, 'columns'):
+                logger.debug(f"Available columns in first race: {list(first_race.columns)}")
+        
+        log_exception("KeyError details:")
+        return 1
+        
+    except MemoryError as e:
+        error_msg = f"MEMORY ERROR during training: {e}"
+        print(f"\n❌ {error_msg}")
+        logger.error(error_msg)
+        print(f"   System ran out of memory. Try:")
+        print(f"   1. Close other applications")
+        print(f"   2. Reduce training data size")
+        print(f"   3. Use a machine with more RAM")
+        log_exception("MemoryError details:")
+        return 1
+        
     except Exception as e:
-        print(f"\n❌ UNEXPECTED ERROR during training: {e}")
+        error_msg = f"UNEXPECTED ERROR during training: {type(e).__name__}: {e}"
+        print(f"\n❌ {error_msg}")
+        logger.error(error_msg)
         print(f"   Error type: {type(e).__name__}")
         print(f"   Error message: {str(e)}")
-        import traceback
-        print("\n📋 FULL TRACEBACK:")
-        traceback.print_exc()
+        
+        # Get detailed error info
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        if exc_tb:
+            logger.error(f"   Error at file: {exc_tb.tb_frame.f_code.co_filename}")
+            logger.error(f"   Error at line: {exc_tb.tb_lineno}")
+            logger.error(f"   Error in function: {exc_tb.tb_frame.f_code.co_name}")
+        
+        log_exception("Unexpected error details:")
         return 1
     
     # Step 5: Save enhanced model
@@ -457,12 +562,20 @@ def main():
     print("✅ ENHANCED ML MODEL v2.1 TRAINING COMPLETE!")
     print("=" * 80)
     
+    logger.info("="*80)
+    logger.info("Enhanced ML Model v2.1 Training - COMPLETED SUCCESSFULLY")
+    logger.info("="*80)
+    
     print("\n📊 MODEL SUMMARY:")
     print(f"   Version: ML v2.1 Enhanced (Weather & Track Conditions)")
     print(f"   Training data: {len(race_data_list)} races")
     print(f"   Track-specific models: {len(predictor.track_models)}")
     print(f"   Total features: 80+ (70+ ML + 10+ weather/track)")
     print(f"   Ensemble algorithms: 2-4 (RF, GB, XGB, LGB - if available)")
+    
+    logger.info(f"Training data: {len(race_data_list)} races")
+    logger.info(f"Track-specific models: {len(predictor.track_models)}")
+    logger.info(f"Model saved to: {os.path.abspath(model_path)}")
     
     print("\n🎯 EXPECTED PERFORMANCE:")
     print(f"   Win rate: 41-47% (hybrid picks)")
@@ -525,8 +638,33 @@ def main():
     print("=" * 80)
     print(f"\n✅ Model saved to: {os.path.abspath(model_path)}")
     print(f"✅ Run predictions to generate Excel betting reports")
+    print(f"\n📝 DETAILED LOG SAVED TO: {os.path.abspath(log_file)}")
+    print("   Review this file for complete training details and diagnostics")
+    print("   If you encounter any issues, share this log file for debugging")
+    
+    logger.info("="*80)
+    logger.info("Training session completed successfully")
+    logger.info(f"Log file saved to: {os.path.abspath(log_file)}")
+    logger.info("="*80)
     
     return 0
 
 if __name__ == "__main__":
-    exit(main())
+    try:
+        exit_code = main()
+        if exit_code != 0:
+            print(f"\n❌ TRAINING FAILED WITH EXIT CODE: {exit_code}")
+            print(f"📝 CHECK LOG FILE FOR DETAILS: {os.path.abspath(log_file)}")
+            logger.error(f"Training failed with exit code: {exit_code}")
+        exit(exit_code)
+    except KeyboardInterrupt:
+        print("\n\n⚠️  Training interrupted by user (Ctrl+C)")
+        logger.warning("Training interrupted by user")
+        print(f"📝 Partial log saved to: {os.path.abspath(log_file)}")
+        exit(130)
+    except Exception as e:
+        print(f"\n\n❌ CRITICAL UNHANDLED ERROR: {e}")
+        log_exception("Critical unhandled error in main:", exc_info=True)
+        print(f"\n📝 FULL ERROR LOG SAVED TO: {os.path.abspath(log_file)}")
+        print("   Please review this file for complete error details")
+        exit(1)
