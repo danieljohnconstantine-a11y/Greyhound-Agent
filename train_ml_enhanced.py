@@ -44,43 +44,74 @@ def integrate_weather_features(df, weather_manager):
     Returns:
         DataFrame with additional weather/track condition features
     """
-    
-    weather_features = []
-    
-    for idx, row in df.iterrows():
-        # Extract date and track
-        race_date = row.get('Date', '2025-12-11')
-        race_track = row.get('Track', 'Unknown')
-        race_distance = row.get('Distance', 515)
+    try:
+        if df is None or len(df) == 0:
+            raise ValueError("CRITICAL ERROR: Empty or None DataFrame passed to integrate_weather_features")
         
-        # Get condition features
-        conditions = weather_manager.get_condition_features(
-            race_date, race_track, race_distance
-        )
+        if weather_manager is None:
+            raise ValueError("CRITICAL ERROR: weather_manager is None")
         
-        weather_features.append(conditions)
+        weather_features = []
+        
+        for idx, row in df.iterrows():
+            try:
+                # Extract date and track with error checking
+                race_date = row.get('Date', '2025-12-11')
+                race_track = row.get('Track', 'Unknown')
+                race_distance = row.get('Distance', 515)
+                
+                # Get condition features
+                conditions = weather_manager.get_condition_features(
+                    race_date, race_track, race_distance
+                )
+                
+                weather_features.append(conditions)
+            except Exception as e:
+                print(f"⚠️  WARNING: Error processing row {idx}: {e}")
+                # Use default conditions on error
+                weather_features.append({
+                    'temperature_norm': 0.5,
+                    'humidity_norm': 0.5,
+                    'rainfall_norm': 0.0,
+                    'wind_norm': 0.3,
+                    'track_rating_norm': 1.0,
+                    'ideal_conditions': 1,
+                    'heat_stress_risk': 0,
+                    'wet_track': 0
+                })
+        
+        # Convert to DataFrame
+        weather_df = pd.DataFrame(weather_features)
+        
+        # Select numeric features for ML
+        weather_cols = [
+            'temperature_norm',
+            'humidity_norm',
+            'rainfall_norm',
+            'wind_norm',
+            'track_rating_norm',
+            'ideal_conditions',
+            'heat_stress_risk',
+            'wet_track'
+        ]
+        
+        # Add to original DataFrame
+        for col in weather_cols:
+            if col in weather_df.columns:
+                df[col] = weather_df[col].values
+            else:
+                print(f"⚠️  WARNING: Weather feature '{col}' not found, using default value 0.5")
+                df[col] = 0.5
+        
+        return df
     
-    # Convert to DataFrame
-    weather_df = pd.DataFrame(weather_features)
-    
-    # Select numeric features for ML
-    weather_cols = [
-        'temperature_norm',
-        'humidity_norm',
-        'rainfall_norm',
-        'wind_norm',
-        'track_rating_norm',
-        'ideal_conditions',
-        'heat_stress_risk',
-        'wet_track'
-    ]
-    
-    # Add to original DataFrame
-    for col in weather_cols:
-        if col in weather_df.columns:
-            df[col] = weather_df[col].values
-    
-    return df
+    except Exception as e:
+        print(f"❌ CRITICAL ERROR in integrate_weather_features: {e}")
+        print(f"   DataFrame shape: {df.shape if df is not None else 'None'}")
+        print(f"   DataFrame columns: {list(df.columns) if df is not None and hasattr(df, 'columns') else 'N/A'}")
+        import traceback
+        traceback.print_exc()
+        raise
 
 def main():
     print("=" * 80)
@@ -124,33 +155,94 @@ def main():
     print("-" * 80)
     
     try:
+        print("   Calling load_historical_data()...")
         # load_historical_data returns (race_data_list, winners_list)
-        race_data_list, winners_list = load_historical_data()
+        result = load_historical_data()
         
-        if race_data_list is None or len(race_data_list) == 0:
-            print("❌ ERROR: No historical data found")
+        # Detailed type checking and error reporting
+        if result is None:
+            print("❌ CRITICAL ERROR: load_historical_data() returned None")
+            print("   Expected: (race_data_list, winners_list) tuple")
+            return 1
+        
+        if not isinstance(result, tuple):
+            print(f"❌ CRITICAL ERROR: load_historical_data() returned {type(result).__name__}, expected tuple")
+            print(f"   Returned value: {result}")
+            return 1
+        
+        if len(result) != 2:
+            print(f"❌ CRITICAL ERROR: load_historical_data() returned tuple with {len(result)} elements, expected 2")
+            print(f"   Expected: (race_data_list, winners_list)")
+            return 1
+        
+        race_data_list, winners_list = result
+        print(f"   ✓ Successfully unpacked tuple: ({type(race_data_list).__name__}, {type(winners_list).__name__})")
+        
+        # Validate race_data_list
+        if race_data_list is None:
+            print("❌ CRITICAL ERROR: race_data_list is None")
+            return 1
+        
+        if not isinstance(race_data_list, list):
+            print(f"❌ CRITICAL ERROR: race_data_list is {type(race_data_list).__name__}, expected list")
+            return 1
+        
+        if len(race_data_list) == 0:
+            print("❌ ERROR: No historical data found (race_data_list is empty)")
             print("   Please ensure you have:")
             print("   1. Race PDFs in data/ folder")
             print("   2. Results CSVs in data/ folder (results_YYYY-MM-DD.csv)")
+            print("\n🔍 DIAGNOSTIC INFO:")
+            print(f"   Data directory: {os.path.abspath('data')}")
+            print(f"   Directory exists: {os.path.exists('data')}")
+            if os.path.exists('data'):
+                csv_files = [f for f in os.listdir('data') if f.endswith('.csv') and f.startswith('results_')]
+                print(f"   Results CSV files found: {len(csv_files)}")
+                if csv_files:
+                    print(f"   CSV files: {csv_files[:5]}")
             return 1
         
         print(f"✅ Loaded historical data:")
         print(f"   Total races: {len(race_data_list)}")
-        print(f"   Total dogs: {sum(len(race_df) for race_df in race_data_list)}")
+        
+        # Calculate total dogs with error handling
+        try:
+            total_dogs = sum(len(race_df) if race_df is not None else 0 for race_df in race_data_list)
+            print(f"   Total dogs: {total_dogs}")
+        except Exception as e:
+            print(f"   ⚠️  Could not calculate total dogs: {e}")
+        
+        # Sample first race for diagnostics
+        if len(race_data_list) > 0:
+            first_race = race_data_list[0]
+            print(f"\n🔍 DIAGNOSTIC - First race info:")
+            print(f"   Type: {type(first_race).__name__}")
+            if hasattr(first_race, 'shape'):
+                print(f"   Shape: {first_race.shape}")
+            if hasattr(first_race, 'columns'):
+                print(f"   Columns ({len(first_race.columns)}): {list(first_race.columns)[:10]}")
+                if len(first_race.columns) > 10:
+                    print(f"            ... and {len(first_race.columns) - 10} more")
         
         # Get date range from first and last race DataFrames if available
-        if len(race_data_list) > 0 and 'Date' in race_data_list[0].columns:
-            all_dates = []
-            for race_df in race_data_list:
-                if 'Date' in race_df.columns:
-                    all_dates.extend(race_df['Date'].tolist())
-            if all_dates:
-                all_dates = pd.Series(all_dates)
-                print(f"   Date range: {all_dates.min()} to {all_dates.max()}")
+        if len(race_data_list) > 0 and hasattr(race_data_list[0], 'columns') and 'Date' in race_data_list[0].columns:
+            try:
+                all_dates = []
+                for race_df in race_data_list:
+                    if race_df is not None and hasattr(race_df, 'columns') and 'Date' in race_df.columns:
+                        all_dates.extend(race_df['Date'].tolist())
+                if all_dates:
+                    all_dates = pd.Series(all_dates)
+                    print(f"   Date range: {all_dates.min()} to {all_dates.max()}")
+            except Exception as e:
+                print(f"   ⚠️  Could not determine date range: {e}")
         
     except Exception as e:
-        print(f"❌ Error loading historical data: {e}")
+        print(f"❌ CRITICAL ERROR loading historical data: {e}")
+        print(f"   Error type: {type(e).__name__}")
+        print(f"   Error details: {str(e)}")
         import traceback
+        print("\n📋 FULL TRACEBACK:")
         traceback.print_exc()
         return 1
     
@@ -160,33 +252,63 @@ def main():
         print("-" * 80)
         
         try:
-            print("Adding weather and track condition features to each race...")
+            print(f"   Processing {len(race_data_list)} races...")
             # Apply weather features to each race DataFrame in the list
             race_data_list_enhanced = []
-            for race_df in race_data_list:
-                race_df_enhanced = integrate_weather_features(race_df, weather_manager)
-                race_data_list_enhanced.append(race_df_enhanced)
+            errors_count = 0
+            
+            for i, race_df in enumerate(race_data_list):
+                try:
+                    if race_df is None:
+                        print(f"⚠️  WARNING: Race {i+1} is None, skipping")
+                        errors_count += 1
+                        continue
+                    
+                    race_df_enhanced = integrate_weather_features(race_df, weather_manager)
+                    race_data_list_enhanced.append(race_df_enhanced)
+                    
+                    # Progress indicator every 50 races
+                    if (i + 1) % 50 == 0:
+                        print(f"   ... processed {i+1}/{len(race_data_list)} races")
+                    
+                except Exception as e:
+                    print(f"❌ ERROR processing race {i+1}: {e}")
+                    errors_count += 1
+                    # Continue with original race data
+                    race_data_list_enhanced.append(race_df)
+            
+            if errors_count > 0:
+                print(f"⚠️  {errors_count} races had errors during weather integration")
+            
             race_data_list = race_data_list_enhanced
             
             print(f"✅ Weather/track features added to {len(race_data_list)} races")
+            print(f"   Successfully processed: {len(race_data_list) - errors_count}/{len(race_data_list)}")
             print(f"   Total features now: 80+")
             
             # Show sample of new features from first race
-            if len(race_data_list) > 0:
-                weather_feature_cols = [col for col in race_data_list[0].columns 
-                                       if any(x in col.lower() for x in ['temperature', 'humidity', 'rainfall', 'wind', 'track_rating', 'ideal', 'heat', 'wet'])]
-                
-                if weather_feature_cols:
-                    print(f"   New weather/track features: {len(weather_feature_cols)}")
-                    for col in weather_feature_cols[:5]:  # Show first 5
-                        print(f"     - {col}")
-                    if len(weather_feature_cols) > 5:
-                        print(f"     ... and {len(weather_feature_cols) - 5} more")
+            if len(race_data_list) > 0 and race_data_list[0] is not None:
+                try:
+                    weather_feature_cols = [col for col in race_data_list[0].columns 
+                                           if any(x in col.lower() for x in ['temperature', 'humidity', 'rainfall', 'wind', 'track_rating', 'ideal', 'heat', 'wet'])]
+                    
+                    if weather_feature_cols:
+                        print(f"   New weather/track features: {len(weather_feature_cols)}")
+                        for col in weather_feature_cols[:5]:  # Show first 5
+                            print(f"     - {col}")
+                        if len(weather_feature_cols) > 5:
+                            print(f"     ... and {len(weather_feature_cols) - 5} more")
+                    else:
+                        print("   ⚠️  No weather features found in processed data")
+                except Exception as e:
+                    print(f"   ⚠️  Could not display weather features: {e}")
             
         except Exception as e:
-            print(f"⚠️  Warning: Could not integrate weather features: {e}")
+            print(f"❌ CRITICAL ERROR: Could not integrate weather features: {e}")
+            print(f"   Error type: {type(e).__name__}")
             print("   Continuing with ML v2.0 features only")
             import traceback
+            print("\n📋 FULL TRACEBACK:")
             traceback.print_exc()
     else:
         print("\n⚠️  STEP 3: Skipping weather integration (manager not available)")
@@ -199,17 +321,72 @@ def main():
     print()
     
     try:
+        # Pre-training validation
+        print("🔍 PRE-TRAINING VALIDATION:")
+        print(f"   race_data_list type: {type(race_data_list).__name__}")
+        print(f"   race_data_list length: {len(race_data_list) if race_data_list else 'N/A'}")
+        print(f"   winners_list type: {type(winners_list).__name__}")
+        print(f"   winners_list length: {len(winners_list) if winners_list else 'N/A'}")
+        
+        if len(race_data_list) < 100:
+            print(f"\n⚠️  WARNING: Only {len(race_data_list)} races available for training")
+            print("   Recommended minimum: 100 races")
+            print("   This may result in poor model performance")
+            response = input("   Continue anyway? (y/n): ")
+            if response.lower() != 'y':
+                print("   Training cancelled by user")
+                return 1
+        
         # Initialize predictor (will use enhanced features)
+        print("\n   Initializing AdvancedGreyhoundMLPredictor...")
         predictor = AdvancedGreyhoundMLPredictor()
+        print("   ✓ Predictor initialized successfully")
+        
+        # Verify method exists
+        if not hasattr(predictor, 'train_track_specific'):
+            print(f"\n❌ CRITICAL ERROR: AdvancedGreyhoundMLPredictor does not have 'train_track_specific' method")
+            print(f"   Available methods: {[m for m in dir(predictor) if not m.startswith('_') and callable(getattr(predictor, m))]}")
+            return 1
+        
+        print(f"   ✓ Method 'train_track_specific' found")
+        print("\n   Starting training process...")
         
         # Train with enhanced data (race_data_list and winners_list)
         predictor.train_track_specific(race_data_list, winners_list)
         
         print("\n✅ Enhanced model training complete!")
         
-    except Exception as e:
-        print(f"\n❌ Error during training: {e}")
+    except AttributeError as e:
+        print(f"\n❌ ATTRIBUTE ERROR during training: {e}")
+        print(f"   This typically means a method or attribute doesn't exist")
+        print(f"   Predictor type: {type(predictor).__name__}")
+        print(f"   Available methods: {[m for m in dir(predictor) if not m.startswith('_') and callable(getattr(predictor, m))]}")
         import traceback
+        print("\n📋 FULL TRACEBACK:")
+        traceback.print_exc()
+        return 1
+    except TypeError as e:
+        print(f"\n❌ TYPE ERROR during training: {e}")
+        print(f"   This typically means wrong argument types were passed")
+        print(f"   race_data_list type: {type(race_data_list).__name__}")
+        print(f"   winners_list type: {type(winners_list).__name__}")
+        import traceback
+        print("\n📋 FULL TRACEBACK:")
+        traceback.print_exc()
+        return 1
+    except ValueError as e:
+        print(f"\n❌ VALUE ERROR during training: {e}")
+        print(f"   This typically means invalid data values")
+        import traceback
+        print("\n📋 FULL TRACEBACK:")
+        traceback.print_exc()
+        return 1
+    except Exception as e:
+        print(f"\n❌ UNEXPECTED ERROR during training: {e}")
+        print(f"   Error type: {type(e).__name__}")
+        print(f"   Error message: {str(e)}")
+        import traceback
+        print("\n📋 FULL TRACEBACK:")
         traceback.print_exc()
         return 1
     
@@ -220,12 +397,38 @@ def main():
     model_path = "models/greyhound_ml_v2.1_enhanced.pkl"
     
     try:
+        # Ensure models directory exists
+        models_dir = os.path.dirname(model_path)
+        if not os.path.exists(models_dir):
+            print(f"   Creating directory: {models_dir}")
+            os.makedirs(models_dir, exist_ok=True)
+        
+        # Verify save_model method exists
+        if not hasattr(predictor, 'save_model'):
+            print(f"❌ CRITICAL ERROR: Predictor does not have 'save_model' method")
+            print(f"   Available methods: {[m for m in dir(predictor) if not m.startswith('_') and callable(getattr(predictor, m))]}")
+            return 1
+        
+        print(f"   Saving to: {os.path.abspath(model_path)}")
         predictor.save_model(model_path)
-        print(f"✅ Model saved to: {model_path}")
-        print(f"   File size: {os.path.getsize(model_path) / 1024 / 1024:.2f} MB")
+        
+        # Verify file was created
+        if not os.path.exists(model_path):
+            print(f"❌ ERROR: Model file was not created at {model_path}")
+            return 1
+        
+        file_size_mb = os.path.getsize(model_path) / 1024 / 1024
+        print(f"✅ Model saved successfully!")
+        print(f"   Location: {os.path.abspath(model_path)}")
+        print(f"   File size: {file_size_mb:.2f} MB")
         
     except Exception as e:
-        print(f"❌ Error saving model: {e}")
+        print(f"❌ ERROR saving model: {e}")
+        print(f"   Error type: {type(e).__name__}")
+        print(f"   Model path: {os.path.abspath(model_path)}")
+        import traceback
+        print("\n📋 FULL TRACEBACK:")
+        traceback.print_exc()
         return 1
     
     # Step 6: Summary
