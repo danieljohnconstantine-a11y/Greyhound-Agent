@@ -212,6 +212,27 @@ def main():
         except Exception as e:
             print(f"   ⚠️  Could not calculate total dogs: {e}")
         
+        # Check how many races could potentially be added
+        import glob
+        results_files_check = glob.glob("data/results_*.csv")
+        if results_files_check:
+            total_results_check = 0
+            for rf in results_files_check:
+                try:
+                    df_r = pd.read_csv(rf)
+                    total_results_check += len(df_r)
+                except:
+                    pass
+            
+            if total_results_check > len(race_data_list):
+                missing_pdfs = total_results_check - len(race_data_list)
+                print(f"\n📊 DATA AVAILABILITY:")
+                print(f"   Results available: {total_results_check} races")
+                print(f"   PDFs available: {len(race_data_list)} races")
+                print(f"   Missing PDFs: {missing_pdfs} races ({missing_pdfs/total_results_check*100:.1f}%)")
+                print(f"\n💡 NOTE: Training uses only races with BOTH PDF + results")
+                print(f"   To train on all {total_results_check} races, add the missing {missing_pdfs} PDFs to data/ folder")
+        
         # Sample first race for diagnostics
         if len(race_data_list) > 0:
             first_race = race_data_list[0]
@@ -431,7 +452,7 @@ def main():
         traceback.print_exc()
         return 1
     
-    # Step 6: Summary
+    # Step 6: Summary and next steps
     print("\n" + "=" * 80)
     print("✅ ENHANCED ML MODEL v2.1 TRAINING COMPLETE!")
     print("=" * 80)
@@ -448,21 +469,62 @@ def main():
     print(f"   Improvement over v2.0: +1-2%")
     print(f"   Selectivity: ~6-8% of races")
     
-    print("\n📝 NEXT STEPS:")
-    print("   1. Copy today's race PDFs to data_predictions/ folder")
-    print("   2. Run: run_ml_hybrid_enhanced.bat")
-    print("   3. Check outputs/ml_hybrid_enhanced_picks.xlsx")
-    print("   4. Bet only on HYBRID_TIER0_ENHANCED picks")
+    print("\n" + "=" * 80)
+    print("📋 DATA COVERAGE ANALYSIS")
+    print("=" * 80)
     
-    print("\n💡 TO IMPROVE ACCURACY FURTHER:")
-    print("   1. Add actual weather data to data/weather_conditions.csv")
-    print("   2. Add track conditions to data/track_conditions.csv")
-    print("   3. Collect more historical data (target: 1000+ races)")
-    print("   4. Update weather data for each race day")
+    # Analyze which races have PDFs vs results only
+    import glob
+    pdf_files = glob.glob("data/*form.pdf")
+    results_files = glob.glob("data/results_*.csv")
+    
+    # Count total results
+    total_results = 0
+    for results_file in results_files:
+        df_results = pd.read_csv(results_file)
+        total_results += len(df_results)
+    
+    print(f"\n📁 Data Files Found:")
+    print(f"   PDFs: {len(pdf_files)}")
+    print(f"   Results CSVs: {len(results_files)}")
+    print(f"   Total race results: {total_results}")
+    print(f"   Races with BOTH PDF + results: {len(race_data_list)}")
+    print(f"   Missing PDFs for: {total_results - len(race_data_list)} races")
+    
+    if total_results - len(race_data_list) > 0:
+        print(f"\n💡 TO GET MORE TRAINING DATA:")
+        print(f"   Add the missing {total_results - len(race_data_list)} race PDFs to data/ folder")
+        print(f"   This will increase training accuracy and model robustness")
+        print(f"   Currently using: {len(race_data_list)}/{total_results} ({len(race_data_list)/total_results*100:.1f}%) of available races")
     
     print("\n" + "=" * 80)
-    print("🏁 Enhanced ML system ready for world-class predictions!")
+    print("📝 NEXT STEPS TO GENERATE BETTING REPORTS")
     print("=" * 80)
+    print("\n⚠️  IMPORTANT: Training only creates the model - it does NOT generate Excel reports!")
+    print("\nTo generate betting picks and Excel reports:")
+    print("\n1️⃣  Place today's race PDFs in data_predictions/ folder")
+    print("   Example: data_predictions/SANDOWN_12DEC_form.pdf")
+    
+    print("\n2️⃣  Run predictions using ONE of these methods:")
+    print("   Option A: python run_ml_hybrid_enhanced.py")
+    print("   Option B: Double-click run_ml_hybrid_enhanced.bat (Windows)")
+    
+    print("\n3️⃣  Check outputs/ folder for Excel files:")
+    print("   • ml_hybrid_enhanced_picks.xlsx - High-confidence bets")
+    print("   • ml_enhanced_all_predictions.xlsx - All predictions ranked")
+    print("   • v44_picks_comparison.csv - Baseline v4.4 picks")
+    
+    print("\n💡 TO IMPROVE ACCURACY FURTHER:")
+    print("   • Add actual weather data to data/weather_conditions.csv")
+    print("   • Add track conditions to data/track_conditions.csv")
+    print("   • Add {0} missing race PDFs to data/ folder".format(total_results - len(race_data_list)) if total_results > len(race_data_list) else "   • Collect more historical race PDFs")
+    print("   • Update weather data daily for maximum accuracy")
+    
+    print("\n" + "=" * 80)
+    print("🎉 TRAINING SUCCESSFUL! Model ready for predictions.")
+    print("=" * 80)
+    print(f"\n✅ Model saved to: {os.path.abspath(model_path)}")
+    print(f"✅ Run predictions to generate Excel betting reports")
     
     return 0
 
