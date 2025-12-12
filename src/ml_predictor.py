@@ -343,9 +343,119 @@ class GreyhoundMLPredictor:
         print(f"   Trained: {model_data.get('timestamp', 'unknown')}")
 
 
+def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
+    """
+    Load historical race data directly from results CSVs for ML training.
+    This loads ALL races from CSV files, not just those with PDFs.
+    
+    Args:
+        data_dir: Directory containing results CSVs
+        use_all_csvs: If True, loads all races from CSVs (recommended for ML training)
+        
+    Returns:
+        tuple: (list of race DataFrames, list of winning boxes)
+    """
+    import glob
+    from src.features import compute_features
+    
+    results_files = sorted(glob.glob(f"{data_dir}/results_*.csv"))
+    
+    print(f"📁 Found {len(results_files)} results CSV files in {data_dir}/")
+    
+    if len(results_files) == 0:
+        print(f"❌ No results files found in {data_dir}/")
+        print(f"   Looking for files matching: {data_dir}/results_*.csv")
+        return [], []
+    
+    # Load all results and create race DataFrames
+    race_data = []
+    winners = []
+    total_races_in_csvs = 0
+    
+    for results_file in results_files:
+        try:
+            df_results = pd.read_csv(results_file)
+            total_races_in_csvs += len(df_results)
+            
+            # Group by race (Track + RaceNumber)
+            if 'Track' not in df_results.columns or 'RaceNumber' not in df_results.columns:
+                print(f"⚠️  Skipping {results_file}: Missing Track or RaceNumber columns")
+                continue
+            
+            for (track, race_num), race_rows in df_results.groupby(['Track', 'RaceNumber']):
+                try:
+                    # Create DataFrame for this race
+                    df_race = race_rows.copy()
+                    
+                    # Ensure required columns exist
+                    required_cols = ['Box', 'Winner']
+                    missing_cols = [col for col in required_cols if col not in df_race.columns]
+                    if missing_cols:
+                        continue
+                    
+                    # Get winner box
+                    winner_row = df_race[df_race['Winner'] == 1]
+                    if len(winner_row) == 0:
+                        # Try extracting from Winner column if it's the box number
+                        try:
+                            winner_value = df_race['Winner'].iloc[0]
+                            if isinstance(winner_value, (int, float)) and not pd.isna(winner_value):
+                                winner_box = int(winner_value)
+                            elif isinstance(winner_value, str) and winner_value:
+                                winner_box = int(winner_value[0])
+                            else:
+                                continue
+                        except:
+                            continue
+                    else:
+                        winner_box = int(winner_row['Box'].iloc[0])
+                    
+                    # Add Date if not present (use filename)
+                    if 'Date' not in df_race.columns:
+                        import re
+                        date_match = re.search(r'(\d{4}-\d{2}-\d{2})', results_file)
+                        if date_match:
+                            df_race['Date'] = date_match.group(1)
+                    
+                    # Compute features if not already present
+                    # Check if features are already computed
+                    feature_cols = ['CareerStarts', 'WinPercentage', 'Speed_kmh']
+                    has_features = all(col in df_race.columns for col in feature_cols)
+                    
+                    if not has_features:
+                        try:
+                            df_race = compute_features(df_race)
+                        except Exception as e:
+                            # If feature computation fails, skip this race
+                            continue
+                    
+                    race_data.append(df_race)
+                    winners.append(winner_box)
+                    
+                except Exception as e:
+                    # Skip races with errors
+                    continue
+        
+        except Exception as e:
+            print(f"⚠️  Error processing {results_file}: {e}")
+            continue
+    
+    print(f"📊 Total races in CSV files: {total_races_in_csvs}")
+    print(f"✅ Successfully loaded {len(race_data)} races with complete data")
+    
+    if len(race_data) < total_races_in_csvs * 0.5:
+        print(f"⚠️  WARNING: Only loaded {len(race_data)}/{total_races_in_csvs} races ({len(race_data)/total_races_in_csvs*100:.1f}%)")
+        print(f"   Some races may be missing required columns or have incomplete data")
+    
+    return race_data, winners
+
+
 def load_historical_data(data_dir='data'):
     """
     Load historical race PDFs and results for ML training.
+    
+    NOTE: This function only loads races with both PDFs and results.
+    For maximum training data, use load_historical_data_from_csvs() instead.
     
     Args:
         data_dir: Directory containing PDFs and results CSVs
@@ -353,6 +463,16 @@ def load_historical_data(data_dir='data'):
     Returns:
         tuple: (list of race DataFrames, list of winning boxes)
     """
+    # Try loading from CSVs first for maximum data
+    print("🔄 Attempting to load ALL races from CSV files...")
+    race_data, winners = load_historical_data_from_csvs(data_dir)
+    
+    if len(race_data) > 0:
+        return race_data, winners
+    
+    # Fallback to PDF-based loading if CSV loading fails
+    print("⚠️  CSV loading failed, falling back to PDF-based loading...")
+    
     import pdfplumber
     from src.parser import parse_race_form
     from src.features import compute_features
