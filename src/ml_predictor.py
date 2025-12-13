@@ -357,14 +357,42 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
     """
     import glob
     from src.features import compute_features
+    import logging
     
-    results_files = sorted(glob.glob(f"{data_dir}/results_*.csv"))
+    logger = logging.getLogger(__name__)
+    
+    try:
+        results_files = sorted(glob.glob(f"{data_dir}/results_*.csv"))
+        logger.info(f"Searching for CSV files in: {data_dir}/results_*.csv")
+        logger.info(f"Found {len(results_files)} results CSV files")
+    except Exception as glob_error:
+        print(f"❌ ERROR searching for CSV files: {glob_error}")
+        logger.error(f"Error during glob search: {glob_error}")
+        raise
     
     print(f"📁 Found {len(results_files)} results CSV files in {data_dir}/")
     
     if len(results_files) == 0:
         print(f"❌ No results files found in {data_dir}/")
         print(f"   Looking for files matching: {data_dir}/results_*.csv")
+        logger.error(f"No results files found matching: {data_dir}/results_*.csv")
+        
+        # Additional diagnostic info
+        try:
+            if os.path.exists(data_dir):
+                all_files = os.listdir(data_dir)
+                csv_files = [f for f in all_files if f.endswith('.csv')]
+                print(f"   Files in {data_dir}: {len(all_files)} total, {len(csv_files)} CSV files")
+                if csv_files:
+                    print(f"   CSV files found: {csv_files[:5]}")
+                logger.info(f"Directory contents: {len(all_files)} files, {len(csv_files)} CSVs")
+            else:
+                print(f"   ERROR: Directory {data_dir} does not exist!")
+                logger.error(f"Directory {data_dir} does not exist")
+        except Exception as dir_error:
+            print(f"   ERROR checking directory: {dir_error}")
+            logger.error(f"Error checking directory: {dir_error}")
+        
         return [], []
     
     # Load all results and create race DataFrames
@@ -372,10 +400,14 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
     winners = []
     total_races_in_csvs = 0
     
-    for results_file in results_files:
+    logger.info(f"Processing {len(results_files)} CSV files...")
+    
+    for idx, results_file in enumerate(results_files, 1):
         try:
+            logger.debug(f"Loading file {idx}/{len(results_files)}: {results_file}")
             df_results = pd.read_csv(results_file)
             total_races_in_csvs += len(df_results)
+            logger.debug(f"  Loaded {len(df_results)} race entries from {os.path.basename(results_file)}")
             
             # Group by race (Track + RaceNumber)
             if 'Track' not in df_results.columns or 'RaceNumber' not in df_results.columns:
@@ -442,11 +474,24 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
     
     print(f"📊 Total races in CSV files: {total_races_in_csvs}")
     print(f"✅ Successfully loaded {len(race_data)} races with complete data")
+    logger.info(f"Total races in CSV files: {total_races_in_csvs}")
+    logger.info(f"Successfully loaded {len(race_data)} races with complete data")
+    
+    if len(race_data) == 0:
+        print(f"❌ CRITICAL: No races could be loaded from {len(results_files)} CSV files")
+        print(f"   This usually means:")
+        print(f"   1. CSV files are empty or corrupted")
+        print(f"   2. CSV files are missing required columns (Track, RaceNumber, Box, Winner)")
+        print(f"   3. No races have valid winner information")
+        logger.error("CRITICAL: No races loaded - CSV files may be empty or missing required data")
+        return [], []
     
     if len(race_data) < total_races_in_csvs * 0.5:
         print(f"⚠️  WARNING: Only loaded {len(race_data)}/{total_races_in_csvs} races ({len(race_data)/total_races_in_csvs*100:.1f}%)")
         print(f"   Some races may be missing required columns or have incomplete data")
+        logger.warning(f"Only loaded {len(race_data)}/{total_races_in_csvs} races ({len(race_data)/total_races_in_csvs*100:.1f}%)")
     
+    logger.info(f"Returning {len(race_data)} race DataFrames and {len(winners)} winners")
     return race_data, winners
 
 

@@ -169,6 +169,88 @@ def main():
     logger.info(f"Working directory: {os.getcwd()}")
     logger.info("="*80)
     
+    # CRITICAL: Add immediate environment check with detailed logging
+    print("\n🔍 STARTUP DIAGNOSTICS:")
+    print("-" * 80)
+    try:
+        print(f"   Python version: {sys.version.split()[0]}")
+        print(f"   Working directory: {os.getcwd()}")
+        print(f"   Script location: {os.path.abspath(__file__)}")
+        logger.info(f"Python version: {sys.version.split()[0]}")
+        logger.info(f"Working directory: {os.getcwd()}")
+        logger.info(f"Script location: {os.path.abspath(__file__)}")
+        
+        # Check data directory
+        data_dir = os.path.join(os.getcwd(), 'data')
+        print(f"   Data directory: {data_dir}")
+        print(f"   Data dir exists: {os.path.exists(data_dir)}")
+        logger.info(f"Data directory: {data_dir}")
+        logger.info(f"Data dir exists: {os.path.exists(data_dir)}")
+        
+        if os.path.exists(data_dir):
+            try:
+                all_files = os.listdir(data_dir)
+                csv_files = [f for f in all_files if f.endswith('.csv') and f.startswith('results_')]
+                print(f"   Total files in data/: {len(all_files)}")
+                print(f"   Results CSV files: {len(csv_files)}")
+                logger.info(f"Total files in data/: {len(all_files)}")
+                logger.info(f"Results CSV files found: {len(csv_files)}")
+                
+                if len(csv_files) > 0:
+                    print(f"   First few CSVs: {csv_files[:3]}")
+                    logger.info(f"CSV files: {csv_files}")
+                else:
+                    print("   ❌ CRITICAL: No results_*.csv files found in data/ directory!")
+                    print("      Please ensure you have results CSV files like:")
+                    print("        - data/results_2025-11-27.csv")
+                    print("        - data/results_2025-11-28.csv")
+                    print("        - etc.")
+                    logger.error("CRITICAL: No results CSV files found in data/ directory")
+                    logger.error("Training cannot proceed without historical race data")
+                    return 1
+            except Exception as dir_error:
+                print(f"   ❌ ERROR listing data directory: {dir_error}")
+                logger.error(f"Error listing data directory: {dir_error}")
+                import traceback
+                traceback.print_exc()
+                return 1
+        else:
+            print("   ❌ CRITICAL: data/ directory does not exist!")
+            print("      Please create data/ directory and add results CSV files")
+            logger.error("CRITICAL: data/ directory does not exist")
+            return 1
+        
+        # Check models directory
+        models_dir = 'models'
+        if not os.path.exists(models_dir):
+            print(f"   Creating models directory: {models_dir}")
+            logger.info(f"Creating models directory: {models_dir}")
+            os.makedirs(models_dir, exist_ok=True)
+        print(f"   Models directory: {os.path.abspath(models_dir)}")
+        logger.info(f"Models directory: {os.path.abspath(models_dir)}")
+        
+        # Check logs directory
+        logs_dir = 'logs'
+        if not os.path.exists(logs_dir):
+            print(f"   Creating logs directory: {logs_dir}")
+            logger.info(f"Creating logs directory: {logs_dir}")
+            os.makedirs(logs_dir, exist_ok=True)
+        print(f"   Logs directory: {os.path.abspath(logs_dir)}")
+        logger.info(f"Logs directory: {os.path.abspath(logs_dir)}")
+        
+        print("   ✓ Environment check passed")
+        logger.info("Environment check completed successfully")
+        print()
+        
+    except Exception as env_error:
+        print(f"\n❌ CRITICAL ERROR during environment check: {env_error}")
+        logger.error(f"CRITICAL: Environment check failed: {env_error}")
+        import traceback
+        print("\n📋 FULL TRACEBACK:")
+        traceback.print_exc()
+        logger.error("Full traceback:", exc_info=True)
+        return 1
+    
     # Step 1: Initialize weather/track data manager
     print("\n🌤️  STEP 1: Initializing weather & track condition data...")
     print("-" * 80)
@@ -201,9 +283,24 @@ def main():
     
     try:
         print("   Calling load_historical_data_from_csvs() for full 1478 race dataset...")
+        logger.info("Calling load_historical_data_from_csvs()")
+        
         # load_historical_data_from_csvs returns (race_data_list, winners_list)
         # This loads ALL races from CSVs without requiring PDFs (4x more data!)
-        result = load_historical_data_from_csvs()
+        try:
+            result = load_historical_data_from_csvs()
+            logger.info(f"load_historical_data_from_csvs() returned: {type(result)}")
+        except Exception as load_error:
+            print(f"\n❌ CRITICAL ERROR calling load_historical_data_from_csvs(): {load_error}")
+            logger.error(f"CRITICAL: load_historical_data_from_csvs() failed: {load_error}")
+            print(f"   Error type: {type(load_error).__name__}")
+            print(f"   Error message: {str(load_error)}")
+            logger.error(f"Error type: {type(load_error).__name__}")
+            import traceback
+            print("\n📋 FULL TRACEBACK:")
+            traceback.print_exc()
+            logger.error("Full traceback:", exc_info=True)
+            return 1
         
         # Detailed type checking and error reporting
         if result is None:
