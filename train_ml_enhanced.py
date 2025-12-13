@@ -40,15 +40,24 @@ log_file = "logs/train_ml_enhanced.log"
 os.makedirs("logs", exist_ok=True)
 
 # Configure logging to both file and console
+# Use INFO level to avoid excessive DEBUG output from PDF parser libraries
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler(log_file, mode='w', encoding='utf-8'),
         logging.StreamHandler(sys.stdout)
     ]
 )
+
+# Suppress DEBUG logging from PDF parsing libraries (pdfminer, etc.)
+logging.getLogger('pdfminer').setLevel(logging.WARNING)
+logging.getLogger('pdfplumber').setLevel(logging.WARNING)
+logging.getLogger('PIL').setLevel(logging.WARNING)
+
+# Set our logger to DEBUG for detailed training diagnostics
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 def log_exception(msg, exc_info=True):
     """Enhanced exception logging with full details"""
