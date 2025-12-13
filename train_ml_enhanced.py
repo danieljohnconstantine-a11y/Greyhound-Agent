@@ -7,6 +7,17 @@ Builds on ML v2.0 with additional weather and track condition modeling:
 - Track condition effects (fast/slow/heavy ratings)
 - Expected: 41-47% win rate (vs 40-45% v2.0)
 
+IMPORTANT - Data Requirements:
+    This script uses PDF-based data loading which requires:
+    1. PDF files in data/ folder with complete race information (dogs, weights, form, etc.)
+    2. Results CSV files in data/ folder with winners (results_YYYY-MM-DD.csv)
+    
+    CSV-direct loading is NOT used because current CSV files only contain:
+    - Track, RaceNumber, WinnerBox (results only)
+    
+    To use CSV-direct loading (for 1478 races), CSVs would need complete dog data:
+    - Track, RaceNumber, Box, DogName, Weight, CareerStarts, Form, Speed, etc.
+
 Usage:
     python train_ml_enhanced.py
 
@@ -14,6 +25,7 @@ Output:
     - Enhanced model saved to models/greyhound_ml_v2.1_enhanced.pkl
     - Weather and track condition feature importance analysis
     - Performance metrics showing improvement over v2.0
+    - Trains on races where both PDF and CSV results exist
 """
 
 import sys
@@ -282,17 +294,22 @@ def main():
     print("-" * 80)
     
     try:
-        print("   Calling load_historical_data_from_csvs() for full 1478 race dataset...")
-        logger.info("Calling load_historical_data_from_csvs()")
+        # NOTE: Using PDF-based loading because CSV files only contain results,
+        # not the detailed dog data needed for training.
+        # CSV-direct loading requires CSV files with complete race information including:
+        # Track, RaceNumber, Box, DogName, Weight, CareerStarts, etc.
+        # Current CSV files only have: Track, RaceNumber, WinnerBox
+        print("   Loading historical data from PDFs and matching with CSV results...")
+        logger.info("Calling load_historical_data() - PDF-based loading")
         
-        # load_historical_data_from_csvs returns (race_data_list, winners_list)
-        # This loads ALL races from CSVs without requiring PDFs (4x more data!)
+        # load_historical_data returns (race_data_list, winners_list)
+        # This matches PDF data with CSV results
         try:
-            result = load_historical_data_from_csvs()
-            logger.info(f"load_historical_data_from_csvs() returned: {type(result)}")
+            result = load_historical_data()
+            logger.info(f"load_historical_data() returned: {type(result)}")
         except Exception as load_error:
-            print(f"\n❌ CRITICAL ERROR calling load_historical_data_from_csvs(): {load_error}")
-            logger.error(f"CRITICAL: load_historical_data_from_csvs() failed: {load_error}")
+            print(f"\n❌ CRITICAL ERROR calling load_historical_data(): {load_error}")
+            logger.error(f"CRITICAL: load_historical_data() failed: {load_error}")
             print(f"   Error type: {type(load_error).__name__}")
             print(f"   Error message: {str(load_error)}")
             logger.error(f"Error type: {type(load_error).__name__}")
@@ -333,16 +350,21 @@ def main():
         if len(race_data_list) == 0:
             print("❌ ERROR: No historical data found (race_data_list is empty)")
             print("   Please ensure you have:")
-            print("   1. Results CSVs in data/ folder (results_YYYY-MM-DD.csv)")
-            print("   Note: CSV-direct loading used - no PDFs required!")
+            print("   1. PDF files in data/ folder with race information")
+            print("   2. Results CSVs in data/ folder (results_YYYY-MM-DD.csv)")
+            print("   Note: Both PDFs and CSV results are required for this method")
             print("\n🔍 DIAGNOSTIC INFO:")
             print(f"   Data directory: {os.path.abspath('data')}")
             print(f"   Directory exists: {os.path.exists('data')}")
             if os.path.exists('data'):
                 csv_files = [f for f in os.listdir('data') if f.endswith('.csv') and f.startswith('results_')]
+                pdf_files = [f for f in os.listdir('data') if f.endswith('.pdf')]
                 print(f"   Results CSV files found: {len(csv_files)}")
+                print(f"   PDF files found: {len(pdf_files)}")
                 if csv_files:
-                    print(f"   CSV files: {csv_files[:5]}")
+                    print(f"   Sample CSV files: {csv_files[:3]}")
+                if pdf_files:
+                    print(f"   Sample PDF files: {pdf_files[:3]}")
             return 1
         
         print(f"✅ Loaded historical data:")
