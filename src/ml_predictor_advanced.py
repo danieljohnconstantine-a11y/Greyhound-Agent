@@ -343,7 +343,7 @@ class AdvancedGreyhoundMLPredictor:
         # Calculate optimal ensemble weights based on validation performance
         total_score = sum(val_scores.values())
         if total_score > 0:
-            weights = {k: v/total_score for k, v in val_scores.values()}
+            weights = {k: v/total_score for k, v in val_scores.items()}
         else:
             # Equal weights if all perform poorly
             weights = {k: 1.0/len(val_scores) for k in val_scores.keys()}
