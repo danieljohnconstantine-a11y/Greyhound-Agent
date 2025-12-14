@@ -50,7 +50,6 @@ from src.weather_track_data import WeatherTrackDataManager
 from src.parser import parse_race_form
 from src.features import compute_features
 from src.scorer import score_race
-from src.excel_export import export_to_excel
 import pandas as pd
 import glob
 import pdfplumber
