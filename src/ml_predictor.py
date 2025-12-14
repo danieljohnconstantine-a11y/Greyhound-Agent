@@ -698,21 +698,29 @@ def load_historical_data(data_dir='data'):
     logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
     
     # Parse all race results from CSV files
-    all_results = {}  # Key: "Track_RaceNumber", Value: winner_box
+    # Key format: "Date_Track_RaceNumber" (e.g., "2025-11-27_Casino_R1")
+    all_results = {}
     for results_file in sorted(results_files):
         try:
+            # Extract date from filename (e.g., results_2025-11-27.csv -> 2025-11-27)
+            import os
+            filename = os.path.basename(results_file)
+            date_match = filename.replace('results_', '').replace('.csv', '')
+            csv_date = date_match if date_match else 'unknown'
+            
             df_results = pd.read_csv(results_file)
             for _, row in df_results.iterrows():
                 track = str(row.get('Track', ''))
                 # Handle both "R1" format and plain "1" format
                 race_str = str(row.get('Race', row.get('RaceNumber', '0')))
                 race_num = int(race_str.replace('R', '').replace('r', ''))
-                winner_str = str(row.get('Winner', '0'))
+                winner_str = str(row.get('Winner', row.get('WinnerBox', '0')))
                 # Extract first digit as winner box
                 winner_box = int(winner_str[0]) if winner_str and winner_str[0].isdigit() else 0
                 
                 if track and race_num and winner_box:
-                    key = f"{track}_R{race_num}"
+                    # Create key with date for more accurate matching
+                    key = f"{csv_date}_{track}_R{race_num}"
                     all_results[key] = winner_box
         except Exception as e:
             print(f"⚠️  Error reading {results_file}: {e}")
@@ -728,7 +736,10 @@ def load_historical_data(data_dir='data'):
     pdfs_parsed = 0
     races_matched = 0
     
-    for pdf_file in sorted(pdf_files):
+    print(f"📄 Processing {len(pdf_files)} PDF files...")
+    for pdf_idx, pdf_file in enumerate(sorted(pdf_files)):
+        if (pdf_idx + 1) % 10 == 0:
+            print(f"   Progress: {pdf_idx + 1}/{len(pdf_files)} PDFs processed...")
         try:
             # Extract text from PDF using pdfplumber
             with pdfplumber.open(pdf_file) as pdf:
@@ -748,10 +759,27 @@ def load_historical_data(data_dir='data'):
             
             # Group by race and match with results
             if 'Track' in df_all_dogs.columns and 'RaceNumber' in df_all_dogs.columns:
-                for (track, race_num), df_race in df_all_dogs.groupby(['Track', 'RaceNumber']):
-                    # Match with results
-                    key = f"{track}_R{race_num}"
-                    if key in all_results:
+                # Group by date, track, and race number for accurate matching
+                groupby_cols = ['Track', 'RaceNumber']
+                if 'RaceDate' in df_all_dogs.columns:
+                    groupby_cols.insert(0, 'RaceDate')
+                
+                for group_key, df_race in df_all_dogs.groupby(groupby_cols):
+                    # Handle both (date, track, race) and (track, race) tuples
+                    if len(groupby_cols) == 3:
+                        race_date, track, race_num = group_key
+                        # Try matching with date first
+                        key = f"{race_date}_{track}_R{race_num}"
+                    else:
+                        track, race_num = group_key
+                        # Fallback: try matching without date (check all dates)
+                        key = None
+                        for result_key in all_results.keys():
+                            if result_key.endswith(f"_{track}_R{race_num}"):
+                                key = result_key
+                                break
+                    
+                    if key and key in all_results:
                         winner_box = all_results[key]
                         # Verify winner box exists in the race
                         if 'Box' in df_race.columns and winner_box in df_race['Box'].values:
