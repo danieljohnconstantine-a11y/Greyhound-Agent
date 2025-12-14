@@ -175,7 +175,7 @@ class AdvancedGreyhoundMLPredictor:
         # Form trend (recent performance)
         if 'Last3Positions' in df.columns:
             # Average finish position in last 3
-            df_features['Avg Last3Position'] = df['Last3Positions'].apply(
+            df_features['AvgLast3Position'] = df['Last3Positions'].apply(
                 lambda x: np.mean(x) if isinstance(x, (list, np.ndarray)) and len(x) > 0 else 5
             )
             feature_cols.append('AvgLast3Position')
@@ -214,7 +214,7 @@ class AdvancedGreyhoundMLPredictor:
         
         # Age-experience interaction
         if 'Age_months' in df.columns and 'CareerStarts' in df.columns:
-            df_features['Experience_per_Month'] = df['CareerStarts'] / (df['Age_months'] + 1)
+            df_features['ExperiencePerMonth'] = df['CareerStarts'] / (df['Age_months'] + 1)
             df_features['MaturityIndex'] = df['Age_months'] * df['CareerStarts'] / 100
             feature_cols.extend(['ExperiencePerMonth', 'MaturityIndex'])
         
@@ -235,9 +235,24 @@ class AdvancedGreyhoundMLPredictor:
             df_features['WeightPerformanceRatio'] = df['WinPercentage'] / (df['Weight'] + 1)
             feature_cols.append('WeightPerformanceRatio')
         
-        # Filter to available features
-        available_cols = [c for c in feature_cols if c in df_features.columns]
-        X = df_features[available_cols].fillna(0)
+        # If model is already trained, use the saved feature names for consistency
+        if self.trained and len(self.feature_names) > 0:
+            # Create all possible features first
+            available_cols = [c for c in feature_cols if c in df_features.columns]
+            
+            # Now select only the features that were used during training, in the same order
+            # Add missing features as zeros
+            for feat in self.feature_names:
+                if feat not in df_features.columns:
+                    df_features[feat] = 0
+            
+            # Select features in the exact order from training
+            X = df_features[self.feature_names].fillna(0)
+        else:
+            # Training mode: use all available features
+            available_cols = [c for c in feature_cols if c in df_features.columns]
+            X = df_features[available_cols].fillna(0)
+            self.feature_names = available_cols
         
         # Replace any infinite values with 0
         X = X.replace([np.inf, -np.inf], 0)
@@ -245,8 +260,7 @@ class AdvancedGreyhoundMLPredictor:
         # Final safety check - fill any remaining NaN values
         X = X.fillna(0)
         
-        self.feature_names = available_cols
-        return X, available_cols
+        return X, self.feature_names if self.trained else available_cols
     
     def create_ensemble_model(self, track_name, X_train, y_train, X_val, y_val):
         """
