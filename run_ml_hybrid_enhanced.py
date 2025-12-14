@@ -152,12 +152,18 @@ def main():
                 race_scores = score_race(race_df)
                 
                 # ML v2.1 predictions
-                ml_predictions = predictor.predict_race(race_df, str(track))
+                ml_confidences = predictor.predict_confidence(race_df)
+                
+                # Create box to confidence mapping
+                ml_predictions = {}
+                for idx, row in race_df.iterrows():
+                    box = row['Box']
+                    ml_predictions[box] = ml_confidences.loc[idx] if idx in ml_confidences.index else 0
                 
                 # Record all predictions
                 for _, dog in race_df.iterrows():
                     box = dog['Box']
-                    ml_conf = ml_predictions.get(box, {}).get('confidence', 0)
+                    ml_conf = ml_predictions.get(box, 0)
                     v44_score = race_scores.get(box, 0)
                     
                     all_ml_enhanced_predictions.append({
@@ -175,7 +181,7 @@ def main():
                 scores_sorted = sorted(race_scores.values(), reverse=True)
                 margin = ((top_score - scores_sorted[1]) / top_score * 100) if len(scores_sorted) > 1 else 0
                 
-                ml_conf_top = ml_predictions.get(top_box_v44, {}).get('confidence', 0)
+                ml_conf_top = ml_predictions.get(top_box_v44, 0)
                 
                 # Hybrid criteria: v4.4 margin 18%+ AND ML confidence 70%+
                 if margin >= 18 and ml_conf_top >= 70:
