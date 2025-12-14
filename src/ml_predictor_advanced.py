@@ -237,22 +237,31 @@ class AdvancedGreyhoundMLPredictor:
         
         # If model is already trained, use the saved feature names for consistency
         if self.trained and len(self.feature_names) > 0:
+            print(f"   🔍 DEBUG: Using trained model feature names ({len(self.feature_names)} features)")
             # Create all possible features first
             available_cols = [c for c in feature_cols if c in df_features.columns]
             
             # Now select only the features that were used during training, in the same order
             # Add missing features as zeros
+            missing_features = []
             for feat in self.feature_names:
                 if feat not in df_features.columns:
                     df_features[feat] = 0
+                    missing_features.append(feat)
+            
+            if missing_features:
+                print(f"   ⚠️  DEBUG: Added {len(missing_features)} missing features as zeros")
             
             # Select features in the exact order from training
             X = df_features[self.feature_names].fillna(0)
+            print(f"   ✅ DEBUG: Feature matrix shape: {X.shape}")
         else:
+            print(f"   🔍 DEBUG: Training mode - discovering features (trained={self.trained}, saved_features={len(self.feature_names)})")
             # Training mode: use all available features
             available_cols = [c for c in feature_cols if c in df_features.columns]
             X = df_features[available_cols].fillna(0)
             self.feature_names = available_cols
+            print(f"   ✅ DEBUG: Discovered {len(self.feature_names)} features")
         
         # Replace any infinite values with 0
         X = X.replace([np.inf, -np.inf], 0)
