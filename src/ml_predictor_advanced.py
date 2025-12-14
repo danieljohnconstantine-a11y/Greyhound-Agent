@@ -239,6 +239,12 @@ class AdvancedGreyhoundMLPredictor:
         available_cols = [c for c in feature_cols if c in df_features.columns]
         X = df_features[available_cols].fillna(0)
         
+        # Replace any infinite values with 0
+        X = X.replace([np.inf, -np.inf], 0)
+        
+        # Final safety check - fill any remaining NaN values
+        X = X.fillna(0)
+        
         self.feature_names = available_cols
         return X, available_cols
     
@@ -261,6 +267,10 @@ class AdvancedGreyhoundMLPredictor:
             dict: Trained ensemble models with optimal weights
         """
         print(f"🎯 Creating optimized ensemble for {track_name}...")
+        
+        # Safety: Replace NaN and infinite values that may have been introduced by scaling
+        X_train = np.nan_to_num(X_train, nan=0.0, posinf=0.0, neginf=0.0)
+        X_val = np.nan_to_num(X_val, nan=0.0, posinf=0.0, neginf=0.0)
         
         ensemble = {}
         val_scores = {}

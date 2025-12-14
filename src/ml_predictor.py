@@ -537,7 +537,9 @@ def load_historical_data_hybrid(data_dir='data'):
             df_results = pd.read_csv(results_file)
             for _, row in df_results.iterrows():
                 track = str(row.get('Track', ''))
-                race_num = int(row.get('Race', row.get('RaceNumber', 0)))
+                # Handle both "R1" format and plain "1" format
+                race_str = str(row.get('Race', row.get('RaceNumber', '0')))
+                race_num = int(race_str.replace('R', '').replace('r', ''))
                 winner = int(row.get('Winner', 0))
                 second = int(row.get('2nd', 0)) if '2nd' in row else 0
                 third = int(row.get('3rd', 0)) if '3rd' in row else 0
