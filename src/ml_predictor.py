@@ -668,7 +668,10 @@ def load_historical_data_hybrid(data_dir='data'):
 def load_historical_data(data_dir='data'):
     """
     Load historical race PDFs and results for ML training.
-    NOW USES HYBRID METHOD to maximize training data!
+    USES ONLY FACTUAL PDF DATA - NO SYNTHETIC DATA!
+    
+    This function matches PDF dog data with CSV race results to identify winners.
+    Only races with both PDF data AND CSV results are used for training.
     
     Args:
         data_dir: Directory containing PDFs and results CSVs
@@ -676,9 +679,108 @@ def load_historical_data(data_dir='data'):
     Returns:
         tuple: (list of race DataFrames, list of winning boxes)
     """
-    # Use hybrid loading for maximum data utilization
-    print("🔄 Using HYBRID loading method for maximum training data...")
-    return load_historical_data_hybrid(data_dir)
+    import pdfplumber
+    from src.parser import parse_race_form
+    from src.features import compute_features
+    import glob
+    import logging
+    
+    logger = logging.getLogger(__name__)
+    
+    print("🔄 Using PDF-ONLY loading method for factual training data...")
+    print("   NO SYNTHETIC DATA - Only races with actual PDF form guides")
+    
+    # Find all PDFs and results
+    pdf_files = glob.glob(f"{data_dir}/*form.pdf")
+    results_files = glob.glob(f"{data_dir}/results_*.csv")
+    
+    print(f"📁 Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
+    logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
+    
+    # Parse all race results from CSV files
+    all_results = {}  # Key: "Track_RaceNumber", Value: winner_box
+    for results_file in sorted(results_files):
+        try:
+            df_results = pd.read_csv(results_file)
+            for _, row in df_results.iterrows():
+                track = str(row.get('Track', ''))
+                # Handle both "R1" format and plain "1" format
+                race_str = str(row.get('Race', row.get('RaceNumber', '0')))
+                race_num = int(race_str.replace('R', '').replace('r', ''))
+                winner_str = str(row.get('Winner', '0'))
+                # Extract first digit as winner box
+                winner_box = int(winner_str[0]) if winner_str and winner_str[0].isdigit() else 0
+                
+                if track and race_num and winner_box:
+                    key = f"{track}_R{race_num}"
+                    all_results[key] = winner_box
+        except Exception as e:
+            print(f"⚠️  Error reading {results_file}: {e}")
+            logger.warning(f"Error reading {results_file}: {e}")
+            continue
+    
+    print(f"📊 Loaded {len(all_results)} race results from CSV files")
+    logger.info(f"Loaded {len(all_results)} race results from CSV files")
+    
+    # Parse PDFs and match with results
+    race_data = []
+    winners = []
+    pdfs_parsed = 0
+    races_matched = 0
+    
+    for pdf_file in sorted(pdf_files):
+        try:
+            # Extract text from PDF using pdfplumber
+            with pdfplumber.open(pdf_file) as pdf:
+                text = ""
+                for page in pdf.pages:
+                    text += page.extract_text() + "\n"
+            
+            # Parse the extracted text
+            df_all_dogs = parse_race_form(text)
+            if df_all_dogs is None or df_all_dogs.empty:
+                continue
+            
+            pdfs_parsed += 1
+                
+            # Compute features for all dogs
+            df_all_dogs = compute_features(df_all_dogs)
+            
+            # Group by race and match with results
+            if 'Track' in df_all_dogs.columns and 'RaceNumber' in df_all_dogs.columns:
+                for (track, race_num), df_race in df_all_dogs.groupby(['Track', 'RaceNumber']):
+                    # Match with results
+                    key = f"{track}_R{race_num}"
+                    if key in all_results:
+                        winner_box = all_results[key]
+                        # Verify winner box exists in the race
+                        if 'Box' in df_race.columns and winner_box in df_race['Box'].values:
+                            race_data.append(df_race)
+                            winners.append(winner_box)
+                            races_matched += 1
+        
+        except Exception as e:
+            print(f"⚠️  Error processing {pdf_file}: {e}")
+            logger.warning(f"Error processing {pdf_file}: {e}")
+            continue
+    
+    print(f"\n📊 PDF-ONLY LOADING SUMMARY:")
+    print(f"   PDFs successfully parsed: {pdfs_parsed}")
+    print(f"   Races matched with results: {races_matched}")
+    print(f"   Total races for training: {len(race_data)}")
+    print(f"   Coverage: 100% FACTUAL DATA (no synthetic races)\n")
+    
+    logger.info(f"PDF-only loading complete: {len(race_data)} races with factual data")
+    
+    if len(race_data) == 0:
+        print("⚠️  WARNING: No races could be matched between PDFs and CSV results")
+        print("   Please ensure:")
+        print("   1. PDF files contain race data")
+        print("   2. CSV files have matching Track and RaceNumber")
+        print("   3. Winner box numbers are valid")
+        logger.warning("No races matched between PDFs and CSV results")
+    
+    return race_data, winners
 
 
 if __name__ == "__main__":
