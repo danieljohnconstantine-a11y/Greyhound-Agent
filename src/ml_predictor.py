@@ -495,12 +495,16 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
     return race_data, winners
 
 
-def load_historical_data(data_dir='data'):
+def load_historical_data_hybrid(data_dir='data'):
     """
-    Load historical race PDFs and results for ML training.
+    HYBRID data loader: Uses both PDFs and CSVs to maximize training data.
     
-    NOTE: This function only loads races with both PDFs and results.
-    For maximum training data, use load_historical_data_from_csvs() instead.
+    Strategy:
+    1. Load all race results from CSV files (Track, Race, Winner, 2nd, 3rd, 4th format)
+    2. For races with PDFs: Extract complete dog data from PDFs
+    3. For races without PDFs: Create synthetic dog profiles based on historical patterns
+    
+    This allows training on ALL 1478 races, not just the 372 with PDFs.
     
     Args:
         data_dir: Directory containing PDFs and results CSVs
@@ -508,87 +512,171 @@ def load_historical_data(data_dir='data'):
     Returns:
         tuple: (list of race DataFrames, list of winning boxes)
     """
-    # Try loading from CSVs first for maximum data
-    print("🔄 Attempting to load ALL races from CSV files...")
-    race_data, winners = load_historical_data_from_csvs(data_dir)
-    
-    if len(race_data) > 0:
-        return race_data, winners
-    
-    # Fallback to PDF-based loading if CSV loading fails
-    print("⚠️  CSV loading failed, falling back to PDF-based loading...")
-    
     import pdfplumber
     from src.parser import parse_race_form
     from src.features import compute_features
     import glob
+    import logging
     
-    # Find all PDFs and results
+    logger = logging.getLogger(__name__)
+    
+    print("🔄 Loading data using HYBRID method (PDFs + CSV synthesis)...")
+    
+    # Step 1: Find all files
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
     results_files = glob.glob(f"{data_dir}/results_*.csv")
     
-    print(f"📁 Found {len(pdf_files)} PDFs and {len(results_files)} results files")
+    print(f"📁 Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
+    logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
     
-    # Parse results
-    all_results = {}
-    for results_file in results_files:
-        df_results = pd.read_csv(results_file)
-        for _, row in df_results.iterrows():
-            track = row.get('Track', row.get('track', ''))
-            race_num = row.get('RaceNumber', row.get('Race', row.get('race', '')))
-            winner = row.get('Winner', row.get('winner', ''))
-            
-            # Extract box number from winner
-            if isinstance(winner, (int, float)):
-                winner_box = int(winner)
-            elif isinstance(winner, str) and winner:
-                winner_box = int(winner[0])
-            else:
-                continue
+    # Step 2: Parse all results from CSV files
+    all_results = []  # List of (track, race, winner, 2nd, 3rd, 4th)
+    
+    for results_file in sorted(results_files):
+        try:
+            df_results = pd.read_csv(results_file)
+            for _, row in df_results.iterrows():
+                track = str(row.get('Track', ''))
+                race_num = int(row.get('Race', row.get('RaceNumber', 0)))
+                winner = int(row.get('Winner', 0))
+                second = int(row.get('2nd', 0)) if '2nd' in row else 0
+                third = int(row.get('3rd', 0)) if '3rd' in row else 0
+                fourth = int(row.get('4th', 0)) if '4th' in row else 0
                 
-            key = f"{track}_R{race_num}"
-            all_results[key] = winner_box
+                if track and race_num and winner:
+                    all_results.append({
+                        'track': track,
+                        'race': race_num,
+                        'winner': winner,
+                        '2nd': second,
+                        '3rd': third,
+                        '4th': fourth,
+                        'file': results_file
+                    })
+        except Exception as e:
+            print(f"⚠️  Error reading {results_file}: {e}")
+            logger.error(f"Error reading {results_file}: {e}")
+            continue
     
-    print(f"📊 Loaded {len(all_results)} race results")
+    print(f"📊 Loaded {len(all_results)} race results from CSV files")
+    logger.info(f"Loaded {len(all_results)} race results from CSV files")
     
-    # Parse PDFs and match with results
-    race_data = []
-    winners = []
+    # Step 3: Parse all PDFs to extract dog data
+    pdf_races = {}  # key: "track_racenum" -> DataFrame of dogs
     
     for pdf_file in sorted(pdf_files):
         try:
-            # Extract text from PDF using pdfplumber
             with pdfplumber.open(pdf_file) as pdf:
                 text = ""
                 for page in pdf.pages:
                     text += page.extract_text() + "\n"
             
-            # Parse the extracted text
             df_all_dogs = parse_race_form(text)
             if df_all_dogs is None or df_all_dogs.empty:
                 continue
                 
-            # Compute features for all dogs
             df_all_dogs = compute_features(df_all_dogs)
             
-            # Group by race and match with results
             if 'Track' in df_all_dogs.columns and 'RaceNumber' in df_all_dogs.columns:
                 for (track, race_num), df_race in df_all_dogs.groupby(['Track', 'RaceNumber']):
-                    # Match with results
                     key = f"{track}_R{race_num}"
-                    if key in all_results:
-                        race_data.append(df_race)
-                        winners.append(all_results[key])
+                    pdf_races[key] = df_race
         
         except Exception as e:
-            print(f"⚠️  Error processing {pdf_file}: {e}")
-            import traceback
-            traceback.print_exc()
+            logger.debug(f"Error processing {pdf_file}: {e}")
             continue
     
-    print(f"✅ Successfully loaded {len(race_data)} races with results")
+    print(f"✅ Extracted dog data from {len(pdf_races)} races in PDFs")
+    logger.info(f"Extracted dog data from {len(pdf_races)} races in PDFs")
+    
+    # Step 4: Build average/template dog profiles from PDF data
+    # This will be used to create synthetic dogs for races without PDFs
+    all_pdf_dogs = pd.concat([df for df in pdf_races.values()], ignore_index=True) if pdf_races else pd.DataFrame()
+    
+    # Create average profiles by box position (boxes 1-8)
+    box_templates = {}
+    if not all_pdf_dogs.empty and 'Box' in all_pdf_dogs.columns:
+        numeric_cols = all_pdf_dogs.select_dtypes(include=[np.number]).columns.tolist()
+        for box_num in range(1, 9):
+            box_dogs = all_pdf_dogs[all_pdf_dogs['Box'] == box_num]
+            if len(box_dogs) > 0:
+                box_templates[box_num] = box_dogs[numeric_cols].median().to_dict()
+        
+        print(f"📐 Created template profiles for {len(box_templates)} box positions")
+        logger.info(f"Created template profiles for {len(box_templates)} box positions")
+    
+    # Step 5: Process all race results
+    race_data = []
+    winners = []
+    races_from_pdf = 0
+    races_synthetic = 0
+    
+    for result in all_results:
+        track = result['track']
+        race_num = result['race']
+        winner_box = result['winner']
+        key = f"{track}_R{race_num}"
+        
+        # Check if we have PDF data for this race
+        if key in pdf_races:
+            # Use real PDF data
+            df_race = pdf_races[key].copy()
+            races_from_pdf += 1
+        elif box_templates:
+            # Create synthetic race using templates
+            dogs_data = []
+            for box_num in range(1, 9):  # Assume 8 dogs per race
+                if box_num in box_templates:
+                    dog_data = box_templates[box_num].copy()
+                    dog_data['Box'] = box_num
+                    # Add some random variation (±5%)
+                    for col in dog_data:
+                        if col != 'Box' and isinstance(dog_data[col], (int, float)):
+                            variation = np.random.normal(1.0, 0.05)
+                            dog_data[col] = dog_data[col] * variation
+                    dogs_data.append(dog_data)
+            
+            if dogs_data:
+                df_race = pd.DataFrame(dogs_data)
+                df_race['Track'] = track
+                df_race['RaceNumber'] = race_num
+                races_synthetic += 1
+            else:
+                continue  # Skip if we can't create synthetic data
+        else:
+            continue  # Skip if no templates available
+        
+        # Add this race to training data
+        if not df_race.empty and winner_box in df_race['Box'].values:
+            race_data.append(df_race)
+            winners.append(winner_box)
+    
+    print(f"\n📊 HYBRID LOADING SUMMARY:")
+    print(f"   Total race results in CSVs: {len(all_results)}")
+    print(f"   Races with PDF data: {races_from_pdf}")
+    print(f"   Races with synthetic data: {races_synthetic}")
+    print(f"   Total races for training: {len(race_data)}")
+    print(f"   Coverage: {len(race_data)/len(all_results)*100:.1f}% of all races\n")
+    
+    logger.info(f"Hybrid loading complete: {races_from_pdf} PDF races + {races_synthetic} synthetic races = {len(race_data)} total")
     
     return race_data, winners
+
+
+def load_historical_data(data_dir='data'):
+    """
+    Load historical race PDFs and results for ML training.
+    NOW USES HYBRID METHOD to maximize training data!
+    
+    Args:
+        data_dir: Directory containing PDFs and results CSVs
+        
+    Returns:
+        tuple: (list of race DataFrames, list of winning boxes)
+    """
+    # Use hybrid loading for maximum data utilization
+    print("🔄 Using HYBRID loading method for maximum training data...")
+    return load_historical_data_hybrid(data_dir)
 
 
 if __name__ == "__main__":
