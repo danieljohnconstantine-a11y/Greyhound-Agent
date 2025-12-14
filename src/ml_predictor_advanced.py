@@ -442,6 +442,10 @@ class AdvancedGreyhoundMLPredictor:
             X_train_scaled = scaler.fit_transform(X_train)
             X_val_scaled = scaler.transform(X_val)
             
+            # Handle any NaN/Inf values that might have been created during scaling
+            X_train_scaled = np.nan_to_num(X_train_scaled, nan=0.0, posinf=0.0, neginf=0.0)
+            X_val_scaled = np.nan_to_num(X_val_scaled, nan=0.0, posinf=0.0, neginf=0.0)
+            
             # Create ensemble
             ensemble = self.create_ensemble_model(
                 track, X_train_scaled, y_train, X_val_scaled, y_val
@@ -493,6 +497,10 @@ class AdvancedGreyhoundMLPredictor:
         
         X_train_scaled = self.global_scaler.fit_transform(X_train)
         X_val_scaled = self.global_scaler.transform(X_val)
+        
+        # Handle any NaN/Inf values that might have been created during scaling
+        X_train_scaled = np.nan_to_num(X_train_scaled, nan=0.0, posinf=0.0, neginf=0.0)
+        X_val_scaled = np.nan_to_num(X_val_scaled, nan=0.0, posinf=0.0, neginf=0.0)
         
         global_ensemble = self.create_ensemble_model(
             "GLOBAL", X_train_scaled, y_train, X_val_scaled, y_val
@@ -596,6 +604,9 @@ class AdvancedGreyhoundMLPredictor:
             weights = {k: 1.0/len(models) for k in models.keys()}
         
         X_scaled = scaler.transform(X)
+        
+        # Handle any NaN/Inf values that might have been created during scaling
+        X_scaled = np.nan_to_num(X_scaled, nan=0.0, posinf=0.0, neginf=0.0)
         
         # Ensemble prediction
         proba = self.predict_ensemble(X_scaled, models, weights)
