@@ -1,0 +1,38 @@
+========================================
+ML Hybrid Enhanced Prediction System
+v2.1 with Weather & Track Conditions
+========================================
+
+
+Running ML v2.1 enhanced predictions on today's races...
+
+Note: This uses weather and track condition data for maximum accuracy
+      Expected: 41-47% win rate (vs 40-45% v2.0, 35-40% v1.0)
+
+Folder structure:
+  data_predictions\  - Today's races (for predictions)
+  data\              - Historical races (for ML training)
+  data\weather_conditions.csv - Weather data
+  data\track_conditions.csv - Track condition ratings
+
+⚠️  XGBoost not available - using RandomForest + GradientBoosting only
+⚠️  LightGBM not available - using available models only
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 53, in <module>
+    from src.excel_export import export_to_excel
+ImportError: cannot import name 'export_to_excel' from 'src.excel_export' (C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\excel_export.py)
+
+========================================
+ERROR - Prediction failed with error code 1
+========================================
+
+Check the error messages above for details.
+Common issues:
+  1. ML model not trained - run train_ml_enhanced.bat first
+  2. Missing PDFs in data_predictions folder
+  3. Missing weather or track condition data
+
+  - ml_enhanced_all_predictions.xlsx (All ML v2.1 predictions ranked)
+  - v44_picks_comparison.csv (All v4.4 picks for reference)
+
+Press any key to continue . . .
