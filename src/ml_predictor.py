@@ -742,15 +742,24 @@ def load_historical_data(data_dir='data'):
                 # Extract first digit as winner box
                 winner_box = int(winner_str[0]) if winner_str and winner_str[0].isdigit() else 0
                 
+                # Use Date column if present, otherwise use date from filename
+                row_date = str(row.get('Date', csv_date))
+                # Normalize date format if needed (e.g., "2025-12-14" or "14/12/2025")
+                if '/' in row_date:
+                    # Convert DD/MM/YYYY to YYYY-MM-DD
+                    parts = row_date.split('/')
+                    if len(parts) == 3:
+                        row_date = f"{parts[2]}-{parts[1].zfill(2)}-{parts[0].zfill(2)}"
+                
                 if track and race_num and winner_box:
                     # Normalize track name to uppercase for consistent matching
                     track_upper = track.upper()
                     # Create key with date for more accurate matching
-                    key = f"{csv_date}_{track_upper}_R{race_num}"
+                    key = f"{row_date}_{track_upper}_R{race_num}"
                     all_results[key] = winner_box
                     # Also store by normalized name if different
                     if track != track_upper:
-                        all_results[f"{csv_date}_{track}_R{race_num}"] = winner_box
+                        all_results[f"{row_date}_{track}_R{race_num}"] = winner_box
         except Exception as e:
             print(f"⚠️  Error reading {results_file}: {e}")
             logger.warning(f"Error reading {results_file}: {e}")
@@ -784,6 +793,22 @@ def load_historical_data(data_dir='data'):
                 continue
             
             pdfs_parsed += 1
+            
+            # If RaceDate is missing, try to extract from PDF filename
+            # Filename format: TRACKDDMMYYYY form.pdf (e.g., ANGLG0212form.pdf = 02 Dec)
+            if 'RaceDate' not in df_all_dogs.columns or df_all_dogs['RaceDate'].isna().all():
+                import os
+                filename = os.path.basename(pdf_file)
+                # Try to extract DDMM from filename (e.g., ANGLG0212form.pdf -> 0212)
+                date_match = re.search(r'(\d{4})form\.pdf$', filename)
+                if date_match:
+                    ddmm = date_match.group(1)
+                    day = ddmm[:2]
+                    month = ddmm[2:4]
+                    # Assume year 2025 based on CSV dates
+                    pdf_date = f"2025-{month}-{day}"
+                    df_all_dogs['RaceDate'] = pdf_date
+                    logger.info(f"Extracted date {pdf_date} from PDF filename: {filename}")
                 
             # Compute features for all dogs
             df_all_dogs = compute_features(df_all_dogs)
