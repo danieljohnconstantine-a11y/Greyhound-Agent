@@ -684,11 +684,35 @@ def load_historical_data(data_dir='data'):
     from src.features import compute_features
     import glob
     import logging
+    import re
     
     logger = logging.getLogger(__name__)
     
     print("🔄 Using PDF-ONLY loading method for factual training data...")
     print("   NO SYNTHETIC DATA - Only races with actual PDF form guides")
+    
+    # Track name normalization map (PDF names -> CSV names)
+    TRACK_NORMALIZATIONS = {
+        'WENTWORTH PARK': 'Wentworth Park',
+        'ANGLE PARK': 'Angle Park',
+        'THE MEADOWS': 'Meadows',
+        'SANDOWN PARK': 'Sandown',
+        'CASINO': 'Casino',
+        'MANDURAH': 'Mandurah',
+        'WARRAGUL': 'Warragul',
+        'BENDIGO': 'Bendigo',
+        'BALLARAT': 'Ballarat',
+        'GEELONG': 'Geelong',
+        'HORSHAM': 'Horsham',
+        'ALBION PARK': 'Albion Park',
+        'RICHMOND': 'Richmond',
+        'GRAFTON': 'Grafton',
+        'HEALESVILLE': 'Healesville',
+        'MOUNT GAMBIER': 'Mount Gambier',
+        'SALE': 'Sale',
+        'GAWLER': 'Gawler',
+        'DARWIN': 'Darwin',
+    }
     
     # Find all PDFs and results
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
@@ -719,9 +743,14 @@ def load_historical_data(data_dir='data'):
                 winner_box = int(winner_str[0]) if winner_str and winner_str[0].isdigit() else 0
                 
                 if track and race_num and winner_box:
+                    # Normalize track name to uppercase for consistent matching
+                    track_upper = track.upper()
                     # Create key with date for more accurate matching
-                    key = f"{csv_date}_{track}_R{race_num}"
+                    key = f"{csv_date}_{track_upper}_R{race_num}"
                     all_results[key] = winner_box
+                    # Also store by normalized name if different
+                    if track != track_upper:
+                        all_results[f"{csv_date}_{track}_R{race_num}"] = winner_box
         except Exception as e:
             print(f"⚠️  Error reading {results_file}: {e}")
             logger.warning(f"Error reading {results_file}: {e}")
@@ -735,6 +764,8 @@ def load_historical_data(data_dir='data'):
     winners = []
     pdfs_parsed = 0
     races_matched = 0
+    races_unmatched = 0
+    unmatched_examples = []
     
     print(f"📄 Processing {len(pdf_files)} PDF files...")
     for pdf_idx, pdf_file in enumerate(sorted(pdf_files)):
@@ -768,14 +799,42 @@ def load_historical_data(data_dir='data'):
                     # Handle both (date, track, race) and (track, race) tuples
                     if len(groupby_cols) == 3:
                         race_date, track, race_num = group_key
-                        # Try matching with date first
-                        key = f"{race_date}_{track}_R{race_num}"
+                        # Normalize track name
+                        track_upper = track.upper()
+                        track_normalized = TRACK_NORMALIZATIONS.get(track_upper, track)
+                        
+                        # Try multiple key variations for matching
+                        possible_keys = [
+                            f"{race_date}_{track}_R{race_num}",
+                            f"{race_date}_{track_upper}_R{race_num}",
+                            f"{race_date}_{track_normalized}_R{race_num}",
+                            f"{race_date}_{track_normalized.upper()}_R{race_num}",
+                        ]
+                        
+                        key = None
+                        for test_key in possible_keys:
+                            if test_key in all_results:
+                                key = test_key
+                                break
+                        
+                        if not key:
+                            # Fallback: try matching without date (check all dates)
+                            for result_key in all_results.keys():
+                                if (result_key.endswith(f"_{track}_R{race_num}") or 
+                                    result_key.endswith(f"_{track_upper}_R{race_num}") or
+                                    result_key.endswith(f"_{track_normalized}_R{race_num}")):
+                                    key = result_key
+                                    break
                     else:
                         track, race_num = group_key
                         # Fallback: try matching without date (check all dates)
+                        track_upper = track.upper()
+                        track_normalized = TRACK_NORMALIZATIONS.get(track_upper, track)
                         key = None
                         for result_key in all_results.keys():
-                            if result_key.endswith(f"_{track}_R{race_num}"):
+                            if (result_key.endswith(f"_{track}_R{race_num}") or 
+                                result_key.endswith(f"_{track_upper}_R{race_num}") or
+                                result_key.endswith(f"_{track_normalized}_R{race_num}")):
                                 key = result_key
                                 break
                     
@@ -786,6 +845,16 @@ def load_historical_data(data_dir='data'):
                             race_data.append(df_race)
                             winners.append(winner_box)
                             races_matched += 1
+                        else:
+                            races_unmatched += 1
+                            if len(unmatched_examples) < 5:
+                                boxes = sorted(df_race['Box'].values) if 'Box' in df_race.columns else []
+                                unmatched_examples.append(f"  {key}: winner box {winner_box} not in race boxes {boxes}")
+                    else:
+                        races_unmatched += 1
+                        if len(unmatched_examples) < 5:
+                            date_part = race_date if len(groupby_cols) == 3 else "NO_DATE"
+                            unmatched_examples.append(f"  {date_part}_{track}_R{race_num}: no matching CSV result")
         
         except Exception as e:
             print(f"⚠️  Error processing {pdf_file}: {e}")
@@ -795,8 +864,15 @@ def load_historical_data(data_dir='data'):
     print(f"\n📊 PDF-ONLY LOADING SUMMARY:")
     print(f"   PDFs successfully parsed: {pdfs_parsed}")
     print(f"   Races matched with results: {races_matched}")
+    print(f"   Races unmatched: {races_unmatched}")
     print(f"   Total races for training: {len(race_data)}")
     print(f"   Coverage: 100% FACTUAL DATA (no synthetic races)\n")
+    
+    if unmatched_examples:
+        print(f"📋 Sample unmatched races (first 5):")
+        for example in unmatched_examples:
+            print(example)
+        print()
     
     logger.info(f"PDF-only loading complete: {len(race_data)} races with factual data")
     
@@ -806,7 +882,12 @@ def load_historical_data(data_dir='data'):
         print("   1. PDF files contain race data")
         print("   2. CSV files have matching Track and RaceNumber")
         print("   3. Winner box numbers are valid")
+        print("   4. Track names are normalized correctly")
         logger.warning("No races matched between PDFs and CSV results")
+    elif races_matched < len(all_results) * 0.5:
+        print(f"⚠️  WARNING: Low match rate ({races_matched}/{len(all_results)} = {100*races_matched/len(all_results):.1f}%)")
+        print(f"   Expected to match most of {len(all_results)} CSV results")
+        print(f"   Check track name normalization and date formats")
     
     return race_data, winners
 
