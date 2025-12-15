@@ -212,7 +212,10 @@ def main():
             success_pdfs += 1
             
         except Exception as e:
+            import traceback
             print(f"   ❌ Error processing {os.path.basename(pdf_file)}: {e}")
+            print(f"   📋 Full traceback:")
+            traceback.print_exc()
             failed_pdfs += 1
             continue
     
@@ -223,35 +226,75 @@ def main():
     print(f"   PDFs: {success_pdfs}/{total_pdfs} successful, {failed_pdfs} failed")
     print(f"   ML v2.1 Hybrid picks: {len(all_hybrid_picks)}")
     print(f"   v4.4 picks (TIER0): {len(all_v44_picks)}")
+    print(f"   Total ML predictions: {len(all_ml_enhanced_predictions)}")
     print(f"   Selectivity: {len(all_hybrid_picks)/max(len(all_v44_picks), 1)*100:.1f}% of v4.4 picks")
+    
+    # Check if any PDFs were successfully processed
+    if success_pdfs == 0:
+        print("\n❌ ERROR: No PDFs were successfully processed!")
+        print("   Check the error messages above for details.")
+        print("   Common issues:")
+        print("   • PDF format not recognized")
+        print("   • Missing required data in PDFs")
+        print("   • Model compatibility issues")
+        return 1
     
     # Save outputs
     os.makedirs('outputs', exist_ok=True)
     
     # 1. ML v2.1 hybrid picks
     if all_hybrid_picks:
-        df_hybrid = pd.DataFrame(all_hybrid_picks)
-        df_hybrid.to_excel('outputs/ml_hybrid_enhanced_picks.xlsx', index=False)
-        print(f"\n✅ ML v2.1 hybrid picks saved: outputs/ml_hybrid_enhanced_picks.xlsx")
+        try:
+            df_hybrid = pd.DataFrame(all_hybrid_picks)
+            df_hybrid.to_excel('outputs/ml_hybrid_enhanced_picks.xlsx', index=False)
+            print(f"\n✅ ML v2.1 hybrid picks saved: outputs/ml_hybrid_enhanced_picks.xlsx")
+        except Exception as e:
+            print(f"\n❌ Error saving hybrid picks to Excel: {e}")
+            print(f"   Attempting to save as CSV instead...")
+            try:
+                df_hybrid.to_csv('outputs/ml_hybrid_enhanced_picks.csv', index=False)
+                print(f"✅ Saved as CSV: outputs/ml_hybrid_enhanced_picks.csv")
+            except Exception as e2:
+                print(f"❌ Failed to save even as CSV: {e2}")
     else:
-        print(f"\nℹ️  No ML v2.1 hybrid picks (waiting for both systems to agree)")
+        print(f"\nℹ️  No ML v2.1 hybrid picks (criteria: v4.4 margin ≥18% AND ML confidence ≥70%)")
+        if all_v44_picks:
+            print(f"   • v4.4 found {len(all_v44_picks)} picks, but ML confidence was too low")
+        elif all_ml_enhanced_predictions:
+            print(f"   • ML made {len(all_ml_enhanced_predictions)} predictions, but v4.4 margins were too low")
     
     # 2. All ML predictions ranked
     if all_ml_enhanced_predictions:
-        df_ml_all = pd.DataFrame(all_ml_enhanced_predictions)
-        df_ml_all = df_ml_all.sort_values('ML_Confidence', ascending=False)
-        df_ml_all.to_excel('outputs/ml_enhanced_all_predictions.xlsx', index=False)
-        print(f"✅ All ML v2.1 predictions saved: outputs/ml_enhanced_all_predictions.xlsx")
-        print(f"   Total predictions: {len(df_ml_all)} (sorted by ML confidence)")
-        if len(df_ml_all) > 0:
-            top_pred = df_ml_all.iloc[0]
-            print(f"   Top ML pick: {top_pred['Track']} R{top_pred['Race']} Box {top_pred['Box']} ({top_pred['ML_Confidence']:.1f}%)")
+        try:
+            df_ml_all = pd.DataFrame(all_ml_enhanced_predictions)
+            df_ml_all = df_ml_all.sort_values('ML_Confidence', ascending=False)
+            df_ml_all.to_excel('outputs/ml_enhanced_all_predictions.xlsx', index=False)
+            print(f"✅ All ML v2.1 predictions saved: outputs/ml_enhanced_all_predictions.xlsx")
+            print(f"   Total predictions: {len(df_ml_all)} (sorted by ML confidence)")
+            if len(df_ml_all) > 0:
+                top_pred = df_ml_all.iloc[0]
+                print(f"   Top ML pick: {top_pred['Track']} R{top_pred['Race']} Box {top_pred['Box']} ({top_pred['ML_Confidence']:.1f}%)")
+        except Exception as e:
+            print(f"❌ Error saving ML predictions to Excel: {e}")
+            print(f"   Attempting to save as CSV instead...")
+            try:
+                df_ml_all.to_csv('outputs/ml_enhanced_all_predictions.csv', index=False)
+                print(f"✅ Saved as CSV: outputs/ml_enhanced_all_predictions.csv")
+            except Exception as e2:
+                print(f"❌ Failed to save even as CSV: {e2}")
+    else:
+        print(f"\n⚠️  No ML predictions generated (all PDFs may have failed to process)")
     
     # 3. v4.4 picks for comparison
     if all_v44_picks:
-        df_v44 = pd.DataFrame(all_v44_picks)
-        df_v44.to_csv('outputs/v44_picks_comparison.csv', index=False)
-        print(f"✅ v4.4 picks saved: outputs/v44_picks_comparison.csv")
+        try:
+            df_v44 = pd.DataFrame(all_v44_picks)
+            df_v44.to_csv('outputs/v44_picks_comparison.csv', index=False)
+            print(f"✅ v4.4 picks saved: outputs/v44_picks_comparison.csv")
+        except Exception as e:
+            print(f"❌ Error saving v4.4 picks: {e}")
+    else:
+        print(f"ℹ️  No v4.4 TIER0 picks (no races met 18%+ margin criterion)")
     
     print("\n" + "=" * 80)
     print("✅ ML v2.1 ENHANCED HYBRID ANALYSIS COMPLETE")
