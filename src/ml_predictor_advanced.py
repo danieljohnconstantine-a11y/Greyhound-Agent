@@ -254,6 +254,8 @@ class AdvancedGreyhoundMLPredictor:
             
             # Select features in the exact order from training
             X_df = df_features[self.feature_names].fillna(0)
+            # Replace any infinite values with 0 BEFORE converting to numpy
+            X_df = X_df.replace([np.inf, -np.inf], 0)
             # Convert to numpy array to bypass sklearn feature name checking
             # The model was trained with synthetic data which has different feature compositions
             X = X_df.values
@@ -263,14 +265,12 @@ class AdvancedGreyhoundMLPredictor:
             # Training mode: use all available features
             available_cols = [c for c in feature_cols if c in df_features.columns]
             X = df_features[available_cols].fillna(0)
+            # Replace any infinite values with 0
+            X = X.replace([np.inf, -np.inf], 0)
+            # Final safety check - fill any remaining NaN values
+            X = X.fillna(0)
             self.feature_names = available_cols
             print(f"   ✅ DEBUG: Discovered {len(self.feature_names)} features")
-        
-        # Replace any infinite values with 0
-        X = X.replace([np.inf, -np.inf], 0)
-        
-        # Final safety check - fill any remaining NaN values
-        X = X.fillna(0)
         
         return X, self.feature_names if self.trained else available_cols
     
