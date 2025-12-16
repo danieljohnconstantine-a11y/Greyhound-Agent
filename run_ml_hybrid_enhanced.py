@@ -17,9 +17,13 @@ Prerequisites:
     4. Optional: Track conditions in data/track_conditions.csv
 
 Outputs:
-    - outputs/ml_hybrid_enhanced_picks.xlsx - High-confidence hybrid picks
-    - outputs/ml_enhanced_all_predictions.xlsx - All predictions ranked
+    - outputs/ml_enhanced_all_predictions.xlsx - ALL dogs with ML scores (DIAGNOSTIC)
+    - outputs/ml_hybrid_enhanced_picks.xlsx - High-confidence hybrid picks only
     - outputs/v44_picks_comparison.csv - v4.4 picks for comparison
+    
+Note: ml_enhanced_all_predictions.xlsx is ALWAYS created (even if empty) to verify
+      the pipeline is working. It shows every dog analyzed with their ML confidence
+      score, sorted from highest to lowest.
 """
 
 import sys
@@ -263,19 +267,28 @@ def main():
         elif all_ml_enhanced_predictions:
             print(f"   • ML made {len(all_ml_enhanced_predictions)} predictions, but v4.4 margins were too low")
     
-    # 2. All ML predictions ranked
+    # 2. All ML predictions ranked (ALWAYS create this file - diagnostic purposes)
     if all_ml_enhanced_predictions:
         try:
             df_ml_all = pd.DataFrame(all_ml_enhanced_predictions)
             df_ml_all = df_ml_all.sort_values('ML_Confidence', ascending=False)
             df_ml_all.to_excel('outputs/ml_enhanced_all_predictions.xlsx', index=False)
-            print(f"✅ All ML v2.1 predictions saved: outputs/ml_enhanced_all_predictions.xlsx")
-            print(f"   Total predictions: {len(df_ml_all)} (sorted by ML confidence)")
+            print(f"\n✅ ALL DOGS WITH ML SCORES saved: outputs/ml_enhanced_all_predictions.xlsx")
+            print(f"   📊 Total dogs analyzed: {len(df_ml_all)} (sorted highest to lowest ML confidence)")
             if len(df_ml_all) > 0:
                 top_pred = df_ml_all.iloc[0]
-                print(f"   Top ML pick: {top_pred['Track']} R{top_pred['Race']} Box {top_pred['Box']} ({top_pred['ML_Confidence']:.1f}%)")
+                print(f"   🏆 Highest ML score: {top_pred['Track']} R{top_pred['Race']} Box {top_pred['Box']} - {top_pred['DogName']}")
+                print(f"      ML Confidence: {top_pred['ML_Confidence']:.1f}%, v4.4 Score: {top_pred['v44_Score']:.1f}")
+                
+                # Show summary statistics
+                high_conf = len(df_ml_all[df_ml_all['ML_Confidence'] >= 70])
+                med_conf = len(df_ml_all[(df_ml_all['ML_Confidence'] >= 50) & (df_ml_all['ML_Confidence'] < 70)])
+                print(f"\n   📈 Confidence Distribution:")
+                print(f"      High (≥70%): {high_conf} dogs")
+                print(f"      Medium (50-70%): {med_conf} dogs")
+                print(f"      Lower (<50%): {len(df_ml_all) - high_conf - med_conf} dogs")
         except Exception as e:
-            print(f"❌ Error saving ML predictions to Excel: {e}")
+            print(f"\n❌ Error saving ML predictions to Excel: {e}")
             print(f"   Attempting to save as CSV instead...")
             try:
                 df_ml_all.to_csv('outputs/ml_enhanced_all_predictions.csv', index=False)
@@ -283,7 +296,16 @@ def main():
             except Exception as e2:
                 print(f"❌ Failed to save even as CSV: {e2}")
     else:
+        # Create empty file to show pipeline ran but no predictions
         print(f"\n⚠️  No ML predictions generated (all PDFs may have failed to process)")
+        print(f"   Creating empty diagnostic file...")
+        try:
+            df_empty = pd.DataFrame(columns=['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'v44_Score'])
+            df_empty.to_excel('outputs/ml_enhanced_all_predictions.xlsx', index=False)
+            print(f"✅ Empty diagnostic file created: outputs/ml_enhanced_all_predictions.xlsx")
+            print(f"   (File exists but contains no predictions - indicates processing issues)")
+        except Exception as e:
+            print(f"❌ Failed to create diagnostic file: {e}")
     
     # 3. v4.4 picks for comparison
     if all_v44_picks:
@@ -304,6 +326,11 @@ def main():
     print("   • Expected: 41-47% win rate (vs 40-45% v2.0, 35-40% v1.0)")
     print("   • Only bets when v4.4 (18%+ margin) AND ML v2.1 (70%+ confidence) agree")
     print("   • Ultra-selective = higher quality picks")
+    print("\n📁 OUTPUT FILES:")
+    print("   1. ml_enhanced_all_predictions.xlsx - ALL dogs with ML scores (diagnostic)")
+    print("   2. ml_hybrid_enhanced_picks.xlsx - High-confidence hybrid picks only")
+    print("   3. v44_picks_comparison.csv - v4.4 picks for comparison")
+    print("\n💡 TIP: Check ml_enhanced_all_predictions.xlsx to verify pipeline is working")
     
     return 0
 
