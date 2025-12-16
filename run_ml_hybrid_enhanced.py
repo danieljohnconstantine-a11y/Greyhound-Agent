@@ -153,7 +153,19 @@ def main():
             # Process each race
             for (track, race_num), race_df in df_dogs.groupby(['Track', 'RaceNumber']):
                 # v4.4 scoring
-                race_scores = score_race(race_df)
+                race_scored_df = score_race(race_df)
+                
+                # Convert DataFrame to dict: Box -> FinalScore
+                # Ensure Box is integer and FinalScore is numeric
+                race_scores = {}
+                for idx, row in race_scored_df.iterrows():
+                    try:
+                        box_int = int(row['Box'])
+                        score_float = float(row.get('FinalScore', 0))
+                        race_scores[box_int] = score_float
+                    except (ValueError, TypeError):
+                        # Skip invalid box/score values
+                        continue
                 
                 # ML v2.1 predictions
                 ml_confidences = predictor.predict_confidence(race_df)
@@ -161,25 +173,36 @@ def main():
                 # Create box to confidence mapping
                 ml_predictions = {}
                 for idx, row in race_df.iterrows():
-                    box = row['Box']
-                    ml_predictions[box] = ml_confidences.loc[idx] if idx in ml_confidences.index else 0
+                    try:
+                        box_int = int(row['Box'])
+                        ml_predictions[box_int] = ml_confidences.loc[idx] if idx in ml_confidences.index else 0
+                    except (ValueError, TypeError):
+                        continue
                 
                 # Record all predictions
                 for _, dog in race_df.iterrows():
-                    box = dog['Box']
-                    ml_conf = ml_predictions.get(box, 0)
-                    v44_score = race_scores.get(box, 0)
-                    
-                    all_ml_enhanced_predictions.append({
-                        'Track': track,
-                        'Race': race_num,
-                        'Box': box,
-                        'DogName': dog.get('DogName', ''),
-                        'ML_Confidence': ml_conf,
-                        'v44_Score': v44_score
-                    })
+                    try:
+                        box_int = int(dog['Box'])
+                        ml_conf = ml_predictions.get(box_int, 0)
+                        v44_score = race_scores.get(box_int, 0)
+                        
+                        all_ml_enhanced_predictions.append({
+                            'Track': track,
+                            'Race': race_num,
+                            'Box': box_int,
+                            'DogName': dog.get('DogName', ''),
+                            'ML_Confidence': ml_conf,
+                            'v44_Score': v44_score
+                        })
+                    except (ValueError, TypeError):
+                        # Skip dogs with invalid box numbers
+                        continue
                 
                 # Check for hybrid picks (both systems agree)
+                if not race_scores:
+                    # Skip if no valid scores
+                    continue
+                    
                 top_box_v44 = max(race_scores, key=race_scores.get)
                 top_score = race_scores[top_box_v44]
                 scores_sorted = sorted(race_scores.values(), reverse=True)
