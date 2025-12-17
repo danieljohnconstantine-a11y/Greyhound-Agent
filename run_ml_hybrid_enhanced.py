@@ -20,10 +20,15 @@ Outputs:
     - outputs/ml_enhanced_all_predictions.xlsx - ALL dogs with ML scores (DIAGNOSTIC)
     - outputs/ml_hybrid_enhanced_picks.xlsx - High-confidence hybrid picks only
     - outputs/v44_picks_comparison.csv - v4.4 picks for comparison
+    - outputs/ml_feature_analysis_detailed.xlsx - DETAILED feature breakdown (NEW!)
     
 Note: ml_enhanced_all_predictions.xlsx is ALWAYS created (even if empty) to verify
       the pipeline is working. It shows every dog analyzed with their ML confidence
       score, sorted from highest to lowest.
+      
+      ml_feature_analysis_detailed.xlsx shows ALL features used to determine scores,
+      including basic info (track, race, dog name), form data (times, win rates),
+      computed ML features (speed rating, consistency), and weather/track conditions.
 """
 
 import sys
@@ -109,6 +114,7 @@ def main():
     all_v44_picks = []
     all_ml_enhanced_predictions = []
     all_hybrid_picks = []
+    all_detailed_features = []  # NEW: Store all features for detailed analysis
     
     total_pdfs = len(pdf_files)
     success_pdfs = 0
@@ -179,8 +185,8 @@ def main():
                     except (ValueError, TypeError):
                         continue
                 
-                # Record all predictions
-                for _, dog in race_df.iterrows():
+                # Record all predictions AND detailed features
+                for idx, dog in race_df.iterrows():
                     try:
                         box_int = int(dog['Box'])
                         ml_conf = ml_predictions.get(box_int, 0)
@@ -194,6 +200,58 @@ def main():
                             'ML_Confidence': ml_conf,
                             'v44_Score': v44_score
                         })
+                        
+                        # NEW: Capture detailed features for feature analysis report
+                        feature_record = {
+                            'Track': track,
+                            'Race': race_num,
+                            'Box': box_int,
+                            'DogName': dog.get('DogName', ''),
+                            'ML_Confidence': ml_conf,
+                            'v44_Score': v44_score,
+                            
+                            # Basic info
+                            'Date': dog.get('Date', ''),
+                            'Distance': dog.get('Distance', 0),
+                            'StartType': dog.get('StartType', ''),
+                            'Grade': dog.get('Grade', ''),
+                            'Weight': dog.get('Weight', 0),
+                            
+                            # Form features
+                            'BestTime': dog.get('BestTime', 0),
+                            'LastTime': dog.get('LastTime', 0),
+                            'AvgTime': dog.get('AvgTime', 0),
+                            'TimeConsistency': dog.get('TimeConsistency', 0),
+                            'RecentForm': dog.get('RecentForm', ''),
+                            'WinRate': dog.get('WinRate', 0),
+                            'PlaceRate': dog.get('PlaceRate', 0),
+                            'Starts': dog.get('Starts', 0),
+                            'Wins': dog.get('Wins', 0),
+                            'Seconds': dog.get('Seconds', 0),
+                            'Thirds': dog.get('Thirds', 0),
+                            
+                            # Computed features (ML features)
+                            'speed_rating': dog.get('speed_rating', 0),
+                            'consistency_score': dog.get('consistency_score', 0),
+                            'recent_performance': dog.get('recent_performance', 0),
+                            'box_advantage': dog.get('box_advantage', 0),
+                            'win_momentum': dog.get('win_momentum', 0),
+                            'place_momentum': dog.get('place_momentum', 0),
+                            'time_improvement': dog.get('time_improvement', 0),
+                            'fitness_trend': dog.get('fitness_trend', 0),
+                            
+                            # Weather/Track features (if available)
+                            'temperature_norm': dog.get('temperature_norm', 0),
+                            'humidity_norm': dog.get('humidity_norm', 0),
+                            'rainfall_norm': dog.get('rainfall_norm', 0),
+                            'wind_norm': dog.get('wind_norm', 0),
+                            'track_rating_norm': dog.get('track_rating_norm', 0),
+                            'ideal_conditions': dog.get('ideal_conditions', 0),
+                            'heat_stress_risk': dog.get('heat_stress_risk', 0),
+                            'wet_track': dog.get('wet_track', 0),
+                        }
+                        all_detailed_features.append(feature_record)
+                        
                     except (ValueError, TypeError):
                         # Skip dogs with invalid box numbers
                         continue
@@ -341,6 +399,45 @@ def main():
     else:
         print(f"ℹ️  No v4.4 TIER0 picks (no races met 18%+ margin criterion)")
     
+    # 4. NEW: Detailed Feature Analysis Report (ALWAYS created)
+    if all_detailed_features:
+        try:
+            df_features = pd.DataFrame(all_detailed_features)
+            # Sort by ML confidence for easy review
+            df_features = df_features.sort_values('ML_Confidence', ascending=False)
+            df_features.to_excel('outputs/ml_feature_analysis_detailed.xlsx', index=False)
+            print(f"\n✅ DETAILED FEATURE ANALYSIS saved: outputs/ml_feature_analysis_detailed.xlsx")
+            print(f"   📋 Complete dataset with ALL features used for scoring")
+            print(f"   📊 Total records: {len(df_features)} dogs")
+            print(f"   📈 Includes: Basic info, form data, ML features, weather/track conditions")
+            print(f"   💡 Use this to understand what data drives the ML confidence scores")
+        except Exception as e:
+            print(f"\n❌ Error saving detailed feature analysis to Excel: {e}")
+            print(f"   Attempting to save as CSV instead...")
+            try:
+                df_features.to_csv('outputs/ml_feature_analysis_detailed.csv', index=False)
+                print(f"✅ Saved as CSV: outputs/ml_feature_analysis_detailed.csv")
+            except Exception as e2:
+                print(f"❌ Failed to save even as CSV: {e2}")
+    else:
+        print(f"\n⚠️  No detailed features captured (all PDFs may have failed)")
+        try:
+            # Create empty template to show expected columns
+            df_empty_features = pd.DataFrame(columns=[
+                'Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'v44_Score',
+                'Date', 'Distance', 'StartType', 'Grade', 'Weight',
+                'BestTime', 'LastTime', 'AvgTime', 'TimeConsistency', 'RecentForm',
+                'WinRate', 'PlaceRate', 'Starts', 'Wins', 'Seconds', 'Thirds',
+                'speed_rating', 'consistency_score', 'recent_performance', 'box_advantage',
+                'win_momentum', 'place_momentum', 'time_improvement', 'fitness_trend',
+                'temperature_norm', 'humidity_norm', 'rainfall_norm', 'wind_norm',
+                'track_rating_norm', 'ideal_conditions', 'heat_stress_risk', 'wet_track'
+            ])
+            df_empty_features.to_excel('outputs/ml_feature_analysis_detailed.xlsx', index=False)
+            print(f"✅ Empty template created: outputs/ml_feature_analysis_detailed.xlsx")
+        except Exception as e:
+            print(f"❌ Failed to create template: {e}")
+    
     print("\n" + "=" * 80)
     print("✅ ML v2.1 ENHANCED HYBRID ANALYSIS COMPLETE")
     print("=" * 80)
@@ -353,7 +450,11 @@ def main():
     print("   1. ml_enhanced_all_predictions.xlsx - ALL dogs with ML scores (diagnostic)")
     print("   2. ml_hybrid_enhanced_picks.xlsx - High-confidence hybrid picks only")
     print("   3. v44_picks_comparison.csv - v4.4 picks for comparison")
-    print("\n💡 TIP: Check ml_enhanced_all_predictions.xlsx to verify pipeline is working")
+    print("   4. ml_feature_analysis_detailed.xlsx - Complete feature breakdown (NEW!)")
+    print("\n💡 TIPS:")
+    print("   • Check ml_enhanced_all_predictions.xlsx to verify pipeline is working")
+    print("   • Use ml_feature_analysis_detailed.xlsx to understand what drives ML scores")
+    print("   • Features include: form data, speed ratings, weather/track conditions, and more")
     
     return 0
 
