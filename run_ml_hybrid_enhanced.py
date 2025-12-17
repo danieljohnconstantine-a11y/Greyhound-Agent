@@ -202,6 +202,7 @@ def main():
                         })
                         
                         # NEW: Capture detailed features for feature analysis report
+                        # Extract ALL available columns from the dog (pandas Series)
                         feature_record = {
                             'Track': track,
                             'Race': race_num,
@@ -209,47 +210,25 @@ def main():
                             'DogName': dog.get('DogName', ''),
                             'ML_Confidence': ml_conf,
                             'v44_Score': v44_score,
-                            
-                            # Basic info
-                            'Date': dog.get('Date', ''),
-                            'Distance': dog.get('Distance', 0),
-                            'StartType': dog.get('StartType', ''),
-                            'Grade': dog.get('Grade', ''),
-                            'Weight': dog.get('Weight', 0),
-                            
-                            # Form features
-                            'BestTime': dog.get('BestTime', 0),
-                            'LastTime': dog.get('LastTime', 0),
-                            'AvgTime': dog.get('AvgTime', 0),
-                            'TimeConsistency': dog.get('TimeConsistency', 0),
-                            'RecentForm': dog.get('RecentForm', ''),
-                            'WinRate': dog.get('WinRate', 0),
-                            'PlaceRate': dog.get('PlaceRate', 0),
-                            'Starts': dog.get('Starts', 0),
-                            'Wins': dog.get('Wins', 0),
-                            'Seconds': dog.get('Seconds', 0),
-                            'Thirds': dog.get('Thirds', 0),
-                            
-                            # Computed features (ML features)
-                            'speed_rating': dog.get('speed_rating', 0),
-                            'consistency_score': dog.get('consistency_score', 0),
-                            'recent_performance': dog.get('recent_performance', 0),
-                            'box_advantage': dog.get('box_advantage', 0),
-                            'win_momentum': dog.get('win_momentum', 0),
-                            'place_momentum': dog.get('place_momentum', 0),
-                            'time_improvement': dog.get('time_improvement', 0),
-                            'fitness_trend': dog.get('fitness_trend', 0),
-                            
-                            # Weather/Track features (if available)
-                            'temperature_norm': dog.get('temperature_norm', 0),
-                            'humidity_norm': dog.get('humidity_norm', 0),
-                            'rainfall_norm': dog.get('rainfall_norm', 0),
-                            'wind_norm': dog.get('wind_norm', 0),
-                            'track_rating_norm': dog.get('track_rating_norm', 0),
-                            'ideal_conditions': dog.get('ideal_conditions', 0),
-                            'heat_stress_risk': dog.get('heat_stress_risk', 0),
-                            'wet_track': dog.get('wet_track', 0),
                         }
+                        
+                        # Add ALL available columns from the DataFrame
+                        # This ensures we capture actual parsed data, not just default zeros
+                        for col in race_df.columns:
+                            if col not in ['Track', 'RaceNumber', 'Box', 'DogName']:  # Skip duplicates
+                                try:
+                                    value = dog.get(col, None)
+                                    # Handle list/array columns (convert to string)
+                                    if isinstance(value, (list, np.ndarray)):
+                                        feature_record[col] = str(value) if len(value) > 0 else ''
+                                    # Handle NaN values
+                                    elif pd.isna(value):
+                                        feature_record[col] = 0 if isinstance(value, (int, float, np.number)) else ''
+                                    else:
+                                        feature_record[col] = value
+                                except Exception:
+                                    feature_record[col] = 0  # Fallback to 0 for numeric, empty for string
+                        
                         all_detailed_features.append(feature_record)
                         
                     except (ValueError, TypeError):
@@ -407,10 +386,10 @@ def main():
             df_features = df_features.sort_values('ML_Confidence', ascending=False)
             df_features.to_excel('outputs/ml_feature_analysis_detailed.xlsx', index=False)
             print(f"\n✅ DETAILED FEATURE ANALYSIS saved: outputs/ml_feature_analysis_detailed.xlsx")
-            print(f"   📋 Complete dataset with ALL features used for scoring")
-            print(f"   📊 Total records: {len(df_features)} dogs")
-            print(f"   📈 Includes: Basic info, form data, ML features, weather/track conditions")
-            print(f"   💡 Use this to understand what data drives the ML confidence scores")
+            print(f"   📋 Complete dataset with ALL {len(df_features.columns)} features from PDFs")
+            print(f"   📊 Total records: {len(df_features)} dogs analyzed")
+            print(f"   📈 Includes: ALL parsed data (times, speeds, form, margins, sectionals, etc.)")
+            print(f"   💡 Every column from PDF parsing is included - review actual dog data!")
         except Exception as e:
             print(f"\n❌ Error saving detailed feature analysis to Excel: {e}")
             print(f"   Attempting to save as CSV instead...")
@@ -422,19 +401,14 @@ def main():
     else:
         print(f"\n⚠️  No detailed features captured (all PDFs may have failed)")
         try:
-            # Create empty template to show expected columns
+            # Create empty template with basic columns
             df_empty_features = pd.DataFrame(columns=[
                 'Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'v44_Score',
-                'Date', 'Distance', 'StartType', 'Grade', 'Weight',
-                'BestTime', 'LastTime', 'AvgTime', 'TimeConsistency', 'RecentForm',
-                'WinRate', 'PlaceRate', 'Starts', 'Wins', 'Seconds', 'Thirds',
-                'speed_rating', 'consistency_score', 'recent_performance', 'box_advantage',
-                'win_momentum', 'place_momentum', 'time_improvement', 'fitness_trend',
-                'temperature_norm', 'humidity_norm', 'rainfall_norm', 'wind_norm',
-                'track_rating_norm', 'ideal_conditions', 'heat_stress_risk', 'wet_track'
+                'Note: Add PDFs to data_predictions/ folder and run again to see actual data'
             ])
             df_empty_features.to_excel('outputs/ml_feature_analysis_detailed.xlsx', index=False)
             print(f"✅ Empty template created: outputs/ml_feature_analysis_detailed.xlsx")
+            print(f"   💡 Note: This file will contain ALL parsed features when PDFs are processed")
         except Exception as e:
             print(f"❌ Failed to create template: {e}")
     
