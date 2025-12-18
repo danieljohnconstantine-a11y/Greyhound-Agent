@@ -64,26 +64,32 @@ def load_results():
     
     return results
 
-def test_threshold(predictor, weather_manager, pdf_files, results, threshold, min_confidence_spread=0):
+def parse_and_cache_pdfs(predictor, weather_manager, pdf_files):
     """
-    Test prediction accuracy at a specific ML confidence threshold
-    
-    Args:
-        predictor: ML predictor instance
-        weather_manager: Weather data manager
-        pdf_files: List of PDF file paths
-        results: Dict of (track, race) -> winner_box
-        threshold: Minimum ML confidence percentage
-        min_confidence_spread: Minimum lead over 2nd place (percentage points)
+    Parse all PDFs once and cache the predictions
+    This avoids reprocessing PDFs for every threshold test
     
     Returns:
-        Dict with performance metrics
+        List of dicts with race predictions
     """
-    total_picks = 0
-    correct_picks = 0
-    track_stats = defaultdict(lambda: {'total': 0, 'correct': 0})
+    print("\n📄 Parsing and caching all PDFs...")
+    print(f"   Total PDFs to process: {len(pdf_files)}")
+    print("   This may take 10-30 minutes depending on your system")
     
-    for pdf_file in pdf_files:
+    all_predictions = []
+    processed = 0
+    errors = 0
+    start_time = datetime.now()
+    
+    for i, pdf_file in enumerate(pdf_files, 1):
+        # Progress update every 10 PDFs
+        if i % 10 == 0:
+            elapsed = (datetime.now() - start_time).total_seconds()
+            avg_per_pdf = elapsed / i
+            remaining = (len(pdf_files) - i) * avg_per_pdf
+            print(f"   Progress: {i}/{len(pdf_files)} PDFs ({i/len(pdf_files)*100:.1f}%) - "
+                  f"Est. {remaining/60:.1f} min remaining")
+        
         try:
             with pdfplumber.open(pdf_file) as pdf:
                 text = "".join(page.extract_text() + "\n" for page in pdf.pages)
@@ -111,9 +117,9 @@ def test_threshold(predictor, weather_manager, pdf_files, results, threshold, mi
                     if col in weather_df.columns:
                         df_dogs[col] = weather_df[col].values
             
-            # Process each race
+            # Process each race in the PDF
             for (track, race_num), race_df in df_dogs.groupby(['Track', 'RaceNumber']):
-                # Get ML predictions
+                # Get ML predictions for this race
                 ml_confidences = predictor.predict_confidence(race_df)
                 
                 # Create box to confidence mapping
@@ -125,36 +131,73 @@ def test_threshold(predictor, weather_manager, pdf_files, results, threshold, mi
                     except:
                         continue
                 
-                if not ml_predictions:
-                    continue
-                
-                # Find top prediction
-                top_box = max(ml_predictions, key=ml_predictions.get)
-                top_confidence = ml_predictions[top_box]
-                
-                # Check confidence spread if required
-                if min_confidence_spread > 0:
-                    sorted_confs = sorted(ml_predictions.values(), reverse=True)
-                    if len(sorted_confs) > 1:
-                        spread = sorted_confs[0] - sorted_confs[1]
-                        if spread < min_confidence_spread:
-                            continue  # Skip races without clear favorites
-                
-                # Only count predictions above threshold
-                if top_confidence >= threshold:
-                    total_picks += 1
-                    
-                    # Check if we have result for this race
-                    result_key = (track, race_num)
-                    if result_key in results:
-                        actual_winner = results[result_key]
-                        if actual_winner == top_box:
-                            correct_picks += 1
-                            track_stats[track]['correct'] += 1
-                        track_stats[track]['total'] += 1
+                if ml_predictions:
+                    all_predictions.append({
+                        'track': track,
+                        'race_num': race_num,
+                        'predictions': ml_predictions  # Dict of box -> confidence
+                    })
+            
+            processed += 1
         
         except Exception as e:
+            errors += 1
             continue
+    
+    elapsed = (datetime.now() - start_time).total_seconds()
+    print(f"\n✅ Parsed {processed} PDFs successfully ({errors} errors)")
+    print(f"   Total time: {elapsed/60:.1f} minutes")
+    print(f"   Found {len(all_predictions)} races with predictions")
+    
+    return all_predictions
+
+def test_threshold_from_cache(cached_predictions, results, threshold, min_confidence_spread=0):
+    """
+    Test prediction accuracy using cached predictions
+    Much faster since PDFs are already parsed
+    
+    Args:
+        cached_predictions: List of prediction dicts from parse_and_cache_pdfs
+        results: Dict of (track, race) -> winner_box
+        threshold: Minimum ML confidence percentage
+        min_confidence_spread: Minimum lead over 2nd place (percentage points)
+    
+    Returns:
+        Dict with performance metrics
+    """
+    total_picks = 0
+    correct_picks = 0
+    track_stats = defaultdict(lambda: {'total': 0, 'correct': 0})
+    
+    for pred in cached_predictions:
+        track = pred['track']
+        race_num = pred['race_num']
+        ml_predictions = pred['predictions']
+        
+        # Find top prediction
+        top_box = max(ml_predictions, key=ml_predictions.get)
+        top_confidence = ml_predictions[top_box]
+        
+        # Check confidence spread if required
+        if min_confidence_spread > 0:
+            sorted_confs = sorted(ml_predictions.values(), reverse=True)
+            if len(sorted_confs) > 1:
+                spread = sorted_confs[0] - sorted_confs[1]
+                if spread < min_confidence_spread:
+                    continue  # Skip races without clear favorites
+        
+        # Only count predictions above threshold
+        if top_confidence >= threshold:
+            total_picks += 1
+            
+            # Check if we have result for this race
+            result_key = (track, race_num)
+            if result_key in results:
+                actual_winner = results[result_key]
+                if actual_winner == top_box:
+                    correct_picks += 1
+                    track_stats[track]['correct'] += 1
+                track_stats[track]['total'] += 1
     
     win_rate = (correct_picks / total_picks * 100) if total_picks > 0 else 0
     
@@ -208,9 +251,17 @@ def main():
     pdf_files = glob.glob("data/*form.pdf")
     print(f"✅ Found {len(pdf_files)} PDF files")
     
-    # Test different thresholds
+    # Parse and cache all PDFs once
+    # This is the slow part - but we only do it once!
+    cached_predictions = parse_and_cache_pdfs(predictor, weather_manager, pdf_files)
+    
+    if not cached_predictions:
+        print("❌ No predictions generated from PDFs")
+        return 1
+    
+    # Test different thresholds (now very fast using cached predictions)
     print("\n🧪 Testing different ML confidence thresholds...")
-    print("   (This may take several minutes)")
+    print("   (Using cached predictions - this will be fast!)")
     print()
     
     thresholds_to_test = [50, 55, 60, 65, 70, 75]
@@ -220,14 +271,14 @@ def main():
     
     for threshold in thresholds_to_test:
         for spread in spread_values:
-            print(f"   Testing: Threshold={threshold}%, Min Spread={spread}%...")
-            result = test_threshold(predictor, weather_manager, pdf_files, results, threshold, spread)
+            print(f"   Testing: Threshold={threshold}%, Min Spread={spread}%...", end='')
+            result = test_threshold_from_cache(cached_predictions, results, threshold, spread)
             results_data.append(result)
             
             if result['total_picks'] > 0:
-                print(f"      Win Rate: {result['win_rate']:.1f}% ({result['correct_picks']}/{result['total_picks']} picks)")
+                print(f" Win Rate: {result['win_rate']:.1f}% ({result['correct_picks']}/{result['total_picks']} picks)")
             else:
-                print(f"      No picks made at this threshold")
+                print(f" No picks made")
     
     # Generate report
     print("\n" + "=" * 80)
