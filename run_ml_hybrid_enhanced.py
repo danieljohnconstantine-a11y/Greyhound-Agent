@@ -382,13 +382,24 @@ def main():
     if all_detailed_features:
         try:
             df_features = pd.DataFrame(all_detailed_features)
-            # Sort by ML confidence for easy review
-            df_features = df_features.sort_values('ML_Confidence', ascending=False)
+            # Sort by Track, Race, Box for easy navigation per track/race
+            sort_columns = []
+            if 'Track' in df_features.columns:
+                sort_columns.append('Track')
+            if 'Race' in df_features.columns:
+                sort_columns.append('Race')
+            if 'Box' in df_features.columns:
+                sort_columns.append('Box')
+            
+            if sort_columns:
+                df_features = df_features.sort_values(sort_columns)
+            
             df_features.to_excel('outputs/ml_feature_analysis_detailed.xlsx', index=False)
             print(f"\n✅ DETAILED FEATURE ANALYSIS saved: outputs/ml_feature_analysis_detailed.xlsx")
             print(f"   📋 Complete dataset with ALL {len(df_features.columns)} features from PDFs")
             print(f"   📊 Total records: {len(df_features)} dogs analyzed")
-            print(f"   📈 Includes: ALL parsed data (times, speeds, form, margins, sectionals, etc.)")
+            print(f"   📈 Organized by Track → Race → Box for easy navigation")
+            print(f"   📄 Includes: ALL parsed data (times, speeds, form, margins, sectionals, etc.)")
             print(f"   💡 Every column from PDF parsing is included - review actual dog data!")
         except Exception as e:
             print(f"\n❌ Error saving detailed feature analysis to Excel: {e}")
