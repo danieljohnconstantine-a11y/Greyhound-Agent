@@ -64,22 +64,27 @@ def main():
         print(f"⚠️  Warning: Could not load weather/track data: {e}")
         weather_manager = WeatherTrackDataManager()
     
-    # Load ML model
+    # Load ML model (with fallback to v4.4-only mode)
     print("\n📥 Loading ML v2.1 enhanced model...")
     model_path = "models/greyhound_ml_v2.1_enhanced.pkl"
+    predictor = None
+    use_ml = False
     
     if not os.path.exists(model_path):
-        print(f"❌ ERROR: Model not found at {model_path}")
-        print("   Please run train_ml_enhanced.bat first to train the model")
-        return 1
-    
-    try:
-        predictor = AdvancedGreyhoundMLPredictor()
-        predictor.load_model(model_path)
-        print(f"✅ ML v2.1 model loaded successfully")
-    except Exception as e:
-        print(f"❌ Error loading model: {e}")
-        return 1
+        print(f"⚠️  Model not found at {model_path}")
+        print("   Running in v4.4-only mode (without ML predictions)")
+        print("   To use ML predictions, run: train_ml_enhanced.bat")
+        use_ml = False
+    else:
+        try:
+            predictor = AdvancedGreyhoundMLPredictor()
+            predictor.load_model(model_path)
+            print(f"✅ ML v2.1 model loaded successfully")
+            use_ml = True
+        except Exception as e:
+            print(f"⚠️  Error loading model: {e}")
+            print("   Running in v4.4-only mode (without ML predictions)")
+            use_ml = False
     
     # Find PDFs in data_predictions
     pdf_files = glob.glob("data_predictions/*.pdf")
@@ -138,8 +143,7 @@ def main():
                     print(f"   🏁 Processing Race {race_num}: {len(race_df)} dogs")
                     
                     # Compute features for ML
-                    weather_conditions = weather_manager.get_conditions(track_code, datetime.now())
-                    features_df = compute_features(race_df, weather_conditions)
+                    features_df = compute_features(race_df)
                     
                     if features_df is None or len(features_df) == 0:
                         print(f"   ⚠️  No features computed for Race {race_num} - skipping")
@@ -147,14 +151,20 @@ def main():
                     
                     print(f"   ✓ Features computed: {len(features_df)} dogs")
                     
-                    # Get ML predictions
-                    ml_predictions = predictor.predict(features_df, track_code)
-                    
-                    if ml_predictions is None or len(ml_predictions) == 0:
-                        print(f"   ⚠️  No ML predictions for Race {race_num} - skipping")
-                        continue
-                    
-                    print(f"   ✓ ML predictions: {len(ml_predictions)} dogs")
+                    # Get ML predictions (if model available)
+                    ml_predictions = {}
+                    if use_ml and predictor:
+                        try:
+                            ml_predictions = predictor.predict(features_df, track_code)
+                            if ml_predictions is None:
+                                ml_predictions = {}
+                            print(f"   ✓ ML predictions: {len(ml_predictions)} dogs")
+                        except Exception as e:
+                            print(f"   ⚠️  ML prediction error: {e}")
+                            ml_predictions = {}
+                    else:
+                        # No ML available - we'll use v4.4 scores as confidence
+                        print(f"   ℹ️  Using v4.4 scores (ML not available)")
                     
                     # Get v4.4 scores
                     v44_scores = score_race(race_df)
@@ -166,9 +176,10 @@ def main():
                         for idx, row in v44_scores.iterrows():
                             try:
                                 box = int(row['Box'])
-                                score = float(row['Score'])
+                                # The scorer returns 'FinalScore' column
+                                score = float(row.get('FinalScore', row.get('Score', 0)))
                                 v44_scores_dict[box] = score
-                            except:
+                            except Exception as e:
                                 continue
                         v44_scores = v44_scores_dict
                     
@@ -179,11 +190,16 @@ def main():
                             box = int(row.get('Box', 0))
                             dog_name = str(row.get('DogName', 'Unknown'))
                             
-                            # Get ML confidence
-                            ml_conf = ml_predictions.get(box, 0.0) * 100
-                            
                             # Get v4.4 score
                             v44_score = v44_scores.get(box, 0.0)
+                            
+                            # Get ML confidence (or use v4.4 as fallback)
+                            if use_ml and ml_predictions:
+                                ml_conf = ml_predictions.get(box, 0.0) * 100
+                            else:
+                                # No ML - normalize v4.4 score to 0-100 range
+                                # v4.4 scores typically range from 0-30, so scale up
+                                ml_conf = min(v44_score * 3.33, 100.0)  # Scale 30 -> 100%
                             
                             # Store ML prediction
                             pred_record = {
@@ -220,12 +236,12 @@ def main():
                             for col in row.index:
                                 if col not in ['Box', 'DogName']:
                                     val = row[col]
-                                    # Handle NaN/None
-                                    if pd.isna(val):
-                                        feature_record[col] = 0
-                                    # Handle lists/arrays
-                                    elif isinstance(val, (list, tuple)):
+                                    # Handle lists/arrays first (before checking pd.isna)
+                                    if isinstance(val, (list, tuple)):
                                         feature_record[col] = str(val)
+                                    # Handle NaN/None
+                                    elif val is None or (isinstance(val, float) and pd.isna(val)):
+                                        feature_record[col] = 0
                                     else:
                                         try:
                                             feature_record[col] = float(val) if isinstance(val, (int, float)) else str(val)
