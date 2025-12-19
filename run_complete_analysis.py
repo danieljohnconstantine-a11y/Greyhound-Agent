@@ -131,23 +131,34 @@ def main():
                 error_count += 1
                 continue
             
+            dogs_added_this_pdf = 0
+            
             for race_num, race_df in races:
                 try:
+                    print(f"   🏁 Processing Race {race_num}: {len(race_df)} dogs")
+                    
                     # Compute features for ML
                     weather_conditions = weather_manager.get_conditions(track_code, datetime.now())
                     features_df = compute_features(race_df, weather_conditions)
                     
                     if features_df is None or len(features_df) == 0:
+                        print(f"   ⚠️  No features computed for Race {race_num} - skipping")
                         continue
+                    
+                    print(f"   ✓ Features computed: {len(features_df)} dogs")
                     
                     # Get ML predictions
                     ml_predictions = predictor.predict(features_df, track_code)
                     
                     if ml_predictions is None or len(ml_predictions) == 0:
+                        print(f"   ⚠️  No ML predictions for Race {race_num} - skipping")
                         continue
+                    
+                    print(f"   ✓ ML predictions: {len(ml_predictions)} dogs")
                     
                     # Get v4.4 scores
                     v44_scores = score_race(race_df)
+                    print(f"   ✓ V4.4 scores computed")
                     
                     # Convert v44_scores DataFrame to dict if needed
                     if isinstance(v44_scores, pd.DataFrame):
@@ -162,6 +173,7 @@ def main():
                         v44_scores = v44_scores_dict
                     
                     # Process each dog
+                    dogs_in_race = 0
                     for idx, row in race_df.iterrows():
                         try:
                             box = int(row.get('Box', 0))
@@ -183,6 +195,8 @@ def main():
                                 'v44_Score': round(v44_score, 1)
                             }
                             all_ml_enhanced_predictions.append(pred_record)
+                            dogs_in_race += 1
+                            dogs_added_this_pdf += 1
                             
                             # Check for hybrid pick (v4.4 >= 18% AND ML >= 70%)
                             if v44_score >= 18.0 and ml_conf >= 70.0:
@@ -221,14 +235,19 @@ def main():
                             all_detailed_features.append(feature_record)
                             
                         except Exception as e:
+                            print(f"   ⚠️  Error processing dog Box {box}: {e}")
                             continue
+                    
+                    print(f"   ✅ Added {dogs_in_race} dogs from Race {race_num}")
                     
                 except Exception as e:
                     print(f"   ⚠️  Error processing race {race_num}: {e}")
+                    import traceback
+                    traceback.print_exc()
                     continue
             
             processed_count += 1
-            print(f"   ✅ Processed successfully")
+            print(f"   ✅ PDF processed: {dogs_added_this_pdf} total dogs added")
             
         except Exception as e:
             print(f"   ❌ Error: {e}")
@@ -240,6 +259,8 @@ def main():
     print(f"   ✅ Successfully processed: {processed_count}/{len(pdf_files)} PDFs")
     if error_count > 0:
         print(f"   ⚠️  Errors encountered: {error_count} PDFs")
+    print(f"   📋 Total dogs collected: {len(all_ml_enhanced_predictions)}")
+    print(f"   📊 Total features collected: {len(all_detailed_features)}")
     print("=" * 80)
     
     # Generate all output files
