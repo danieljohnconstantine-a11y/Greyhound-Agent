@@ -39,3 +39,7 @@ Thumbs.db
 # Logs
 *.log
 outputs/*.log
+
+# ML Models (too large for GitHub)
+*.pkl
+models/*.pkl

@@ -45,6 +45,8 @@ import pandas as pd
 import glob
 import pdfplumber
 from datetime import datetime
+from openpyxl import load_workbook
+from openpyxl.styles import PatternFill
 
 def main():
     print("=" * 80)
@@ -298,11 +300,34 @@ def main():
                 how='left'
             )
             
-            # IMPORTANT: Keep only the TOP dog per race (highest ML_Confidence per Track+Race)
+            # Calculate comparative metrics for each dog
+            # Sort to rank dogs within each race
             df_unified = df_unified.sort_values(['Track', 'Race', 'ML_Confidence', 'v44_Score'], 
                                                 ascending=[True, True, False, False])
+            
+            # Add ranking within race
+            df_unified['Position_In_Field'] = df_unified.groupby(['Track', 'Race']).cumcount() + 1
+            df_unified['Total_In_Field'] = df_unified.groupby(['Track', 'Race'])['Box'].transform('count')
+            df_unified['Position_Display'] = df_unified.apply(
+                lambda x: f"{int(x['Position_In_Field'])} of {int(x['Total_In_Field'])}", axis=1
+            )
+            
+            # Calculate confidence gap to 2nd place
+            def calc_confidence_gap(group):
+                sorted_group = group.sort_values('ML_Confidence', ascending=False)
+                if len(sorted_group) >= 2:
+                    sorted_group['Confidence_Gap_vs_2nd'] = sorted_group['ML_Confidence'].iloc[0] - sorted_group['ML_Confidence'].iloc[1]
+                else:
+                    sorted_group['Confidence_Gap_vs_2nd'] = 0
+                # Fill gap for all rows in group (only 1st place is meaningful)
+                sorted_group.loc[sorted_group.index[1:], 'Confidence_Gap_vs_2nd'] = 0
+                return sorted_group
+            
+            df_unified = df_unified.groupby(['Track', 'Race']).apply(calc_confidence_gap).reset_index(drop=True)
+            
+            # IMPORTANT: Keep only the TOP dog per race (highest ML_Confidence per Track+Race)
             # Group by Track+Race and take the first (highest confidence) dog
-            df_top_picks = df_unified.groupby(['Track', 'Race']).first().reset_index()
+            df_top_picks = df_unified[df_unified['Position_In_Field'] == 1].copy()
             
             # Add pick tier column
             df_top_picks['Pick_Tier'] = df_top_picks['ML_Confidence'].apply(
@@ -311,9 +336,10 @@ def main():
                 else 'Lower Confidence (<50%)'
             )
             
-            # Reorder columns for clarity - key columns first, then all features
-            priority_cols = ['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'Pick_Tier', 'v44_Score']
-            other_cols = [c for c in df_top_picks.columns if c not in priority_cols]
+            # Reorder columns for clarity - key columns first, then comparative metrics, then all features
+            priority_cols = ['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'Pick_Tier', 
+                           'Confidence_Gap_vs_2nd', 'Position_Display', 'v44_Score']
+            other_cols = [c for c in df_top_picks.columns if c not in priority_cols and c not in ['Position_In_Field', 'Total_In_Field']]
             df_top_picks = df_top_picks[priority_cols + other_cols]
             
             # Sort by ML confidence (highest first) for final output
@@ -341,17 +367,70 @@ def main():
     else:
         print(f"⚠️  No predictions generated")
     
-    # 2. Detailed Feature Analysis (Track→Race→Box sorted)
+    # 2. Detailed Feature Analysis (Track→Race→Box sorted with color coding)
     if all_detailed_features:
         try:
             df_features = pd.DataFrame(all_detailed_features)
-            # Sort by Track, Race, Box
+            # Sort by Track, Race, ML_Confidence (descending) to rank within race
+            df_features = df_features.sort_values(['Track', 'Race', 'ML_Confidence'], ascending=[True, True, False])
+            
+            # Add position ranking within each race
+            df_features['Position_Rank'] = df_features.groupby(['Track', 'Race']).cumcount() + 1
+            
+            # Re-sort by Track, Race, Box for final display
             df_features = df_features.sort_values(['Track', 'Race', 'Box'])
-            df_features.to_excel('outputs/ml_feature_analysis_detailed.xlsx', index=False)
-            print(f"✅ Feature analysis: outputs/ml_feature_analysis_detailed.xlsx ({len(df_features)} dogs)")
-            print(f"   📋 Sorted by Track → Race → Box for easy navigation")
-            print(f"   📊 Contains {len(df_features.columns)} features/columns")
-            print(f"   🔍 Shows ALL data used by ML model for predictions")
+            
+            # Save to Excel
+            output_path = 'outputs/ml_feature_analysis_detailed.xlsx'
+            df_features.to_excel(output_path, index=False)
+            
+            # Apply color coding using openpyxl
+            try:
+                wb = load_workbook(output_path)
+                ws = wb.active
+                
+                # Define colors
+                green_fill = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")  # Light green
+                yellow_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")  # Yellow
+                orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")  # Orange
+                
+                # Get column index for Position_Rank
+                headers = [cell.value for cell in ws[1]]
+                rank_col_idx = headers.index('Position_Rank') + 1 if 'Position_Rank' in headers else None
+                
+                # Apply conditional formatting based on Position_Rank
+                if rank_col_idx:
+                    for row_idx in range(2, ws.max_row + 1):  # Start from row 2 (skip header)
+                        rank_cell = ws.cell(row=row_idx, column=rank_col_idx)
+                        rank_value = rank_cell.value
+                        
+                        # Apply color to entire row based on rank
+                        if rank_value == 1:
+                            fill = green_fill
+                        elif rank_value == 2:
+                            fill = yellow_fill
+                        elif rank_value == 3:
+                            fill = orange_fill
+                        else:
+                            continue
+                        
+                        # Color all cells in the row
+                        for col_idx in range(1, ws.max_column + 1):
+                            ws.cell(row=row_idx, column=col_idx).fill = fill
+                
+                wb.save(output_path)
+                print(f"✅ Feature analysis: {output_path} ({len(df_features)} dogs)")
+                print(f"   📋 Sorted by Track → Race → Box for easy navigation")
+                print(f"   🟢 Green = Predicted 1st place (highest ML confidence)")
+                print(f"   🟡 Yellow = Predicted 2nd place")
+                print(f"   🟠 Orange = Predicted 3rd place")
+                print(f"   📊 Contains {len(df_features.columns)} features/columns")
+                print(f"   🔍 Shows ALL data used by ML model for predictions")
+            except Exception as color_error:
+                print(f"✅ Feature analysis: {output_path} ({len(df_features)} dogs)")
+                print(f"   ⚠️  Color coding skipped: {color_error}")
+                print(f"   📋 Sorted by Track → Race → Box for easy navigation")
+                print(f"   📊 Contains {len(df_features.columns)} features/columns")
         except Exception as e:
             print(f"❌ Error saving feature analysis: {e}")
     else:
