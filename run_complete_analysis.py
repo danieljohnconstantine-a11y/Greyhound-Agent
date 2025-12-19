@@ -282,41 +282,62 @@ def main():
     # Generate all output files
     print(f"\n📁 Generating output files...")
     
-    # 1. UNIFIED Predictions Report (replaces 3 separate files)
-    # This combines all predictions ranked by ML confidence (trained on 2,108 historical races)
-    if all_ml_enhanced_predictions:
+    # 1. UNIFIED Predictions Report - TOP PICK PER RACE
+    # Shows only the highest confidence dog for each race (1 winner prediction per race)
+    if all_ml_enhanced_predictions and all_detailed_features:
         try:
-            df_unified = pd.DataFrame(all_ml_enhanced_predictions)
-            df_unified = df_unified.sort_values('ML_Confidence', ascending=False)
+            # Merge predictions with detailed features to get all columns
+            df_predictions = pd.DataFrame(all_ml_enhanced_predictions)
+            df_features = pd.DataFrame(all_detailed_features)
+            
+            # Merge to get all feature columns
+            df_unified = pd.merge(
+                df_predictions, 
+                df_features, 
+                on=['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'v44_Score'],
+                how='left'
+            )
+            
+            # IMPORTANT: Keep only the TOP dog per race (highest ML_Confidence per Track+Race)
+            df_unified = df_unified.sort_values(['Track', 'Race', 'ML_Confidence', 'v44_Score'], 
+                                                ascending=[True, True, False, False])
+            # Group by Track+Race and take the first (highest confidence) dog
+            df_top_picks = df_unified.groupby(['Track', 'Race']).first().reset_index()
             
             # Add pick tier column
-            df_unified['Pick_Tier'] = df_unified['ML_Confidence'].apply(
+            df_top_picks['Pick_Tier'] = df_top_picks['ML_Confidence'].apply(
                 lambda x: 'High Confidence (≥70%)' if x >= 70 
                 else 'Medium Confidence (50-70%)' if x >= 50 
                 else 'Lower Confidence (<50%)'
             )
             
-            # Reorder columns for clarity
-            cols = ['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'Pick_Tier', 'v44_Score']
-            # Add any additional columns that exist
-            other_cols = [c for c in df_unified.columns if c not in cols]
-            df_unified = df_unified[cols + other_cols]
+            # Reorder columns for clarity - key columns first, then all features
+            priority_cols = ['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'Pick_Tier', 'v44_Score']
+            other_cols = [c for c in df_top_picks.columns if c not in priority_cols]
+            df_top_picks = df_top_picks[priority_cols + other_cols]
             
-            df_unified.to_excel('outputs/ml_unified_predictions.xlsx', index=False)
+            # Sort by ML confidence (highest first) for final output
+            df_top_picks = df_top_picks.sort_values('ML_Confidence', ascending=False)
+            
+            df_top_picks.to_excel('outputs/ml_unified_predictions.xlsx', index=False)
             
             # Statistics
-            high_conf = len(df_unified[df_unified['ML_Confidence'] >= 70])
-            med_conf = len(df_unified[(df_unified['ML_Confidence'] >= 50) & (df_unified['ML_Confidence'] < 70)])
-            low_conf = len(df_unified[df_unified['ML_Confidence'] < 50])
+            total_races = len(df_top_picks)
+            high_conf = len(df_top_picks[df_top_picks['ML_Confidence'] >= 70])
+            med_conf = len(df_top_picks[(df_top_picks['ML_Confidence'] >= 50) & (df_top_picks['ML_Confidence'] < 70)])
+            low_conf = len(df_top_picks[df_top_picks['ML_Confidence'] < 50])
             
-            print(f"✅ Unified predictions: outputs/ml_unified_predictions.xlsx")
-            print(f"   📊 Total: {len(df_unified)} dogs analyzed")
-            print(f"   🎯 High Confidence (≥70%): {high_conf} dogs")
-            print(f"   🟡 Medium Confidence (50-70%): {med_conf} dogs")
-            print(f"   ⚪ Lower Confidence (<50%): {low_conf} dogs")
-            print(f"   📈 Ranked by ML confidence (model trained on 2,108 historical races)")
+            print(f"✅ Top picks (1 per race): outputs/ml_unified_predictions.xlsx")
+            print(f"   📊 Total races: {total_races}")
+            print(f"   🎯 High Confidence (≥70%): {high_conf} races")
+            print(f"   🟡 Medium Confidence (50-70%): {med_conf} races")
+            print(f"   ⚪ Lower Confidence (<50%): {low_conf} races")
+            print(f"   📋 Columns: {len(df_top_picks.columns)} (all features included)")
+            print(f"   📈 Each race shows ONLY the top predicted winner")
         except Exception as e:
             print(f"❌ Error saving unified predictions: {e}")
+            import traceback
+            traceback.print_exc()
     else:
         print(f"⚠️  No predictions generated")
     
@@ -363,33 +384,48 @@ def main():
             f.write(f"  Errors: {error_count}\n\n")
             
             f.write("OUTPUT FILES GENERATED:\n")
-            f.write(f"  1. ml_unified_predictions.xlsx - {len(all_ml_enhanced_predictions)} dogs ranked by ML confidence\n")
-            f.write(f"     • ALL dogs from today's PDFs\n")
-            f.write(f"     • Ranked in order of 'most likely to win' (based on 2,108 race learnings)\n")
-            f.write(f"     • Includes confidence tier classification\n\n")
+            
+            # Count unique races for top picks report
+            if all_ml_enhanced_predictions:
+                df_temp = pd.DataFrame(all_ml_enhanced_predictions)
+                unique_races = df_temp.groupby(['Track', 'Race']).size().count()
+                f.write(f"  1. ml_unified_predictions.xlsx - TOP PICK PER RACE\n")
+                f.write(f"     • {unique_races} races analyzed (1 winning prediction per race)\n")
+                f.write(f"     • Shows ONLY the highest confidence dog for each race\n")
+                f.write(f"     • Ranked by ML confidence (based on 2,108 historical race patterns)\n")
+                f.write(f"     • Includes ALL {len(df_temp.columns) if df_temp is not None else 'available'} feature columns\n\n")
+            else:
+                f.write(f"  1. ml_unified_predictions.xlsx - TOP PICK PER RACE\n")
+                f.write(f"     • Shows ONLY the highest confidence dog for each race\n\n")
+            
             f.write(f"  2. ml_feature_analysis_detailed.xlsx - {len(all_detailed_features)} dogs with full features\n")
             f.write(f"     • Sorted Track→Race→Box for easy navigation\n")
-            f.write(f"     • Shows ALL data the ML model uses to make predictions\n")
-            f.write(f"     • 50+ columns of actual PDF data\n\n")
+            f.write(f"     • Shows ALL dogs from all races (not just top picks)\n")
+            f.write(f"     • Contains ALL data the ML model uses to make predictions\n")
+            f.write(f"     • {len(pd.DataFrame(all_detailed_features).columns) if all_detailed_features else 'Multiple'} columns of actual PDF data\n\n")
             f.write(f"  3. complete_analysis_summary.txt - This summary\n\n")
             
             if all_ml_enhanced_predictions:
                 df_temp = pd.DataFrame(all_ml_enhanced_predictions)
-                high_conf = len(df_temp[df_temp['ML_Confidence'] >= 70])
-                med_conf = len(df_temp[(df_temp['ML_Confidence'] >= 50) & (df_temp['ML_Confidence'] < 70)])
+                # Calculate stats on top picks per race
+                df_grouped = df_temp.sort_values('ML_Confidence', ascending=False).groupby(['Track', 'Race']).first()
+                high_conf_races = len(df_grouped[df_grouped['ML_Confidence'] >= 70])
+                med_conf_races = len(df_grouped[(df_grouped['ML_Confidence'] >= 50) & (df_grouped['ML_Confidence'] < 70)])
                 
-                f.write("CONFIDENCE DISTRIBUTION:\n")
-                f.write(f"  High (≥70%): {high_conf} dogs - Strong predictions\n")
-                f.write(f"  Medium (50-70%): {med_conf} dogs - Moderate confidence\n")
-                f.write(f"  Lower (<50%): {len(df_temp) - high_conf - med_conf} dogs - Less confident\n\n")
+                f.write("RACE CONFIDENCE DISTRIBUTION (Top Pick Per Race):\n")
+                f.write(f"  High (≥70%): {high_conf_races} races - Strong predictions\n")
+                f.write(f"  Medium (50-70%): {med_conf_races} races - Moderate confidence\n")
+                f.write(f"  Lower (<50%): {len(df_grouped) - high_conf_races - med_conf_races} races - Less confident\n\n")
             
             f.write("HOW TO USE THE REPORTS:\n")
-            f.write("  1. Open ml_unified_predictions.xlsx\n")
-            f.write("     - Dogs are already ranked by ML confidence (highest first)\n")
-            f.write("     - Top dogs = most likely to win based on 2,108 historical patterns\n")
-            f.write("     - Focus on 'High Confidence (≥70%)' dogs for best results\n\n")
-            f.write("  2. Open ml_feature_analysis_detailed.xlsx\n")
-            f.write("     - See exactly what data drives each prediction\n")
+            f.write("  1. Open ml_unified_predictions.xlsx (START HERE)\n")
+            f.write("     - ONE winning prediction per race (highest ML confidence)\n")
+            f.write("     - Races ranked by confidence (highest first)\n")
+            f.write("     - ALL feature columns included for transparency\n")
+            f.write("     - Focus on 'High Confidence (≥70%)' races for best results\n\n")
+            f.write("  2. Open ml_feature_analysis_detailed.xlsx (for detailed review)\n")
+            f.write("     - See ALL dogs from ALL races\n")
+            f.write("     - Compare dogs within each race\n")
             f.write("     - Sorted by Track→Race→Box for easy per-race review\n")
             f.write("     - All values are from actual PDF parsing (100% factual)\n\n")
             
