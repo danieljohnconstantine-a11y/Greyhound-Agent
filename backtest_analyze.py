@@ -40,27 +40,50 @@ def load_results():
     """Load all historical results from CSV files"""
     results = {}
     csv_files = glob.glob("data/results_*.csv")
+    loaded_count = 0
+    error_count = 0
     
     for csv_file in csv_files:
         try:
             df = pd.read_csv(csv_file)
             
-            # Handle different CSV formats
-            if 'Date' in df.columns:
+            # Handle different CSV formats more robustly
+            if 'Date' in df.columns and 'Race' in df.columns and 'Winner' in df.columns:
                 # New format: Track,Date,Race,Winner
                 for _, row in df.iterrows():
-                    key = (row['Track'], int(row['Race']))
-                    results[key] = int(row['Winner'])
-            else:
+                    try:
+                        key = (str(row['Track']).strip(), int(row['Race']))
+                        results[key] = int(row['Winner'])
+                        loaded_count += 1
+                    except:
+                        continue
+            elif 'RaceNumber' in df.columns and 'WinnerBox' in df.columns:
                 # Old format: Track,RaceNumber,WinnerBox
-                # Extract date from filename
-                date_str = os.path.basename(csv_file).replace('results_', '').replace('.csv', '')
                 for _, row in df.iterrows():
-                    key = (row['Track'], int(row['RaceNumber']))
-                    results[key] = int(row['WinnerBox'])
+                    try:
+                        key = (str(row['Track']).strip(), int(row['RaceNumber']))
+                        results[key] = int(row['WinnerBox'])
+                        loaded_count += 1
+                    except:
+                        continue
+            elif 'Race' in df.columns and 'Winner' in df.columns:
+                # Alternative format without Date
+                for _, row in df.iterrows():
+                    try:
+                        key = (str(row['Track']).strip(), int(row['Race']))
+                        results[key] = int(row['Winner'])
+                        loaded_count += 1
+                    except:
+                        continue
+            else:
+                error_count += 1
+                continue
         except Exception as e:
-            print(f"Warning: Error loading {csv_file}: {e}")
+            error_count += 1
             continue
+    
+    if error_count > 0:
+        print(f"⚠️  Skipped {error_count} CSV files with incompatible formats")
     
     return results
 
@@ -244,7 +267,7 @@ def main():
     # Load results
     print("\n📊 Loading historical results...")
     results = load_results()
-    print(f"✅ Loaded {len(results)} race results")
+    print(f"✅ Loaded {len(results)} race results from CSV files")
     
     # Find PDFs
     print("\n📄 Finding historical race PDFs...")
@@ -285,7 +308,8 @@ def main():
     print("📈 ANALYSIS RESULTS")
     print("=" * 80)
     
-    report_lines = []
+    try:
+        report_lines = []
     report_lines.append("=" * 80)
     report_lines.append("BACKTEST ANALYSIS REPORT")
     report_lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -338,22 +362,29 @@ def main():
                               f"{result['win_rate']:.1f}%")
     
     # Track-specific analysis for best configuration
-    if results_data:
+    if results_data and results_data[0]['total_picks'] > 0:
         best = results_data[0]
         report_lines.append("")
         report_lines.append("=" * 80)
         report_lines.append(f"TRACK-SPECIFIC ANALYSIS (Best Config: {best['threshold']}%, Spread: {best['min_spread']}%)")
         report_lines.append("=" * 80)
         report_lines.append("")
-        report_lines.append(f"{'Track':<30} {'Picks':<10} {'Wins':<10} {'Win Rate':<12}")
-        report_lines.append("-" * 80)
         
-        for track, stats in sorted(best['track_stats'].items(), 
-                                   key=lambda x: (x[1]['correct']/x[1]['total'] if x[1]['total'] > 0 else 0), 
-                                   reverse=True):
-            if stats['total'] > 0:
-                track_win_rate = stats['correct'] / stats['total'] * 100
-                report_lines.append(f"{track:<30} {stats['total']:<10} {stats['correct']:<10} {track_win_rate:.1f}%")
+        if best['track_stats']:
+            report_lines.append(f"{'Track':<30} {'Picks':<10} {'Wins':<10} {'Win Rate':<12}")
+            report_lines.append("-" * 80)
+            
+            try:
+                for track, stats in sorted(best['track_stats'].items(), 
+                                           key=lambda x: (x[1]['correct']/x[1]['total'] if x[1]['total'] > 0 else 0), 
+                                           reverse=True):
+                    if stats['total'] > 0:
+                        track_win_rate = stats['correct'] / stats['total'] * 100
+                        report_lines.append(f"{track:<30} {stats['total']:<10} {stats['correct']:<10} {track_win_rate:.1f}%")
+            except Exception as e:
+                report_lines.append(f"Error generating track stats: {e}")
+        else:
+            report_lines.append("No track-specific data available")
     
     report_lines.append("")
     report_lines.append("=" * 80)
@@ -384,21 +415,27 @@ def main():
             report_lines.append(f"Best current performance: {results_data[0]['win_rate']:.1f}% "
                               f"at {results_data[0]['threshold']}% threshold")
     
-    report_lines.append("")
-    report_lines.append("=" * 80)
-    
-    # Write report
-    os.makedirs("outputs", exist_ok=True)
-    report_file = "outputs/backtest_analysis_report.txt"
-    with open(report_file, 'w') as f:
-        f.write('\n'.join(report_lines))
-    
-    # Print to console
-    for line in report_lines:
-        print(line)
-    
-    print(f"\n✅ Full report saved to: {report_file}")
-    print("\nNext step: Use run_ml_optimized.py with recommended settings")
+        report_lines.append("")
+        report_lines.append("=" * 80)
+        
+        # Write report
+        os.makedirs("outputs", exist_ok=True)
+        report_file = "outputs/backtest_analysis_report.txt"
+        with open(report_file, 'w') as f:
+            f.write('\n'.join(report_lines))
+        
+        # Print to console
+        for line in report_lines:
+            print(line)
+        
+        print(f"\n✅ Full report saved to: {report_file}")
+        print("\nNext step: Use run_ml_optimized.py with recommended settings")
+        
+    except Exception as e:
+        print(f"\n❌ Error generating report: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
     
     return 0
 
