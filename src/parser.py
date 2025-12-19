@@ -122,8 +122,9 @@ def parse_race_form(text):
         # Form number can contain digits, 'x' and 'f' characters (e.g., "8x324", "67f67")
         # BUG FIX: Added 'f' to form number pattern - many dogs have 'f' in their form number
         # which was causing them to not be parsed (e.g., "67f67Lil Patti" was missed)
+        # ENHANCED: More flexible pattern to handle edge cases and spacing variations
         dog_match = re.match(
-            r"""^(\d+)\.?\s*([0-9xf]{2,7})?([A-Za-z''\- ]+)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+            r"""^(\d+)\.?\s*([0-9xf]{2,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
             line
         )
 
@@ -138,27 +139,81 @@ def parse_race_form(text):
                 dog_name = dog_name[len(form_number[-2:]):].strip()
 
             dog_index = len(dogs)
-            dogs.append({
-                "Box": int(box),
-                "DogName": dog_name,
-                "FormNumber": form_number or "",
-                "Trainer": trainer.strip(),
-                "SexAge": sex_age,
-                "Weight": float(weight),
-                "Draw": int(draw),
-                "CareerWins": int(wins),
-                "CareerPlaces": int(places),
-                "CareerStarts": int(starts),
-                "PrizeMoney": float(prize.replace(",", "")),
-                "RTC": rtc,
-                "DLR": dlr,
-                "DLW": dlw,
-                **current_race
-            })
-            
-            # Initialize timing data collection for this dog
-            dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
+            try:
+                dogs.append({
+                    "Box": int(box),
+                    "DogName": dog_name,
+                    "FormNumber": form_number or "",
+                    "Trainer": trainer.strip(),
+                    "SexAge": sex_age,
+                    "Weight": float(weight),
+                    "Draw": int(draw),
+                    "CareerWins": int(wins),
+                    "CareerPlaces": int(places),
+                    "CareerStarts": int(starts),
+                    "PrizeMoney": float(prize.replace(",", "")),
+                    "RTC": rtc,
+                    "DLR": dlr,
+                    "DLW": dlw,
+                    **current_race
+                })
+                
+                # Initialize timing data collection for this dog
+                dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
+                logger.debug(f"✓ Parsed dog: Box {box} - {dog_name} (Race {current_race.get('RaceNumber', '?')})")
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to parse dog from line: {line[:100]}... Error: {e}")
             continue
+        
+        # Fallback pattern: Try simpler pattern for dogs with unusual formatting
+        # Pattern: Box Number, optional form, Dog Name (more flexible spacing/punctuation)
+        # This catches edge cases where the main pattern fails
+        if not dog_match and line and line[0].isdigit():
+            simple_dog_match = re.match(
+                r"""^(\d+)[\.\s]+([0-9xf]{1,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg""",
+                line
+            )
+            if simple_dog_match:
+                logger.info(f"⚠️ Using fallback pattern for line: {line[:80]}...")
+                # Try to extract remaining fields with more flexible pattern
+                remaining_pattern = re.search(
+                    r"""(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+                    line[simple_dog_match.end():]
+                )
+                if remaining_pattern:
+                    box, form_number, raw_name, sex_age, weight = simple_dog_match.groups()
+                    draw, trainer, wins, places, starts, prize, rtc, dlr, dlw = remaining_pattern.groups()
+                    
+                    dog_name = raw_name.strip()
+                    if form_number and dog_name.startswith(form_number[-2:]):
+                        dog_name = dog_name[len(form_number[-2:]):].strip()
+                    
+                    dog_index = len(dogs)
+                    try:
+                        dogs.append({
+                            "Box": int(box),
+                            "DogName": dog_name,
+                            "FormNumber": form_number or "",
+                            "Trainer": trainer.strip(),
+                            "SexAge": sex_age,
+                            "Weight": float(weight),
+                            "Draw": int(draw),
+                            "CareerWins": int(wins),
+                            "CareerPlaces": int(places),
+                            "CareerStarts": int(starts),
+                            "PrizeMoney": float(prize.replace(",", "")),
+                            "RTC": rtc,
+                            "DLR": dlr,
+                            "DLW": dlw,
+                            **current_race
+                        })
+                        
+                        # Initialize timing data collection for this dog
+                        dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
+                        logger.info(f"✓ Parsed dog (fallback): Box {box} - {dog_name}")
+                    except Exception as e:
+                        logger.warning(f"⚠️ Fallback parse failed: {e}")
+                    continue
 
         # Check if this is a dog name header (dog name in caps at start of line)
         # This marks the start of a dog's detailed section
@@ -482,5 +537,21 @@ def parse_race_form(text):
         if sec_time_count == 0:
             print(f"   ⚠️  WARNING: No SectionalSec data extracted from any dog")
             logger.warning("No SectionalSec data extracted from any dog")
+        
+        # Validation: Check for missing dogs per race (typical field is 6-8 dogs)
+        if 'RaceNumber' in df.columns:
+            for race_num in df['RaceNumber'].unique():
+                race_dogs = df[df['RaceNumber'] == race_num]
+                dog_count = len(race_dogs)
+                # Typical field is 6-8 dogs, warn if less than 5 or more than 10
+                if dog_count < 5:
+                    print(f"   ⚠️  Race {race_num}: Only {dog_count} dogs parsed (expected 6-8)")
+                    logger.warning(f"Race {race_num}: Only {dog_count} dogs parsed (possible missing dogs)")
+                    # List the boxes that were found
+                    found_boxes = sorted(race_dogs['Box'].tolist())
+                    print(f"      Found boxes: {found_boxes}")
+                elif dog_count > 10:
+                    print(f"   ⚠️  Race {race_num}: {dog_count} dogs parsed (expected 6-8, possible duplicates)")
+                    logger.warning(f"Race {race_num}: {dog_count} dogs parsed (possible duplicates)")
     
     return df

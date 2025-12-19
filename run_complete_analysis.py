@@ -122,6 +122,13 @@ def main():
             
             if df is None or len(df) == 0:
                 print(f"   ⚠️  No data extracted from {filename}")
+                print(f"   📄 Saving PDF text to outputs/debug_{filename}.txt for inspection")
+                # Save the PDF text for manual inspection
+                try:
+                    with open(f"outputs/debug_{filename}.txt", 'w', encoding='utf-8') as f:
+                        f.write(all_text)
+                except:
+                    pass
                 error_count += 1
                 continue
             
