@@ -3,9 +3,9 @@ Complete Analysis Pipeline - One-Click Solution
 Runs predictions on data_predictions/ PDFs and generates all reports
 
 This script combines:
-1. ML v2.1 Enhanced Hybrid Predictions (run_ml_hybrid_enhanced.py functionality)
+1. ML v2.1 Enhanced Predictions (trained on 2,108 historical races)
 2. Feature Analysis with Track→Race→Box sorting
-3. All diagnostic reports
+3. Unified prediction report
 
 Usage:
     python run_complete_analysis.py
@@ -18,11 +18,9 @@ Prerequisites:
     2. Race PDFs in data_predictions/ folder
 
 Outputs (ALL generated in single run):
-    1. outputs/ml_enhanced_all_predictions.xlsx - ALL dogs with ML scores
-    2. outputs/ml_hybrid_enhanced_picks.xlsx - High-confidence picks
-    3. outputs/v44_picks_comparison.csv - v4.4 picks comparison
-    4. outputs/ml_feature_analysis_detailed.xlsx - Detailed features (Track→Race→Box sorted)
-    5. outputs/complete_analysis_summary.txt - Quick summary report
+    1. outputs/ml_unified_predictions.xlsx - ALL dogs ranked by ML confidence (trained on 2,108 races)
+    2. outputs/ml_feature_analysis_detailed.xlsx - Detailed features (Track→Race→Box sorted)
+    3. outputs/complete_analysis_summary.txt - Quick summary report
 """
 
 import sys
@@ -245,40 +243,45 @@ def main():
     # Generate all output files
     print(f"\n📁 Generating output files...")
     
-    # 1. Hybrid picks
-    if all_hybrid_picks:
-        try:
-            df_hybrid = pd.DataFrame(all_hybrid_picks)
-            df_hybrid = df_hybrid.sort_values('ML_Confidence', ascending=False)
-            df_hybrid.to_excel('outputs/ml_hybrid_enhanced_picks.xlsx', index=False)
-            print(f"✅ Hybrid picks: outputs/ml_hybrid_enhanced_picks.xlsx ({len(df_hybrid)} picks)")
-        except Exception as e:
-            print(f"❌ Error saving hybrid picks: {e}")
-    else:
-        print(f"ℹ️  No hybrid picks (criteria: v4.4 ≥18% AND ML ≥70%)")
-    
-    # 2. All ML predictions (ALWAYS create)
+    # 1. UNIFIED Predictions Report (replaces 3 separate files)
+    # This combines all predictions ranked by ML confidence (trained on 2,108 historical races)
     if all_ml_enhanced_predictions:
         try:
-            df_ml_all = pd.DataFrame(all_ml_enhanced_predictions)
-            df_ml_all = df_ml_all.sort_values('ML_Confidence', ascending=False)
-            df_ml_all.to_excel('outputs/ml_enhanced_all_predictions.xlsx', index=False)
-            print(f"✅ All predictions: outputs/ml_enhanced_all_predictions.xlsx ({len(df_ml_all)} dogs)")
+            df_unified = pd.DataFrame(all_ml_enhanced_predictions)
+            df_unified = df_unified.sort_values('ML_Confidence', ascending=False)
+            
+            # Add pick tier column
+            df_unified['Pick_Tier'] = df_unified['ML_Confidence'].apply(
+                lambda x: 'High Confidence (≥70%)' if x >= 70 
+                else 'Medium Confidence (50-70%)' if x >= 50 
+                else 'Lower Confidence (<50%)'
+            )
+            
+            # Reorder columns for clarity
+            cols = ['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'Pick_Tier', 'v44_Score']
+            # Add any additional columns that exist
+            other_cols = [c for c in df_unified.columns if c not in cols]
+            df_unified = df_unified[cols + other_cols]
+            
+            df_unified.to_excel('outputs/ml_unified_predictions.xlsx', index=False)
+            
+            # Statistics
+            high_conf = len(df_unified[df_unified['ML_Confidence'] >= 70])
+            med_conf = len(df_unified[(df_unified['ML_Confidence'] >= 50) & (df_unified['ML_Confidence'] < 70)])
+            low_conf = len(df_unified[df_unified['ML_Confidence'] < 50])
+            
+            print(f"✅ Unified predictions: outputs/ml_unified_predictions.xlsx")
+            print(f"   📊 Total: {len(df_unified)} dogs analyzed")
+            print(f"   🎯 High Confidence (≥70%): {high_conf} dogs")
+            print(f"   🟡 Medium Confidence (50-70%): {med_conf} dogs")
+            print(f"   ⚪ Lower Confidence (<50%): {low_conf} dogs")
+            print(f"   📈 Ranked by ML confidence (model trained on 2,108 historical races)")
         except Exception as e:
-            print(f"❌ Error saving all predictions: {e}")
+            print(f"❌ Error saving unified predictions: {e}")
     else:
         print(f"⚠️  No predictions generated")
     
-    # 3. v4.4 picks for comparison
-    if all_v44_picks:
-        try:
-            df_v44 = pd.DataFrame(all_v44_picks)
-            df_v44.to_csv('outputs/v44_picks_comparison.csv', index=False)
-            print(f"✅ v4.4 picks: outputs/v44_picks_comparison.csv ({len(df_v44)} picks)")
-        except Exception as e:
-            print(f"❌ Error saving v4.4 picks: {e}")
-    
-    # 4. Detailed Feature Analysis (Track→Race→Box sorted)
+    # 2. Detailed Feature Analysis (Track→Race→Box sorted)
     if all_detailed_features:
         try:
             df_features = pd.DataFrame(all_detailed_features)
@@ -288,12 +291,13 @@ def main():
             print(f"✅ Feature analysis: outputs/ml_feature_analysis_detailed.xlsx ({len(df_features)} dogs)")
             print(f"   📋 Sorted by Track → Race → Box for easy navigation")
             print(f"   📊 Contains {len(df_features.columns)} features/columns")
+            print(f"   🔍 Shows ALL data used by ML model for predictions")
         except Exception as e:
             print(f"❌ Error saving feature analysis: {e}")
     else:
         print(f"⚠️  No features captured")
     
-    # 5. Summary report
+    # 3. Summary report
     try:
         end_time = datetime.now()
         duration = (end_time - start_time).total_seconds()
@@ -305,16 +309,30 @@ def main():
             f.write(f"Analysis Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Processing Time: {duration:.1f} seconds\n\n")
             
+            f.write("HOW 2,108 HISTORICAL RACES ARE USED:\n")
+            f.write("  The ML v2.1 model was TRAINED on 2,108 actual race results.\n")
+            f.write("  It learned patterns from:\n")
+            f.write("    - Winner characteristics (times, form, box positions)\n")
+            f.write("    - Track-specific trends (which tracks favor certain boxes)\n")
+            f.write("    - Weather/condition impacts on performance\n")
+            f.write("    - Dog performance patterns across all conditions\n\n")
+            f.write("  When predicting today's races, the model applies these learned patterns\n")
+            f.write("  to score each dog's likelihood of winning.\n\n")
+            
             f.write("INPUT:\n")
             f.write(f"  PDFs Processed: {processed_count}/{len(pdf_files)}\n")
             f.write(f"  Errors: {error_count}\n\n")
             
             f.write("OUTPUT FILES GENERATED:\n")
-            f.write(f"  1. ml_enhanced_all_predictions.xlsx - {len(all_ml_enhanced_predictions)} dogs analyzed\n")
-            f.write(f"  2. ml_hybrid_enhanced_picks.xlsx - {len(all_hybrid_picks)} high-confidence picks\n")
-            f.write(f"  3. v44_picks_comparison.csv - {len(all_v44_picks)} v4.4 picks\n")
-            f.write(f"  4. ml_feature_analysis_detailed.xlsx - {len(all_detailed_features)} dogs with full features\n")
-            f.write(f"  5. complete_analysis_summary.txt - This summary\n\n")
+            f.write(f"  1. ml_unified_predictions.xlsx - {len(all_ml_enhanced_predictions)} dogs ranked by ML confidence\n")
+            f.write(f"     • ALL dogs from today's PDFs\n")
+            f.write(f"     • Ranked in order of 'most likely to win' (based on 2,108 race learnings)\n")
+            f.write(f"     • Includes confidence tier classification\n\n")
+            f.write(f"  2. ml_feature_analysis_detailed.xlsx - {len(all_detailed_features)} dogs with full features\n")
+            f.write(f"     • Sorted Track→Race→Box for easy navigation\n")
+            f.write(f"     • Shows ALL data the ML model uses to make predictions\n")
+            f.write(f"     • 50+ columns of actual PDF data\n\n")
+            f.write(f"  3. complete_analysis_summary.txt - This summary\n\n")
             
             if all_ml_enhanced_predictions:
                 df_temp = pd.DataFrame(all_ml_enhanced_predictions)
@@ -322,15 +340,19 @@ def main():
                 med_conf = len(df_temp[(df_temp['ML_Confidence'] >= 50) & (df_temp['ML_Confidence'] < 70)])
                 
                 f.write("CONFIDENCE DISTRIBUTION:\n")
-                f.write(f"  High (≥70%): {high_conf} dogs\n")
-                f.write(f"  Medium (50-70%): {med_conf} dogs\n")
-                f.write(f"  Lower (<50%): {len(df_temp) - high_conf - med_conf} dogs\n\n")
+                f.write(f"  High (≥70%): {high_conf} dogs - Strong predictions\n")
+                f.write(f"  Medium (50-70%): {med_conf} dogs - Moderate confidence\n")
+                f.write(f"  Lower (<50%): {len(df_temp) - high_conf - med_conf} dogs - Less confident\n\n")
             
-            f.write("RECOMMENDATIONS:\n")
-            f.write("  1. Review ml_hybrid_enhanced_picks.xlsx for today's high-confidence selections\n")
-            f.write("  2. Check ml_feature_analysis_detailed.xlsx to see what data drives each prediction\n")
-            f.write("  3. Feature analysis is sorted Track→Race→Box for easy per-race review\n")
-            f.write("  4. All data comes from actual PDF parsing (100% factual)\n\n")
+            f.write("HOW TO USE THE REPORTS:\n")
+            f.write("  1. Open ml_unified_predictions.xlsx\n")
+            f.write("     - Dogs are already ranked by ML confidence (highest first)\n")
+            f.write("     - Top dogs = most likely to win based on 2,108 historical patterns\n")
+            f.write("     - Focus on 'High Confidence (≥70%)' dogs for best results\n\n")
+            f.write("  2. Open ml_feature_analysis_detailed.xlsx\n")
+            f.write("     - See exactly what data drives each prediction\n")
+            f.write("     - Sorted by Track→Race→Box for easy per-race review\n")
+            f.write("     - All values are from actual PDF parsing (100% factual)\n\n")
             
             f.write("=" * 80 + "\n")
         
