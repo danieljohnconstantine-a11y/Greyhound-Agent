@@ -122,10 +122,12 @@ def main():
             track_code = filename[:4].upper() if len(filename) >= 4 else "UNKN"
             
             # Group by race
-            if 'RaceNum' in df.columns:
+            if 'RaceNumber' in df.columns:
+                races = df.groupby('RaceNumber')
+            elif 'RaceNum' in df.columns:
                 races = df.groupby('RaceNum')
             else:
-                print(f"   ⚠️  No RaceNum column in {filename}")
+                print(f"   ⚠️  No RaceNumber/RaceNum column in {filename}")
                 error_count += 1
                 continue
             
