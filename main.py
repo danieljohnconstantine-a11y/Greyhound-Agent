@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import pdfplumber
 import os
+import sys
+import glob
 import logging
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
@@ -31,20 +33,36 @@ if not os.path.exists(output_dir):
     os.makedirs(output_dir)
     logging.info(f"✅ Created outputs directory: {output_dir}")
 
-# ✅ Find all PDFs in data folder
-pdf_folder = "data"
-pdf_files = [f for f in os.listdir(pdf_folder) if f.lower().endswith(".pdf")]
-pdf_files.sort(key=lambda x: os.path.getmtime(os.path.join(pdf_folder, x)), reverse=True)
-
-if not pdf_files:
-    print("❌ No PDF files found in data folder.")
-    exit()
+# ✅ Determine which PDFs to process
+if len(sys.argv) > 1:
+    # Command-line arguments provided (e.g., data_predictions/*.pdf)
+    pdf_paths = []
+    for pattern in sys.argv[1:]:
+        pdf_paths.extend(glob.glob(pattern))
+    pdf_paths = [p for p in pdf_paths if p.lower().endswith('.pdf')]
+    
+    if not pdf_paths:
+        print(f"❌ No PDF files found matching: {' '.join(sys.argv[1:])}")
+        exit()
+    
+    print(f"📂 Processing {len(pdf_paths)} PDF file(s) from command line")
+else:
+    # Default: Find all PDFs in data folder
+    pdf_folder = "data"
+    pdf_files = [f for f in os.listdir(pdf_folder) if f.lower().endswith(".pdf")]
+    pdf_files.sort(key=lambda x: os.path.getmtime(os.path.join(pdf_folder, x)), reverse=True)
+    
+    if not pdf_files:
+        print("❌ No PDF files found in data folder.")
+        exit()
+    
+    pdf_paths = [os.path.join(pdf_folder, f) for f in pdf_files]
+    print(f"📂 Processing {len(pdf_paths)} PDF file(s) from data folder")
 
 all_dogs = []
 
 # ✅ Process each PDF
-for pdf_file in pdf_files:
-    pdf_path = os.path.join(pdf_folder, pdf_file)
+for pdf_path in pdf_paths:
     print(f"📄 Processing: {pdf_path}")
     
     try:
@@ -52,7 +70,7 @@ for pdf_file in pdf_files:
         df = parse_race_form(raw_text)
         
         if len(df) == 0:
-            logging.warning(f"⚠️ No dogs parsed from {pdf_file} - skipping")
+            logging.warning(f"⚠️ No dogs parsed from {os.path.basename(pdf_path)} - skipping")
             continue
 
         # ✅ Convert DLR to numeric to avoid type errors
@@ -61,9 +79,9 @@ for pdf_file in pdf_files:
         # ✅ Apply enhanced scoring
         df = compute_features(df)
         all_dogs.append(df)
-        logging.info(f"✅ Successfully processed {pdf_file}: {len(df)} dogs")
+        logging.info(f"✅ Successfully processed {os.path.basename(pdf_path)}: {len(df)} dogs")
     except Exception as e:
-        logging.error(f"❌ Error processing {pdf_file}: {e}")
+        logging.error(f"❌ Error processing {os.path.basename(pdf_path)}: {e}")
         # Continue processing other PDFs rather than crashing
 
 # Check if we have any dogs
