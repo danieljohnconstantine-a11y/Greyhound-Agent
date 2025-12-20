@@ -192,9 +192,9 @@ def main():
                                 continue
                         v44_scores = v44_scores_dict
                     
-                    # Process each dog
+                    # Process each dog - use features_df to get ALL 80+ computed features
                     dogs_in_race = 0
-                    for idx, row in race_df.iterrows():
+                    for idx, row in features_df.iterrows():
                         try:
                             box = int(row.get('Box', 0))
                             dog_name = str(row.get('DogName', 'Unknown'))
@@ -232,6 +232,7 @@ def main():
                                 all_v44_picks.append(pred_record.copy())
                             
                             # Extract detailed features for analysis report
+                            # CRITICAL: Use features_df (which has ALL 80+ computed features), not race_df
                             feature_record = {
                                 'Track': track_code,
                                 'Race': int(race_num),
@@ -241,7 +242,7 @@ def main():
                                 'v44_Score': round(v44_score, 1)
                             }
                             
-                            # Add all columns from the parsed DataFrame
+                            # Add ALL columns from the features DataFrame (includes all computed features)
                             for col in row.index:
                                 if col not in ['Box', 'DogName']:
                                     val = row[col]
@@ -374,7 +375,7 @@ def main():
     else:
         print(f"⚠️  No predictions generated")
     
-    # 2. Detailed Feature Analysis (Track→Race→Box sorted with color coding)
+    # 2. Detailed Feature Analysis (Track→Race→Box sorted with color coding + blank rows between races)
     if all_detailed_features:
         try:
             df_features = pd.DataFrame(all_detailed_features)
@@ -387,9 +388,23 @@ def main():
             # Re-sort by Track, Race, Box for final display
             df_features = df_features.sort_values(['Track', 'Race', 'Box'])
             
+            # Insert blank rows between races for easier reading
+            # Group by Track and Race, and build a new dataframe with blank rows
+            df_with_blanks = pd.DataFrame()
+            for (track, race), group in df_features.groupby(['Track', 'Race'], sort=False):
+                df_with_blanks = pd.concat([df_with_blanks, group], ignore_index=True)
+                # Add blank row after each race (except last race)
+                # We'll add it for all, then remove the last one later
+                blank_row = pd.DataFrame([{col: None for col in df_features.columns}])
+                df_with_blanks = pd.concat([df_with_blanks, blank_row], ignore_index=True)
+            
+            # Remove the last blank row
+            if len(df_with_blanks) > 0:
+                df_with_blanks = df_with_blanks.iloc[:-1]
+            
             # Save to Excel
             output_path = 'outputs/ml_feature_analysis_detailed.xlsx'
-            df_features.to_excel(output_path, index=False)
+            df_with_blanks.to_excel(output_path, index=False)
             
             # Apply color coding using openpyxl
             try:
@@ -405,11 +420,15 @@ def main():
                 headers = [cell.value for cell in ws[1]]
                 rank_col_idx = headers.index('Position_Rank') + 1 if 'Position_Rank' in headers else None
                 
-                # Apply conditional formatting based on Position_Rank
+                # Apply conditional formatting based on Position_Rank (skip blank rows)
                 if rank_col_idx:
                     for row_idx in range(2, ws.max_row + 1):  # Start from row 2 (skip header)
                         rank_cell = ws.cell(row=row_idx, column=rank_col_idx)
                         rank_value = rank_cell.value
+                        
+                        # Skip blank rows (None values)
+                        if rank_value is None:
+                            continue
                         
                         # Apply color to entire row based on rank
                         if rank_value == 1:
@@ -428,18 +447,22 @@ def main():
                 wb.save(output_path)
                 print(f"✅ Feature analysis: {output_path} ({len(df_features)} dogs)")
                 print(f"   📋 Sorted by Track → Race → Box for easy navigation")
+                print(f"   📏 Blank rows added between races for easier reading")
                 print(f"   🟢 Green = Predicted 1st place (highest ML confidence)")
                 print(f"   🟡 Yellow = Predicted 2nd place")
                 print(f"   🟠 Orange = Predicted 3rd place")
-                print(f"   📊 Contains {len(df_features.columns)} features/columns")
+                print(f"   📊 Contains {len(df_features.columns)} features/columns (ALL 80+ computed features)")
                 print(f"   🔍 Shows ALL data used by ML model for predictions")
             except Exception as color_error:
                 print(f"✅ Feature analysis: {output_path} ({len(df_features)} dogs)")
                 print(f"   ⚠️  Color coding skipped: {color_error}")
                 print(f"   📋 Sorted by Track → Race → Box for easy navigation")
-                print(f"   📊 Contains {len(df_features.columns)} features/columns")
+                print(f"   📏 Blank rows added between races for easier reading")
+                print(f"   📊 Contains {len(df_features.columns)} features/columns (ALL 80+ computed features)")
         except Exception as e:
             print(f"❌ Error saving feature analysis: {e}")
+            import traceback
+            traceback.print_exc()
     else:
         print(f"⚠️  No features captured")
     
