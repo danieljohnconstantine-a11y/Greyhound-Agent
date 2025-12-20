@@ -506,7 +506,8 @@ def parse_race_form(text):
     df = pd.DataFrame(dogs)
     
     # Normalize column names: strip whitespace and ensure consistent casing
-    df.columns = df.columns.str.strip()
+    if len(df) > 0:
+        df.columns = [str(col).strip() for col in df.columns]
     
     # Log parsing results
     logger.info(f"✅ Parsed {len(df)} dogs across {race_number} races")
