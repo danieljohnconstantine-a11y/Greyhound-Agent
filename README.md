@@ -9,6 +9,11 @@ Automated parsing and scoring of greyhound racing forms.
 - Feature scoring
 - Top pick selection
 
+## Installation
+```bash
+pip install -r requirements.txt
+```
+
 ## Usage
 1. Place your PDF form files in the `data/` folder.
 2. Run `main.py` (or use `run_main.bat` on Windows)

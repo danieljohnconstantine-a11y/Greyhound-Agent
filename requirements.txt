@@ -1,0 +1,8 @@
+# Greyhound Analytics Pipeline - Python Dependencies
+
+# Core data processing
+pandas>=1.3.0
+numpy>=1.20.0
+
+# PDF processing
+pdfplumber>=0.5.0
