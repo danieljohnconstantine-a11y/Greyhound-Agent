@@ -1,0 +1,1285 @@
+========================================
+ML Hybrid Enhanced Prediction System
+v2.1 with Weather & Track Conditions
+========================================
+
+
+Running ML v2.1 enhanced predictions on today's races...
+
+Note: This uses weather and track condition data for maximum accuracy
+      Expected: 41-47% win rate (vs 40-45% v2.0, 35-40% v1.0)
+
+Folder structure:
+  data_predictions\  - Today's races (for predictions)
+  data\              - Historical races (for ML training)
+  data\weather_conditions.csv - Weather data
+  data\track_conditions.csv - Track condition ratings
+
+??  XGBoost not available - using RandomForest + GradientBoosting only
+??  LightGBM not available - using available models only
+================================================================================
+?? ML HYBRID ENHANCED PREDICTION SYSTEM v2.1
+   v4.4 Rule-Based + ML v2.0 + Weather/Track Conditions
+================================================================================
+
+???  Loading weather & track condition data...
+? Weather records: 2
+? Track condition records: 2
+
+?? Loading ML v2.1 enhanced model...
+?? Advanced model loaded from models/greyhound_ml_v2.1_enhanced.pkl
+   Version: 2.0_advanced
+   Trained: 2025-12-16T14:45:00.865061
+   Track-specific models: 17
+   Global fallback: ?
+? ML v2.1 model loaded successfully
+
+?? Found 11 race PDF(s)
+   • ANGLG1512form.pdf
+   • BRATG1512form.pdf
+   • GUNNG1512form.pdf
+   • MAITG1512form.pdf
+   • MANDG1512form.pdf
+   • MOWBG1512form.pdf
+   • NOWRG1512form.pdf
+   • QSTRG1512form.pdf
+   • SANDG1512form.pdf
+   • SHEPG1512form.pdf
+   • WNBLG1512form.pdf
+
+?? Processing (1/11): ANGLG1512form.pdf
+Converted timing for Split Vision: 3 times from other distances -> 19.58s at 342m
+Converted timing for Nangar Express: 1 times from other distances -> 19.47s at 342m
+Converted timing for Miss Gravity: 1 times from other distances -> 19.45s at 342m
+Converted timing for Cyclone Darcy: 3 times from other distances -> 19.50s at 342m
+Converted timing for Power Move: 2 times from other distances -> 30.82s at 530m
+Converted timing for Princess Cordite: 1 times from other distances -> 31.96s at 530m
+Converted timing for Velaris: 1 times from other distances -> 29.63s at 530m
+Converted timing for Ultimate: 1 times from other distances -> 19.90s at 342m
+Converted timing for Adhana Lulu: 5 times from other distances -> 19.44s at 342m
+Converted timing for Rev Pirate: 2 times from other distances -> 19.71s at 342m
+? Parsed 53 dogs across 10 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [342, 530]
+? Parsed 53 dogs
+   ?? Timing data extracted: 52/53 dogs have BestTimeSec, 45/53 have SectionalSec
+? Parsed 53 dogs
+?? WARNING: 1 dogs have missing BestTimeSec values
+?? WARNING: 8 dogs have missing SectionalSec values
+?? WARNING: 1 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 30 unique trainers
+  Range: 0.0000 to 0.4000
+  Mean: 0.1581
+?? INFO: RestFactor found for 53/53 dogs.
+? Calculated PlaceRate for 53 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 53 dogs
+? Calculated DrawFactor for 53 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX1_SPEED': 53}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 53 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (7 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 53 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (4 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 6 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 4 unique trainers
+  Range: 0.0000 to 0.1667
+  Mean: 0.0917
+?? INFO: RestFactor found for 6/6 dogs.
+? Calculated PlaceRate for 6 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 6 dogs
+? Calculated DrawFactor for 6 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX1_SPEED': 6}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 6 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (1 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 6 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (6, 22) (converted to numpy array)
+   ? Error processing ANGLG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (2/11): BRATG1512form.pdf
+Converted timing for Zipping Windsor: 2 times from other distances -> 25.26s at 450m
+Converted timing for Bakali Surprise: 4 times from other distances -> 21.76s at 390m
+Converted timing for Chatter Beast: 3 times from other distances -> 21.72s at 390m
+Converted timing for Bust Up: 2 times from other distances -> 22.39s at 390m
+Converted timing for Whodat Hooked: 1 times from other distances -> 25.95s at 450m
+Converted timing for Super Seafarer: 1 times from other distances -> 25.70s at 450m
+Converted timing for Paw Quanda: 1 times from other distances -> 31.16s at 545m
+Converted timing for Aston Ryan: 2 times from other distances -> 30.86s at 545m
+Converted timing for Scott Vicious: 2 times from other distances -> 21.89s at 390m
+Converted timing for Munching Mangoes: 2 times from other distances -> 22.02s at 390m
+Converted timing for Proud Mary: 1 times from other distances -> 22.05s at 390m
+Converted timing for Canya Kelsey: 2 times from other distances -> 25.48s at 450m
+Converted timing for Neena Bale: 1 times from other distances -> 26.08s at 450m
+Converted timing for Dim Sim Rixi: 1 times from other distances -> 22.02s at 390m
+Converted timing for Zipping Scooby: 1 times from other distances -> 22.33s at 390m
+? Parsed 129 dogs across 14 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [390, 450, 545]
+? Parsed 129 dogs
+   ?? Timing data extracted: 122/129 dogs have BestTimeSec, 123/129 have SectionalSec
+? Parsed 129 dogs
+?? WARNING: 7 dogs have missing BestTimeSec values
+?? WARNING: 6 dogs have missing SectionalSec values
+?? WARNING: 7 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 69 unique trainers
+  Range: 0.0000 to 0.3333
+  Mean: 0.1091
+?? INFO: RestFactor found for 129/129 dogs.
+? Calculated PlaceRate for 129 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 129 dogs
+? Calculated DrawFactor for 129 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 129}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 129 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (30 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 129 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (8 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 1 dogs have missing BestTimeSec values
+?? WARNING: 1 dogs have missing/empty Last3TimesSec values
+?? WARNING: 9 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 8 unique trainers
+  Range: 0.0000 to 0.0000
+  Mean: 0.0000
+?? INFO: RestFactor found for 9/9 dogs.
+? Calculated PlaceRate for 9 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 9 dogs
+? Calculated DrawFactor for 9 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 9}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 9 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (2 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 9 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (9, 22) (converted to numpy array)
+   ? Error processing BRATG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (3/11): GUNNG1512form.pdf
+Converted timing for Cluster One: 1 times from other distances -> 24.91s at 431m
+Converted timing for Make Your Stand: 2 times from other distances -> 24.75s at 431m
+Converted timing for Karli Mulwee: 1 times from other distances -> 19.48s at 340m
+Converted timing for Sudden Surprise: 3 times from other distances -> 19.17s at 340m
+Converted timing for Buddy Mac: 1 times from other distances -> 19.60s at 340m
+Converted timing for Cheerful Cow: 1 times from other distances -> 19.30s at 340m
+Converted timing for Squid Worth: 1 times from other distances -> 19.00s at 340m
+Converted timing for Sister Creek: 3 times from other distances -> 19.30s at 340m
+? Parsed 81 dogs across 11 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [340, 431]
+? Parsed 81 dogs
+   ?? Timing data extracted: 76/81 dogs have BestTimeSec, 74/81 have SectionalSec
+? Parsed 81 dogs
+?? WARNING: 5 dogs have missing BestTimeSec values
+?? WARNING: 7 dogs have missing SectionalSec values
+?? WARNING: 5 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 27 unique trainers
+  Range: 0.0000 to 0.5000
+  Mean: 0.1286
+?? INFO: RestFactor found for 81/81 dogs.
+? Calculated PlaceRate for 81 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 81 dogs
+? Calculated DrawFactor for 81 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 81}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 81 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (19 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 81 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 2 dogs have missing BestTimeSec values
+?? WARNING: 2 dogs have missing SectionalSec values
+?? WARNING: 2 dogs have missing/empty Last3TimesSec values
+?? WARNING: 7 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 7 unique trainers
+  Range: 0.0000 to 0.1500
+  Mean: 0.0214
+?? INFO: RestFactor found for 7/7 dogs.
+? Calculated PlaceRate for 7 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 7 dogs
+? Calculated DrawFactor for 7 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 7}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 7 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (1 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 7 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (7, 22) (converted to numpy array)
+   ? Error processing GUNNG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (4/11): MAITG1512form.pdf
+Converted timing for Ferocious Vaughn: 4 times from other distances -> 21.56s at 400m
+Converted timing for Mum Said Albert: 4 times from other distances -> 22.89s at 400m
+Converted timing for Wreck It Rex: 1 times from other distances -> 22.96s at 400m
+Converted timing for Elusive Lenny: 6 times from other distances -> 22.99s at 400m
+Converted timing for Canya Talking: 4 times from other distances -> 22.86s at 400m
+Converted timing for Burglar Tom: 2 times from other distances -> 23.09s at 400m
+Converted timing for Martin's Shine: 5 times from other distances -> 25.74s at 450m
+Converted timing for Dapper Lomar: 1 times from other distances -> 26.83s at 450m
+Converted timing for Bago Sweetie: 5 times from other distances -> 25.92s at 450m
+Converted timing for Ray Finkle: 2 times from other distances -> 22.98s at 400m
+Converted timing for Occulent: 2 times from other distances -> 23.10s at 400m
+? Parsed 74 dogs across 10 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [450, 400]
+? Parsed 74 dogs
+   ?? Timing data extracted: 65/74 dogs have BestTimeSec, 61/74 have SectionalSec
+? Parsed 74 dogs
+?? WARNING: 9 dogs have missing BestTimeSec values
+?? WARNING: 13 dogs have missing SectionalSec values
+?? WARNING: 9 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 38 unique trainers
+  Range: 0.0000 to 0.4167
+  Mean: 0.1377
+?? INFO: RestFactor found for 74/74 dogs.
+? Calculated PlaceRate for 74 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 74 dogs
+? Calculated DrawFactor for 74 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 74}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 74 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (16 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 74 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (1 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 1 dogs have missing BestTimeSec values
+?? WARNING: 1 dogs have missing SectionalSec values
+?? WARNING: 1 dogs have missing/empty Last3TimesSec values
+?? WARNING: 5 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 5 unique trainers
+  Range: 0.0000 to 0.0000
+  Mean: 0.0000
+?? INFO: RestFactor found for 5/5 dogs.
+? Calculated PlaceRate for 5 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 5 dogs
+? Calculated DrawFactor for 5 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 5}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 5 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (1 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 5 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (5, 22) (converted to numpy array)
+   ? Error processing MAITG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (5/11): MANDG1512form.pdf
+Converted timing for Happy But Poor: 1 times from other distances -> 17.30s at 300m
+Converted timing for Fidel Pronto: 2 times from other distances -> 27.76s at 488m
+Converted timing for Maximum Hughes: 2 times from other distances -> 27.55s at 488m
+Converted timing for Full Of Suprises: 1 times from other distances -> 23.23s at 400m
+Converted timing for Pecorino Monelli: 1 times from other distances -> 17.35s at 300m
+? Parsed 69 dogs across 9 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'SectionalSec', 'BoxBiasFactor', 'BestTimeSec', 'Last3TimesSec', 'TimeConverted']
+?? Distance values (sample): [300, 488, 400]
+? Parsed 69 dogs
+   ?? Timing data extracted: 55/69 dogs have BestTimeSec, 63/69 have SectionalSec
+? Parsed 69 dogs
+?? WARNING: 14 dogs have missing BestTimeSec values
+?? WARNING: 6 dogs have missing SectionalSec values
+?? WARNING: 14 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 16 unique trainers
+  Range: 0.0349 to 0.2619
+  Mean: 0.1211
+?? INFO: RestFactor found for 69/69 dogs.
+? Calculated PlaceRate for 69 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 69 dogs
+? Calculated DrawFactor for 69 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX7_CLOSER': 69}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 69 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (14 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 69 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (2 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 6 dogs have missing BestTimeSec values
+?? WARNING: 6 dogs have missing/empty Last3TimesSec values
+?? WARNING: 6 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 4 unique trainers
+  Range: 0.0000 to 0.0000
+  Mean: 0.0000
+?? INFO: RestFactor found for 6/6 dogs.
+? Calculated PlaceRate for 6 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 6 dogs
+? Calculated DrawFactor for 6 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX7_CLOSER': 6}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 6 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (2 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 6 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (6, 22) (converted to numpy array)
+   ? Error processing MANDG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (6/11): MOWBG1512form.pdf
+Converted timing for Kiwi Isabele: 3 times from other distances -> 15.80s at 278m
+Converted timing for Bun Uncle: 3 times from other distances -> 15.69s at 278m
+Converted timing for Canya Siyan: 1 times from other distances -> 15.87s at 278m
+Converted timing for Don't Slip Mick: 1 times from other distances -> 15.90s at 278m
+Converted timing for Jungle Boogie: 1 times from other distances -> 16.15s at 278m
+Converted timing for Kisses For Ruby: 2 times from other distances -> 15.53s at 278m
+Converted timing for Timeless Gracie: 3 times from other distances -> 15.89s at 278m
+Converted timing for Spare A Dime: 2 times from other distances -> 29.51s at 515m
+Converted timing for Aeroplane Bernie: 3 times from other distances -> 29.11s at 515m
+Converted timing for Dusty Rico: 1 times from other distances -> 29.00s at 515m
+Converted timing for Cadia Gold: 4 times from other distances -> 28.67s at 515m
+Converted timing for Sherwood Boys: 3 times from other distances -> 28.58s at 515m
+Converted timing for Darling Danger: 4 times from other distances -> 28.96s at 515m
+Converted timing for Arcadian Ruby: 1 times from other distances -> 29.11s at 515m
+Converted timing for Bearville Bronx: 1 times from other distances -> 16.33s at 278m
+Converted timing for Why Sparky: 4 times from other distances -> 15.62s at 278m
+Converted timing for Motton Millie: 1 times from other distances -> 15.81s at 278m
+Converted timing for Memphis Rains: 4 times from other distances -> 15.66s at 278m
+Converted timing for Paris Danger: 1 times from other distances -> 15.79s at 278m
+? Parsed 93 dogs across 10 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [278, 515]
+? Parsed 93 dogs
+   ?? Timing data extracted: 87/93 dogs have BestTimeSec, 79/93 have SectionalSec
+? Parsed 93 dogs
+?? WARNING: 6 dogs have missing BestTimeSec values
+?? WARNING: 14 dogs have missing SectionalSec values
+?? WARNING: 6 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 31 unique trainers
+  Range: 0.0000 to 0.3235
+  Mean: 0.1345
+?? INFO: RestFactor found for 93/93 dogs.
+? Calculated PlaceRate for 93 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 93 dogs
+? Calculated DrawFactor for 93 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 93}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 93 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (17 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 93 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (6 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 1 dogs have missing SectionalSec values
+?? WARNING: 9 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 8 unique trainers
+  Range: 0.0000 to 0.2500
+  Mean: 0.0463
+?? INFO: RestFactor found for 9/9 dogs.
+? Calculated PlaceRate for 9 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 9 dogs
+? Calculated DrawFactor for 9 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 9}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 9 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (2 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 9 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (9, 22) (converted to numpy array)
+   ? Error processing MOWBG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (7/11): NOWRG1512form.pdf
+Converted timing for Fast Sphere: 1 times from other distances -> 29.78s at 520m
+Converted timing for Lock Star: 3 times from other distances -> 29.61s at 520m
+Converted timing for Stellar Ethics: 4 times from other distances -> 28.66s at 520m
+Converted timing for Skedaddle Benny: 3 times from other distances -> 29.53s at 520m
+Converted timing for Paw Dimetra: 8 times from other distances -> 29.71s at 520m
+Converted timing for Fancy Bella: 1 times from other distances -> 29.63s at 520m
+Converted timing for Revved Up: 4 times from other distances -> 29.27s at 520m
+Converted timing for Skedaddle Louise: 2 times from other distances -> 21.02s at 365m
+Converted timing for Magic Linkin: 1 times from other distances -> 21.08s at 365m
+Converted timing for Gramercy Garry: 4 times from other distances -> 20.77s at 365m
+Converted timing for Zipping Cluedo: 2 times from other distances -> 20.90s at 365m
+Converted timing for Cumbria Jill: 2 times from other distances -> 20.85s at 365m
+? Parsed 85 dogs across 11 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [365, 520]
+? Parsed 85 dogs
+   ?? Timing data extracted: 75/85 dogs have BestTimeSec, 70/85 have SectionalSec
+? Parsed 85 dogs
+?? WARNING: 10 dogs have missing BestTimeSec values
+?? WARNING: 15 dogs have missing SectionalSec values
+?? WARNING: 10 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 35 unique trainers
+  Range: 0.0000 to 0.7500
+  Mean: 0.1733
+?? INFO: RestFactor found for 85/85 dogs.
+? Calculated PlaceRate for 85 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 85 dogs
+? Calculated DrawFactor for 85 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX2_FORM': 85}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 85 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (16 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 85 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (6 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 7 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 6 unique trainers
+  Range: 0.0000 to 0.0435
+  Mean: 0.0062
+?? INFO: RestFactor found for 7/7 dogs.
+? Calculated PlaceRate for 7 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 7 dogs
+? Calculated DrawFactor for 7 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX2_FORM': 7}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 7 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (2 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 7 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (7, 22) (converted to numpy array)
+   ? Error processing NOWRG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (8/11): QSTRG1512form.pdf
+Converted timing for Lakoda Skylah: 1 times from other distances -> 16.84s at 300m
+Converted timing for Aces Keane: 1 times from other distances -> 16.82s at 300m
+Converted timing for Bones: 2 times from other distances -> 16.67s at 300m
+Converted timing for Cabarita Beach: 4 times from other distances -> 16.36s at 300m
+Converted timing for Crisp Ride On: 4 times from other distances -> 16.49s at 300m
+Converted timing for Tempo And Touch: 1 times from other distances -> 16.55s at 300m
+Converted timing for Uno Cha Cha: 1 times from other distances -> 16.53s at 300m
+Converted timing for Arnie Ferrari: 2 times from other distances -> 17.44s at 300m
+Converted timing for Black Raspberry: 2 times from other distances -> 16.57s at 300m
+? Parsed 118 dogs across 14 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [300]
+? Parsed 118 dogs
+   ?? Timing data extracted: 102/118 dogs have BestTimeSec, 99/118 have SectionalSec
+? Parsed 118 dogs
+?? WARNING: 16 dogs have missing BestTimeSec values
+?? WARNING: 19 dogs have missing SectionalSec values
+?? WARNING: 16 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 47 unique trainers
+  Range: 0.0000 to 0.2718
+  Mean: 0.1073
+?? INFO: RestFactor found for 118/118 dogs.
+? Calculated PlaceRate for 118 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 118 dogs
+? Calculated DrawFactor for 118 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX1_SPEED': 118}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 118 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (23 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 118 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 7 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 7 unique trainers
+  Range: 0.0000 to 0.0000
+  Mean: 0.0000
+?? INFO: RestFactor found for 7/7 dogs.
+? Calculated PlaceRate for 7 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 7 dogs
+? Calculated DrawFactor for 7 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX1_SPEED': 7}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 7 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (2 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 7 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (7, 22) (converted to numpy array)
+   ? Error processing QSTRG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (9/11): SANDG1512form.pdf
+Converted timing for Minter's Jet: 4 times from other distances -> 33.83s at 595m
+Converted timing for Hunterview Jack: 3 times from other distances -> 33.83s at 595m
+Converted timing for Gone For Good: 3 times from other distances -> 33.87s at 595m
+Converted timing for Deep Talent: 3 times from other distances -> 33.83s at 595m
+Converted timing for Greysynd Will: 4 times from other distances -> 33.62s at 595m
+Converted timing for Assume Floppy: 2 times from other distances -> 34.23s at 595m
+Converted timing for Lakeview Sneaky: 2 times from other distances -> 29.13s at 515m
+Converted timing for Miss Hollywood: 3 times from other distances -> 29.16s at 515m
+Converted timing for Found Treasure: 2 times from other distances -> 29.14s at 515m
+Converted timing for Black Star Riot: 2 times from other distances -> 28.75s at 515m
+Converted timing for Jodie's Angel: 2 times from other distances -> 29.09s at 515m
+Converted timing for Zipping Columbus: 2 times from other distances -> 29.09s at 515m
+Converted timing for Lady Mia: 2 times from other distances -> 41.23s at 715m
+Converted timing for Julea Ruslie: 1 times from other distances -> 41.36s at 715m
+Converted timing for Cloncurry Gold: 1 times from other distances -> 34.34s at 595m
+Converted timing for McIvor Olly: 3 times from other distances -> 34.71s at 595m
+Converted timing for Tanner Time: 1 times from other distances -> 33.23s at 595m
+Converted timing for Blinked: 2 times from other distances -> 33.84s at 595m
+Converted timing for Paw Verity: 1 times from other distances -> 29.28s at 515m
+Converted timing for Mepunga Scarlett: 1 times from other distances -> 29.36s at 515m
+Converted timing for Dream On Allan: 2 times from other distances -> 33.57s at 595m
+Converted timing for Glowing Ethics: 3 times from other distances -> 33.69s at 595m
+Converted timing for Warrior Ethan: 5 times from other distances -> 33.54s at 595m
+Converted timing for Vintage King: 2 times from other distances -> 33.42s at 595m
+Converted timing for Ascend Geranium: 3 times from other distances -> 33.06s at 595m
+Converted timing for Ayden's Warrior: 3 times from other distances -> 34.45s at 595m
+Converted timing for Buster's Dream: 2 times from other distances -> 33.63s at 595m
+Converted timing for Lakeview Hunter: 1 times from other distances -> 29.12s at 515m
+Converted timing for Pygmy Puff: 2 times from other distances -> 29.24s at 515m
+Converted timing for Turbo Terror: 2 times from other distances -> 29.10s at 515m
+Converted timing for Let's Cause Kaos: 2 times from other distances -> 29.09s at 515m
+Converted timing for Billy Ray Mikado: 1 times from other distances -> 29.20s at 515m
+Converted timing for Call Security: 3 times from other distances -> 29.12s at 515m
+Converted timing for Nellie Running: 2 times from other distances -> 28.95s at 515m
+Converted timing for Galloping Pippy: 4 times from other distances -> 28.95s at 515m
+? Parsed 91 dogs across 12 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [595, 515, 715]
+? Parsed 91 dogs
+   ?? Timing data extracted: 86/91 dogs have BestTimeSec, 57/91 have SectionalSec
+? Parsed 91 dogs
+?? WARNING: 5 dogs have missing BestTimeSec values
+?? WARNING: 34 dogs have missing SectionalSec values
+?? WARNING: 5 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 64 unique trainers
+  Range: 0.0000 to 0.4615
+  Mean: 0.1430
+?? INFO: RestFactor found for 91/91 dogs.
+? Calculated PlaceRate for 91 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 91 dogs
+? Calculated DrawFactor for 91 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX1_SPEED': 91}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 91 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (13 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 91 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (23 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 3 dogs have missing SectionalSec values
+?? WARNING: 6 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 6 unique trainers
+  Range: 0.0000 to 0.2000
+  Mean: 0.0739
+?? INFO: RestFactor found for 6/6 dogs.
+? Calculated PlaceRate for 6 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 6 dogs
+? Calculated DrawFactor for 6 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX1_SPEED': 6}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 6 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (1 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 6 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (2 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (6, 22) (converted to numpy array)
+   ? Error processing SANDG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (10/11): SHEPG1512form.pdf
+Converted timing for Aston Major: 2 times from other distances -> 21.91s at 390m
+Converted timing for Hoppy: 1 times from other distances -> 25.90s at 450m
+Converted timing for Black Marvel: 2 times from other distances -> 25.70s at 450m
+Converted timing for Naradhan: 3 times from other distances -> 25.55s at 450m
+Converted timing for Beeline: 5 times from other distances -> 24.84s at 450m
+Converted timing for Borough Salts: 2 times from other distances -> 25.86s at 450m
+Converted timing for Scott Greyscale: 1 times from other distances -> 22.29s at 390m
+Converted timing for Zipping Bocelli: 1 times from other distances -> 22.17s at 390m
+Converted timing for Twilight Tori: 3 times from other distances -> 22.17s at 390m
+Converted timing for Talk Is Cheap: 1 times from other distances -> 21.84s at 390m
+Converted timing for Got A Habit: 1 times from other distances -> 21.88s at 390m
+Converted timing for It's Bubble Time: 2 times from other distances -> 22.15s at 390m
+Converted timing for Show Cause: 1 times from other distances -> 21.88s at 390m
+Converted timing for Super Tone: 2 times from other distances -> 22.43s at 390m
+? Parsed 126 dogs across 14 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'SectionalSec', 'BoxBiasFactor', 'BestTimeSec', 'Last3TimesSec', 'TimeConverted']
+?? Distance values (sample): [390, 450]
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+? Parsed 126 dogs
+   ?? Timing data extracted: 89/126 dogs have BestTimeSec, 96/126 have SectionalSec
+? Parsed 126 dogs
+?? WARNING: 37 dogs have missing BestTimeSec values
+?? WARNING: 30 dogs have missing SectionalSec values
+?? WARNING: 37 dogs have missing/empty Last3TimesSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 61 unique trainers
+  Range: 0.0000 to 0.8000
+  Mean: 0.1972
+?? INFO: RestFactor found for 126/126 dogs.
+? Calculated PlaceRate for 126 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 126 dogs
+? Calculated DrawFactor for 126 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX4_EXPERIENCE': 126}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 126 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (25 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 126 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (8 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 5 dogs have missing BestTimeSec values
+?? WARNING: 5 dogs have missing SectionalSec values
+?? WARNING: 5 dogs have missing/empty Last3TimesSec values
+?? WARNING: 9 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 8 unique trainers
+  Range: 0.0000 to 0.1500
+  Mean: 0.0667
+?? INFO: RestFactor found for 9/9 dogs.
+? Calculated PlaceRate for 9 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 9 dogs
+? Calculated DrawFactor for 9 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX4_EXPERIENCE': 9}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 9 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (1 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 9 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (9, 22) (converted to numpy array)
+   ? Error processing SHEPG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+?? Processing (11/11): WNBLG1512form.pdf
+Converted timing for Dart Nights: 3 times from other distances -> 22.05s at 390m
+Converted timing for Lektra Sting: 1 times from other distances -> 22.95s at 390m
+Converted timing for Snapper Head: 1 times from other distances -> 22.22s at 390m
+Converted timing for Northern Saint: 3 times from other distances -> 22.70s at 390m
+Converted timing for Quaynor: 3 times from other distances -> 25.53s at 450m
+Converted timing for Marli Moo: 3 times from other distances -> 25.88s at 450m
+Converted timing for Aston Girl: 2 times from other distances -> 26.16s at 450m
+Converted timing for Miles Apart: 2 times from other distances -> 25.17s at 450m
+Converted timing for Nicked Again: 2 times from other distances -> 22.29s at 390m
+Converted timing for Impress Joe: 2 times from other distances -> 22.48s at 390m
+? Parsed 96 dogs across 13 races
+?? Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted']
+?? Distance values (sample): [390, 450]
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\run_ml_hybrid_enhanced.py", line 155, in main
+    ml_confidences = predictor.predict_confidence(race_df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 620, in predict_confidence
+    X, _ = self.prepare_enhanced_features(race_df)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-merge-major-updates-features\src\ml_predictor_advanced.py", line 270, in prepare_enhanced_features
+    X = X.replace([np.inf, -np.inf], 0)
+        ^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'replace'
+? Parsed 96 dogs
+   ?? Timing data extracted: 96/96 dogs have BestTimeSec, 91/96 have SectionalSec
+? Parsed 96 dogs
+?? WARNING: 5 dogs have missing SectionalSec values
+?? WARNING: Margins not found in parsed data - setting to empty lists
+?? WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).
+? Calculated TrainerStrikeRate for 45 unique trainers
+  Range: 0.0000 to 0.2500
+  Mean: 0.1014
+?? INFO: RestFactor found for 96/96 dogs.
+? Calculated PlaceRate for 96 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 96 dogs
+? Calculated DrawFactor for 96 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 96}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 96 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (20 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 96 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (5 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+?? WARNING: 8 dogs have missing/empty Margins values
+? Calculated TrainerStrikeRate for 6 unique trainers
+  Range: 0.0000 to 0.0000
+  Mean: 0.0000
+?? INFO: RestFactor found for 8/8 dogs.
+? Calculated PlaceRate for 8 dogs
+? Calculated DLWFactor based on Days Last Win
+? Calculated WeightFactor for 8 dogs
+? Calculated DrawFactor for 8 dogs
+? Calculated RTCFactor from Racing Times Category
+? Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 8}
+? Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+? Calculated AgeFactor for 8 dogs
+? Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+? Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+? Calculated Last3FinishFactor (1.8x weight for winners)
+? Calculated DistanceChangeFactor for distance changes
+? Calculated PaceBoxFactor (2 front-runners detected)
+? Enhanced TrainerTier classification
+? Refined FreshnessFactor (optimal 6-10 days)
+? Refined AgeFactor (peak 26-36 months)
+? Calculated SurfacePreferenceFactor for track surface
+? Calculated BestTimePercentile (lower time = higher rank)
+? Calculated FieldSimilarityIndex (luck factor) for 8 dogs
+? Applied TrackUpsetFactor (track-specific luck factor)
+? Calculated FieldSizeAdjustment based on field size
+? Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+?? WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+? Calculated CloserBonus (0 dogs with bonus)
+? Calculated TrainerMomentum (trainer hot streak factor)
+   ?? DEBUG: Using trained model feature names (22 features)
+   ? DEBUG: Feature matrix shape: (8, 22) (converted to numpy array)
+   ? Error processing WNBLG1512form.pdf: 'numpy.ndarray' object has no attribute 'replace'
+   ?? Full traceback:
+
+================================================================================
+?? PROCESSING SUMMARY
+================================================================================
+   PDFs: 0/11 successful, 11 failed
+   ML v2.1 Hybrid picks: 0
+   v4.4 picks (TIER0): 0
+   Total ML predictions: 0
+   Selectivity: 0.0% of v4.4 picks
+
+? ERROR: No PDFs were successfully processed!
+   Check the error messages above for details.
+   Common issues:
+   • PDF format not recognized
+   • Missing required data in PDFs
+   • Model compatibility issues
+
+========================================
+ERROR - Prediction failed with error code 1
+========================================
+
+Check the error messages above for details.
+Common issues:
+  1. ML model not trained - run train_ml_enhanced.bat first
+  2. Missing PDFs in data_predictions folder
+  3. Missing weather or track condition data
+
+  - ml_enhanced_all_predictions.xlsx (All ML v2.1 predictions ranked)
+  - v44_picks_comparison.csv (All v4.4 picks for reference)
+
+Press any key to continue . . .

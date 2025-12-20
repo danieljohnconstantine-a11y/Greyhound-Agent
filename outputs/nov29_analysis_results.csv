@@ -1,0 +1,91 @@
+Track,Race,OurPick,OurDog,OurScore,ActualWinner,ActualTop3,IsWinner,IsTop3
+Taree,1,3,Matilda's Waltz,37.21004271505894,2,"[2, 3, 4]",False,True
+Taree,2,2,Fab Prince,39.95435778020393,6,"[6, 7, 1]",False,False
+Taree,3,1,Zipping Astrid,45.79827215659498,1,"[1, 6, 4]",True,True
+Taree,4,2,Hurricane Freya,52.477767816531184,3,"[3, 4, 1]",False,False
+Taree,5,1,Ritzy Ritzy,42.5588815215449,6,"[6, 1, 3]",False,True
+Taree,6,4,Go Elvis,58.883405326379545,6,"[6, 7, 2]",False,False
+Taree,7,4,Rocky Bell,65.89530109680322,6,"[6, 7, 4]",False,True
+Taree,8,2,Malmsteen,73.0295170443716,8,"[8, 2, 1]",False,True
+Taree,9,6,Big Cool Kaos,51.01567846947407,2,"[2, 8, 1]",False,False
+Taree,10,3,Garin,43.97684728911432,8,"[8, 6, 2]",False,False
+Taree,11,1,Real Magic,52.39400244490534,4,"[4, 1, 7]",False,True
+Dubbo,1,2,Zipping Streep,33.17737117583751,7,"[7, 6, 3]",False,False
+Dubbo,2,7,Laura Keeping,51.86077955952807,7,"[7, 1, 3]",True,True
+Dubbo,3,1,Lumeah Sparkles,37.34882558911035,3,"[3, 4, 5]",False,False
+Dubbo,4,2,Bronte Beach,37.74864284033592,1,"[1, 5, 3]",False,False
+Dubbo,5,4,Fusion Blazer,39.68669491939073,1,"[1, 4, 2]",False,True
+Dubbo,6,5,Whiskey McGraw,60.30813554088789,8,"[8, 5, 1]",False,True
+Dubbo,7,7,What A Roughy,47.49932410774188,5,"[5, 8, 1]",False,False
+Dubbo,8,5,Bell Mac Magic,59.31738531614786,1,"[1, 8, 2]",False,False
+Dubbo,9,8,Nangar Archie,32.01303504945936,8,"[8, 1, 3]",True,True
+Dubbo,10,8,Babette Fusion,55.96148913600173,8,"[8, 2, 6]",True,True
+Dubbo,11,7,Trent Crimm,61.986108952990925,4,"[4, 3, 1]",False,False
+Wentworth Park,1,3,Lochinvar Chiron,58.269541219771604,2,"[2, 4, 6]",False,False
+Wentworth Park,2,2,Rosacky Rayo,83.92746913884945,1,"[1, 7, 4]",False,False
+Wentworth Park,3,1,My Cupcake,94.7427707994671,8,"[8, 2, 6]",False,False
+Wentworth Park,4,7,Unleash Shirley,100.41716243534096,1,"[1, 2, 5]",False,False
+Wentworth Park,5,3,Zipping Chetty,93.27674151543393,1,"[1, 2, 7]",False,False
+Wentworth Park,6,4,Taw Galaxy,91.29462306231036,4,"[4, 2, 6]",True,True
+Wentworth Park,7,5,Magic Bandit,81.90462933119419,4,"[4, 5, 2]",False,True
+Wentworth Park,8,6,Spring Witness,71.99690655811318,1,"[1, 6, 5]",False,True
+Wentworth Park,9,8,Total Faith,74.26869628688534,3,"[3, 5, 2]",False,False
+Wentworth Park,10,6,Hello Cindy Lou,52.96113374666693,6,"[6, 2, 1]",True,True
+Gardens,1,2,Bonsai Boy,41.25358997722807,5,"[5, 6, 7]",False,False
+Gardens,2,5,Ivy Star,30.795264191198978,6,"[6, 5, 2]",False,True
+Gardens,3,5,Marra Lad,62.146156658221585,2,"[2, 8, 4]",False,False
+Gardens,4,5,Hooked On Iraola,47.65585742686941,5,"[5, 8, 7]",True,True
+Gardens,5,8,Chopper Express,69.91427728843789,5,"[5, 8, 2]",False,True
+Gardens,6,1,Gary Indiana,73.78282140227553,2,"[2, 7, 8]",False,False
+Gardens,7,4,Cessnock Curtain,80.1019137793606,5,"[5, 8, 7]",False,False
+Gardens,8,7,Simplicity Magic,75.62346693286803,5,"[5, 4, 8]",False,False
+Gardens,9,2,Zig Zag Zeal,71.68635917798976,1,"[1, 9, 10]",False,False
+Gardens,10,1,Four Barrys,42.315535698788686,4,"[4, 7, 8]",False,False
+Gardens,11,1,Jet Fuel,52.15107421295794,6,"[6, 5, 2]",False,False
+Gardens,12,1,My Something,62.36938555752533,4,"[4, 6, 5]",False,False
+Ballarat,1,2,Slick Nitro,26.824271970879206,2,"[2, 1, 7]",True,True
+Ballarat,2,2,Centrefold Sal,28.780670257190394,4,"[4, 8, 3]",False,False
+Ballarat,3,1,Aston Killara,49.853259298848954,4,"[4, 5, 8]",False,False
+Ballarat,4,5,Super Sealant,48.790569931678135,4,"[4, 8, 2]",False,False
+Ballarat,5,7,Slick Eclipse,50.866931854950906,6,"[6, 4, 8]",False,False
+Ballarat,6,2,Aston Ryan,59.475614898643194,1,"[1, 4, 5]",False,False
+Ballarat,7,1,If He Could,66.17466589959658,7,"[7, 1, 6]",False,True
+Ballarat,8,5,Aston Surpass,69.64381566411075,7,"[7, 6, 4]",False,False
+Ballarat,9,2,Slay,46.91746079582691,4,"[4, 7, 3]",False,False
+Ballarat,10,1,Chantilly's Star,48.484282436647824,8,"[8, 7, 3]",False,False
+Ballarat,11,2,Wow His Norm,65.51281444851706,4,"[4, 8, 3]",False,False
+Ballarat,12,7,Go Me Go,67.152137650572,8,"[8, 6, 7]",False,True
+Lakeside,1,1,Konstantin,65.44199499166642,4,"[4, 1, 7]",False,True
+Lakeside,2,7,Redeemer's Way,66.2779875315045,5,"[5, 8, 2]",False,False
+Lakeside,3,2,Brute Banner,63.122435182012936,8,"[8, 6, 2]",False,True
+Lakeside,4,1,Surrealist,81.85336854163752,1,"[1, 8, 2]",True,True
+Lakeside,5,4,Juniper Rose,68.05056712309961,4,"[4, 2, 9]",True,True
+Lakeside,6,5,Oxidisation,63.40184463838747,6,"[6, 3, 1]",False,False
+Lakeside,7,7,Ninetymile Venom,77.32399961739328,1,"[1, 6, 3]",False,False
+Lakeside,8,7,Pop's Maestro,95.30763970217919,3,"[3, 7, 8]",False,True
+Lakeside,9,7,Sheriff,73.11265141983156,5,"[5, 8, 4]",False,False
+Lakeside,10,8,Jay Walking,95.88653024157007,8,"[8, 4, 2]",True,True
+Sandown,1,2,Launch Mode,79.34272122551744,1,"[1, 7, 2]",False,True
+Sandown,2,2,Summer Quinn,86.97335419642054,3,"[3, 2, 6]",False,True
+Sandown,3,6,Expedite,51.707325795689464,1,"[1, 2, 4]",False,False
+Sandown,4,8,Robinson,84.49395419607558,1,"[1, 2, 10]",False,False
+Sandown,5,8,He's Magic,76.8786858487055,1,"[1, 8, 2]",False,True
+Sandown,6,2,Belair Ethyl,72.06684041611896,4,"[4, 5, 6]",False,False
+Sandown,7,1,Sharapova Star,93.15430789075833,2,"[2, 7, 3]",False,False
+Sandown,8,8,Without A Trace,87.71605493788735,8,"[8, 4, 3]",True,True
+Sandown,9,3,Select Airley,90.31099281220025,7,"[7, 1, 2]",False,False
+Sandown,10,5,Dashing Slay,108.05538987128536,2,"[2, 5, 1]",False,True
+Sandown,11,8,Lightning Speed,58.76596525719482,3,"[3, 4, 8]",False,True
+Sandown,12,6,Faye Valentine,68.24737253328,8,"[8, 3, 2]",False,False
+Cannington,1,4,Revolution Rico,39.55908106268705,6,"[6, 2, 1]",False,False
+Cannington,2,7,Kokrak,63.97445746214046,6,"[6, 1, 8]",False,False
+Cannington,3,7,Aston Ruler,92.2500743118873,2,"[2, 10, 3]",False,False
+Cannington,4,8,Burnt Passion,93.28156504333752,2,"[2, 1, 4]",False,False
+Cannington,5,6,Our Ozzie Salute,99.84369964138118,4,"[4, 5, 3]",False,False
+Cannington,6,4,Sir Tommy,71.58949297254667,1,"[1, 5, 3]",False,False
+Cannington,7,1,Iron Works,86.83928952841293,1,"[1, 4, 7]",True,True
+Cannington,8,6,Rapido Ninja,74.40602470190373,1,"[1, 2, 3]",False,False
+Cannington,9,4,Le Castellet,62.69334832855509,2,"[2, 1, 8]",False,False
+Cannington,10,7,Impress Seminyak,67.14612131562455,3,"[3, 6, 5]",False,False
+Cannington,11,4,Destiny Lane,68.04084376994207,8,"[8, 4, 2]",False,True
+Cannington,12,2,Starlight Twix,87.29386260250652,1,"[1, 3, 6]",False,False
