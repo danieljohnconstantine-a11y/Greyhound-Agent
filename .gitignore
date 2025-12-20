@@ -19,3 +19,16 @@ ENV/
 # Temporary files
 *.tmp
 .DS_Store
+
+# Output files
+outputs/*.csv
+outputs/*.xlsx
+outputs/*.log
+
+# ML models (large files)
+models/*.pkl
+models/*.joblib
+
+# Keep README files
+!outputs/README.md
+!models/README.md

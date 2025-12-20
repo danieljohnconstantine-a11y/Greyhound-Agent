@@ -2,53 +2,129 @@ import pandas as pd
 import re
 import logging
 
-# Configure logging for diagnostics
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+# Get logger for this module (logging is configured in main.py if needed)
+logger = logging.getLogger(__name__)
+
+# Distance tolerance constants for matching race times to current race distance
+DISTANCE_EXACT_MATCH_TOLERANCE = 10  # meters
+DISTANCE_SIMILAR_MATCH_TOLERANCE = 50  # meters
+
+# Distance conversion: enable converting times from different distances
+# Formula: converted_time = original_time * (target_distance / original_distance)
+# This assumes consistent average speed (m/s) across distances, which is reasonable for greyhounds
+ENABLE_DISTANCE_CONVERSION = True
+# Maximum distance difference to convert from (beyond this, conversion is unreliable)
+MAX_DISTANCE_CONVERSION_DIFF = 200  # meters (e.g., can convert 400m time to 500m, but not 300m to 600m)
+
+def convert_time_to_distance(original_time, original_distance, target_distance):
+    """
+    Convert a race time from one distance to an estimated time at another distance.
+    
+    Uses linear scaling based on average speed:
+    - Speed (m/s) = original_distance / original_time
+    - Estimated time = target_distance / speed = original_time * (target_distance / original_distance)
+    
+    This is an approximation - actual times may vary due to:
+    - Track conditions
+    - Dog's stamina (sprint vs distance specialists)
+    - Box position effects
+    
+    Args:
+        original_time: Time in seconds at original distance
+        original_distance: Original distance in meters
+        target_distance: Target distance to convert to in meters
+        
+    Returns:
+        Estimated time at target distance in seconds
+    """
+    if original_distance <= 0 or original_time <= 0:
+        return None
+    
+    # Calculate speed and convert
+    speed_mps = original_distance / original_time
+    converted_time = target_distance / speed_mps
+    
+    return round(converted_time, 2)
+
+# Month abbreviation to number mapping for date parsing
+MONTH_MAP = {
+    'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+    'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+    'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+}
+
+# Year conversion constant (for 2-digit years in format YY -> 20YY)
+# Assumes all greyhound racing data is from 2000-2099 (current era)
+BASE_YEAR = 2000
 
 def parse_race_form(text):
+    """
+    Enhanced parser that extracts timing data from race history.
+    
+    Multi-level approach to extract BestTimeSec and SectionalSec:
+    1. Primary: Extract from race history lines (Race Time and Sec Time patterns)
+    2. Track dog sections using dog name headers
+    3. Match race times to distances from preceding line
+    4. Filter best time for the specific distance the dog is racing at
+    5. Fallback: Legacy "Best:" and "Sectional:" format (backward compatibility)
+    6. Validation: Filter out invalid values (race times: 10-200s, sectionals: 1-15s)
+       - Sectionals measure first 100-200m, so >15s likely indicates incidents/errors
+    7. Ensure no silent failures, log extraction results
+    """
     lines = text.splitlines()
     dogs = []
     current_race = {}
     race_number = 0
+    
+    # Track which dog's detailed section we're currently in
+    current_dog_section_index = -1
+    dog_timing_data = {}  # Index -> {race_times: [(time, distance)], sec_times: [(time, distance)], box_history: [(box_pos, won)]}
+    previous_line_distance = None  # Track distance from previous line
 
-    for line in lines:
+    for i, line in enumerate(lines):
         line = line.strip()
 
-        # Match race header - updated to handle different date formats
-        # Format: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
-        # Where 22 is race number, Nov is month, 25 is year (2025)
-        header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Z\s]+?)\s+(\d+)m", line, re.IGNORECASE)
+        # Match race header - flexible format for different months and date formats
+        # Format: "Race No  1 Oct 16 04:00PM Angle Park 530m"
+        # Groups: (day_of_race, month_abbr, year_2digit, time, track, distance)
+        # Example: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
+        # Captures: day=22, month=Nov, year=25, time=07:21PM, track=WENTWORTH PARK, distance=520
+        header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+?)\s+(\d+)m", line)
         if header_match:
-            race_num_str, month, year_suffix, time, track, distance = header_match.groups()
             race_number += 1
+            day_of_race, month_abbr, year_2digit, time, track, distance = header_match.groups()
             
-            # Convert month abbreviation to number
-            month_map = {
-                'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04',
-                'may': '05', 'jun': '06', 'jul': '07', 'aug': '08',
-                'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12'
-            }
-            month_num = month_map.get(month.lower()[:3], '01')
+            # Convert 2-digit year to 4-digit year (e.g., '25' -> 2025)
+            year = BASE_YEAR + int(year_2digit)
             
-            # Construct full year from 2-digit suffix (e.g., '25' -> '2025')
-            year = f"20{year_suffix}"
+            # Convert month abbreviation to numeric format using MONTH_MAP
+            month_num = MONTH_MAP.get(month_abbr, None)
+            if month_num is None:
+                # Month abbreviation not recognized, use default and log error
+                logger.error(
+                    f"❌ Unrecognized month abbreviation '{month_abbr}' in race header. "
+                    f"Using '01' (January) as fallback. Please update MONTH_MAP if this is a valid month."
+                )
+                month_num = '01'  # Default to January to maintain valid ISO date format
             
-            # Use the race number from the PDF or our counter
-            # The date is year-month-day format, but we don't have the day from this format
-            # So we'll use day 01 as a placeholder
             current_race = {
                 "RaceNumber": race_number,
-                "RaceDate": f"{year}-{month_num}-01",  # Using day 01 as placeholder
+                "RaceDate": f"{year}-{month_num}-{day_of_race.zfill(2)}",  # ISO format: YYYY-MM-DD
                 "RaceTime": time,
                 "Track": track.strip(),
                 "Distance": int(distance)
             }
-            logging.debug(f"✅ Parsed race header: {current_race}")
+            logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{day_of_race.zfill(2)}")
+            current_dog_section_index = -1  # Reset dog section when new race starts
             continue
 
         # Match dog entry with glued form number
+        # Form number can contain digits, 'x' and 'f' characters (e.g., "8x324", "67f67")
+        # BUG FIX: Added 'f' to form number pattern - many dogs have 'f' in their form number
+        # which was causing them to not be parsed (e.g., "67f67Lil Patti" was missed)
+        # ENHANCED: More flexible pattern to handle edge cases and spacing variations
         dog_match = re.match(
-            r"""^(\d+)\.?\s*(\d{3,6})?([A-Za-z'' -]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z'' -]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$([0-9,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+            r"""^(\d+)\.?\s*([0-9xf]{2,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
             line
         )
 
@@ -62,84 +138,420 @@ def parse_race_form(text):
             if form_number and dog_name.startswith(form_number[-2:]):
                 dog_name = dog_name[len(form_number[-2:]):].strip()
 
-            # Initialize dog data with defaults for time metrics
-            dog_data = {
-                "Box": int(box),
-                "DogName": dog_name,
-                "FormNumber": form_number or "",
-                "Trainer": trainer.strip(),
-                "SexAge": sex_age,
-                "Weight": float(weight),
-                "Draw": int(draw),
-                "CareerWins": int(wins),
-                "CareerPlaces": int(places),
-                "CareerStarts": int(starts),
-                "PrizeMoney": float(prize.replace(",", "")),
-                "RTC": rtc,
-                "DLR": dlr,
-                "DLW": dlw,
-                **current_race,
-                # Initialize time metrics as None - will be filled if found
-                "BestTimeSec": None,
-                "SectionalSec": None,
-                "Last3TimesSec": None,
-                "Margins": None
-            }
-            
-            dogs.append(dog_data)
-            continue
-
-        # Match Best/Sectional/Last3 block
-        time_match = re.match(
-            r"""Best:\s*(\d+\.\d+)\s+Sectional:\s*(\d+\.\d+)\s+Last3:\s*\[(.*?)\]""",
-            line
-        )
-        if time_match and dogs:
+            dog_index = len(dogs)
             try:
-                dogs[-1]["BestTimeSec"] = float(time_match.group(1))
-                dogs[-1]["SectionalSec"] = float(time_match.group(2))
-                last3 = [float(t.strip()) for t in time_match.group(3).split(",")]
-                dogs[-1]["Last3TimesSec"] = last3
-                logging.debug(f"✅ Parsed time data for {dogs[-1]['DogName']}: Best={dogs[-1]['BestTimeSec']}, Sectional={dogs[-1]['SectionalSec']}")
-            except ValueError as e:
-                logging.warning(f"⚠️ Error parsing time data for {dogs[-1].get('DogName', 'Unknown')}: {e}")
-                dogs[-1]["Last3TimesSec"] = []
+                dogs.append({
+                    "Box": int(box),
+                    "DogName": dog_name,
+                    "FormNumber": form_number or "",
+                    "Trainer": trainer.strip(),
+                    "SexAge": sex_age,
+                    "Weight": float(weight),
+                    "Draw": int(draw),
+                    "CareerWins": int(wins),
+                    "CareerPlaces": int(places),
+                    "CareerStarts": int(starts),
+                    "PrizeMoney": float(prize.replace(",", "")),
+                    "RTC": rtc,
+                    "DLR": dlr,
+                    "DLW": dlw,
+                    **current_race
+                })
+                
+                # Initialize timing data collection for this dog
+                dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
+                logger.debug(f"✓ Parsed dog: Box {box} - {dog_name} (Race {current_race.get('RaceNumber', '?')})")
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to parse dog from line: {line[:100]}... Error: {e}")
+            continue
+        
+        # Fallback pattern: Try simpler pattern for dogs with unusual formatting
+        # Pattern: Box Number, optional form, Dog Name (more flexible spacing/punctuation)
+        # This catches edge cases where the main pattern fails
+        if not dog_match and line and line[0].isdigit():
+            simple_dog_match = re.match(
+                r"""^(\d+)[\.\s]+([0-9xf]{1,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg""",
+                line
+            )
+            if simple_dog_match:
+                logger.info(f"⚠️ Using fallback pattern for line: {line[:80]}...")
+                # Try to extract remaining fields with more flexible pattern
+                remaining_pattern = re.search(
+                    r"""(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+                    line[simple_dog_match.end():]
+                )
+                if remaining_pattern:
+                    box, form_number, raw_name, sex_age, weight = simple_dog_match.groups()
+                    draw, trainer, wins, places, starts, prize, rtc, dlr, dlw = remaining_pattern.groups()
+                    
+                    dog_name = raw_name.strip()
+                    if form_number and dog_name.startswith(form_number[-2:]):
+                        dog_name = dog_name[len(form_number[-2:]):].strip()
+                    
+                    dog_index = len(dogs)
+                    try:
+                        dogs.append({
+                            "Box": int(box),
+                            "DogName": dog_name,
+                            "FormNumber": form_number or "",
+                            "Trainer": trainer.strip(),
+                            "SexAge": sex_age,
+                            "Weight": float(weight),
+                            "Draw": int(draw),
+                            "CareerWins": int(wins),
+                            "CareerPlaces": int(places),
+                            "CareerStarts": int(starts),
+                            "PrizeMoney": float(prize.replace(",", "")),
+                            "RTC": rtc,
+                            "DLR": dlr,
+                            "DLW": dlw,
+                            **current_race
+                        })
+                        
+                        # Initialize timing data collection for this dog
+                        dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
+                        logger.info(f"✓ Parsed dog (fallback): Box {box} - {dog_name}")
+                    except Exception as e:
+                        logger.warning(f"⚠️ Fallback parse failed: {e}")
+                    continue
+
+        # Check if this is a dog name header (dog name in caps at start of line)
+        # This marks the start of a dog's detailed section
+        # IMPROVED: Use fuzzy/prefix matching to handle lines like "RUBY'S MATE j50s j350s t50s t350s"
+        # where the dog name appears at the start but has extra lowercase text after it
+        # Note: Don't require entire line to be uppercase - just check if it starts with uppercase chars
+        first_word = line.split()[0] if line.split() else ""
+        looks_like_header = (
+            len(line) >= 3 and 
+            first_word.upper() == first_word and  # First word is uppercase
+            len(first_word) >= 2 and
+            first_word[0].isalpha()  # Starts with a letter (not a number like race position)
+        )
+        
+        if looks_like_header:
+            # Exclude common non-dog headers
+            if any(keyword in line.upper() for keyword in ['RACE', 'PRIZE', 'DISTANCE', 'TRACK', 'HORSE', 'WINNER', 'MARGIN', 'LENGTHS', 'SETTLED', 'SECOND', 'THIRD', 'FOURTH']):
+                continue
+            
+            # Try to match this to a known dog using prefix/fuzzy matching
+            line_normalized = line.replace("'", "").replace("-", " ").replace("  ", " ").strip().upper()
+            
+            best_match_idx = -1
+            best_match_len = 0
+            
+            for dog_idx, dog in enumerate(dogs):
+                dog_name_normalized = dog["DogName"].upper().replace("'", "").replace("-", " ").strip()
+                
+                # Method 1: Exact match (original behavior)
+                if dog_name_normalized == line_normalized:
+                    best_match_idx = dog_idx
+                    best_match_len = len(dog_name_normalized)
+                    break  # Exact match is best, stop searching
+                
+                # Method 2: Prefix match - dog name appears at the start of the line
+                # E.g., "RUBYS MATE J50S J350S" starts with "RUBYS MATE"
+                if line_normalized.startswith(dog_name_normalized + " ") or line_normalized.startswith(dog_name_normalized + "\t"):
+                    # Only update if this is a longer/better match
+                    if len(dog_name_normalized) > best_match_len:
+                        best_match_idx = dog_idx
+                        best_match_len = len(dog_name_normalized)
+                
+                # Method 3: Check if the line starts with the dog name (no space required for longer names)
+                elif len(dog_name_normalized) >= 5 and line_normalized.startswith(dog_name_normalized):
+                    if len(dog_name_normalized) > best_match_len:
+                        best_match_idx = dog_idx
+                        best_match_len = len(dog_name_normalized)
+            
+            if best_match_idx >= 0:
+                current_dog_section_index = best_match_idx
+
+        # Extract timing data from race history lines
+        # Only attribute to a dog if we know which dog's section we're in
+        if current_dog_section_index >= 0 and current_dog_section_index in dog_timing_data:
+            # Check if current line has distance info (appears before race time)
+            distance_match = re.search(r'Distance (\d+)m', line)
+            if distance_match:
+                previous_line_distance = int(distance_match.group(1))
+            
+            # Store distance for this line's timing data (both Race Time and Sec Time can use it)
+            line_distance = previous_line_distance
+            
+            # Pattern: "Race Time 0:30.92" (mm:ss.ss format)
+            race_time_match = re.search(r'Race Time (\d+):(\d+\.\d+)', line)
+            if race_time_match:
+                minutes = int(race_time_match.group(1))
+                seconds = float(race_time_match.group(2))
+                total_seconds = minutes * 60 + seconds
+                # Validate: race times should be between 10 and 200 seconds for greyhounds
+                if 10 <= total_seconds <= 200:
+                    # Store race time with distance (if we just saw a distance in a recent line)
+                    # Note: distance might be None if not found recently
+                    dog_timing_data[current_dog_section_index]["race_times"].append(
+                        (total_seconds, line_distance)
+                    )
+                    
+                    # Extract Box Position (BP) from the same line if available
+                    # Pattern: " BP 2 " or " BP 10 "
+                    bp_match = re.search(r' BP (\d+)', line)
+                    if bp_match:
+                        box_pos = int(bp_match.group(1))
+                        # Determine if dog won: look for "Prize Won" (indicates placed)
+                        # More precise: check if this is first place
+                        # API ~1.0 typically means won, API < 0.5 means lost badly
+                        # For now, use Prize Won as indicator of placing/winning
+                        won = "Prize Won" in line
+                        dog_timing_data[current_dog_section_index]["box_history"].append(
+                            (box_pos, won)
+                        )
+                    
+                    # Extract race date from the beginning of the line
+                    # Common formats: "07Oct24", "15Nov24", etc.
+                    date_match = re.search(r'(\d{1,2})(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(\d{2})', line)
+                    if date_match:
+                        day = int(date_match.group(1))
+                        month_str = date_match.group(2)
+                        year_short = int(date_match.group(3))
+                        
+                        # Convert month string to number
+                        month_map = {
+                            "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
+                            "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12
+                        }
+                        month = month_map.get(month_str, 1)
+                        
+                        # Assume 20xx for year (e.g., 24 -> 2024)
+                        year = 2000 + year_short
+                        
+                        # Store race date
+                        from datetime import date as date_obj
+                        try:
+                            race_date = date_obj(year, month, day)
+                            dog_timing_data[current_dog_section_index]["race_dates"].append(race_date)
+                        except ValueError:
+                            # Invalid date - skip
+                            pass
+            
+            # Pattern: "Sec Time 5.28" (sectional time in seconds)
+            # Both Race Time and Sec Time can appear on the same line with the same distance
+            sec_time_match = re.search(r'Sec Time (\d+\.\d+)', line)
+            if sec_time_match:
+                sec_time = float(sec_time_match.group(1))
+                # Validate: sectional times should be between 1 and 15 seconds
+                # Sectionals measure first 100-200m, so even slow dogs should be under 12-14s
+                # Values above 15s likely indicate incidents, falls, or data errors
+                if 1 <= sec_time <= 15:
+                    # Store sectional time with distance (same distance as race time if both on same line)
+                    dog_timing_data[current_dog_section_index]["sec_times"].append(
+                        (sec_time, line_distance)
+                    )
+            
+            # Reset distance after processing this line's timing data
+            if race_time_match or sec_time_match:
+                previous_line_distance = None
+
+        # Legacy: Match Best/Sectional/Last3 block (for backward compatibility)
+        time_match = re.search(r'Best:\s*(\d+\.\d+)\s+Sectional:\s*(\d+\.\d+)', line)
+        if time_match and dogs:
+            best_time = float(time_match.group(1))
+            sec_time = float(time_match.group(2))
+            # Validate before assigning
+            if 10 <= best_time <= 200:
+                dogs[-1]["BestTimeSec"] = best_time
+            if 1 <= sec_time <= 15:  # Sectionals should be under 15s (typically first 100-200m)
+                dogs[-1]["SectionalSec"] = sec_time
+            # Also check for Last3
+            last3_match = re.search(r'Last3:\s*\[([\d., ]+)\]', line)
+            if last3_match:
+                try:
+                    last3 = [float(t.strip()) for t in last3_match.group(1).split(",")]
+                    dogs[-1]["Last3TimesSec"] = last3
+                except:
+                    pass
 
         # Match Margins block
-        margin_match = re.match(
-            r"""Margins:\s*\[(.*?)\]""",
-            line
-        )
+        margin_match = re.search(r'Margins:\s*\[([\d., ]+)\]', line)
         if margin_match and dogs:
             try:
                 margins = [float(m.strip()) for m in margin_match.group(1).split(",")]
                 dogs[-1]["Margins"] = margins
-                logging.debug(f"✅ Parsed margins for {dogs[-1]['DogName']}: {margins}")
-            except ValueError as e:
-                logging.warning(f"⚠️ Error parsing margins for {dogs[-1].get('DogName', 'Unknown')}: {e}")
-                dogs[-1]["Margins"] = []
+            except:
+                pass
+
+    # Apply collected timing data to each dog
+    for dog_index, timing in dog_timing_data.items():
+        race_times = timing["race_times"]  # List of (time, distance) tuples
+        sec_times = timing["sec_times"]    # List of (time, distance) tuples
+        dog_race_distance = dogs[dog_index]["Distance"]  # The distance this dog is racing today
+        
+        if race_times:
+            # Filter race times for the same distance (within exact match tolerance)
+            same_distance_times = [
+                time for time, dist in race_times 
+                if dist is not None and abs(dist - dog_race_distance) <= DISTANCE_EXACT_MATCH_TOLERANCE
+            ]
+            
+            # If we have times at the same distance, use those
+            if same_distance_times:
+                # BestTimeSec: minimum race time at this distance (best performance)
+                dogs[dog_index]["BestTimeSec"] = min(same_distance_times)
+                # Last3TimesSec: most recent 3 race times at this distance
+                dogs[dog_index]["Last3TimesSec"] = same_distance_times[-3:] if len(same_distance_times) >= 3 else same_distance_times
+            else:
+                # Try wider tolerance for similar distances
+                similar_distance_times = [
+                    time for time, dist in race_times 
+                    if dist is not None and abs(dist - dog_race_distance) <= DISTANCE_SIMILAR_MATCH_TOLERANCE
+                ]
+                if similar_distance_times:
+                    dogs[dog_index]["BestTimeSec"] = min(similar_distance_times)
+                    dogs[dog_index]["Last3TimesSec"] = similar_distance_times[-3:] if len(similar_distance_times) >= 3 else similar_distance_times
+                
+                # DISTANCE CONVERSION: If no similar-distance times, convert from other distances
+                elif ENABLE_DISTANCE_CONVERSION:
+                    # Get all times with valid distances within conversion range
+                    convertible_times = [
+                        (time, dist) for time, dist in race_times 
+                        if dist is not None and abs(dist - dog_race_distance) <= MAX_DISTANCE_CONVERSION_DIFF
+                    ]
+                    
+                    if convertible_times:
+                        # Convert each time to the target distance
+                        converted_times = []
+                        for orig_time, orig_dist in convertible_times:
+                            converted = convert_time_to_distance(orig_time, orig_dist, dog_race_distance)
+                            if converted is not None:
+                                converted_times.append(converted)
+                        
+                        if converted_times:
+                            # Use the best (fastest) converted time
+                            dogs[dog_index]["BestTimeSec"] = min(converted_times)
+                            # Mark as converted for transparency
+                            dogs[dog_index]["TimeConverted"] = True
+                            # Last3 from converted times
+                            dogs[dog_index]["Last3TimesSec"] = converted_times[-3:] if len(converted_times) >= 3 else converted_times
+                            logger.info(f"Converted timing for {dogs[dog_index].get('DogName', 'Unknown')}: "
+                                       f"{len(convertible_times)} times from other distances -> {min(converted_times):.2f}s at {dog_race_distance}m")
+        
+        if sec_times:
+            # Filter sectional times for the same distance (exact match tolerance)
+            same_distance_sectionals = [
+                time for time, dist in sec_times 
+                if dist is not None and abs(dist - dog_race_distance) <= DISTANCE_EXACT_MATCH_TOLERANCE
+            ]
+            
+            # If we have sectionals at the same distance, use those
+            if same_distance_sectionals:
+                # SectionalSec: minimum sectional time at this distance
+                dogs[dog_index]["SectionalSec"] = min(same_distance_sectionals)
+            else:
+                # Try wider tolerance for similar distances
+                similar_distance_sectionals = [
+                    time for time, dist in sec_times 
+                    if dist is not None and abs(dist - dog_race_distance) <= DISTANCE_SIMILAR_MATCH_TOLERANCE
+                ]
+                if similar_distance_sectionals:
+                    dogs[dog_index]["SectionalSec"] = min(similar_distance_sectionals)
+                # Note: We don't convert sectional times as they're for the initial portion of the race
+                # and don't scale linearly with total distance
+        
+        # Calculate box preference/bias for this dog
+        box_history = timing.get("box_history", [])
+        if box_history and "Box" in dogs[dog_index]:
+            current_box = dogs[dog_index]["Box"]
+            
+            # Group boxes into categories
+            # Typically: 1-3 (inside), 4-6 (mid), 7-10 (outside)
+            def get_box_group(box):
+                if box <= 3:
+                    return "inside"
+                elif box <= 6:
+                    return "mid"
+                else:
+                    return "outside"
+            
+            current_box_group = get_box_group(current_box)
+            
+            # Calculate win rate for each box group
+            box_group_stats = {"inside": {"races": 0, "wins": 0}, 
+                              "mid": {"races": 0, "wins": 0}, 
+                              "outside": {"races": 0, "wins": 0}}
+            
+            for box_pos, won in box_history:
+                group = get_box_group(box_pos)
+                box_group_stats[group]["races"] += 1
+                if won:
+                    box_group_stats[group]["wins"] += 1
+            
+            # Calculate win rates
+            overall_wins = sum(stats["wins"] for stats in box_group_stats.values())
+            overall_races = sum(stats["races"] for stats in box_group_stats.values())
+            overall_win_rate = overall_wins / overall_races if overall_races > 0 else 0
+            
+            # Win rate in current box group
+            current_group_stats = box_group_stats[current_box_group]
+            current_group_win_rate = (current_group_stats["wins"] / current_group_stats["races"] 
+                                     if current_group_stats["races"] > 0 else overall_win_rate)
+            
+            # BoxBiasFactor: difference from overall win rate
+            # Positive = performs better in this box group
+            # Negative = performs worse in this box group
+            box_bias = current_group_win_rate - overall_win_rate
+            
+            # Store in dog data
+            dogs[dog_index]["BoxBiasFactor"] = box_bias
+        else:
+            # No box history or current box - use neutral bias
+            dogs[dog_index]["BoxBiasFactor"] = 0.0
 
     df = pd.DataFrame(dogs)
     
-    # Log diagnostic information about missing data
-    if len(df) > 0:
-        missing_best_time = df["BestTimeSec"].isna().sum()
-        missing_sectional = df["SectionalSec"].isna().sum()
-        missing_last3 = df["Last3TimesSec"].isna().sum()
-        missing_margins = df["Margins"].isna().sum()
-        
-        if missing_best_time > 0:
-            logging.warning(f"⚠️ {missing_best_time}/{len(df)} dogs missing BestTimeSec data")
-        if missing_sectional > 0:
-            logging.warning(f"⚠️ {missing_sectional}/{len(df)} dogs missing SectionalSec data")
-        if missing_last3 > 0:
-            logging.warning(f"⚠️ {missing_last3}/{len(df)} dogs missing Last3TimesSec data")
-        if missing_margins > 0:
-            logging.warning(f"⚠️ {missing_margins}/{len(df)} dogs missing Margins data")
-        
-        logging.info(f"✅ Parsed {len(df)} dogs from race form")
-    else:
-        logging.error("❌ No dogs were parsed from the race form - check PDF format and regex patterns")
+    # Normalize column names: strip whitespace and ensure consistent casing
+    df.columns = df.columns.str.strip()
     
-    print(f"✅ Parsed {len(df)} dogs")
+    # Log parsing results
+    logger.info(f"✅ Parsed {len(df)} dogs across {race_number} races")
+    logger.info(f"📊 Columns in parsed DataFrame: {df.columns.tolist()}")
+    
+    # Check for critical columns and log warnings if missing
+    critical_columns = ['Distance', 'DogName', 'Box', 'Track', 'RaceNumber']
+    missing_critical = [col for col in critical_columns if col not in df.columns]
+    if missing_critical:
+        logger.warning(f"⚠️ Missing critical columns: {missing_critical}")
+    
+    # Log sample of Distance values to verify parsing
+    if 'Distance' in df.columns:
+        logger.info(f"📏 Distance values (sample): {df['Distance'].unique()[:5].tolist()}")
+    else:
+        logger.error("❌ 'Distance' column is MISSING from parsed DataFrame!")
+    
+    # Validation: Count how many dogs have timing data
+    if len(df) > 0:
+        best_time_count = df["BestTimeSec"].notna().sum() if "BestTimeSec" in df.columns else 0
+        sec_time_count = df["SectionalSec"].notna().sum() if "SectionalSec" in df.columns else 0
+        print(f"✅ Parsed {len(df)} dogs")
+        print(f"   📊 Timing data extracted: {best_time_count}/{len(df)} dogs have BestTimeSec, {sec_time_count}/{len(df)} have SectionalSec")
+        
+        if best_time_count == 0:
+            print(f"   ⚠️  WARNING: No BestTimeSec data extracted from any dog")
+            logger.warning("No BestTimeSec data extracted from any dog")
+        if sec_time_count == 0:
+            print(f"   ⚠️  WARNING: No SectionalSec data extracted from any dog")
+            logger.warning("No SectionalSec data extracted from any dog")
+        
+        # Validation: Check for missing dogs per race (typical field is 6-8 dogs)
+        if 'RaceNumber' in df.columns:
+            for race_num in df['RaceNumber'].unique():
+                race_dogs = df[df['RaceNumber'] == race_num]
+                dog_count = len(race_dogs)
+                # Typical field is 6-8 dogs, warn if less than 5 or more than 10
+                if dog_count < 5:
+                    print(f"   ⚠️  Race {race_num}: Only {dog_count} dogs parsed (expected 6-8)")
+                    logger.warning(f"Race {race_num}: Only {dog_count} dogs parsed (possible missing dogs)")
+                    # List the boxes that were found
+                    found_boxes = sorted(race_dogs['Box'].tolist())
+                    print(f"      Found boxes: {found_boxes}")
+                elif dog_count > 10:
+                    print(f"   ⚠️  Race {race_num}: {dog_count} dogs parsed (expected 6-8, possible duplicates)")
+                    logger.warning(f"Race {race_num}: {dog_count} dogs parsed (possible duplicates)")
+    
     return df
