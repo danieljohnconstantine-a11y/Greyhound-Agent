@@ -69,24 +69,24 @@ def main():
     # Load ML model (with fallback to v4.4-only mode)
     print("\n📥 Loading ML v2.1 enhanced model...")
     model_path = "models/greyhound_ml_v2.1_enhanced.pkl"
-    predictor = None
-    use_ml = False
     
     if not os.path.exists(model_path):
-        print(f"⚠️  Model not found at {model_path}")
-        print("   Running in v4.4-only mode (without ML predictions)")
-        print("   To use ML predictions, run: train_ml_enhanced.bat")
-        use_ml = False
-    else:
-        try:
-            predictor = AdvancedGreyhoundMLPredictor()
-            predictor.load_model(model_path)
-            print(f"✅ ML v2.1 model loaded successfully")
-            use_ml = True
-        except Exception as e:
-            print(f"⚠️  Error loading model: {e}")
-            print("   Running in v4.4-only mode (without ML predictions)")
-            use_ml = False
+        print(f"❌ ERROR: ML model not found at {model_path}")
+        print("   This script requires the trained ML model to generate predictions.")
+        print("   Please train the model first by running: train_ml_enhanced.bat")
+        print("\n   The ML model uses 3,000+ historical races to make predictions.")
+        print("   Without it, predictions cannot be generated.")
+        sys.exit(1)
+    
+    try:
+        predictor = AdvancedGreyhoundMLPredictor()
+        predictor.load_model(model_path)
+        print(f"✅ ML v2.1 model loaded successfully")
+        print(f"   Model trained on {len(predictor.models) if hasattr(predictor, 'models') else 'multiple'} track-specific models")
+    except Exception as e:
+        print(f"❌ ERROR: Failed to load ML model: {e}")
+        print("   The model file may be corrupted. Please retrain: train_ml_enhanced.bat")
+        sys.exit(1)
     
     # Find PDFs in data_predictions
     pdf_files = glob.glob("data_predictions/*.pdf")
@@ -160,22 +160,18 @@ def main():
                     
                     print(f"   ✓ Features computed: {len(features_df)} dogs")
                     
-                    # Get ML predictions (if model available)
-                    ml_predictions = {}
-                    if use_ml and predictor:
-                        try:
-                            ml_predictions = predictor.predict(features_df, track_code)
-                            if ml_predictions is None:
-                                ml_predictions = {}
-                            print(f"   ✓ ML predictions: {len(ml_predictions)} dogs")
-                        except Exception as e:
-                            print(f"   ⚠️  ML prediction error: {e}")
-                            import traceback
-                            traceback.print_exc()
+                    # Get ML predictions from trained model
+                    try:
+                        ml_predictions = predictor.predict(features_df, track_code)
+                        if ml_predictions is None:
                             ml_predictions = {}
-                    else:
-                        # No ML available - we'll use v4.4 scores as confidence
-                        print(f"   ℹ️  Using v4.4 scores (ML not available)")
+                        print(f"   ✓ ML predictions: {len(ml_predictions)} dogs")
+                    except Exception as e:
+                        print(f"   ❌ ML prediction error: {e}")
+                        import traceback
+                        traceback.print_exc()
+                        print(f"   ⚠️  Skipping Race {race_num} due to ML prediction failure")
+                        continue  # Skip this race entirely if ML fails
                     
                     # Get v4.4 scores
                     v44_scores = score_race(race_df)
@@ -204,13 +200,13 @@ def main():
                             # Get v4.4 score
                             v44_score = v44_scores.get(box, 0.0)
                             
-                            # Get ML confidence (or use v4.4 as fallback)
-                            if use_ml and ml_predictions:
-                                ml_conf = ml_predictions.get(box, 0.0) * 100
-                            else:
-                                # No ML - normalize v4.4 score to 0-100 range
-                                # v4.4 scores typically range from 0-30, so scale up
-                                ml_conf = min(v44_score * 3.33, 100.0)  # Scale 30 -> 100%
+                            # Get ML confidence from trained model
+                            ml_conf = ml_predictions.get(box, 0.0) * 100
+                            
+                            # Skip dogs with no ML prediction
+                            if ml_conf == 0.0:
+                                print(f"   ⚠️  No ML prediction for Box {box} ({dog_name}) - skipping")
+                                continue
                             
                             # Store ML prediction
                             pred_record = {
