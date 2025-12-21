@@ -239,8 +239,8 @@ class MLOptimizationPhases:
         Phase 3: Perform time-series cross-validation.
         
         Args:
-            X: Features
-            y: Labels
+            X: Features (numpy array or pandas DataFrame)
+            y: Labels (numpy array or pandas Series)
             model: ML model to validate
             n_splits: Number of time-series splits
         
@@ -249,12 +249,16 @@ class MLOptimizationPhases:
         """
         logger.info(f"📊 Phase 3: Time-series cross-validation ({n_splits} splits)...")
         
+        # Convert to numpy if needed for indexing compatibility
+        X_array = X.values if hasattr(X, 'values') else X
+        y_array = y.values if hasattr(y, 'values') else y
+        
         tscv = TimeSeriesSplit(n_splits=n_splits)
         scores = []
         
-        for fold, (train_idx, test_idx) in enumerate(tscv.split(X), 1):
-            X_train_fold, X_test_fold = X[train_idx], X[test_idx]
-            y_train_fold, y_test_fold = y[train_idx], y[test_idx]
+        for fold, (train_idx, test_idx) in enumerate(tscv.split(X_array), 1):
+            X_train_fold, X_test_fold = X_array[train_idx], X_array[test_idx]
+            y_train_fold, y_test_fold = y_array[train_idx], y_array[test_idx]
             
             model.fit(X_train_fold, y_train_fold)
             score = model.score(X_test_fold, y_test_fold)
@@ -347,7 +351,7 @@ class MLOptimizationPhases:
         """
         summary = {
             'best_hyperparameters': self.best_params,
-            'feature_importances': self.feature_importances.head(20).to_dict() if hasattr(self.feature_importances, 'head') else None,
+            'feature_importances': self.feature_importances.head(20).to_dict() if isinstance(self.feature_importances, pd.DataFrame) else None,
             'scaling_applied': self.scaler is not None
         }
         
