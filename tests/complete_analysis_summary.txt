@@ -1,0 +1,27 @@
+================================================================================
+COMPLETE ANALYSIS PIPELINE - SUMMARY REPORT
+================================================================================
+
+Analysis Date: 2025-12-21 18:04:32
+Processing Time: 79.1 seconds
+
+HOW 2,108 HISTORICAL RACES ARE USED:
+  The ML v2.1 model was TRAINED on 2,108 actual race results.
+  It learned patterns from:
+    - Winner characteristics (times, form, box positions)
+    - Track-specific trends (which tracks favor certain boxes)
+    - Weather/condition impacts on performance
+    - Dog performance patterns across all conditions
+
+  When predicting today's races, the model applies these learned patterns
+  to score each dog's likelihood of winning.
+
+INPUT:
+  PDFs Processed: 10/10
+  Errors: 0
+
+OUTPUT FILES GENERATED:
+  1. ml_unified_predictions.xlsx - TOP PICK PER RACE
+     • Shows ONLY the highest confidence dog for each race
+
+  2. ml_feature_analysis_detailed.xlsx - 0 dogs with full features
