@@ -676,51 +676,95 @@ class AdvancedGreyhoundMLPredictor:
         else:
             track = 'UNKNOWN'
         
-        # Use only the ML feature columns (exclude metadata like DogName, Track, etc.)
-        # The prepare_enhanced_features method should have been called already
-        # So we need to extract just the numeric features
-        
         # Use track-specific model if available
         if track in self.track_models:
             scaler = self.track_scalers[track]
             models = self.track_models[track]
             weights = {k: 1.0/len(models) for k in models.keys()}
+            print(f"   🎯 Using track-specific model for {track}")
         else:
             scaler = self.global_scaler
             models = self.global_model
             if models is None:
                 # No model available at all
+                print(f"   ❌ No model available for track {track}")
                 return {}
             weights = {k: 1.0/len(models) for k in models.keys()}
+            print(f"   🌐 Using global model for {track}")
         
-        # Extract numeric features only (exclude Box, DogName, Track, Race, etc.)
-        metadata_cols = ['Box', 'DogName', 'Track', 'Race', 'TrackCode', 'RaceNum']
-        feature_cols = [col for col in features_df.columns if col not in metadata_cols]
+        # CRITICAL: Align features with training data
+        # The scaler was fit on specific feature columns - we must match them exactly
+        if hasattr(scaler, 'feature_names_in_'):
+            # sklearn >= 1.0 stores feature names
+            required_features = list(scaler.feature_names_in_)
+        elif self.feature_names:
+            # Use stored feature names from training
+            required_features = self.feature_names
+        else:
+            # Fallback: extract numeric features only (exclude Box, DogName, Track, Race, etc.)
+            metadata_cols = ['Box', 'DogName', 'Track', 'Race', 'TrackCode', 'RaceNum', 'RaceNumber']
+            required_features = [col for col in features_df.columns if col not in metadata_cols]
         
-        if len(feature_cols) == 0:
-            # No features available
+        if len(required_features) == 0:
+            print(f"   ❌ No valid features available for prediction")
             return {}
         
-        X = features_df[feature_cols].fillna(0)
-        X_scaled = scaler.transform(X)
+        # Check feature availability and add missing features as zeros
+        available_features = set(features_df.columns)
+        missing_features = set(required_features) - available_features
         
-        # Handle any NaN/Inf values
-        X_scaled = np.nan_to_num(X_scaled, nan=0.0, posinf=0.0, neginf=0.0)
+        if missing_features:
+            print(f"   ⚠️  Warning: {len(missing_features)} features missing from input data")
+            print(f"   📊 Adding missing features as zeros: {list(missing_features)[:5]}...")
+            # Add missing features as zeros
+            for feat in missing_features:
+                features_df[feat] = 0.0
         
-        # Ensemble prediction
-        proba = self.predict_ensemble(X_scaled, models, weights)
-        
-        # Build result dict by box number
-        predictions = {}
-        for idx in range(len(features_df)):
-            box = features_df.iloc[idx].get('Box', idx + 1)
-            try:
-                box = int(box)
-            except:
-                box = idx + 1
-            predictions[box] = float(proba[idx])
-        
-        return predictions
+        # Extract features in the exact order the model expects
+        try:
+            X = features_df[required_features].fillna(0)
+            
+            # Verify shape
+            if X.shape[1] != len(required_features):
+                print(f"   ❌ Feature shape mismatch: got {X.shape[1]}, expected {len(required_features)}")
+                return {}
+            
+            print(f"   ✓ Feature alignment successful: {X.shape[1]} features")
+            
+            # Scale features
+            X_scaled = scaler.transform(X)
+            
+            # Handle any NaN/Inf values
+            X_scaled = np.nan_to_num(X_scaled, nan=0.0, posinf=0.0, neginf=0.0)
+            
+            # Ensemble prediction
+            proba = self.predict_ensemble(X_scaled, models, weights)
+            
+            # Verify predictions are valid
+            if np.all(proba == 0):
+                print(f"   ⚠️  Warning: All predictions are 0% - feature mismatch likely")
+            elif np.max(proba) < 0.01:
+                print(f"   ⚠️  Warning: All predictions very low (max={np.max(proba):.3f}) - check features")
+            else:
+                print(f"   ✓ Predictions valid: range {np.min(proba):.3f} to {np.max(proba):.3f}")
+            
+            # Build result dict by box number
+            predictions = {}
+            for idx in range(len(features_df)):
+                box = features_df.iloc[idx].get('Box', idx + 1)
+                try:
+                    box = int(box)
+                except:
+                    box = idx + 1
+                predictions[box] = float(proba[idx])
+            
+            return predictions
+            
+        except Exception as e:
+            print(f"   ❌ Prediction error: {e}")
+            import traceback
+            traceback.print_exc()
+            return {}
     
     def save_model(self, path):
         """Save trained model to disk."""
