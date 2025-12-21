@@ -40,6 +40,14 @@ except ImportError:
     HAS_LIGHTGBM = False
     print("⚠️  LightGBM not available - using available models only")
 
+# Import Phase 2-4 optimizations
+try:
+    from src.ml_optimization_phases import MLOptimizationPhases
+    HAS_OPTIMIZATION_PHASES = True
+except ImportError:
+    HAS_OPTIMIZATION_PHASES = False
+    print("⚠️  ML Optimization Phases not available - using standard training")
+
 
 class AdvancedGreyhoundMLPredictor:
     """
@@ -90,6 +98,10 @@ class AdvancedGreyhoundMLPredictor:
             'ml_confidence': 75,  # Default, adjusted per track
             'v44_margin': 18      # Default, adjusted per track
         }
+        
+        # Initialize Phase 2-4 optimizations
+        self.optimization_phases = MLOptimizationPhases() if HAS_OPTIMIZATION_PHASES else None
+        self.use_advanced_optimization = HAS_OPTIMIZATION_PHASES
         
         if model_path and os.path.exists(model_path):
             self.load_model(model_path)

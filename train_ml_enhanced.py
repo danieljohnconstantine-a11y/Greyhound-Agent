@@ -81,6 +81,43 @@ def log_exception(msg, exc_info=True):
         traceback.print_exc()
         print("="*80 + "\n")
 
+def implement_time_series_validation(df):
+    """
+    Phase 3: Time-Series Validation Strategy
+    
+    Ensures training on older races, testing on newer races.
+    Prevents data leakage and provides realistic accuracy estimates.
+    
+    Args:
+        df: DataFrame with race data including 'Date' column
+    
+    Returns:
+        train_df, val_df, test_df: Split datasets (60% train, 20% val, 20% test)
+    """
+    try:
+        # Sort by date
+        df_sorted = df.sort_values('Date').reset_index(drop=True)
+        
+        # Calculate split points
+        n = len(df_sorted)
+        train_end = int(n * 0.6)
+        val_end = int(n * 0.8)
+        
+        # Split chronologically
+        train_df = df_sorted.iloc[:train_end].copy()
+        val_df = df_sorted.iloc[train_end:val_end].copy()
+        test_df = df_sorted.iloc[val_end:].copy()
+        
+        logger.info(f"✅ Time-series split: {len(train_df)} train, {len(val_df)} validation, {len(test_df)} test")
+        logger.info(f"   Train: {train_df['Date'].min()} to {train_df['Date'].max()}")
+        logger.info(f"   Val:   {val_df['Date'].min()} to {val_df['Date'].max()}")
+        logger.info(f"   Test:  {test_df['Date'].min()} to {test_df['Date'].max()}")
+        
+        return train_df, val_df, test_df
+    except Exception as e:
+        logger.warning(f"Time-series validation failed: {e}. Using random split.")
+        return None, None, None
+
 def integrate_weather_features(df, weather_manager):
     """
     Add weather and track condition features to race data.
