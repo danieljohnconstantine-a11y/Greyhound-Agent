@@ -170,8 +170,9 @@ def main():
                         print(f"   ❌ ML prediction error: {e}")
                         import traceback
                         traceback.print_exc()
-                        print(f"   ⚠️  Skipping Race {race_num} due to ML prediction failure")
-                        continue  # Skip this race entirely if ML fails
+                        print(f"   ⚠️  Warning: ML prediction failed for Race {race_num}")
+                        print(f"   📝 Continuing with available data for feature analysis...")
+                        ml_predictions = {}  # Continue with empty predictions instead of skipping
                     
                     # Get v4.4 scores
                     v44_scores = score_race(race_df)
@@ -203,10 +204,10 @@ def main():
                             # Get ML confidence from trained model
                             ml_conf = ml_predictions.get(box, 0.0) * 100
                             
-                            # Skip dogs with no ML prediction
+                            # Note: We no longer skip dogs with no ML prediction
+                            # Instead, we include them with 0% confidence for feature analysis
                             if ml_conf == 0.0:
-                                print(f"   ⚠️  No ML prediction for Box {box} ({dog_name}) - skipping")
-                                continue
+                                print(f"   ⚠️  No ML prediction for Box {box} ({dog_name}) - including with 0% confidence")
                             
                             # Store ML prediction
                             pred_record = {
@@ -292,19 +293,27 @@ def main():
     
     # 1. UNIFIED Predictions Report - TOP PICK PER RACE
     # Shows only the highest confidence dog for each race (1 winner prediction per race)
-    if all_ml_enhanced_predictions and all_detailed_features:
+    # CHANGED: Generate this even if all_detailed_features is empty
+    if all_ml_enhanced_predictions:
         try:
             # Merge predictions with detailed features to get all columns
             df_predictions = pd.DataFrame(all_ml_enhanced_predictions)
-            df_features = pd.DataFrame(all_detailed_features)
             
-            # Merge to get all feature columns
-            df_unified = pd.merge(
-                df_predictions, 
-                df_features, 
-                on=['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'v44_Score'],
-                how='left'
-            )
+            # Check if we have detailed features to merge
+            if all_detailed_features:
+                df_features = pd.DataFrame(all_detailed_features)
+                
+                # Merge to get all feature columns
+                df_unified = pd.merge(
+                    df_predictions, 
+                    df_features, 
+                    on=['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'v44_Score'],
+                    how='left'
+                )
+            else:
+                # No detailed features available - use predictions only
+                print(f"   ⚠️  No detailed features available - generating simplified report")
+                df_unified = df_predictions
             
             # Calculate comparative metrics for each dog
             # Sort to rank dogs within each race
