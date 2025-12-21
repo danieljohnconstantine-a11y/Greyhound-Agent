@@ -430,6 +430,55 @@ def main():
         traceback.print_exc()
         return 1
     
+    # Step 2.5: Add Phase 1A Enhanced Features (Days since last race, Track/Distance-specific win rates)
+    print("\n🚀 STEP 2.5: Computing Phase 1A enhanced features...")
+    print("-" * 80)
+    print("   Computing features from historical race data:")
+    print("   1. Days since last race (freshness/rest impact)")
+    print("   2. Track-specific win rate (venue performance)")
+    print("   3. Distance-specific win rate (distance specialization)")
+    print()
+    
+    try:
+        from src.feature_engineering_enhanced import add_enhanced_features
+        
+        print(f"   Processing {len(race_data_list)} races in chronological order...")
+        race_data_list, winners_list, feature_summary = add_enhanced_features(race_data_list, winners_list)
+        
+        print(f"\n✅ Phase 1A features computed successfully!")
+        print(f"   Dogs tracked: {feature_summary['total_dogs_tracked']}")
+        print(f"   Races processed: {feature_summary['total_races_processed']}")
+        print(f"   Dogs with track history: {feature_summary['dogs_with_track_history']}")
+        print(f"   Dogs with distance history: {feature_summary['dogs_with_distance_history']}")
+        print(f"   Unique track/dog combinations: {feature_summary['unique_tracks']}")
+        print(f"   Unique distance/dog combinations: {feature_summary['unique_distances']}")
+        
+        # Show sample features from first race
+        if len(race_data_list) > 0 and race_data_list[0] is not None:
+            try:
+                enhanced_features = ['DaysSinceLastRace', 'TrackSpecificWinRate', 'DistanceSpecificWinRate']
+                sample_race = race_data_list[0]
+                
+                print(f"\n   Sample from first race:")
+                for feature in enhanced_features:
+                    if feature in sample_race.columns:
+                        non_null_count = sample_race[feature].notna().sum()
+                        print(f"     - {feature}: {non_null_count}/{len(sample_race)} dogs have data")
+                    else:
+                        print(f"     - {feature}: ❌ Not found")
+            except Exception as e:
+                print(f"   ⚠️  Could not display sample features: {e}")
+        
+        print(f"\n   Total features now: 28 base + 3 Phase 1A = 31 features")
+        
+    except Exception as e:
+        print(f"❌ ERROR computing enhanced features: {e}")
+        print(f"   Error type: {type(e).__name__}")
+        print("   Continuing with base features only")
+        import traceback
+        print("\n📋 FULL TRACEBACK:")
+        traceback.print_exc()
+    
     # Step 3: Integrate weather/track condition features
     if weather_manager:
         print("\n🌤️  STEP 3: Integrating weather & track condition features...")
@@ -468,7 +517,7 @@ def main():
             
             print(f"✅ Weather/track features added to {len(race_data_list)} races")
             print(f"   Successfully processed: {len(race_data_list) - errors_count}/{len(race_data_list)}")
-            print(f"   Total features now: 80+")
+            print(f"   Total features now: 31 base + 3 Phase 1A + 4 weather + 3 track = 84+ features")
             
             # Show sample of new features from first race
             if len(race_data_list) > 0 and race_data_list[0] is not None:
@@ -694,10 +743,11 @@ def main():
     logger.info("="*80)
     
     print("\n📊 MODEL SUMMARY:")
-    print(f"   Version: ML v2.1 Enhanced (Weather & Track Conditions)")
+    print(f"   Version: ML v2.1 Enhanced (Phase 1A Features + Weather & Track)")
     print(f"   Training data: {len(race_data_list)} races")
     print(f"   Track-specific models: {len(predictor.track_models)}")
-    print(f"   Total features: 80+ (70+ ML + 10+ weather/track)")
+    print(f"   Total features: 84+ (28 base + 3 Phase 1A + 4 weather + 3 track + 46 derived)")
+    print(f"   Phase 1A features: Days since last race, Track-specific win rate, Distance-specific win rate")
     print(f"   Ensemble algorithms: 2-4 (RF, GB, XGB, LGB - if available)")
     
     logger.info(f"Training data: {len(race_data_list)} races")
