@@ -642,6 +642,74 @@ class AdvancedGreyhoundMLPredictor:
         
         return pd.Series(confidence, index=race_df.index)
     
+    def predict(self, features_df, track_code=None):
+        """
+        Predict win confidence for each dog, returning dict by box number.
+        
+        Args:
+            features_df: DataFrame with pre-computed features
+            track_code: Optional track code (for compatibility)
+            
+        Returns:
+            dict: {box_number: confidence_0_to_1} for each dog
+        """
+        if not self.trained:
+            raise ValueError("Model not trained")
+        
+        # Get track from features_df if available
+        if 'Track' in features_df.columns:
+            track = features_df['Track'].iloc[0]
+        elif track_code:
+            track = track_code
+        else:
+            track = 'UNKNOWN'
+        
+        # Use only the ML feature columns (exclude metadata like DogName, Track, etc.)
+        # The prepare_enhanced_features method should have been called already
+        # So we need to extract just the numeric features
+        
+        # Use track-specific model if available
+        if track in self.track_models:
+            scaler = self.track_scalers[track]
+            models = self.track_models[track]
+            weights = {k: 1.0/len(models) for k in models.keys()}
+        else:
+            scaler = self.global_scaler
+            models = self.global_model
+            if models is None:
+                # No model available at all
+                return {}
+            weights = {k: 1.0/len(models) for k in models.keys()}
+        
+        # Extract numeric features only (exclude Box, DogName, Track, Race, etc.)
+        metadata_cols = ['Box', 'DogName', 'Track', 'Race', 'TrackCode', 'RaceNum']
+        feature_cols = [col for col in features_df.columns if col not in metadata_cols]
+        
+        if len(feature_cols) == 0:
+            # No features available
+            return {}
+        
+        X = features_df[feature_cols].fillna(0)
+        X_scaled = scaler.transform(X)
+        
+        # Handle any NaN/Inf values
+        X_scaled = np.nan_to_num(X_scaled, nan=0.0, posinf=0.0, neginf=0.0)
+        
+        # Ensemble prediction
+        proba = self.predict_ensemble(X_scaled, models, weights)
+        
+        # Build result dict by box number
+        predictions = {}
+        for idx in range(len(features_df)):
+            box = features_df.iloc[idx].get('Box', idx + 1)
+            try:
+                box = int(box)
+            except:
+                box = idx + 1
+            predictions[box] = float(proba[idx])
+        
+        return predictions
+    
     def save_model(self, path):
         """Save trained model to disk."""
         if not self.trained:

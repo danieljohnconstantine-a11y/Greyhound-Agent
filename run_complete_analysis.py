@@ -170,6 +170,8 @@ def main():
                             print(f"   ✓ ML predictions: {len(ml_predictions)} dogs")
                         except Exception as e:
                             print(f"   ⚠️  ML prediction error: {e}")
+                            import traceback
+                            traceback.print_exc()
                             ml_predictions = {}
                     else:
                         # No ML available - we'll use v4.4 scores as confidence
@@ -415,22 +417,29 @@ def main():
                 green_fill = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")  # Light green
                 yellow_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")  # Yellow
                 orange_fill = PatternFill(start_color="FFA500", end_color="FFA500", fill_type="solid")  # Orange
+                black_fill = PatternFill(start_color="000000", end_color="000000", fill_type="solid")  # Black separator
                 
                 # Get column index for Position_Rank
                 headers = [cell.value for cell in ws[1]]
                 rank_col_idx = headers.index('Position_Rank') + 1 if 'Position_Rank' in headers else None
                 
-                # Apply conditional formatting based on Position_Rank (skip blank rows)
+                # Apply conditional formatting based on Position_Rank
                 if rank_col_idx:
                     for row_idx in range(2, ws.max_row + 1):  # Start from row 2 (skip header)
                         rank_cell = ws.cell(row=row_idx, column=rank_col_idx)
                         rank_value = rank_cell.value
                         
-                        # Skip blank rows (None values)
-                        if rank_value is None:
+                        # Check if this is a blank separator row (all cells are None)
+                        is_blank_row = all(ws.cell(row=row_idx, column=c).value is None 
+                                          for c in range(1, min(6, ws.max_column + 1)))  # Check first 5 columns
+                        
+                        if is_blank_row:
+                            # Color blank separator rows BLACK
+                            for col_idx in range(1, ws.max_column + 1):
+                                ws.cell(row=row_idx, column=col_idx).fill = black_fill
                             continue
                         
-                        # Apply color to entire row based on rank
+                        # Apply color to data rows based on rank
                         if rank_value == 1:
                             fill = green_fill
                         elif rank_value == 2:
@@ -447,7 +456,7 @@ def main():
                 wb.save(output_path)
                 print(f"✅ Feature analysis: {output_path} ({len(df_features)} dogs)")
                 print(f"   📋 Sorted by Track → Race → Box for easy navigation")
-                print(f"   📏 Blank rows added between races for easier reading")
+                print(f"   ⬛ BLACK separator rows added between races for easier reading")
                 print(f"   🟢 Green = Predicted 1st place (highest ML confidence)")
                 print(f"   🟡 Yellow = Predicted 2nd place")
                 print(f"   🟠 Orange = Predicted 3rd place")
