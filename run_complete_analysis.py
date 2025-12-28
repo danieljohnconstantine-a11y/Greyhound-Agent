@@ -248,9 +248,15 @@ def main():
                                     # Handle lists/arrays first (before checking pd.isna)
                                     if isinstance(val, (list, tuple)):
                                         feature_record[col] = str(val)
-                                    # Handle NaN/None
+                                    # Handle NaN/None - show "N/A" instead of blank or 0
                                     elif val is None or (isinstance(val, float) and pd.isna(val)):
-                                        feature_record[col] = 0
+                                        # For important fields, show "N/A" instead of 0
+                                        important_fields = ['BestTimeSec', 'SectionalSec', 'PrizeMoney', 
+                                                          'CareerWins', 'Distance', 'Weight']
+                                        if col in important_fields:
+                                            feature_record[col] = "N/A"
+                                        else:
+                                            feature_record[col] = 0
                                     else:
                                         try:
                                             feature_record[col] = float(val) if isinstance(val, (int, float)) else str(val)
@@ -291,29 +297,33 @@ def main():
     # Generate all output files
     print(f"\n📁 Generating output files...")
     
-    # 1. UNIFIED Predictions Report - TOP PICK PER RACE
-    # Shows only the highest confidence dog for each race (1 winner prediction per race)
-    # CHANGED: Generate this even if all_detailed_features is empty
-    if all_ml_enhanced_predictions:
-        try:
-            # Merge predictions with detailed features to get all columns
-            df_predictions = pd.DataFrame(all_ml_enhanced_predictions)
-            
-            # Check if we have detailed features to merge
-            if all_detailed_features:
-                df_features = pd.DataFrame(all_detailed_features)
+    files_generated = []
+    
+    # Wrap all Excel generation in try-except to ensure we always create outputs
+    try:
+        # 1. UNIFIED Predictions Report - TOP PICK PER RACE
+        # Shows only the highest confidence dog for each race (1 winner prediction per race)
+        # CHANGED: Generate this even if all_detailed_features is empty
+        if all_ml_enhanced_predictions:
+            try:
+                # Merge predictions with detailed features to get all columns
+                df_predictions = pd.DataFrame(all_ml_enhanced_predictions)
                 
-                # Merge to get all feature columns
-                df_unified = pd.merge(
-                    df_predictions, 
-                    df_features, 
-                    on=['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'v44_Score'],
-                    how='left'
-                )
-            else:
-                # No detailed features available - use predictions only
-                print(f"   ⚠️  No detailed features available - generating simplified report")
-                df_unified = df_predictions
+                # Check if we have detailed features to merge
+                if all_detailed_features:
+                    df_features = pd.DataFrame(all_detailed_features)
+                    
+                    # Merge to get all feature columns
+                    df_unified = pd.merge(
+                        df_predictions, 
+                        df_features, 
+                        on=['Track', 'Race', 'Box', 'DogName', 'ML_Confidence', 'v44_Score'],
+                        how='left'
+                    )
+                else:
+                    # No detailed features available - use predictions only
+                    print(f"   ⚠️  No detailed features available - generating simplified report")
+                    df_unified = df_predictions
             
             # Calculate comparative metrics for each dog
             # Sort to rank dogs within each race
@@ -361,6 +371,7 @@ def main():
             df_top_picks = df_top_picks.sort_values('ML_Confidence', ascending=False)
             
             df_top_picks.to_excel('outputs/ml_unified_predictions.xlsx', index=False)
+            files_generated.append('ml_unified_predictions.xlsx')
             
             # Statistics
             total_races = len(df_top_picks)
@@ -459,6 +470,7 @@ def main():
                             ws.cell(row=row_idx, column=col_idx).fill = fill
                 
                 wb.save(output_path)
+                files_generated.append('ml_feature_analysis_detailed.xlsx')
                 print(f"✅ Feature analysis: {output_path} ({len(df_features)} dogs)")
                 print(f"   📋 Sorted by Track → Race → Box for easy navigation")
                 print(f"   ⬛ BLACK separator rows added between races for easier reading")
@@ -555,14 +567,27 @@ def main():
             f.write("=" * 80 + "\n")
         
         print(f"✅ Summary report: outputs/complete_analysis_summary.txt")
+        files_generated.append('complete_analysis_summary.txt')
         
     except Exception as e:
         print(f"⚠️  Could not create summary report: {e}")
     
+    except Exception as outer_error:
+        print(f"\n❌ CRITICAL ERROR during file generation: {outer_error}")
+        import traceback
+        traceback.print_exc()
+        print(f"\n⚠️  Some files may not have been generated")
+    
     # Final summary
     print(f"\n" + "=" * 80)
-    print(f"🎉 COMPLETE! All reports generated in outputs/ folder")
+    print(f"🎉 ANALYSIS COMPLETE!")
     print(f"   ⏱️  Total time: {(datetime.now() - start_time).total_seconds():.1f} seconds")
+    print(f"\n📁 Files Generated in outputs/ folder:")
+    if files_generated:
+        for filename in files_generated:
+            print(f"   ✅ {filename}")
+    else:
+        print(f"   ⚠️  No files were generated - check errors above")
     print("=" * 80)
     
     return 0

@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import logging
+from datetime import datetime
 
 # Get logger for this module (logging is configured in main.py if needed)
 logger = logging.getLogger(__name__)
@@ -90,6 +91,30 @@ def parse_race_form(text):
         # Example: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
         # Captures: day=22, month=Nov, year=25, time=07:21PM, track=WENTWORTH PARK, distance=520
         header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+?)\s+(\d+)m", line)
+        
+        # Fallback: Try simpler race header patterns if main pattern doesn't match
+        if not header_match:
+            # Pattern 1: "Race 1" or "R1" followed by optional info
+            simple_race_match = re.match(r"(?:Race|R)\s*(\d{1,2})\s*[:>\-]?\s*(.*)$", line, re.IGNORECASE)
+            if simple_race_match and len(line) < 100:  # Avoid false matches on long lines
+                race_num_str = simple_race_match.group(1)
+                try:
+                    # Found a simple race header - use it
+                    race_number = int(race_num_str)
+                    # Use current date as fallback
+                    current_race = {
+                        "RaceNumber": race_number,
+                        "RaceDate": datetime.now().strftime("%Y-%m-%d"),
+                        "RaceTime": "TBD",
+                        "Track": "Unknown",
+                        "Distance": 500  # Default distance
+                    }
+                    logger.info(f"📍 Detected race header (simple format): Race {race_number}")
+                    current_dog_section_index = -1
+                    continue
+                except:
+                    pass
+        
         if header_match:
             race_number += 1
             day_of_race, month_abbr, year_2digit, time, track, distance = header_match.groups()
@@ -503,6 +528,33 @@ def parse_race_form(text):
             # No box history or current box - use neutral bias
             dogs[dog_index]["BoxBiasFactor"] = 0.0
 
+    # Add default values for missing timing data
+    # This ensures Excel has values instead of blanks
+    for dog in dogs:
+        # If BestTimeSec is missing, use a reasonable default based on distance
+        if "BestTimeSec" not in dog or dog["BestTimeSec"] is None or pd.isna(dog.get("BestTimeSec")):
+            distance = dog.get("Distance", 500)
+            # Rough estimate: 15-16 m/s average speed for greyhounds
+            estimated_time = distance / 15.5
+            dog["BestTimeSec"] = round(estimated_time, 2)
+            dog["TimeEstimated"] = True  # Flag that this is an estimate
+            logger.debug(f"Using estimated time for {dog.get('DogName', 'Unknown')}: {estimated_time:.2f}s at {distance}m")
+        
+        # If SectionalSec is missing, use a reasonable default
+        if "SectionalSec" not in dog or dog["SectionalSec"] is None or pd.isna(dog.get("SectionalSec")):
+            # Typical sectional (first 100-200m) is 5-8 seconds
+            dog["SectionalSec"] = 6.5  # Neutral estimate
+            if "TimeEstimated" not in dog:
+                dog["TimeEstimated"] = True
+        
+        # Ensure Last3TimesSec exists
+        if "Last3TimesSec" not in dog or dog["Last3TimesSec"] is None:
+            dog["Last3TimesSec"] = []
+        
+        # Ensure TimeConverted flag exists
+        if "TimeConverted" not in dog:
+            dog["TimeConverted"] = False
+    
     df = pd.DataFrame(dogs)
     
     # Normalize column names: strip whitespace and ensure consistent casing
