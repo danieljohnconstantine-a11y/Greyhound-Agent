@@ -529,7 +529,7 @@ def parse_race_form(text):
             # No box history or current box - use neutral bias
             dogs[dog_index]["BoxBiasFactor"] = 0.0
 
-    # Add default values for missing timing data
+    # Add default values for ALL missing data fields
     # This ensures Excel has values instead of blanks
     for dog in dogs:
         # If BestTimeSec is missing, use a reasonable default based on distance
@@ -555,6 +555,31 @@ def parse_race_form(text):
         # Ensure TimeConverted flag exists
         if "TimeConverted" not in dog:
             dog["TimeConverted"] = False
+        
+        # CRITICAL: Ensure all text fields have values (never blank/None)
+        text_fields_defaults = {
+            'Trainer': 'N/A',
+            'Owner': 'N/A',
+            'Color': 'N/A',
+            'Sex': 'N/A',
+            'Sire': 'N/A',
+            'Dam': 'N/A',
+            'Age': 'N/A'
+        }
+        for field, default_val in text_fields_defaults.items():
+            if field not in dog or dog[field] is None or pd.isna(dog.get(field)) or (isinstance(dog.get(field), str) and dog[field].strip() == ''):
+                dog[field] = default_val
+        
+        # Ensure numeric fields have values (never blank/None)
+        numeric_fields_defaults = {
+            'Weight': 0,
+            'PrizeMoney': 0,
+            'CareerWins': 0,
+            'CareerStarts': 0
+        }
+        for field, default_val in numeric_fields_defaults.items():
+            if field not in dog or dog[field] is None or pd.isna(dog.get(field)):
+                dog[field] = default_val
     
     df = pd.DataFrame(dogs)
     

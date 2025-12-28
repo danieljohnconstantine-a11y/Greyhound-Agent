@@ -248,20 +248,33 @@ def main():
                                     # Handle lists/arrays first (before checking pd.isna)
                                     if isinstance(val, (list, tuple)):
                                         feature_record[col] = str(val)
-                                    # Handle NaN/None - show "N/A" instead of blank or 0
+                                    # Handle empty strings - treat as missing
+                                    elif isinstance(val, str) and val.strip() == '':
+                                        feature_record[col] = "N/A"
+                                    # Handle NaN/None - show "N/A" for text fields, 0 for numeric
                                     elif val is None or (isinstance(val, float) and pd.isna(val)):
-                                        # For important fields, show "N/A" instead of 0
-                                        important_fields = ['BestTimeSec', 'SectionalSec', 'PrizeMoney', 
-                                                          'CareerWins', 'Distance', 'Weight']
-                                        if col in important_fields:
+                                        # Text/categorical fields that should show "N/A"
+                                        text_fields = ['Trainer', 'Owner', 'Color', 'Sex', 'Sire', 'Dam',
+                                                      'BestTimeSec', 'SectionalSec', 'Weight', 'Age']
+                                        # Numeric fields that should show 0
+                                        numeric_fields = ['PrizeMoney', 'CareerWins', 'Distance', 
+                                                         'ML_Confidence', 'v44_Score']
+                                        
+                                        if col in text_fields:
                                             feature_record[col] = "N/A"
-                                        else:
+                                        elif col in numeric_fields:
                                             feature_record[col] = 0
+                                        else:
+                                            # For other fields, default to 0 for likely numeric, "N/A" otherwise
+                                            if 'Rate' in col or 'Sec' in col or 'Time' in col or 'Speed' in col:
+                                                feature_record[col] = 0
+                                            else:
+                                                feature_record[col] = "N/A"
                                     else:
                                         try:
                                             feature_record[col] = float(val) if isinstance(val, (int, float)) else str(val)
                                         except:
-                                            feature_record[col] = str(val)
+                                            feature_record[col] = str(val) if str(val).strip() != '' else "N/A"
                             
                             all_detailed_features.append(feature_record)
                             
