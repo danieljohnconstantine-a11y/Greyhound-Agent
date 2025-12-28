@@ -33,7 +33,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
-from src.ml_predictor import load_historical_data
+from src.ml_predictor import load_historical_data_from_csvs
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -211,7 +211,7 @@ def main():
     print("-" * 80)
     
     try:
-        race_data_list, winners_list = load_historical_data()
+        race_data_list, winners_list = load_historical_data_from_csvs()
         print(f"✅ Loaded {len(race_data_list)} races")
         
         total_dogs = sum(len(race_df) if race_df is not None else 0 for race_df in race_data_list)
