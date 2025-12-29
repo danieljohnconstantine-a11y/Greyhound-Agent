@@ -650,23 +650,46 @@ def load_historical_data_hybrid(data_dir='data'):
     logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
     
     # Step 2: Parse all results from CSV files
-    all_results = []  # List of (track, race, winner, 2nd, 3rd, 4th)
+    all_results = []  # List of (date, track, race, winner, 2nd, 3rd, 4th)
     
     for results_file in sorted(results_files):
         try:
             df_results = pd.read_csv(results_file)
             for _, row in df_results.iterrows():
                 track = str(row.get('Track', ''))
+                date = str(row.get('Date', ''))
                 # Handle both "R1" format and plain "1" format
                 race_str = str(row.get('Race', row.get('RaceNumber', '0')))
                 race_num = int(race_str.replace('R', '').replace('r', ''))
-                winner = int(row.get('Winner', 0))
-                second = int(row.get('2nd', 0)) if '2nd' in row else 0
-                third = int(row.get('3rd', 0)) if '3rd' in row else 0
-                fourth = int(row.get('4th', 0)) if '4th' in row else 0
                 
-                if track and race_num and winner:
+                # Extract winner from multiple possible formats
+                winner = 0
+                if 'Winner' in row and pd.notna(row['Winner']):
+                    winner = int(row['Winner'])
+                elif 'Position1' in row and pd.notna(row['Position1']):
+                    winner = int(row['Position1'])
+                
+                second = 0
+                if '2nd' in row and pd.notna(row['2nd']):
+                    second = int(row['2nd'])
+                elif 'Position2' in row and pd.notna(row['Position2']):
+                    second = int(row['Position2'])
+                    
+                third = 0
+                if '3rd' in row and pd.notna(row['3rd']):
+                    third = int(row['3rd'])
+                elif 'Position3' in row and pd.notna(row['Position3']):
+                    third = int(row['Position3'])
+                    
+                fourth = 0
+                if '4th' in row and pd.notna(row['4th']):
+                    fourth = int(row['4th'])
+                elif 'Position4' in row and pd.notna(row['Position4']):
+                    fourth = int(row['Position4'])
+                
+                if track and race_num and winner and date:
                     all_results.append({
+                        'date': date,
                         'track': track,
                         'race': race_num,
                         'winner': winner,
@@ -684,10 +707,26 @@ def load_historical_data_hybrid(data_dir='data'):
     logger.info(f"Loaded {len(all_results)} race results from CSV files")
     
     # Step 3: Parse all PDFs to extract dog data
-    pdf_races = {}  # key: "track_racenum" -> DataFrame of dogs
+    pdf_races = {}  # key: "date_track_racenum" -> DataFrame of dogs
+    
+    import re
+    import os
     
     for pdf_file in sorted(pdf_files):
         try:
+            # Extract date from PDF filename: TRACKGDDMM (e.g., RICHG2812form.pdf)
+            filename = os.path.basename(pdf_file)
+            match = re.match(r'([A-Z]+)G(\d{2})(\d{2})form\.pdf', filename)
+            pdf_date = None
+            pdf_track_code = None
+            
+            if match:
+                pdf_track_code = match.group(1)
+                day = match.group(2)
+                month = match.group(3)
+                # Assume year 2025 for now (can be improved)
+                pdf_date = f"2025-{month}-{day}"
+            
             with pdfplumber.open(pdf_file) as pdf:
                 text = ""
                 for page in pdf.pages:
@@ -701,7 +740,11 @@ def load_historical_data_hybrid(data_dir='data'):
             
             if 'Track' in df_all_dogs.columns and 'RaceNumber' in df_all_dogs.columns:
                 for (track, race_num), df_race in df_all_dogs.groupby(['Track', 'RaceNumber']):
-                    key = f"{track}_R{race_num}"
+                    # Store with date if available
+                    if pdf_date and pdf_track_code:
+                        key = f"{pdf_date}_{pdf_track_code}_R{race_num}"
+                    else:
+                        key = f"{track}_R{race_num}"
                     pdf_races[key] = df_race
         
         except Exception as e:
@@ -718,27 +761,38 @@ def load_historical_data_hybrid(data_dir='data'):
     races_skipped_no_pdf = 0
     
     for result in all_results:
+        date = result['date']
         track = result['track']
         race_num = result['race']
         winner_box = result['winner']
         
         # Normalize track name to match PDF format (4-letter code)
         track_code = normalize_track_name(track)
-        key = f"{track_code}_R{race_num}"
+        
+        # Try to match with date first (most accurate)
+        key_with_date = f"{date}_{track_code}_R{race_num}"
+        key_without_date = f"{track_code}_R{race_num}"
+        
+        df_race = None
         
         # ONLY use races that have actual PDF data
-        if key in pdf_races:
-            # Use real PDF data
-            df_race = pdf_races[key].copy()
+        if key_with_date in pdf_races:
+            # Best match: date + track + race
+            df_race = pdf_races[key_with_date].copy()
             races_from_pdf += 1
-            
-            # Add this race to training data
-            if not df_race.empty and winner_box in df_race['Box'].values:
-                race_data.append(df_race)
-                winners.append(winner_box)
+        elif key_without_date in pdf_races:
+            # Fallback: track + race (for older PDFs without date parsing)
+            df_race = pdf_races[key_without_date].copy()
+            races_from_pdf += 1
         else:
             # Skip races without PDF data - NO SYNTHETIC DATA GENERATED
             races_skipped_no_pdf += 1
+            continue
+        
+        # Add this race to training data
+        if df_race is not None and not df_race.empty and winner_box in df_race['Box'].values:
+            race_data.append(df_race)
+            winners.append(winner_box)
     
     print(f"\n📊 HYBRID LOADING SUMMARY (FACTUAL DATA ONLY):")
     print(f"   Total race results in CSVs: {len(all_results)}")
