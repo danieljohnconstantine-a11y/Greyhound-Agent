@@ -531,6 +531,87 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
     return race_data, winners
 
 
+def normalize_track_name(track_name):
+    """
+    Normalize track names from CSV format to PDF 4-letter code format.
+    
+    Examples:
+        "Richmond" -> "RICH"
+        "BetDeluxe Capalaba" -> "CAPA"
+        "Ladbrokes Q1 Lakeside" -> "QLAK"
+    """
+    track_mapping = {
+        # Common full names to 4-letter codes
+        'richmond': 'RICH',
+        'grafton': 'GRAF',
+        'healesville': 'HEAL',
+        'mount gambier': 'MTGG',
+        'sale': 'SALE',
+        'gawler': 'GAWL',
+        'betdeluxe capalaba': 'CAPA',
+        'betdeluxe rockhampton': 'ROCK',
+        'ladbrokes q1 lakeside': 'QLAK',
+        'ladbrokes q2 parklands': 'QPRK',
+        'wentworth park': 'WENP',
+        'angle park': 'ANGL',
+        'the meadows': 'MEAD',
+        'sandown': 'SAND',
+        'bendigo': 'BDGO',
+        'geelong': 'GEEL',
+        'warragul': 'WARG',
+        'ballarat': 'BRAT',
+        'shepparton': 'SHEP',
+        'traralgon': 'TAST',
+        'horsham': 'HSHM',
+        'maitland': 'MAIT',
+        'newcastle': 'NOWR',
+        'gosford': 'GOSF',
+        'bulli': 'BULI',
+        'wollongong': 'WNBL',
+        'dapto': 'NOWG',
+        'casino': 'CSNO',
+        'lismore': 'RIST',
+        'taree': 'TARE',
+        'gunnedah': 'GUNN',
+        'dubbo': 'DUBB',
+        'wagga': 'WAGG',
+        'temora': 'TEMO',
+        'canberra': 'CANN',
+        'albion park': 'QSTR',
+        'ipswich': 'QPRK',
+        'townsville': 'TOWN',
+        'rockhampton': 'ROCK',
+        'capalaba': 'CAPA',
+        'darwin': 'DRWN',
+        'hobart': 'TAST',
+        'launceston': 'ELWK',
+        'devonport': 'MEAD',
+        'gardens': 'GARD',
+        'mandurah': 'MAND',
+        'cannington': 'CANN',
+        'murray bridge': 'MBRS',
+        'mount barker': 'MBRG',
+        'meadows': 'MEAD',
+        'goulburn': 'GOUL',
+        'mowbray': 'MOWB',
+    }
+    
+    # Normalize to lowercase for matching
+    track_lower = str(track_name).lower().strip()
+    
+    # Direct match
+    if track_lower in track_mapping:
+        return track_mapping[track_lower]
+    
+    # Try partial matches for compound names
+    for full_name, code in track_mapping.items():
+        if full_name in track_lower or track_lower in full_name:
+            return code
+    
+    # If no match, return first 4 letters uppercase
+    return track_name[:4].upper()
+
+
 def load_historical_data_hybrid(data_dir='data'):
     """
     HYBRID data loader: Uses both PDFs and CSVs to maximize training data.
@@ -540,7 +621,7 @@ def load_historical_data_hybrid(data_dir='data'):
     2. For races with PDFs: Extract complete dog data from PDFs
     3. For races without PDFs: Create synthetic dog profiles based on historical patterns
     
-    This allows training on ALL 1478 races, not just the 372 with PDFs.
+    This allows training on ALL races in CSVs, not just those with PDFs.
     
     Args:
         data_dir: Directory containing PDFs and results CSVs
@@ -653,7 +734,10 @@ def load_historical_data_hybrid(data_dir='data'):
         track = result['track']
         race_num = result['race']
         winner_box = result['winner']
-        key = f"{track}_R{race_num}"
+        
+        # Normalize track name to match PDF format (4-letter code)
+        track_code = normalize_track_name(track)
+        key = f"{track_code}_R{race_num}"
         
         # Check if we have PDF data for this race
         if key in pdf_races:
@@ -676,7 +760,7 @@ def load_historical_data_hybrid(data_dir='data'):
             
             if dogs_data:
                 df_race = pd.DataFrame(dogs_data)
-                df_race['Track'] = track
+                df_race['Track'] = track_code  # Use normalized track code
                 df_race['RaceNumber'] = race_num
                 races_synthetic += 1
             else:
