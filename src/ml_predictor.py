@@ -614,14 +614,15 @@ def normalize_track_name(track_name):
 
 def load_historical_data_hybrid(data_dir='data'):
     """
-    HYBRID data loader: Uses both PDFs and CSVs to maximize training data.
+    HYBRID data loader: Uses both PDFs and CSVs to load training data.
     
     Strategy:
-    1. Load all race results from CSV files (Track, Race, Winner, 2nd, 3rd, 4th format)
-    2. For races with PDFs: Extract complete dog data from PDFs
-    3. For races without PDFs: Create synthetic dog profiles based on historical patterns
+    1. Load all race results from CSV files (Track, Race, Winner format)
+    2. Extract complete dog data from PDFs
+    3. Match PDF races to CSV winners using track name normalization
     
-    This allows training on ALL races in CSVs, not just those with PDFs.
+    IMPORTANT: ONLY USES FACTUAL PDF DATA - NO SYNTHETIC/GENERATED DATA!
+    Only races that have BOTH PDF dog data AND CSV winners are used for training.
     
     Args:
         data_dir: Directory containing PDFs and results CSVs
@@ -637,7 +638,9 @@ def load_historical_data_hybrid(data_dir='data'):
     
     logger = logging.getLogger(__name__)
     
-    print("🔄 Loading data using HYBRID method (PDFs + CSV synthesis)...")
+    print("🔄 Loading data using HYBRID method (PDFs + CSV results)...")
+    print("   ✅ FACTUAL DATA ONLY - Using real PDF form guides matched to CSV winners")
+    print("   ❌ NO SYNTHETIC DATA - Races without PDFs are skipped")
     
     # Step 1: Find all files
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
@@ -708,27 +711,11 @@ def load_historical_data_hybrid(data_dir='data'):
     print(f"✅ Extracted dog data from {len(pdf_races)} races in PDFs")
     logger.info(f"Extracted dog data from {len(pdf_races)} races in PDFs")
     
-    # Step 4: Build average/template dog profiles from PDF data
-    # This will be used to create synthetic dogs for races without PDFs
-    all_pdf_dogs = pd.concat([df for df in pdf_races.values()], ignore_index=True) if pdf_races else pd.DataFrame()
-    
-    # Create average profiles by box position (boxes 1-8)
-    box_templates = {}
-    if not all_pdf_dogs.empty and 'Box' in all_pdf_dogs.columns:
-        numeric_cols = all_pdf_dogs.select_dtypes(include=[np.number]).columns.tolist()
-        for box_num in range(1, 9):
-            box_dogs = all_pdf_dogs[all_pdf_dogs['Box'] == box_num]
-            if len(box_dogs) > 0:
-                box_templates[box_num] = box_dogs[numeric_cols].median().to_dict()
-        
-        print(f"📐 Created template profiles for {len(box_templates)} box positions")
-        logger.info(f"Created template profiles for {len(box_templates)} box positions")
-    
-    # Step 5: Process all race results
+    # Step 4: Process all race results - ONLY USE PDF DATA (NO SYNTHETIC)
     race_data = []
     winners = []
     races_from_pdf = 0
-    races_synthetic = 0
+    races_skipped_no_pdf = 0
     
     for result in all_results:
         track = result['track']
@@ -739,48 +726,29 @@ def load_historical_data_hybrid(data_dir='data'):
         track_code = normalize_track_name(track)
         key = f"{track_code}_R{race_num}"
         
-        # Check if we have PDF data for this race
+        # ONLY use races that have actual PDF data
         if key in pdf_races:
             # Use real PDF data
             df_race = pdf_races[key].copy()
             races_from_pdf += 1
-        elif box_templates:
-            # Create synthetic race using templates
-            dogs_data = []
-            for box_num in range(1, 9):  # Assume 8 dogs per race
-                if box_num in box_templates:
-                    dog_data = box_templates[box_num].copy()
-                    dog_data['Box'] = box_num
-                    # Add some random variation (±5%)
-                    for col in dog_data:
-                        if col != 'Box' and isinstance(dog_data[col], (int, float)):
-                            variation = np.random.normal(1.0, 0.05)
-                            dog_data[col] = dog_data[col] * variation
-                    dogs_data.append(dog_data)
             
-            if dogs_data:
-                df_race = pd.DataFrame(dogs_data)
-                df_race['Track'] = track_code  # Use normalized track code
-                df_race['RaceNumber'] = race_num
-                races_synthetic += 1
-            else:
-                continue  # Skip if we can't create synthetic data
+            # Add this race to training data
+            if not df_race.empty and winner_box in df_race['Box'].values:
+                race_data.append(df_race)
+                winners.append(winner_box)
         else:
-            continue  # Skip if no templates available
-        
-        # Add this race to training data
-        if not df_race.empty and winner_box in df_race['Box'].values:
-            race_data.append(df_race)
-            winners.append(winner_box)
+            # Skip races without PDF data - NO SYNTHETIC DATA GENERATED
+            races_skipped_no_pdf += 1
     
-    print(f"\n📊 HYBRID LOADING SUMMARY:")
+    print(f"\n📊 HYBRID LOADING SUMMARY (FACTUAL DATA ONLY):")
     print(f"   Total race results in CSVs: {len(all_results)}")
     print(f"   Races with PDF data: {races_from_pdf}")
-    print(f"   Races with synthetic data: {races_synthetic}")
+    print(f"   Races skipped (no PDF): {races_skipped_no_pdf}")
     print(f"   Total races for training: {len(race_data)}")
-    print(f"   Coverage: {len(race_data)/len(all_results)*100:.1f}% of all races\n")
+    print(f"   Coverage: {len(race_data)/len(all_results)*100:.1f}% of all races")
+    print(f"   ✅ Using ONLY factual PDF data - NO synthetic data generated\n")
     
-    logger.info(f"Hybrid loading complete: {races_from_pdf} PDF races + {races_synthetic} synthetic races = {len(race_data)} total")
+    logger.info(f"Hybrid loading complete: {races_from_pdf} races with PDF data, {races_skipped_no_pdf} skipped (no PDF)")
     
     return race_data, winners
 
