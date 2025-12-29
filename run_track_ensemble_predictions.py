@@ -43,6 +43,23 @@ import pickle
 import glob
 from datetime import datetime
 import traceback
+import pdfplumber
+
+def extract_text_from_pdf(pdf_path):
+    """
+    Extract text content from a PDF file.
+    
+    Args:
+        pdf_path: Path to the PDF file
+        
+    Returns:
+        str: Extracted text content from all pages
+    """
+    text = ""
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text() + "\n"
+    return text
 
 def load_track_ensemble(track_name, models_dir="models/track_ensemble"):
     """
@@ -165,8 +182,17 @@ def main():
         print(f"\n📄 Processing: {os.path.basename(pdf_file)}")
         
         try:
-            # Parse PDF
-            race_df = parse_race_form(pdf_file)
+            # Extract text from PDF
+            print(f"   📖 Extracting text from PDF...")
+            pdf_text = extract_text_from_pdf(pdf_file)
+            
+            if not pdf_text or len(pdf_text.strip()) == 0:
+                print(f"   ⚠️  No text extracted from PDF")
+                continue
+            
+            # Parse PDF text
+            print(f"   🔍 Parsing race form...")
+            race_df = parse_race_form(pdf_text)
             
             if race_df is None or len(race_df) == 0:
                 print(f"   ⚠️  No data extracted from PDF")
