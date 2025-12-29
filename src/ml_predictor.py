@@ -409,9 +409,15 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
             total_races_in_csvs += len(df_results)
             logger.debug(f"  Loaded {len(df_results)} race entries from {os.path.basename(results_file)}")
             
+            # Normalize column names - handle variations in CSV format
+            # Some CSVs use 'Race' instead of 'RaceNumber'
+            if 'Race' in df_results.columns and 'RaceNumber' not in df_results.columns:
+                df_results['RaceNumber'] = df_results['Race']
+            
             # Group by race (Track + RaceNumber)
             if 'Track' not in df_results.columns or 'RaceNumber' not in df_results.columns:
                 print(f"⚠️  Skipping {results_file}: Missing Track or RaceNumber columns")
+                logger.warning(f"Skipping {results_file}: columns are {list(df_results.columns)}")
                 continue
             
             for (track, race_num), race_rows in df_results.groupby(['Track', 'RaceNumber']):
