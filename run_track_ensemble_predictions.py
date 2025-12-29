@@ -254,8 +254,8 @@ def main():
         # Combine all predictions
         df_all = pd.concat(all_predictions, ignore_index=True)
         
-        # Sort by Track -> Race -> ML_Confidence
-        df_all = df_all.sort_values(['Track', 'Race', 'ML_Confidence'], ascending=[True, True, False])
+        # Sort by Track -> RaceNumber -> ML_Confidence
+        df_all = df_all.sort_values(['Track', 'RaceNumber', 'ML_Confidence'], ascending=[True, True, False])
         
         # Save to Excel
         output_dir = "outputs"
@@ -281,12 +281,12 @@ def main():
             for track in df_all['Track'].unique():
                 track_df = df_all[df_all['Track'] == track]
                 f.write(f"\n{track}:\n")
-                f.write(f"  Races: {track_df['Race'].nunique()}\n")
+                f.write(f"  Races: {track_df['RaceNumber'].nunique()}\n")
                 f.write(f"  Dogs: {len(track_df)}\n")
                 
                 # Top picks per race
-                for race_num in sorted(track_df['Race'].unique()):
-                    race_df = track_df[track_df['Race'] == race_num]
+                for race_num in sorted(track_df['RaceNumber'].unique()):
+                    race_df = track_df[track_df['RaceNumber'] == race_num]
                     if len(race_df) > 0:
                         top = race_df.loc[race_df['ML_Confidence'].idxmax()]
                         f.write(f"  Race {race_num}: Box {top['Box']} - {top['DogName']} ({top['ML_Confidence']:.1f}%)\n")
@@ -298,7 +298,7 @@ def main():
         print("=" * 80)
         print(f"\n📊 Results:")
         print(f"   Tracks processed: {df_all['Track'].nunique()}")
-        print(f"   Races: {df_all['Race'].nunique()}")
+        print(f"   Races: {df_all['RaceNumber'].nunique()}")
         print(f"   Dogs: {len(df_all)}")
         print(f"\n📁 Output files:")
         print(f"   {excel_path}")
