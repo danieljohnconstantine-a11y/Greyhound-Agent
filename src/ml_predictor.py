@@ -428,28 +428,55 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
                     # Create DataFrame for this race
                     df_race = race_rows.copy()
                     
-                    # Ensure required columns exist
-                    required_cols = ['Box', 'Winner']
-                    missing_cols = [col for col in required_cols if col not in df_race.columns]
-                    if missing_cols:
-                        continue
+                    # Extract winner box from various CSV formats
+                    winner_box = None
                     
-                    # Get winner box
-                    winner_row = df_race[df_race['Winner'] == 1]
-                    if len(winner_row) == 0:
-                        # Try extracting from Winner column if it's the box number
+                    # Format 1: WinnerBox column (Track,RaceNumber,WinnerBox)
+                    if 'WinnerBox' in df_race.columns:
+                        try:
+                            winner_box = int(df_race['WinnerBox'].iloc[0])
+                        except:
+                            continue
+                    
+                    # Format 2: Winner column with box number (Date,Track,RaceNumber,Winner)
+                    elif 'Winner' in df_race.columns:
                         try:
                             winner_value = df_race['Winner'].iloc[0]
                             if isinstance(winner_value, (int, float)) and not pd.isna(winner_value):
                                 winner_box = int(winner_value)
                             elif isinstance(winner_value, str) and winner_value:
-                                winner_box = int(winner_value[0])
+                                # Try to extract first digit
+                                winner_box = int(str(winner_value)[0])
                             else:
                                 continue
                         except:
                             continue
+                    
+                    # Format 3: Position1,Position2,... columns (Date,Track,RaceNumber,Position1,...)
+                    elif 'Position1' in df_race.columns:
+                        try:
+                            # Winner is in Position1 column
+                            winner_box = int(df_race['Position1'].iloc[0])
+                        except:
+                            continue
+                    
+                    # Format 4: Box and Winner columns (legacy format)
+                    elif 'Box' in df_race.columns and 'Winner' in df_race.columns:
+                        try:
+                            winner_row = df_race[df_race['Winner'] == 1]
+                            if len(winner_row) > 0:
+                                winner_box = int(winner_row['Box'].iloc[0])
+                            else:
+                                continue
+                        except:
+                            continue
+                    
                     else:
-                        winner_box = int(winner_row['Box'].iloc[0])
+                        # No recognizable winner format
+                        continue
+                    
+                    if winner_box is None:
+                        continue
                     
                     # Add Date if not present (use filename)
                     if 'Date' not in df_race.columns:
