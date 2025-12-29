@@ -1,0 +1,147 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2025-12-30 07:08:35
+================================================================================
+
+Total PDFs processed: 12
+Successful predictions: 9
+Total dogs predicted: 799
+
+
+Angle Park:
+  Races: 10
+  Dogs: 54
+  Race 1: Box 1 - Time Of Design (13.1%)
+  Race 2: Box 7 - Sunset Tantrum (47.0%)
+  Race 3: Box 7 - All The Bling (16.6%)
+  Race 4: Box 7 - Elegant Flint (13.1%)
+  Race 5: Box 2 - Galba Stacey (44.8%)
+  Race 6: Box 7 - Lady Nova (8.3%)
+  Race 7: Box 7 - Let's Go Pies (10.4%)
+  Race 8: Box 2 - Hara's Kitana (19.8%)
+  Race 9: Box 7 - Swift Ascent (13.0%)
+  Race 10: Box 1 - Kim Got Game (19.9%)
+
+Bulli:
+  Races: 11
+  Dogs: 87
+  Race 1: Box 8 - Roscoe Conklin (13.1%)
+  Race 2: Box 2 - Ripper Joe (11.4%)
+  Race 3: Box 2 - Rion Express (60.8%)
+  Race 4: Box 1 - Zipping McKeon (64.0%)
+  Race 5: Box 6 - Lord Eddie (55.8%)
+  Race 6: Box 5 - Chief Lightning (66.3%)
+  Race 7: Box 8 - Unplug Ben (15.0%)
+  Race 8: Box 7 - Taking Chance (11.2%)
+  Race 9: Box 1 - Whistle Wave (65.4%)
+  Race 10: Box 7 - Sydney Keeping (58.4%)
+  Race 11: Box 2 - Lady Luella (17.6%)
+
+CASINO:
+  Races: 11
+  Dogs: 81
+  Race 1: Box 6 - Make A Mile (52.8%)
+  Race 2: Box 1 - Where's The Boss (38.4%)
+  Race 3: Box 1 - Cookey Charisma (52.3%)
+  Race 4: Box 8 - Brodies Tiger (24.9%)
+  Race 5: Box 1 - Kooringa Trish (19.4%)
+  Race 6: Box 5 - Hope I Can (16.2%)
+  Race 7: Box 4 - Petite Arma (61.4%)
+  Race 8: Box 1 - Remi Nath (17.5%)
+  Race 9: Box 1 - For Mercy Sake (16.0%)
+  Race 10: Box 1 - Rose Of Mercy (26.9%)
+  Race 11: Box 3 - Federal Escape (41.1%)
+
+GEELONG:
+  Races: 13
+  Dogs: 106
+  Race 1: Box 7 - Back Talk (57.0%)
+  Race 2: Box 5 - Notorious Milo (22.7%)
+  Race 3: Box 3 - Major Lose (51.1%)
+  Race 4: Box 1 - Rumbling Rose (23.9%)
+  Race 5: Box 1 - Watch It (15.2%)
+  Race 6: Box 1 - Altocumulus (72.4%)
+  Race 7: Box 2 - Paw Judas (9.2%)
+  Race 8: Box 2 - Reiko Jetson (16.1%)
+  Race 9: Box 4 - Blackpool Iris (64.0%)
+  Race 10: Box 4 - Rio Stella (25.8%)
+  Race 11: Box 4 - Average Return (12.6%)
+  Race 12: Box 2 - Val's Legacy (11.2%)
+  Race 13: Box 2 - Neena Bale (9.4%)
+
+GOSFORD:
+  Races: 12
+  Dogs: 95
+  Race 1: Box 5 - Dakila (13.8%)
+  Race 2: Box 1 - Von Rupee (16.3%)
+  Race 3: Box 1 - Gambino (68.4%)
+  Race 4: Box 4 - Miss Louella (6.7%)
+  Race 5: Box 1 - Loco Ryder (61.8%)
+  Race 6: Box 10 - Stylish Choice (49.9%)
+  Race 7: Box 7 - At The Gate (12.9%)
+  Race 8: Box 7 - Simply Juan (12.7%)
+  Race 9: Box 2 - Good Odds Turbo (60.5%)
+  Race 10: Box 4 - Ginny Riggs (16.9%)
+  Race 11: Box 8 - Loco Miss (31.2%)
+  Race 12: Box 8 - Sail Away Sam (35.5%)
+
+HORSHAM:
+  Races: 12
+  Dogs: 95
+  Race 1: Box 3 - Starbright Hud (64.0%)
+  Race 2: Box 1 - Detriment (54.9%)
+  Race 3: Box 3 - Kansas Chief (62.4%)
+  Race 4: Box 2 - Paw Yaz (52.0%)
+  Race 5: Box 1 - Ishikawa Lass (57.4%)
+  Race 6: Box 3 - Vilma Bale (68.3%)
+  Race 7: Box 3 - Motor City Sam (74.7%)
+  Race 8: Box 2 - Crackerjack Ralf (25.5%)
+  Race 9: Box 4 - Hokkaido Express (62.5%)
+  Race 10: Box 1 - Bunni Bale (16.6%)
+  Race 11: Box 4 - Cliff The Boss (62.0%)
+  Race 12: Box 3 - With The Wind (9.6%)
+
+Mandurah:
+  Races: 10
+  Dogs: 70
+  Race 1: Box 6 - Swift Melody (20.1%)
+  Race 2: Box 7 - Lansley Whisper (17.1%)
+  Race 3: Box 9 - Miss Crenshaw (44.9%)
+  Race 4: Box 3 - Jungle Deluxe (54.3%)
+  Race 5: Box 4 - Smell Like Rose (12.2%)
+  Race 6: Box 2 - Sheeran Melody (56.4%)
+  Race 7: Box 2 - Sunset Vendetta (43.4%)
+  Race 8: Box 7 - Hugo Gundi (15.6%)
+  Race 9: Box 2 - Aston Zagreb (6.1%)
+  Race 10: Box 7 - Yunderup Sun (17.4%)
+
+Q LAKESIDE:
+  Races: 11
+  Dogs: 99
+  Race 1: Box 6 - Lady Shazam (22.7%)
+  Race 2: Box 3 - Professor Saxon (16.3%)
+  Race 3: Box 2 - We Different (31.6%)
+  Race 4: Box 2 - Hara's Hazel (20.3%)
+  Race 5: Box 2 - Canya Shotfire (39.5%)
+  Race 6: Box 2 - Hara's Pest (72.6%)
+  Race 7: Box 2 - Professor Starr (57.5%)
+  Race 8: Box 1 - Backburn Bluey (17.0%)
+  Race 9: Box 2 - Grab A Donut (32.4%)
+  Race 10: Box 6 - Hara's Milena (19.0%)
+  Race 11: Box 2 - Flaming Blossom (8.3%)
+
+Warragul:
+  Races: 12
+  Dogs: 112
+  Race 1: Box 8 - Zoe's Secret (46.7%)
+  Race 2: Box 8 - Fading Flame (64.7%)
+  Race 3: Box 10 - Tinker Dot (62.7%)
+  Race 4: Box 2 - Better Banjo (64.7%)
+  Race 5: Box 7 - Memories (29.3%)
+  Race 6: Box 6 - Black Business (15.1%)
+  Race 7: Box 3 - Atticus (66.7%)
+  Race 8: Box 3 - Paw Phelps (51.9%)
+  Race 9: Box 9 - Master Your Mind (66.7%)
+  Race 10: Box 3 - Paw Tabitha (38.1%)
+  Race 11: Box 2 - Paw Kramer (71.2%)
+  Race 12: Box 3 - Myall Jack (17.9%)
