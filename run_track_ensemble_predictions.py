@@ -257,13 +257,59 @@ def main():
         # Sort by Track -> RaceNumber -> ML_Confidence
         df_all = df_all.sort_values(['Track', 'RaceNumber', 'ML_Confidence'], ascending=[True, True, False])
         
-        # Save to Excel
+        # Save to Excel with formatting
         output_dir = "outputs"
         os.makedirs(output_dir, exist_ok=True)
         
         excel_path = os.path.join(output_dir, "track_ensemble_predictions.xlsx")
-        df_all.to_excel(excel_path, index=False)
-        print(f"✅ Excel saved: {excel_path}")
+        
+        # Create Excel writer with formatting
+        with pd.ExcelWriter(excel_path, engine='openpyxl') as writer:
+            df_all.to_excel(writer, index=False, sheet_name='Predictions')
+            
+            # Get workbook and worksheet
+            workbook = writer.book
+            worksheet = writer.sheets['Predictions']
+            
+            # Define fill styles
+            from openpyxl.styles import PatternFill, Border, Side
+            green_fill = PatternFill(start_color='90EE90', end_color='90EE90', fill_type='solid')
+            yellow_fill = PatternFill(start_color='FFFF00', end_color='FFFF00', fill_type='solid')
+            orange_fill = PatternFill(start_color='FFA500', end_color='FFA500', fill_type='solid')
+            black_border = Border(top=Side(style='thick', color='000000'))
+            
+            # Group by Track and RaceNumber to find positions
+            prev_race_key = None
+            for idx, row in df_all.iterrows():
+                excel_row = idx + 2  # +2 because Excel is 1-indexed and we have a header row
+                race_key = f"{row['Track']}_{row['RaceNumber']}"
+                
+                # Get all dogs in this race and sort by ML_Confidence
+                race_df = df_all[(df_all['Track'] == row['Track']) & (df_all['RaceNumber'] == row['RaceNumber'])]
+                race_df_sorted = race_df.sort_values('ML_Confidence', ascending=False)
+                
+                # Find position (1st, 2nd, 3rd)
+                position = list(race_df_sorted.index).index(idx) + 1
+                
+                # Apply color coding
+                if position == 1:
+                    for col in range(1, len(df_all.columns) + 1):
+                        worksheet.cell(row=excel_row, column=col).fill = green_fill
+                elif position == 2:
+                    for col in range(1, len(df_all.columns) + 1):
+                        worksheet.cell(row=excel_row, column=col).fill = yellow_fill
+                elif position == 3:
+                    for col in range(1, len(df_all.columns) + 1):
+                        worksheet.cell(row=excel_row, column=col).fill = orange_fill
+                
+                # Add black line between different races
+                if prev_race_key is not None and race_key != prev_race_key:
+                    for col in range(1, len(df_all.columns) + 1):
+                        worksheet.cell(row=excel_row, column=col).border = black_border
+                
+                prev_race_key = race_key
+        
+        print(f"✅ Excel saved (with color coding): {excel_path}")
         
         # Save summary
         summary_path = os.path.join(output_dir, "track_ensemble_summary.txt")
