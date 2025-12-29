@@ -254,8 +254,13 @@ def main():
         # Combine all predictions
         df_all = pd.concat(all_predictions, ignore_index=True)
         
-        # Sort by Track -> RaceNumber -> ML_Confidence
-        df_all = df_all.sort_values(['Track', 'RaceNumber', 'ML_Confidence'], ascending=[True, True, False])
+        # Reorder columns: Track, RaceNumber, Box, DogName, ML_Confidence, then rest
+        priority_cols = ['Track', 'RaceNumber', 'Box', 'DogName', 'ML_Confidence']
+        other_cols = [col for col in df_all.columns if col not in priority_cols]
+        df_all = df_all[priority_cols + other_cols]
+        
+        # Sort by Track -> RaceNumber -> Box (for race order)
+        df_all = df_all.sort_values(['Track', 'RaceNumber', 'Box'], ascending=[True, True, True])
         
         # Save to Excel with formatting
         output_dir = "outputs"
@@ -278,36 +283,43 @@ def main():
             orange_fill = PatternFill(start_color='FFA500', end_color='FFA500', fill_type='solid')
             black_border = Border(top=Side(style='thick', color='000000'))
             
-            # Group by Track and RaceNumber to find positions
+            # Apply formatting row by row
             prev_race_key = None
-            for idx, row in df_all.iterrows():
-                excel_row = idx + 2  # +2 because Excel is 1-indexed and we have a header row
+            current_row = 2  # Start at row 2 (after header)
+            
+            for idx in range(len(df_all)):
+                row = df_all.iloc[idx]
                 race_key = f"{row['Track']}_{row['RaceNumber']}"
                 
-                # Get all dogs in this race and sort by ML_Confidence
-                race_df = df_all[(df_all['Track'] == row['Track']) & (df_all['RaceNumber'] == row['RaceNumber'])]
-                race_df_sorted = race_df.sort_values('ML_Confidence', ascending=False)
+                # Add black line at start of new race
+                if prev_race_key is not None and race_key != prev_race_key:
+                    for col in range(1, len(df_all.columns) + 1):
+                        worksheet.cell(row=current_row, column=col).border = black_border
                 
-                # Find position (1st, 2nd, 3rd)
-                position = list(race_df_sorted.index).index(idx) + 1
+                # Get all dogs in current race sorted by ML_Confidence
+                race_mask = (df_all['Track'] == row['Track']) & (df_all['RaceNumber'] == row['RaceNumber'])
+                race_dogs = df_all[race_mask].copy()
+                race_dogs_sorted = race_dogs.sort_values('ML_Confidence', ascending=False)
+                
+                # Find position of current dog (1st, 2nd, 3rd by ML_Confidence)
+                position = list(race_dogs_sorted.index).index(df_all.index[idx]) + 1
                 
                 # Apply color coding
                 if position == 1:
-                    for col in range(1, len(df_all.columns) + 1):
-                        worksheet.cell(row=excel_row, column=col).fill = green_fill
+                    fill = green_fill
                 elif position == 2:
-                    for col in range(1, len(df_all.columns) + 1):
-                        worksheet.cell(row=excel_row, column=col).fill = yellow_fill
+                    fill = yellow_fill
                 elif position == 3:
-                    for col in range(1, len(df_all.columns) + 1):
-                        worksheet.cell(row=excel_row, column=col).fill = orange_fill
+                    fill = orange_fill
+                else:
+                    fill = None
                 
-                # Add black line between different races
-                if prev_race_key is not None and race_key != prev_race_key:
+                if fill:
                     for col in range(1, len(df_all.columns) + 1):
-                        worksheet.cell(row=excel_row, column=col).border = black_border
+                        worksheet.cell(row=current_row, column=col).fill = fill
                 
                 prev_race_key = race_key
+                current_row += 1
         
         print(f"✅ Excel saved (with color coding): {excel_path}")
         
