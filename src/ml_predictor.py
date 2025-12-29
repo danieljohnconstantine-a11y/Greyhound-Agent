@@ -410,9 +410,12 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
             logger.debug(f"  Loaded {len(df_results)} race entries from {os.path.basename(results_file)}")
             
             # Normalize column names - handle variations in CSV format
-            # Some CSVs use 'Race' instead of 'RaceNumber'
-            if 'Race' in df_results.columns and 'RaceNumber' not in df_results.columns:
-                df_results['RaceNumber'] = df_results['Race']
+            # Some CSVs use 'Race', 'RaceNum', or 'RaceNumber'
+            if 'RaceNumber' not in df_results.columns:
+                if 'Race' in df_results.columns:
+                    df_results['RaceNumber'] = df_results['Race']
+                elif 'RaceNum' in df_results.columns:
+                    df_results['RaceNumber'] = df_results['RaceNum']
             
             # Group by race (Track + RaceNumber)
             if 'Track' not in df_results.columns or 'RaceNumber' not in df_results.columns:

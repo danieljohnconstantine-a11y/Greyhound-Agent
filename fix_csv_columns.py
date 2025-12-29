@@ -27,11 +27,16 @@ def fix_csv_columns():
             original_cols = list(df.columns)
             modified = False
             
-            # Fix 'Race' -> 'RaceNumber'
-            if 'Race' in df.columns and 'RaceNumber' not in df.columns:
-                df.rename(columns={'Race': 'RaceNumber'}, inplace=True)
-                modified = True
-                print(f"✅ Fixed {os.path.basename(csv_file)}: 'Race' → 'RaceNumber'")
+            # Fix 'Race' or 'RaceNum' -> 'RaceNumber'
+            if 'RaceNumber' not in df.columns:
+                if 'Race' in df.columns:
+                    df.rename(columns={'Race': 'RaceNumber'}, inplace=True)
+                    modified = True
+                    print(f"✅ Fixed {os.path.basename(csv_file)}: 'Race' → 'RaceNumber'")
+                elif 'RaceNum' in df.columns:
+                    df.rename(columns={'RaceNum': 'RaceNumber'}, inplace=True)
+                    modified = True
+                    print(f"✅ Fixed {os.path.basename(csv_file)}: 'RaceNum' → 'RaceNumber'")
             
             # Check if file now has required columns
             if 'Track' in df.columns and 'RaceNumber' in df.columns:
