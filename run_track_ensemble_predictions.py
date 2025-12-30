@@ -254,6 +254,31 @@ def main():
         # Combine all predictions
         df_all = pd.concat(all_predictions, ignore_index=True)
         
+        # Remove columns that cannot be populated from PDFs (not factual data)
+        # These fields don't exist in race form PDFs and would only have placeholder values
+        columns_to_remove = [
+            'Owner', 'Color', 'Sire', 'Dam',  # Pedigree info not in race forms
+            'RaceDate',  # Race date is for training matching, not predictions
+        ]
+        
+        # Also remove computed feature columns that are all defaults/placeholders
+        # These don't add value if they're all the same
+        placeholder_columns = [
+            'TimeEstimated', 'Margins', 'TrackConditionAdj', 'RestFactor',
+            'MarginAvg', 'FormMomentum', 'WeightFactor', 'FormMomentumNorm',
+            'MarginFactor', 'TrackBox4Adjustment', 'Last3AvgFinish',
+            'Last3FinishFactor', 'RecentPlaceStreak', 'TimeConverted'
+        ]
+        
+        # Remove columns that exist in the dataframe
+        columns_to_remove_existing = [col for col in columns_to_remove if col in df_all.columns]
+        placeholder_columns_existing = [col for col in placeholder_columns if col in df_all.columns]
+        
+        all_cols_to_remove = columns_to_remove_existing + placeholder_columns_existing
+        if all_cols_to_remove:
+            print(f"   Removing {len(all_cols_to_remove)} non-factual columns: {', '.join(all_cols_to_remove[:5])}...")
+            df_all = df_all.drop(columns=all_cols_to_remove)
+        
         # Reorder columns: Track, RaceNumber, Box, DogName, ML_Confidence, then rest
         priority_cols = ['Track', 'RaceNumber', 'Box', 'DogName', 'ML_Confidence']
         other_cols = [col for col in df_all.columns if col not in priority_cols]

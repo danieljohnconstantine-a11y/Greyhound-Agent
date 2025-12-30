@@ -556,19 +556,29 @@ def parse_race_form(text):
         if "TimeConverted" not in dog:
             dog["TimeConverted"] = False
         
-        # CRITICAL: Ensure all text fields have values (never blank/None)
-        text_fields_defaults = {
-            'Trainer': 'N/A',
-            'Owner': 'N/A',
-            'Color': 'N/A',
-            'Sex': 'N/A',
-            'Sire': 'N/A',
-            'Dam': 'N/A',
-            'Age': 'N/A'
-        }
-        for field, default_val in text_fields_defaults.items():
-            if field not in dog or dog[field] is None or pd.isna(dog.get(field)) or (isinstance(dog.get(field), str) and dog[field].strip() == ''):
-                dog[field] = default_val
+        # Split SexAge field into separate Sex and Age columns
+        # Format: "7d" = 7 years old, dog (male)
+        # Format: "3b" = 3 years old, bitch (female)
+        if 'SexAge' in dog and dog['SexAge']:
+            sex_age_str = str(dog['SexAge'])
+            # Extract age (numeric part) and sex (letter at the end)
+            age_match = re.match(r'(\d+)([a-z])', sex_age_str.lower())
+            if age_match:
+                dog['Age'] = int(age_match.group(1))
+                sex_letter = age_match.group(2)
+                # Convert letter to readable sex: 'd' = dog (male), 'b' = bitch (female)
+                dog['Sex'] = 'Dog' if sex_letter == 'd' else 'Bitch' if sex_letter == 'b' else 'Unknown'
+            else:
+                # Fallback if format doesn't match expected pattern
+                dog['Age'] = None
+                dog['Sex'] = 'Unknown'
+        else:
+            dog['Age'] = None
+            dog['Sex'] = 'Unknown'
+        
+        # CRITICAL: Ensure Trainer field has value (never blank/None)
+        if 'Trainer' not in dog or dog['Trainer'] is None or pd.isna(dog.get('Trainer')) or (isinstance(dog.get('Trainer'), str) and dog['Trainer'].strip() == ''):
+            dog['Trainer'] = 'N/A'
         
         # Ensure numeric fields have values (never blank/None)
         numeric_fields_defaults = {
