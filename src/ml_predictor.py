@@ -537,12 +537,15 @@ def normalize_track_name(track_name):
     
     Examples:
         "Richmond" -> "RICH"
+        "Richmond Straight" -> "RICH"
         "BetDeluxe Capalaba" -> "CAPA"
         "Ladbrokes Q1 Lakeside" -> "QLAK"
+        "Ladbrokes Q Straight" -> "QSTR"
     """
     track_mapping = {
         # Common full names to 4-letter codes
         'richmond': 'RICH',
+        'richmond straight': 'RICH',
         'grafton': 'GRAF',
         'healesville': 'HEAL',
         'mount gambier': 'MTGG',
@@ -552,6 +555,7 @@ def normalize_track_name(track_name):
         'betdeluxe rockhampton': 'ROCK',
         'ladbrokes q1 lakeside': 'QLAK',
         'ladbrokes q2 parklands': 'QPRK',
+        'ladbrokes q straight': 'QSTR',
         'wentworth park': 'WENP',
         'angle park': 'ANGL',
         'the meadows': 'MEAD',
@@ -565,6 +569,7 @@ def normalize_track_name(track_name):
         'horsham': 'HSHM',
         'maitland': 'MAIT',
         'newcastle': 'NOWR',
+        'nowra': 'NOWR',
         'gosford': 'GOSF',
         'bulli': 'BULI',
         'wollongong': 'WNBL',
@@ -583,13 +588,14 @@ def normalize_track_name(track_name):
         'rockhampton': 'ROCK',
         'capalaba': 'CAPA',
         'darwin': 'DRWN',
-        'hobart': 'TAST',
+        'hobart': 'ELWK',
         'launceston': 'ELWK',
         'devonport': 'MEAD',
         'gardens': 'GARD',
         'mandurah': 'MAND',
         'cannington': 'CANN',
         'murray bridge': 'MBRS',
+        'murray bridge straight': 'MBRS',
         'mount barker': 'MBRG',
         'meadows': 'MEAD',
         'goulburn': 'GOUL',
