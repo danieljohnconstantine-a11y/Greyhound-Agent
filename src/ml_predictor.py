@@ -730,8 +730,9 @@ def load_historical_data_hybrid(data_dir='data'):
                 pdf_track_code = match.group(1)
                 day = match.group(2)
                 month = match.group(3)
-                # Assume year 2025 for now (can be improved)
-                pdf_date = f"2025-{month}-{day}"
+                # Determine year: December = 2025, January = 2026
+                year = "2026" if month == "01" else "2025"
+                pdf_date = f"{year}-{month}-{day}"
             
             with pdfplumber.open(pdf_file) as pdf:
                 text = ""
