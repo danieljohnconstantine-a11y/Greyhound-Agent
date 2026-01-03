@@ -1,0 +1,134 @@
+Date,Track,RaceNumber,Position1,Position2,Position3,Position4,Position5,Position6,Position7,Position8,Position9,Position10
+2025-11-25,Grafton,1,1,8,7,5
+2025-11-25,Grafton,2,2,5,8,4
+2025-11-25,Grafton,3,7,4,1,3
+2025-11-25,Grafton,4,7,4,8,6
+2025-11-25,Grafton,5,1,4,6,7
+2025-11-25,Grafton,6,1,4,3,7
+2025-11-25,Grafton,7,6,8,2,7
+2025-11-25,Grafton,8,6,9,4,3
+2025-11-25,Grafton,9,3,1,7,8
+2025-11-25,Grafton,10,3,5,8,1
+2025-11-25,Bulli,1,1,8,4,5
+2025-11-25,Bulli,2,7,1,0,8,3
+2025-11-25,Bulli,3,5,7,2,8
+2025-11-25,Bulli,4,2,1,5,6
+2025-11-25,Bulli,5,7,6,1,4
+2025-11-25,Bulli,6,8,2,1,4
+2025-11-25,Bulli,7,1,7,2,4
+2025-11-25,Bulli,8,8,3,4,7
+2025-11-25,Bulli,9,1,6,8,3
+2025-11-25,Bulli,10,4,7,1,8
+2025-11-25,Bulli,11,4,2,7,8
+2025-11-25,Bulli,12,2,3,7,6
+2025-11-25,Gosford,1,5,7,6,4
+2025-11-25,Gosford,2,6,4,2,9
+2025-11-25,Gosford,3,2,3,1,4
+2025-11-25,Gosford,4,4,6,3,2
+2025-11-25,Gosford,5,2,6,3,4
+2025-11-25,Gosford,6,5,1,7,8
+2025-11-25,Gosford,7,9,7,2,6
+2025-11-25,Gosford,8,4,5,8,3
+2025-11-25,Gosford,9,7,4,8,6
+2025-11-25,Gosford,10,3,1,5,6
+2025-11-25,Gosford,11,8,2,1,4
+2025-11-25,Murray Bridge Straight,1,5,2,8,4
+2025-11-25,Murray Bridge Straight,2,6,1,2,8
+2025-11-25,Murray Bridge Straight,3,8,6,4,1
+2025-11-25,Murray Bridge Straight,4,1,6,2,8
+2025-11-25,Murray Bridge Straight,5,2,7,8,4
+2025-11-25,Murray Bridge Straight,6,2,8,7,5
+2025-11-25,Murray Bridge Straight,7,7,1,8,5
+2025-11-25,Murray Bridge Straight,8,4,8,5,2
+2025-11-25,Murray Bridge Straight,9,1,8,6,4
+2025-11-25,Murray Bridge Straight,10,8,6,2,4
+2025-11-25,Launceston,1,2,1,4,7
+2025-11-25,Launceston,2,4,6,5,8
+2025-11-25,Launceston,3,2,7,1,0,4
+2025-11-25,Launceston,4,2,5,6,7
+2025-11-25,Launceston,5,1,6,2,3
+2025-11-25,Launceston,6,8,1,2,3
+2025-11-25,Launceston,7,8,7,1,6
+2025-11-25,Launceston,8,7,8,2,3
+2025-11-25,Launceston,9,1,8,6,7
+2025-11-25,Launceston,10,6,7,8,4
+2025-11-25,Horsham,1,2,1,6,8
+2025-11-25,Horsham,2,8,2,7,3
+2025-11-25,Horsham,3,7,8,1,4
+2025-11-25,Horsham,4,3,8,1,2
+2025-11-25,Horsham,5,1,6,3,2
+2025-11-25,Horsham,6,7,8,4,5
+2025-11-25,Horsham,7,2,1,6,3
+2025-11-25,Horsham,8,6,3,8,5
+2025-11-25,Horsham,9,3,2,4,7
+2025-11-25,Horsham,10,2,1,3,6
+2025-11-25,Horsham,11,1,4,3,7
+2025-11-25,Horsham,12,7,8,1,6
+2025-11-25,Ladbrokes Q1 Lakeside,1,2,7,5,4
+2025-11-25,Ladbrokes Q1 Lakeside,2,6,1,2,3
+2025-11-25,Ladbrokes Q1 Lakeside,3,1,7,3,2
+2025-11-25,Ladbrokes Q1 Lakeside,4,6,1,3,4
+2025-11-25,Ladbrokes Q1 Lakeside,5,4,6,2,7
+2025-11-25,Ladbrokes Q1 Lakeside,6,1,2,7,5
+2025-11-25,Ladbrokes Q1 Lakeside,7,1,3,2,5
+2025-11-25,Ladbrokes Q1 Lakeside,8,2,3,5,1
+2025-11-25,Ladbrokes Q1 Lakeside,9,8,2,3,1
+2025-11-25,Ladbrokes Q1 Lakeside,10,3,4,6,2
+2025-11-25,Ladbrokes Q1 Lakeside,11,1,2,4,7
+2025-11-25,Ladbrokes Q1 Lakeside,12,3,6,7,8
+2025-11-25,Ballarat,1,7,8,3,6
+2025-11-25,Ballarat,2,2,5,7,3
+2025-11-25,Ballarat,3,9,1,2,4
+2025-11-25,Ballarat,4,4,5,2,7
+2025-11-25,Ballarat,5,4,2,8,7
+2025-11-25,Ballarat,6,1,3,7,8
+2025-11-25,Ballarat,7,3,2,7,4
+2025-11-25,Ballarat,8,1,3,8,6
+2025-11-25,Ballarat,9,7,4,2,6
+2025-11-25,Ballarat,10,7,5,6,1,0
+2025-11-25,Ballarat,11,1,8,2,3
+2025-11-25,Ballarat,12,8,5,3,6
+2025-11-25,Angle Park,1,1,5,4,8
+2025-11-25,Angle Park,2,1,2,5,8
+2025-11-25,Angle Park,3,2,8,4,5
+2025-11-25,Angle Park,4,1,2,5,7
+2025-11-25,Angle Park,5,1,5,7,4
+2025-11-25,Angle Park,6,4,8,1,2
+2025-11-25,Angle Park,7,8,2,1,5
+2025-11-25,Angle Park,8,4,1,9,2
+2025-11-25,Angle Park,9,4,1,5,8
+2025-11-25,Angle Park,10,7,8,2,5
+2025-11-25,Warragul,1,2,1,3,8
+2025-11-25,Warragul,2,8,6,5,4
+2025-11-25,Warragul,3,1,3,8,7
+2025-11-25,Warragul,4,6,1,5,8
+2025-11-25,Warragul,5,6,1,2,8
+2025-11-25,Warragul,6,2,5,4,3
+2025-11-25,Warragul,7,3,7,1,0,1
+2025-11-25,Warragul,8,2,1,4,3
+2025-11-25,Warragul,9,3,2,1,5
+2025-11-25,Warragul,10,8,7,1,3
+2025-11-25,Warragul,11,4,7,2,1
+2025-11-25,Warragul,12,4,8,5,7
+2025-11-25,Bet Nation Townsville,1,3,7,6,4
+2025-11-25,Bet Nation Townsville,2,1,8,6,4
+2025-11-25,Bet Nation Townsville,3,5,8,3,4
+2025-11-25,Bet Nation Townsville,4,6,8,1,5
+2025-11-25,Bet Nation Townsville,5,4,5,3,7
+2025-11-25,Bet Nation Townsville,6,1,3,2,8
+2025-11-25,Bet Nation Townsville,7,8,6,1,2
+2025-11-25,Bet Nation Townsville,8,6,8,2,5
+2025-11-25,Bet Nation Townsville,9,7,1,8,5
+2025-11-25,Bet Nation Townsville,10,4,2,8,5
+2025-11-25,Bet Nation Townsville,11,2,7,6,5
+2025-11-25,Bet Nation Townsville,12,7,1,4,2
+2025-11-25,Mandurah,1,9,8,4,1
+2025-11-25,Mandurah,2,8,1,3,9
+2025-11-25,Mandurah,3,7,1,8,6
+2025-11-25,Mandurah,4,1,2,7,8
+2025-11-25,Mandurah,5,1,6,8,2
+2025-11-25,Mandurah,6,5,2,6,8
+2025-11-25,Mandurah,7,1,8,3,4
+2025-11-25,Mandurah,8,5,2,1,4
+2025-11-25,Mandurah,9,8,4,3,6
+2025-11-25,Mandurah,10,1,6,7,3
