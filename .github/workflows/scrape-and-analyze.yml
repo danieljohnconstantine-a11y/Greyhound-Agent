@@ -18,6 +18,14 @@ name: Scrape and Analyze Greyhound Forms
         required: false
         type: boolean
         default: false
+      scrape_mode:
+        description: 'Scraping mode: html or pdf'
+        required: false
+        type: choice
+        options:
+          - html
+          - pdf
+        default: html
 
 jobs:
   scrape-and-analyze:
@@ -43,7 +51,7 @@ jobs:
           mkdir -p data_predictions
           mkdir -p outputs
 
-      - name: Scrape HTML forms
+      - name: Scrape HTML forms or download PDFs
         id: scrape
         run: |
           DATE_ARG=""
@@ -56,16 +64,21 @@ jobs:
             MOCK_ARG="--mock"
           fi
 
-          python scrape_html_forms.py $DATE_ARG $MOCK_ARG --output-dir data_predictions
+          MODE_ARG=""
+          if [ -n "${{ github.event.inputs.scrape_mode }}" ]; then
+            MODE_ARG="--mode ${{ github.event.inputs.scrape_mode }}"
+          fi
 
-          # Check if any CSV files were created
-          if ls data_predictions/*.csv 1> /dev/null 2>&1; then
+          python scrape_html_forms.py $DATE_ARG $MOCK_ARG $MODE_ARG --output-dir data_predictions
+
+          # Check if any CSV or PDF files were created
+          if ls data_predictions/*.csv 1> /dev/null 2>&1 || ls data_predictions/*.pdf 1> /dev/null 2>&1; then
             echo "scrape_success=true" >> $GITHUB_OUTPUT
           else
             echo "scrape_success=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Convert scraped CSV to compatible format (if needed)
+      - name: Process data through pipeline
         if: steps.scrape.outputs.scrape_success == 'true'
         run: |
           echo "Scraped data is ready for analysis"
@@ -75,7 +88,12 @@ jobs:
         if: steps.scrape.outputs.scrape_success == 'true'
         run: |
           # Process scraped forms through the main pipeline
-          python main.py data_predictions/*.csv
+          # If PDFs were downloaded, process them; otherwise process CSV files
+          if ls data_predictions/*.pdf 1> /dev/null 2>&1; then
+            python main.py data_predictions/*.pdf
+          elif ls data_predictions/*.csv 1> /dev/null 2>&1; then
+            python main.py data_predictions/*.csv
+          fi
 
       - name: Generate timestamp for artifacts
         id: timestamp

@@ -1,27 +1,27 @@
-# HTML Form Scraping Guide
+# HTML Form Scraping & PDF Download Guide
 
 ## Overview
 
-The HTML Form Scraping feature automates the collection of greyhound racing data from web sources, eliminating the need to manually download PDF files. This feature is designed to integrate seamlessly with the existing analytics pipeline.
+The HTML Form Scraping feature automates the collection of greyhound racing data from web sources, supporting both HTML parsing and direct PDF downloads. This feature is designed to integrate seamlessly with the existing analytics pipeline.
 
 ## Components
 
 ### 1. Scraper Script (`scrape_html_forms.py`)
 
 The main scraping script that:
-- Fetches HTML data from configured sources
-- Parses race form information
-- Converts data to CSV format compatible with the pipeline
+- **HTML Mode**: Fetches HTML data from configured sources and parses race form information
+- **PDF Mode**: Automatically downloads PDF files from racing websites
+- Converts data to CSV format compatible with the pipeline (HTML mode)
 - Supports mock data generation for testing
 
 ### 2. GitHub Actions Workflow (`.github/workflows/scrape-and-analyze.yml`)
 
 An automated workflow that:
 - Runs daily at 6 AM UTC
-- Scrapes latest race forms
+- Scrapes latest race forms (HTML or PDF mode)
 - Processes data through the analytics pipeline
 - Uploads results as artifacts
-- Can be triggered manually on-demand
+- Can be triggered manually on-demand with mode selection
 
 ## Quick Start
 
@@ -37,6 +37,24 @@ python scrape_html_forms.py --mock --output-dir data_predictions
 python main.py data_predictions/*.csv
 ```
 
+### PDF Download Mode
+
+To download PDFs directly from a racing website:
+
+```bash
+# Download PDFs for today
+python scrape_html_forms.py --mode pdf --output-dir data_predictions
+
+# Download PDFs for a specific date
+python scrape_html_forms.py --mode pdf --date 2025-01-04 --output-dir data_predictions
+
+# Download PDFs filtered by track name
+python scrape_html_forms.py --mode pdf --track-filter "Angle Park" --output-dir data_predictions
+
+# Process downloaded PDFs
+python main.py data_predictions/*.pdf
+```
+
 ### Configuring Real Data Sources
 
 To scrape actual greyhound racing websites, edit `scrape_html_forms.py`:
@@ -46,6 +64,23 @@ To scrape actual greyhound racing websites, edit `scrape_html_forms.py`:
 SCRAPING_CONFIG = {
     "base_url": "https://actual-greyhound-racing-site.com",
     # ...
+}
+```
+
+2. **Configure PDF endpoint (for PDF mode):**
+```python
+"endpoints": {
+    "race_form": "/race-form",  # For HTML mode
+    "pdf_list": "/pdfs",        # Page that lists PDF downloads
+}
+```
+
+3. **Configure PDF link selector:**
+```python
+"pdf_config": {
+    "link_selector": "a[href$='.pdf']",  # CSS selector to find PDF links
+    "date_pattern": None,  # Optional date filtering
+    "track_filter": None   # Optional track filtering
 }
 ```
 
@@ -85,14 +120,23 @@ def parse_html_race_form(soup):
 ### Command-Line Options
 
 ```bash
-# Scrape today's data
+# HTML scraping mode (default)
 python scrape_html_forms.py --output-dir data_predictions
+
+# PDF download mode
+python scrape_html_forms.py --mode pdf --output-dir data_predictions
 
 # Scrape specific date
 python scrape_html_forms.py --date 2025-01-04 --output-dir data_predictions
 
 # Use custom URL
 python scrape_html_forms.py --url https://example.com/races --output-dir data_predictions
+
+# PDF mode with track filter
+python scrape_html_forms.py --mode pdf --track-filter "Angle Park" --output-dir data_predictions
+
+# PDF mode with custom selector
+python scrape_html_forms.py --mode pdf --pdf-selector "a.pdf-download" --output-dir data_predictions
 
 # Generate mock data for testing
 python scrape_html_forms.py --mock --output-dir data_predictions
@@ -113,6 +157,7 @@ The workflow automatically runs daily at 6 AM UTC. Results are uploaded as artif
 5. Optionally specify:
    - **Date**: Target date (YYYY-MM-DD format)
    - **Use mock data**: Enable for testing without real data
+   - **Scrape mode**: Choose "html" or "pdf" mode
 
 #### Viewing Results
 

@@ -49,10 +49,21 @@ SCRAPING_CONFIG = {
     "base_url": "https://example.com/greyhounds",  # ⚠️ REPLACE WITH ACTUAL URL
     "endpoints": {
         "race_form": "/race-form",  # Update with actual endpoint
-        "results": "/results"       # Update if results scraping is needed
+        "results": "/results",      # Update if results scraping is needed
+        "pdf_list": "/pdfs"         # Endpoint that lists available PDF files
     },
     "headers": {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    },
+    # PDF download configuration
+    "pdf_config": {
+        # CSS selector or pattern to find PDF links on the page
+        # Examples: "a[href$='.pdf']", "a.pdf-link", "a[href*='form.pdf']"
+        "link_selector": "a[href$='.pdf']",
+        # Optional: Filter PDFs by date pattern in filename (e.g., "20250104", "2025-01-04")
+        "date_pattern": None,
+        # Optional: Filter PDFs by track name in filename
+        "track_filter": None
     }
 }
 
@@ -222,6 +233,161 @@ def convert_to_csv_format(races_data, output_path):
     logger.info(f"Saved race data to {output_path}")
 
 
+def find_pdf_links(soup, base_url, link_selector="a[href$='.pdf']", date_pattern=None, track_filter=None):
+    """
+    Find PDF links on a webpage.
+    
+    Args:
+        soup: BeautifulSoup object of the page
+        base_url: Base URL for resolving relative links
+        link_selector: CSS selector to find PDF links
+        date_pattern: Optional date pattern to filter PDFs (e.g., "20250104")
+        track_filter: Optional track name to filter PDFs
+        
+    Returns:
+        List of absolute PDF URLs
+    """
+    pdf_links = []
+    
+    try:
+        # Find all links matching the selector
+        links = soup.select(link_selector)
+        logger.info(f"Found {len(links)} potential PDF links")
+        
+        for link in links:
+            href = link.get('href')
+            if not href:
+                continue
+            
+            # Make absolute URL
+            if href.startswith('http'):
+                pdf_url = href
+            elif href.startswith('/'):
+                pdf_url = base_url.rstrip('/') + href
+            else:
+                pdf_url = base_url.rstrip('/') + '/' + href
+            
+            # Apply filters if specified
+            if date_pattern and date_pattern not in pdf_url:
+                continue
+            
+            if track_filter and track_filter.lower() not in pdf_url.lower():
+                continue
+            
+            pdf_links.append(pdf_url)
+            logger.info(f"  Found PDF: {pdf_url}")
+    
+    except Exception as e:
+        logger.error(f"Error finding PDF links: {e}")
+    
+    return pdf_links
+
+
+def download_pdf(url, output_path, headers=None):
+    """
+    Download a PDF file from a URL.
+    
+    Args:
+        url: URL of the PDF file
+        output_path: Path where the PDF should be saved
+        headers: Optional HTTP headers
+        
+    Returns:
+        True if download successful, False otherwise
+    """
+    try:
+        logger.info(f"Downloading PDF from: {url}")
+        response = requests.get(url, headers=headers, timeout=60, stream=True)
+        response.raise_for_status()
+        
+        # Check if content is actually a PDF
+        content_type = response.headers.get('Content-Type', '')
+        if 'pdf' not in content_type.lower() and not url.lower().endswith('.pdf'):
+            logger.warning(f"URL does not appear to be a PDF (Content-Type: {content_type})")
+        
+        # Write PDF to file
+        with open(output_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        
+        file_size = os.path.getsize(output_path)
+        logger.info(f"Successfully downloaded PDF: {output_path} ({file_size / 1024:.1f} KB)")
+        return True
+        
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Failed to download PDF from {url}: {e}")
+        return False
+    except Exception as e:
+        logger.error(f"Error saving PDF to {output_path}: {e}")
+        return False
+
+
+def scrape_and_download_pdfs(url, output_dir, headers=None, link_selector=None, date_pattern=None, track_filter=None):
+    """
+    Scrape a webpage for PDF links and download them.
+    
+    Args:
+        url: URL of the page containing PDF links
+        output_dir: Directory to save downloaded PDFs
+        headers: Optional HTTP headers
+        link_selector: CSS selector to find PDF links
+        date_pattern: Optional date pattern to filter PDFs
+        track_filter: Optional track name to filter PDFs
+        
+    Returns:
+        List of paths to downloaded PDF files
+    """
+    logger.info(f"Scraping PDF links from: {url}")
+    
+    # Scrape the page
+    soup = scrape_race_form_html(url, headers)
+    if soup is None:
+        logger.error("Failed to scrape page for PDF links")
+        return []
+    
+    # Use default selector if not provided
+    if link_selector is None:
+        link_selector = SCRAPING_CONFIG['pdf_config']['link_selector']
+    
+    # Find PDF links
+    base_url = '/'.join(url.split('/')[:3])  # Extract base URL (e.g., https://example.com)
+    pdf_urls = find_pdf_links(soup, base_url, link_selector, date_pattern, track_filter)
+    
+    if not pdf_urls:
+        logger.warning("No PDF links found on the page")
+        return []
+    
+    logger.info(f"Found {len(pdf_urls)} PDF(s) to download")
+    
+    # Download each PDF
+    downloaded_files = []
+    os.makedirs(output_dir, exist_ok=True)
+    
+    for pdf_url in pdf_urls:
+        # Extract filename from URL
+        filename = pdf_url.split('/')[-1]
+        if not filename.endswith('.pdf'):
+            filename += '.pdf'
+        
+        output_path = os.path.join(output_dir, filename)
+        
+        # Skip if file already exists
+        if os.path.exists(output_path):
+            logger.info(f"PDF already exists, skipping: {output_path}")
+            downloaded_files.append(output_path)
+            continue
+        
+        # Download the PDF
+        if download_pdf(pdf_url, output_path, headers):
+            downloaded_files.append(output_path)
+        
+        # Be nice to the server - add a small delay between downloads
+        time.sleep(1)
+    
+    logger.info(f"Successfully downloaded {len(downloaded_files)} PDF file(s)")
+    return downloaded_files
+
+
 def scrape_mock_data(output_dir):
     """
     Generate mock/sample race data for testing when actual scraping is not available.
@@ -290,7 +456,7 @@ def scrape_mock_data(output_dir):
 
 def main():
     """Main function to run the scraper."""
-    parser = argparse.ArgumentParser(description='Scrape greyhound racing HTML forms')
+    parser = argparse.ArgumentParser(description='Scrape greyhound racing HTML forms or download PDFs')
     parser.add_argument('--date', type=str, default=None,
                         help='Date to scrape (YYYY-MM-DD). Default: today')
     parser.add_argument('--output-dir', type=str, default='data_predictions',
@@ -299,6 +465,12 @@ def main():
                         help='Custom URL to scrape. Overrides default configuration')
     parser.add_argument('--mock', action='store_true',
                         help='Generate mock data for testing instead of actual scraping')
+    parser.add_argument('--mode', type=str, choices=['html', 'pdf'], default='html',
+                        help='Scraping mode: "html" for HTML parsing (default), "pdf" for PDF downloads')
+    parser.add_argument('--pdf-selector', type=str, default=None,
+                        help='CSS selector for finding PDF links (only for PDF mode)')
+    parser.add_argument('--track-filter', type=str, default=None,
+                        help='Filter PDFs by track name (only for PDF mode)')
     
     args = parser.parse_args()
     
@@ -313,6 +485,7 @@ def main():
         target_date = datetime.now()
     
     logger.info(f"Scraping race data for date: {target_date.strftime('%Y-%m-%d')}")
+    logger.info(f"Mode: {args.mode.upper()}")
     
     # Create output directory
     os.makedirs(args.output_dir, exist_ok=True)
@@ -322,6 +495,44 @@ def main():
         scrape_mock_data(args.output_dir)
         return
     
+    # PDF download mode
+    if args.mode == 'pdf':
+        # Determine URL to scrape for PDF links
+        if args.url:
+            scrape_url = args.url
+        else:
+            # Build URL from configuration
+            base_url = SCRAPING_CONFIG['base_url']
+            endpoint = SCRAPING_CONFIG['endpoints']['pdf_list']
+            scrape_url = f"{base_url}{endpoint}?date={target_date.strftime('%Y-%m-%d')}"
+        
+        # Get configuration
+        headers = SCRAPING_CONFIG.get('headers')
+        pdf_selector = args.pdf_selector or SCRAPING_CONFIG['pdf_config']['link_selector']
+        date_pattern = target_date.strftime('%Y%m%d')  # Format date for filtering
+        track_filter = args.track_filter or SCRAPING_CONFIG['pdf_config'].get('track_filter')
+        
+        # Download PDFs
+        downloaded_files = scrape_and_download_pdfs(
+            scrape_url,
+            args.output_dir,
+            headers=headers,
+            link_selector=pdf_selector,
+            date_pattern=date_pattern,
+            track_filter=track_filter
+        )
+        
+        if downloaded_files:
+            logger.info(f"PDF download completed! Files saved to {args.output_dir}")
+            logger.info("Downloaded files:")
+            for file in downloaded_files:
+                logger.info(f"  - {file}")
+        else:
+            logger.error("No PDFs were downloaded")
+        
+        return
+    
+    # HTML scraping mode (original functionality)
     # Determine URL to scrape
     if args.url:
         scrape_url = args.url

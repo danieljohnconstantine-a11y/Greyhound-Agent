@@ -56,11 +56,13 @@ To run manually:
 
 ## Advanced Features
 
-### 1. HTML Form Scraping
+### 1. HTML Form Scraping & PDF Download
 
-Automatically scrape greyhound racing forms from HTML sources instead of manually downloading PDFs.
+Automatically scrape greyhound racing forms from HTML sources or download PDFs directly from racing websites.
 
 **Features:**
+- **HTML Scraping Mode**: Extract data from website HTML → outputs CSV → processes through pipeline
+- **PDF Download Mode**: Automatically download PDF files from configured URLs
 - Automated daily scraping via GitHub Actions
 - Configurable data sources
 - Mock data generation for testing
@@ -68,11 +70,17 @@ Automatically scrape greyhound racing forms from HTML sources instead of manuall
 
 **Usage:**
 ```bash
-# Scrape today's forms
+# HTML scraping mode (default)
 python scrape_html_forms.py --output-dir data_predictions
+
+# PDF download mode
+python scrape_html_forms.py --mode pdf --output-dir data_predictions
 
 # Scrape specific date
 python scrape_html_forms.py --date 2025-01-04 --output-dir data_predictions
+
+# PDF download with track filter
+python scrape_html_forms.py --mode pdf --track-filter "Angle Park" --output-dir data_predictions
 
 # Generate mock data for testing
 python scrape_html_forms.py --mock --output-dir data_predictions
@@ -81,7 +89,8 @@ python scrape_html_forms.py --mock --output-dir data_predictions
 **Configuration:**
 Edit `scrape_html_forms.py` to configure:
 - `base_url`: Base URL of the greyhound racing website
-- `endpoints`: API endpoints for race data
+- `endpoints`: API endpoints for race data and PDF lists
+- `pdf_config`: PDF link selector and filtering options
 - `headers`: HTTP headers for requests
 
 **Note:** The default configuration includes placeholder values. Update these with actual greyhound racing website URLs before production use.
