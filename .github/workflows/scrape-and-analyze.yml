@@ -1,10 +1,11 @@
+---
 name: Scrape and Analyze Greyhound Forms
 
-on:
+"on":
   # Run daily at 6 AM UTC (adjust timezone as needed)
   schedule:
     - cron: '0 6 * * *'
-  
+
   # Allow manual triggering
   workflow_dispatch:
     inputs:
@@ -21,27 +22,27 @@ on:
 jobs:
   scrape-and-analyze:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      
+
       - name: Create output directories
         run: |
           mkdir -p data_predictions
           mkdir -p outputs
-      
+
       - name: Scrape HTML forms
         id: scrape
         run: |
@@ -49,37 +50,37 @@ jobs:
           if [ -n "${{ github.event.inputs.date }}" ]; then
             DATE_ARG="--date ${{ github.event.inputs.date }}"
           fi
-          
+
           MOCK_ARG=""
           if [ "${{ github.event.inputs.use_mock_data }}" = "true" ]; then
             MOCK_ARG="--mock"
           fi
-          
+
           python scrape_html_forms.py $DATE_ARG $MOCK_ARG --output-dir data_predictions
-          
+
           # Check if any CSV files were created
           if ls data_predictions/*.csv 1> /dev/null 2>&1; then
             echo "scrape_success=true" >> $GITHUB_OUTPUT
           else
             echo "scrape_success=false" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Convert scraped CSV to compatible format (if needed)
         if: steps.scrape.outputs.scrape_success == 'true'
         run: |
           echo "Scraped data is ready for analysis"
           ls -lah data_predictions/
-      
+
       - name: Run greyhound analytics pipeline
         if: steps.scrape.outputs.scrape_success == 'true'
         run: |
           # Process scraped forms through the main pipeline
           python main.py data_predictions/*.csv
-      
+
       - name: Generate timestamp for artifacts
         id: timestamp
         run: echo "timestamp=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
-      
+
       - name: Upload analysis results
         if: steps.scrape.outputs.scrape_success == 'true'
         uses: actions/upload-artifact@v4
@@ -90,7 +91,7 @@ jobs:
             outputs/*.xlsx
             outputs/*.log
           retention-days: 30
-      
+
       - name: Upload selective picks
         if: steps.scrape.outputs.scrape_success == 'true'
         uses: actions/upload-artifact@v4
@@ -98,23 +99,23 @@ jobs:
           name: selective-picks-${{ steps.timestamp.outputs.timestamp }}
           path: outputs/selective_picks.csv
           retention-days: 30
-      
+
       - name: Create summary
         if: always()
         run: |
           echo "## Workflow Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ "${{ steps.scrape.outputs.scrape_success }}" = "true" ]; then
             echo "✅ **Scraping Status:** Success" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            
+
             # Count scraped entries
             if [ -f data_predictions/scraped_*.csv ]; then
               ENTRY_COUNT=$(tail -n +2 data_predictions/scraped_*.csv | wc -l)
               echo "📊 **Entries Scraped:** $ENTRY_COUNT" >> $GITHUB_STEP_SUMMARY
             fi
-            
+
             # Show selective picks if available
             if [ -f outputs/selective_picks.csv ]; then
               PICKS_COUNT=$(tail -n +2 outputs/selective_picks.csv | wc -l)
@@ -130,10 +131,10 @@ jobs:
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "No data was scraped. Check the scraper logs for details." >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Timestamp:** $(date -u)" >> $GITHUB_STEP_SUMMARY
-      
+
       - name: Notify on failure
         if: failure()
         run: |
