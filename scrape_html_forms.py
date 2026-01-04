@@ -32,13 +32,24 @@ logger = logging.getLogger(__name__)
 # Configuration for scraping sources
 # ⚠️ WARNING: This is a placeholder configuration
 # Update with actual greyhound racing website URLs before production use
-# Using example.com will fail in production
+#
+# URL Requirements:
+#  - Must be a publicly accessible greyhound racing website
+#  - Should provide race form data (track, race number, dogs, trainers, etc.)
+#  - Check website's Terms of Service and robots.txt before scraping
+#  - Ensure URL is HTTPS for security
+#
+# Example real-world patterns (update with actual URLs):
+#  - Australian: "https://greyhounds.example.au/racing/form"
+#  - UK: "https://uk-greyhounds.example.com/today"
+#  - US: "https://us-racing.example.org/forms"
+#
 SCRAPING_CONFIG = {
-    # Example configuration for a hypothetical greyhound racing website
-    "base_url": "https://example.com/greyhounds",  # ⚠️ Update with actual URL
+    # Base URL of the greyhound racing website
+    "base_url": "https://example.com/greyhounds",  # ⚠️ REPLACE WITH ACTUAL URL
     "endpoints": {
-        "race_form": "/race-form",
-        "results": "/results"
+        "race_form": "/race-form",  # Update with actual endpoint
+        "results": "/results"       # Update if results scraping is needed
     },
     "headers": {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -78,6 +89,41 @@ def parse_html_race_form(soup):
     This function should be customized based on the actual HTML structure
     of the greyhound racing website.
     
+    HOW TO CUSTOMIZE FOR A REAL WEBSITE:
+    1. Visit the target website in a browser
+    2. Right-click on race data and select "Inspect Element"
+    3. Identify the HTML structure:
+       - What element contains each race? (e.g., <div class="race-card">)
+       - Where is the track name? (e.g., <span class="venue-name">)
+       - Where is the race number? (e.g., <div class="race-num">)
+       - Where are the dogs listed? (e.g., <div class="runner">)
+    4. Update the CSS selectors below to match actual HTML
+    
+    EXAMPLE HTML STRUCTURES:
+    
+    Structure A (nested divs):
+      <div class="race-card">
+        <h3 class="track">Angle Park</h3>
+        <span class="race-no">Race 1</span>
+        <div class="runners">
+          <div class="runner">
+            <span class="box">1</span>
+            <span class="dog">Thunder Bolt</span>
+          </div>
+        </div>
+      </div>
+    
+    Structure B (table-based):
+      <table class="race-table">
+        <tr class="race-header">
+          <td>Track: Angle Park | Race: 1</td>
+        </tr>
+        <tr class="runner-row">
+          <td class="box-number">1</td>
+          <td class="dog-name">Thunder Bolt</td>
+        </tr>
+      </table>
+    
     Args:
         soup: BeautifulSoup object
         
@@ -86,20 +132,22 @@ def parse_html_race_form(soup):
     """
     races = []
     
-    # PLACEHOLDER IMPLEMENTATION
-    # This needs to be customized based on actual website structure
-    # Example parsing logic:
+    # ⚠️ PLACEHOLDER IMPLEMENTATION - CUSTOMIZE FOR ACTUAL WEBSITE
+    # The CSS selectors below are examples and WILL NOT work on real websites
+    # Update them based on the actual HTML structure (see examples above)
     
     # Find all race containers
+    # Example: race_containers = soup.find_all('div', class_='race-card')
     race_containers = soup.find_all('div', class_='race-container')
     
     for race_container in race_containers:
         try:
             # Extract race information with null checks
-            track_elem = race_container.find('span', class_='track-name')
-            race_num_elem = race_container.find('span', class_='race-number')
-            distance_elem = race_container.find('span', class_='distance')
-            time_elem = race_container.find('span', class_='start-time')
+            # Update these selectors based on actual website HTML:
+            track_elem = race_container.find('span', class_='track-name')  # Update selector
+            race_num_elem = race_container.find('span', class_='race-number')  # Update selector
+            distance_elem = race_container.find('span', class_='distance')  # Update selector
+            time_elem = race_container.find('span', class_='start-time')  # Update selector
             
             if not all([track_elem, race_num_elem]):
                 logger.warning("Missing required race information, skipping container")
@@ -113,13 +161,15 @@ def parse_html_race_form(soup):
             }
             
             # Extract dog information
-            dogs = race_container.find_all('div', class_='dog-entry')
+            # Update this selector based on actual website:
+            dogs = race_container.find_all('div', class_='dog-entry')  # Update selector
             for dog in dogs:
                 dog_data = race_data.copy()
                 
-                box_elem = dog.find('span', class_='box')
-                name_elem = dog.find('span', class_='dog-name')
-                trainer_elem = dog.find('span', class_='trainer')
+                # Update these selectors based on actual website HTML:
+                box_elem = dog.find('span', class_='box')  # Update selector
+                name_elem = dog.find('span', class_='dog-name')  # Update selector
+                trainer_elem = dog.find('span', class_='trainer')  # Update selector
                 
                 if not all([box_elem, name_elem]):
                     logger.warning("Missing required dog information, skipping dog")
@@ -129,7 +179,7 @@ def parse_html_race_form(soup):
                     'Box': int(box_elem.text.strip()),
                     'DogName': name_elem.text.strip(),
                     'Trainer': trainer_elem.text.strip() if trainer_elem else 'Unknown',
-                    # Add more fields as needed
+                    # Add more fields as available on the website
                 })
                 races.append(dog_data)
                 
