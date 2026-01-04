@@ -4,6 +4,7 @@ Automated parsing and scoring of greyhound racing forms with intelligent bet-wor
 
 ## Features
 - PDF-to-text ingestion
+- **HTML form scraping** (automated data collection)
 - Race form parsing
 - Trainer matching
 - Feature scoring
@@ -11,15 +12,41 @@ Automated parsing and scoring of greyhound racing forms with intelligent bet-wor
 - **Bet-worthy race detection and color highlighting**
 - **Speed matrix analysis and optimization**
 - **Prediction accuracy tracking**
+- **Automated GitHub Actions workflow**
 
 ## Quick Start
 
 See [QUICKSTART.md](QUICKSTART.md) for a step-by-step guide to running the pipeline.
 
 ## Usage
+
+### Manual Mode (PDF Files)
 1. Place your `.pdf` form file in the `data/` folder.
 2. Run `main.py`
 3. Check results in `outputs/`
+
+### Automated Mode (HTML Scraping)
+1. Configure scraping sources in `scrape_html_forms.py`
+2. Run the scraper:
+   ```bash
+   python scrape_html_forms.py --output-dir data_predictions
+   ```
+3. Process scraped data:
+   ```bash
+   python main.py data_predictions/*.csv
+   ```
+
+### GitHub Actions Workflow
+The repository includes an automated workflow that:
+- Runs daily at 6 AM UTC
+- Scrapes HTML forms automatically
+- Processes and analyzes the data
+- Uploads results as artifacts
+
+To run manually:
+1. Go to the "Actions" tab in GitHub
+2. Select "Scrape and Analyze Greyhound Forms"
+3. Click "Run workflow"
 
 ## Output Files
 - `todays_form.csv`: Parsed race data (CSV format)
@@ -29,7 +56,37 @@ See [QUICKSTART.md](QUICKSTART.md) for a step-by-step guide to running the pipel
 
 ## Advanced Features
 
-### 1. Bet-Worthy Race Highlighting
+### 1. HTML Form Scraping
+
+Automatically scrape greyhound racing forms from HTML sources instead of manually downloading PDFs.
+
+**Features:**
+- Automated daily scraping via GitHub Actions
+- Configurable data sources
+- Mock data generation for testing
+- CSV export compatible with existing pipeline
+
+**Usage:**
+```bash
+# Scrape today's forms
+python scrape_html_forms.py --output-dir data_predictions
+
+# Scrape specific date
+python scrape_html_forms.py --date 2025-01-04 --output-dir data_predictions
+
+# Generate mock data for testing
+python scrape_html_forms.py --mock --output-dir data_predictions
+```
+
+**Configuration:**
+Edit `scrape_html_forms.py` to configure:
+- `base_url`: Base URL of the greyhound racing website
+- `endpoints`: API endpoints for race data
+- `headers`: HTTP headers for requests
+
+**Note:** The default configuration includes placeholder values. Update these with actual greyhound racing website URLs before production use.
+
+### 2. Bet-Worthy Race Highlighting
 
 The Excel output (`todays_form_color.xlsx`) includes color highlighting to identify races that meet "bet-worthy" criteria. Within each bet-worthy race, dogs are color-coded by their predicted position based on FinalScore:
 
@@ -50,7 +107,7 @@ A race is considered bet-worthy if **any** of the following conditions are met:
 
 See [DEVELOPER_NOTES.md](DEVELOPER_NOTES.md) for threshold tuning details.
 
-### 2. Speed Matrix Analysis
+### 3. Speed Matrix Analysis
 
 Optimize scoring weights based on actual race results. See [SPEED_MATRIX_USER_GUIDE.md](SPEED_MATRIX_USER_GUIDE.md) for details.
 
@@ -58,7 +115,7 @@ Optimize scoring weights based on actual race results. See [SPEED_MATRIX_USER_GU
 python analyze_speed_matrix.py
 ```
 
-### 3. Prediction Accuracy Analysis
+### 4. Prediction Accuracy Analysis
 
 Track and analyze prediction accuracy against actual results. See [ANALYSIS_README.md](ANALYSIS_README.md) for details.
 
@@ -68,11 +125,18 @@ python analyze_predictions.py
 
 ## Dependencies
 
+Install all dependencies with:
+```bash
+pip install -r requirements.txt
+```
+
+Core dependencies:
 - pandas
 - numpy
 - pdfplumber
 - openpyxl
 - scikit-learn (for advanced analysis)
 - scipy (for statistical analysis)
-
-Install with: `pip install pandas numpy pdfplumber openpyxl scikit-learn scipy`
+- requests (for HTML scraping)
+- beautifulsoup4 (for HTML parsing)
+- lxml (for HTML parsing)
