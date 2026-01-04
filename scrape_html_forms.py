@@ -30,16 +30,18 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuration for scraping sources
-# This is a placeholder configuration that should be updated with actual data sources
+# ⚠️ WARNING: This is a placeholder configuration
+# Update with actual greyhound racing website URLs before production use
+# Using example.com will fail in production
 SCRAPING_CONFIG = {
     # Example configuration for a hypothetical greyhound racing website
-    "base_url": "https://example.com/greyhounds",  # Update with actual URL
+    "base_url": "https://example.com/greyhounds",  # ⚠️ Update with actual URL
     "endpoints": {
         "race_form": "/race-form",
         "results": "/results"
     },
     "headers": {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
 }
 
@@ -93,22 +95,40 @@ def parse_html_race_form(soup):
     
     for race_container in race_containers:
         try:
-            # Extract race information
+            # Extract race information with null checks
+            track_elem = race_container.find('span', class_='track-name')
+            race_num_elem = race_container.find('span', class_='race-number')
+            distance_elem = race_container.find('span', class_='distance')
+            time_elem = race_container.find('span', class_='start-time')
+            
+            if not all([track_elem, race_num_elem]):
+                logger.warning("Missing required race information, skipping container")
+                continue
+            
             race_data = {
-                'Track': race_container.find('span', class_='track-name').text.strip(),
-                'RaceNumber': int(race_container.find('span', class_='race-number').text.strip()),
-                'Distance': int(race_container.find('span', class_='distance').text.strip()),
-                'StartTime': race_container.find('span', class_='start-time').text.strip(),
+                'Track': track_elem.text.strip(),
+                'RaceNumber': int(race_num_elem.text.strip()),
+                'Distance': int(distance_elem.text.strip()) if distance_elem else None,
+                'StartTime': time_elem.text.strip() if time_elem else None,
             }
             
             # Extract dog information
             dogs = race_container.find_all('div', class_='dog-entry')
             for dog in dogs:
                 dog_data = race_data.copy()
+                
+                box_elem = dog.find('span', class_='box')
+                name_elem = dog.find('span', class_='dog-name')
+                trainer_elem = dog.find('span', class_='trainer')
+                
+                if not all([box_elem, name_elem]):
+                    logger.warning("Missing required dog information, skipping dog")
+                    continue
+                
                 dog_data.update({
-                    'Box': int(dog.find('span', class_='box').text.strip()),
-                    'DogName': dog.find('span', class_='dog-name').text.strip(),
-                    'Trainer': dog.find('span', class_='trainer').text.strip(),
+                    'Box': int(box_elem.text.strip()),
+                    'DogName': name_elem.text.strip(),
+                    'Trainer': trainer_elem.text.strip() if trainer_elem else 'Unknown',
                     # Add more fields as needed
                 })
                 races.append(dog_data)
@@ -157,6 +177,7 @@ def scrape_mock_data(output_dir):
     Generate mock/sample race data for testing when actual scraping is not available.
     
     This function creates sample data that mimics the structure expected by the pipeline.
+    Includes all required columns for the analytics pipeline.
     
     Args:
         output_dir: Directory to save the mock data
@@ -166,23 +187,37 @@ def scrape_mock_data(output_dir):
     # Sample data structure
     mock_races = []
     tracks = ['Angle Park', 'BALLARAT', 'Q LAKESIDE', 'Meadows']
-    dog_names = ['Thunder Bolt', 'Lightning Speed', 'Fast Track', 'Quick Step', 
+    dog_names = ['Thunder Bolt', 'Lightning Speed', 'Fast Track', 'Quick Step',
                  'Swift Runner', 'Speed Demon', 'Rapid Fire', 'Turbo Charge']
     trainers = ['John Smith', 'Jane Doe', 'Bob Wilson', 'Alice Brown']
     
     for track_idx, track in enumerate(tracks):
         for race_num in range(1, 4):  # 3 races per track
+            distance = 400 + (race_num * 100)  # Varies by race (500m, 600m, 700m)
             for box in range(1, 9):  # 8 dogs per race
+                # Generate realistic mock values
+                career_starts = 10 + (box * 5)
+                career_wins = int(career_starts * (0.15 + box * 0.02))  # Win rate based on box
+                best_time = (distance / 100) * 5.5 + (box * 0.2)  # Realistic time based on distance
+                sectional_time = best_time * 0.4  # Approximate sectional time
+                
                 mock_races.append({
                     'Track': track,
                     'RaceNumber': race_num,
                     'Box': box,
                     'DogName': f"{dog_names[box-1]} {track_idx}{race_num}",
                     'Trainer': trainers[box % len(trainers)],
-                    'Distance': 400 + (race_num * 100),  # Varies by race
+                    'Distance': distance,
                     'StartTime': f"{19 + race_num}:{(box * 7) % 60:02d}",
-                    'Grade': f"{box % 3 + 1}",
-                    'DLR': f"{box}{(box+1) % 3}{(box+2) % 3}",
+                    'Grade': f"{(box % 3) + 1}",
+                    'DLR': f"{box % 3}{(box+1) % 4}{(box+2) % 5}",
+                    'CareerStarts': career_starts,
+                    'CareerWins': career_wins,
+                    'BestTime': f"{best_time:.2f}",
+                    'BestTimeSec': best_time,
+                    'Sectional': f"{sectional_time:.2f}",
+                    'SectionalSec': sectional_time,
+                    'PrizeMoney': 1000 + (box * 500) + (career_starts * 100),
                 })
     
     # Convert to DataFrame and save
@@ -198,6 +233,7 @@ def scrape_mock_data(output_dir):
     df.to_csv(output_path, index=False)
     logger.info(f"Generated mock data: {output_path}")
     logger.info(f"Total entries: {len(mock_races)} ({len(tracks)} tracks, 3 races each, 8 dogs per race)")
+    logger.info(f"Columns included: {', '.join(df.columns)}")
     
     return output_path
 
