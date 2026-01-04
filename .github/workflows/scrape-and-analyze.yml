@@ -1,0 +1,159 @@
+---
+name: Scrape and Analyze Greyhound Forms
+
+"on":
+  # Run daily at 6 AM UTC (adjust timezone as needed)
+  schedule:
+    - cron: '0 6 * * *'
+
+  # Allow manual triggering
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date to scrape (YYYY-MM-DD, leave empty for today)'
+        required: false
+        default: ''
+      use_mock_data:
+        description: 'Use mock data for testing'
+        required: false
+        type: boolean
+        default: false
+      scrape_mode:
+        description: 'Scraping mode: html or pdf'
+        required: false
+        type: choice
+        options:
+          - html
+          - pdf
+        default: html
+
+jobs:
+  scrape-and-analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create output directories
+        run: |
+          mkdir -p data_predictions
+          mkdir -p outputs
+
+      - name: Scrape HTML forms or download PDFs
+        id: scrape
+        run: |
+          DATE_ARG=""
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            DATE_ARG="--date ${{ github.event.inputs.date }}"
+          fi
+
+          MOCK_ARG=""
+          if [ "${{ github.event.inputs.use_mock_data }}" = "true" ]; then
+            MOCK_ARG="--mock"
+          fi
+
+          MODE_ARG=""
+          if [ -n "${{ github.event.inputs.scrape_mode }}" ]; then
+            MODE_ARG="--mode ${{ github.event.inputs.scrape_mode }}"
+          fi
+
+          python scrape_html_forms.py $DATE_ARG $MOCK_ARG $MODE_ARG --output-dir data_predictions
+
+          # Check if any CSV or PDF files were created
+          if ls data_predictions/*.csv 1> /dev/null 2>&1 || ls data_predictions/*.pdf 1> /dev/null 2>&1; then
+            echo "scrape_success=true" >> $GITHUB_OUTPUT
+          else
+            echo "scrape_success=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Process data through pipeline
+        if: steps.scrape.outputs.scrape_success == 'true'
+        run: |
+          echo "Scraped data is ready for analysis"
+          ls -lah data_predictions/
+
+      - name: Run greyhound analytics pipeline
+        if: steps.scrape.outputs.scrape_success == 'true'
+        run: |
+          # Process scraped forms through the main pipeline
+          # If PDFs were downloaded, process them; otherwise process CSV files
+          if ls data_predictions/*.pdf 1> /dev/null 2>&1; then
+            python main.py data_predictions/*.pdf
+          elif ls data_predictions/*.csv 1> /dev/null 2>&1; then
+            python main.py data_predictions/*.csv
+          fi
+
+      - name: Generate timestamp for artifacts
+        id: timestamp
+        run: echo "timestamp=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
+
+      - name: Upload analysis results
+        if: steps.scrape.outputs.scrape_success == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-results-${{ steps.timestamp.outputs.timestamp }}
+          path: |
+            outputs/*.csv
+            outputs/*.xlsx
+            outputs/*.log
+          retention-days: 30
+
+      - name: Upload selective picks
+        if: steps.scrape.outputs.scrape_success == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: selective-picks-${{ steps.timestamp.outputs.timestamp }}
+          path: outputs/selective_picks.csv
+          retention-days: 30
+
+      - name: Create summary
+        if: always()
+        run: |
+          echo "## Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.scrape.outputs.scrape_success }}" = "true" ]; then
+            echo "✅ **Scraping Status:** Success" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Count scraped entries
+            if [ -f data_predictions/scraped_*.csv ]; then
+              ENTRY_COUNT=$(tail -n +2 data_predictions/scraped_*.csv | wc -l)
+              echo "📊 **Entries Scraped:** $ENTRY_COUNT" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Show selective picks if available
+            if [ -f outputs/selective_picks.csv ]; then
+              PICKS_COUNT=$(tail -n +2 outputs/selective_picks.csv | wc -l)
+              echo "🎯 **Selective Picks:** $PICKS_COUNT" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "### Top Picks" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              head -n 6 outputs/selective_picks.csv >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "❌ **Scraping Status:** Failed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "No data was scraped. Check the scraper logs for details." >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date -u)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Workflow failed. Check the logs for details."

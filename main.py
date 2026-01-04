@@ -36,34 +36,36 @@ def extract_text_from_pdf(pdf_path):
 logger.info("🚀 Starting Greyhound Analytics - Ultra-Selective Betting v3.0")
 print("🚀 Starting Greyhound Analytics - Ultra-Selective Betting v3.0")
 
-# ✅ Determine PDF files to process
+# ✅ Determine files to process (PDF or CSV)
 # If command-line arguments provided, use those files
 # Otherwise, use all PDFs in the data folder
 if len(sys.argv) > 1:
-    # Command-line arguments provided (e.g., data_predictions\*.pdf)
-    pdf_paths = []
+    # Command-line arguments provided (e.g., data_predictions\*.pdf or data_predictions\*.csv)
+    input_paths = []
     for arg in sys.argv[1:]:
         # Handle wildcards
         if '*' in arg or '?' in arg:
-            pdf_paths.extend(glob.glob(arg))
+            input_paths.extend(glob.glob(arg))
         else:
-            pdf_paths.append(arg)
+            input_paths.append(arg)
     
-    # Filter to only .pdf files and verify they exist
-    pdf_paths = [p for p in pdf_paths if p.lower().endswith('.pdf') and os.path.exists(p)]
+    # Filter to only .pdf or .csv files and verify they exist
+    pdf_paths = [p for p in input_paths if p.lower().endswith('.pdf') and os.path.exists(p)]
+    csv_paths = [p for p in input_paths if p.lower().endswith('.csv') and os.path.exists(p)]
     
-    if not pdf_paths:
-        print("❌ No valid PDF files found from command-line arguments.")
+    if not pdf_paths and not csv_paths:
+        print("❌ No valid PDF or CSV files found from command-line arguments.")
         print(f"   Arguments: {sys.argv[1:]}")
         exit()
     
-    print(f"📁 Processing {len(pdf_paths)} PDF file(s) from command line")
+    print(f"📁 Processing {len(pdf_paths)} PDF file(s) and {len(csv_paths)} CSV file(s) from command line")
 else:
-    # No arguments - use default data folder
+    # No arguments - use default data folder (PDFs only)
     pdf_folder = "data"
     pdf_files = [f for f in os.listdir(pdf_folder) if f.lower().endswith(".pdf")]
     pdf_files.sort(key=lambda x: os.path.getmtime(os.path.join(pdf_folder, x)), reverse=True)
     pdf_paths = [os.path.join(pdf_folder, f) for f in pdf_files]
+    csv_paths = []
     
     if not pdf_paths:
         print("❌ No PDF files found in data folder.")
@@ -75,13 +77,26 @@ all_dogs = []
 
 # ✅ Process each PDF
 for pdf_path in pdf_paths:
-    print(f"📄 Processing: {pdf_path}")
+    print(f"📄 Processing PDF: {pdf_path}")
     raw_text = extract_text_from_pdf(pdf_path)
     df = parse_race_form(raw_text)
 
     # ✅ Convert DLR to numeric to avoid type errors
     df["DLR"] = pd.to_numeric(df["DLR"], errors="coerce")
 
+    # ✅ Apply enhanced scoring
+    df = compute_features(df)
+    all_dogs.append(df)
+
+# ✅ Process each CSV (scraped data)
+for csv_path in csv_paths:
+    print(f"📄 Processing CSV: {csv_path}")
+    df = pd.read_csv(csv_path)
+    
+    # ✅ Convert DLR to numeric to avoid type errors
+    if "DLR" in df.columns:
+        df["DLR"] = pd.to_numeric(df["DLR"], errors="coerce")
+    
     # ✅ Apply enhanced scoring
     df = compute_features(df)
     all_dogs.append(df)

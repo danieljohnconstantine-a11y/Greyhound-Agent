@@ -39,3 +39,12 @@ Thumbs.db
 # Logs
 *.log
 outputs/*.log
+
+# Generated output files (keep outputs directory structure but ignore generated files)
+outputs/*.csv
+outputs/*.xlsx
+!outputs/.gitkeep
+
+# Scraped data
+data_predictions/*.csv
+!data_predictions/README.md
