@@ -1,129 +1,153 @@
 ================================================================================
 TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
-Generated: 2026-01-04 11:50:30
+Generated: 2026-01-05 10:27:57
 ================================================================================
 
-Total PDFs processed: 10
-Successful predictions: 8
-Total dogs predicted: 702
+Total PDFs processed: 11
+Successful predictions: 9
+Total dogs predicted: 878
 
 
-Capalaba:
-  Races: 9
-  Dogs: 70
-  Race 1: Box 5 - Bentley Olaf (41.4%)
-  Race 2: Box 5 - Cambla Blaze (57.5%)
-  Race 3: Box 7 - Golden Bear (26.9%)
-  Race 4: Box 8 - Lakoda Talk (15.0%)
-  Race 5: Box 8 - Hara's Jackson (64.6%)
-  Race 6: Box 6 - Cambla Diva (29.7%)
-  Race 7: Box 4 - Sagai Miss (53.9%)
-  Race 8: Box 4 - That's Nuts (29.6%)
-  Race 9: Box 6 - Sirmione (10.1%)
-
-DARWIN:
-  Races: 11
-  Dogs: 72
-  Race 1: Box 9 - Canya Keep Cool (64.0%)
-  Race 2: Box 2 - Ontario (75.7%)
-  Race 3: Box 2 - Dirty Dancing (46.5%)
-  Race 4: Box 2 - Bing Bing Charm (79.2%)
-  Race 5: Box 9 - Canya Keep Cool (65.1%)
-  Race 6: Box 6 - Cooper's Legacy (14.4%)
-  Race 7: Box 5 - Luka Magic (73.1%)
-  Race 8: Box 9 - Canya Keep Cool (64.4%)
-  Race 9: Box 3 - Omar Monelli (66.1%)
-  Race 10: Box 9 - Canya Keep Cool (64.4%)
-  Race 11: Box 8 - Little Lockett (69.9%)
-
-GRAFTON:
+Angle Park:
   Races: 12
-  Dogs: 100
-  Race 1: Box 6 - Sugar Bug (21.0%)
-  Race 2: Box 5 - Kingsbrae Maggie (10.2%)
-  Race 3: Box 4 - For Mercy Sake (70.4%)
-  Race 4: Box 2 - Malicious (71.0%)
-  Race 5: Box 4 - Gemstone Jasper (53.8%)
-  Race 6: Box 4 - Barcia Cruiser (8.2%)
-  Race 7: Box 7 - Kooringa Kate (21.6%)
-  Race 8: Box 3 - Local Legend (10.2%)
-  Race 9: Box 6 - Wagtail Whisper (24.3%)
-  Race 10: Box 7 - Away Days (9.0%)
-  Race 11: Box 1 - Infra Terra (9.8%)
-  Race 12: Box 2 - Heroic Federer (69.8%)
+  Dogs: 73
+  Race 1: Box 2 - If I Could (24.1%)
+  Race 2: Box 2 - Happy Hunter (45.9%)
+  Race 3: Box 2 - Imagine The Fun (27.5%)
+  Race 4: Box 8 - Runaway Merv (15.6%)
+  Race 5: Box 1 - She's Got Design (18.4%)
+  Race 6: Box 5 - Stormy Day (34.1%)
+  Race 7: Box 4 - Attention Seeker (40.8%)
+  Race 8: Box 1 - Rhinestone (30.5%)
+  Race 9: Box 1 - Specked (13.3%)
+  Race 10: Box 3 - Moscow Chick (24.3%)
+  Race 11: Box 4 - Weblec Pebbles (38.2%)
+  Race 12: Box 2 - Zali Keeping (57.4%)
+
+BALLARAT:
+  Races: 14
+  Dogs: 109
+  Race 1: Box 1 - Absolute Faith (9.3%)
+  Race 2: Box 8 - Rothwell Jack (49.9%)
+  Race 3: Box 7 - Tommy's Whisky (12.9%)
+  Race 4: Box 8 - Paw Ingrid (19.6%)
+  Race 5: Box 8 - Soda Ben (14.4%)
+  Race 6: Box 1 - Insane (54.6%)
+  Race 7: Box 1 - Ice Sculptress (19.9%)
+  Race 8: Box 2 - White Brew (5.8%)
+  Race 9: Box 1 - Aston Francesca (39.2%)
+  Race 10: Box 8 - Tricky Disco (14.6%)
+  Race 11: Box 1 - Riverdale Clyde (27.9%)
+  Race 12: Box 4 - Demonic Spirit (12.9%)
+  Race 13: Box 1 - Paw Hull (10.0%)
+  Race 14: Box 5 - Stormy Secret (11.7%)
+
+DUBBO:
+  Races: 11
+  Dogs: 91
+  Race 1: Box 2 - Tap Out Spider (7.8%)
+  Race 2: Box 2 - All About Krissy (9.2%)
+  Race 3: Box 1 - Tralee Tiny (13.5%)
+  Race 4: Box 2 - Hot To Drop (14.0%)
+  Race 5: Box 2 - Zippy Zenden (44.7%)
+  Race 6: Box 2 - Vanando (15.0%)
+  Race 7: Box 4 - Magic Breakout (27.7%)
+  Race 8: Box 8 - Tralee Charlie (24.6%)
+  Race 9: Box 1 - Slippery Bogan (12.8%)
+  Race 10: Box 4 - Hot To Twist (28.4%)
+  Race 11: Box 6 - Ratbag Load (65.2%)
 
 HEALESVILLE:
   Races: 12
-  Dogs: 108
-  Race 1: Box 5 - Commanche Jack (75.1%)
-  Race 2: Box 2 - Morning Sam (13.4%)
-  Race 3: Box 3 - Aston Antibes (60.4%)
-  Race 4: Box 6 - Bravado (42.4%)
-  Race 5: Box 7 - Choji Akimichi (18.0%)
-  Race 6: Box 8 - Son Of Rosie (78.1%)
-  Race 7: Box 8 - Codicil (16.6%)
-  Race 8: Box 1 - Mav Reiko (19.6%)
-  Race 9: Box 6 - Lady Gunai (55.3%)
-  Race 10: Box 1 - Shima Stripe (20.9%)
-  Race 11: Box 4 - Canya Ultimate (28.1%)
-  Race 12: Box 1 - Peaky Avenger (35.9%)
+  Dogs: 91
+  Race 1: Box 1 - Sponsorship (18.8%)
+  Race 2: Box 5 - Tommy The Turtle (26.0%)
+  Race 3: Box 8 - Reel Sweet (11.4%)
+  Race 4: Box 5 - So Glamorous (16.2%)
+  Race 5: Box 5 - Dancing Blue (18.0%)
+  Race 6: Box 2 - Bakali Surprise (11.2%)
+  Race 7: Box 4 - Want Some (17.6%)
+  Race 8: Box 7 - Be Gracious (13.2%)
+  Race 9: Box 7 - Miss Lady Bug (7.9%)
+  Race 10: Box 5 - Maggie Storm (19.9%)
+  Race 11: Box 8 - Audacious Livvy (14.3%)
+  Race 12: Box 1 - Perfect Revenge (8.5%)
 
-HORSHAM:
-  Races: 12
-  Dogs: 98
-  Race 1: Box 1 - Time Perpetuated (45.8%)
-  Race 2: Box 1 - Billy Set (14.3%)
-  Race 3: Box 3 - More Beer Please (13.2%)
-  Race 4: Box 1 - Green Flash (18.2%)
-  Race 5: Box 1 - Crackerjack Ralf (74.4%)
-  Race 6: Box 6 - Paw Tonk (26.0%)
-  Race 7: Box 2 - Doongalla Rocket (47.6%)
-  Race 8: Box 3 - Matchbox Honey (66.7%)
-  Race 9: Box 1 - Loud Mouth Louie (11.7%)
-  Race 10: Box 2 - Motion Sensor (37.6%)
-  Race 11: Box 6 - Let's Go Out (60.1%)
-  Race 12: Box 2 - Salty Snoop (6.6%)
-
-Q PARKLANDS:
+Maitland:
   Races: 9
-  Dogs: 65
-  Race 1: Box 4 - Inland Mark (21.3%)
-  Race 2: Box 1 - Wildash Dozer (19.7%)
-  Race 3: Box 7 - Here's The Plan (34.7%)
-  Race 4: Box 2 - Sleek Karma (8.8%)
-  Race 5: Box 7 - Top Notch Scotch (8.5%)
-  Race 6: Box 2 - Gypsy Girl Pearl (8.3%)
-  Race 7: Box 2 - Fanciful (40.9%)
-  Race 8: Box 4 - Neame (63.8%)
-  Race 9: Box 2 - Five Birdies (15.7%)
+  Dogs: 69
+  Race 1: Box 3 - Midnight Arrow (31.6%)
+  Race 2: Box 1 - Extreme Machine (66.1%)
+  Race 3: Box 3 - Silver Rein (5.2%)
+  Race 4: Box 3 - Furious (60.0%)
+  Race 5: Box 2 - Mythic (11.6%)
+  Race 6: Box 3 - Tarawi Lock (41.7%)
+  Race 7: Box 7 - Mia Zipper (66.0%)
+  Race 8: Box 7 - Drink Twisties (61.4%)
+  Race 9: Box 1 - Federal Felix (18.1%)
 
-RICHMOND:
-  Races: 12
-  Dogs: 99
-  Race 1: Box 2 - Glimmer Girl (30.1%)
-  Race 2: Box 2 - Blue Moet (25.9%)
-  Race 3: Box 2 - King Canelo (20.4%)
-  Race 4: Box 1 - Loco Storm (30.8%)
-  Race 5: Box 1 - Zipping Georgia (25.8%)
-  Race 6: Box 2 - Psycho Circus (64.1%)
-  Race 7: Box 8 - No Bail Jester (28.0%)
-  Race 8: Box 8 - Confectionery (23.8%)
-  Race 9: Box 7 - Well Kept Secret (43.1%)
-  Race 10: Box 7 - Batgirl (43.5%)
-  Race 11: Box 2 - Lady Luella (24.6%)
-  Race 12: Box 6 - Stephen Witherap (56.3%)
-
-ROCKHAMPTON:
+Mandurah:
   Races: 11
-  Dogs: 90
-  Race 1: Box 6 - Strolling Along (16.2%)
-  Race 2: Box 7 - Diamantina Opal (12.8%)
-  Race 3: Box 2 - Kej Stefani (25.3%)
-  Race 4: Box 3 - Valentia Blue (9.2%)
-  Race 5: Box 6 - Gold Alaska (25.7%)
-  Race 6: Box 1 - Tusken Raider (24.9%)
-  Race 7: Box 1 - Tusken Wind (21.3%)
-  Race 8: Box 1 - Abraxos (33.8%)
-  Race 9: Box 3 - Nuka (7.5%)
-  Race 10: Box 3 - Diamantina Pearl (8.1%)
-  Race 11: Box 6 - Farmor Leeway (19.7%)
+  Dogs: 100
+  Race 1: Box 5 - Junk Yard Jiggle (18.5%)
+  Race 2: Box 8 - Eramosa (24.6%)
+  Race 3: Box 9 - Six Story Syd (41.0%)
+  Race 4: Box 7 - Uncompromised (39.5%)
+  Race 5: Box 4 - Defender (17.9%)
+  Race 6: Box 5 - Invested (24.5%)
+  Race 7: Box 3 - Canya Celeste (39.3%)
+  Race 8: Box 4 - Roamin' Around (45.2%)
+  Race 9: Box 1 - Mayday Mayday (29.9%)
+  Race 10: Box 3 - Sassy Deluxe (18.1%)
+  Race 11: Box 7 - Gigabyte (18.9%)
+
+NOWRA:
+  Races: 11
+  Dogs: 86
+  Race 1: Box 2 - Slider Allen (46.6%)
+  Race 2: Box 3 - Skedaddle Lulu (7.5%)
+  Race 3: Box 2 - Red Raider (10.3%)
+  Race 4: Box 5 - Kicking Bins (55.0%)
+  Race 5: Box 8 - Dynamic Gregory (12.9%)
+  Race 6: Box 6 - Ding's Sandy (52.6%)
+  Race 7: Box 2 - Zipping Chaplin (70.5%)
+  Race 8: Box 1 - She's Gaga (35.8%)
+  Race 9: Box 2 - Tiggerlong Snake (21.9%)
+  Race 10: Box 8 - Aston Aisling (7.2%)
+  Race 11: Box 1 - Resist The Urge (56.9%)
+
+Q STRAIGHT:
+  Races: 14
+  Dogs: 140
+  Race 1: Box 4 - Akuli Phoenix (11.3%)
+  Race 2: Box 6 - Boney Maloney (30.9%)
+  Race 3: Box 1 - Bones (50.1%)
+  Race 4: Box 5 - Custard (14.9%)
+  Race 5: Box 6 - Panda Snow (57.6%)
+  Race 6: Box 6 - Ibrox McCoist (47.1%)
+  Race 7: Box 8 - Traditional (22.8%)
+  Race 8: Box 4 - Disco Ethics (38.6%)
+  Race 9: Box 2 - Ace Diva (11.6%)
+  Race 10: Box 5 - Unacceptable Pat (45.4%)
+  Race 11: Box 3 - No Cover (15.1%)
+  Race 12: Box 3 - Tuta Sun (47.7%)
+  Race 13: Box 1 - Crisp Ride On (13.8%)
+  Race 14: Box 6 - Little Rowdy (56.0%)
+
+SHEPPARTON:
+  Races: 14
+  Dogs: 119
+  Race 1: Box 3 - Paw Danger (28.3%)
+  Race 2: Box 5 - Sweet Millie (22.0%)
+  Race 3: Box 1 - Walter Walrus (19.9%)
+  Race 4: Box 3 - Illuminator (18.0%)
+  Race 5: Box 2 - Black Business (9.9%)
+  Race 6: Box 1 - Bailieston (15.0%)
+  Race 7: Box 3 - Fled The Scene (65.7%)
+  Race 8: Box 8 - If Only (43.2%)
+  Race 9: Box 3 - Paw Manny (18.3%)
+  Race 10: Box 2 - Bianca's Boy (66.3%)
+  Race 11: Box 1 - Sweet Valentine (37.3%)
+  Race 12: Box 5 - Major Shiraz (15.8%)
+  Race 13: Box 1 - Hokkaido Express (37.5%)
+  Race 14: Box 1 - Paw Tabitha (19.6%)
