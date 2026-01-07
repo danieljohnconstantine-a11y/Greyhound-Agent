@@ -533,7 +533,9 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
 
 def normalize_track_name(track_name):
     """
-    Normalize track names from CSV format to PDF 4-letter code format.
+    Normalize track names from CSV format to PDF track code format.
+    
+    CRITICAL: PDF files use track codes like WARGG, ELWKG, GARDG (with extra 'G')
     
     Examples:
         "Richmond" -> "RICH"
@@ -541,9 +543,15 @@ def normalize_track_name(track_name):
         "BetDeluxe Capalaba" -> "CAPA"
         "Ladbrokes Q1 Lakeside" -> "QLAK"
         "Ladbrokes Q Straight" -> "QSTR"
+        "Warrnambool" -> "WARGG" (PDF format)
+        "Launceston" -> "ELWKG" (PDF format)
+        "Gardens" or "Ladbrokes Gardens" -> "GARDG" (PDF format)
     """
     track_mapping = {
-        # Common full names to 4-letter codes
+        # Common full names to 4-letter codes (EXACT MATCHES FIRST!)
+        # IMPORTANT: More specific names MUST come before partial matches
+        'warrnambool': 'WARGG',  # MUST come before 'warragul'
+        'warragul': 'WARG',
         'richmond': 'RICH',
         'richmond straight': 'RICH',
         'grafton': 'GRAF',
@@ -556,13 +564,13 @@ def normalize_track_name(track_name):
         'ladbrokes q1 lakeside': 'QLAK',
         'ladbrokes q2 parklands': 'QPRK',
         'ladbrokes q straight': 'QSTR',
+        'ladbrokes gardens': 'GARDG',  # Added for Ladbrokes Gardens
         'wentworth park': 'WENP',
         'angle park': 'ANGL',
         'the meadows': 'MEAD',
         'sandown': 'SAND',
         'bendigo': 'BDGO',
         'geelong': 'GEEL',
-        'warragul': 'WARG',
         'ballarat': 'BRAT',
         'shepparton': 'SHEP',
         'traralgon': 'TAST',
@@ -588,10 +596,11 @@ def normalize_track_name(track_name):
         'rockhampton': 'ROCK',
         'capalaba': 'CAPA',
         'darwin': 'DRWN',
-        'hobart': 'ELWK',
-        'launceston': 'ELWK',
+        'hobart': 'ELWKG',  # Updated to match PDF format
+        'launceston': 'ELWKG',  # Updated to match PDF format
         'devonport': 'MEAD',
-        'gardens': 'GARD',
+        'gardens': 'GARDG',  # Updated to match PDF format
+        'the gardens': 'GARDG',  # Alternative name
         'mandurah': 'MAND',
         'cannington': 'CANN',
         'murray bridge': 'MBRS',
@@ -605,14 +614,18 @@ def normalize_track_name(track_name):
     # Normalize to lowercase for matching
     track_lower = str(track_name).lower().strip()
     
-    # Direct match
+    # Remove common prefixes/suffixes
+    track_lower = track_lower.replace('betdeluxe ', '').replace('ladbrokes ', '')
+    track_lower = track_lower.replace(' straight', '').replace(' park', '')
+    
+    # Direct exact match (after normalization)
     if track_lower in track_mapping:
         return track_mapping[track_lower]
     
-    # Try partial matches for compound names
-    for full_name, code in track_mapping.items():
-        if full_name in track_lower or track_lower in full_name:
-            return code
+    # Check original string too (for compound names)
+    track_original = str(track_name).lower().strip()
+    if track_original in track_mapping:
+        return track_mapping[track_original]
     
     # If no match, return first 4 letters uppercase
     return track_name[:4].upper()
