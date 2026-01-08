@@ -74,7 +74,13 @@ def parse_race_form(text):
     """
     lines = text.splitlines()
     dogs = []
-    current_race = {}
+    current_race = {
+        "RaceNumber": 1,
+        "RaceDate": datetime.now().strftime("%Y-%m-%d"),
+        "RaceTime": "TBD",
+        "Track": "Unknown",
+        "Distance": 500  # Default to 500m (most common greyhound racing distance)
+    }
     race_number = 0
     
     # Track which dog's detailed section we're currently in
