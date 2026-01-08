@@ -23,7 +23,12 @@ def compute_features(df):
     # Ensure numeric types
     df["DLR"] = pd.to_numeric(df["DLR"], errors="coerce")
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
-    df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
+    
+    # Handle Distance field - set default if missing
+    if "Distance" not in df.columns:
+        print("⚠️ WARNING: Distance not found in parsed data - using default 500m")
+        df["Distance"] = 500  # Default to 500m (most common greyhound racing distance)
+    df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce").fillna(500)
 
     # Preserve parsed BestTimeSec and SectionalSec values if they exist, otherwise set to NaN
     if "BestTimeSec" not in df.columns:
