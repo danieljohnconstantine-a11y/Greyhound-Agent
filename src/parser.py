@@ -74,9 +74,7 @@ def parse_race_form(text):
     """
     lines = text.splitlines()
     dogs = []
-    # Initialize current_race as None - will be set when first race header is found
-    # This ensures we don't add dogs to a race until we know which race it is
-    current_race = None
+    current_race = {}
     race_number = 0
     
     # Track which dog's detailed section we're currently in
@@ -156,11 +154,6 @@ def parse_race_form(text):
         )
 
         if dog_match:
-            # Skip dog if we haven't found a race header yet
-            if current_race is None:
-                logger.warning(f"⚠️ Skipping dog before any race header found: {line[:80]}...")
-                continue
-                
             (
                 box, form_number, raw_name, sex_age, weight, draw, trainer,
                 wins, places, starts, prize, rtc, dlr, dlw
@@ -202,10 +195,6 @@ def parse_race_form(text):
         # This catches edge cases where the main pattern fails
         # RELAXED to accept dogs with minimal form data
         if not dog_match and line and line[0].isdigit():
-            # Skip dog if we haven't found a race header yet
-            if current_race is None:
-                continue
-                
             simple_dog_match = re.match(
                 r"""^(\d+)[\.\s]+([0-9xf]{0,7})?\s*([A-Za-z''\- ]+?)\s+(\d+[a-z])?\s*([\d.]+)?kg""",
                 line

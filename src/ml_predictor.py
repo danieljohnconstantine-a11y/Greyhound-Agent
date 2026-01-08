@@ -535,25 +535,15 @@ def normalize_track_name(track_name):
     """
     Normalize track names from CSV format to PDF 4-letter code format.
     
-    CRITICAL: PDF filenames use pattern TRACKGDDMM where the regex extracts TRACK before the G.
-    So WARGG0101form.pdf becomes WARG, ELWKG0101form.pdf becomes ELWK, etc.
-    This function must return codes that match what the regex extracts!
-    
     Examples:
         "Richmond" -> "RICH"
         "Richmond Straight" -> "RICH"
         "BetDeluxe Capalaba" -> "CAPA"
         "Ladbrokes Q1 Lakeside" -> "QLAK"
         "Ladbrokes Q Straight" -> "QSTR"
-        "Warrnambool" -> "WARG" (matches WARGG0101form.pdf extraction)
-        "Launceston" -> "ELWK" (matches ELWKG0101form.pdf extraction)
-        "Gardens" -> "GARD" (matches GARDG0101form.pdf extraction)
     """
     track_mapping = {
         # Common full names to 4-letter codes
-        # IMPORTANT: More specific names MUST come before partial matches
-        'warrnambool': 'WARG',  # MUST come before 'warragul'
-        'warragul': 'WARG',
         'richmond': 'RICH',
         'richmond straight': 'RICH',
         'grafton': 'GRAF',
@@ -566,13 +556,13 @@ def normalize_track_name(track_name):
         'ladbrokes q1 lakeside': 'QLAK',
         'ladbrokes q2 parklands': 'QPRK',
         'ladbrokes q straight': 'QSTR',
-        'ladbrokes gardens': 'GARD',
         'wentworth park': 'WENP',
         'angle park': 'ANGL',
         'the meadows': 'MEAD',
         'sandown': 'SAND',
         'bendigo': 'BDGO',
         'geelong': 'GEEL',
+        'warragul': 'WARG',
         'ballarat': 'BRAT',
         'shepparton': 'SHEP',
         'traralgon': 'TAST',
@@ -602,7 +592,6 @@ def normalize_track_name(track_name):
         'launceston': 'ELWK',
         'devonport': 'MEAD',
         'gardens': 'GARD',
-        'the gardens': 'GARD',
         'mandurah': 'MAND',
         'cannington': 'CANN',
         'murray bridge': 'MBRS',
@@ -616,11 +605,11 @@ def normalize_track_name(track_name):
     # Normalize to lowercase for matching
     track_lower = str(track_name).lower().strip()
     
-    # Try exact match first
+    # Direct match
     if track_lower in track_mapping:
         return track_mapping[track_lower]
     
-    # Try partial matches for compound names with prefixes
+    # Try partial matches for compound names
     for full_name, code in track_mapping.items():
         if full_name in track_lower or track_lower in full_name:
             return code
