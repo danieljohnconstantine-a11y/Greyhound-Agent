@@ -74,13 +74,7 @@ def parse_race_form(text):
     """
     lines = text.splitlines()
     dogs = []
-    current_race = {
-        "RaceNumber": 1,
-        "RaceDate": datetime.now().strftime("%Y-%m-%d"),
-        "RaceTime": "TBD",
-        "Track": "Unknown",
-        "Distance": 500  # Default to 500m (most common greyhound racing distance)
-    }
+    current_race = None  # Will be set when first race header is found
     race_number = 0
     
     # Track which dog's detailed section we're currently in
@@ -107,7 +101,7 @@ def parse_race_form(text):
                 try:
                     # Found a simple race header - use it
                     race_number = int(race_num_str)
-                    # Use current date as fallback
+                    # Use current date as fallback with proper defaults
                     current_race = {
                         "RaceNumber": race_number,
                         "RaceDate": datetime.now().strftime("%Y-%m-%d"),
@@ -147,6 +141,10 @@ def parse_race_form(text):
             }
             logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{day_of_race.zfill(2)}")
             current_dog_section_index = -1  # Reset dog section when new race starts
+            continue
+        
+        # Skip dog parsing if no race header found yet
+        if current_race is None:
             continue
 
         # Match dog entry with glued form number
@@ -194,6 +192,10 @@ def parse_race_form(text):
                 logger.debug(f"✓ Parsed dog: Box {box} - {dog_name} (Race {current_race.get('RaceNumber', '?')})")
             except Exception as e:
                 logger.warning(f"⚠️ Failed to parse dog from line: {line[:100]}... Error: {e}")
+            continue
+        
+        # Skip dog parsing if no race header found yet
+        if current_race is None:
             continue
         
         # CRITICAL FIX #2: Enhanced fallback pattern to catch more dogs
