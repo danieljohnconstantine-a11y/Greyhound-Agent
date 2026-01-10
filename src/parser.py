@@ -118,10 +118,9 @@ def parse_race_form(text):
             # Pattern 1: "Race 1" or "R1" followed by optional info
             simple_race_match = re.match(r"(?:Race|R)\s*(\d{1,2})\s*[:>\-]?\s*(.*)$", line, re.IGNORECASE)
             if simple_race_match and len(line) < 100:  # Avoid false matches on long lines
-                race_num_str = simple_race_match.group(1)
                 try:
-                    # Found a simple race header - use it
-                    race_number = int(race_num_str)
+                    # Found a simple race header - increment race number
+                    race_number += 1
                     # Use current date as fallback with proper defaults
                     current_race = {
                         "RaceNumber": race_number,
@@ -139,14 +138,23 @@ def parse_race_form(text):
         if header_match:
             race_day_combined, month_abbr, year_2digit, time, track, distance = header_match.groups()
             
-            # Parse race number and day from combined string
-            # "110" -> race=1, day=10;  "212" -> race=2, day=12; "9" -> race=9, day=unknown
+            # Increment race number each time we detect a new race header
+            # This ensures proper race numbering even when PDFs use same number for all races
+            race_number += 1
+            
+            # Parse day from the number in header
+            # Modern PDFs: "10" = day 10, Old PDFs: "110" = might be race+day or just day
+            # We parse as day only since we auto-increment race_number above
             if len(race_day_combined) >= 2:
-                race_number = int(race_day_combined[0])  # First digit is race number
-                day_of_race = race_day_combined[1:]  # Remaining digits are day
+                # Try to extract day - could be last 2 digits or entire number
+                try:
+                    day_of_race = race_day_combined[-2:]  # Last 2 digits as day
+                    if not (1 <= int(day_of_race) <= 31):  # Validate day
+                        day_of_race = race_day_combined  # Use full number if invalid
+                except:
+                    day_of_race = race_day_combined
             else:
-                race_number = int(race_day_combined)
-                day_of_race = "01"  # Default day
+                day_of_race = race_day_combined
             
             # Convert 2-digit year to 4-digit year (e.g., '25' -> 2025, '26' -> 2026)
             year = BASE_YEAR + int(year_2digit)
@@ -171,7 +179,7 @@ def parse_race_form(text):
                 "Track": track.strip(),
                 "Distance": int(distance)
             }
-            logger.debug(f"Parsed race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{day_of_race.zfill(2)}")
+            logger.info(f"📍 Detected race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{day_of_race.zfill(2)} at {time}")
             current_dog_section_index = -1  # Reset dog section when new race starts
             continue
         
