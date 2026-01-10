@@ -1,0 +1,101 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2026-01-10 14:15:57
+================================================================================
+
+Total PDFs processed: 8
+Successful predictions: 6
+Total dogs predicted: 527
+
+
+Cannington:
+  Races: 12
+  Dogs: 92
+  Race 1: Box 5 - Please Me (12.9%)
+  Race 2: Box 1 - Legs Eleven (4.9%)
+  Race 3: Box 1 - Just A Lad (56.0%)
+  Race 4: Box 6 - Just A Foreman (35.6%)
+  Race 5: Box 3 - Starlight Snowy (67.9%)
+  Race 6: Box 8 - West On Cole (49.5%)
+  Race 7: Box 3 - West On Boonie (19.1%)
+  Race 8: Box 2 - Wyong Irving (39.9%)
+  Race 9: Box 8 - Silent Assassin (14.5%)
+  Race 10: Box 2 - Free Settler (15.9%)
+  Race 11: Box 1 - Crocodile Crawl (6.6%)
+  Race 12: Box 5 - Splendacious (20.3%)
+
+DUBBO:
+  Races: 11
+  Dogs: 81
+  Race 1: Box 4 - Sadie Mcgraw (20.6%)
+  Race 2: Box 1 - Grant Keeping (27.7%)
+  Race 3: Box 8 - Gemma Keeping (35.4%)
+  Race 4: Box 8 - Diogo Keeping (17.6%)
+  Race 5: Box 1 - Moses Magic (33.6%)
+  Race 6: Box 5 - Heidi Keeping (14.7%)
+  Race 7: Box 4 - Urban Bream (38.9%)
+  Race 8: Box 2 - From The Disco (33.6%)
+  Race 9: Box 2 - Swift Eli (45.1%)
+  Race 10: Box 1 - Gladstone Bag (48.9%)
+  Race 11: Box 5 - Spring Fred (21.3%)
+
+Meadows:
+  Races: 12
+  Dogs: 96
+  Race 1: Box 6 - Paw Quiver (10.0%)
+  Race 2: Box 5 - Fractions (48.9%)
+  Race 3: Box 8 - Irish Millie (31.4%)
+  Race 4: Box 8 - Paw Vortex (27.1%)
+  Race 5: Box 1 - Solar Spectrum (19.6%)
+  Race 6: Box 5 - Come To Party (13.5%)
+  Race 7: Box 5 - Lorraine Jacky (15.8%)
+  Race 8: Box 2 - Sharapova Star (19.6%)
+  Race 9: Box 3 - Paw Tonk (16.6%)
+  Race 10: Box 2 - Paw Yale (10.2%)
+  Race 11: Box 4 - Motor City Rossi (14.1%)
+  Race 12: Box 7 - Velox Bale (60.8%)
+
+Q LAKESIDE:
+  Races: 10
+  Dogs: 71
+  Race 1: Box 2 - Henry Blake (20.9%)
+  Race 2: Box 1 - Blue Milk (16.4%)
+  Race 3: Box 1 - Goodness Baby (31.0%)
+  Race 4: Box 2 - Grubber Kick (26.2%)
+  Race 5: Box 6 - Logistical (15.0%)
+  Race 6: Box 6 - Local Legend (14.8%)
+  Race 7: Box 6 - Ice Rider (31.2%)
+  Race 8: Box 3 - Fire Me Up (39.3%)
+  Race 9: Box 4 - Strut (20.7%)
+  Race 10: Box 4 - Always The Sun (12.9%)
+
+The Gardens:
+  Races: 12
+  Dogs: 98
+  Race 1: Box 2 - Jono's Energy (13.7%)
+  Race 2: Box 1 - Smart Comet (38.2%)
+  Race 3: Box 2 - Paper Shredder (33.6%)
+  Race 4: Box 1 - Volare Alto (47.7%)
+  Race 5: Box 3 - Zipping Vivid (42.9%)
+  Race 6: Box 3 - Ritza Old Mate (22.1%)
+  Race 7: Box 4 - Lightning Hunter (20.2%)
+  Race 8: Box 2 - Federal Odds (36.9%)
+  Race 9: Box 2 - Larrikin Pioneer (70.1%)
+  Race 10: Box 1 - Shanghai Spy (22.8%)
+  Race 11: Box 1 - Humble Smiles (36.3%)
+  Race 12: Box 4 - Sudden Surprise (28.0%)
+
+WENTWORTH PARK:
+  Races: 11
+  Dogs: 89
+  Race 1: Box 2 - Bring On Bling (11.5%)
+  Race 2: Box 1 - Still Available (63.6%)
+  Race 3: Box 7 - West Rock Casey (63.2%)
+  Race 4: Box 7 - Be Wowed (21.6%)
+  Race 5: Box 7 - Mustang Ethics (45.3%)
+  Race 6: Box 6 - Classy Bandit (12.4%)
+  Race 7: Box 4 - Fascinate Samuel (13.6%)
+  Race 8: Box 5 - You Never Lose (43.9%)
+  Race 9: Box 6 - Bombay (21.7%)
+  Race 10: Box 1 - Freight Express (26.4%)
+  Race 11: Box 8 - Winsome Storm (19.2%)
