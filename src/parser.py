@@ -82,15 +82,36 @@ def parse_race_form(text):
     dog_timing_data = {}  # Index -> {race_times: [(time, distance)], sec_times: [(time, distance)], box_history: [(box_pos, won)]}
     previous_line_distance = None  # Track distance from previous line
 
+    # CRITICAL FIX: Join "Race No" lines that are split across two lines
+    # Modern PDFs often have: Line 1: "Race No"  Line 2: "1 10 Jan 26 07:27pm DUBBO 400m"
+    processed_lines = []
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        # If this line is "Race No" and next line starts with digits, join them
+        if line == "Race No" and i + 1 < len(lines):
+            next_line = lines[i + 1].strip()
+            if next_line and next_line[0].isdigit():
+                # Join the lines
+                processed_lines.append(f"Race No {next_line}")
+                i += 2  # Skip both lines
+                continue
+        processed_lines.append(line)
+        i += 1
+    
+    lines = processed_lines
+
     for i, line in enumerate(lines):
         line = line.strip()
 
         # Match race header - flexible format for different months and date formats
-        # Format: "Race No  1 Oct 16 04:00PM Angle Park 530m"
-        # Groups: (day_of_race, month_abbr, year_2digit, time, track, distance)
-        # Example: "Race No 22 Nov 25 07:21PM WENTWORTH PARK 520m"
-        # Captures: day=22, month=Nov, year=25, time=07:21PM, track=WENTWORTH PARK, distance=520
-        header_match = re.match(r"Race No\s+(\d{1,2})\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[AP]M)\s+([A-Za-z ]+?)\s+(\d+)m", line)
+        # Format: "Race No  1 Oct 16 04:00PM Angle Park 530m" OR "Race No 110 Jan 26 07:27pm DUBBO 400m"
+        # The "110" is actually race "1" + day "10" (no space between them in some PDFs)
+        # Groups: (race_day_combined, month_abbr, year_2digit, time, track, distance)
+        # Example: "Race No 110 Jan 26 07:27pm DUBBO 400m"
+        # Captures: "110", "Jan", "26", "07:27pm", "DUBBO", "400"
+        # We'll parse race_num and day from the combined string
+        header_match = re.match(r"Race No\s*(\d+)\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[APap][Mm])\s+([A-Za-z ]+?)\s+(\d+)m", line)
         
         # Fallback: Try simpler race header patterns if main pattern doesn't match
         if not header_match:
@@ -116,11 +137,22 @@ def parse_race_form(text):
                     pass
         
         if header_match:
-            race_number += 1
-            day_of_race, month_abbr, year_2digit, time, track, distance = header_match.groups()
+            race_day_combined, month_abbr, year_2digit, time, track, distance = header_match.groups()
             
-            # Convert 2-digit year to 4-digit year (e.g., '25' -> 2025)
+            # Parse race number and day from combined string
+            # "110" -> race=1, day=10;  "212" -> race=2, day=12; "9" -> race=9, day=unknown
+            if len(race_day_combined) >= 2:
+                race_number = int(race_day_combined[0])  # First digit is race number
+                day_of_race = race_day_combined[1:]  # Remaining digits are day
+            else:
+                race_number = int(race_day_combined)
+                day_of_race = "01"  # Default day
+            
+            # Convert 2-digit year to 4-digit year (e.g., '25' -> 2025, '26' -> 2026)
             year = BASE_YEAR + int(year_2digit)
+            
+            # Normalize time to uppercase
+            time = time.upper()
             
             # Convert month abbreviation to numeric format using MONTH_MAP
             month_num = MONTH_MAP.get(month_abbr, None)
@@ -608,8 +640,8 @@ def parse_race_form(text):
     # CRITICAL FIX #1: Extract date from PDF filename if not in header
     # Format: TRACKDDMM (e.g., ANGLG0212 → Dec 02, 2025)
     # This enables Phase 1 features that require dates
-    race_date = current_race.get('date')
-    if not race_date and 'Track' in current_race:
+    race_date = current_race.get('date') if current_race else None
+    if not race_date and current_race and 'Track' in current_race:
         # Try to extract from typical filename pattern
         # Filenames like: ANGLG0212form.pdf → track=ANGLG, day=02, month=12
         track_code = current_race.get('Track', '').upper()
