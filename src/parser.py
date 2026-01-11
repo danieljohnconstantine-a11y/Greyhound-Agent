@@ -191,11 +191,117 @@ def parse_race_form(text):
         # Form number can contain digits, 'x' and 'f' characters (e.g., "8x324", "67f67")
         # BUG FIX: Added 'f' to form number pattern - many dogs have 'f' in their form number
         # which was causing them to not be parsed (e.g., "67f67Lil Patti" was missed)
+        # CRITICAL FIX #21: Make form number completely optional {0,7} to catch dogs with NO form number
+        # CRITICAL FIX #22: Handle multi-line dog entries where career stats wrap to next lines
         # ENHANCED: More flexible pattern to handle edge cases and spacing variations
         dog_match = re.match(
-            r"""^(\d+)\.?\s*([0-9xf]{2,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+            r"""^(\d+)\.?\s*([0-9xf]{0,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
             line
         )
+        
+        # NEW: Also try pattern for dogs where career stats are on NEXT line(s)
+        # Pattern: Box, FormNum, Name, Sex/Age, Weight, BP, Trainer, Prize, then partial career stats
+        # Example: "5. 48537Great North 4d 0.0kg 5 Brett Gilbert $33,285 173 7 96"
+        # Where "173 7 96" are partial career stats on same line, and rest is on next line
+        if not dog_match:
+            partial_dog_match = re.match(
+                r"""^(\d+)\.?\s*([0-9xf]{0,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+?)\s+\$?([\d,]+)(?:\s+(\d+)\s+(\d+)\s+(\d+))?""",
+                line
+            )
+            if partial_dog_match and i + 2 < len(lines):
+                # Found partial match
+                groups = partial_dog_match.groups()
+                box = groups[0]
+                form_number = groups[1]
+                raw_name = groups[2]
+                sex_age = groups[3]
+                weight = groups[4]
+                draw = groups[5]
+                trainer = groups[6]
+                prize = groups[7]
+                # Career stats might be on same line or next lines
+                wins = groups[8] if groups[8] else None
+                places = groups[9] if groups[9] else None
+                starts = groups[10] if groups[10] else None
+                
+                # Check next lines for more career stats if not all on current line
+                if wins and places and starts:
+                    # All stats on same line, just need RTC/DLR/DLW from next line
+                    next_line = lines[i + 1].strip()
+                    # Look for pattern like "172" (continuation) or skip
+                    # Then look for "35 - 59 -" pattern
+                    next_next_line = lines[i + 2].strip() if i + 2 < len(lines) else ""
+                    
+                    # Try to extract RTC, DLR, DLW from next line after continuation
+                    rtc_dlr_match = re.search(r'^(\d+)\s*-\s*(\d+)\s*-\s*(\S+)?', next_next_line)
+                    if rtc_dlr_match:
+                        rtc = rtc_dlr_match.group(1) if rtc_dlr_match.group(1) else "0"
+                        dlr = rtc_dlr_match.group(2) if rtc_dlr_match.group(2) else "0"
+                        dlw = rtc_dlr_match.group(3) if rtc_dlr_match.group(3) else "Mdn"
+                    else:
+                        rtc, dlr, dlw = "0", "0", "Mdn"
+                else:
+                    # Career stats spread across next lines
+                    next_line = lines[i + 1].strip()
+                    next_next_line = lines[i + 2].strip() if i + 2 < len(lines) else ""
+                    
+                    # Pattern 1: All stats on next line after prize
+                    # "2. 38236Blazin' Bad Zula 4b 0.0kg 2 Nathan Goodwin $42,595 106 7 164"
+                    # Next line: "105"
+                    # Next next line: "35 - 59 -"
+                    if not wins:
+                        # Extract from current line - might have partial stats after prize
+                        prize_and_stats = re.search(r'\$?([\d,]+)\s+(\d+)\s+(\d+)', line)
+                        if prize_and_stats:
+                            wins = int(prize_and_stats.group(2))
+                            places = int(prize_and_stats.group(3))
+                    
+                    # Get starts from next line
+                    career_match = re.search(r'^(\d+)$', next_line)
+                    if career_match:
+                        starts = int(career_match.group(1))
+                    else:
+                        starts = 0
+                    
+                    # Get RTC, DLR, DLW from next next line
+                    stats_match = re.search(r'^(\d+)\s*-\s*(\d+)\s*-\s*(\S+)?', next_next_line)
+                    if stats_match:
+                        rtc = stats_match.group(1)
+                        dlr = stats_match.group(2)
+                        dlw = stats_match.group(3) if stats_match.group(3) else "Mdn"
+                    else:
+                        rtc, dlr, dlw = "0", "0", "Mdn"
+                
+                dog_name = raw_name.strip()
+                if form_number and dog_name.startswith(form_number[-2:]):
+                    dog_name = dog_name[len(form_number[-2:]):].strip()
+                
+                dog_index = len(dogs)
+                try:
+                    dogs.append({
+                        "Box": int(box),
+                        "DogName": dog_name,
+                        "FormNumber": form_number or "",
+                        "Trainer": trainer.strip(),
+                        "SexAge": sex_age,
+                        "Weight": float(weight),
+                        "Draw": int(draw),
+                        "CareerWins": int(wins) if wins else 0,
+                        "CareerPlaces": int(places) if places else 0,
+                        "CareerStarts": int(starts) if starts else 0,
+                        "PrizeMoney": float(prize.replace(",", "")),
+                        "RTC": rtc,
+                        "DLR": dlr,
+                        "DLW": dlw,
+                        **current_race
+                    })
+                    
+                    # Initialize timing data collection for this dog
+                    dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
+                    logger.info(f"✓ Parsed dog (multi-line format): Box {box} - {dog_name} (Race {current_race.get('RaceNumber', '?')})")
+                    continue  # Skip to next iteration - we've handled this dog
+                except Exception as e:
+                    logger.warning(f"⚠️ Failed to parse multi-line dog: {e}")
 
         if dog_match:
             (
