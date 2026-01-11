@@ -1,0 +1,143 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2026-01-11 07:51:34
+================================================================================
+
+Total PDFs processed: 11
+Successful predictions: 9
+Total dogs predicted: 759
+
+
+Capalaba:
+  Races: 9
+  Dogs: 72
+  Race 1: Box 7 - Bugatti Nova (8.1%)
+  Race 2: Box 2 - Shadow Raven (11.5%)
+  Race 3: Box 7 - Crisp Ride On (21.0%)
+  Race 4: Box 3 - Shine A Light (23.0%)
+  Race 5: Box 2 - Garrison (58.8%)
+  Race 6: Box 1 - Zipping Lipa (24.2%)
+  Race 7: Box 3 - Zipping Saigo (38.3%)
+  Race 8: Box 8 - Spirit Ripple (60.3%)
+  Race 9: Box 8 - Idea's Man (56.5%)
+
+DARWIN:
+  Races: 11
+  Dogs: 60
+  Race 1: Box 1 - Top End Terror (17.3%)
+  Race 2: Box 1 - Bing Bing Charm (69.7%)
+  Race 3: Box 2 - Ontario (74.6%)
+  Race 4: Box 3 - Stan's Dream (73.7%)
+  Race 5: Box 2 - Chronic (33.1%)
+  Race 6: Box 7 - Brittain On Fire (75.4%)
+  Race 7: Box 2 - Luka Magic (70.3%)
+  Race 8: Box 2 - Canya Keep Cool (73.9%)
+  Race 9: Box 8 - So Naive (67.0%)
+  Race 10: Box 8 - Territory Tuff (71.1%)
+  Race 11: Box 2 - Mum Said Yes (13.3%)
+
+GRAFTON:
+  Races: 12
+  Dogs: 107
+  Race 1: Box 1 - Brown Bread (30.4%)
+  Race 2: Box 2 - Nangar Nugget (31.9%)
+  Race 3: Box 1 - Nangar Zara (15.5%)
+  Race 4: Box 1 - Nangar Mcgraw (32.1%)
+  Race 5: Box 6 - Noir Ripple (73.3%)
+  Race 6: Box 3 - Confetti Dan (26.2%)
+  Race 7: Box 3 - Kingsbrae Rex (25.6%)
+  Race 8: Box 5 - For Mercy Sake (52.9%)
+  Race 9: Box 2 - Tiddler Boy (17.2%)
+  Race 10: Box 4 - Western Lies (65.3%)
+  Race 11: Box 2 - Paw Until Payday (14.2%)
+  Race 12: Box 4 - Malicious (37.2%)
+
+HEALESVILLE:
+  Races: 12
+  Dogs: 110
+  Race 1: Box 8 - Son Of Rosie (72.1%)
+  Race 2: Box 9 - Son Of Rosie (57.9%)
+  Race 3: Box 6 - Talk Is Cheap (20.4%)
+  Race 4: Box 8 - Above Them All (23.5%)
+  Race 5: Box 1 - Daintree Dazzler (40.2%)
+  Race 6: Box 1 - Zinzan Charlie (20.4%)
+  Race 7: Box 6 - Lady Gunai (12.6%)
+  Race 8: Box 1 - Michigan (44.9%)
+  Race 9: Box 6 - Urana Panda (19.8%)
+  Race 10: Box 1 - Sonic Diesel (17.3%)
+  Race 11: Box 8 - Lewis (55.9%)
+  Race 12: Box 3 - Taryn's Blue (11.5%)
+
+Q PARKLANDS:
+  Races: 10
+  Dogs: 73
+  Race 1: Box 1 - Wildash Dozer (41.9%)
+  Race 2: Box 2 - Luminate (6.5%)
+  Race 3: Box 2 - Stunner (27.5%)
+  Race 4: Box 2 - Uno Nangar (17.4%)
+  Race 5: Box 4 - Starry Raymar (20.3%)
+  Race 6: Box 6 - Neame (41.2%)
+  Race 7: Box 3 - Fill My Pockets (32.6%)
+  Race 8: Box 3 - Crab Pot (31.6%)
+  Race 9: Box 1 - Canya Flavour (21.8%)
+  Race 10: Box 1 - Callisto (11.2%)
+
+RICHMOND:
+  Races: 10
+  Dogs: 83
+  Race 1: Box 7 - Knight's Castle (34.4%)
+  Race 2: Box 4 - Psycho Circus (43.2%)
+  Race 3: Box 8 - Cumbria Laura (20.2%)
+  Race 4: Box 3 - Batgirl (41.4%)
+  Race 5: Box 4 - Zipping Georgia (34.6%)
+  Race 6: Box 8 - She's Enticing (26.5%)
+  Race 7: Box 8 - Well Kept Secret (44.5%)
+  Race 8: Box 8 - Beth Dutton (20.6%)
+  Race 9: Box 1 - Maybe Next Week (33.9%)
+  Race 10: Box 4 - Tell Me Again (46.9%)
+
+ROCKHAMPTON:
+  Races: 11
+  Dogs: 80
+  Race 1: Box 2 - Patriot Pauline (12.2%)
+  Race 2: Box 5 - She's No Lady (19.7%)
+  Race 3: Box 6 - Untamed Velocity (42.5%)
+  Race 4: Box 4 - Abraxos (12.5%)
+  Race 5: Box 5 - Jackpot Junior (39.5%)
+  Race 6: Box 3 - Hacienda Dream (17.2%)
+  Race 7: Box 3 - Farmor Leeway (24.9%)
+  Race 8: Box 1 - Farmor Rogue (41.5%)
+  Race 9: Box 3 - Rupee Ranger (25.2%)
+  Race 10: Box 1 - Twisted Yew (16.4%)
+  Race 11: Box 8 - End Of Tunnel (24.9%)
+
+SALE:
+  Races: 12
+  Dogs: 89
+  Race 1: Box 5 - Lakeview Leigh (18.2%)
+  Race 2: Box 1 - Minter Delicious (27.6%)
+  Race 3: Box 2 - Exequiel (34.2%)
+  Race 4: Box 4 - Nosey Bluey (18.5%)
+  Race 5: Box 1 - Lakeview Hunter (44.0%)
+  Race 6: Box 5 - Docherty (32.9%)
+  Race 7: Box 5 - Twisted Fantasy (55.3%)
+  Race 8: Box 4 - It's Mikado Time (71.1%)
+  Race 9: Box 3 - Flying Toxic (20.5%)
+  Race 10: Box 3 - Trendy Tommy (36.0%)
+  Race 11: Box 3 - Hammer Rose (14.0%)
+  Race 12: Box 3 - Peaky Collinda (9.3%)
+
+WAGGA:
+  Races: 11
+  Dogs: 85
+  Race 1: Box 7 - Slick Tilly (32.7%)
+  Race 2: Box 6 - Shifty Bulldozer (46.6%)
+  Race 3: Box 2 - Mob Mentality (31.9%)
+  Race 4: Box 8 - Navy Davies (32.1%)
+  Race 5: Box 3 - Fulfilment (11.8%)
+  Race 6: Box 1 - West End Lass (71.8%)
+  Race 7: Box 4 - Temora Terror (67.9%)
+  Race 8: Box 3 - Phoenix Violet (17.8%)
+  Race 9: Box 4 - Sonali (25.6%)
+  Race 10: Box 7 - Out Of Luck (17.4%)
+  Race 11: Box 5 - Tommy's Ava (13.4%)
