@@ -1,0 +1,192 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2026-01-13 16:36:12
+================================================================================
+
+Total PDFs processed: 12
+Successful predictions: 12
+Total dogs predicted: 1072
+
+
+Angle Park:
+  Races: 10
+  Dogs: 60
+  Race 1: Box 2 - Lulu Doll (11.5%)
+  Race 2: Box 7 - Taz Maniac (19.7%)
+  Race 3: Box 4 - Sebon Ember (7.3%)
+  Race 4: Box 8 - Once A Diva (16.4%)
+  Race 5: Box 1 - Hudson's Rain (34.9%)
+  Race 6: Box 5 - Lady Nova (22.7%)
+  Race 7: Box 1 - Crying Tiger (0.0%)
+  Race 8: Box 7 - Velaris (35.0%)
+  Race 9: Box 1 - Wait And See (0.0%)
+  Race 10: Box 2 - King Cordite (71.3%)
+
+BALLARAT:
+  Races: 14
+  Dogs: 130
+  Race 1: Box 1 - Carpark Babe (35.4%)
+  Race 2: Box 1 - Barellen Moon (0.0%)
+  Race 3: Box 1 - Blackpool Lottie (50.0%)
+  Race 4: Box 1 - Tinker Mike (50.0%)
+  Race 5: Box 1 - Blanket Game (0.0%)
+  Race 6: Box 1 - Nicky Boo Boo (61.5%)
+  Race 7: Box 1 - Maddie Odd Sock (50.0%)
+  Race 8: Box 1 - Wild Venus (19.3%)
+  Race 9: Box 8 - Aston Surpass (20.0%)
+  Race 10: Box 1 - Monarch (100.0%)
+  Race 11: Box 1 - Aston Finniss (17.1%)
+  Race 12: Box 4 - Go Fish (1.1%)
+  Race 13: Box 3 - Intex Bale (35.3%)
+  Race 14: Box 1 - Serenity Girl (0.0%)
+
+Bulli:
+  Races: 12
+  Dogs: 97
+  Race 1: Box 4 - Hard Sniff Style (77.3%)
+  Race 2: Box 1 - Lomax Keeping (78.3%)
+  Race 3: Box 2 - Jelly To Go (22.5%)
+  Race 4: Box 2 - Chief Lightning (100.0%)
+  Race 5: Box 8 - Wild Angela (3.7%)
+  Race 6: Box 3 - Reaction Jaxon (24.4%)
+  Race 7: Box 2 - Tralaero (98.3%)
+  Race 8: Box 2 - Go Go Spirit (89.2%)
+  Race 9: Box 3 - Unleash In Miami (76.6%)
+  Race 10: Box 8 - Sketchy Story (74.1%)
+  Race 11: Box 3 - Charming Chicka (98.5%)
+  Race 12: Box 5 - Linkin Park (75.7%)
+
+GOSFORD:
+  Races: 11
+  Dogs: 98
+  Race 1: Box 6 - Miracle Jack (53.4%)
+  Race 2: Box 7 - Solo Fernando (31.7%)
+  Race 3: Box 1 - Pitman Go Well (26.1%)
+  Race 4: Box 1 - Bold Charm (1.4%)
+  Race 5: Box 5 - My Monroe (39.8%)
+  Race 6: Box 1 - Tap Out Tiffy (0.0%)
+  Race 7: Box 6 - Bernardo's Belle (6.1%)
+  Race 8: Box 2 - Kawasaki Girl (15.3%)
+  Race 9: Box 1 - Samson's Riot (0.0%)
+  Race 10: Box 8 - Federal Player (20.7%)
+  Race 11: Box 1 - Tasman Hope (0.0%)
+
+GRAFTON:
+  Races: 10
+  Dogs: 73
+  Race 1: Box 7 - Ninita (11.3%)
+  Race 2: Box 1 - Wyndra All Prada (30.2%)
+  Race 3: Box 8 - My Frankenstein (8.5%)
+  Race 4: Box 8 - Bentley Rex (50.0%)
+  Race 5: Box 8 - Ritza Jackson (57.6%)
+  Race 6: Box 3 - Precocious Storm (50.9%)
+  Race 7: Box 2 - Robell Bobby (20.6%)
+  Race 8: Box 1 - Georgian Daisy (0.0%)
+  Race 9: Box 1 - Reel 'Em Mini (1.6%)
+  Race 10: Box 7 - Robell Ceaser (2.7%)
+
+HEALESVILLE:
+  Races: 12
+  Dogs: 95
+  Race 1: Box 2 - Jumbuk Backboard (12.4%)
+  Race 2: Box 8 - Morning Sam (41.4%)
+  Race 3: Box 1 - Prince Of Fire (19.2%)
+  Race 4: Box 2 - Shank's Pony (37.4%)
+  Race 5: Box 1 - Rugrat Tommy (0.0%)
+  Race 6: Box 1 - Zinzan Holly (0.0%)
+  Race 7: Box 1 - Dim Sim Rixi (0.0%)
+  Race 8: Box 1 - Lily Marleen (13.3%)
+  Race 9: Box 1 - Stormy Secret (3.8%)
+  Race 10: Box 1 - Excellent Dash (0.0%)
+  Race 11: Box 1 - Dookie Giblet (0.0%)
+  Race 12: Box 1 - Blonde Mustang (0.0%)
+
+HOBART:
+  Races: 10
+  Dogs: 92
+  Race 1: Box 7 - Deadly Breeze (21.4%)
+  Race 2: Box 3 - Stanmore (44.3%)
+  Race 3: Box 1 - Scooby Danger (24.1%)
+  Race 4: Box 7 - Simply Danger (35.8%)
+  Race 5: Box 1 - Ronny Rocket (71.0%)
+  Race 6: Box 8 - Canya Do It (21.0%)
+  Race 7: Box 1 - Cal's Sensation (10.4%)
+  Race 8: Box 1 - Tokyo Danger (57.5%)
+  Race 9: Box 7 - Teddy Danger (22.7%)
+  Race 10: Box 6 - Houdini's Sister (12.3%)
+
+MURRAY BDGE STRAIGHT:
+  Races: 12
+  Dogs: 67
+  Race 1: Box 3 - Fern Dreamer (13.0%)
+  Race 2: Box 2 - Kilcoy Lass (3.3%)
+  Race 3: Box 4 - All The Bling (27.7%)
+  Race 4: Box 1 - Bitter Fury (0.0%)
+  Race 5: Box 1 - Spring Diesel (8.3%)
+  Race 6: Box 1 - Right Side Up (33.4%)
+  Race 7: Box 4 - Canya Nameless (96.6%)
+  Race 8: Box 8 - Jukebox Duke (50.8%)
+  Race 9: Box 1 - Exultant Mclaren (0.0%)
+  Race 10: Box 6 - Techno Kelli (24.2%)
+  Race 11: Box 8 - If I Could (17.7%)
+  Race 12: Box 1 - Forgotten Fury (0.0%)
+
+Mandurah:
+  Races: 9
+  Dogs: 67
+  Race 1: Box 1 - Yunderup Tammy (0.0%)
+  Race 2: Box 1 - Cash To Flames (0.0%)
+  Race 3: Box 1 - Tricep King (25.8%)
+  Race 4: Box 5 - Sunset Vanadium (38.4%)
+  Race 5: Box 1 - Examiner (9.4%)
+  Race 6: Box 2 - Magic Grip (25.0%)
+  Race 7: Box 8 - Royale (28.6%)
+  Race 8: Box 3 - Global Flash (31.2%)
+  Race 9: Box 1 - Don't Tell Dasha (100.0%)
+
+Q LAKESIDE:
+  Races: 11
+  Dogs: 87
+  Race 1: Box 1 - Jenny Dutton (50.0%)
+  Race 2: Box 4 - Golden Label (8.8%)
+  Race 3: Box 8 - Federal Joey (43.4%)
+  Race 4: Box 2 - Pass The Peppa (19.4%)
+  Race 5: Box 1 - Clear Breeze (0.0%)
+  Race 6: Box 1 - I'm Sandwiches (0.0%)
+  Race 7: Box 7 - Zipping Kravitz (9.0%)
+  Race 8: Box 2 - Tusken Warrior (58.0%)
+  Race 9: Box 2 - Zipping Saigo (52.8%)
+  Race 10: Box 4 - Brooklyn Bandit (50.0%)
+  Race 11: Box 2 - Tahitian Girl (23.6%)
+
+TOWNSVILLE:
+  Races: 12
+  Dogs: 97
+  Race 1: Box 1 - Kasey's Way (47.1%)
+  Race 2: Box 2 - Lenard Clyde (24.7%)
+  Race 3: Box 4 - Federal Tommy (6.6%)
+  Race 4: Box 7 - Aston Kinnie (22.4%)
+  Race 5: Box 2 - Hopefully Fast (55.4%)
+  Race 6: Box 7 - Jackknifed (32.1%)
+  Race 7: Box 8 - Stormy Rose (23.7%)
+  Race 8: Box 8 - Cash Pirate (13.4%)
+  Race 9: Box 1 - Mad Attitude (5.8%)
+  Race 10: Box 8 - Big Bubba Gump (17.3%)
+  Race 11: Box 1 - Good Odds Adam (7.0%)
+  Race 12: Box 8 - Emgrand Flash (13.5%)
+
+Warragul:
+  Races: 12
+  Dogs: 109
+  Race 1: Box 2 - Reality Surprise (10.8%)
+  Race 2: Box 4 - Paw Oltron (23.2%)
+  Race 3: Box 7 - Fading Flame (67.8%)
+  Race 4: Box 3 - Paw Xyla (14.3%)
+  Race 5: Box 3 - Whatever He Said (28.2%)
+  Race 6: Box 3 - Dash Intention (52.5%)
+  Race 7: Box 8 - Okay Boss (3.1%)
+  Race 8: Box 1 - Doongalla Pedro (100.0%)
+  Race 9: Box 1 - Chalk And Cheese (100.0%)
+  Race 10: Box 2 - Tarawi Therese (100.0%)
+  Race 11: Box 1 - Princess Panda (0.0%)
+  Race 12: Box 1 - Imposter (50.0%)
