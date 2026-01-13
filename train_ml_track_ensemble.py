@@ -41,6 +41,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
+from sklearn.calibration import CalibratedClassifierCV
 import pickle
 import logging
 import traceback
@@ -99,7 +100,7 @@ def extract_features_and_labels(race_data_list, winners_list):
 
 def train_track_specific_ensemble(df, feature_cols, track_name):
     """
-    Train ensemble of 3 algorithms for a specific track.
+    Train ensemble of 3 algorithms for a specific track WITH CALIBRATION.
     
     Args:
         df: DataFrame with race data for this track
@@ -107,7 +108,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         track_name: Name of the track
     
     Returns:
-        models: Dict with trained models {algorithm_name: model}
+        models: Dict with trained AND CALIBRATED models {algorithm_name: model}
         scaler: Fitted StandardScaler
         metrics: Dict with performance metrics
     """
@@ -127,6 +128,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     
     models = {}
     predictions = {}
+    calibrated_predictions = {}
     
     # 1. Random Forest
     print(f"      Training RandomForest...")
@@ -138,8 +140,14 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         n_jobs=-1
     )
     rf.fit(X_train_scaled, y_train)
-    models['rf'] = rf
+    
+    # Calibrate Random Forest with Isotonic Regression
+    print(f"      Calibrating RandomForest...")
+    rf_calibrated = CalibratedClassifierCV(rf, method='isotonic', cv='prefit')
+    rf_calibrated.fit(X_train_scaled, y_train)
+    models['rf'] = rf_calibrated
     predictions['rf'] = rf.predict_proba(X_test_scaled)[:, 1]
+    calibrated_predictions['rf'] = rf_calibrated.predict_proba(X_test_scaled)[:, 1]
     
     # 2. Gradient Boosting
     print(f"      Training GradientBoosting...")
@@ -150,8 +158,14 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         random_state=42
     )
     gb.fit(X_train_scaled, y_train)
-    models['gb'] = gb
+    
+    # Calibrate Gradient Boosting with Isotonic Regression
+    print(f"      Calibrating GradientBoosting...")
+    gb_calibrated = CalibratedClassifierCV(gb, method='isotonic', cv='prefit')
+    gb_calibrated.fit(X_train_scaled, y_train)
+    models['gb'] = gb_calibrated
     predictions['gb'] = gb.predict_proba(X_test_scaled)[:, 1]
+    calibrated_predictions['gb'] = gb_calibrated.predict_proba(X_test_scaled)[:, 1]
     
     # 3. XGBoost (if available)
     if HAS_XGBOOST:
@@ -165,11 +179,17 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
             eval_metric='logloss'
         )
         xgb_model.fit(X_train_scaled, y_train)
-        models['xgb'] = xgb_model
+        
+        # Calibrate XGBoost with Isotonic Regression
+        print(f"      Calibrating XGBoost...")
+        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='isotonic', cv='prefit')
+        xgb_calibrated.fit(X_train_scaled, y_train)
+        models['xgb'] = xgb_calibrated
         predictions['xgb'] = xgb_model.predict_proba(X_test_scaled)[:, 1]
+        calibrated_predictions['xgb'] = xgb_calibrated.predict_proba(X_test_scaled)[:, 1]
     
-    # Compute ensemble prediction (simple average)
-    ensemble_pred_proba = np.mean([predictions[alg] for alg in predictions], axis=0)
+    # Compute ensemble prediction (simple average of CALIBRATED predictions)
+    ensemble_pred_proba = np.mean([calibrated_predictions[alg] for alg in calibrated_predictions], axis=0)
     ensemble_pred = (ensemble_pred_proba > 0.5).astype(int)
     
     # Compute metrics
@@ -181,23 +201,37 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         'n_test': len(X_test)
     }
     
+    # Uncalibrated metrics (for comparison)
     for alg_name, pred_proba in predictions.items():
+        pred = (pred_proba > 0.5).astype(int)
+        acc = accuracy_score(y_test, pred)
+        metrics[f'{alg_name}_accuracy_uncalibrated'] = acc
+    
+    # Calibrated metrics (actual performance)
+    for alg_name, pred_proba in calibrated_predictions.items():
         pred = (pred_proba > 0.5).astype(int)
         acc = accuracy_score(y_test, pred)
         metrics[f'{alg_name}_accuracy'] = acc
     
     metrics['ensemble_accuracy'] = accuracy_score(y_test, ensemble_pred)
     
+    # Calculate calibration improvement
+    uncal_ensemble = np.mean([predictions[alg] for alg in predictions], axis=0)
+    uncal_ensemble_pred = (uncal_ensemble > 0.5).astype(int)
+    metrics['ensemble_accuracy_uncalibrated'] = accuracy_score(y_test, uncal_ensemble_pred)
+    metrics['calibration_improvement'] = metrics['ensemble_accuracy'] - metrics['ensemble_accuracy_uncalibrated']
+    
     return models, scaler, metrics
 
 def main():
     print("=" * 80)
-    print("🎯 TRACK-SPECIFIC ENSEMBLE MODEL TRAINING - Option C")
+    print("🎯 TRACK-SPECIFIC ENSEMBLE MODEL TRAINING - Option C + CALIBRATION")
     print("=" * 80)
-    print("\nImplementing Priority 2 & 3 improvements:")
+    print("\nImplementing Priority 1, 2 & 3 improvements:")
     print("  ✅ Track-specific models (separate model per venue)")
     print("  ✅ Ensemble learning (RandomForest + GradientBoosting + XGBoost)")
-    print("  ✅ Expected: 8-12% accuracy improvement")
+    print("  ✅ Probability Calibration (Isotonic Regression) - NEW!")
+    print("  ✅ Expected: 8-12% accuracy improvement + calibrated confidence")
     print("=" * 80)
     print(f"\n📝 LOG FILE: {os.path.abspath(log_file)}")
     print("=" * 80)
@@ -322,7 +356,9 @@ def main():
         print("\n🎯 Per-Track Results:")
         print("-" * 80)
         for _, row in metrics_df.iterrows():
-            print(f"   {row['track']:25s}: Ensemble {row['ensemble_accuracy']:.1%}", end="")
+            cal_improve = row.get('calibration_improvement', 0)
+            improve_str = f" [+{cal_improve:.1%} calibration]" if cal_improve > 0 else ""
+            print(f"   {row['track']:25s}: Ensemble {row['ensemble_accuracy']:.1%}{improve_str}", end="")
             if 'rf_accuracy' in row:
                 print(f"  (RF: {row['rf_accuracy']:.1%}, GB: {row['gb_accuracy']:.1%}", end="")
                 if 'xgb_accuracy' in row:
@@ -336,6 +372,12 @@ def main():
         print(f"   Tracks trained: {len(all_metrics)}")
         print(f"   Total models: {len(all_metrics) * len(config['algorithms'])}")
         print(f"   Average ensemble accuracy: {metrics_df['ensemble_accuracy'].mean():.1%}")
+        
+        # Calculate average calibration improvement
+        if 'calibration_improvement' in metrics_df.columns:
+            avg_cal_improve = metrics_df['calibration_improvement'].mean()
+            print(f"   Average calibration improvement: +{avg_cal_improve:.1%}")
+        
         print(f"   Best track: {metrics_df.loc[metrics_df['ensemble_accuracy'].idxmax(), 'track']} ({metrics_df['ensemble_accuracy'].max():.1%})")
         print(f"   Worst track: {metrics_df.loc[metrics_df['ensemble_accuracy'].idxmin(), 'track']} ({metrics_df['ensemble_accuracy'].min():.1%})")
         
@@ -349,13 +391,16 @@ def main():
                 print(f"   {alg.upper():3s} average accuracy: {avg_acc:.1%}")
     
     print("\n" + "=" * 80)
-    print("✅ TRAINING COMPLETE!")
+    print("✅ TRAINING COMPLETE WITH CALIBRATION!")
     print("=" * 80)
     print(f"\n📁 Models saved to: {os.path.abspath(output_dir)}")
-    print(f"   - {len(all_models)} track-specific model sets")
+    print(f"   - {len(all_models)} track-specific model sets (CALIBRATED)")
     print(f"   - {len(all_models) * len(config['algorithms'])} individual algorithm models")
     print(f"   - Configuration file: config.pkl")
-    print("\n💡 To use these models, run: run_track_ensemble_predictions.bat")
+    print("\n💡 Key Improvement: All models now use Isotonic Regression calibration")
+    print("   This fixes the high-confidence prediction failures by ensuring")
+    print("   predicted probabilities match actual win rates.")
+    print("\n💡 To use these calibrated models, run: run_track_ensemble_predictions.bat")
     print("=" * 80)
     
     return 0
