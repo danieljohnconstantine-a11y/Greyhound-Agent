@@ -85,38 +85,55 @@ def extract_features_and_labels(race_data_list, winners_list):
     """
     all_rows = []
     
-    for race_df, winner_info in zip(race_data_list, winners_list):
+    logger.info(f"Starting feature extraction for {len(race_data_list)} race entries...")
+    
+    for idx, (race_df, winner_info) in enumerate(zip(race_data_list, winners_list)):
         if race_df is None or len(race_df) == 0:
+            logger.debug(f"Skipping race {idx}: empty dataframe")
             continue
         
-        # Handle both old format (int) and new format (dict with weight)
-        if isinstance(winner_info, dict):
-            winner_box = winner_info['box']
-            weight = winner_info['weight']
-            position = winner_info['position']
-        else:
-            # Backward compatibility: old format treats all as winners (weight 1.0)
-            winner_box = winner_info
-            weight = 1.0
-            position = 1
-        
-        # Add winner label and weight
-        race_df = race_df.copy()
-        race_df['Winner'] = (race_df['Box'] == winner_box).astype(float) * weight
-        race_df['SampleWeight'] = weight  # Store weight for later use
-        race_df['FinishPosition'] = 0  # Default for non-finishers
-        race_df.loc[race_df['Box'] == winner_box, 'FinishPosition'] = position
-        
-        all_rows.append(race_df)
+        try:
+            # Handle both old format (int) and new format (dict with weight)
+            if isinstance(winner_info, dict):
+                winner_box = winner_info['box']
+                weight = winner_info['weight']
+                position = winner_info['position']
+            else:
+                # Backward compatibility: old format treats all as winners (weight 1.0)
+                winner_box = winner_info
+                weight = 1.0
+                position = 1
+            
+            # Add winner label and weight
+            race_df = race_df.copy()
+            race_df['Winner'] = (race_df['Box'] == winner_box).astype(float) * weight
+            race_df['SampleWeight'] = weight  # Store weight for later use
+            race_df['FinishPosition'] = 0  # Default for non-finishers
+            race_df.loc[race_df['Box'] == winner_box, 'FinishPosition'] = position
+            
+            all_rows.append(race_df)
+            
+        except Exception as e:
+            logger.error(f"Error processing race {idx}: {e}", exc_info=True)
+            continue
+    
+    if not all_rows:
+        raise ValueError("No valid race data was processed!")
+    
+    logger.info(f"Successfully processed {len(all_rows)} race entries")
     
     # Combine all races
     df = pd.concat(all_rows, ignore_index=True)
+    
+    logger.info(f"Combined dataframe has {len(df)} rows")
     
     # Identify feature columns (exclude metadata and labels)
     exclude_cols = ['Winner', 'SampleWeight', 'FinishPosition', 'DogName', 'Track', 
                     'Date', 'Race', 'RaceNumber', 'Trainer', 'Owner', 'Sire', 'Dam', 
                     'Color', 'Sex', 'Age']
     feature_cols = [col for col in df.columns if col not in exclude_cols and df[col].dtype in [np.float64, np.int64]]
+    
+    logger.info(f"Identified {len(feature_cols)} feature columns")
     
     return df, feature_cols
 
@@ -290,6 +307,13 @@ def main():
         
         total_dogs = sum(len(race_df) if race_df is not None else 0 for race_df in race_data_list)
         print(f"   Total dogs: {total_dogs}")
+        print(f"   Winner entries: {len(winners_list)}")
+        
+        # Validate data structure
+        if len(race_data_list) != len(winners_list):
+            print(f"❌ ERROR: Mismatch between race_data ({len(race_data_list)}) and winners ({len(winners_list)})")
+            return 1
+            
     except Exception as e:
         print(f"❌ ERROR loading data: {e}")
         traceback.print_exc()
@@ -300,7 +324,8 @@ def main():
     print("-" * 80)
     
     try:
-        print(f"   Processing {len(race_data_list)} races with {len(winners_list)} winner entries...")
+        print(f"   Processing {len(race_data_list)} race entries with {len(winners_list)} winner entries...")
+        print(f"   Note: With Top 4 training, each race appears 4 times (1st/2nd/3rd/4th)")
         df, feature_cols = extract_features_and_labels(race_data_list, winners_list)
         print(f"✅ Extracted {len(feature_cols)} features from {len(df)} dog entries")
         
