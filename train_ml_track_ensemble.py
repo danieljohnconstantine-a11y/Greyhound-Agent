@@ -300,6 +300,7 @@ def main():
     print("-" * 80)
     
     try:
+        print(f"   Processing {len(race_data_list)} races with {len(winners_list)} winner entries...")
         df, feature_cols = extract_features_and_labels(race_data_list, winners_list)
         print(f"✅ Extracted {len(feature_cols)} features from {len(df)} dog entries")
         
@@ -313,7 +314,7 @@ def main():
             n_races = len(track_df)
             n_winners = track_df['Winner'].sum()
             track_data[track] = track_df
-            print(f"   {track:25s}: {n_races:4d} dogs, {n_winners:3d} winners")
+            print(f"   {track:25s}: {n_races:4d} dogs, {n_winners:3d} winners (weighted)")
     
     except Exception as e:
         print(f"❌ ERROR extracting features: {e}")
@@ -336,9 +337,9 @@ def main():
         try:
             track_df = track_data[track]
             
-            # Skip tracks with too few samples
-            if len(track_df) < 50:
-                print(f"      ⚠️  Skipping {track} - insufficient data ({len(track_df)} dogs)")
+            # Skip tracks with too few samples (lowered from 50 to 30 for Top 4 training)
+            if len(track_df) < 30:
+                print(f"      ⚠️  Skipping {track} - insufficient data ({len(track_df)} dogs, need 30+)")
                 continue
             
             # Train ensemble
@@ -372,6 +373,21 @@ def main():
     # Step 4: Save configuration
     print("\n💾 STEP 4: Saving ensemble configuration...")
     print("-" * 80)
+    
+    if not all_models:
+        print("❌ ERROR: No models were trained!")
+        print("   This usually means:")
+        print("   1. No tracks had enough data (need 30+ dogs per track)")
+        print("   2. CSV-to-PDF matching failed")
+        print("   3. Data format issues")
+        print(f"\n   Total races loaded: {len(race_data_list)}")
+        print(f"   Total samples: {len(df)}")
+        print(f"   Tracks found: {len(tracks)}")
+        print("\n   Track sample counts:")
+        for track in sorted(tracks):
+            track_df = track_data[track]
+            print(f"      {track:25s}: {len(track_df)} dogs")
+        return 1
     
     config = {
         'tracks': list(all_models.keys()),
