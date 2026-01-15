@@ -106,8 +106,10 @@ def extract_features_and_labels(race_data_list, winners_list):
             
             # Add winner label and weight
             race_df = race_df.copy()
-            race_df['Winner'] = (race_df['Box'] == winner_box).astype(float) * weight
-            race_df['SampleWeight'] = weight  # Store weight for later use
+            # CRITICAL: Winner label must be binary (0 or 1), NOT weighted
+            # The weight is used separately during model training via sample_weight parameter
+            race_df['Winner'] = (race_df['Box'] == winner_box).astype(float)
+            race_df['SampleWeight'] = weight  # Store weight for later use in model.fit()
             race_df['FinishPosition'] = 0  # Default for non-finishers
             race_df.loc[race_df['Box'] == winner_box, 'FinishPosition'] = position
             
