@@ -762,16 +762,21 @@ def load_historical_data_hybrid(data_dir='data'):
     logger.info(f"Extracted dog data from {len(pdf_races)} races in PDFs")
     
     # Step 4: Process all race results - ONLY USE PDF DATA (NO SYNTHETIC)
+    # ENHANCED: Use Top 4 finishers with weighted labels (1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3)
     race_data = []
     winners = []
     races_from_pdf = 0
     races_skipped_no_pdf = 0
+    top4_samples_added = 0
     
     for result in all_results:
         date = result['date']
         track = result['track']
         race_num = result['race']
         winner_box = result['winner']
+        second_box = result.get('2nd', 0)
+        third_box = result.get('3rd', 0)
+        fourth_box = result.get('4th', 0)
         
         # Normalize track name to match PDF format (4-letter code)
         track_code = normalize_track_name(track)
@@ -796,20 +801,45 @@ def load_historical_data_hybrid(data_dir='data'):
             races_skipped_no_pdf += 1
             continue
         
-        # Add this race to training data
-        if df_race is not None and not df_race.empty and winner_box in df_race['Box'].values:
-            race_data.append(df_race)
-            winners.append(winner_box)
+        # Add this race to training data - ENHANCED WITH TOP 4 FINISHERS
+        if df_race is not None and not df_race.empty:
+            # Add winner (weight 1.0) - original behavior
+            if winner_box in df_race['Box'].values:
+                race_data.append(df_race.copy())
+                winners.append({'box': winner_box, 'weight': 1.0, 'position': 1})
+                
+            # Add 2nd place (weight 0.7) - NEW
+            if second_box and second_box in df_race['Box'].values:
+                race_data.append(df_race.copy())
+                winners.append({'box': second_box, 'weight': 0.7, 'position': 2})
+                top4_samples_added += 1
+                
+            # Add 3rd place (weight 0.5) - NEW
+            if third_box and third_box in df_race['Box'].values:
+                race_data.append(df_race.copy())
+                winners.append({'box': third_box, 'weight': 0.5, 'position': 3})
+                top4_samples_added += 1
+                
+            # Add 4th place (weight 0.3) - NEW
+            if fourth_box and fourth_box in df_race['Box'].values:
+                race_data.append(df_race.copy())
+                winners.append({'box': fourth_box, 'weight': 0.3, 'position': 4})
+                top4_samples_added += 1
     
-    print(f"\n📊 HYBRID LOADING SUMMARY (FACTUAL DATA ONLY):")
+    print(f"\n📊 HYBRID LOADING SUMMARY (FACTUAL DATA ONLY + TOP 4 WEIGHTED TRAINING):")
     print(f"   Total race results in CSVs: {len(all_results)}")
     print(f"   Races with PDF data: {races_from_pdf}")
     print(f"   Races skipped (no PDF): {races_skipped_no_pdf}")
-    print(f"   Total races for training: {len(race_data)}")
-    print(f"   Coverage: {len(race_data)/len(all_results)*100:.1f}% of all races")
-    print(f"   ✅ Using ONLY factual PDF data - NO synthetic data generated\n")
+    print(f"   Winners added: {races_from_pdf}")
+    print(f"   2nd/3rd/4th place finishers added: {top4_samples_added}")
+    print(f"   Total training samples: {len(race_data)} (was {races_from_pdf})")
+    print(f"   Training data expansion: {len(race_data)/races_from_pdf:.1f}x")
+    print(f"   Coverage: {races_from_pdf/len(all_results)*100:.1f}% of all races")
+    print(f"   ✅ Using ONLY factual PDF data - NO synthetic data generated")
+    print(f"   ✅ Weighted labels: 1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3\n")
     
     logger.info(f"Hybrid loading complete: {races_from_pdf} races with PDF data, {races_skipped_no_pdf} skipped (no PDF)")
+    logger.info(f"Top 4 weighted training: {len(race_data)} samples ({top4_samples_added} from 2nd/3rd/4th place)")
     
     return race_data, winners
 
