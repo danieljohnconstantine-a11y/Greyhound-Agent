@@ -328,10 +328,23 @@ def main():
     try:
         print(f"   Processing {len(race_data_list)} race entries with {len(winners_list)} winner entries...")
         print(f"   Note: With Top 4 training, each race appears 4 times (1st/2nd/3rd/4th)")
+        
+        print("   Calling extract_features_and_labels()...")
+        sys.stdout.flush()  # Force flush to see output immediately
+        
         df, feature_cols = extract_features_and_labels(race_data_list, winners_list)
+        
+        print(f"   Returned from extract_features_and_labels()")
+        print(f"   DataFrame shape: {df.shape}")
+        print(f"   Feature columns count: {len(feature_cols)}")
+        sys.stdout.flush()  # Force flush
+        
         print(f"✅ Extracted {len(feature_cols)} features from {len(df)} dog entries")
         
         # Group by track
+        print("   Grouping by track...")
+        sys.stdout.flush()
+        
         tracks = df['Track'].unique()
         print(f"\n📊 Found {len(tracks)} unique tracks:")
         
