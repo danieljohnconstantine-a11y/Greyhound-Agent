@@ -1,0 +1,927 @@
+2026-01-15 05:14:44,732 - INFO - Found 480 PDFs and 42 results CSV files
+2026-01-15 05:14:45,071 - INFO - Loaded 3521 race results from CSV files
+2026-01-15 05:14:51,868 - INFO - 📍 Detected race header: Race 1, Angle Park, 530m on 2026-01-01 at 06:40PM
+2026-01-15 05:14:51,872 - INFO - 📍 Detected race header: Race 2, Angle Park, 530m on 2026-01-01 at 07:03PM
+2026-01-15 05:14:51,872 - INFO - 📍 Detected race header: Race 3, Angle Park, 530m on 2026-01-01 at 07:21PM
+2026-01-15 05:14:51,873 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Jukebox Duke (Race 3)
+2026-01-15 05:14:51,874 - INFO - 📍 Detected race header: Race 4, Angle Park, 530m on 2026-01-01 at 07:43PM
+2026-01-15 05:14:51,876 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2026-01-01 at 08:01PM
+2026-01-15 05:14:51,878 - INFO - 📍 Detected race header: Race 6, Angle Park, 530m on 2026-01-01 at 08:24PM
+2026-01-15 05:14:51,880 - INFO - 📍 Detected race header: Race 7, Angle Park, 595m on 2026-01-01 at 08:42PM
+2026-01-15 05:14:51,882 - INFO - 📍 Detected race header: Race 8, Angle Park, 530m on 2026-01-01 at 09:07PM
+2026-01-15 05:14:51,882 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Princess Cordite (Race 8)
+2026-01-15 05:14:51,884 - INFO - 📍 Detected race header: Race 9, Angle Park, 595m on 2026-01-01 at 09:25PM
+2026-01-15 05:14:51,886 - INFO - 📍 Detected race header: Race 10, Angle Park, 730m on 2026-01-01 at 09:49PM
+2026-01-15 05:14:51,888 - INFO - 📍 Detected race header: Race 11, Angle Park, 730m on 2026-01-01 at 10:07PM
+2026-01-15 05:14:51,889 - INFO - 📍 Detected race header: Race 12, Angle Park, 342m on 2026-01-01 at 10:31PM
+2026-01-15 05:14:51,892 - INFO - Converted timing for Archer Fly High: 3 times from other distances -> 30.30s at 530m
+2026-01-15 05:14:51,892 - INFO - Converted timing for Trophy Darts: 2 times from other distances -> 19.63s at 342m
+2026-01-15 05:14:51,893 - INFO - Converted timing for Victa Howard: 1 times from other distances -> 29.21s at 530m
+2026-01-15 05:14:51,893 - INFO - Converted timing for Keeley Rose: 4 times from other distances -> 34.06s at 595m
+2026-01-15 05:14:51,893 - INFO - Converted timing for Princess Cordite: 3 times from other distances -> 30.87s at 530m
+2026-01-15 05:14:51,893 - INFO - Converted timing for Adhana Martina: 3 times from other distances -> 34.66s at 595m
+2026-01-15 05:14:51,893 - INFO - Converted timing for I'm Vanilla Baby: 2 times from other distances -> 34.59s at 595m
+2026-01-15 05:14:51,893 - INFO - Converted timing for Echoes Of Dad: 3 times from other distances -> 34.15s at 595m
+2026-01-15 05:14:51,893 - INFO - Converted timing for Nitro Neo: 2 times from other distances -> 43.43s at 730m
+2026-01-15 05:14:51,893 - INFO - Converted timing for Precinct: 3 times from other distances -> 42.60s at 730m
+2026-01-15 05:14:51,894 - INFO - Converted timing for Zenvo Yoyo: 4 times from other distances -> 42.76s at 730m
+2026-01-15 05:14:51,894 - INFO - Converted timing for Carry On Casey: 3 times from other distances -> 19.36s at 342m
+2026-01-15 05:14:51,894 - INFO - Converted timing for Binnaway Sands: 3 times from other distances -> 19.44s at 342m
+2026-01-15 05:14:51,896 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:14:51,896 - INFO - ✅ Parsed 75 dogs across 12 races
+2026-01-15 05:14:51,896 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:14:51,896 - INFO - 📏 Distance values (sample): [530, 342, 595, 730]
+2026-01-15 05:14:57,728 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-12-01 at 05:59PM
+2026-01-15 05:14:57,729 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-01 at 06:18PM
+2026-01-15 05:14:57,730 - INFO - 📍 Detected race header: Race 3, Angle Park, 530m on 2025-12-01 at 06:42PM
+2026-01-15 05:14:57,732 - INFO - 📍 Detected race header: Race 4, Angle Park, 530m on 2025-12-01 at 07:01PM
+2026-01-15 05:14:57,734 - INFO - 📍 Detected race header: Race 5, Angle Park, 530m on 2025-12-01 at 07:23PM
+2026-01-15 05:14:57,736 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2025-12-01 at 07:45PM
+2026-01-15 05:14:57,738 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2025-12-01 at 08:11PM
+2026-01-15 05:14:57,740 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2025-12-01 at 08:29PM
+2026-01-15 05:14:57,742 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-12-01 at 08:54PM
+2026-01-15 05:14:57,744 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-12-01 at 09:19PM
+2026-01-15 05:14:57,746 - INFO - Converted timing for Pants: 2 times from other distances -> 19.48s at 342m
+2026-01-15 05:14:57,746 - INFO - Converted timing for Rock On Bub: 3 times from other distances -> 30.18s at 530m
+2026-01-15 05:14:57,746 - INFO - Converted timing for Paw Electra: 3 times from other distances -> 29.97s at 530m
+2026-01-15 05:14:57,746 - INFO - Converted timing for Zipping Norris: 3 times from other distances -> 30.33s at 530m
+2026-01-15 05:14:57,746 - INFO - Converted timing for Zipping Elly May: 3 times from other distances -> 30.06s at 530m
+2026-01-15 05:14:57,746 - INFO - Converted timing for Velaris: 3 times from other distances -> 29.63s at 530m
+2026-01-15 05:14:57,746 - INFO - Converted timing for Toora Terry: 5 times from other distances -> 30.01s at 530m
+2026-01-15 05:14:57,747 - INFO - Converted timing for Long Gully Cait: 3 times from other distances -> 19.24s at 342m
+2026-01-15 05:14:57,747 - INFO - Converted timing for Yumali: 2 times from other distances -> 19.48s at 342m
+2026-01-15 05:14:57,747 - INFO - Converted timing for Springvale Shell: 4 times from other distances -> 19.49s at 342m
+2026-01-15 05:14:57,747 - INFO - Converted timing for Dakota Shine: 4 times from other distances -> 19.40s at 342m
+2026-01-15 05:14:57,747 - INFO - Converted timing for Lenny's Honey: 1 times from other distances -> 19.40s at 342m
+2026-01-15 05:14:57,747 - INFO - Converted timing for Storm Sister: 2 times from other distances -> 19.77s at 342m
+2026-01-15 05:14:57,747 - INFO - Converted timing for Elegant Laika: 3 times from other distances -> 19.76s at 342m
+2026-01-15 05:14:57,747 - INFO - Converted timing for Ivory Pygmy: 5 times from other distances -> 19.55s at 342m
+2026-01-15 05:14:57,749 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:14:57,749 - INFO - ✅ Parsed 62 dogs across 10 races
+2026-01-15 05:14:57,749 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-01-15 05:14:57,749 - INFO - 📏 Distance values (sample): [342, 530]
+2026-01-15 05:15:03,643 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-12-02 at 05:54PM
+2026-01-15 05:15:03,645 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-02 at 06:12PM
+2026-01-15 05:15:03,646 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-12-02 at 06:31PM
+2026-01-15 05:15:03,648 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-12-02 at 06:49PM
+2026-01-15 05:15:03,649 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2025-12-02 at 07:06PM
+2026-01-15 05:15:03,651 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2025-12-02 at 07:23PM
+2026-01-15 05:15:03,651 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Kaison's Curse (Race 6)
+2026-01-15 05:15:03,653 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2025-12-02 at 07:40PM
+2026-01-15 05:15:03,653 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Far Out Lexi (Race 7)
+2026-01-15 05:15:03,655 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2025-12-02 at 08:03PM
+2026-01-15 05:15:03,656 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-12-02 at 08:23PM
+2026-01-15 05:15:03,659 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-12-02 at 08:39PM
+2026-01-15 05:15:03,659 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Way Too Soft (Race 10)
+2026-01-15 05:15:03,661 - INFO - Converted timing for Happy Hunter: 2 times from other distances -> 20.04s at 342m
+2026-01-15 05:15:03,661 - INFO - Converted timing for King Cordite: 2 times from other distances -> 19.85s at 342m
+2026-01-15 05:15:03,661 - INFO - Converted timing for Glenageary: 2 times from other distances -> 19.57s at 342m
+2026-01-15 05:15:03,661 - INFO - Converted timing for Cabinteely: 4 times from other distances -> 19.49s at 342m
+2026-01-15 05:15:03,661 - INFO - Converted timing for Split Vision: 4 times from other distances -> 19.64s at 342m
+2026-01-15 05:15:03,663 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:15:03,663 - INFO - ✅ Parsed 60 dogs across 10 races
+2026-01-15 05:15:03,663 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:15:03,663 - INFO - 📏 Distance values (sample): [342]
+2026-01-15 05:15:11,242 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2026-01-03 at 08:52AM
+2026-01-15 05:15:11,243 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2026-01-03 at 09:12AM
+2026-01-15 05:15:11,245 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2026-01-03 at 09:27AM
+2026-01-15 05:15:11,247 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2026-01-03 at 09:47AM
+2026-01-15 05:15:11,249 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2026-01-03 at 10:04AM
+2026-01-15 05:15:11,252 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2026-01-03 at 10:23AM
+2026-01-15 05:15:11,252 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Kaison's Curse (Race 6)
+2026-01-15 05:15:11,254 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2026-01-03 at 10:42AM
+2026-01-15 05:15:11,256 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2026-01-03 at 10:58AM
+2026-01-15 05:15:11,259 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2026-01-03 at 11:14AM
+2026-01-15 05:15:11,262 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2026-01-03 at 11:30AM
+2026-01-15 05:15:11,262 - INFO - ✓ Parsed dog (multi-line format): Box 9 - Miss Gravity (Race 10)
+2026-01-15 05:15:11,265 - INFO - Converted timing for Pressure Point: 1 times from other distances -> 19.90s at 342m
+2026-01-15 05:15:11,265 - INFO - Converted timing for Zinfandel Austin: 2 times from other distances -> 19.72s at 342m
+2026-01-15 05:15:11,267 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:15:11,267 - INFO - ✅ Parsed 78 dogs across 10 races
+2026-01-15 05:15:11,267 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:15:11,267 - INFO - 📏 Distance values (sample): [342]
+2026-01-15 05:15:18,991 - INFO - 📍 Detected race header: Race 1, Angle Park, 595m on 2025-12-04 at 06:34PM
+2026-01-15 05:15:18,993 - INFO - 📍 Detected race header: Race 2, Angle Park, 530m on 2025-12-04 at 06:56PM
+2026-01-15 05:15:18,994 - INFO - 📍 Detected race header: Race 3, Angle Park, 530m on 2025-12-04 at 07:19PM
+2026-01-15 05:15:18,994 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Jukebox Duke (Race 3)
+2026-01-15 05:15:18,996 - INFO - 📍 Detected race header: Race 4, Angle Park, 530m on 2025-12-04 at 07:37PM
+2026-01-15 05:15:18,996 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Immense (Race 4)
+2026-01-15 05:15:18,997 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2025-12-04 at 07:59PM
+2026-01-15 05:15:19,000 - INFO - 📍 Detected race header: Race 6, Angle Park, 530m on 2025-12-04 at 08:23PM
+2026-01-15 05:15:19,000 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Kisauni (Race 6)
+2026-01-15 05:15:19,002 - INFO - 📍 Detected race header: Race 7, Angle Park, 530m on 2025-12-04 at 08:44PM
+2026-01-15 05:15:19,004 - INFO - 📍 Detected race header: Race 8, Angle Park, 530m on 2025-12-04 at 09:08PM
+2026-01-15 05:15:19,007 - INFO - 📍 Detected race header: Race 9, Angle Park, 530m on 2025-12-04 at 09:29PM
+2026-01-15 05:15:19,009 - INFO - 📍 Detected race header: Race 10, Angle Park, 595m on 2025-12-04 at 09:54PM
+2026-01-15 05:15:19,011 - INFO - 📍 Detected race header: Race 11, Angle Park, 530m on 2025-12-04 at 10:12PM
+2026-01-15 05:15:19,012 - INFO - 📍 Detected race header: Race 12, Angle Park, 342m on 2025-12-04 at 10:34PM
+2026-01-15 05:15:19,015 - INFO - Converted timing for Cawbourne Adele: 4 times from other distances -> 34.69s at 595m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Cool Blue You: 3 times from other distances -> 34.76s at 595m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Discouraged: 2 times from other distances -> 34.52s at 595m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Unleash Innocent: 4 times from other distances -> 30.99s at 530m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Terrific Bobby: 2 times from other distances -> 31.23s at 530m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Amron Tiger: 4 times from other distances -> 29.81s at 530m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Fantastic Helga: 2 times from other distances -> 30.86s at 530m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Secret Super: 3 times from other distances -> 19.35s at 342m
+2026-01-15 05:15:19,016 - INFO - Converted timing for You Ain't It: 1 times from other distances -> 19.33s at 342m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Dolan: 2 times from other distances -> 19.75s at 342m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Zipping Elly May: 3 times from other distances -> 30.06s at 530m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Needs Space: 2 times from other distances -> 30.24s at 530m
+2026-01-15 05:15:19,016 - INFO - Converted timing for Lala Effie: 4 times from other distances -> 19.61s at 342m
+2026-01-15 05:15:19,018 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:15:19,018 - INFO - ✅ Parsed 80 dogs across 12 races
+2026-01-15 05:15:19,018 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:15:19,019 - INFO - 📏 Distance values (sample): [595, 530, 342]
+2026-01-15 05:15:26,245 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2026-01-05 at 05:58PM
+2026-01-15 05:15:26,246 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2026-01-05 at 06:21PM
+2026-01-15 05:15:26,247 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2026-01-05 at 06:43PM
+2026-01-15 05:15:26,249 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2026-01-05 at 07:01PM
+2026-01-15 05:15:26,251 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2026-01-05 at 07:23PM
+2026-01-15 05:15:26,253 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2026-01-05 at 07:45PM
+2026-01-15 05:15:26,253 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Blue Pride (Race 6)
+2026-01-15 05:15:26,254 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2026-01-05 at 08:03PM
+2026-01-15 05:15:26,257 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2026-01-05 at 08:21PM
+2026-01-15 05:15:26,259 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2026-01-05 at 08:45PM
+2026-01-15 05:15:26,262 - INFO - 📍 Detected race header: Race 10, Angle Park, 730m on 2026-01-05 at 09:03PM
+2026-01-15 05:15:26,263 - INFO - 📍 Detected race header: Race 11, Angle Park, 530m on 2026-01-05 at 09:26PM
+2026-01-15 05:15:26,265 - INFO - 📍 Detected race header: Race 12, Angle Park, 530m on 2026-01-05 at 09:42PM
+2026-01-15 05:15:26,267 - INFO - Converted timing for Pressure Point: 1 times from other distances -> 19.90s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Imagine The Fun: 5 times from other distances -> 19.32s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Parrakie: 3 times from other distances -> 19.27s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Oregon Hutan: 3 times from other distances -> 19.31s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Fire Stone: 1 times from other distances -> 19.51s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for You See Me: 4 times from other distances -> 19.24s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Mazuma Mayhem: 2 times from other distances -> 19.49s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Rhinestone: 2 times from other distances -> 19.11s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Rev Leon: 2 times from other distances -> 20.00s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Cantara Pearl: 3 times from other distances -> 19.47s at 342m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Moscow Chick: 3 times from other distances -> 41.28s at 730m
+2026-01-15 05:15:26,267 - INFO - Converted timing for Weblec Polly: 2 times from other distances -> 42.03s at 730m
+2026-01-15 05:15:26,268 - INFO - Converted timing for Weblec Pebbles: 2 times from other distances -> 29.81s at 530m
+2026-01-15 05:15:26,268 - INFO - Converted timing for Zali Keeping: 4 times from other distances -> 29.70s at 530m
+2026-01-15 05:15:26,269 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:15:26,269 - INFO - ✅ Parsed 74 dogs across 12 races
+2026-01-15 05:15:26,269 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'TimeConverted', 'Last3TimesSec', 'BoxBiasFactor', 'SectionalSec', 'TimeEstimated', 'Age', 'Sex']
+2026-01-15 05:15:26,270 - INFO - 📏 Distance values (sample): [342, 730, 530]
+2026-01-15 05:15:34,018 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2026-01-06 at 06:08PM
+2026-01-15 05:15:34,019 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2026-01-06 at 06:33PM
+2026-01-15 05:15:34,019 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Way Too Soft (Race 2)
+2026-01-15 05:15:34,021 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2026-01-06 at 06:58PM
+2026-01-15 05:15:34,023 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2026-01-06 at 07:22PM
+2026-01-15 05:15:34,023 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Far Out Lexi (Race 4)
+2026-01-15 05:15:34,023 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Starburst Candy (Race 4)
+2026-01-15 05:15:34,023 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Kaison's Curse (Race 4)
+2026-01-15 05:15:34,025 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2026-01-06 at 07:39PM
+2026-01-15 05:15:34,025 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Deep Purple (Race 5)
+2026-01-15 05:15:34,026 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2026-01-06 at 07:59PM
+2026-01-15 05:15:34,028 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2026-01-06 at 08:23PM
+2026-01-15 05:15:34,031 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2026-01-06 at 08:47PM
+2026-01-15 05:15:34,033 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2026-01-06 at 09:13PM
+2026-01-15 05:15:34,035 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2026-01-06 at 09:28PM
+2026-01-15 05:15:34,037 - INFO - 📍 Detected race header: Race 11, Angle Park, 342m on 2026-01-06 at 09:48PM
+2026-01-15 05:15:34,039 - INFO - 📍 Detected race header: Race 12, Angle Park, 342m on 2026-01-06 at 10:05PM
+2026-01-15 05:15:34,041 - INFO - Converted timing for Velaris: 2 times from other distances -> 19.87s at 342m
+2026-01-15 05:15:34,041 - INFO - Converted timing for Wreaking Havoc: 2 times from other distances -> 19.55s at 342m
+2026-01-15 05:15:34,041 - INFO - Converted timing for Steel Skies: 3 times from other distances -> 19.58s at 342m
+2026-01-15 05:15:34,041 - INFO - Converted timing for Sebon Rocks: 1 times from other distances -> 19.88s at 342m
+2026-01-15 05:15:34,042 - INFO - Converted timing for Evolve: 4 times from other distances -> 19.16s at 342m
+2026-01-15 05:15:34,042 - INFO - Converted timing for Red Brook: 4 times from other distances -> 19.64s at 342m
+2026-01-15 05:15:34,043 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:15:34,043 - INFO - ✅ Parsed 78 dogs across 12 races
+2026-01-15 05:15:34,043 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:15:34,044 - INFO - 📏 Distance values (sample): [342]
+2026-01-15 05:15:40,023 - INFO - 📍 Detected race header: Race 1, Angle Park, 595m on 2025-12-08 at 05:58PM
+2026-01-15 05:15:40,025 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-08 at 06:18PM
+2026-01-15 05:15:40,026 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-12-08 at 06:41PM
+2026-01-15 05:15:40,027 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-12-08 at 07:03PM
+2026-01-15 05:15:40,028 - INFO - 📍 Detected race header: Race 5, Angle Park, 530m on 2025-12-08 at 07:25PM
+2026-01-15 05:15:40,028 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Jukebox Duke (Race 5)
+2026-01-15 05:15:40,030 - INFO - 📍 Detected race header: Race 6, Angle Park, 530m on 2025-12-08 at 07:43PM
+2026-01-15 05:15:40,032 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2025-12-08 at 08:05PM
+2026-01-15 05:15:40,032 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Far Out Lexi (Race 7)
+2026-01-15 05:15:40,032 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Way Too Soft (Race 7)
+2026-01-15 05:15:40,034 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2025-12-08 at 08:23PM
+2026-01-15 05:15:40,036 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-12-08 at 08:41PM
+2026-01-15 05:15:40,038 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-12-08 at 09:02PM
+2026-01-15 05:15:40,040 - INFO - 📍 Detected race header: Race 11, Angle Park, 530m on 2025-12-08 at 09:22PM
+2026-01-15 05:15:40,042 - INFO - Converted timing for Mikaela's Joy: 2 times from other distances -> 34.24s at 595m
+2026-01-15 05:15:40,042 - INFO - Converted timing for Zipping Beluga: 1 times from other distances -> 19.79s at 342m
+2026-01-15 05:15:40,042 - INFO - Converted timing for Toora Terry: 3 times from other distances -> 30.31s at 530m
+2026-01-15 05:15:40,042 - INFO - Converted timing for Bristol Moss: 4 times from other distances -> 30.62s at 530m
+2026-01-15 05:15:40,042 - INFO - Converted timing for All The Sass: 1 times from other distances -> 30.49s at 530m
+2026-01-15 05:15:40,042 - INFO - Converted timing for Canya Nameless: 2 times from other distances -> 30.39s at 530m
+2026-01-15 05:15:40,042 - INFO - Converted timing for Buzz The Hustler: 4 times from other distances -> 19.15s at 342m
+2026-01-15 05:15:40,043 - INFO - Converted timing for Long Gully Cait: 2 times from other distances -> 19.24s at 342m
+2026-01-15 05:15:40,043 - INFO - Converted timing for Zipping Migaloo: 4 times from other distances -> 19.64s at 342m
+2026-01-15 05:15:40,043 - INFO - Converted timing for Aston Hanson: 1 times from other distances -> 19.34s at 342m
+2026-01-15 05:15:40,043 - INFO - Converted timing for Velaris: 2 times from other distances -> 29.63s at 530m
+2026-01-15 05:15:40,045 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:15:40,045 - INFO - ✅ Parsed 65 dogs across 11 races
+2026-01-15 05:15:40,045 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'TimeConverted', 'Last3TimesSec', 'BoxBiasFactor', 'SectionalSec', 'TimeEstimated', 'Age', 'Sex']
+2026-01-15 05:15:40,045 - INFO - 📏 Distance values (sample): [595, 342, 530]
+2026-01-15 05:15:47,913 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-12-09 at 06:02PM
+2026-01-15 05:15:47,915 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-09 at 06:23PM
+2026-01-15 05:15:47,917 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-12-09 at 06:43PM
+2026-01-15 05:15:47,919 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-12-09 at 07:06PM
+2026-01-15 05:15:47,922 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2025-12-09 at 07:23PM
+2026-01-15 05:15:47,924 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2025-12-09 at 07:40PM
+2026-01-15 05:15:47,926 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2025-12-09 at 07:57PM
+2026-01-15 05:15:47,926 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Kaison's Curse (Race 7)
+2026-01-15 05:15:47,929 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2025-12-09 at 08:14PM
+2026-01-15 05:15:47,929 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Starburst Candy (Race 8)
+2026-01-15 05:15:47,931 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-12-09 at 08:38PM
+2026-01-15 05:15:47,934 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-12-09 at 09:03PM
+2026-01-15 05:15:47,937 - INFO - Converted timing for Ultimate: 2 times from other distances -> 19.90s at 342m
+2026-01-15 05:15:47,937 - INFO - Converted timing for Aston Baker: 6 times from other distances -> 19.40s at 342m
+2026-01-15 05:15:47,937 - INFO - Converted timing for Aston Hanson: 1 times from other distances -> 19.34s at 342m
+2026-01-15 05:15:47,939 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:15:47,939 - INFO - ✅ Parsed 80 dogs across 10 races
+2026-01-15 05:15:47,939 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:15:47,940 - INFO - 📏 Distance values (sample): [342]
+2026-01-15 05:15:57,843 - INFO - 📍 Detected race header: Race 1, Angle Park, 530m on 2025-12-11 at 06:37PM
+2026-01-15 05:15:57,843 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Jukebox Duke (Race 1)
+2026-01-15 05:15:57,846 - INFO - 📍 Detected race header: Race 2, Angle Park, 530m on 2025-12-11 at 06:56PM
+2026-01-15 05:15:57,849 - INFO - 📍 Detected race header: Race 3, Angle Park, 530m on 2025-12-11 at 07:17PM
+2026-01-15 05:15:57,849 - INFO - ✓ Parsed dog (multi-line format): Box 3 - Immense (Race 3)
+2026-01-15 05:15:57,852 - INFO - 📍 Detected race header: Race 4, Angle Park, 530m on 2025-12-11 at 07:39PM
+2026-01-15 05:15:57,853 - INFO - 📍 Detected race header: Race 5, Angle Park, 530m on 2025-12-11 at 07:57PM
+2026-01-15 05:15:57,853 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Kisauni (Race 5)
+2026-01-15 05:15:57,855 - INFO - 📍 Detected race header: Race 6, Angle Park, 530m on 2025-12-11 at 08:19PM
+2026-01-15 05:15:57,855 - INFO - ✓ Parsed dog (multi-line format): Box 3 - Okay Boomer (Race 6)
+2026-01-15 05:15:57,858 - INFO - 📍 Detected race header: Race 7, Angle Park, 530m on 2025-12-11 at 08:40PM
+2026-01-15 05:15:57,862 - INFO - 📍 Detected race header: Race 8, Angle Park, 530m on 2025-12-11 at 09:04PM
+2026-01-15 05:15:57,862 - INFO - ✓ Parsed dog (multi-line format): Box 9 - Prime Of Life (Race 8)
+2026-01-15 05:15:57,865 - INFO - 📍 Detected race header: Race 9, Angle Park, 530m on 2025-12-11 at 09:28PM
+2026-01-15 05:15:57,868 - INFO - 📍 Detected race header: Race 10, Angle Park, 530m on 2025-12-11 at 09:49PM
+2026-01-15 05:15:57,872 - INFO - 📍 Detected race header: Race 11, Angle Park, 595m on 2025-12-11 at 10:11PM
+2026-01-15 05:15:57,874 - INFO - 📍 Detected race header: Race 12, Angle Park, 595m on 2025-12-11 at 10:34PM
+2026-01-15 05:15:57,876 - INFO - Converted timing for Amron Tiger: 2 times from other distances -> 29.81s at 530m
+2026-01-15 05:15:57,876 - INFO - Converted timing for Big Boss Giblet: 4 times from other distances -> 30.17s at 530m
+2026-01-15 05:15:57,876 - INFO - Converted timing for Shea's Entity: 2 times from other distances -> 30.92s at 530m
+2026-01-15 05:15:57,876 - INFO - Converted timing for Minnie's My Mum: 1 times from other distances -> 30.34s at 530m
+2026-01-15 05:15:57,876 - INFO - Converted timing for Find The Sun: 2 times from other distances -> 30.10s at 530m
+2026-01-15 05:15:57,877 - INFO - Converted timing for Lala Fluffy: 3 times from other distances -> 30.15s at 530m
+2026-01-15 05:15:57,877 - INFO - Converted timing for Rupee McGraw: 2 times from other distances -> 30.13s at 530m
+2026-01-15 05:15:57,877 - INFO - Converted timing for Prime Of Life: 3 times from other distances -> 30.10s at 530m
+2026-01-15 05:15:57,877 - INFO - Converted timing for Michalis: 1 times from other distances -> 30.30s at 530m
+2026-01-15 05:15:57,877 - INFO - Converted timing for My Rusty Halo: 5 times from other distances -> 30.10s at 530m
+2026-01-15 05:15:57,877 - INFO - Converted timing for Scary Eyes: 3 times from other distances -> 33.85s at 595m
+2026-01-15 05:15:57,877 - INFO - Converted timing for Ace's Chance: 3 times from other distances -> 34.24s at 595m
+2026-01-15 05:15:57,877 - INFO - Converted timing for Black Chip: 1 times from other distances -> 34.45s at 595m
+2026-01-15 05:15:57,879 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:15:57,879 - INFO - ✅ Parsed 102 dogs across 12 races
+2026-01-15 05:15:57,879 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:15:57,879 - INFO - 📏 Distance values (sample): [530, 595]
+2026-01-15 05:16:03,937 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2026-01-13 at 05:53PM
+2026-01-15 05:16:03,939 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2026-01-13 at 06:20PM
+2026-01-15 05:16:03,940 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2026-01-13 at 06:40PM
+2026-01-15 05:16:03,942 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2026-01-13 at 07:04PM
+2026-01-15 05:16:03,943 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2026-01-13 at 07:21PM
+2026-01-15 05:16:03,945 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2026-01-13 at 07:38PM
+2026-01-15 05:16:03,945 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Starburst Candy (Race 6)
+2026-01-15 05:16:03,947 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2026-01-13 at 07:55PM
+2026-01-15 05:16:03,949 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2026-01-13 at 08:12PM
+2026-01-15 05:16:03,951 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2026-01-13 at 08:36PM
+2026-01-15 05:16:03,951 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Kaison's Curse (Race 9)
+2026-01-15 05:16:03,953 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2026-01-13 at 08:57PM
+2026-01-15 05:16:03,953 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Far Out Lexi (Race 10)
+2026-01-15 05:16:03,955 - INFO - Converted timing for Hot Work: 3 times from other distances -> 20.19s at 342m
+2026-01-15 05:16:03,955 - INFO - Converted timing for Tough Cookie: 1 times from other distances -> 19.44s at 342m
+2026-01-15 05:16:03,955 - INFO - Converted timing for Sea Breezy: 4 times from other distances -> 19.51s at 342m
+2026-01-15 05:16:03,957 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:03,957 - INFO - ✅ Parsed 60 dogs across 10 races
+2026-01-15 05:16:03,957 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:03,957 - INFO - 📏 Distance values (sample): [342]
+2026-01-15 05:16:12,536 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-12-13 at 08:57AM
+2026-01-15 05:16:12,539 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-13 at 09:19AM
+2026-01-15 05:16:12,541 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-12-13 at 09:34AM
+2026-01-15 05:16:12,543 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-12-13 at 09:50AM
+2026-01-15 05:16:12,545 - INFO - 📍 Detected race header: Race 5, Angle Park, 530m on 2025-12-13 at 10:06AM
+2026-01-15 05:16:12,548 - INFO - 📍 Detected race header: Race 6, Angle Park, 530m on 2025-12-13 at 10:22AM
+2026-01-15 05:16:12,551 - INFO - 📍 Detected race header: Race 7, Angle Park, 530m on 2025-12-13 at 10:37AM
+2026-01-15 05:16:12,554 - INFO - 📍 Detected race header: Race 8, Angle Park, 530m on 2025-12-13 at 10:55AM
+2026-01-15 05:16:12,556 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-12-13 at 11:15AM
+2026-01-15 05:16:12,560 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-12-13 at 11:30AM
+2026-01-15 05:16:12,564 - INFO - Converted timing for Gunning Bandit: 4 times from other distances -> 29.56s at 530m
+2026-01-15 05:16:12,564 - INFO - Converted timing for Silent Storm: 2 times from other distances -> 30.99s at 530m
+2026-01-15 05:16:12,564 - INFO - Converted timing for Black Wanda: 2 times from other distances -> 30.81s at 530m
+2026-01-15 05:16:12,564 - INFO - Converted timing for Buzz The Hustler: 3 times from other distances -> 19.15s at 342m
+2026-01-15 05:16:12,564 - INFO - Converted timing for Hi There Frank: 2 times from other distances -> 19.25s at 342m
+2026-01-15 05:16:12,564 - INFO - Converted timing for Honey Zen: 2 times from other distances -> 19.24s at 342m
+2026-01-15 05:16:12,564 - INFO - Converted timing for Wicket: 3 times from other distances -> 19.71s at 342m
+2026-01-15 05:16:12,566 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:12,566 - INFO - ✅ Parsed 89 dogs across 10 races
+2026-01-15 05:16:12,566 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:12,567 - INFO - 📏 Distance values (sample): [342, 530]
+2026-01-15 05:16:18,349 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-12-15 at 05:58PM
+2026-01-15 05:16:18,351 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-15 at 06:20PM
+2026-01-15 05:16:18,352 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-12-15 at 06:45PM
+2026-01-15 05:16:18,354 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-12-15 at 07:03PM
+2026-01-15 05:16:18,356 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2025-12-15 at 07:25PM
+2026-01-15 05:16:18,357 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2025-12-15 at 07:43PM
+2026-01-15 05:16:18,359 - INFO - 📍 Detected race header: Race 7, Angle Park, 530m on 2025-12-15 at 08:10PM
+2026-01-15 05:16:18,361 - INFO - 📍 Detected race header: Race 8, Angle Park, 530m on 2025-12-15 at 08:32PM
+2026-01-15 05:16:18,361 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Lost At Sea (Race 8)
+2026-01-15 05:16:18,363 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-12-15 at 08:54PM
+2026-01-15 05:16:18,364 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-12-15 at 09:20PM
+2026-01-15 05:16:18,366 - INFO - Converted timing for Split Vision: 3 times from other distances -> 19.58s at 342m
+2026-01-15 05:16:18,366 - INFO - Converted timing for Nangar Express: 1 times from other distances -> 19.47s at 342m
+2026-01-15 05:16:18,366 - INFO - Converted timing for Miss Gravity: 1 times from other distances -> 19.45s at 342m
+2026-01-15 05:16:18,366 - INFO - Converted timing for Cyclone Darcy: 3 times from other distances -> 19.50s at 342m
+2026-01-15 05:16:18,366 - INFO - Converted timing for Power Move: 2 times from other distances -> 30.82s at 530m
+2026-01-15 05:16:18,366 - INFO - Converted timing for Princess Cordite: 1 times from other distances -> 31.96s at 530m
+2026-01-15 05:16:18,366 - INFO - Converted timing for Lost At Sea: 3 times from other distances -> 30.17s at 530m
+2026-01-15 05:16:18,366 - INFO - Converted timing for Velaris: 1 times from other distances -> 29.63s at 530m
+2026-01-15 05:16:18,366 - INFO - Converted timing for Ultimate: 1 times from other distances -> 19.90s at 342m
+2026-01-15 05:16:18,367 - INFO - Converted timing for Adhana Lulu: 5 times from other distances -> 19.44s at 342m
+2026-01-15 05:16:18,367 - INFO - Converted timing for Rev Pirate: 2 times from other distances -> 19.71s at 342m
+2026-01-15 05:16:18,368 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:18,368 - INFO - ✅ Parsed 56 dogs across 10 races
+2026-01-15 05:16:18,368 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:18,369 - INFO - 📏 Distance values (sample): [342, 530]
+2026-01-15 05:16:25,436 - INFO - 📍 Detected race header: Race 1, Angle Park, 530m on 2025-10-16 at 06:37PM
+2026-01-15 05:16:25,438 - INFO - 📍 Detected race header: Race 2, Angle Park, 530m on 2025-10-16 at 06:58PM
+2026-01-15 05:16:25,439 - INFO - 📍 Detected race header: Race 3, Angle Park, 530m on 2025-10-16 at 07:19PM
+2026-01-15 05:16:25,439 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Hartley Bale (Race 3)
+2026-01-15 05:16:25,439 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Weblec Flame (Race 3)
+2026-01-15 05:16:25,440 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Silk Sonic (Race 3)
+2026-01-15 05:16:25,440 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Immense (Race 3)
+2026-01-15 05:16:25,441 - INFO - 📍 Detected race header: Race 4, Angle Park, 530m on 2025-10-16 at 07:40PM
+2026-01-15 05:16:25,442 - INFO - 📍 Detected race header: Race 5, Angle Park, 530m on 2025-10-16 at 07:58PM
+2026-01-15 05:16:25,445 - INFO - 📍 Detected race header: Race 6, Angle Park, 530m on 2025-10-16 at 08:19PM
+2026-01-15 05:16:25,447 - INFO - 📍 Detected race header: Race 7, Angle Park, 595m on 2025-10-16 at 08:40PM
+2026-01-15 05:16:25,449 - INFO - 📍 Detected race header: Race 8, Angle Park, 530m on 2025-10-16 at 09:04PM
+2026-01-15 05:16:25,451 - INFO - 📍 Detected race header: Race 9, Angle Park, 530m on 2025-10-16 at 09:25PM
+2026-01-15 05:16:25,453 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-10-16 at 09:50PM
+2026-01-15 05:16:25,456 - INFO - 📍 Detected race header: Race 11, Angle Park, 342m on 2025-10-16 at 10:11PM
+2026-01-15 05:16:25,457 - INFO - 📍 Detected race header: Race 12, Angle Park, 342m on 2025-10-16 at 10:35PM
+2026-01-15 05:16:25,459 - INFO - Converted timing for Booterstown: 2 times from other distances -> 29.81s at 530m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Ultimate: 4 times from other distances -> 30.34s at 530m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Rocklands Gator: 5 times from other distances -> 30.06s at 530m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Hot Ruby: 2 times from other distances -> 29.99s at 530m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Nardo: 2 times from other distances -> 29.91s at 530m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Apilla: 1 times from other distances -> 35.38s at 595m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Fencer Max: 3 times from other distances -> 33.75s at 595m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Memories Of Rose: 2 times from other distances -> 31.10s at 530m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Oregon Hutan: 5 times from other distances -> 19.50s at 342m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Terrific Izzy: 2 times from other distances -> 19.40s at 342m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Irinka George: 2 times from other distances -> 17.32s at 342m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Carry On Natasha: 2 times from other distances -> 19.31s at 342m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Oscar Intention: 4 times from other distances -> 19.65s at 342m
+2026-01-15 05:16:25,460 - INFO - Converted timing for Secret Super: 2 times from other distances -> 19.51s at 342m
+2026-01-15 05:16:25,462 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:25,462 - INFO - ✅ Parsed 77 dogs across 12 races
+2026-01-15 05:16:25,462 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:25,462 - INFO - 📏 Distance values (sample): [530, 595, 342]
+2026-01-15 05:16:31,418 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-12-16 at 06:09PM
+2026-01-15 05:16:31,419 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-16 at 06:34PM
+2026-01-15 05:16:31,421 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-12-16 at 06:52PM
+2026-01-15 05:16:31,422 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-12-16 at 07:09PM
+2026-01-15 05:16:31,424 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2025-12-16 at 07:26PM
+2026-01-15 05:16:31,424 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Kaison's Curse (Race 5)
+2026-01-15 05:16:31,425 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2025-12-16 at 07:43PM
+2026-01-15 05:16:31,425 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Far Out Lexi (Race 6)
+2026-01-15 05:16:31,427 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2025-12-16 at 08:07PM
+2026-01-15 05:16:31,427 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Starburst Candy (Race 7)
+2026-01-15 05:16:31,429 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2025-12-16 at 08:24PM
+2026-01-15 05:16:31,429 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Way Too Soft (Race 8)
+2026-01-15 05:16:31,429 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Deep Purple (Race 8)
+2026-01-15 05:16:31,431 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-12-16 at 08:41PM
+2026-01-15 05:16:31,433 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-12-16 at 08:58PM
+2026-01-15 05:16:31,437 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:31,437 - INFO - ✅ Parsed 60 dogs across 10 races
+2026-01-15 05:16:31,437 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:31,437 - INFO - 📏 Distance values (sample): [342]
+2026-01-15 05:16:37,882 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-11-25 at 06:01PM
+2026-01-15 05:16:37,884 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-11-25 at 06:19PM
+2026-01-15 05:16:37,885 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-11-25 at 06:36PM
+2026-01-15 05:16:37,887 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-11-25 at 06:56PM
+2026-01-15 05:16:37,889 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2025-11-25 at 07:13PM
+2026-01-15 05:16:37,889 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Far Out Lexi (Race 5)
+2026-01-15 05:16:37,889 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Kaison's Curse (Race 5)
+2026-01-15 05:16:37,891 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2025-11-25 at 07:30PM
+2026-01-15 05:16:37,891 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Starburst Candy (Race 6)
+2026-01-15 05:16:37,893 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2025-11-25 at 07:48PM
+2026-01-15 05:16:37,893 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Way Too Soft (Race 7)
+2026-01-15 05:16:37,893 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Deep Purple (Race 7)
+2026-01-15 05:16:37,895 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2025-11-25 at 08:04PM
+2026-01-15 05:16:37,898 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-11-25 at 08:23PM
+2026-01-15 05:16:37,900 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-11-25 at 08:38PM
+2026-01-15 05:16:37,902 - INFO - Converted timing for Black Wanda: 1 times from other distances -> 19.88s at 342m
+2026-01-15 05:16:37,902 - INFO - Converted timing for Not The Gravy: 3 times from other distances -> 19.70s at 342m
+2026-01-15 05:16:37,902 - INFO - Converted timing for Cobalt Winter: 3 times from other distances -> 19.48s at 342m
+2026-01-15 05:16:37,902 - INFO - Converted timing for Huxi Bear: 4 times from other distances -> 19.64s at 342m
+2026-01-15 05:16:37,902 - INFO - Converted timing for Sebon Prince: 4 times from other distances -> 19.51s at 342m
+2026-01-15 05:16:37,902 - INFO - Converted timing for On The Strip: 1 times from other distances -> 19.73s at 342m
+2026-01-15 05:16:37,904 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:37,904 - INFO - ✅ Parsed 66 dogs across 10 races
+2026-01-15 05:16:37,904 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:37,904 - INFO - 📏 Distance values (sample): [342]
+2026-01-15 05:16:44,195 - INFO - 📍 Detected race header: Race 1, Angle Park, 595m on 2025-11-27 at 06:35PM
+2026-01-15 05:16:44,197 - INFO - 📍 Detected race header: Race 2, Angle Park, 530m on 2025-11-27 at 06:54PM
+2026-01-15 05:16:44,198 - INFO - 📍 Detected race header: Race 3, Angle Park, 530m on 2025-11-27 at 07:16PM
+2026-01-15 05:16:44,198 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Okay Boomer (Race 3)
+2026-01-15 05:16:44,199 - INFO - 📍 Detected race header: Race 4, Angle Park, 530m on 2025-11-27 at 07:34PM
+2026-01-15 05:16:44,200 - INFO - 📍 Detected race header: Race 5, Angle Park, 530m on 2025-11-27 at 07:56PM
+2026-01-15 05:16:44,201 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Immense (Race 5)
+2026-01-15 05:16:44,202 - INFO - 📍 Detected race header: Race 6, Angle Park, 530m on 2025-11-27 at 08:18PM
+2026-01-15 05:16:44,204 - INFO - 📍 Detected race header: Race 7, Angle Park, 530m on 2025-11-27 at 08:39PM
+2026-01-15 05:16:44,205 - INFO - 📍 Detected race header: Race 8, Angle Park, 530m on 2025-11-27 at 09:00PM
+2026-01-15 05:16:44,208 - INFO - 📍 Detected race header: Race 9, Angle Park, 530m on 2025-11-27 at 09:18PM
+2026-01-15 05:16:44,209 - INFO - 📍 Detected race header: Race 10, Angle Park, 530m on 2025-11-27 at 09:42PM
+2026-01-15 05:16:44,211 - INFO - 📍 Detected race header: Race 11, Angle Park, 530m on 2025-11-27 at 10:03PM
+2026-01-15 05:16:44,213 - INFO - 📍 Detected race header: Race 12, Angle Park, 342m on 2025-11-27 at 10:25PM
+2026-01-15 05:16:44,215 - INFO - Converted timing for Bourne Model: 3 times from other distances -> 33.67s at 595m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Brink And Back: 1 times from other distances -> 31.04s at 530m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Archer Fly High: 4 times from other distances -> 26.18s at 530m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Amron Tiger: 2 times from other distances -> 29.81s at 530m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Midnight Sun: 3 times from other distances -> 30.31s at 530m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Victory Club: 4 times from other distances -> 29.81s at 530m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Adhana Henry: 1 times from other distances -> 30.19s at 530m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Scary Eyes: 3 times from other distances -> 30.15s at 530m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Adhana Annie: 1 times from other distances -> 19.37s at 342m
+2026-01-15 05:16:44,215 - INFO - Converted timing for Brother Bilo: 5 times from other distances -> 19.34s at 342m
+2026-01-15 05:16:44,217 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:44,217 - INFO - ✅ Parsed 66 dogs across 12 races
+2026-01-15 05:16:44,217 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:44,217 - INFO - 📏 Distance values (sample): [595, 530, 342]
+2026-01-15 05:16:49,324 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-12-29 at 07:01PM
+2026-01-15 05:16:49,325 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-29 at 07:19PM
+2026-01-15 05:16:49,326 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-12-29 at 07:41PM
+2026-01-15 05:16:49,328 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-12-29 at 08:01PM
+2026-01-15 05:16:49,329 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2025-12-29 at 08:21PM
+2026-01-15 05:16:49,331 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2025-12-29 at 08:43PM
+2026-01-15 05:16:49,334 - INFO - 📍 Detected race header: Race 7, Angle Park, 530m on 2025-12-29 at 09:07PM
+2026-01-15 05:16:49,335 - INFO - 📍 Detected race header: Race 8, Angle Park, 530m on 2025-12-29 at 09:25PM
+2026-01-15 05:16:49,337 - INFO - 📍 Detected race header: Race 9, Angle Park, 595m on 2025-12-29 at 09:46PM
+2026-01-15 05:16:49,339 - INFO - Converted timing for Loving It Sweet: 1 times from other distances -> 19.72s at 342m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Ice Age: 1 times from other distances -> 19.74s at 342m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Miniature Fury: 2 times from other distances -> 19.72s at 342m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Allinga Amy: 4 times from other distances -> 19.47s at 342m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Forgotten Fury: 4 times from other distances -> 19.31s at 342m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Carry On Izzy: 3 times from other distances -> 19.22s at 342m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Phantom Carat: 4 times from other distances -> 19.49s at 342m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Joker's Queen: 4 times from other distances -> 19.45s at 342m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Rafferty Blues: 3 times from other distances -> 30.54s at 530m
+2026-01-15 05:16:49,339 - INFO - Converted timing for It's Jackie: 2 times from other distances -> 30.24s at 530m
+2026-01-15 05:16:49,339 - INFO - Converted timing for Victa Bob: 2 times from other distances -> 34.24s at 595m
+2026-01-15 05:16:49,340 - INFO - Converted timing for Vista Cadmium: 3 times from other distances -> 34.73s at 595m
+2026-01-15 05:16:49,340 - INFO - Converted timing for Referent Power: 1 times from other distances -> 34.85s at 595m
+2026-01-15 05:16:49,341 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:49,341 - INFO - ✅ Parsed 50 dogs across 9 races
+2026-01-15 05:16:49,341 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:49,341 - INFO - 📏 Distance values (sample): [342, 530, 595]
+2026-01-15 05:16:54,745 - INFO - 📍 Detected race header: Race 1, Angle Park, 342m on 2025-12-30 at 06:09PM
+2026-01-15 05:16:54,746 - INFO - 📍 Detected race header: Race 2, Angle Park, 342m on 2025-12-30 at 06:29PM
+2026-01-15 05:16:54,747 - INFO - 📍 Detected race header: Race 3, Angle Park, 342m on 2025-12-30 at 06:45PM
+2026-01-15 05:16:54,749 - INFO - 📍 Detected race header: Race 4, Angle Park, 342m on 2025-12-30 at 07:02PM
+2026-01-15 05:16:54,750 - INFO - 📍 Detected race header: Race 5, Angle Park, 342m on 2025-12-30 at 07:25PM
+2026-01-15 05:16:54,752 - INFO - 📍 Detected race header: Race 6, Angle Park, 342m on 2025-12-30 at 07:42PM
+2026-01-15 05:16:54,752 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Kaison's Curse (Race 6)
+2026-01-15 05:16:54,754 - INFO - 📍 Detected race header: Race 7, Angle Park, 342m on 2025-12-30 at 08:02PM
+2026-01-15 05:16:54,754 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Starburst Candy (Race 7)
+2026-01-15 05:16:54,756 - INFO - 📍 Detected race header: Race 8, Angle Park, 342m on 2025-12-30 at 08:22PM
+2026-01-15 05:16:54,756 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Way Too Soft (Race 8)
+2026-01-15 05:16:54,756 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Deep Purple (Race 8)
+2026-01-15 05:16:54,758 - INFO - 📍 Detected race header: Race 9, Angle Park, 342m on 2025-12-30 at 08:42PM
+2026-01-15 05:16:54,760 - INFO - 📍 Detected race header: Race 10, Angle Park, 342m on 2025-12-30 at 09:05PM
+2026-01-15 05:16:54,762 - INFO - Converted timing for Sebon Rocks: 1 times from other distances -> 19.88s at 342m
+2026-01-15 05:16:54,762 - INFO - Converted timing for South Girls: 2 times from other distances -> 20.08s at 342m
+2026-01-15 05:16:54,762 - INFO - Converted timing for Once A Diva: 1 times from other distances -> 19.99s at 342m
+2026-01-15 05:16:54,764 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:16:54,764 - INFO - ✅ Parsed 58 dogs across 10 races
+2026-01-15 05:16:54,764 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:16:54,764 - INFO - 📏 Distance values (sample): [342]
+2026-01-15 05:17:04,628 - INFO - 📍 Detected race header: Race 1, Angle Park Night, 530m on 2025-12-20 at 05:57PM
+2026-01-15 05:17:04,629 - INFO - 📍 Detected race header: Race 2, Angle Park Night, 530m on 2025-12-20 at 06:18PM
+2026-01-15 05:17:04,630 - INFO - ✓ Parsed dog (multi-line format): Box 9 - Immense (Race 2)
+2026-01-15 05:17:04,632 - INFO - 📍 Detected race header: Race 3, Angle Park Night, 342m on 2025-12-20 at 06:42PM
+2026-01-15 05:17:04,635 - INFO - 📍 Detected race header: Race 4, Angle Park Night, 530m on 2025-12-20 at 07:09PM
+2026-01-15 05:17:04,635 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Okay Boomer (Race 4)
+2026-01-15 05:17:04,635 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Immense (Race 4)
+2026-01-15 05:17:04,638 - INFO - 📍 Detected race header: Race 5, Angle Park Night, 595m on 2025-12-20 at 07:24PM
+2026-01-15 05:17:04,641 - INFO - 📍 Detected race header: Race 6, Angle Park Night, 530m on 2025-12-20 at 07:52PM
+2026-01-15 05:17:04,645 - INFO - 📍 Detected race header: Race 7, Angle Park Night, 730m on 2025-12-20 at 08:08PM
+2026-01-15 05:17:04,645 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Springvale Bray (Race 7)
+2026-01-15 05:17:04,647 - INFO - 📍 Detected race header: Race 8, Angle Park Night, 530m on 2025-12-20 at 08:29PM
+2026-01-15 05:17:04,650 - INFO - 📍 Detected race header: Race 9, Angle Park Night, 530m on 2025-12-20 at 08:56PM
+2026-01-15 05:17:04,654 - INFO - 📍 Detected race header: Race 10, Angle Park Night, 530m on 2025-12-20 at 09:13PM
+2026-01-15 05:17:04,657 - INFO - 📍 Detected race header: Race 11, Angle Park Night, 530m on 2025-12-20 at 09:31PM
+2026-01-15 05:17:04,657 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Jukebox Duke (Race 11)
+2026-01-15 05:17:04,660 - INFO - 📍 Detected race header: Race 12, Angle Park Night, 530m on 2025-12-20 at 09:48PM
+2026-01-15 05:17:04,662 - INFO - Converted timing for Victa Chrissy: 2 times from other distances -> 29.41s at 530m
+2026-01-15 05:17:04,663 - INFO - Converted timing for Amron Tiger: 2 times from other distances -> 29.81s at 530m
+2026-01-15 05:17:04,663 - INFO - Converted timing for Ace's Chance: 2 times from other distances -> 34.24s at 595m
+2026-01-15 05:17:04,663 - INFO - Converted timing for Scary Eyes: 1 times from other distances -> 34.66s at 595m
+2026-01-15 05:17:04,663 - INFO - Converted timing for Ginny's Run: 5 times from other distances -> 42.13s at 730m
+2026-01-15 05:17:04,663 - INFO - Converted timing for Memories Of Rose: 5 times from other distances -> 41.98s at 730m
+2026-01-15 05:17:04,663 - INFO - Converted timing for National Grid: 4 times from other distances -> 42.12s at 730m
+2026-01-15 05:17:04,663 - INFO - Converted timing for Dolan: 3 times from other distances -> 42.15s at 730m
+2026-01-15 05:17:04,663 - INFO - Converted timing for Dashing Nando: 1 times from other distances -> 30.19s at 530m
+2026-01-15 05:17:04,663 - INFO - Converted timing for Dolly's My Mum: 1 times from other distances -> 30.02s at 530m
+2026-01-15 05:17:04,665 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:17:04,665 - INFO - ✅ Parsed 104 dogs across 12 races
+2026-01-15 05:17:04,665 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-01-15 05:17:04,666 - INFO - 📏 Distance values (sample): [530, 342, 595, 730]
+2026-01-15 05:17:14,547 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2026-01-02 at 07:17PM
+2026-01-15 05:17:14,548 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2026-01-02 at 07:40PM
+2026-01-15 05:17:14,550 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2026-01-02 at 07:57PM
+2026-01-15 05:17:14,552 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2026-01-02 at 08:22PM
+2026-01-15 05:17:14,552 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Paw Kattia (Race 4)
+2026-01-15 05:17:14,555 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2026-01-02 at 08:39PM
+2026-01-15 05:17:14,558 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2026-01-02 at 09:01PM
+2026-01-15 05:17:14,561 - INFO - 📍 Detected race header: Race 7, BENDIGO, 500m on 2026-01-02 at 09:18PM
+2026-01-15 05:17:14,563 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2026-01-02 at 09:38PM
+2026-01-15 05:17:14,567 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2026-01-02 at 09:58PM
+2026-01-15 05:17:14,570 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2026-01-02 at 10:18PM
+2026-01-15 05:17:14,574 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2026-01-02 at 10:43PM
+2026-01-15 05:17:14,577 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2026-01-02 at 10:58PM
+2026-01-15 05:17:14,580 - INFO - Converted timing for Urana Taurus: 1 times from other distances -> 24.42s at 425m
+2026-01-15 05:17:14,581 - INFO - Converted timing for Aston Guitar: 1 times from other distances -> 23.74s at 425m
+2026-01-15 05:17:14,581 - INFO - Converted timing for Miss Mocha: 1 times from other distances -> 28.88s at 500m
+2026-01-15 05:17:14,581 - INFO - Converted timing for Ruckman: 1 times from other distances -> 27.89s at 500m
+2026-01-15 05:17:14,581 - INFO - Converted timing for Accounts Manager: 2 times from other distances -> 24.02s at 425m
+2026-01-15 05:17:14,581 - INFO - Converted timing for Our Regards: 2 times from other distances -> 24.06s at 425m
+2026-01-15 05:17:14,581 - INFO - Converted timing for Paw Eden: 1 times from other distances -> 24.53s at 425m
+2026-01-15 05:17:14,583 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:17:14,583 - INFO - ✅ Parsed 111 dogs across 12 races
+2026-01-15 05:17:14,583 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:17:14,583 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:17:23,960 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-12-03 at 02:29PM
+2026-01-15 05:17:23,962 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-12-03 at 02:49PM
+2026-01-15 05:17:23,964 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-12-03 at 03:10PM
+2026-01-15 05:17:23,967 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-12-03 at 03:28PM
+2026-01-15 05:17:23,970 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2025-12-03 at 03:52PM
+2026-01-15 05:17:23,972 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2025-12-03 at 04:12PM
+2026-01-15 05:17:23,974 - INFO - 📍 Detected race header: Race 7, BENDIGO, 500m on 2025-12-03 at 04:34PM
+2026-01-15 05:17:23,977 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-12-03 at 04:55PM
+2026-01-15 05:17:23,979 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-12-03 at 05:19PM
+2026-01-15 05:17:23,981 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-12-03 at 05:42PM
+2026-01-15 05:17:23,984 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-12-03 at 06:02PM
+2026-01-15 05:17:23,987 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-12-03 at 06:17PM
+2026-01-15 05:17:23,990 - INFO - 📍 Detected race header: Race 13, BENDIGO, 425m on 2025-12-03 at 06:34PM
+2026-01-15 05:17:23,990 - INFO - ✓ Parsed dog (multi-line format): Box 5 - My Compass (Race 13)
+2026-01-15 05:17:23,993 - INFO - Converted timing for Whistling By: 3 times from other distances -> 28.35s at 500m
+2026-01-15 05:17:23,993 - INFO - Converted timing for Greysynd Fever: 3 times from other distances -> 28.61s at 500m
+2026-01-15 05:17:23,993 - INFO - Converted timing for Sassy Panama: 1 times from other distances -> 23.91s at 425m
+2026-01-15 05:17:23,993 - INFO - Converted timing for Aston Dunkel: 1 times from other distances -> 23.96s at 425m
+2026-01-15 05:17:23,994 - INFO - Converted timing for Boulder Dash: 1 times from other distances -> 24.74s at 425m
+2026-01-15 05:17:23,994 - INFO - Converted timing for Angelani: 2 times from other distances -> 23.59s at 425m
+2026-01-15 05:17:23,994 - INFO - Converted timing for Stilton Swirl: 1 times from other distances -> 24.08s at 425m
+2026-01-15 05:17:23,996 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:17:23,996 - INFO - ✅ Parsed 98 dogs across 13 races
+2026-01-15 05:17:23,996 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:17:23,996 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:17:33,385 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-12-05 at 07:08PM
+2026-01-15 05:17:33,387 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-12-05 at 07:27PM
+2026-01-15 05:17:33,389 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-12-05 at 07:50PM
+2026-01-15 05:17:33,392 - INFO - 📍 Detected race header: Race 4, BENDIGO, 660m on 2025-12-05 at 08:08PM
+2026-01-15 05:17:33,393 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2025-12-05 at 08:27PM
+2026-01-15 05:17:33,395 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2025-12-05 at 08:53PM
+2026-01-15 05:17:33,398 - INFO - 📍 Detected race header: Race 7, BENDIGO, 500m on 2025-12-05 at 09:09PM
+2026-01-15 05:17:33,402 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-12-05 at 09:34PM
+2026-01-15 05:17:33,405 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-12-05 at 09:53PM
+2026-01-15 05:17:33,408 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-12-05 at 10:12PM
+2026-01-15 05:17:33,408 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Everglade (Race 10)
+2026-01-15 05:17:33,410 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-12-05 at 10:30PM
+2026-01-15 05:17:33,410 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Flyin' Ethics (Race 11)
+2026-01-15 05:17:33,413 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-12-05 at 10:50PM
+2026-01-15 05:17:33,415 - INFO - Converted timing for Fast Reply: 1 times from other distances -> 24.35s at 425m
+2026-01-15 05:17:33,415 - INFO - Converted timing for Galloping Pippy: 2 times from other distances -> 24.46s at 425m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Kiptum: 3 times from other distances -> 37.79s at 660m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Stomping: 2 times from other distances -> 37.49s at 660m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Fade To Black: 5 times from other distances -> 37.95s at 660m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Manager: 1 times from other distances -> 24.24s at 425m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Tiger Shark: 2 times from other distances -> 28.29s at 500m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Scott Sigma: 1 times from other distances -> 28.19s at 500m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Cash The Lot: 3 times from other distances -> 27.11s at 500m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Pine Bluff: 1 times from other distances -> 28.09s at 500m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Spicy La Vida: 1 times from other distances -> 24.75s at 425m
+2026-01-15 05:17:33,416 - INFO - Converted timing for One For Bill: 3 times from other distances -> 23.62s at 425m
+2026-01-15 05:17:33,416 - INFO - Converted timing for Blank Slate: 1 times from other distances -> 23.53s at 425m
+2026-01-15 05:17:33,416 - INFO - Converted timing for McIvor Morgan: 1 times from other distances -> 24.02s at 425m
+2026-01-15 05:17:33,418 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:17:33,418 - INFO - ✅ Parsed 100 dogs across 12 races
+2026-01-15 05:17:33,418 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:17:33,419 - INFO - 📏 Distance values (sample): [425, 660, 500]
+2026-01-15 05:17:42,873 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2026-01-07 at 08:20AM
+2026-01-15 05:17:42,876 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2026-01-07 at 08:36AM
+2026-01-15 05:17:42,877 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2026-01-07 at 08:51AM
+2026-01-15 05:17:42,880 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2026-01-07 at 09:06AM
+2026-01-15 05:17:42,882 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2026-01-07 at 09:21AM
+2026-01-15 05:17:42,884 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2026-01-07 at 09:36AM
+2026-01-15 05:17:42,886 - INFO - 📍 Detected race header: Race 7, BENDIGO, 425m on 2026-01-07 at 09:51AM
+2026-01-15 05:17:42,888 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2026-01-07 at 10:06AM
+2026-01-15 05:17:42,888 - INFO - ✓ Parsed dog (multi-line format): Box 7 - White Shiraz (Race 8)
+2026-01-15 05:17:42,892 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2026-01-07 at 10:21AM
+2026-01-15 05:17:42,894 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2026-01-07 at 10:37AM
+2026-01-15 05:17:42,897 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2026-01-07 at 10:53AM
+2026-01-15 05:17:42,899 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2026-01-07 at 11:13AM
+2026-01-15 05:17:42,899 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Mini Minion (Race 12)
+2026-01-15 05:17:42,902 - INFO - 📍 Detected race header: Race 13, BENDIGO, 425m on 2026-01-07 at 11:29AM
+2026-01-15 05:17:42,905 - INFO - Converted timing for Thermal Ignition: 1 times from other distances -> 23.64s at 425m
+2026-01-15 05:17:42,905 - INFO - Converted timing for Simply Stylish: 1 times from other distances -> 23.67s at 425m
+2026-01-15 05:17:42,905 - INFO - Converted timing for Thermal Smoke: 2 times from other distances -> 28.11s at 500m
+2026-01-15 05:17:42,905 - INFO - Converted timing for Akela Young: 2 times from other distances -> 28.16s at 500m
+2026-01-15 05:17:42,906 - INFO - Converted timing for White Shiraz: 1 times from other distances -> 27.83s at 500m
+2026-01-15 05:17:42,906 - INFO - Converted timing for Whipstick Jordan: 1 times from other distances -> 23.81s at 425m
+2026-01-15 05:17:42,906 - INFO - Converted timing for Beast Power: 3 times from other distances -> 23.19s at 425m
+2026-01-15 05:17:42,908 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:17:42,908 - INFO - ✅ Parsed 100 dogs across 13 races
+2026-01-15 05:17:42,908 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:17:42,908 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:17:54,338 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-12-10 at 02:14PM
+2026-01-15 05:17:54,340 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-12-10 at 02:35PM
+2026-01-15 05:17:54,342 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-12-10 at 02:52PM
+2026-01-15 05:17:54,345 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-12-10 at 03:17PM
+2026-01-15 05:17:54,347 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2025-12-10 at 03:37PM
+2026-01-15 05:17:54,350 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2025-12-10 at 03:59PM
+2026-01-15 05:17:54,353 - INFO - 📍 Detected race header: Race 7, BENDIGO, 500m on 2025-12-10 at 04:16PM
+2026-01-15 05:17:54,356 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-12-10 at 04:31PM
+2026-01-15 05:17:54,358 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-12-10 at 04:52PM
+2026-01-15 05:17:54,361 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-12-10 at 05:17PM
+2026-01-15 05:17:54,365 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-12-10 at 05:34PM
+2026-01-15 05:17:54,369 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-12-10 at 05:59PM
+2026-01-15 05:17:54,372 - INFO - 📍 Detected race header: Race 13, BENDIGO, 425m on 2025-12-10 at 06:17PM
+2026-01-15 05:17:54,373 - INFO - ✓ Parsed dog (multi-line format): Box 10 - Lektra Nick (Race 13)
+2026-01-15 05:17:54,377 - INFO - Converted timing for Irish Legend: 3 times from other distances -> 24.17s at 425m
+2026-01-15 05:17:54,377 - INFO - Converted timing for Urana Radiant: 2 times from other distances -> 24.62s at 425m
+2026-01-15 05:17:54,377 - INFO - Converted timing for Misty Autumn: 1 times from other distances -> 25.53s at 425m
+2026-01-15 05:17:54,377 - INFO - Converted timing for Idyllic Meyer: 3 times from other distances -> 28.55s at 500m
+2026-01-15 05:17:54,377 - INFO - Converted timing for Classic Grey: 1 times from other distances -> 28.76s at 500m
+2026-01-15 05:17:54,377 - INFO - Converted timing for Aubrey Miss: 1 times from other distances -> 24.93s at 425m
+2026-01-15 05:17:54,377 - INFO - Converted timing for Jarmon: 1 times from other distances -> 23.71s at 425m
+2026-01-15 05:17:54,377 - INFO - Converted timing for Baijiu: 2 times from other distances -> 24.23s at 425m
+2026-01-15 05:17:54,377 - INFO - Converted timing for Amron Buster: 1 times from other distances -> 24.99s at 425m
+2026-01-15 05:17:54,379 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:17:54,379 - INFO - ✅ Parsed 121 dogs across 13 races
+2026-01-15 05:17:54,379 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:17:54,380 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:18:02,667 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-12-12 at 06:57PM
+2026-01-15 05:18:02,668 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-12-12 at 07:14PM
+2026-01-15 05:18:02,670 - INFO - 📍 Detected race header: Race 3, BENDIGO, 500m on 2025-12-12 at 07:31PM
+2026-01-15 05:18:02,672 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-12-12 at 07:54PM
+2026-01-15 05:18:02,674 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2025-12-12 at 08:16PM
+2026-01-15 05:18:02,674 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Flyin' Ethics (Race 5)
+2026-01-15 05:18:02,676 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2025-12-12 at 08:32PM
+2026-01-15 05:18:02,679 - INFO - 📍 Detected race header: Race 7, BENDIGO, 425m on 2025-12-12 at 08:54PM
+2026-01-15 05:18:02,681 - INFO - 📍 Detected race header: Race 8, BENDIGO, 425m on 2025-12-12 at 09:17PM
+2026-01-15 05:18:02,681 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Don't Tell Shell (Race 8)
+2026-01-15 05:18:02,684 - INFO - 📍 Detected race header: Race 9, BENDIGO, 500m on 2025-12-12 at 09:44PM
+2026-01-15 05:18:02,686 - INFO - 📍 Detected race header: Race 10, BENDIGO, 500m on 2025-12-12 at 10:03PM
+2026-01-15 05:18:02,688 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-12-12 at 10:23PM
+2026-01-15 05:18:02,691 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-12-12 at 10:46PM
+2026-01-15 05:18:02,693 - INFO - Converted timing for Jumbuk Jade: 1 times from other distances -> 23.87s at 425m
+2026-01-15 05:18:02,693 - INFO - Converted timing for Zipping Kentucky: 1 times from other distances -> 24.01s at 425m
+2026-01-15 05:18:02,693 - INFO - Converted timing for Tension Head: 1 times from other distances -> 23.88s at 425m
+2026-01-15 05:18:02,693 - INFO - Converted timing for Lady Gunai: 3 times from other distances -> 23.55s at 425m
+2026-01-15 05:18:02,694 - INFO - Converted timing for Speedy Easy: 3 times from other distances -> 27.67s at 500m
+2026-01-15 05:18:02,694 - INFO - Converted timing for Blank Slate: 1 times from other distances -> 23.53s at 425m
+2026-01-15 05:18:02,694 - INFO - Converted timing for Smooth Collinda: 1 times from other distances -> 23.17s at 425m
+2026-01-15 05:18:02,695 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:18:02,696 - INFO - ✅ Parsed 87 dogs across 12 races
+2026-01-15 05:18:02,696 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:18:02,696 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:18:10,701 - INFO - 📍 Detected race header: Race 1, BENDIGO, 500m on 2025-12-13 at 06:06PM
+2026-01-15 05:18:10,703 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-12-13 at 06:25PM
+2026-01-15 05:18:10,705 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-12-13 at 06:40PM
+2026-01-15 05:18:10,706 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-12-13 at 06:57PM
+2026-01-15 05:18:10,708 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2025-12-13 at 07:19PM
+2026-01-15 05:18:10,710 - INFO - 📍 Detected race header: Race 6, BENDIGO, 425m on 2025-12-13 at 07:44PM
+2026-01-15 05:18:10,712 - INFO - 📍 Detected race header: Race 7, BENDIGO, 425m on 2025-12-13 at 07:59PM
+2026-01-15 05:18:10,714 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-12-13 at 08:21PM
+2026-01-15 05:18:10,714 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Dasher Bale (Race 8)
+2026-01-15 05:18:10,717 - INFO - 📍 Detected race header: Race 9, BENDIGO, 500m on 2025-12-13 at 08:42PM
+2026-01-15 05:18:10,718 - INFO - 📍 Detected race header: Race 10, BENDIGO, 500m on 2025-12-13 at 09:01PM
+2026-01-15 05:18:10,721 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-12-13 at 09:22PM
+2026-01-15 05:18:10,723 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-12-13 at 09:37PM
+2026-01-15 05:18:10,723 - INFO - ✓ Parsed dog (multi-line format): Box 3 - My Compass (Race 12)
+2026-01-15 05:18:10,726 - INFO - Converted timing for Decimal Point: 1 times from other distances -> 28.85s at 500m
+2026-01-15 05:18:10,726 - INFO - Converted timing for Rosie Force: 3 times from other distances -> 28.44s at 500m
+2026-01-15 05:18:10,726 - INFO - Converted timing for Cornhill Scout: 2 times from other distances -> 28.42s at 500m
+2026-01-15 05:18:10,726 - INFO - Converted timing for Excellent Dash: 2 times from other distances -> 24.11s at 425m
+2026-01-15 05:18:10,726 - INFO - Converted timing for Rusty Rancher: 1 times from other distances -> 23.79s at 425m
+2026-01-15 05:18:10,726 - INFO - Converted timing for Stilton Swirl: 1 times from other distances -> 24.08s at 425m
+2026-01-15 05:18:10,727 - INFO - Converted timing for Tickets: 1 times from other distances -> 23.75s at 425m
+2026-01-15 05:18:10,727 - INFO - Converted timing for Steely Shiraz: 3 times from other distances -> 28.28s at 500m
+2026-01-15 05:18:10,727 - INFO - Converted timing for She's Iconic: 2 times from other distances -> 28.82s at 500m
+2026-01-15 05:18:10,727 - INFO - Converted timing for Les Norton: 2 times from other distances -> 28.97s at 500m
+2026-01-15 05:18:10,727 - INFO - Converted timing for Moraine Joker: 1 times from other distances -> 24.42s at 425m
+2026-01-15 05:18:10,729 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:18:10,729 - INFO - ✅ Parsed 83 dogs across 12 races
+2026-01-15 05:18:10,729 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:18:10,729 - INFO - 📏 Distance values (sample): [500, 425]
+2026-01-15 05:18:20,653 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2026-01-14 at 01:43PM
+2026-01-15 05:18:20,656 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2026-01-14 at 02:04PM
+2026-01-15 05:18:20,658 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2026-01-14 at 02:24PM
+2026-01-15 05:18:20,660 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2026-01-14 at 02:49PM
+2026-01-15 05:18:20,663 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2026-01-14 at 03:10PM
+2026-01-15 05:18:20,663 - INFO - ✓ Parsed dog (multi-line format): Box 3 - Paw Kattia (Race 5)
+2026-01-15 05:18:20,665 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2026-01-14 at 03:27PM
+2026-01-15 05:18:20,667 - INFO - 📍 Detected race header: Race 7, BENDIGO, 425m on 2026-01-14 at 03:52PM
+2026-01-15 05:18:20,669 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2026-01-14 at 04:12PM
+2026-01-15 05:18:20,670 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Destini Rebel (Race 8)
+2026-01-15 05:18:20,670 - INFO - ✓ Parsed dog (multi-line format): Box 6 - White Shiraz (Race 8)
+2026-01-15 05:18:20,673 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2026-01-14 at 04:35PM
+2026-01-15 05:18:20,676 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2026-01-14 at 04:55PM
+2026-01-15 05:18:20,678 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2026-01-14 at 05:19PM
+2026-01-15 05:18:20,681 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2026-01-14 at 05:37PM
+2026-01-15 05:18:20,684 - INFO - 📍 Detected race header: Race 13, BENDIGO, 425m on 2026-01-14 at 05:57PM
+2026-01-15 05:18:20,684 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Mini Minion (Race 13)
+2026-01-15 05:18:20,687 - INFO - Converted timing for Zinzan Plodder: 2 times from other distances -> 23.53s at 425m
+2026-01-15 05:18:20,687 - INFO - Converted timing for Presence: 3 times from other distances -> 28.44s at 500m
+2026-01-15 05:18:20,687 - INFO - Converted timing for Darra Ruby: 2 times from other distances -> 28.19s at 500m
+2026-01-15 05:18:20,689 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:18:20,690 - INFO - ✅ Parsed 106 dogs across 13 races
+2026-01-15 05:18:20,690 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'SectionalSec', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-01-15 05:18:20,690 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:18:27,450 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-10-16 at 03:09PM
+2026-01-15 05:18:27,451 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-10-16 at 03:34PM
+2026-01-15 05:18:27,453 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-10-16 at 03:57PM
+2026-01-15 05:18:27,454 - INFO - 📍 Detected race header: Race 4, BENDIGO, 500m on 2025-10-16 at 04:24PM
+2026-01-15 05:18:27,455 - INFO - 📍 Detected race header: Race 5, BENDIGO, 500m on 2025-10-16 at 04:44PM
+2026-01-15 05:18:27,457 - INFO - 📍 Detected race header: Race 6, BENDIGO, 425m on 2025-10-16 at 05:12PM
+2026-01-15 05:18:27,459 - INFO - 📍 Detected race header: Race 7, BENDIGO, 425m on 2025-10-16 at 05:34PM
+2026-01-15 05:18:27,462 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-10-16 at 05:54PM
+2026-01-15 05:18:27,464 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-10-16 at 06:17PM
+2026-01-15 05:18:27,464 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Don't Tell Shell (Race 9)
+2026-01-15 05:18:27,466 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-10-16 at 06:39PM
+2026-01-15 05:18:27,466 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Flyin' Ethics (Race 10)
+2026-01-15 05:18:27,468 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-10-16 at 06:58PM
+2026-01-15 05:18:27,472 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:18:27,472 - INFO - ✅ Parsed 69 dogs across 11 races
+2026-01-15 05:18:27,472 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:18:27,473 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:18:36,141 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-12-17 at 02:32PM
+2026-01-15 05:18:36,143 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-12-17 at 02:49PM
+2026-01-15 05:18:36,144 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-12-17 at 03:10PM
+2026-01-15 05:18:36,146 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-12-17 at 03:28PM
+2026-01-15 05:18:36,148 - INFO - 📍 Detected race header: Race 5, BENDIGO, 500m on 2025-12-17 at 03:52PM
+2026-01-15 05:18:36,150 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2025-12-17 at 04:12PM
+2026-01-15 05:18:36,152 - INFO - 📍 Detected race header: Race 7, BENDIGO, 425m on 2025-12-17 at 04:34PM
+2026-01-15 05:18:36,154 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-12-17 at 04:52PM
+2026-01-15 05:18:36,154 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Destini Rebel (Race 8)
+2026-01-15 05:18:36,156 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-12-17 at 05:07PM
+2026-01-15 05:18:36,159 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-12-17 at 05:27PM
+2026-01-15 05:18:36,161 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-12-17 at 05:42PM
+2026-01-15 05:18:36,163 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-12-17 at 06:02PM
+2026-01-15 05:18:36,164 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Hartland Prince (Race 12)
+2026-01-15 05:18:36,166 - INFO - 📍 Detected race header: Race 13, BENDIGO, 425m on 2025-12-17 at 06:21PM
+2026-01-15 05:18:36,169 - INFO - Converted timing for Urana Radiant: 1 times from other distances -> 24.84s at 425m
+2026-01-15 05:18:36,169 - INFO - Converted timing for Enzo Envy: 2 times from other distances -> 24.72s at 425m
+2026-01-15 05:18:36,169 - INFO - Converted timing for Pine Bluff: 1 times from other distances -> 23.78s at 425m
+2026-01-15 05:18:36,169 - INFO - Converted timing for Moraine Piper: 1 times from other distances -> 23.96s at 425m
+2026-01-15 05:18:36,169 - INFO - Converted timing for Amron Buster: 1 times from other distances -> 28.69s at 500m
+2026-01-15 05:18:36,169 - INFO - Converted timing for Kunama Namadgi: 4 times from other distances -> 23.90s at 425m
+2026-01-15 05:18:36,169 - INFO - Converted timing for Mike Angelo Zeal: 2 times from other distances -> 23.53s at 425m
+2026-01-15 05:18:36,171 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:18:36,171 - INFO - ✅ Parsed 90 dogs across 13 races
+2026-01-15 05:18:36,171 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:18:36,171 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:18:44,769 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-12-19 at 07:12PM
+2026-01-15 05:18:44,770 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-12-19 at 07:27PM
+2026-01-15 05:18:44,772 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-12-19 at 07:50PM
+2026-01-15 05:18:44,772 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Don't Tell Shell (Race 3)
+2026-01-15 05:18:44,774 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-12-19 at 08:12PM
+2026-01-15 05:18:44,776 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2025-12-19 at 08:27PM
+2026-01-15 05:18:44,778 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2025-12-19 at 08:53PM
+2026-01-15 05:18:44,781 - INFO - 📍 Detected race header: Race 7, BENDIGO, 500m on 2025-12-19 at 09:12PM
+2026-01-15 05:18:44,784 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-12-19 at 09:28PM
+2026-01-15 05:18:44,787 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-12-19 at 09:50PM
+2026-01-15 05:18:44,787 - INFO - ✓ Parsed dog (multi-line format): Box 1 - Flyin' Ethics (Race 9)
+2026-01-15 05:18:44,789 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-12-19 at 10:15PM
+2026-01-15 05:18:44,792 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-12-19 at 10:35PM
+2026-01-15 05:18:44,794 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-12-19 at 10:55PM
+2026-01-15 05:18:44,795 - INFO - ✓ Parsed dog (multi-line format): Box 3 - Paw Kattia (Race 12)
+2026-01-15 05:18:44,797 - INFO - Converted timing for Simply Stylish: 2 times from other distances -> 23.67s at 425m
+2026-01-15 05:18:44,797 - INFO - Converted timing for Hoppy: 1 times from other distances -> 28.78s at 500m
+2026-01-15 05:18:44,797 - INFO - Converted timing for Chappy's Totem: 2 times from other distances -> 28.27s at 500m
+2026-01-15 05:18:44,797 - INFO - Converted timing for Whisky Bella: 1 times from other distances -> 28.88s at 500m
+2026-01-15 05:18:44,799 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:18:44,799 - INFO - ✅ Parsed 93 dogs across 12 races
+2026-01-15 05:18:44,799 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:18:44,800 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:18:54,700 - INFO - 📍 Detected race header: Race 1, BENDIGO, 500m on 2025-11-26 at 01:52PM
+2026-01-15 05:18:54,702 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-11-26 at 02:14PM
+2026-01-15 05:18:54,704 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-11-26 at 02:35PM
+2026-01-15 05:18:54,706 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-11-26 at 02:59PM
+2026-01-15 05:18:54,708 - INFO - 📍 Detected race header: Race 5, BENDIGO, 500m on 2025-11-26 at 03:17PM
+2026-01-15 05:18:54,711 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2025-11-26 at 03:37PM
+2026-01-15 05:18:54,713 - INFO - 📍 Detected race header: Race 7, BENDIGO, 500m on 2025-11-26 at 03:59PM
+2026-01-15 05:18:54,715 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-11-26 at 04:20PM
+2026-01-15 05:18:54,718 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-11-26 at 04:44PM
+2026-01-15 05:18:54,721 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-11-26 at 05:02PM
+2026-01-15 05:18:54,723 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-11-26 at 05:22PM
+2026-01-15 05:18:54,724 - INFO - ✓ Parsed dog (multi-line format): Box 8 - My Compass (Race 11)
+2026-01-15 05:18:54,726 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-11-26 at 05:44PM
+2026-01-15 05:18:54,727 - INFO - ✓ Parsed dog (multi-line format): Box 3 - Gunai Jedi (Race 12)
+2026-01-15 05:18:54,729 - INFO - 📍 Detected race header: Race 13, BENDIGO, 425m on 2025-11-26 at 06:08PM
+2026-01-15 05:18:54,729 - INFO - ✓ Parsed dog (multi-line format): Box 2 - Lektra Nick (Race 13)
+2026-01-15 05:18:54,732 - INFO - Converted timing for Bootleg Tommy: 1 times from other distances -> 28.72s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Alligator Rock: 4 times from other distances -> 28.27s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Redemption Lass: 2 times from other distances -> 29.14s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Especial Kiani: 2 times from other distances -> 24.01s at 425m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Belgium Slice: 1 times from other distances -> 24.44s at 425m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Enzo Envy: 2 times from other distances -> 24.72s at 425m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Marvulli: 3 times from other distances -> 28.40s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Olympia Onyx: 2 times from other distances -> 28.41s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Angelani: 1 times from other distances -> 27.76s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Tornado Jack: 2 times from other distances -> 28.54s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Axel's Radar: 1 times from other distances -> 28.39s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Lilly Loud Mouth: 1 times from other distances -> 28.71s at 500m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Bust Up: 1 times from other distances -> 23.93s at 425m
+2026-01-15 05:18:54,733 - INFO - Converted timing for Like A Blaze: 1 times from other distances -> 24.04s at 425m
+2026-01-15 05:18:54,735 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:18:54,735 - INFO - ✅ Parsed 104 dogs across 13 races
+2026-01-15 05:18:54,735 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'SectionalSec', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-01-15 05:18:54,736 - INFO - 📏 Distance values (sample): [500, 425]
+2026-01-15 05:19:03,446 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-11-28 at 06:52PM
+2026-01-15 05:19:03,448 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-11-28 at 07:17PM
+2026-01-15 05:19:03,450 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-11-28 at 07:39PM
+2026-01-15 05:19:03,452 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-11-28 at 07:54PM
+2026-01-15 05:19:03,452 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Classy Shifter (Race 4)
+2026-01-15 05:19:03,452 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Nolan Bale (Race 4)
+2026-01-15 05:19:03,454 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2025-11-28 at 08:17PM
+2026-01-15 05:19:03,456 - INFO - 📍 Detected race header: Race 6, BENDIGO, 425m on 2025-11-28 at 08:35PM
+2026-01-15 05:19:03,457 - INFO - ✓ Parsed dog (multi-line format): Box 6 - Don't Tell Shell (Race 6)
+2026-01-15 05:19:03,459 - INFO - 📍 Detected race header: Race 7, BENDIGO, 500m on 2025-11-28 at 08:57PM
+2026-01-15 05:19:03,459 - INFO - ✓ Parsed dog (multi-line format): Box 9 - Dasher Bale (Race 7)
+2026-01-15 05:19:03,462 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-11-28 at 09:16PM
+2026-01-15 05:19:03,462 - INFO - ✓ Parsed dog (multi-line format): Box 9 - Dasher Bale (Race 8)
+2026-01-15 05:19:03,465 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-11-28 at 09:42PM
+2026-01-15 05:19:03,892 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-11-28 at 10:05PM
+2026-01-15 05:19:03,894 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-11-28 at 10:25PM
+2026-01-15 05:19:03,894 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Flyin' Ethics (Race 11)
+2026-01-15 05:19:03,897 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-11-28 at 10:48PM
+2026-01-15 05:19:03,900 - INFO - Converted timing for Blank Slate: 1 times from other distances -> 23.53s at 425m
+2026-01-15 05:19:03,900 - INFO - Converted timing for Bushman's Archie: 1 times from other distances -> 28.26s at 500m
+2026-01-15 05:19:03,900 - INFO - Converted timing for Paw Grady: 1 times from other distances -> 24.10s at 425m
+2026-01-15 05:19:03,900 - INFO - Converted timing for Fill Your Boots: 1 times from other distances -> 23.70s at 425m
+2026-01-15 05:19:03,900 - INFO - Converted timing for Lorraine Jacky: 1 times from other distances -> 24.70s at 425m
+2026-01-15 05:19:03,902 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:19:03,902 - INFO - ✅ Parsed 93 dogs across 12 races
+2026-01-15 05:19:03,902 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-01-15 05:19:03,902 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:19:13,706 - INFO - 📍 Detected race header: Race 1, BENDIGO, 425m on 2025-12-31 at 02:59PM
+2026-01-15 05:19:13,708 - INFO - 📍 Detected race header: Race 2, BENDIGO, 425m on 2025-12-31 at 03:24PM
+2026-01-15 05:19:13,710 - INFO - 📍 Detected race header: Race 3, BENDIGO, 425m on 2025-12-31 at 03:42PM
+2026-01-15 05:19:13,712 - INFO - 📍 Detected race header: Race 4, BENDIGO, 425m on 2025-12-31 at 04:06PM
+2026-01-15 05:19:13,715 - INFO - 📍 Detected race header: Race 5, BENDIGO, 425m on 2025-12-31 at 04:21PM
+2026-01-15 05:19:13,717 - INFO - 📍 Detected race header: Race 6, BENDIGO, 500m on 2025-12-31 at 04:42PM
+2026-01-15 05:19:13,719 - INFO - 📍 Detected race header: Race 7, BENDIGO, 425m on 2025-12-31 at 04:57PM
+2026-01-15 05:19:13,720 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Gunai Jedi (Race 7)
+2026-01-15 05:19:13,722 - INFO - 📍 Detected race header: Race 8, BENDIGO, 500m on 2025-12-31 at 05:21PM
+2026-01-15 05:19:13,722 - INFO - ✓ Parsed dog (multi-line format): Box 3 - Destini Rebel (Race 8)
+2026-01-15 05:19:13,725 - INFO - 📍 Detected race header: Race 9, BENDIGO, 425m on 2025-12-31 at 05:41PM
+2026-01-15 05:19:13,727 - INFO - 📍 Detected race header: Race 10, BENDIGO, 425m on 2025-12-31 at 05:57PM
+2026-01-15 05:19:13,730 - INFO - 📍 Detected race header: Race 11, BENDIGO, 425m on 2025-12-31 at 06:14PM
+2026-01-15 05:19:13,733 - INFO - 📍 Detected race header: Race 12, BENDIGO, 425m on 2025-12-31 at 06:34PM
+2026-01-15 05:19:13,733 - INFO - ✓ Parsed dog (multi-line format): Box 1 - My Compass (Race 12)
+2026-01-15 05:19:13,736 - INFO - 📍 Detected race header: Race 13, BENDIGO, 425m on 2025-12-31 at 06:52PM
+2026-01-15 05:19:13,739 - INFO - Converted timing for Dundee Aero: 2 times from other distances -> 24.48s at 425m
+2026-01-15 05:19:13,739 - INFO - Converted timing for Summer Hail: 1 times from other distances -> 23.64s at 425m
+2026-01-15 05:19:13,739 - INFO - Converted timing for Moon Walk: 1 times from other distances -> 24.42s at 425m
+2026-01-15 05:19:13,739 - INFO - Converted timing for Jilliby Mish: 2 times from other distances -> 24.12s at 425m
+2026-01-15 05:19:13,740 - INFO - Converted timing for Akela Young: 3 times from other distances -> 23.93s at 425m
+2026-01-15 05:19:13,741 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:19:13,741 - INFO - ✅ Parsed 104 dogs across 13 races
+2026-01-15 05:19:13,742 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-15 05:19:13,742 - INFO - 📏 Distance values (sample): [425, 500]
+2026-01-15 05:19:25,360 - INFO - 📍 Detected race header: Race 1, BALLARAT, 450m on 2025-12-01 at 02:49PM
+2026-01-15 05:19:25,362 - INFO - 📍 Detected race header: Race 2, BALLARAT, 390m on 2025-12-01 at 03:12PM
+2026-01-15 05:19:25,365 - INFO - 📍 Detected race header: Race 3, BALLARAT, 390m on 2025-12-01 at 03:32PM
+2026-01-15 05:19:25,368 - INFO - 📍 Detected race header: Race 4, BALLARAT, 390m on 2025-12-01 at 03:47PM
+2026-01-15 05:19:25,368 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Intex Bale (Race 4)
+2026-01-15 05:19:25,370 - INFO - 📍 Detected race header: Race 5, BALLARAT, 390m on 2025-12-01 at 04:07PM
+2026-01-15 05:19:25,373 - INFO - 📍 Detected race header: Race 6, BALLARAT, 545m on 2025-12-01 at 04:27PM
+2026-01-15 05:19:25,376 - INFO - 📍 Detected race header: Race 7, BALLARAT, 450m on 2025-12-01 at 04:47PM
+2026-01-15 05:19:25,376 - INFO - ✓ Parsed dog (multi-line format): Box 7 - Dasher Bale (Race 7)
+2026-01-15 05:19:25,378 - INFO - 📍 Detected race header: Race 8, BALLARAT, 450m on 2025-12-01 at 05:07PM
+2026-01-15 05:19:25,381 - INFO - 📍 Detected race header: Race 9, BALLARAT, 450m on 2025-12-01 at 05:27PM
+2026-01-15 05:19:25,384 - INFO - 📍 Detected race header: Race 10, BALLARAT, 390m on 2025-12-01 at 05:47PM
+2026-01-15 05:19:25,387 - INFO - 📍 Detected race header: Race 11, BALLARAT, 390m on 2025-12-01 at 06:07PM
+2026-01-15 05:19:25,387 - INFO - ✓ Parsed dog (multi-line format): Box 5 - Vinny Dewalt (Race 11)
+2026-01-15 05:19:25,390 - INFO - 📍 Detected race header: Race 12, BALLARAT, 390m on 2025-12-01 at 06:23PM
+2026-01-15 05:19:25,391 - INFO - ✓ Parsed dog (multi-line format): Box 6 - Hartland Duke (Race 12)
+2026-01-15 05:19:25,394 - INFO - 📍 Detected race header: Race 13, BALLARAT, 390m on 2025-12-01 at 06:42PM
+2026-01-15 05:19:25,394 - INFO - ✓ Parsed dog (multi-line format): Box 8 - Hartland Prince (Race 13)
+2026-01-15 05:19:25,397 - INFO - 📍 Detected race header: Race 14, BALLARAT, 390m on 2025-12-01 at 06:59PM
+2026-01-15 05:19:25,397 - INFO - ✓ Parsed dog (multi-line format): Box 4 - Juice (Race 14)
+2026-01-15 05:19:25,401 - INFO - Converted timing for Blame Wally: 1 times from other distances -> 22.13s at 390m
+2026-01-15 05:19:25,401 - INFO - Converted timing for Bakali Surprise: 4 times from other distances -> 21.76s at 390m
+2026-01-15 05:19:25,401 - INFO - Converted timing for Lady Arandt: 4 times from other distances -> 22.06s at 390m
+2026-01-15 05:19:25,401 - INFO - Converted timing for Pocket Riot: 3 times from other distances -> 31.08s at 545m
+2026-01-15 05:19:25,401 - INFO - Converted timing for Bangkok Beauty: 2 times from other distances -> 30.60s at 545m
+2026-01-15 05:19:25,401 - INFO - Converted timing for Athens Aura: 3 times from other distances -> 31.08s at 545m
+2026-01-15 05:19:25,402 - INFO - Converted timing for Bust Up: 1 times from other distances -> 25.34s at 450m
+2026-01-15 05:19:25,402 - INFO - Converted timing for Blue Vendetta: 1 times from other distances -> 25.99s at 450m
+2026-01-15 05:19:25,402 - INFO - Converted timing for Solitary Flame: 2 times from other distances -> 25.95s at 450m
+2026-01-15 05:19:25,402 - INFO - Converted timing for Paw Olyslagers: 1 times from other distances -> 25.65s at 450m
+2026-01-15 05:19:25,402 - INFO - Converted timing for Hartland Duke: 1 times from other distances -> 22.10s at 390m
+2026-01-15 05:19:25,402 - INFO - Converted timing for Aston Dunkel: 1 times from other distances -> 21.98s at 390m
+2026-01-15 05:19:25,402 - INFO - Converted timing for Obstropalous: 2 times from other distances -> 22.34s at 390m
+2026-01-15 05:19:25,402 - INFO - Converted timing for County Tyrone: 3 times from other distances -> 22.04s at 390m
+2026-01-15 05:19:25,404 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-15 05:19:25,404 - INFO - ✅ Parsed 123 dogs across 14 races
+2026-01-15 05:19:25,404 - INFO - 📊 Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'BoxBiasFactor', 'SectionalSec', 'TimeEstimated', 'TimeConverted', 'Age', 'Sex']
+2026-01-15 05:19:25,404 - INFO - 📏 Distance values (sample): [450, 390, 545]
