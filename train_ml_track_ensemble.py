@@ -137,6 +137,13 @@ def extract_features_and_labels(race_data_list, winners_list):
     
     logger.info(f"Identified {len(feature_cols)} feature columns")
     
+    # Memory optimization: Convert float64 to float32 to reduce memory usage (50% reduction)
+    logger.info("Optimizing dataframe memory usage...")
+    for col in df.select_dtypes(include=['float64']).columns:
+        df[col] = df[col].astype('float32')
+    logger.info(f"Memory optimized - DataFrame size: {df.memory_usage(deep=True).sum() / 1024 / 1024:.2f} MB")
+    
+    logger.info("Returning dataframe and feature columns...")
     return df, feature_cols
 
 def train_track_specific_ensemble(df, feature_cols, track_name):
