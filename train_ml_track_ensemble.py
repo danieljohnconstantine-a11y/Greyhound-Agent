@@ -82,11 +82,31 @@ def extract_features_and_labels(race_data_list, winners_list):
     Returns:
         temp_file_path: Path to temporary pickle file containing (df, feature_cols)
     """
+    import sys
+    print("   CHECKPOINT 1: Entered extract_features_and_labels function")
+    sys.stdout.flush()
+    
     all_rows = []
+    
+    print(f"   CHECKPOINT 2: About to log - race_data_list length: {len(race_data_list)}")
+    sys.stdout.flush()
     
     logger.info(f"Starting feature extraction for {len(race_data_list)} race entries...")
     
+    print("   CHECKPOINT 3: Logger.info completed, starting main loop")
+    sys.stdout.flush()
+    
+    print(f"   CHECKPOINT 4: Starting enumeration loop over {len(race_data_list)} races")
+    sys.stdout.flush()
+    
     for idx, (race_df, winner_info) in enumerate(zip(race_data_list, winners_list)):
+        if idx == 0:
+            print(f"   CHECKPOINT 5: Processing first race (idx=0)")
+            sys.stdout.flush()
+        if idx % 1000 == 0 and idx > 0:
+            print(f"   CHECKPOINT: Processed {idx} races so far...")
+            sys.stdout.flush()
+            
         if race_df is None or len(race_df) == 0:
             logger.debug(f"Skipping race {idx}: empty dataframe")
             continue
@@ -121,10 +141,19 @@ def extract_features_and_labels(race_data_list, winners_list):
     if not all_rows:
         raise ValueError("No valid race data was processed!")
     
+    print(f"   CHECKPOINT 6: Finished loop, processed {len(all_rows)} race entries")
+    sys.stdout.flush()
+    
     logger.info(f"Successfully processed {len(all_rows)} race entries")
+    
+    print("   CHECKPOINT 7: About to concat dataframes")
+    sys.stdout.flush()
     
     # Combine all races
     df = pd.concat(all_rows, ignore_index=True)
+    
+    print(f"   CHECKPOINT 8: Concatenation complete, df has {len(df)} rows")
+    sys.stdout.flush()
     
     logger.info(f"Combined dataframe has {len(df)} rows")
     
