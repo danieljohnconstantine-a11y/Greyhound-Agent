@@ -154,6 +154,13 @@ def extract_features_and_labels(race_data_list, winners_list):
         pickle.dump((df, feature_cols), f, protocol=4)
     
     logger.info(f"Successfully wrote dataframe ({len(df)} rows, {len(feature_cols)} features) to file")
+    
+    # CRITICAL: Delete DataFrame from memory before returning to avoid crash on function exit
+    del df
+    import gc
+    gc.collect()
+    logger.info("Freed memory before return")
+    
     return temp_file_path
 
 def train_track_specific_ensemble(df, feature_cols, track_name):
