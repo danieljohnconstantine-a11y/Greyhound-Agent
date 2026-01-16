@@ -80,8 +80,7 @@ def extract_features_and_labels(race_data_list, winners_list):
     - 5th+: weight 0.0 (negative examples)
     
     Returns:
-        df: DataFrame with all features, labels, and sample weights
-        feature_cols: List of feature column names
+        temp_file_path: Path to temporary pickle file containing (df, feature_cols)
     """
     all_rows = []
     
@@ -143,8 +142,19 @@ def extract_features_and_labels(race_data_list, winners_list):
         df[col] = df[col].astype('float32')
     logger.info(f"Memory optimized - DataFrame size: {df.memory_usage(deep=True).sum() / 1024 / 1024:.2f} MB")
     
-    logger.info("Returning dataframe and feature columns...")
-    return df, feature_cols
+    # CRITICAL FIX #30: Write to temp file instead of returning large DataFrame directly
+    # This avoids Python's memory limit when returning large objects between functions
+    import tempfile
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.pkl')
+    temp_file_path = temp_file.name
+    temp_file.close()
+    
+    logger.info(f"Writing dataframe to temporary file: {temp_file_path}")
+    with open(temp_file_path, 'wb') as f:
+        pickle.dump((df, feature_cols), f, protocol=4)
+    
+    logger.info(f"Successfully wrote dataframe ({len(df)} rows, {len(feature_cols)} features) to file")
+    return temp_file_path
 
 def train_track_specific_ensemble(df, feature_cols, track_name):
     """
@@ -339,9 +349,24 @@ def main():
         print("   Calling extract_features_and_labels()...")
         sys.stdout.flush()  # Force flush to see output immediately
         
-        df, feature_cols = extract_features_and_labels(race_data_list, winners_list)
+        # CRITICAL FIX #30: Function now returns temp file path instead of DataFrame directly
+        temp_file_path = extract_features_and_labels(race_data_list, winners_list)
         
-        print(f"   Returned from extract_features_and_labels()")
+        print(f"   Loading dataframe from temporary file: {temp_file_path}")
+        sys.stdout.flush()
+        
+        # Load the DataFrame from the temp file
+        with open(temp_file_path, 'rb') as f:
+            df, feature_cols = pickle.load(f)
+        
+        # Clean up temp file
+        try:
+            os.unlink(temp_file_path)
+            print(f"   Cleaned up temporary file")
+        except:
+            pass  # Ignore cleanup errors
+        
+        print(f"   Successfully loaded dataframe")
         print(f"   DataFrame shape: {df.shape}")
         print(f"   Feature columns count: {len(feature_cols)}")
         sys.stdout.flush()  # Force flush
