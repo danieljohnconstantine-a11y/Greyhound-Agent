@@ -717,6 +717,12 @@ def load_historical_data_hybrid(data_dir='data'):
     
     import re
     import os
+    import gc
+    import sys
+    
+    # Add progress tracking and memory optimization
+    total_pdfs = len(pdf_files)
+    processed_pdfs = 0
     
     for pdf_file in sorted(pdf_files):
         try:
@@ -741,9 +747,14 @@ def load_historical_data_hybrid(data_dir='data'):
             
             df_all_dogs = parse_race_form(text)
             if df_all_dogs is None or df_all_dogs.empty:
+                processed_pdfs += 1
                 continue
                 
             df_all_dogs = compute_features(df_all_dogs)
+            
+            # MEMORY OPTIMIZATION: Convert float64 to float32 immediately
+            for col in df_all_dogs.select_dtypes(include=['float64']).columns:
+                df_all_dogs[col] = df_all_dogs[col].astype('float32')
             
             if 'Track' in df_all_dogs.columns and 'RaceNumber' in df_all_dogs.columns:
                 for (track, race_num), df_race in df_all_dogs.groupby(['Track', 'RaceNumber']):
@@ -752,9 +763,24 @@ def load_historical_data_hybrid(data_dir='data'):
                         key = f"{pdf_date}_{pdf_track_code}_R{race_num}"
                     else:
                         key = f"{track}_R{race_num}"
+                    # Convert to float32 for each race DataFrame
+                    for col in df_race.select_dtypes(include=['float64']).columns:
+                        df_race[col] = df_race[col].astype('float32')
                     pdf_races[key] = df_race
+            
+            processed_pdfs += 1
+            
+            # Progress update every 50 PDFs
+            if processed_pdfs % 50 == 0:
+                print(f"   📄 Processed {processed_pdfs}/{total_pdfs} PDFs ({processed_pdfs*100//total_pdfs}%)")
+                sys.stdout.flush()
+                
+            # Force garbage collection every 100 PDFs to prevent memory buildup
+            if processed_pdfs % 100 == 0:
+                gc.collect()
         
         except Exception as e:
+            processed_pdfs += 1
             logger.debug(f"Error processing {pdf_file}: {e}")
             continue
     
