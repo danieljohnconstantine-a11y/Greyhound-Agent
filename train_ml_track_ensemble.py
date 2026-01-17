@@ -27,6 +27,9 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(__file__))
 
+# CRITICAL FIX #35: Global variable to pass temp file path to avoid return statement crash
+TEMP_FILE_PATH_GLOBAL = None
+
 # Fix encoding for Windows console
 if sys.platform == 'win32':
     import io
@@ -190,7 +193,21 @@ def extract_features_and_labels(race_data_list, winners_list):
     gc.collect()
     logger.info("Freed memory before return")
     
-    return temp_file_path
+    # CRITICAL FIX #35: Use global variable instead of return statement to avoid Python crash
+    global TEMP_FILE_PATH_GLOBAL
+    TEMP_FILE_PATH_GLOBAL = temp_file_path
+    
+    print(f"   CHECKPOINT: Set global variable TEMP_FILE_PATH_GLOBAL = {temp_file_path}")
+    sys.stdout.flush()
+    
+    # Force another garbage collection cycle
+    gc.collect()
+    
+    print(f"   CHECKPOINT: Exiting function WITHOUT return statement")
+    sys.stdout.flush()
+    
+    # Return None - caller will use global variable instead
+    return None
 
 def train_track_specific_ensemble(df, feature_cols, track_name):
     """
@@ -388,15 +405,22 @@ def main():
         print("   CHECKPOINT: About to call extract_features_and_labels()...")
         sys.stdout.flush()  # Force flush to see output immediately
         
-        # CRITICAL FIX #30: Function now returns temp file path instead of DataFrame directly
-        temp_file_path = extract_features_and_labels(race_data_list, winners_list)
+        # CRITICAL FIX #35: Function now sets global variable instead of returning  
+        extract_features_and_labels(race_data_list, winners_list)
         
-        print(f"   CHECKPOINT: Function returned successfully, temp_file_path = {temp_file_path}")
+        print(f"   CHECKPOINT: Function returned successfully")
+        sys.stdout.flush()
+        
+        # Get temp file path from global variable
+        global TEMP_FILE_PATH_GLOBAL
+        temp_file_path = TEMP_FILE_PATH_GLOBAL
+        
+        print(f"   CHECKPOINT: Retrieved temp_file_path from global = {temp_file_path}")
         sys.stdout.flush()
         
         # Validate the return value
         if temp_file_path is None:
-            print(f"   ERROR: extract_features_and_labels() returned None!")
+            print(f"   ERROR: Global variable TEMP_FILE_PATH_GLOBAL is None!")
             sys.stdout.flush()
             return 1
         
