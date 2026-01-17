@@ -193,6 +193,10 @@ def extract_features_and_labels(race_data_list, winners_list):
     gc.collect()
     logger.info("Freed memory before return")
     
+    # CRITICAL: Add checkpoint immediately after logger to detect crash point
+    print("   CHECKPOINT: After 'Freed memory before return' logger statement")
+    sys.stdout.flush()
+    
     # CRITICAL FIX #35: Use global variable instead of return statement to avoid Python crash
     global TEMP_FILE_PATH_GLOBAL
     TEMP_FILE_PATH_GLOBAL = temp_file_path
