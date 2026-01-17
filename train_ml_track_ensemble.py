@@ -392,37 +392,71 @@ def main():
         sys.stdout.flush()
         
         # Load the DataFrame from the temp file
+        print(f"   CHECKPOINT: About to load from pickle file")
+        sys.stdout.flush()
+        
         with open(temp_file_path, 'rb') as f:
             df, feature_cols = pickle.load(f)
+        
+        print(f"   CHECKPOINT: Pickle load completed")
+        sys.stdout.flush()
         
         # Clean up temp file
         try:
             os.unlink(temp_file_path)
             print(f"   Cleaned up temporary file")
-        except:
-            pass  # Ignore cleanup errors
+            sys.stdout.flush()
+        except Exception as cleanup_err:
+            print(f"   Warning: Could not clean up temp file: {cleanup_err}")
+            sys.stdout.flush()
+        
+        print(f"   CHECKPOINT: Starting to access loaded dataframe")
+        sys.stdout.flush()
         
         print(f"   Successfully loaded dataframe")
-        print(f"   DataFrame shape: {df.shape}")
+        sys.stdout.flush()
+        
+        print(f"   CHECKPOINT: About to get df.shape")
+        sys.stdout.flush()
+        
+        df_shape = df.shape
+        print(f"   DataFrame shape: {df_shape}")
+        sys.stdout.flush()
+        
         print(f"   Feature columns count: {len(feature_cols)}")
-        sys.stdout.flush()  # Force flush
+        sys.stdout.flush()
         
         print(f"✅ Extracted {len(feature_cols)} features from {len(df)} dog entries")
+        sys.stdout.flush()
         
         # Group by track
         print("   Grouping by track...")
         sys.stdout.flush()
         
+        print(f"   CHECKPOINT: About to get unique tracks")
+        sys.stdout.flush()
+        
         tracks = df['Track'].unique()
         print(f"\n📊 Found {len(tracks)} unique tracks:")
+        sys.stdout.flush()
         
         track_data = {}
-        for track in sorted(tracks):
+        print(f"   CHECKPOINT: Starting track iteration over {len(tracks)} tracks")
+        sys.stdout.flush()
+        
+        for i, track in enumerate(sorted(tracks), 1):
+            print(f"   CHECKPOINT: Processing track {i}/{len(tracks)}: {track}")
+            sys.stdout.flush()
+            
             track_df = df[df['Track'] == track]
             n_races = len(track_df)
             n_winners = track_df['Winner'].sum()
             track_data[track] = track_df
             print(f"   {track:25s}: {n_races:4d} dogs, {n_winners:3d} winners (weighted)")
+            sys.stdout.flush()
+        
+        print(f"   CHECKPOINT: Completed track grouping")
+        sys.stdout.flush()
     
     except Exception as e:
         print(f"❌ ERROR extracting features: {e}")
@@ -433,14 +467,20 @@ def main():
     print("\n🚀 STEP 3: Training track-specific ensemble models...")
     print("-" * 80)
     print(f"   Training 3 algorithms per track × {len(tracks)} tracks")
+    print(f"   CHECKPOINT: About to start model training loop")
+    sys.stdout.flush()
     print()
     
     all_models = {}
     all_scalers = {}
     all_metrics = []
     
+    print(f"   CHECKPOINT: Entering training loop for {len(sorted(tracks))} tracks")
+    sys.stdout.flush()
+    
     for i, track in enumerate(sorted(tracks), 1):
-        print(f"   [{i}/{len(tracks)}] Training models for {track}...")
+        print(f"\n   [{i}/{len(tracks)}] Training models for {track}...")
+        sys.stdout.flush()
         
         try:
             track_df = track_data[track]
