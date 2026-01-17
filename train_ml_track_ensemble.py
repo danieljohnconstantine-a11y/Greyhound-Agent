@@ -191,10 +191,9 @@ def extract_features_and_labels(race_data_list, winners_list):
     del df
     import gc
     gc.collect()
-    logger.info("Freed memory before return")
     
-    # CRITICAL: Add checkpoint immediately after logger to detect crash point
-    print("   CHECKPOINT: After 'Freed memory before return' logger statement")
+    # CRITICAL FIX #37: Use print instead of logger.info to avoid logger-related crash
+    print("   CHECKPOINT: Freed memory, about to set global variable")
     sys.stdout.flush()
     
     # CRITICAL FIX #35: Use global variable instead of return statement to avoid Python crash
@@ -204,10 +203,10 @@ def extract_features_and_labels(race_data_list, winners_list):
     print(f"   CHECKPOINT: Set global variable TEMP_FILE_PATH_GLOBAL = {temp_file_path}")
     sys.stdout.flush()
     
-    # Force another garbage collection cycle
-    gc.collect()
+    # Log after setting global variable (safer point)
+    logger.info(f"Freed memory and stored temp file path in global variable: {temp_file_path}")
     
-    print(f"   CHECKPOINT: Exiting function WITHOUT return statement")
+    print(f"   CHECKPOINT: Exiting function, returning None")
     sys.stdout.flush()
     
     # Return None - caller will use global variable instead
