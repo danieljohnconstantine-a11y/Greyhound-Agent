@@ -379,14 +379,31 @@ def main():
     print("-" * 80)
     
     try:
+        print(f"   CHECKPOINT: Entered STEP 2 try block")
+        sys.stdout.flush()
+        
         print(f"   Processing {len(race_data_list)} race entries with {len(winners_list)} winner entries...")
         print(f"   Note: With Top 4 training, each race appears 4 times (1st/2nd/3rd/4th)")
         
-        print("   Calling extract_features_and_labels()...")
+        print("   CHECKPOINT: About to call extract_features_and_labels()...")
         sys.stdout.flush()  # Force flush to see output immediately
         
         # CRITICAL FIX #30: Function now returns temp file path instead of DataFrame directly
         temp_file_path = extract_features_and_labels(race_data_list, winners_list)
+        
+        print(f"   CHECKPOINT: Function returned successfully, temp_file_path = {temp_file_path}")
+        sys.stdout.flush()
+        
+        # Validate the return value
+        if temp_file_path is None:
+            print(f"   ERROR: extract_features_and_labels() returned None!")
+            sys.stdout.flush()
+            return 1
+        
+        if not os.path.exists(temp_file_path):
+            print(f"   ERROR: Temp file does not exist: {temp_file_path}")
+            sys.stdout.flush()
+            return 1
         
         print(f"   Loading dataframe from temporary file: {temp_file_path}")
         sys.stdout.flush()
