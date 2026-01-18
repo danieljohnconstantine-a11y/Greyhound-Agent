@@ -187,23 +187,29 @@ def extract_features_and_labels(race_data_list, winners_list):
     
     logger.info(f"Successfully wrote dataframe ({len(df)} rows, {len(feature_cols)} features) to file")
     
-    # CRITICAL: Delete DataFrame from memory before returning to avoid crash on function exit
+    print("   CHECKPOINT: About to set global variable BEFORE garbage collection")
+    sys.stdout.flush()
+    
+    # CRITICAL FIX #35/#38: Set global variable BEFORE deleting DataFrame and garbage collection
+    # This ensures the path is stored even if gc.collect() causes issues
+    global TEMP_FILE_PATH_GLOBAL
+    TEMP_FILE_PATH_GLOBAL = temp_file_path
+    
+    print(f"   CHECKPOINT: Set global variable = {temp_file_path}")
+    sys.stdout.flush()
+    
+    # Now delete DataFrame from memory
+    print("   CHECKPOINT: About to delete DataFrame and run garbage collection")
+    sys.stdout.flush()
+    
     del df
     import gc
     gc.collect()
     
-    # CRITICAL FIX #37: Use print instead of logger.info to avoid logger-related crash
-    print("   CHECKPOINT: Freed memory, about to set global variable")
+    print("   CHECKPOINT: Garbage collection completed successfully")
     sys.stdout.flush()
     
-    # CRITICAL FIX #35: Use global variable instead of return statement to avoid Python crash
-    global TEMP_FILE_PATH_GLOBAL
-    TEMP_FILE_PATH_GLOBAL = temp_file_path
-    
-    print(f"   CHECKPOINT: Set global variable TEMP_FILE_PATH_GLOBAL = {temp_file_path}")
-    sys.stdout.flush()
-    
-    # Log after setting global variable (safer point)
+    # Log after garbage collection (if we reach here)
     logger.info(f"Freed memory and stored temp file path in global variable: {temp_file_path}")
     
     print(f"   CHECKPOINT: Exiting function, returning None")
