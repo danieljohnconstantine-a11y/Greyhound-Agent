@@ -135,7 +135,10 @@ def extract_features_and_labels(race_data_list, winners_list):
             race_df['FinishPosition'] = 0  # Default for non-finishers
             race_df.loc[race_df['Box'] == winner_box, 'FinishPosition'] = position
             
-            all_rows.append(race_df)
+            # CRITICAL FIX #41: Convert to dict immediately to avoid pd.concat() memory issues
+            # Instead of storing DataFrames and concatenating later (causes memory spike),
+            # convert to list of dicts which uses minimal memory
+            all_rows.extend(race_df.to_dict('records'))
             
         except Exception as e:
             logger.error(f"Error processing race {idx}: {e}", exc_info=True)
@@ -149,54 +152,27 @@ def extract_features_and_labels(race_data_list, winners_list):
     
     logger.info(f"Successfully processed {len(all_rows)} race entries")
     
-    print("   CHECKPOINT 7: About to concat dataframes")
+    print("   CHECKPOINT 7: About to create DataFrame from list of dicts")
     sys.stdout.flush()
     
-    # CRITICAL FIX #39 & #40: Concatenate in small batches with aggressive memory cleanup
-    # Concatenating many DataFrames causes memory spike - use smaller batches and cleanup
-    batch_size = 500  # Reduced from 1000 to 500
-    batches = []
-    
-    print(f"   CHECKPOINT 7.1: Concatenating {len(all_rows)} DataFrames in batches of {batch_size}")
+    # CRITICAL FIX #41: Create DataFrame directly from list of dicts
+    # This bypasses pd.concat() entirely and uses minimal memory
+    # all_rows is now a list of dicts, not a list of DataFrames
+    print(f"   CHECKPOINT 7.1: Creating DataFrame from {len(all_rows)} records")
     sys.stdout.flush()
     
-    for i in range(0, len(all_rows), batch_size):
-        batch = all_rows[i:i + batch_size]
-        try:
-            batch_df = pd.concat(batch, ignore_index=True)
-            batches.append(batch_df)
-            # Clear the batch to free memory
-            del batch
-            if (i // batch_size + 1) % 2 == 0:  # Print progress every 2 batches
-                print(f"   CHECKPOINT 7.2: Processed batch {i // batch_size + 1}/{(len(all_rows) + batch_size - 1) // batch_size}")
-                sys.stdout.flush()
-                # Force garbage collection every 4 batches to prevent memory buildup
-                if (i // batch_size + 1) % 4 == 0:
-                    import gc
-                    gc.collect()
-        except Exception as e:
-            print(f"   ERROR during batch {i // batch_size + 1}: {e}")
-            sys.stdout.flush()
-            raise
-    
-    # Clear all_rows to free memory before final concat
-    del all_rows
-    import gc
-    gc.collect()
-    
-    print(f"   CHECKPOINT 7.3: Batches created, now concatenating {len(batches)} batch DataFrames")
-    sys.stdout.flush()
-    
-    # Combine all batches
     try:
-        df = pd.concat(batches, ignore_index=True)
+        df = pd.DataFrame(all_rows)
+        print(f"   CHECKPOINT 7.2: DataFrame created successfully with {len(df)} rows")
+        sys.stdout.flush()
     except Exception as e:
-        print(f"   ERROR during final concatenation: {e}")
+        print(f"   ERROR creating DataFrame: {e}")
         sys.stdout.flush()
         raise
     
-    # Clear batches to free memory
-    del batches
+    # Clear all_rows to free memory
+    del all_rows
+    import gc
     gc.collect()
     
     print(f"   CHECKPOINT 8: Concatenation complete, df has {len(df)} rows")
