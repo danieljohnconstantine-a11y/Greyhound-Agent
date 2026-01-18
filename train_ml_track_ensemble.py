@@ -152,8 +152,27 @@ def extract_features_and_labels(race_data_list, winners_list):
     print("   CHECKPOINT 7: About to concat dataframes")
     sys.stdout.flush()
     
-    # Combine all races
-    df = pd.concat(all_rows, ignore_index=True)
+    # CRITICAL FIX #39: Concatenate in batches to avoid memory issues
+    # Concatenating 7,745 small DataFrames at once causes memory spike
+    batch_size = 1000
+    batches = []
+    
+    print(f"   CHECKPOINT 7.1: Concatenating {len(all_rows)} DataFrames in batches of {batch_size}")
+    sys.stdout.flush()
+    
+    for i in range(0, len(all_rows), batch_size):
+        batch = all_rows[i:i + batch_size]
+        batch_df = pd.concat(batch, ignore_index=True)
+        batches.append(batch_df)
+        if (i // batch_size + 1) % 2 == 0:  # Print progress every 2 batches
+            print(f"   CHECKPOINT 7.2: Processed batch {i // batch_size + 1}/{(len(all_rows) + batch_size - 1) // batch_size}")
+            sys.stdout.flush()
+    
+    print(f"   CHECKPOINT 7.3: Batches created, now concatenating {len(batches)} batch DataFrames")
+    sys.stdout.flush()
+    
+    # Combine all batches
+    df = pd.concat(batches, ignore_index=True)
     
     print(f"   CHECKPOINT 8: Concatenation complete, df has {len(df)} rows")
     sys.stdout.flush()
