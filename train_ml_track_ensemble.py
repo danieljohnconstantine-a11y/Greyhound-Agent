@@ -39,7 +39,8 @@ if sys.platform == 'win32':
 from src.ml_predictor import load_historical_data_hybrid
 import pandas as pd
 import numpy as np
-from datetime import datetime
+import json
+import datetime
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, classification_report
@@ -71,9 +72,13 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-def extract_features_and_labels(race_data_list, winners_list):
+def extract_features_and_labels(race_data_list, winners_list, output_dir="models/track_ensemble"):
     """
     Extract features and labels from race data WITH WEIGHTED TOP 4 TRAINING.
+    Then IMMEDIATELY train and save models before returning.
+    
+    CRITICAL FIX #42: Move ALL model training logic into this function to avoid
+    Python process exit when returning from function that processed large dataset.
     
     ENHANCED: Now supports weighted labels for Top 4 finishers:
     - 1st place: weight 1.0 (full winner)
@@ -83,7 +88,7 @@ def extract_features_and_labels(race_data_list, winners_list):
     - 5th+: weight 0.0 (negative examples)
     
     Returns:
-        temp_file_path: Path to temporary pickle file containing (df, feature_cols)
+        None (all work done internally)
     """
     import sys
     print("   CHECKPOINT 1: Entered extract_features_and_labels function")
@@ -194,49 +199,128 @@ def extract_features_and_labels(race_data_list, winners_list):
         df[col] = df[col].astype('float32')
     logger.info(f"Memory optimized - DataFrame size: {df.memory_usage(deep=True).sum() / 1024 / 1024:.2f} MB")
     
-    # CRITICAL FIX #30: Write to temp file instead of returning large DataFrame directly
-    # This avoids Python's memory limit when returning large objects between functions
-    import tempfile
-    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.pkl')
-    temp_file_path = temp_file.name
-    temp_file.close()
-    
-    logger.info(f"Writing dataframe to temporary file: {temp_file_path}")
-    with open(temp_file_path, 'wb') as f:
-        pickle.dump((df, feature_cols), f, protocol=4)
-    
-    logger.info(f"Successfully wrote dataframe ({len(df)} rows, {len(feature_cols)} features) to file")
-    
-    print("   CHECKPOINT: About to set global variable BEFORE garbage collection")
+    # CRITICAL FIX #42: Train models NOW before any return/cleanup
+    # This ensures everything completes in one function call
+    print("\n🚀 STEP 3: Training track-specific ensemble models...")
+    print("-" * 80)
     sys.stdout.flush()
     
-    # CRITICAL FIX #35/#38: Set global variable BEFORE deleting DataFrame and garbage collection
-    # This ensures the path is stored even if gc.collect() causes issues
-    global TEMP_FILE_PATH_GLOBAL
-    TEMP_FILE_PATH_GLOBAL = temp_file_path
-    
-    print(f"   CHECKPOINT: Set global variable = {temp_file_path}")
+    # Group by track
+    print("   Grouping by track...")
     sys.stdout.flush()
     
-    # Now delete DataFrame from memory
-    print("   CHECKPOINT: About to delete DataFrame and run garbage collection")
+    tracks = df['Track'].unique()
+    print(f"\n📊 Found {len(tracks)} unique tracks:")
+    sys.stdout.flush()
+    
+    track_data = {}
+    for i, track in enumerate(sorted(tracks), 1):
+        track_df = df[df['Track'] == track]
+        n_races = len(track_df)
+        n_winners = track_df['Winner'].sum()
+        track_data[track] = track_df
+        print(f"   {track:25s}: {n_races:4d} dogs, {n_winners:3d} winners (weighted)")
+        sys.stdout.flush()
+    
+    # Create output directory
+    import os
+    os.makedirs(output_dir, exist_ok=True)
+    
+    print(f"\n   Training 3 algorithms per track × {len(tracks)} tracks")
+    print(f"   CHECKPOINT: About to start model training loop")
+    sys.stdout.flush()
+    
+    all_models = {}
+    all_scalers = {}
+    all_metrics = []
+    
+    for i, track in enumerate(sorted(tracks), 1):
+        print(f"\n   [{i}/{len(tracks)}] Training models for {track}...")
+        sys.stdout.flush()
+        
+        try:
+            track_df = track_data[track]
+            
+            # Skip tracks with too few samples
+            if len(track_df) < 30:
+                print(f"      ⚠️  Skipping {track} - insufficient data ({len(track_df)} dogs, need 30+)")
+                continue
+            
+            # Train ensemble
+            models, scaler, metrics = train_track_specific_ensemble(
+                track_df, feature_cols, track
+            )
+            
+            # Save models
+            for alg_name, model in models.items():
+                model_path = os.path.join(output_dir, f"{track}_{alg_name}.pkl")
+                with open(model_path, 'wb') as f:
+                    pickle.dump(model, f)
+            
+            # Save scaler
+            scaler_path = os.path.join(output_dir, f"{track}_scaler.pkl")
+            with open(scaler_path, 'wb') as f:
+                pickle.dump(scaler, f)
+            
+            all_models[track] = models
+            all_scalers[track] = scaler
+            all_metrics.append(metrics)
+            
+            # Show results
+            print(f"      ✅ Ensemble accuracy: {metrics['ensemble_accuracy']:.1%}")
+            
+        except Exception as e:
+            print(f"      ❌ ERROR training {track}: {e}")
+            logger.error(f"Error training {track}", exc_info=True)
+            continue
+    
+    # Save configuration
+    print("\n💾 STEP 4: Saving ensemble configuration...")
+    print("-" * 80)
+    sys.stdout.flush()
+    
+    if all_models:
+        config = {
+            'tracks': list(all_models.keys()),
+            'feature_cols': feature_cols,
+            'training_date': datetime.datetime.now().isoformat(),
+            'n_samples': len(df),
+            'n_tracks': len(all_models)
+        }
+        
+        config_path = os.path.join(output_dir, 'ensemble_config.json')
+        with open(config_path, 'w') as f:
+            json.dump(config, f, indent=2)
+        
+        print(f"✅ Configuration saved to {config_path}")
+        print(f"\n🎉 SUCCESS! Trained {len(all_models)} track-specific ensembles")
+        print(f"   Models saved to: {os.path.abspath(output_dir)}/")
+        
+        # Show summary stats
+        if all_metrics:
+            avg_accuracy = np.mean([m['ensemble_accuracy'] for m in all_metrics])
+            print(f"\n📊 Average ensemble accuracy: {avg_accuracy:.1%}")
+    else:
+        print("❌ ERROR: No models were trained!")
+        print(f"   Total samples: {len(df)}")
+        print(f"   Tracks found: {len(tracks)}")
+    
+    sys.stdout.flush()
+    
+    # Clean up memory
+    print("   CHECKPOINT: Cleaning up memory")
     sys.stdout.flush()
     
     del df
     import gc
     gc.collect()
     
-    print("   CHECKPOINT: Garbage collection completed successfully")
+    print("   CHECKPOINT: Function complete, returning None")
     sys.stdout.flush()
     
-    # Log after garbage collection (if we reach here)
-    logger.info(f"Freed memory and stored temp file path in global variable: {temp_file_path}")
-    
-    print(f"   CHECKPOINT: Exiting function, returning None")
-    sys.stdout.flush()
-    
-    # Return None - caller will use global variable instead
+    # Return None - all work is done
     return None
+
 
 def train_track_specific_ensemble(df, feature_cols, track_name):
     """
@@ -434,248 +518,17 @@ def main():
         print("   CHECKPOINT: About to call extract_features_and_labels()...")
         sys.stdout.flush()  # Force flush to see output immediately
         
-        # CRITICAL FIX #35: Function now sets global variable instead of returning  
-        extract_features_and_labels(race_data_list, winners_list)
+        # CRITICAL FIX #42: All work happens inside the function now
+        extract_features_and_labels(race_data_list, winners_list, output_dir)
         
-        print(f"   CHECKPOINT: Function returned successfully")
-        sys.stdout.flush()
-        
-        # Get temp file path from global variable
-        global TEMP_FILE_PATH_GLOBAL
-        temp_file_path = TEMP_FILE_PATH_GLOBAL
-        
-        print(f"   CHECKPOINT: Retrieved temp_file_path from global = {temp_file_path}")
-        sys.stdout.flush()
-        
-        # Validate the return value
-        if temp_file_path is None:
-            print(f"   ERROR: Global variable TEMP_FILE_PATH_GLOBAL is None!")
-            sys.stdout.flush()
-            return 1
-        
-        if not os.path.exists(temp_file_path):
-            print(f"   ERROR: Temp file does not exist: {temp_file_path}")
-            sys.stdout.flush()
-            return 1
-        
-        print(f"   Loading dataframe from temporary file: {temp_file_path}")
-        sys.stdout.flush()
-        
-        # Load the DataFrame from the temp file
-        print(f"   CHECKPOINT: About to load from pickle file")
-        sys.stdout.flush()
-        
-        with open(temp_file_path, 'rb') as f:
-            df, feature_cols = pickle.load(f)
-        
-        print(f"   CHECKPOINT: Pickle load completed")
-        sys.stdout.flush()
-        
-        # Clean up temp file
-        try:
-            os.unlink(temp_file_path)
-            print(f"   Cleaned up temporary file")
-            sys.stdout.flush()
-        except Exception as cleanup_err:
-            print(f"   Warning: Could not clean up temp file: {cleanup_err}")
-            sys.stdout.flush()
-        
-        print(f"   CHECKPOINT: Starting to access loaded dataframe")
-        sys.stdout.flush()
-        
-        print(f"   Successfully loaded dataframe")
-        sys.stdout.flush()
-        
-        print(f"   CHECKPOINT: About to get df.shape")
-        sys.stdout.flush()
-        
-        df_shape = df.shape
-        print(f"   DataFrame shape: {df_shape}")
-        sys.stdout.flush()
-        
-        print(f"   Feature columns count: {len(feature_cols)}")
-        sys.stdout.flush()
-        
-        print(f"✅ Extracted {len(feature_cols)} features from {len(df)} dog entries")
-        sys.stdout.flush()
-        
-        # Group by track
-        print("   Grouping by track...")
-        sys.stdout.flush()
-        
-        print(f"   CHECKPOINT: About to get unique tracks")
-        sys.stdout.flush()
-        
-        tracks = df['Track'].unique()
-        print(f"\n📊 Found {len(tracks)} unique tracks:")
-        sys.stdout.flush()
-        
-        track_data = {}
-        print(f"   CHECKPOINT: Starting track iteration over {len(tracks)} tracks")
-        sys.stdout.flush()
-        
-        for i, track in enumerate(sorted(tracks), 1):
-            print(f"   CHECKPOINT: Processing track {i}/{len(tracks)}: {track}")
-            sys.stdout.flush()
-            
-            track_df = df[df['Track'] == track]
-            n_races = len(track_df)
-            n_winners = track_df['Winner'].sum()
-            track_data[track] = track_df
-            print(f"   {track:25s}: {n_races:4d} dogs, {n_winners:3d} winners (weighted)")
-            sys.stdout.flush()
-        
-        print(f"   CHECKPOINT: Completed track grouping")
+        print(f"\n✅ Training pipeline completed successfully!")
+        print(f"   Models saved to: {os.path.abspath(output_dir)}/")
         sys.stdout.flush()
     
     except Exception as e:
-        print(f"❌ ERROR extracting features: {e}")
+        print(f"❌ ERROR in training pipeline: {e}")
         traceback.print_exc()
         return 1
-    
-    # Step 3: Train track-specific ensemble models
-    print("\n🚀 STEP 3: Training track-specific ensemble models...")
-    print("-" * 80)
-    print(f"   Training 3 algorithms per track × {len(tracks)} tracks")
-    print(f"   CHECKPOINT: About to start model training loop")
-    sys.stdout.flush()
-    print()
-    
-    all_models = {}
-    all_scalers = {}
-    all_metrics = []
-    
-    print(f"   CHECKPOINT: Entering training loop for {len(sorted(tracks))} tracks")
-    sys.stdout.flush()
-    
-    for i, track in enumerate(sorted(tracks), 1):
-        print(f"\n   [{i}/{len(tracks)}] Training models for {track}...")
-        sys.stdout.flush()
-        
-        try:
-            track_df = track_data[track]
-            
-            # Skip tracks with too few samples (lowered from 50 to 30 for Top 4 training)
-            if len(track_df) < 30:
-                print(f"      ⚠️  Skipping {track} - insufficient data ({len(track_df)} dogs, need 30+)")
-                continue
-            
-            # Train ensemble
-            models, scaler, metrics = train_track_specific_ensemble(
-                track_df, feature_cols, track
-            )
-            
-            # Save models
-            for alg_name, model in models.items():
-                model_path = os.path.join(output_dir, f"{track}_{alg_name}.pkl")
-                with open(model_path, 'wb') as f:
-                    pickle.dump(model, f)
-            
-            # Save scaler
-            scaler_path = os.path.join(output_dir, f"{track}_scaler.pkl")
-            with open(scaler_path, 'wb') as f:
-                pickle.dump(scaler, f)
-            
-            all_models[track] = models
-            all_scalers[track] = scaler
-            all_metrics.append(metrics)
-            
-            # Show results
-            print(f"      ✅ Ensemble accuracy: {metrics['ensemble_accuracy']:.1%}")
-            
-        except Exception as e:
-            print(f"      ❌ ERROR training {track}: {e}")
-            logger.error(f"Error training {track}", exc_info=True)
-            continue
-    
-    # Step 4: Save configuration
-    print("\n💾 STEP 4: Saving ensemble configuration...")
-    print("-" * 80)
-    
-    if not all_models:
-        print("❌ ERROR: No models were trained!")
-        print("   This usually means:")
-        print("   1. No tracks had enough data (need 30+ dogs per track)")
-        print("   2. CSV-to-PDF matching failed")
-        print("   3. Data format issues")
-        print(f"\n   Total races loaded: {len(race_data_list)}")
-        print(f"   Total samples: {len(df)}")
-        print(f"   Tracks found: {len(tracks)}")
-        print("\n   Track sample counts:")
-        for track in sorted(tracks):
-            track_df = track_data[track]
-            print(f"      {track:25s}: {len(track_df)} dogs")
-        return 1
-    
-    config = {
-        'tracks': list(all_models.keys()),
-        'feature_cols': feature_cols,
-        'algorithms': ['rf', 'gb'] + (['xgb'] if HAS_XGBOOST else []),
-        'ensemble_weights': {'rf': 0.4, 'gb': 0.3, 'xgb': 0.3} if HAS_XGBOOST else {'rf': 0.5, 'gb': 0.5}
-    }
-    
-    config_path = os.path.join(output_dir, "config.pkl")
-    with open(config_path, 'wb') as f:
-        pickle.dump(config, f)
-    
-    print(f"✅ Configuration saved to {config_path}")
-    
-    # Step 5: Performance summary
-    print("\n📊 STEP 5: Performance Summary")
-    print("=" * 80)
-    
-    if all_metrics:
-        metrics_df = pd.DataFrame(all_metrics)
-        
-        print("\n🎯 Per-Track Results:")
-        print("-" * 80)
-        for _, row in metrics_df.iterrows():
-            cal_improve = row.get('calibration_improvement', 0)
-            improve_str = f" [+{cal_improve:.1%} calibration]" if cal_improve > 0 else ""
-            print(f"   {row['track']:25s}: Ensemble {row['ensemble_accuracy']:.1%}{improve_str}", end="")
-            if 'rf_accuracy' in row:
-                print(f"  (RF: {row['rf_accuracy']:.1%}, GB: {row['gb_accuracy']:.1%}", end="")
-                if 'xgb_accuracy' in row:
-                    print(f", XGB: {row['xgb_accuracy']:.1%})", end="")
-                else:
-                    print(")", end="")
-            print()
-        
-        print("\n📈 Overall Statistics:")
-        print("-" * 80)
-        print(f"   Tracks trained: {len(all_metrics)}")
-        print(f"   Total models: {len(all_metrics) * len(config['algorithms'])}")
-        print(f"   Average ensemble accuracy: {metrics_df['ensemble_accuracy'].mean():.1%}")
-        
-        # Calculate average calibration improvement
-        if 'calibration_improvement' in metrics_df.columns:
-            avg_cal_improve = metrics_df['calibration_improvement'].mean()
-            print(f"   Average calibration improvement: +{avg_cal_improve:.1%}")
-        
-        print(f"   Best track: {metrics_df.loc[metrics_df['ensemble_accuracy'].idxmax(), 'track']} ({metrics_df['ensemble_accuracy'].max():.1%})")
-        print(f"   Worst track: {metrics_df.loc[metrics_df['ensemble_accuracy'].idxmin(), 'track']} ({metrics_df['ensemble_accuracy'].min():.1%})")
-        
-        # Algorithm comparison
-        print("\n🔬 Algorithm Comparison:")
-        print("-" * 80)
-        for alg in config['algorithms']:
-            col_name = f'{alg}_accuracy'
-            if col_name in metrics_df.columns:
-                avg_acc = metrics_df[col_name].mean()
-                print(f"   {alg.upper():3s} average accuracy: {avg_acc:.1%}")
-    
-    print("\n" + "=" * 80)
-    print("✅ TRAINING COMPLETE WITH CALIBRATION!")
-    print("=" * 80)
-    print(f"\n📁 Models saved to: {os.path.abspath(output_dir)}")
-    print(f"   - {len(all_models)} track-specific model sets (CALIBRATED)")
-    print(f"   - {len(all_models) * len(config['algorithms'])} individual algorithm models")
-    print(f"   - Configuration file: config.pkl")
-    print("\n💡 Key Improvement: All models now use Isotonic Regression calibration")
-    print("   This fixes the high-confidence prediction failures by ensuring")
-    print("   predicted probabilities match actual win rates.")
-    print("\n💡 To use these calibrated models, run: run_track_ensemble_predictions.bat")
-    print("=" * 80)
     
     return 0
 
