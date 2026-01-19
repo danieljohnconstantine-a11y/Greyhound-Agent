@@ -199,6 +199,18 @@ def extract_features_and_labels(race_data_list, winners_list, output_dir="models
         df[col] = df[col].astype('float32')
     logger.info(f"Memory optimized - DataFrame size: {df.memory_usage(deep=True).sum() / 1024 / 1024:.2f} MB")
     
+    # CRITICAL FIX #43: Force explicit checkpoint and flush BEFORE continuing to training
+    # Windows Python may terminate silently after large memory operations without this
+    print("   CHECKPOINT 8.1: Memory optimization complete, forcing flush...")
+    sys.stdout.flush()
+    
+    # Force garbage collection and flush any pending operations
+    import gc
+    gc.collect()
+    
+    print("   CHECKPOINT 8.2: GC complete, about to start model training")
+    sys.stdout.flush()
+    
     # CRITICAL FIX #42: Train models NOW before any return/cleanup
     # This ensures everything completes in one function call
     print("\n🚀 STEP 3: Training track-specific ensemble models...")
