@@ -296,6 +296,7 @@ def extract_features_and_labels(race_data_list, winners_list, output_dir="models
             'tracks': list(all_models.keys()),
             'algorithms': ['rf', 'gb', 'xgb'],  # Algorithm names used in model files
             'feature_cols': feature_cols,
+            'ensemble_weights': {'rf': 1.0, 'gb': 1.0, 'xgb': 1.0},  # Equal weights for all algorithms
             'training_date': datetime.datetime.now().isoformat(),
             'n_samples': len(df),
             'n_tracks': len(all_models)
