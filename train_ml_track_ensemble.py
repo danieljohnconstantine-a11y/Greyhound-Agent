@@ -231,7 +231,7 @@ def extract_features_and_labels(race_data_list, winners_list, output_dir="models
         n_races = len(track_df)
         n_winners = track_df['Winner'].sum()
         track_data[track] = track_df
-        print(f"   {track:25s}: {n_races:4d} dogs, {n_winners:3d} winners (weighted)")
+        print(f"   {track:25s}: {n_races:4d} dogs, {n_winners:6.1f} winners (weighted)")
         sys.stdout.flush()
     
     # Create output directory
