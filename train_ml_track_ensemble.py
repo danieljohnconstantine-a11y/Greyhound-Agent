@@ -389,7 +389,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     
     # Calibrate Random Forest with Isotonic Regression
     print(f"      Calibrating RandomForest...")
-    rf_calibrated = CalibratedClassifierCV(rf, method='isotonic', cv='prefit')
+    rf_calibrated = CalibratedClassifierCV(rf, method='isotonic', cv=5)
     rf_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
     models['rf'] = rf_calibrated
     predictions['rf'] = rf.predict_proba(X_test_scaled)[:, 1]
@@ -408,7 +408,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     
     # Calibrate Gradient Boosting with Isotonic Regression
     print(f"      Calibrating GradientBoosting...")
-    gb_calibrated = CalibratedClassifierCV(gb, method='isotonic', cv='prefit')
+    gb_calibrated = CalibratedClassifierCV(gb, method='isotonic', cv=5)
     gb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
     models['gb'] = gb_calibrated
     predictions['gb'] = gb.predict_proba(X_test_scaled)[:, 1]
@@ -429,7 +429,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         
         # Calibrate XGBoost with Isotonic Regression
         print(f"      Calibrating XGBoost...")
-        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='isotonic', cv='prefit')
+        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='isotonic', cv=5)
         xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
         models['xgb'] = xgb_calibrated
         predictions['xgb'] = xgb_model.predict_proba(X_test_scaled)[:, 1]
