@@ -294,17 +294,25 @@ def extract_features_and_labels(race_data_list, winners_list, output_dir="models
     if all_models:
         config = {
             'tracks': list(all_models.keys()),
+            'algorithms': ['rf', 'gb', 'xgb'],  # Algorithm names used in model files
             'feature_cols': feature_cols,
             'training_date': datetime.datetime.now().isoformat(),
             'n_samples': len(df),
             'n_tracks': len(all_models)
         }
         
-        config_path = os.path.join(output_dir, 'ensemble_config.json')
-        with open(config_path, 'w') as f:
+        # Save as JSON for human readability
+        config_path_json = os.path.join(output_dir, 'ensemble_config.json')
+        with open(config_path_json, 'w') as f:
             json.dump(config, f, indent=2)
         
-        print(f"✅ Configuration saved to {config_path}")
+        # Save as pickle for prediction script compatibility
+        config_path_pkl = os.path.join(output_dir, 'config.pkl')
+        with open(config_path_pkl, 'wb') as f:
+            pickle.dump(config, f)
+        
+        print(f"✅ Configuration saved to {config_path_json}")
+        print(f"✅ Configuration saved to {config_path_pkl}")
         print(f"\n🎉 SUCCESS! Trained {len(all_models)} track-specific ensembles")
         print(f"   Models saved to: {os.path.abspath(output_dir)}/")
         
