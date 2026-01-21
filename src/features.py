@@ -25,6 +25,55 @@ def compute_features(df):
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
     df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
     
+    # === CRITICAL FIX: Estimate Weight when 0.0 ===
+    # PDFs often show 0.0kg for all dogs. Estimate realistic weights based on sex/age.
+    # Greyhound weights: Males (dogs) 30-35kg, Females (bitches) 25-30kg
+    if "Weight" in df.columns:
+        df["Weight"] = pd.to_numeric(df["Weight"], errors="coerce").fillna(0)
+        # Check if all weights are 0 or missing
+        zero_weight_count = (df["Weight"] == 0).sum()
+        if zero_weight_count > 0:
+            print(f"⚠️ WARNING: {zero_weight_count}/{len(df)} dogs have Weight=0.0. Estimating realistic weights...")
+            
+            # Parse sex from SexAge field if available
+            if "SexAge" in df.columns:
+                # Extract sex: 'd' = dog (male), 'b' = bitch (female)
+                df["_TempSex"] = df["SexAge"].astype(str).str[-1].str.lower()
+            elif "Sex" in df.columns:
+                df["_TempSex"] = df["Sex"].str.lower().str[0]  # First letter: 'd' or 'b'
+            else:
+                df["_TempSex"] = "d"  # Default to male
+            
+            # Estimate weight based on sex
+            # Males: 30-35kg (use 32kg average)
+            # Females: 25-30kg (use 27kg average)
+            # Add slight random variation (+/- 2kg) to differentiate dogs
+            for idx in df.index:
+                if df.loc[idx, "Weight"] == 0:
+                    sex = df.loc[idx, "_TempSex"]
+                    if sex == "b":
+                        # Female: 25-30kg
+                        base_weight = 27.0
+                    else:
+                        # Male: 30-35kg
+                        base_weight = 32.0
+                    
+                    # Add slight variation based on Box number (deterministic but varies)
+                    # This ensures dogs in same race have slightly different weights
+                    box = df.loc[idx, "Box"] if "Box" in df.columns else 1
+                    variation = (int(box) % 5) - 2  # Ranges from -2 to +2
+                    
+                    df.loc[idx, "Weight"] = base_weight + variation
+            
+            # Drop temporary column
+            df.drop(columns=["_TempSex"], inplace=True, errors="ignore")
+            
+            print(f"✅ Estimated weights for {zero_weight_count} dogs: {df['Weight'].unique()[:10].tolist()}")
+    else:
+        # Weight column missing entirely - create it
+        df["Weight"] = 30.0  # Default average greyhound weight
+        print("⚠️ WARNING: Weight column missing - using default 30kg for all dogs")
+    
     # === ADD MISSING FEATURES FOR MODEL COMPATIBILITY ===
     # These features are expected by trained models but may not be in parsed data
     
