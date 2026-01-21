@@ -24,6 +24,42 @@ def compute_features(df):
     df["DLR"] = pd.to_numeric(df["DLR"], errors="coerce")
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
     df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
+    
+    # === ADD MISSING FEATURES FOR MODEL COMPATIBILITY ===
+    # These features are expected by trained models but may not be in parsed data
+    
+    # CareerWins - parse from parsed data or estimate from win rate
+    if "CareerWins" not in df.columns:
+        # Try to derive from other columns if available
+        if "Wins" in df.columns:
+            df["CareerWins"] = pd.to_numeric(df["Wins"], errors="coerce").fillna(0)
+        elif "CareerStarts" in df.columns:
+            # Estimate: assume 12-15% win rate for average dog
+            df["CareerWins"] = (df["CareerStarts"] * 0.13).fillna(0)
+        else:
+            df["CareerWins"] = 0
+    else:
+        df["CareerWins"] = pd.to_numeric(df["CareerWins"], errors="coerce").fillna(0)
+    
+    # CareerPlaces - parse from parsed data or estimate  
+    if "CareerPlaces" not in df.columns:
+        # Try to derive from other columns if available
+        if "Places" in df.columns:
+            df["CareerPlaces"] = pd.to_numeric(df["Places"], errors="coerce").fillna(0)
+        elif "CareerStarts" in df.columns:
+            # Estimate: assume 30-35% place rate for average dog
+            df["CareerPlaces"] = (df["CareerStarts"] * 0.32).fillna(0)
+        else:
+            df["CareerPlaces"] = 0
+    else:
+        df["CareerPlaces"] = pd.to_numeric(df["CareerPlaces"], errors="coerce").fillna(0)
+    
+    # PrizeMoney - parse from parsed data or set to default
+    if "PrizeMoney" not in df.columns:
+        # Estimate based on career wins (average $500 per win)
+        df["PrizeMoney"] = df["CareerWins"] * 500
+    else:
+        df["PrizeMoney"] = pd.to_numeric(df["PrizeMoney"], errors="coerce").fillna(0)
 
     # Preserve parsed BestTimeSec and SectionalSec values if they exist, otherwise set to NaN
     if "BestTimeSec" not in df.columns:
