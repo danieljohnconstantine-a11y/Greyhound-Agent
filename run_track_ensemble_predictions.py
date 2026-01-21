@@ -131,13 +131,33 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     
     # Check for feature variability - warn if features don't vary between dogs
     constant_features = []
+    varying_features = []
     for col in feature_cols:
-        if col in df.columns and df[col].nunique() == 1:
-            constant_features.append(col)
+        if col in df.columns:
+            unique_count = df[col].nunique()
+            if unique_count == 1:
+                constant_features.append(col)
+            else:
+                varying_features.append(col)
     
-    if constant_features and len(constant_features) > len(feature_cols) * 0.5:
-        print(f"      ⚠️  Warning: {len(constant_features)}/{len(feature_cols)} features have same value for all dogs")
-        print(f"         This may cause similar prediction scores. Check feature computation.")
+    # CRITICAL: Warn if >30% of features are constant (lowered threshold from 50%)
+    constant_ratio = len(constant_features) / len(feature_cols) if feature_cols else 0
+    if constant_ratio > 0.3:
+        print(f"      ⚠️  CRITICAL: {len(constant_features)}/{len(feature_cols)} features ({constant_ratio*100:.1f}%) have same value for all dogs!")
+        print(f"         This will cause identical prediction scores.")
+        print(f"         Varying features: {len(varying_features)}")
+        
+        # Show sample of varying features
+        if varying_features:
+            print(f"         Sample varying: {', '.join(varying_features[:5])}")
+        
+        # Show critical dog-specific features that should vary
+        critical_features = ['Box', 'Draw', 'Weight', 'BestTimeSec', 'SectionalSec', 'CareerWins', 
+                            'CareerStarts', 'WinRate', 'PlaceRate', 'DLWFactor', 'WeightFactor']
+        missing_critical = [f for f in critical_features if f not in df.columns or df[f].nunique() == 1]
+        if missing_critical:
+            print(f"         ⚠️  Missing/constant critical features: {', '.join(missing_critical[:10])}")
+            print(f"         These should vary between dogs for accurate predictions!")
     
     X_scaled = scaler.transform(X)
     
@@ -259,9 +279,33 @@ def main():
                 # Add ranking
                 race_df['ML_Rank'] = race_df['ML_Confidence'].rank(ascending=False, method='dense').astype(int)
                 
-                # Get top pick
-                top_dog = race_df.loc[race_df['ML_Confidence'].idxmax()]
+                # Get top pick with tie-breaking
+                # Check if all scores are identical (or within 0.1% of each other)
+                score_range = race_df['ML_Confidence'].max() - race_df['ML_Confidence'].min()
+                if score_range < 0.2:  # Scores are essentially identical
+                    print(f"      ⚠️  WARNING: All dogs have nearly identical scores (range: {score_range:.2f}%)")
+                    print(f"         This indicates features aren't varying between dogs!")
+                    print(f"         Using Box 1 bias as tie-breaker...")
+                    # Use box position as tie-breaker (Box 1 typically has best odds)
+                    top_idx = race_df.sort_values(['ML_Confidence', 'Box'], ascending=[False, True]).index[0]
+                    top_dog = race_df.loc[top_idx]
+                else:
+                    top_dog = race_df.loc[race_df['ML_Confidence'].idxmax()]
+                
                 print(f"   ✅ Top pick: Box {top_dog['Box']} - {top_dog['DogName']} ({top_dog['ML_Confidence']:.1f}%)")
+                
+                # Show sample feature values for first race to help diagnose issues
+                if len(all_predictions) == 0:  # First race only
+                    print(f"\n   📊 Sample feature values (first 3 dogs):")
+                    sample_features = ['Box', 'Weight', 'BestTimeSec', 'SectionalSec', 'CareerWins', 
+                                      'CareerStarts', 'WinRate', 'BoxBias', 'DrawFactor', 'WeightFactor']
+                    available_features = [f for f in sample_features if f in race_df.columns]
+                    if available_features:
+                        for idx in race_df.head(3).index:
+                            dog = race_df.loc[idx]
+                            feature_str = ', '.join([f"{f}={dog[f]:.2f}" if pd.notna(dog[f]) else f"{f}=NaN" 
+                                                    for f in available_features[:6]])
+                            print(f"      Box {dog['Box']}: {feature_str}")
                 
                 all_predictions.append(race_df)
                 
