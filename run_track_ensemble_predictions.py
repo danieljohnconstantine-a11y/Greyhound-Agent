@@ -119,7 +119,26 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
         predictions: Array of ensemble probabilities for each dog
     """
     # Prepare features
+    # Check for missing features and warn user
+    missing_features = [col for col in feature_cols if col not in df.columns]
+    if missing_features:
+        print(f"      ⚠️  Warning: {len(missing_features)} features missing from race data (will be filled with 0)")
+        if len(missing_features) <= 5:
+            print(f"         Missing: {', '.join(missing_features)}")
+    
+    # Extract features and fill missing with 0
     X = df[feature_cols].fillna(0)
+    
+    # Check for feature variability - warn if features don't vary between dogs
+    constant_features = []
+    for col in feature_cols:
+        if col in df.columns and df[col].nunique() == 1:
+            constant_features.append(col)
+    
+    if constant_features and len(constant_features) > len(feature_cols) * 0.5:
+        print(f"      ⚠️  Warning: {len(constant_features)}/{len(feature_cols)} features have same value for all dogs")
+        print(f"         This may cause similar prediction scores. Check feature computation.")
+    
     X_scaled = scaler.transform(X)
     
     # Get predictions from each algorithm
@@ -169,6 +188,10 @@ def main():
     print(f"   Tracks: {len(config['tracks'])}")
     print(f"   Algorithms: {', '.join(config['algorithms'])}")
     print(f"   Features: {len(config['feature_cols'])}")
+    print(f"\n📊 Feature columns used for predictions:")
+    print(f"   {', '.join(config['feature_cols'][:15])}...")
+    if len(config['feature_cols']) > 15:
+        print(f"   ... and {len(config['feature_cols']) - 15} more features")
     
     # Find PDFs
     pdf_files = glob.glob("data_predictions/*.pdf")
@@ -258,30 +281,18 @@ def main():
         # Combine all predictions
         df_all = pd.concat(all_predictions, ignore_index=True)
         
-        # Remove columns that cannot be populated from PDFs (not factual data)
-        # These fields don't exist in race form PDFs and would only have placeholder values
+        # Remove only non-essential metadata columns (not used for predictions)
+        # Keep all feature columns that were used for predictions so users can inspect them
         columns_to_remove = [
-            'Owner', 'Color', 'Sire', 'Dam',  # Pedigree info not in race forms
-            'RaceDate',  # Race date is for training matching, not predictions
-        ]
-        
-        # Also remove computed feature columns that are all defaults/placeholders
-        # These don't add value if they're all the same
-        placeholder_columns = [
-            'TimeEstimated', 'Margins', 'TrackConditionAdj', 'RestFactor',
-            'MarginAvg', 'FormMomentum', 'WeightFactor', 'FormMomentumNorm',
-            'MarginFactor', 'TrackBox4Adjustment', 'Last3AvgFinish',
-            'Last3FinishFactor', 'RecentPlaceStreak', 'TimeConverted'
+            'Owner', 'Color', 'Sire', 'Dam',  # Pedigree info rarely in race forms
         ]
         
         # Remove columns that exist in the dataframe
         columns_to_remove_existing = [col for col in columns_to_remove if col in df_all.columns]
-        placeholder_columns_existing = [col for col in placeholder_columns if col in df_all.columns]
         
-        all_cols_to_remove = columns_to_remove_existing + placeholder_columns_existing
-        if all_cols_to_remove:
-            print(f"   Removing {len(all_cols_to_remove)} non-factual columns: {', '.join(all_cols_to_remove[:5])}...")
-            df_all = df_all.drop(columns=all_cols_to_remove)
+        if columns_to_remove_existing:
+            print(f"   Removing {len(columns_to_remove_existing)} metadata columns: {', '.join(columns_to_remove_existing)}...")
+            df_all = df_all.drop(columns=columns_to_remove_existing)
         
         # Reorder columns: Track, RaceNumber, Box, DogName, ML_Confidence, then rest
         priority_cols = ['Track', 'RaceNumber', 'Box', 'DogName', 'ML_Confidence']
