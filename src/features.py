@@ -146,26 +146,10 @@ def compute_features(df):
     # TrackConditionAdj: Track-level constant (1.0 = neutral conditions)
     df["TrackConditionAdj"] = 1.0
     
-    # RestFactor: Use parsed value if available, otherwise derive from DLR
-    # Optimal rest: 6-10 days. Too fresh (<5 days) or too stale (>15 days) reduces performance
+    # RestFactor: Use parsed value if available, otherwise default to 0.8
     if "RestFactor" not in df.columns:
-        if "DLR" in df.columns:
-            df["DLR_for_rest"] = pd.to_numeric(df["DLR"], errors="coerce")
-            df["RestFactor"] = df["DLR_for_rest"].apply(
-                lambda dlr: 1.0 if pd.notna(dlr) and 6 <= dlr <= 10 else
-                           0.9 if pd.notna(dlr) and 5 <= dlr <= 12 else
-                           0.75 if pd.notna(dlr) and 3 <= dlr <= 15 else
-                           0.6 if pd.notna(dlr) and dlr < 3 else
-                           0.5
-            )
-            print(f"✓ RestFactor derived from DLR for {len(df)} dogs")
-        else:
-            df["RestFactor"] = 0.8
-            print("⚠️ WARNING: RestFactor and DLR not found. Setting to 0.8 (default).")
-    else:
-        # Log statistics
-        rest_count = df["RestFactor"].notna().sum()
-        print(f"ℹ️ INFO: RestFactor found for {rest_count}/{len(df)} dogs.")
+        df["RestFactor"] = 0.8
+        print("⚠️ WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).")
 
     # Derived metrics - handle NaN values in timing data
     # Speed_kmh: only calculate if BestTimeSec is valid
@@ -188,49 +172,14 @@ def compute_features(df):
     )
     
     # MarginAvg: only calculate if Margins has at least 1 value
-    # INTELLIGENT FALLBACK: When margins missing, estimate from career performance
-    has_margin_data = df["Margins"].apply(lambda x: isinstance(x, list) and len(x) > 0).any()
-    if has_margin_data:
-        df["MarginAvg"] = df["Margins"].apply(
-            lambda x: np.mean(x) if isinstance(x, list) and len(x) > 0 else 0
-        )
-    else:
-        # Estimate margin from win/place rate (winners have smaller margins, placers slightly larger)
-        if "CareerWins" in df.columns and "CareerPlaces" in df.columns and "CareerStarts" in df.columns:
-            df["MarginAvg"] = df.apply(
-                lambda row: -2.0 if (row["CareerStarts"] > 0 and row["CareerWins"] / row["CareerStarts"] > 0.20) else
-                           -1.0 if (row["CareerStarts"] > 0 and row["CareerWins"] / row["CareerStarts"] > 0.10) else
-                            1.0 if (row["CareerStarts"] > 0 and row["CareerPlaces"] / row["CareerStarts"] > 0.30) else
-                            3.0,
-                axis=1
-            )
-            print(f"✓ MarginAvg estimated from career performance (margin data not available)")
-        else:
-            df["MarginAvg"] = 0
+    df["MarginAvg"] = df["Margins"].apply(
+        lambda x: np.mean(x) if isinstance(x, list) and len(x) > 0 else 0
+    )
     
     # FormMomentum: only calculate if Margins has at least 2 values
-    # INTELLIGENT FALLBACK: When margins missing, use recent form trend
-    has_form_data = df["Margins"].apply(lambda x: isinstance(x, list) and len(x) >= 2).any()
-    if has_form_data:
-        df["FormMomentum"] = df["Margins"].apply(
-            lambda x: np.mean(np.diff(x)) if isinstance(x, list) and len(x) >= 2 else 0
-        )
-    else:
-        # Estimate form momentum from DLR (days since last race) and recent wins
-        # Positive momentum = recently won/placed, negative = long time between wins
-        if "DLR" in df.columns and "DLW" in df.columns:
-            # Convert to numeric first
-            df["DLW_numeric"] = pd.to_numeric(df["DLW"], errors="coerce")
-            df["FormMomentum"] = df.apply(
-                lambda row: 3.0 if (pd.notna(row["DLW_numeric"]) and row["DLW_numeric"] <= 14) else  # Recent winner
-                           1.5 if (pd.notna(row["DLW_numeric"]) and row["DLW_numeric"] <= 30) else  # Won recently
-                          -1.0 if (pd.notna(row["DLW_numeric"]) and row["DLW_numeric"] > 90) else  # Long time since win
-                           0.0,  # Neutral
-                axis=1
-            )
-            print(f"✓ FormMomentum estimated from DLR/DLW (margin trend data not available)")
-        else:
-            df["FormMomentum"] = 0
+    df["FormMomentum"] = df["Margins"].apply(
+        lambda x: np.mean(np.diff(x)) if isinstance(x, list) and len(x) >= 2 else 0
+    )
 
     # Consistency Index
     df["ConsistencyIndex"] = df.apply(
@@ -274,6 +223,15 @@ def compute_features(df):
         df["TrainerStrikeRate"] = 0.15
         print("⚠️ WARNING: Cannot calculate TrainerStrikeRate - missing required columns. Setting to 0.15 (default).")
     
+    # RestFactor: Use parsed value if available, otherwise default to 0.8
+    if "RestFactor" not in df.columns:
+        df["RestFactor"] = 0.8
+        print("⚠️ WARNING: RestFactor not found in parsed data. Setting to 0.8 (default).")
+    else:
+        # Log statistics
+        rest_count = df["RestFactor"].notna().sum()
+        print(f"ℹ️ INFO: RestFactor found for {rest_count}/{len(df)} dogs.")
+
     # Overexposure Penalty
     df["OverexposedPenalty"] = df["CareerStarts"].apply(lambda x: -0.1 if x > 80 else 0)
     
@@ -309,28 +267,14 @@ def compute_features(df):
     
     # Weight Factor: Optimal racing weight typically 28-32kg for greyhounds
     # Analysis of 320 races showed dogs at 30-31kg have slightly higher win rates
-    # INTELLIGENT FALLBACK: When Weight=0 for all dogs, use Speed_kmh variation instead
     if "Weight" in df.columns:
         df["Weight"] = pd.to_numeric(df["Weight"], errors="coerce")
-        # Check if all weights are 0 or constant
-        non_zero_weights = df[df["Weight"] > 0]["Weight"]
-        if len(non_zero_weights) > 0:
-            # Normal weight-based calculation
-            df["WeightFactor"] = df["Weight"].apply(
-                lambda w: 1.0 if pd.notna(w) and 29.5 <= w <= 31.5 else 
-                         0.9 if pd.notna(w) and 28 <= w <= 33 else 
-                         0.7 if pd.notna(w) and 25 <= w <= 36 else 0.5
-            )
-            print(f"✓ Calculated WeightFactor for {len(df)} dogs")
-        else:
-            # Fallback: Use Speed_kmh percentile as proxy (faster dogs = better conditioning)
-            if "Speed_kmh" in df.columns and df["Speed_kmh"].notna().sum() > 0:
-                df["WeightFactor"] = df["Speed_kmh"].rank(pct=True, method='average')
-                df["WeightFactor"] = df["WeightFactor"].fillna(0.5)  # Fill NaN with neutral
-                print(f"✓ WeightFactor derived from Speed_kmh (all weights are 0.0)")
-            else:
-                df["WeightFactor"] = 0.8
-                print("⚠️ WARNING: Weight=0 for all dogs, using default 0.8")
+        df["WeightFactor"] = df["Weight"].apply(
+            lambda w: 1.0 if pd.notna(w) and 29.5 <= w <= 31.5 else 
+                     0.9 if pd.notna(w) and 28 <= w <= 33 else 
+                     0.7 if pd.notna(w) and 25 <= w <= 36 else 0.5
+        )
+        print(f"✓ Calculated WeightFactor for {len(df)} dogs")
     else:
         df["WeightFactor"] = 0.8
         print("⚠️ WARNING: Weight not found - setting WeightFactor to 0.8 (neutral).")
