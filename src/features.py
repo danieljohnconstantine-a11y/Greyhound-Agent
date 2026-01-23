@@ -189,10 +189,22 @@ def compute_features(df):
     )
 
     # Consistency Index
-    df["ConsistencyIndex"] = df.apply(
-        lambda row: row["CareerWins"] / row["CareerStarts"] if row["CareerStarts"] > 0 else 0,
-        axis=1
-    )
+    # CRITICAL FIX: Detect maiden races (all dogs have CareerWins=0)
+    # In maiden races, use CareerStarts as experience proxy instead of constant 0
+    total_career_wins = df["CareerWins"].sum() if "CareerWins" in df.columns else 1
+    is_maiden_race = total_career_wins == 0
+    
+    if is_maiden_race:
+        # Maiden race: Use experience (CareerStarts) as differentiation
+        # More starts = more experience = slight edge (normalize to 0-1 range)
+        df["ConsistencyIndex"] = df["CareerStarts"].apply(lambda s: min(s / 20.0, 1.0))
+        print(f"⚠️ MAIDEN RACE DETECTED - Using CareerStarts for ConsistencyIndex differentiation")
+    else:
+        # Normal race: Use win rate
+        df["ConsistencyIndex"] = df.apply(
+            lambda row: row["CareerWins"] / row["CareerStarts"] if row["CareerStarts"] > 0 else 0,
+            axis=1
+        )
 
     # Recent Form Boost
     df["RecentFormBoost"] = df.apply(
@@ -257,14 +269,25 @@ def compute_features(df):
     # - Dogs that won within 14 days: ~23% higher win rate than average
     # - Dogs that won within 30 days: ~15% higher win rate
     # - Dogs with no recent wins (60+ days): significantly lower win rates
+    # CRITICAL FIX: Handle maiden races (DLW="Mdn") specially
     if "DLW" in df.columns:
-        df["DLW"] = pd.to_numeric(df["DLW"], errors="coerce")
-        df["DLWFactor"] = df["DLW"].apply(
-            lambda x: 1.0 if pd.notna(x) and x <= 14 else 
-                     0.7 if pd.notna(x) and x <= 30 else 
-                     0.4 if pd.notna(x) and x <= 60 else 0.2
-        )
-        print(f"✓ Calculated DLWFactor based on Days Last Win")
+        # Check for maiden race indicators
+        maiden_count = (df["DLW"] == "Mdn").sum() + (df["DLW"] == "MDN").sum()
+        is_maiden_for_dlw = maiden_count >= len(df) * 0.5
+        
+        if is_maiden_for_dlw:
+            # Maiden race: All dogs get neutral DLWFactor
+            df["DLWFactor"] = 0.5
+            print(f"⚠️ MAIDEN RACE DETECTED (DLW='Mdn') - Setting neutral DLWFactor=0.5 for all")
+        else:
+            # Normal race: Convert numeric DLW values
+            df["DLW"] = pd.to_numeric(df["DLW"], errors="coerce")
+            df["DLWFactor"] = df["DLW"].apply(
+                lambda x: 1.0 if pd.notna(x) and x <= 14 else 
+                         0.7 if pd.notna(x) and x <= 30 else 
+                         0.4 if pd.notna(x) and x <= 60 else 0.2
+            )
+            print(f"✓ Calculated DLWFactor based on Days Last Win")
     else:
         df["DLWFactor"] = 0.5
         print("⚠️ WARNING: DLW not found - setting DLWFactor to 0.5 (neutral).")
@@ -1402,10 +1425,26 @@ def compute_features(df):
     # === FIELD SIMILARITY INDEX (FSI) ===
     # When dogs have very similar scores, the race is more unpredictable
     # High FSI = high uncertainty = luck plays bigger role
+    # CRITICAL FIX: Convert race-level constants to dog-vs-field comparisons
     if "EarlySpeedIndex" in df.columns and "BestTimeSec" in df.columns:
-        # Calculate score variance within each race
+        # Calculate race-level statistics for comparison
         df["FieldSpeedStd"] = df.groupby(["Track", "RaceNumber"])["EarlySpeedIndex"].transform("std")
         df["FieldTimeStd"] = df.groupby(["Track", "RaceNumber"])["BestTimeSec"].transform("std")
+        
+        # NEW: Convert to dog-vs-field comparison (VARIES by dog)
+        df["TimeVsField"] = df.apply(
+            lambda row: (row["BestTimeSec"] - df[(df["Track"] == row["Track"]) & 
+                                                  (df["RaceNumber"] == row["RaceNumber"])]["BestTimeSec"].mean()) / 
+                        (row.get("FieldTimeStd", 1.0) + 0.1) if row.get("FieldTimeStd", 0) > 0.1 else 0,
+            axis=1
+        )
+        df["SpeedVsField"] = df.apply(
+            lambda row: (row["EarlySpeedIndex"] - df[(df["Track"] == row["Track"]) & 
+                                                       (df["RaceNumber"] == row["RaceNumber"])]["EarlySpeedIndex"].mean()) / 
+                        (row.get("FieldSpeedStd", 1.0) + 0.1) if row.get("FieldSpeedStd", 0) > 0.1 else 0,
+            axis=1
+        )
+        
         # Normalize: High std = more predictable (clear differences)
         df["FieldSimilarityIndex"] = df.apply(
             lambda row: 0.8 if (pd.notna(row.get("FieldSpeedStd")) and row.get("FieldSpeedStd", 0) > 3) or 
@@ -1414,11 +1453,13 @@ def compute_features(df):
                         else 1.1,  # High similarity = more unpredictable = reduce confidence
             axis=1
         )
-        print(f"✓ Calculated FieldSimilarityIndex (luck factor) for {len(df)} dogs")
+        print(f"✓ Calculated FieldSimilarityIndex + dog-vs-field comparisons for {len(df)} dogs")
     else:
         df["FieldSimilarityIndex"] = 1.0
         df["FieldSpeedStd"] = np.nan
         df["FieldTimeStd"] = np.nan
+        df["TimeVsField"] = 0
+        df["SpeedVsField"] = 0
     
     # === UPSET PROBABILITY ===
     # v3.9 UPDATE: Based on Nov 28-30 analysis (335 races)
