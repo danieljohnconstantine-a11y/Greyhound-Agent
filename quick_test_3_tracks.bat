@@ -65,39 +65,56 @@ echo If you see these messages, the fix is working!
 echo ========================================
 echo.
 
-if exist venv\Scripts\activate.bat (
-    call venv\Scripts\activate.bat
-    python train_quick_test_3tracks.py 2>&1 | tee test_training.log
-    
+if not exist venv\Scripts\activate.bat (
     echo.
     echo ========================================
-    echo TRAINING COMPLETE
-    echo ========================================
-    echo.
-    echo Check test_training.log for maiden race messages
-    echo Models saved to: models\track_ensemble_test\
-    echo.
-    
-    REM Step 5: Run test predictions
-    echo Step 5: Running test predictions...
-    python predict_quick_test_3tracks.py
-    
-    echo.
-    echo ========================================
-    echo RESULTS
-    echo ========================================
-    echo.
-    type outputs\test_predictions_summary.txt
-    echo.
-    
-    call venv\Scripts\deactivate.bat
-) else (
     echo [ERROR] Virtual environment not found!
-    echo Please run: python -m venv venv
-    echo Then run this script again.
+    echo ========================================
+    echo.
+    echo The virtual environment needs to be created in THIS folder.
+    echo Current directory: %CD%
+    echo.
+    echo Please run these commands in Command Prompt:
+    echo   cd %CD%
+    echo   python -m venv venv
+    echo   venv\Scripts\activate
+    echo   pip install pandas numpy xgboost scikit-learn pdfplumber
+    echo.
+    echo Then double-click this batch file again.
+    echo.
     pause
     exit /b 1
 )
+
+call venv\Scripts\activate.bat
+python train_quick_test_3tracks.py 2>&1 | python -c "import sys; [print(line, end='') for line in sys.stdin]" > test_training.log 2>&1
+
+echo.
+echo ========================================
+echo TRAINING COMPLETE
+echo ========================================
+echo.
+echo Check test_training.log for maiden race messages
+echo Models saved to: models\track_ensemble_test\
+echo.
+
+REM Step 5: Run test predictions
+echo Step 5: Running test predictions...
+python predict_quick_test_3tracks.py
+
+echo.
+echo ========================================
+echo RESULTS
+echo ========================================
+echo.
+if exist outputs\test_predictions_summary.txt (
+    type outputs\test_predictions_summary.txt
+) else (
+    echo [WARNING] test_predictions_summary.txt not found
+)
+echo.
+
+call venv\Scripts\deactivate.bat 2>nul
 
 echo.
 echo ========================================
