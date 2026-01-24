@@ -669,23 +669,32 @@ def load_historical_data_hybrid(data_dir='data'):
                 race_num = int(race_str.replace('R', '').replace('r', ''))
                 
                 # Extract winner from multiple possible formats
+                # Handle abandoned races (ABD) - skip them
                 winner = 0
                 if 'Winner' in row and pd.notna(row['Winner']):
+                    winner_str = str(row['Winner']).strip().upper()
+                    if winner_str == 'ABD':
+                        logger.debug(f"Skipping abandoned race: {track} {date} R{race_num}")
+                        continue
                     winner = int(row['Winner'])
                 elif 'Position1' in row and pd.notna(row['Position1']):
+                    pos1_str = str(row['Position1']).strip().upper()
+                    if pos1_str == 'ABD':
+                        logger.debug(f"Skipping abandoned race: {track} {date} R{race_num}")
+                        continue
                     winner = int(row['Position1'])
                 
                 second = 0
                 if '2nd' in row and pd.notna(row['2nd']):
-                    second = int(row['2nd'])
+                    second = int(row['2nd']) if str(row['2nd']).strip().upper() != 'ABD' else 0
                 elif 'Position2' in row and pd.notna(row['Position2']):
-                    second = int(row['Position2'])
+                    second = int(row['Position2']) if str(row['Position2']).strip().upper() != 'ABD' else 0
                     
                 third = 0
                 if '3rd' in row and pd.notna(row['3rd']):
-                    third = int(row['3rd'])
+                    third = int(row['3rd']) if str(row['3rd']).strip().upper() != 'ABD' else 0
                 elif 'Position3' in row and pd.notna(row['Position3']):
-                    third = int(row['Position3'])
+                    third = int(row['Position3']) if str(row['Position3']).strip().upper() != 'ABD' else 0
                     
                 fourth = 0
                 if '4th' in row and pd.notna(row['4th']):
@@ -944,6 +953,12 @@ def load_historical_data(data_dir='data'):
                 race_str = str(row.get('Race', row.get('RaceNumber', '0')))
                 race_num = int(race_str.replace('R', '').replace('r', ''))
                 winner_str = str(row.get('Winner', row.get('WinnerBox', '0')))
+                
+                # Handle abandoned races (ABD) - skip them
+                if winner_str.strip().upper() == 'ABD':
+                    logger.debug(f"Skipping abandoned race: {track} R{race_num}")
+                    continue
+                
                 # Extract first digit as winner box
                 winner_box = int(winner_str[0]) if winner_str and winner_str[0].isdigit() else 0
                 
