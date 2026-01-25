@@ -60,13 +60,13 @@ def compute_features(df):
     # Preserve parsed BestTimeSec and SectionalSec values if they exist, otherwise set to NaN
     if "BestTimeSec" not in df.columns:
         df["BestTimeSec"] = np.nan
-        print("⚠️ WARNING: BestTimeSec not found in parsed data - setting to NaN")
+        print("[WARNING] WARNING: BestTimeSec not found in parsed data - setting to NaN")
     else:
         df["BestTimeSec"] = pd.to_numeric(df["BestTimeSec"], errors="coerce")
         # Check for missing values
         missing_count = df["BestTimeSec"].isna().sum()
         if missing_count > 0:
-            print(f"⚠️ WARNING: {missing_count} dogs have missing BestTimeSec values")
+            print(f"[WARNING] WARNING: {missing_count} dogs have missing BestTimeSec values")
         # Check if all values are the same (indicating parsing failure)
         # Only check if we have at least 2 non-NaN values
         if len(df) > 1:
@@ -74,18 +74,18 @@ def compute_features(df):
             if non_nan_count > 1:
                 unique_values = df["BestTimeSec"].dropna().nunique()
                 if unique_values == 1:
-                    print(f"⚠️ WARNING: All {non_nan_count} dogs with BestTimeSec values have the same value ({df['BestTimeSec'].dropna().iloc[0]}). This may indicate a parsing issue.")
+                    print(f"[WARNING] WARNING: All {non_nan_count} dogs with BestTimeSec values have the same value ({df['BestTimeSec'].dropna().iloc[0]}). This may indicate a parsing issue.")
                     # Don't raise error - continue with data
     
     if "SectionalSec" not in df.columns:
         df["SectionalSec"] = np.nan
-        print("⚠️ WARNING: SectionalSec not found in parsed data - setting to NaN")
+        print("[WARNING] WARNING: SectionalSec not found in parsed data - setting to NaN")
     else:
         df["SectionalSec"] = pd.to_numeric(df["SectionalSec"], errors="coerce")
         # Check for missing values
         missing_count = df["SectionalSec"].isna().sum()
         if missing_count > 0:
-            print(f"⚠️ WARNING: {missing_count} dogs have missing SectionalSec values")
+            print(f"[WARNING] WARNING: {missing_count} dogs have missing SectionalSec values")
         # Check if all values are the same (indicating parsing failure)
         # Only check if we have at least 2 non-NaN values
         if len(df) > 1:
@@ -93,18 +93,18 @@ def compute_features(df):
             if non_nan_count > 1:
                 unique_values = df["SectionalSec"].dropna().nunique()
                 if unique_values == 1:
-                    print(f"⚠️ WARNING: All {non_nan_count} dogs with SectionalSec values have the same value ({df['SectionalSec'].dropna().iloc[0]}). This may indicate a parsing issue.")
+                    print(f"[WARNING] WARNING: All {non_nan_count} dogs with SectionalSec values have the same value ({df['SectionalSec'].dropna().iloc[0]}). This may indicate a parsing issue.")
                     # Don't raise error - continue with data
     
     # Preserve parsed Last3TimesSec values if they exist, otherwise set to empty list
     if "Last3TimesSec" not in df.columns:
         df["Last3TimesSec"] = [[] for _ in range(len(df))]
-        print("⚠️ WARNING: Last3TimesSec not found in parsed data - setting to empty lists")
+        print("[WARNING] WARNING: Last3TimesSec not found in parsed data - setting to empty lists")
     else:
         # Check for missing values
         empty_count = df["Last3TimesSec"].apply(lambda x: len(x) == 0 if isinstance(x, list) else True).sum()
         if empty_count > 0:
-            print(f"⚠️ WARNING: {empty_count} dogs have missing/empty Last3TimesSec values")
+            print(f"[WARNING] WARNING: {empty_count} dogs have missing/empty Last3TimesSec values")
         # Check if all values are the same (indicating parsing failure)
         if len(df) > 1:
             non_empty = df["Last3TimesSec"].apply(lambda x: tuple(x) if isinstance(x, list) and len(x) > 0 else None)
@@ -112,18 +112,18 @@ def compute_features(df):
             if non_empty_count > 1:
                 unique_values = non_empty.dropna().nunique()
                 if unique_values == 1:
-                    print(f"⚠️ WARNING: All {non_empty_count} dogs with Last3TimesSec values have the same value. This may indicate a parsing issue.")
+                    print(f"[WARNING] WARNING: All {non_empty_count} dogs with Last3TimesSec values have the same value. This may indicate a parsing issue.")
                     # Don't raise error - continue with data
     
     # Preserve parsed Margins values if they exist, otherwise set to empty list
     if "Margins" not in df.columns:
         df["Margins"] = [[] for _ in range(len(df))]
-        print("⚠️ WARNING: Margins not found in parsed data - setting to empty lists")
+        print("[WARNING] WARNING: Margins not found in parsed data - setting to empty lists")
     else:
         # Check for missing values
         empty_count = df["Margins"].apply(lambda x: len(x) == 0 if isinstance(x, list) else True).sum()
         if empty_count > 0:
-            print(f"⚠️ WARNING: {empty_count} dogs have missing/empty Margins values")
+            print(f"[WARNING] WARNING: {empty_count} dogs have missing/empty Margins values")
         # Check if all values are the same (indicating parsing failure)
         if len(df) > 1:
             non_empty = df["Margins"].apply(lambda x: tuple(x) if isinstance(x, list) and len(x) > 0 else None)
@@ -131,13 +131,13 @@ def compute_features(df):
             if non_empty_count > 1:
                 unique_values = non_empty.dropna().nunique()
                 if unique_values == 1:
-                    print(f"⚠️ WARNING: All {non_empty_count} dogs with Margins values have the same value. This may indicate a parsing issue.")
+                    print(f"[WARNING] WARNING: All {non_empty_count} dogs with Margins values have the same value. This may indicate a parsing issue.")
                     # Don't raise error - continue with data
     
     # BoxBiasFactor: Use parsed value if available, otherwise default to 0.0
     if "BoxBiasFactor" not in df.columns:
         df["BoxBiasFactor"] = 0.0
-        print("⚠️ WARNING: BoxBiasFactor not found in parsed data. Setting to 0.0 (neutral).")
+        print("[WARNING] WARNING: BoxBiasFactor not found in parsed data. Setting to 0.0 (neutral).")
     
     # TrackConditionAdj: Track-level constant (1.0 = neutral conditions)
     df["TrackConditionAdj"] = 1.0
@@ -153,7 +153,7 @@ def compute_features(df):
                            0.7 if pd.notna(dlr) and 2 <= dlr <= 21 else
                            0.5 if pd.notna(dlr) else 0.8
             )
-            print(f"✓ Calculated RestFactor from DLR for {df['DLR'].notna().sum()} dogs")
+            print(f"[OK] Calculated RestFactor from DLR for {df['DLR'].notna().sum()} dogs")
         else:
             df["RestFactor"] = 1.0  # Neutral - no data to differentiate
             print("ℹ️ INFO: RestFactor/DLR not found - set to neutral 1.0 (no differentiation).")
@@ -198,7 +198,7 @@ def compute_features(df):
         # Maiden race: Use experience (CareerStarts) as differentiation
         # More starts = more experience = slight edge (normalize to 0-1 range)
         df["ConsistencyIndex"] = df["CareerStarts"].apply(lambda s: min(s / 20.0, 1.0))
-        print(f"⚠️ MAIDEN RACE DETECTED - Using CareerStarts for ConsistencyIndex differentiation")
+        print(f"[WARNING] MAIDEN RACE DETECTED - Using CareerStarts for ConsistencyIndex differentiation")
     else:
         # Normal race: Use win rate
         df["ConsistencyIndex"] = df.apply(
@@ -235,12 +235,12 @@ def compute_features(df):
         # Fill any NaN values with default
         df["TrainerStrikeRate"] = df["TrainerStrikeRate"].fillna(0.15)
         
-        print(f"✓ Calculated TrainerStrikeRate for {len(trainer_stats)} unique trainers")
+        print(f"[OK] Calculated TrainerStrikeRate for {len(trainer_stats)} unique trainers")
         print(f"  Range: {df['TrainerStrikeRate'].min():.4f} to {df['TrainerStrikeRate'].max():.4f}")
         print(f"  Mean: {df['TrainerStrikeRate'].mean():.4f}")
     else:
         df["TrainerStrikeRate"] = 0.15
-        print("⚠️ WARNING: Cannot calculate TrainerStrikeRate - missing required columns. Setting to 0.15 (default).")
+        print("[WARNING] WARNING: Cannot calculate TrainerStrikeRate - missing required columns. Setting to 0.15 (default).")
     
     # RestFactor: Check if it was already calculated above or present in parsed data
     if "RestFactor" in df.columns:
@@ -259,10 +259,10 @@ def compute_features(df):
             lambda row: row["CareerPlaces"] / row["CareerStarts"] if row["CareerStarts"] > 0 else 0,
             axis=1
         )
-        print(f"✓ Calculated PlaceRate for {len(df)} dogs")
+        print(f"[OK] Calculated PlaceRate for {len(df)} dogs")
     else:
         df["PlaceRate"] = 0.15
-        print("⚠️ WARNING: Cannot calculate PlaceRate - missing required columns. Setting to 0.15.")
+        print("[WARNING] WARNING: Cannot calculate PlaceRate - missing required columns. Setting to 0.15.")
     
     # DLW Factor: Days since last win (recent winners perform better)
     # Analysis of 320 races (Sep-Nov 2025) from data/race_results_nov_2025.csv showed:
@@ -278,7 +278,7 @@ def compute_features(df):
         if is_maiden_for_dlw:
             # Maiden race: All dogs get neutral DLWFactor
             df["DLWFactor"] = 0.5
-            print(f"⚠️ MAIDEN RACE DETECTED (DLW='Mdn') - Setting neutral DLWFactor=0.5 for all")
+            print(f"[WARNING] MAIDEN RACE DETECTED (DLW='Mdn') - Setting neutral DLWFactor=0.5 for all")
         else:
             # Normal race: Convert numeric DLW values
             df["DLW"] = pd.to_numeric(df["DLW"], errors="coerce")
@@ -287,10 +287,10 @@ def compute_features(df):
                          0.7 if pd.notna(x) and x <= 30 else 
                          0.4 if pd.notna(x) and x <= 60 else 0.2
             )
-            print(f"✓ Calculated DLWFactor based on Days Last Win")
+            print(f"[OK] Calculated DLWFactor based on Days Last Win")
     else:
         df["DLWFactor"] = 0.5
-        print("⚠️ WARNING: DLW not found - setting DLWFactor to 0.5 (neutral).")
+        print("[WARNING] WARNING: DLW not found - setting DLWFactor to 0.5 (neutral).")
     
     # Weight Factor: Optimal racing weight typically 28-32kg for greyhounds
     # Analysis of 320 races showed dogs at 30-31kg have slightly higher win rates
@@ -310,7 +310,7 @@ def compute_features(df):
                          0.9 if pd.notna(w) and 28 <= w <= 33 else 
                          0.7 if pd.notna(w) and 25 <= w <= 36 else 0.5
             )
-            print(f"✓ Calculated WeightFactor for {len(valid_weights)} dogs with valid weight data")
+            print(f"[OK] Calculated WeightFactor for {len(valid_weights)} dogs with valid weight data")
     else:
         df["WeightFactor"] = 1.0
         print("ℹ️ INFO: Weight not found - WeightFactor set to neutral 1.0 (no differentiation).")
@@ -327,7 +327,7 @@ def compute_features(df):
                          0.85 if pd.notna(d) and d <= 5 else 
                          0.7 if pd.notna(d) and d <= 8 else 0.6
             )
-            print(f"✓ Calculated DrawFactor for {valid_draw} dogs")
+            print(f"[OK] Calculated DrawFactor for {valid_draw} dogs")
         else:
             df["DrawFactor"] = 0.85  # Neutral - all same
             print("ℹ️ INFO: Draw column exists but all values missing - DrawFactor set to neutral 0.85")
@@ -341,7 +341,7 @@ def compute_features(df):
                          0.85 if pd.notna(d) and d <= 5 else 
                          0.7 if pd.notna(d) and d <= 8 else 0.6
             )
-            print(f"✓ Calculated DrawFactor from Box for {valid_draw} dogs")
+            print(f"[OK] Calculated DrawFactor from Box for {valid_draw} dogs")
         else:
             df["DrawFactor"] = 0.85  # Neutral
             print("ℹ️ INFO: Box column exists but all values missing - DrawFactor set to neutral 0.85")
@@ -378,7 +378,7 @@ def compute_features(df):
                 lambda row: min(max((row["RTC"] - 50) / 50, 0), 1) if pd.notna(row["RTC"]) else 0.5,
                 axis=1
             )
-            print(f"✓ Calculated RTCFactor from Racing Times Category for {valid_rtc} dogs")
+            print(f"[OK] Calculated RTCFactor from Racing Times Category for {valid_rtc} dogs")
         else:
             df["RTCFactor"] = 0.5  # Neutral - all same, no differentiation
             print("ℹ️ INFO: RTC column exists but all values missing - RTCFactor set to neutral 0.5")
@@ -922,7 +922,7 @@ def compute_features(df):
             
             df["TrackPattern"] = df["Track"].apply(get_track_pattern)
             
-            print(f"✓ Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)")
+            print(f"[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)")
             print(f"  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration")
             print(f"  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora")
             print(f"  Track patterns identified: {df['TrackPattern'].value_counts().to_dict()}")
@@ -931,7 +931,7 @@ def compute_features(df):
             df["TrackBox4Adjustment"] = 0.0
             df["TrackComprehensiveAdjustment"] = 0.0
         
-        print(f"✓ Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)")
+        print(f"[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)")
         print(f"  Win/Place/Top3 rates analyzed for all 8 boxes")
     else:
         df["BoxPositionBias"] = 0.0
@@ -985,11 +985,11 @@ def compute_features(df):
                        0.6 if age > 54 else          # Veteran
                        0.7                            # Very young (unlikely)
         )
-        print(f"✓ Calculated AgeFactor for {len(df)} dogs")
+        print(f"[OK] Calculated AgeFactor for {len(df)} dogs")
     else:
         df["AgeFactor"] = 0.85
         df["AgeMonths"] = 30
-        print("⚠️ WARNING: SexAge not found - setting AgeFactor to 0.85 (default)")
+        print("[WARNING] WARNING: SexAge not found - setting AgeFactor to 0.85 (default)")
     
     # === INSIDE/OUTSIDE RAIL PREFERENCE ===
     # Dogs in boxes 1-3 have different running styles than 7-8
@@ -1052,7 +1052,7 @@ def compute_features(df):
             return BOX_PENALTY_FACTORS.get(box, 1.0)
         
         df["BoxPenaltyFactor"] = df["Box"].apply(get_box_penalty_factor)
-        print(f"✓ Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)")
+        print(f"[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)")
     else:
         df["BoxPenaltyFactor"] = 1.0
     
@@ -1170,7 +1170,7 @@ def compute_features(df):
             return base_factor
         
         df["GradeFactor"] = df.apply(calculate_grade_factor, axis=1)
-        print(f"✓ Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)")
+        print(f"[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)")
     else:
         df["GradeFactor"] = 0.9
     
@@ -1192,7 +1192,7 @@ def compute_features(df):
                      0.9 if pd.notna(m) and m >= -1 else       # Below average
                      0.8                                        # Poor recent form
         )
-        print(f"✓ Calculated Last3FinishFactor (1.8x weight for winners)")
+        print(f"[OK] Calculated Last3FinishFactor (1.8x weight for winners)")
     else:
         df["Last3AvgFinish"] = 0
         df["Last3FinishFactor"] = 1.0
@@ -1234,7 +1234,7 @@ def compute_features(df):
         # Additional penalty for long distance races with inexperienced dogs
         # Stamina is less proven for newer dogs
         df.loc[(df["RaceDistanceCategory"] == "LONG") & (df["ExperienceTier"] < 0.9), "DistanceChangeFactor"] *= 0.90
-        print(f"✓ Calculated DistanceChangeFactor for distance changes")
+        print(f"[OK] Calculated DistanceChangeFactor for distance changes")
     else:
         df["DistanceChangeFactor"] = 1.0
         df["RaceDistanceCategory"] = "MIDDLE"
@@ -1279,7 +1279,7 @@ def compute_features(df):
         
         df["PaceBoxFactor"] = df.apply(get_pace_box_factor, axis=1)
         front_runner_count = df["IsFrontRunner"].sum()
-        print(f"✓ Calculated PaceBoxFactor ({front_runner_count} front-runners detected)")
+        print(f"[OK] Calculated PaceBoxFactor ({front_runner_count} front-runners detected)")
     else:
         df["IsFrontRunner"] = False
         df["PaceBoxFactor"] = 1.0
@@ -1299,7 +1299,7 @@ def compute_features(df):
                       1.0 if pd.notna(sr) and sr >= 0.10 else     # Average trainer (10-15%)
                       0.95                                          # Below average trainer (<10%)
         )
-        print(f"✓ Enhanced TrainerTier classification")
+        print(f"[OK] Enhanced TrainerTier classification")
     else:
         df["TrainerTier"] = 1.0
     
@@ -1320,7 +1320,7 @@ def compute_features(df):
         )
         # Replace old FreshnessFactor with improved version
         df["FreshnessFactor"] = df["FreshnessFactorV2"]
-        print(f"✓ Refined FreshnessFactor (optimal 6-10 days)")
+        print(f"[OK] Refined FreshnessFactor (optimal 6-10 days)")
     
     # ========================================================================
     # ENHANCEMENT #7: REFINED AGE CURVE
@@ -1339,7 +1339,7 @@ def compute_features(df):
         )
         # Replace old AgeFactor with improved version
         df["AgeFactor"] = df["AgeFactorV2"]
-        print(f"✓ Refined AgeFactor (peak 26-36 months)")
+        print(f"[OK] Refined AgeFactor (peak 26-36 months)")
     
     # ========================================================================
     # ENHANCEMENT #8: TRACK SURFACE PREFERENCE
@@ -1382,7 +1382,7 @@ def compute_features(df):
         # Additional small bonus for sand track specialists at sand tracks
         # (Sand tracks are generally faster and favor different running styles)
         df.loc[df["TrackSurface"] == "SAND", "SurfacePreferenceFactor"] *= 1.01
-        print(f"✓ Calculated SurfacePreferenceFactor for track surface")
+        print(f"[OK] Calculated SurfacePreferenceFactor for track surface")
     else:
         df["TrackSurface"] = "UNKNOWN"
         df["SurfacePreferenceFactor"] = 1.0
@@ -1412,7 +1412,7 @@ def compute_features(df):
         # Use ascending=False so that lower (faster) times get higher percentile
         # na_option="bottom" so dogs without timing data get lowest rank
         df["BestTimePercentile"] = df.groupby(["Track", "RaceNumber"])["BestTimeSec"].rank(pct=True, ascending=False, na_option="bottom")
-        print(f"✓ Calculated BestTimePercentile (lower time = higher rank)")
+        print(f"[OK] Calculated BestTimePercentile (lower time = higher rank)")
     else:
         df["BestTimePercentile"] = 0.5
     
@@ -1453,7 +1453,7 @@ def compute_features(df):
                         else 1.1,  # High similarity = more unpredictable = reduce confidence
             axis=1
         )
-        print(f"✓ Calculated FieldSimilarityIndex + dog-vs-field comparisons for {len(df)} dogs")
+        print(f"[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for {len(df)} dogs")
     else:
         df["FieldSimilarityIndex"] = 1.0
         df["FieldSpeedStd"] = np.nan
@@ -1516,7 +1516,7 @@ def compute_features(df):
         return TRACK_UPSET_PROBABILITY["DEFAULT"]
     
     df["TrackUpsetFactor"] = df["Track"].apply(get_upset_probability)
-    print(f"✓ Applied TrackUpsetFactor (track-specific luck factor)")
+    print(f"[OK] Applied TrackUpsetFactor (track-specific luck factor)")
     
     # === COMPETITOR DENSITY ===
     # Races with 8 competitive dogs are harder than races with only 3-4 real contenders
@@ -1568,7 +1568,7 @@ def compute_features(df):
             return 0.0
         
         df["FieldSizeAdjustment"] = df.apply(get_field_size_adjustment, axis=1)
-        print(f"✓ Calculated FieldSizeAdjustment based on field size")
+        print(f"[OK] Calculated FieldSizeAdjustment based on field size")
     else:
         df["FieldSizeAdjustment"] = 0.0
     
@@ -1587,7 +1587,7 @@ def compute_features(df):
         )
         # Replace old WinStreakFactor with enhanced version
         df["WinStreakFactor"] = df["WinStreakFactorV2"]
-        print(f"✓ Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)")
+        print(f"[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)")
     
     # ========================================================================
     # ENHANCEMENT #9B: RECENT PLACE STREAK (v4.4 NEW)
@@ -1612,10 +1612,10 @@ def compute_features(df):
                 return 0.98  # v4.4: No top-3 finishes - losing form
         
         df["RecentPlaceStreak"] = df["Last3Finishes"].apply(calc_recent_place_streak)
-        print(f"✓ Added RecentPlaceStreak v4.4 (1.12x for 3/3 places, 1.06x for 2/3)")
+        print(f"[OK] Added RecentPlaceStreak v4.4 (1.12x for 3/3 places, 1.06x for 2/3)")
     else:
         df["RecentPlaceStreak"] = 1.0
-        print("⚠️ WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0")
+        print("[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0")
     
     # ========================================================================
     # ENHANCEMENT #10: CLOSER BONUS FOR BOX 7-8 AT LONG DISTANCES
@@ -1649,7 +1649,7 @@ def compute_features(df):
         
         df["CloserBonus"] = df.apply(get_closer_bonus, axis=1)
         closer_bonus_count = (df["CloserBonus"] > 1.0).sum()
-        print(f"✓ Calculated CloserBonus ({closer_bonus_count} dogs with bonus)")
+        print(f"[OK] Calculated CloserBonus ({closer_bonus_count} dogs with bonus)")
     else:
         df["CloserBonus"] = 1.0
     
@@ -1681,7 +1681,7 @@ def compute_features(df):
                      1.0 if pd.notna(x) and x <= 60 else     # Normal
                      0.98                                     # Trainer cold
         )
-        print(f"✓ Calculated TrainerMomentum (trainer hot streak factor)")
+        print(f"[OK] Calculated TrainerMomentum (trainer hot streak factor)")
     else:
         df["TrainerMomentum"] = 1.0
     
