@@ -54,51 +54,55 @@ try:
     os.makedirs(output_dir, exist_ok=True)
     
     logger.info("Loading historical data...")
-    historical_data = load_historical_data_hybrid(data_dir=data_dir)
+    race_data, winners = load_historical_data_hybrid(data_dir=data_dir)
     
-    if not historical_data:
+    if not race_data or not winners:
         print("[ERROR] No historical data found!")
+        print(f"[ERROR] race_data: {len(race_data) if race_data else 0}, winners: {len(winners) if winners else 0}")
         sys.exit(1)
     
-    logger.info(f"Loaded {len(historical_data)} races")
+    logger.info(f"Loaded {len(race_data)} training samples")
     
     # Group by track
     tracks = {}
-    for race in historical_data:
-        track = race.get('track', 'Unknown')
+    for idx, (df_race, winner_info) in enumerate(zip(race_data, winners)):
+        # Extract track from the DataFrame
+        track = df_race['Track'].iloc[0] if 'Track' in df_race.columns else 'Unknown'
+        
         if track not in tracks:
-            tracks[track] = []
-        tracks[track].append(race)
+            tracks[track] = {'races': [], 'winners': []}
+        
+        tracks[track]['races'].append(df_race)
+        tracks[track]['winners'].append(winner_info)
     
     logger.info(f"Found {len(tracks)} tracks: {list(tracks.keys())}")
     
     # Train a simple model for each track
     config = {'tracks': {}, 'ensemble_weights': [1.0/3, 1.0/3, 1.0/3]}
     
-    for track, track_races in tracks.items():
-        logger.info(f"Training {track} ensemble...")
+    for track, track_data in tracks.items():
+        logger.info(f"Training {track} ensemble with {len(track_data['races'])} samples...")
         
         # Prepare training data
         X_list = []
         y_list = []
+        sample_weights = []
         
-        for race in track_races:
-            if 'dogs' not in race or 'winner' not in race:
+        for df_race, winner_info in zip(track_data['races'], track_data['winners']):
+            if df_race is None or df_race.empty:
                 continue
             
-            # Build features
-            df = pd.DataFrame(race['dogs'])
-            feature_matrix = compute_features(df)
-            
-            if feature_matrix is None or len(feature_matrix) == 0:
-                continue
-            
-            X_list.append(feature_matrix)
+            winner_box = winner_info['box']
+            weight = winner_info.get('weight', 1.0)
             
             # Create labels
-            winner_box = race['winner']
-            y = (feature_matrix['Box'] == winner_box).astype(int)
+            y = (df_race['Box'] == winner_box).astype(int)
+            
+            X_list.append(df_race)
             y_list.append(y)
+            
+            # Add sample weight for each dog in the race
+            sample_weights.extend([weight] * len(df_race))
         
         if not X_list:
             logger.warning(f"No training data for {track}")
@@ -114,9 +118,9 @@ try:
         
         logger.info(f"Training with {len(X_numeric)} samples, {len(numeric_cols)} features")
         
-        # Train a simple RF model
+        # Train a simple RF model with sample weights
         rf_model = RandomForestClassifier(n_estimators=100, random_state=42, max_depth=10)
-        rf_model.fit(X_numeric, y)
+        rf_model.fit(X_numeric, y, sample_weight=sample_weights)
         
         accuracy = rf_model.score(X_numeric, y)
         logger.info(f"[SUCCESS] {track} - Accuracy: {accuracy:.1%}")
