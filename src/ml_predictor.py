@@ -203,7 +203,7 @@ class GreyhoundMLPredictor:
             'confusion_matrix': confusion_matrix(y_val, y_pred)
         }
         
-        print(f"\n✅ Training complete:")
+        print(f"\n[SUCCESS] Training complete:")
         print(f"   Train accuracy: {train_score:.1%}")
         print(f"   Validation accuracy: {val_score:.1%}")
         print(f"   CV accuracy: {cv_scores.mean():.1%} (+/- {cv_scores.std()*2:.1%})")
@@ -290,14 +290,14 @@ class GreyhoundMLPredictor:
         if is_tier0 and ml_agrees:
             recommended = race_df.loc[top_idx, 'Box']
             tier = 'HYBRID_TIER0'
-            print(f"✅ HYBRID TIER0: Box {recommended} "
+            print(f"[SUCCESS] HYBRID TIER0: Box {recommended} "
                   f"(v4.4: {top_score:.1f}, margin: {margin_pct:.1f}%, "
                   f"ML: {top_ml_confidence:.1f}%)")
         elif is_tier0:
-            print(f"⚠️  v4.4 TIER0 but ML low confidence: Box {race_df.loc[top_idx, 'Box']} "
+            print(f"[WARNING] v4.4 TIER0 but ML low confidence: Box {race_df.loc[top_idx, 'Box']} "
                   f"(ML: {top_ml_confidence:.1f}% < {ml_threshold}%)")
         elif ml_agrees:
-            print(f"⚠️  ML confident but v4.4 margin too low: Box {race_df.loc[top_idx, 'Box']} "
+            print(f"[WARNING] ML confident but v4.4 margin too low: Box {race_df.loc[top_idx, 'Box']} "
                   f"(margin: {margin_pct:.1f}% < {tier0_threshold}%)")
         
         predictions = predictions.sort_values('ML_Confidence', ascending=False)
@@ -366,14 +366,14 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
         logger.info(f"Searching for CSV files in: {data_dir}/results_*.csv")
         logger.info(f"Found {len(results_files)} results CSV files")
     except Exception as glob_error:
-        print(f"❌ ERROR searching for CSV files: {glob_error}")
+        print(f"[ERROR] ERROR searching for CSV files: {glob_error}")
         logger.error(f"Error during glob search: {glob_error}")
         raise
     
-    print(f"📁 Found {len(results_files)} results CSV files in {data_dir}/")
+    print(f"[INFO] Found {len(results_files)} results CSV files in {data_dir}/")
     
     if len(results_files) == 0:
-        print(f"❌ No results files found in {data_dir}/")
+        print(f"[ERROR] No results files found in {data_dir}/")
         print(f"   Looking for files matching: {data_dir}/results_*.csv")
         logger.error(f"No results files found matching: {data_dir}/results_*.csv")
         
@@ -419,7 +419,7 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
             
             # Group by race (Track + RaceNumber)
             if 'Track' not in df_results.columns or 'RaceNumber' not in df_results.columns:
-                print(f"⚠️  Skipping {results_file}: Missing Track or RaceNumber columns")
+                print(f"[WARNING] Skipping {results_file}: Missing Track or RaceNumber columns")
                 logger.warning(f"Skipping {results_file}: columns are {list(df_results.columns)}")
                 continue
             
@@ -505,16 +505,16 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
                     continue
         
         except Exception as e:
-            print(f"⚠️  Error processing {results_file}: {e}")
+            print(f"[WARNING] Error processing {results_file}: {e}")
             continue
     
     print(f"📊 Total races in CSV files: {total_races_in_csvs}")
-    print(f"✅ Successfully loaded {len(race_data)} races with complete data")
+    print(f"[SUCCESS] Successfully loaded {len(race_data)} races with complete data")
     logger.info(f"Total races in CSV files: {total_races_in_csvs}")
     logger.info(f"Successfully loaded {len(race_data)} races with complete data")
     
     if len(race_data) == 0:
-        print(f"❌ CRITICAL: No races could be loaded from {len(results_files)} CSV files")
+        print(f"[ERROR] CRITICAL: No races could be loaded from {len(results_files)} CSV files")
         print(f"   This usually means:")
         print(f"   1. CSV files are empty or corrupted")
         print(f"   2. CSV files are missing required columns (Track, RaceNumber, Box, Winner)")
@@ -523,7 +523,7 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
         return [], []
     
     if len(race_data) < total_races_in_csvs * 0.5:
-        print(f"⚠️  WARNING: Only loaded {len(race_data)}/{total_races_in_csvs} races ({len(race_data)/total_races_in_csvs*100:.1f}%)")
+        print(f"[WARNING] WARNING: Only loaded {len(race_data)}/{total_races_in_csvs} races ({len(race_data)/total_races_in_csvs*100:.1f}%)")
         print(f"   Some races may be missing required columns or have incomplete data")
         logger.warning(f"Only loaded {len(race_data)}/{total_races_in_csvs} races ({len(race_data)/total_races_in_csvs*100:.1f}%)")
     
@@ -644,15 +644,15 @@ def load_historical_data_hybrid(data_dir='data'):
     
     logger = logging.getLogger(__name__)
     
-    print("🔄 Loading data using HYBRID method (PDFs + CSV results)...")
-    print("   ✅ FACTUAL DATA ONLY - Using real PDF form guides matched to CSV winners")
-    print("   ❌ NO SYNTHETIC DATA - Races without PDFs are skipped")
+    print("[INFO] Loading data using HYBRID method (PDFs + CSV results)...")
+    print("   [SUCCESS] FACTUAL DATA ONLY - Using real PDF form guides matched to CSV winners")
+    print("   [INFO] NO SYNTHETIC DATA - Races without PDFs are skipped")
     
     # Step 1: Find all files
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
     results_files = glob.glob(f"{data_dir}/results_*.csv")
     
-    print(f"📁 Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
+    print(f"[INFO] Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
     logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
     
     # Step 2: Parse all results from CSV files
@@ -714,7 +714,7 @@ def load_historical_data_hybrid(data_dir='data'):
                         'file': results_file
                     })
         except Exception as e:
-            print(f"⚠️  Error reading {results_file}: {e}")
+            print(f"[WARNING]  Error reading {results_file}: {e}")
             logger.error(f"Error reading {results_file}: {e}")
             continue
     
@@ -793,7 +793,7 @@ def load_historical_data_hybrid(data_dir='data'):
             logger.debug(f"Error processing {pdf_file}: {e}")
             continue
     
-    print(f"✅ Extracted dog data from {len(pdf_races)} races in PDFs")
+    print(f"[SUCCESS] Extracted dog data from {len(pdf_races)} races in PDFs")
     logger.info(f"Extracted dog data from {len(pdf_races)} races in PDFs")
     
     # Step 4: Process all race results - ONLY USE PDF DATA (NO SYNTHETIC)
@@ -872,8 +872,8 @@ def load_historical_data_hybrid(data_dir='data'):
         print(f"   Training data expansion: {len(race_data)/races_from_pdf:.1f}x")
     if len(all_results) > 0:
         print(f"   Coverage: {races_from_pdf/len(all_results)*100:.1f}% of all races")
-    print(f"   ✅ Using ONLY factual PDF data - NO synthetic data generated")
-    print(f"   ✅ Weighted labels: 1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3\n")
+    print(f"   [SUCCESS] Using ONLY factual PDF data - NO synthetic data generated")
+    print(f"   [SUCCESS] Weighted labels: 1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3\n")
     
     logger.info(f"Hybrid loading complete: {races_from_pdf} races with PDF data, {races_skipped_no_pdf} skipped (no PDF)")
     logger.info(f"Top 4 weighted training: {len(race_data)} samples ({top4_samples_added} from 2nd/3rd/4th place)")
@@ -904,7 +904,7 @@ def load_historical_data(data_dir='data'):
     
     logger = logging.getLogger(__name__)
     
-    print("🔄 Using PDF-ONLY loading method for factual training data...")
+    print("[INFO] Using PDF-ONLY loading method for factual training data...")
     print("   NO SYNTHETIC DATA - Only races with actual PDF form guides")
     
     # Track name normalization map (PDF names -> CSV names)
@@ -934,7 +934,7 @@ def load_historical_data(data_dir='data'):
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
     results_files = glob.glob(f"{data_dir}/results_*.csv")
     
-    print(f"📁 Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
+    print(f"[INFO] Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
     logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
     
     # Parse all race results from CSV files
@@ -983,7 +983,7 @@ def load_historical_data(data_dir='data'):
                     if track != track_upper:
                         all_results[f"{row_date}_{track}_R{race_num}"] = winner_box
         except Exception as e:
-            print(f"⚠️  Error reading {results_file}: {e}")
+            print(f"[WARNING]  Error reading {results_file}: {e}")
             logger.warning(f"Error reading {results_file}: {e}")
             continue
     
@@ -1104,7 +1104,7 @@ def load_historical_data(data_dir='data'):
                             unmatched_examples.append(f"  {date_part}_{track}_R{race_num}: no matching CSV result")
         
         except Exception as e:
-            print(f"⚠️  Error processing {pdf_file}: {e}")
+            print(f"[WARNING]  Error processing {pdf_file}: {e}")
             logger.warning(f"Error processing {pdf_file}: {e}")
             continue
     
@@ -1124,7 +1124,7 @@ def load_historical_data(data_dir='data'):
     logger.info(f"PDF-only loading complete: {len(race_data)} races with factual data")
     
     if len(race_data) == 0:
-        print("⚠️  WARNING: No races could be matched between PDFs and CSV results")
+        print("[WARNING]  WARNING: No races could be matched between PDFs and CSV results")
         print("   Please ensure:")
         print("   1. PDF files contain race data")
         print("   2. CSV files have matching Track and RaceNumber")
@@ -1132,7 +1132,7 @@ def load_historical_data(data_dir='data'):
         print("   4. Track names are normalized correctly")
         logger.warning("No races matched between PDFs and CSV results")
     elif races_matched < len(all_results) * 0.5:
-        print(f"⚠️  WARNING: Low match rate ({races_matched}/{len(all_results)} = {100*races_matched/len(all_results):.1f}%)")
+        print(f"[WARNING]  WARNING: Low match rate ({races_matched}/{len(all_results)} = {100*races_matched/len(all_results):.1f}%)")
         print(f"   Expected to match most of {len(all_results)} CSV results")
         print(f"   Check track name normalization and date formats")
     
@@ -1152,7 +1152,7 @@ if __name__ == "__main__":
     race_data, winners = load_historical_data('data')
     
     if len(race_data) < 50:
-        print(f"⚠️  Warning: Only {len(race_data)} races available. Recommend 200+ for robust training.")
+        print(f"[WARNING]  Warning: Only {len(race_data)} races available. Recommend 200+ for robust training.")
     
     # Initialize and train
     print("\n2️⃣  Training ML model...")
@@ -1165,7 +1165,7 @@ if __name__ == "__main__":
     predictor.save_model(model_path)
     
     print("\n" + "=" * 60)
-    print("✅ Training complete! Model ready for hybrid predictions.")
+    print("[SUCCESS] Training complete! Model ready for hybrid predictions.")
     print("=" * 60)
     print(f"\n📈 Expected performance:")
     print(f"   v4.4 alone: 28-30% win rate")
