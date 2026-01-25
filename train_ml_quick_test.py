@@ -21,7 +21,7 @@ try:
     import glob
     import pickle
     
-    print("✅ All modules imported successfully")
+    print("[SUCCESS] All modules imported successfully")
     
     # Load race results
     print("\n" + "="*80)
@@ -36,12 +36,12 @@ try:
         try:
             df = pd.read_csv(f, on_bad_lines='skip')
             all_results.append(df)
-            print(f"  ✅ Loaded {os.path.basename(f)}: {len(df)} results")
+            print(f"  [SUCCESS] Loaded {os.path.basename(f)}: {len(df)} results")
         except Exception as e:
-            print(f"  ⚠️  Skipped {os.path.basename(f)}: {e}")
+            print(f"  [WARNING]  Skipped {os.path.basename(f)}: {e}")
     
     combined_results = pd.concat(all_results, ignore_index=True) if all_results else pd.DataFrame()
-    print(f"\n✅ Total race results loaded: {len(combined_results)}")
+    print(f"\n[SUCCESS] Total race results loaded: {len(combined_results)}")
     
     # Parse PDFs
     print("\n" + "="*80)
@@ -58,16 +58,16 @@ try:
             if df is not None and len(df) > 0:
                 df = compute_features(df)
                 all_parsed.append(df)
-                print(f"  {i}. ✅ {os.path.basename(pdf_file)}: {len(df)} dogs")
+                print(f"  {i}. [SUCCESS] {os.path.basename(pdf_file)}: {len(df)} dogs")
         except Exception as e:
-            print(f"  {i}. ⚠️  {os.path.basename(pdf_file)}: {str(e)[:50]}")
+            print(f"  {i}. [WARNING]  {os.path.basename(pdf_file)}: {str(e)[:50]}")
     
     if not all_parsed:
-        print("\n❌ No PDFs parsed successfully - cannot train model")
+        print("\n[ERROR] No PDFs parsed successfully - cannot train model")
         sys.exit(1)
     
     historical_data = pd.concat(all_parsed, ignore_index=True)
-    print(f"\n✅ Total dogs parsed: {len(historical_data)} from {len(all_parsed)} PDFs")
+    print(f"\n[SUCCESS] Total dogs parsed: {len(historical_data)} from {len(all_parsed)} PDFs")
     
     # Initialize predictor
     print("\n" + "="*80)
@@ -75,7 +75,7 @@ try:
     print("="*80)
     
     predictor = AdvancedGreyhoundMLPredictor()
-    print("✅ Advanced ML predictor initialized with weather/track features")
+    print("[SUCCESS] Advanced ML predictor initialized with weather/track features")
     
     # Train model
     print("\n" + "="*80)
@@ -87,9 +87,9 @@ try:
     
     try:
         predictor.train_track_specific(historical_data, combined_results, min_races_per_track=3)
-        print("\n✅ Model training completed successfully")
+        print("\n[SUCCESS] Model training completed successfully")
     except Exception as e:
-        print(f"\n⚠️  Training completed with warnings: {e}")
+        print(f"\n[WARNING]  Training completed with warnings: {e}")
     
     # Save model
     print("\n" + "="*80)
@@ -104,14 +104,14 @@ try:
     if os.path.exists(model_path):
         size_bytes = os.path.getsize(model_path)
         size_mb = size_bytes / (1024 * 1024)
-        print(f"✅ Model saved successfully!")
+        print(f"[SUCCESS] Model saved successfully!")
         print(f"   Path: {model_path}")
         print(f"   Size: {size_mb:.2f} MB ({size_bytes:,} bytes)")
         print(f"   Training PDFs: {len(all_parsed)}")
         print(f"   Training results: {len(combined_results)}")
         print(f"   Dogs processed: {len(historical_data)}")
     else:
-        print("❌ Model file was not created")
+        print("[ERROR] Model file was not created")
         sys.exit(1)
     
     # Test model loading
@@ -121,23 +121,23 @@ try:
     
     test_predictor = AdvancedGreyhoundMLPredictor()
     test_predictor.load_model(model_path)
-    print("✅ Model loads correctly")
+    print("[SUCCESS] Model loads correctly")
     
     # Summary
     print("\n" + "="*80)
     print("TRAINING COMPLETE - MODEL READY")
     print("="*80)
-    print(f"\n✅ Model: {model_path}")
-    print(f"✅ Size: {size_mb:.2f} MB")
-    print(f"✅ Training data: {len(all_parsed)} PDFs, {len(combined_results)} results")
-    print(f"✅ Expected win rate: 41-47% (with full training dataset)")
-    print(f"\n⚠️  NOTE: This was a quick test with limited data (5 PDFs)")
+    print(f"\n[SUCCESS] Model: {model_path}")
+    print(f"[SUCCESS] Size: {size_mb:.2f} MB")
+    print(f"[SUCCESS] Training data: {len(all_parsed)} PDFs, {len(combined_results)} results")
+    print(f"[SUCCESS] Expected win rate: 41-47% (with full training dataset)")
+    print(f"\n[WARNING]  NOTE: This was a quick test with limited data (5 PDFs)")
     print(f"   For full model training with all 58 PDFs:")
     print(f"   Run: train_ml_enhanced.bat (10-30 minutes)")
     print("\n" + "="*80)
     
 except Exception as e:
-    print(f"\n❌ TRAINING FAILED: {e}")
+    print(f"\n[ERROR] TRAINING FAILED: {e}")
     import traceback
     traceback.print_exc()
     sys.exit(1)

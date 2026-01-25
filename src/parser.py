@@ -129,7 +129,7 @@ def parse_race_form(text):
                         "Track": "Unknown",
                         "Distance": 500  # Default distance
                     }
-                    logger.info(f"📍 Detected race header (simple format): Race {race_number}")
+                    logger.info(f"[INFO] Detected race header (simple format): Race {race_number}")
                     current_dog_section_index = -1
                     continue
                 except:
@@ -167,7 +167,7 @@ def parse_race_form(text):
             if month_num is None:
                 # Month abbreviation not recognized, use default and log error
                 logger.error(
-                    f"❌ Unrecognized month abbreviation '{month_abbr}' in race header. "
+                    f"[ERROR] Unrecognized month abbreviation '{month_abbr}' in race header. "
                     f"Using '01' (January) as fallback. Please update MONTH_MAP if this is a valid month."
                 )
                 month_num = '01'  # Default to January to maintain valid ISO date format
@@ -179,7 +179,7 @@ def parse_race_form(text):
                 "Track": track.strip(),
                 "Distance": int(distance)
             }
-            logger.info(f"📍 Detected race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{day_of_race.zfill(2)} at {time}")
+            logger.info(f"[INFO] Detected race header: Race {race_number}, {track}, {distance}m on {year}-{month_num}-{day_of_race.zfill(2)} at {time}")
             current_dog_section_index = -1  # Reset dog section when new race starts
             continue
         
@@ -298,10 +298,10 @@ def parse_race_form(text):
                     
                     # Initialize timing data collection for this dog
                     dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
-                    logger.info(f"✓ Parsed dog (multi-line format): Box {box} - {dog_name} (Race {current_race.get('RaceNumber', '?')})")
+                    logger.info(f"[OK] Parsed dog (multi-line format): Box {box} - {dog_name} (Race {current_race.get('RaceNumber', '?')})")
                     continue  # Skip to next iteration - we've handled this dog
                 except Exception as e:
-                    logger.warning(f"⚠️ Failed to parse multi-line dog: {e}")
+                    logger.warning(f"[WARNING] Failed to parse multi-line dog: {e}")
 
         if dog_match:
             (
@@ -335,9 +335,9 @@ def parse_race_form(text):
                 
                 # Initialize timing data collection for this dog
                 dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
-                logger.debug(f"✓ Parsed dog: Box {box} - {dog_name} (Race {current_race.get('RaceNumber', '?')})")
+                logger.debug(f"[OK] Parsed dog: Box {box} - {dog_name} (Race {current_race.get('RaceNumber', '?')})")
             except Exception as e:
-                logger.warning(f"⚠️ Failed to parse dog from line: {line[:100]}... Error: {e}")
+                logger.warning(f"[WARNING] Failed to parse dog from line: {line[:100]}... Error: {e}")
             continue
         
         # Skip dog parsing if no race header found yet
@@ -390,9 +390,9 @@ def parse_race_form(text):
                         
                         # Initialize timing data collection for this dog
                         dog_timing_data[dog_index] = {"race_times": [], "sec_times": [], "box_history": [], "race_dates": [], "name": dog_name}
-                        logger.info(f"✓ Parsed dog (fallback): Box {box} - {dog_name}")
+                        logger.info(f"[OK] Parsed dog (fallback): Box {box} - {dog_name}")
                     except Exception as e:
-                        logger.warning(f"⚠️ Fallback parse failed: {e}")
+                        logger.warning(f"[WARNING] Fallback parse failed: {e}")
                     continue
 
         # Check if this is a dog name header (dog name in caps at start of line)
@@ -776,33 +776,33 @@ def parse_race_form(text):
         logger.warning("No race date extracted - will rely on CSV matching")
     
     # Log parsing results
-    logger.info(f"✅ Parsed {len(df)} dogs across {race_number} races")
-    logger.info(f"📊 Columns in parsed DataFrame: {df.columns.tolist()}")
+    logger.info(f"[SUCCESS] Parsed {len(df)} dogs across {race_number} races")
+    logger.info(f"[INFO] Columns in parsed DataFrame: {df.columns.tolist()}")
     
     # Check for critical columns and log warnings if missing
     critical_columns = ['Distance', 'DogName', 'Box', 'Track', 'RaceNumber']
     missing_critical = [col for col in critical_columns if col not in df.columns]
     if missing_critical:
-        logger.warning(f"⚠️ Missing critical columns: {missing_critical}")
+        logger.warning(f"[WARNING] Missing critical columns: {missing_critical}")
     
     # Log sample of Distance values to verify parsing
     if 'Distance' in df.columns:
-        logger.info(f"📏 Distance values (sample): {df['Distance'].unique()[:5].tolist()}")
+        logger.info(f"[INFO] Distance values (sample): {df['Distance'].unique()[:5].tolist()}")
     else:
-        logger.error("❌ 'Distance' column is MISSING from parsed DataFrame!")
+        logger.error("[ERROR] 'Distance' column is MISSING from parsed DataFrame!")
     
     # Validation: Count how many dogs have timing data
     if len(df) > 0:
         best_time_count = df["BestTimeSec"].notna().sum() if "BestTimeSec" in df.columns else 0
         sec_time_count = df["SectionalSec"].notna().sum() if "SectionalSec" in df.columns else 0
-        print(f"✅ Parsed {len(df)} dogs")
-        print(f"   📊 Timing data extracted: {best_time_count}/{len(df)} dogs have BestTimeSec, {sec_time_count}/{len(df)} have SectionalSec")
+        print(f"[SUCCESS] Parsed {len(df)} dogs")
+        print(f"   [INFO] Timing data extracted: {best_time_count}/{len(df)} dogs have BestTimeSec, {sec_time_count}/{len(df)} have SectionalSec")
         
         if best_time_count == 0:
-            print(f"   ⚠️  WARNING: No BestTimeSec data extracted from any dog")
+            print(f"   [WARNING]  WARNING: No BestTimeSec data extracted from any dog")
             logger.warning("No BestTimeSec data extracted from any dog")
         if sec_time_count == 0:
-            print(f"   ⚠️  WARNING: No SectionalSec data extracted from any dog")
+            print(f"   [WARNING]  WARNING: No SectionalSec data extracted from any dog")
             logger.warning("No SectionalSec data extracted from any dog")
         
         # CRITICAL FIX #2: Reduce "missing dogs" warnings - only warn if significantly fewer than expected
@@ -812,13 +812,13 @@ def parse_race_form(text):
                 dog_count = len(race_dogs)
                 # Only warn if less than 4 dogs (clearly incomplete) or more than 10 (duplicates)
                 if dog_count < 4:
-                    print(f"   ⚠️  Race {race_num}: Only {dog_count} dogs parsed (expected 6-8)")
+                    print(f"   [WARNING]  Race {race_num}: Only {dog_count} dogs parsed (expected 6-8)")
                     logger.warning(f"Race {race_num}: Only {dog_count} dogs parsed (possible missing dogs)")
                     # List the boxes that were found
                     found_boxes = sorted(race_dogs['Box'].tolist())
                     print(f"      Found boxes: {found_boxes}")
                 elif dog_count > 10:
-                    print(f"   ⚠️  Race {race_num}: {dog_count} dogs parsed (expected 6-8, possible duplicates)")
+                    print(f"   [WARNING]  Race {race_num}: {dog_count} dogs parsed (expected 6-8, possible duplicates)")
                     logger.warning(f"Race {race_num}: {dog_count} dogs parsed (possible duplicates)")
     
     return df

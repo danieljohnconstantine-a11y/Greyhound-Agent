@@ -31,14 +31,14 @@ try:
     HAS_XGBOOST = True
 except ImportError:
     HAS_XGBOOST = False
-    print("⚠️  XGBoost not available - using RandomForest + GradientBoosting only")
+    print("[WARNING]  XGBoost not available - using RandomForest + GradientBoosting only")
 
 try:
     import lightgbm as lgb
     HAS_LIGHTGBM = True
 except ImportError:
     HAS_LIGHTGBM = False
-    print("⚠️  LightGBM not available - using available models only")
+    print("[WARNING]  LightGBM not available - using available models only")
 
 # Import Phase 2-4 optimizations
 try:
@@ -46,7 +46,7 @@ try:
     HAS_OPTIMIZATION_PHASES = True
 except ImportError:
     HAS_OPTIMIZATION_PHASES = False
-    print("⚠️  ML Optimization Phases not available - using standard training")
+    print("[WARNING]  ML Optimization Phases not available - using standard training")
 
 
 class AdvancedGreyhoundMLPredictor:
@@ -249,7 +249,7 @@ class AdvancedGreyhoundMLPredictor:
         
         # If model is already trained, use the saved feature names for consistency
         if self.trained and len(self.feature_names) > 0:
-            print(f"   🔍 DEBUG: Using trained model feature names ({len(self.feature_names)} features)")
+            print(f"   [DEBUG] DEBUG: Using trained model feature names ({len(self.feature_names)} features)")
             # Create all possible features first
             available_cols = [c for c in feature_cols if c in df_features.columns]
             
@@ -262,7 +262,7 @@ class AdvancedGreyhoundMLPredictor:
                     missing_features.append(feat)
             
             if missing_features:
-                print(f"   ⚠️  DEBUG: Added {len(missing_features)} missing features as zeros")
+                print(f"   [WARNING]  DEBUG: Added {len(missing_features)} missing features as zeros")
             
             # Select features in the exact order from training
             X_df = df_features[self.feature_names].fillna(0)
@@ -271,9 +271,9 @@ class AdvancedGreyhoundMLPredictor:
             # Convert to numpy array to bypass sklearn feature name checking
             # The model was trained with synthetic data which has different feature compositions
             X = X_df.values
-            print(f"   ✅ DEBUG: Feature matrix shape: {X.shape} (converted to numpy array)")
+            print(f"   [SUCCESS] DEBUG: Feature matrix shape: {X.shape} (converted to numpy array)")
         else:
-            print(f"   🔍 DEBUG: Training mode - discovering features (trained={self.trained}, saved_features={len(self.feature_names)})")
+            print(f"   [DEBUG] DEBUG: Training mode - discovering features (trained={self.trained}, saved_features={len(self.feature_names)})")
             # Training mode: use all available features
             available_cols = [c for c in feature_cols if c in df_features.columns]
             X = df_features[available_cols].fillna(0)
@@ -282,7 +282,7 @@ class AdvancedGreyhoundMLPredictor:
             # Final safety check - fill any remaining NaN values
             X = X.fillna(0)
             self.feature_names = available_cols
-            print(f"   ✅ DEBUG: Discovered {len(self.feature_names)} features")
+            print(f"   [SUCCESS] DEBUG: Discovered {len(self.feature_names)} features")
         
         return X, self.feature_names if self.trained else available_cols
     
@@ -304,7 +304,7 @@ class AdvancedGreyhoundMLPredictor:
         Returns:
             dict: Trained ensemble models with optimal weights
         """
-        print(f"🎯 Creating optimized ensemble for {track_name}...")
+        print(f"[TARGET] Creating optimized ensemble for {track_name}...")
         
         # Safety: Replace NaN and infinite values that may have been introduced by scaling
         X_train = np.nan_to_num(X_train, nan=0.0, posinf=0.0, neginf=0.0)
@@ -415,7 +415,7 @@ class AdvancedGreyhoundMLPredictor:
             dict: Training metrics
         """
         print("=" * 80)
-        print("🚀 ADVANCED ML TRAINING - Track-Specific Models")
+        print("[START] ADVANCED ML TRAINING - Track-Specific Models")
         print("=" * 80)
         
         # Group data by track
@@ -435,7 +435,7 @@ class AdvancedGreyhoundMLPredictor:
             track_data[track].append(race_df)
             track_results[track].append(winner)
         
-        print(f"\n📊 Data Distribution:")
+        print(f"\n[INFO] Data Distribution:")
         print(f"   Total tracks: {len(track_data)}")
         print(f"   Total races: {sum(len(v) for v in track_data.values())}")
         print("\n   Races per track:")
@@ -447,11 +447,11 @@ class AdvancedGreyhoundMLPredictor:
         
         for track, races in track_data.items():
             if len(races) < min_races_per_track:
-                print(f"\n⚠️  {track}: Only {len(races)} races - will use global model")
+                print(f"\n[WARNING]  {track}: Only {len(races)} races - will use global model")
                 continue
             
             print(f"\n{'='*80}")
-            print(f"🏁 Training model for {track} ({len(races)} races)")
+            print(f"[TRAIN] Training model for {track} ({len(races)} races)")
             print("="*80)
             
             # Prepare training data for this track
@@ -506,11 +506,11 @@ class AdvancedGreyhoundMLPredictor:
                 'model_scores': ensemble['val_scores']
             }
             
-            print(f"\n   ✅ {track} Ensemble: {ensemble_accuracy:.1%} validation accuracy")
+            print(f"\n   [SUCCESS] {track} Ensemble: {ensemble_accuracy:.1%} validation accuracy")
         
         # Train global fallback model
         print(f"\n{'='*80}")
-        print("🌐 Training global fallback model...")
+        print("[GLOBAL] Training global fallback model...")
         print("="*80)
         
         X_all_list = []
@@ -558,17 +558,17 @@ class AdvancedGreyhoundMLPredictor:
             'model_scores': global_ensemble['val_scores']
         }
         
-        print(f"\n   ✅ Global Ensemble: {global_accuracy:.1%} validation accuracy")
+        print(f"\n   [SUCCESS] Global Ensemble: {global_accuracy:.1%} validation accuracy")
         
         self.trained = True
         
         # Summary
         print("\n" + "="*80)
-        print("✅ TRAINING COMPLETE")
+        print("[SUCCESS] TRAINING COMPLETE")
         print("="*80)
-        print(f"\n📈 Performance Summary:")
+        print(f"\n[SUMMARY] Performance Summary:")
         print(f"   Track-specific models: {len(self.track_models)}")
-        print(f"   Global fallback model: ✅")
+        print(f"   Global fallback model: [SUCCESS]")
         
         print("\n   Track-specific accuracies:")
         for track, metrics in sorted(all_metrics.items(), 
@@ -681,16 +681,16 @@ class AdvancedGreyhoundMLPredictor:
             scaler = self.track_scalers[track]
             models = self.track_models[track]
             weights = {k: 1.0/len(models) for k in models.keys()}
-            print(f"   🎯 Using track-specific model for {track}")
+            print(f"   [TARGET] Using track-specific model for {track}")
         else:
             scaler = self.global_scaler
             models = self.global_model
             if models is None:
                 # No model available at all
-                print(f"   ❌ No model available for track {track}")
+                print(f"   [ERROR] No model available for track {track}")
                 return {}
             weights = {k: 1.0/len(models) for k in models.keys()}
-            print(f"   🌐 Using global model for {track}")
+            print(f"   [GLOBAL] Using global model for {track}")
         
         # CRITICAL: Align features with training data
         # The scaler was fit on specific feature columns - we must match them exactly
@@ -706,7 +706,7 @@ class AdvancedGreyhoundMLPredictor:
             required_features = [col for col in features_df.columns if col not in metadata_cols]
         
         if len(required_features) == 0:
-            print(f"   ❌ No valid features available for prediction")
+            print(f"   [ERROR] No valid features available for prediction")
             return {}
         
         # Check feature availability and add missing features as zeros
@@ -714,8 +714,8 @@ class AdvancedGreyhoundMLPredictor:
         missing_features = set(required_features) - available_features
         
         if missing_features:
-            print(f"   ⚠️  Warning: {len(missing_features)} features missing from input data")
-            print(f"   📊 Adding missing features as zeros: {list(missing_features)[:5]}...")
+            print(f"   [WARNING]  Warning: {len(missing_features)} features missing from input data")
+            print(f"   [INFO] Adding missing features as zeros: {list(missing_features)[:5]}...")
             # Add missing features as zeros
             for feat in missing_features:
                 features_df[feat] = 0.0
@@ -726,10 +726,10 @@ class AdvancedGreyhoundMLPredictor:
             
             # Verify shape
             if X.shape[1] != len(required_features):
-                print(f"   ❌ Feature shape mismatch: got {X.shape[1]}, expected {len(required_features)}")
+                print(f"   [ERROR] Feature shape mismatch: got {X.shape[1]}, expected {len(required_features)}")
                 return {}
             
-            print(f"   ✓ Feature alignment successful: {X.shape[1]} features")
+            print(f"   [OK] Feature alignment successful: {X.shape[1]} features")
             
             # Scale features
             X_scaled = scaler.transform(X)
@@ -742,11 +742,11 @@ class AdvancedGreyhoundMLPredictor:
             
             # Verify predictions are valid
             if np.all(proba == 0):
-                print(f"   ⚠️  Warning: All predictions are 0% - feature mismatch likely")
+                print(f"   [WARNING]  Warning: All predictions are 0% - feature mismatch likely")
             elif np.max(proba) < 0.01:
-                print(f"   ⚠️  Warning: All predictions very low (max={np.max(proba):.3f}) - check features")
+                print(f"   [WARNING]  Warning: All predictions very low (max={np.max(proba):.3f}) - check features")
             else:
-                print(f"   ✓ Predictions valid: range {np.min(proba):.3f} to {np.max(proba):.3f}")
+                print(f"   [OK] Predictions valid: range {np.min(proba):.3f} to {np.max(proba):.3f}")
             
             # Build result dict by box number
             predictions = {}
@@ -761,7 +761,7 @@ class AdvancedGreyhoundMLPredictor:
             return predictions
             
         except Exception as e:
-            print(f"   ❌ Prediction error: {e}")
+            print(f"   [ERROR] Prediction error: {e}")
             import traceback
             traceback.print_exc()
             return {}
@@ -788,9 +788,9 @@ class AdvancedGreyhoundMLPredictor:
         with open(path, 'wb') as f:
             pickle.dump(model_data, f)
         
-        print(f"💾 Advanced model saved to {path}")
+        print(f"[SAVE] Advanced model saved to {path}")
         print(f"   Track-specific models: {len(self.track_models)}")
-        print(f"   Global model: ✅")
+        print(f"   Global model: [SUCCESS]")
     
     def load_model(self, path):
         """Load trained model from disk."""
@@ -809,8 +809,8 @@ class AdvancedGreyhoundMLPredictor:
         
         version = model_data.get('version', '1.0')
         
-        print(f"📥 Advanced model loaded from {path}")
+        print(f"[LOAD] Advanced model loaded from {path}")
         print(f"   Version: {version}")
         print(f"   Trained: {model_data.get('timestamp', 'unknown')}")
         print(f"   Track-specific models: {len(self.track_models)}")
-        print(f"   Global fallback: ✅")
+        print(f"   Global fallback: [SUCCESS]")

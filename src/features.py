@@ -156,7 +156,7 @@ def compute_features(df):
             print(f"[OK] Calculated RestFactor from DLR for {df['DLR'].notna().sum()} dogs")
         else:
             df["RestFactor"] = 1.0  # Neutral - no data to differentiate
-            print("ℹ️ INFO: RestFactor/DLR not found - set to neutral 1.0 (no differentiation).")
+            print("[INFO] INFO: RestFactor/DLR not found - set to neutral 1.0 (no differentiation).")
 
     # Derived metrics - handle NaN values in timing data
     # Speed_kmh: only calculate if BestTimeSec is valid
@@ -246,7 +246,7 @@ def compute_features(df):
     if "RestFactor" in df.columns:
         # Log statistics
         rest_count = df["RestFactor"].notna().sum()
-        print(f"ℹ️ INFO: RestFactor found or calculated for {rest_count}/{len(df)} dogs.")
+        print(f"[INFO] INFO: RestFactor found or calculated for {rest_count}/{len(df)} dogs.")
 
     # Overexposure Penalty
     df["OverexposedPenalty"] = df["CareerStarts"].apply(lambda x: -0.1 if x > 80 else 0)
@@ -302,7 +302,7 @@ def compute_features(df):
         if len(valid_weights) == 0:
             # All weights are 0 or missing - neutralize this feature (don't create constant)
             df["WeightFactor"] = 1.0  # Neutral value - no differentiation
-            print("ℹ️ INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs")
+            print("[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs")
         else:
             # Valid weight data exists - calculate normally
             df["WeightFactor"] = df["Weight"].apply(
@@ -313,7 +313,7 @@ def compute_features(df):
             print(f"[OK] Calculated WeightFactor for {len(valid_weights)} dogs with valid weight data")
     else:
         df["WeightFactor"] = 1.0
-        print("ℹ️ INFO: Weight not found - WeightFactor set to neutral 1.0 (no differentiation).")
+        print("[INFO] INFO: Weight not found - WeightFactor set to neutral 1.0 (no differentiation).")
     
     # Draw Factor: Inside draws (1-4) generally perform better
     # Analysis of 320 races showed draws 1-3 have ~17% higher win rate than draws 7-10
@@ -330,7 +330,7 @@ def compute_features(df):
             print(f"[OK] Calculated DrawFactor for {valid_draw} dogs")
         else:
             df["DrawFactor"] = 0.85  # Neutral - all same
-            print("ℹ️ INFO: Draw column exists but all values missing - DrawFactor set to neutral 0.85")
+            print("[INFO] INFO: Draw column exists but all values missing - DrawFactor set to neutral 0.85")
     elif "Box" in df.columns:
         # Use Box as fallback for Draw
         df["Draw"] = pd.to_numeric(df["Box"], errors="coerce")
@@ -344,10 +344,10 @@ def compute_features(df):
             print(f"[OK] Calculated DrawFactor from Box for {valid_draw} dogs")
         else:
             df["DrawFactor"] = 0.85  # Neutral
-            print("ℹ️ INFO: Box column exists but all values missing - DrawFactor set to neutral 0.85")
+            print("[INFO] INFO: Box column exists but all values missing - DrawFactor set to neutral 0.85")
     else:
         df["DrawFactor"] = 0.85  # Neutral - no data
-        print("ℹ️ INFO: Draw/Box not found - DrawFactor set to neutral 0.85 (no differentiation).")
+        print("[INFO] INFO: Draw/Box not found - DrawFactor set to neutral 0.85 (no differentiation).")
     
     # FormMomentum: Trend direction of margins (already calculated, now weighted)
     # Positive momentum = improving form, negative = declining
@@ -381,10 +381,10 @@ def compute_features(df):
             print(f"[OK] Calculated RTCFactor from Racing Times Category for {valid_rtc} dogs")
         else:
             df["RTCFactor"] = 0.5  # Neutral - all same, no differentiation
-            print("ℹ️ INFO: RTC column exists but all values missing - RTCFactor set to neutral 0.5")
+            print("[INFO] INFO: RTC column exists but all values missing - RTCFactor set to neutral 0.5")
     else:
         df["RTCFactor"] = 0.5  # Neutral - no data, no differentiation
-        print("ℹ️ INFO: RTC not found - RTCFactor set to neutral 0.5 (no differentiation).")
+        print("[INFO] INFO: RTC not found - RTCFactor set to neutral 0.5 (no differentiation).")
 
     # ========================================================================
     # COMPREHENSIVE BOX ANALYSIS - Based on 386 race results (Sep-Nov 2025)
