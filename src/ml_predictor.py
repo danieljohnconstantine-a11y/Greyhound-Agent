@@ -868,8 +868,10 @@ def load_historical_data_hybrid(data_dir='data'):
     print(f"   Winners added: {races_from_pdf}")
     print(f"   2nd/3rd/4th place finishers added: {top4_samples_added}")
     print(f"   Total training samples: {len(race_data)} (was {races_from_pdf})")
-    print(f"   Training data expansion: {len(race_data)/races_from_pdf:.1f}x")
-    print(f"   Coverage: {races_from_pdf/len(all_results)*100:.1f}% of all races")
+    if races_from_pdf > 0:
+        print(f"   Training data expansion: {len(race_data)/races_from_pdf:.1f}x")
+    if len(all_results) > 0:
+        print(f"   Coverage: {races_from_pdf/len(all_results)*100:.1f}% of all races")
     print(f"   ✅ Using ONLY factual PDF data - NO synthetic data generated")
     print(f"   ✅ Weighted labels: 1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3\n")
     
