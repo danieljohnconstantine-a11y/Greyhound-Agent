@@ -48,14 +48,13 @@ try:
     logger = logging.getLogger(__name__)
     
     # Load test data
-    pdf_dir = 'data_test'
-    csv_dir = 'data_test'
+    data_dir = 'data_test'
     output_dir = 'models/track_ensemble_test'
     
     os.makedirs(output_dir, exist_ok=True)
     
     logger.info("Loading historical data...")
-    historical_data = load_historical_data_hybrid(pdf_dir=pdf_dir, csv_dir=csv_dir)
+    historical_data = load_historical_data_hybrid(data_dir=data_dir)
     
     if not historical_data:
         print("[ERROR] No historical data found!")
