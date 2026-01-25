@@ -112,8 +112,8 @@ try:
             logger.error(f"Error processing {pdf_file}: {e}")
             continue
     
-    # Generate summary
-    summary_file = 'test_predictions_summary.txt'
+    # Generate summary and save to outputs folder
+    summary_file = 'outputs/test_predictions_summary.txt'
     with open(summary_file, 'w') as f:
         f.write("=" * 60 + "\n")
         f.write("QUICK TEST PREDICTIONS SUMMARY\n")

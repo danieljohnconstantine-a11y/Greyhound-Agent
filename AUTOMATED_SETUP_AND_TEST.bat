@@ -111,9 +111,10 @@ echo Expected time: 5-10 minutes
 echo ============================================================
 echo.
 
-REM Create test directories
+REM Create test directories and outputs folder
 if not exist "data_test\" mkdir data_test
 if not exist "models\track_ensemble_test\" mkdir models\track_ensemble_test
+if not exist "outputs\" mkdir outputs
 
 REM Copy test files
 echo Copying test PDFs...
@@ -135,8 +136,8 @@ echo If you see these messages, the fix is working!
 echo ========================================
 echo.
 
-REM Run training
-python train_quick_test_3tracks.py > test_training_output.txt 2>&1
+REM Run training and save output to outputs folder
+python train_quick_test_3tracks.py > outputs\test_training_output.txt 2>&1
 
 REM Check if training succeeded
 if %errorlevel% neq 0 (
@@ -144,7 +145,7 @@ if %errorlevel% neq 0 (
     echo [ERROR] Training failed!
     echo.
     echo Error log:
-    type test_training_output.txt
+    type outputs\test_training_output.txt
     echo.
     pause
     exit /b 1
@@ -154,16 +155,16 @@ echo.
 echo   [OK] Training completed successfully!
 echo.
 
-REM Run predictions
+REM Run predictions and save output to outputs folder
 echo Running predictions...
-python predict_quick_test_3tracks.py > test_predictions_output.txt 2>&1
+python predict_quick_test_3tracks.py > outputs\test_predictions_output.txt 2>&1
 
 if %errorlevel% neq 0 (
     echo.
     echo [ERROR] Predictions failed!
     echo.
     echo Error log:
-    type test_predictions_output.txt
+    type outputs\test_predictions_output.txt
     echo.
     pause
     exit /b 1
@@ -178,7 +179,7 @@ echo ============================================================
 echo.
 
 REM Check for maiden race messages
-findstr /C:"MAIDEN RACE" test_training_output.txt >nul 2>&1
+findstr /C:"MAIDEN RACE" outputs\test_training_output.txt >nul 2>&1
 if %errorlevel% equ 0 (
     echo [CHECK 1] Maiden race detection: PASS
     echo   Found maiden race handling messages in training log
@@ -189,10 +190,10 @@ if %errorlevel% equ 0 (
 echo.
 
 REM Display predictions summary if it exists
-if exist "test_predictions_summary.txt" (
+if exist "outputs\test_predictions_summary.txt" (
     echo [CHECK 2] Prediction results:
     echo.
-    type test_predictions_summary.txt
+    type outputs\test_predictions_summary.txt
     echo.
 ) else (
     echo [CHECK 2] Prediction summary file not found
@@ -203,10 +204,10 @@ echo ============================================================
 echo.
 echo TEST COMPLETE!
 echo.
-echo Output files created:
-echo   - test_training_output.txt (training log)
-echo   - test_predictions_output.txt (prediction log)
-echo   - test_predictions_summary.txt (results summary)
+echo Output files saved to outputs folder:
+echo   - outputs\test_training_output.txt (training log)
+echo   - outputs\test_predictions_output.txt (prediction log)
+echo   - outputs\test_predictions_summary.txt (results summary)
 echo   - Models: models\track_ensemble_test\
 echo.
 echo ============================================================
@@ -219,7 +220,7 @@ echo   1. Delete old models: del /Q models\track_ensemble\*.*
 echo   2. Run: train_ml_track_ensemble.bat
 echo.
 echo If the test still shows identical scores (e.g., 14.5%%, 14.5%%, 14.5%%):
-echo   Contact support with the test_training_output.txt file
+echo   Contact support with the outputs\test_training_output.txt file
 echo.
 echo ============================================================
 echo.
