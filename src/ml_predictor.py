@@ -132,7 +132,7 @@ class GreyhoundMLPredictor:
         Returns:
             dict: Training metrics (accuracy, feature importance, etc.)
         """
-        print("🤖 Training ML model on historical data...")
+        print("[INFO] Training ML model on historical data...")
         
         # Prepare training data
         X_list = []
@@ -207,7 +207,7 @@ class GreyhoundMLPredictor:
         print(f"   Train accuracy: {train_score:.1%}")
         print(f"   Validation accuracy: {val_score:.1%}")
         print(f"   CV accuracy: {cv_scores.mean():.1%} (+/- {cv_scores.std()*2:.1%})")
-        print(f"\n🔝 Top 5 Features:")
+        print(f"\n[INFO] Top 5 Features:")
         for idx, row in feature_importance.head(5).iterrows():
             print(f"   {row['feature']}: {row['importance']:.3f}")
         
@@ -339,7 +339,7 @@ class GreyhoundMLPredictor:
         self.feature_names = model_data['feature_names']
         self.trained = model_data['trained']
         
-        print(f"📥 Model loaded from {path}")
+        print(f"[INFO] Model loaded from {path}")
         print(f"   Trained: {model_data.get('timestamp', 'unknown')}")
 
 
@@ -781,7 +781,7 @@ def load_historical_data_hybrid(data_dir='data'):
             
             # Progress update every 50 PDFs
             if processed_pdfs % 50 == 0:
-                print(f"   📄 Processed {processed_pdfs}/{total_pdfs} PDFs ({processed_pdfs*100//total_pdfs}%)")
+                print(f"   [INFO] Processed {processed_pdfs}/{total_pdfs} PDFs ({processed_pdfs*100//total_pdfs}%)")
                 sys.stdout.flush()
                 
             # Force garbage collection every 100 PDFs to prevent memory buildup
@@ -998,7 +998,7 @@ def load_historical_data(data_dir='data'):
     races_unmatched = 0
     unmatched_examples = []
     
-    print(f"📄 Processing {len(pdf_files)} PDF files...")
+    print(f"[INFO] Processing {len(pdf_files)} PDF files...")
     for pdf_idx, pdf_file in enumerate(sorted(pdf_files)):
         if (pdf_idx + 1) % 10 == 0:
             print(f"   Progress: {pdf_idx + 1}/{len(pdf_files)} PDFs processed...")
@@ -1116,7 +1116,7 @@ def load_historical_data(data_dir='data'):
     print(f"   Coverage: 100% FACTUAL DATA (no synthetic races)\n")
     
     if unmatched_examples:
-        print(f"📋 Sample unmatched races (first 5):")
+        print(f"[INFO] Sample unmatched races (first 5):")
         for example in unmatched_examples:
             print(example)
         print()
@@ -1144,18 +1144,18 @@ if __name__ == "__main__":
     Example usage: Train ML model on historical data
     """
     print("=" * 60)
-    print("🤖 Greyhound ML Predictor - Training Demo")
+    print("[INFO] Greyhound ML Predictor - Training Demo")
     print("=" * 60)
     
     # Load historical data
-    print("\n1️⃣  Loading historical data...")
+    print("\n[STEP 1] Loading historical data...")
     race_data, winners = load_historical_data('data')
     
     if len(race_data) < 50:
         print(f"[WARNING]  Warning: Only {len(race_data)} races available. Recommend 200+ for robust training.")
     
     # Initialize and train
-    print("\n2️⃣  Training ML model...")
+    print("\n[STEP 2] Training ML model...")
     predictor = GreyhoundMLPredictor()
     metrics = predictor.train(race_data, winners)
     
@@ -1167,7 +1167,7 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("[SUCCESS] Training complete! Model ready for hybrid predictions.")
     print("=" * 60)
-    print(f"\n📈 Expected performance:")
+    print(f"\n[INFO] Expected performance:")
     print(f"   v4.4 alone: 28-30% win rate")
     print(f"   ML alone: {metrics['val_accuracy']*100:.1f}% win rate")
     print(f"   Hybrid (both agree): 35-40% expected")
