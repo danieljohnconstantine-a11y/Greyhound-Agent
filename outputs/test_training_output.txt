@@ -1,0 +1,35 @@
+============================================================
+QUICK TEST TRAINING - 3 TRACKS
+============================================================
+
+Testing tracks:
+  1. Cannington
+  2. Dubbo
+  3. Wentworth Park
+
+============================================================
+
+Starting training...
+
+WATCH FOR THESE MESSAGES:
+  [WARNING] MAIDEN RACE - Using CareerStarts for differentiation
+  [WARNING] MAIDEN RACE (DLW='Mdn') - neutral DLWFactor
+
+============================================================
+
+
+============================================================
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-streamline-repo-structure\train_quick_test_3tracks.py", line 33, in <module>
+    from src.features import build_feature_matrix
+ImportError: cannot import name 'build_feature_matrix' from 'src.features' (C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-streamline-repo-structure\src\features.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\danie\OneDrive\Desktop\Greyhound-Agent-copilot-streamline-repo-structure\train_quick_test_3tracks.py", line 161, in <module>
+    print("\u274c ERROR DURING TRAINING")
+  File "C:\Users\danie\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 0: character maps to <undefined>
