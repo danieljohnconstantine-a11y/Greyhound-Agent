@@ -157,7 +157,7 @@ class GreyhoundMLPredictor:
         X = pd.concat(X_list, ignore_index=True)
         y = pd.concat(y_list, ignore_index=True)
         
-        print(f"📊 Training data: {len(X)} dogs from {len(historical_data)} races")
+        print(f"[INFO] Training data: {len(X)} dogs from {len(historical_data)} races")
         print(f"   Winners: {y.sum()} ({y.mean()*100:.1f}%)")
         
         # Split for validation
@@ -327,7 +327,7 @@ class GreyhoundMLPredictor:
         with open(path, 'wb') as f:
             pickle.dump(model_data, f)
         
-        print(f"💾 Model saved to {path}")
+        print(f"[SUCCESS] Model saved to {path}")
     
     def load_model(self, path):
         """Load trained model from disk."""
@@ -508,7 +508,7 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
             print(f"[WARNING] Error processing {results_file}: {e}")
             continue
     
-    print(f"📊 Total races in CSV files: {total_races_in_csvs}")
+    print(f"[INFO] Total races in CSV files: {total_races_in_csvs}")
     print(f"[SUCCESS] Successfully loaded {len(race_data)} races with complete data")
     logger.info(f"Total races in CSV files: {total_races_in_csvs}")
     logger.info(f"Successfully loaded {len(race_data)} races with complete data")
@@ -718,7 +718,7 @@ def load_historical_data_hybrid(data_dir='data'):
             logger.error(f"Error reading {results_file}: {e}")
             continue
     
-    print(f"📊 Loaded {len(all_results)} race results from CSV files")
+    print(f"[INFO] Loaded {len(all_results)} race results from CSV files")
     logger.info(f"Loaded {len(all_results)} race results from CSV files")
     
     # Step 3: Parse all PDFs to extract dog data
@@ -861,7 +861,7 @@ def load_historical_data_hybrid(data_dir='data'):
                 winners.append({'box': fourth_box, 'weight': 0.3, 'position': 4})
                 top4_samples_added += 1
     
-    print(f"\n📊 HYBRID LOADING SUMMARY (FACTUAL DATA ONLY + TOP 4 WEIGHTED TRAINING):")
+    print(f"\n[INFO] HYBRID LOADING SUMMARY (FACTUAL DATA ONLY + TOP 4 WEIGHTED TRAINING):")
     print(f"   Total race results in CSVs: {len(all_results)}")
     print(f"   Races with PDF data: {races_from_pdf}")
     print(f"   Races skipped (no PDF): {races_skipped_no_pdf}")
@@ -987,7 +987,7 @@ def load_historical_data(data_dir='data'):
             logger.warning(f"Error reading {results_file}: {e}")
             continue
     
-    print(f"📊 Loaded {len(all_results)} race results from CSV files")
+    print(f"[INFO] Loaded {len(all_results)} race results from CSV files")
     logger.info(f"Loaded {len(all_results)} race results from CSV files")
     
     # Parse PDFs and match with results
@@ -1108,7 +1108,7 @@ def load_historical_data(data_dir='data'):
             logger.warning(f"Error processing {pdf_file}: {e}")
             continue
     
-    print(f"\n📊 PDF-ONLY LOADING SUMMARY:")
+    print(f"\n[INFO] PDF-ONLY LOADING SUMMARY:")
     print(f"   PDFs successfully parsed: {pdfs_parsed}")
     print(f"   Races matched with results: {races_matched}")
     print(f"   Races unmatched: {races_unmatched}")
