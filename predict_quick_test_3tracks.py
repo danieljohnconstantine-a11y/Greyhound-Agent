@@ -27,7 +27,7 @@ try:
     # Load config
     config_path = 'models/track_ensemble_test/config.pkl'
     if not os.path.exists(config_path):
-        print(f"❌ Config file not found: {config_path}")
+        print(f"[ERROR] Config file not found: {config_path}")
         print("Please run training first.")
         sys.exit(1)
     
@@ -139,7 +139,7 @@ try:
     
     print()
     print("=" * 60)
-    print("✅ PREDICTIONS COMPLETE!")
+    print("[SUCCESS] PREDICTIONS COMPLETE!")
     print("=" * 60)
     print()
     print(f"Summary saved to: {summary_file}")
@@ -167,24 +167,24 @@ try:
         print()
         
         if score_range < 2.0:
-            print("⚠️  WARNING: Scores are very similar (spread < 2%)")
+            print("[WARNING] Scores are very similar (spread < 2%)")
             print("    This suggests the fix may not be working.")
             print("    Check test_training_output.txt for maiden race messages.")
         elif score_range < 5.0:
-            print("⚠️  CAUTION: Scores show limited variation (spread < 5%)")
+            print("[CAUTION] Scores show limited variation (spread < 5%)")
             print("    Results are improved but may need verification.")
         else:
-            print("✅ SUCCESS: Scores show good variation (spread >= 5%)")
+            print("[SUCCESS] Scores show good variation (spread >= 5%)")
             print("    The fix appears to be working correctly!")
     else:
-        print("⚠️  WARNING: No predictions generated")
+        print("[WARNING] No predictions generated")
     
     print()
     
 except Exception as e:
     print()
     print("=" * 60)
-    print("❌ ERROR DURING PREDICTIONS")
+    print("[ERROR] ERROR DURING PREDICTIONS")
     print("=" * 60)
     print()
     print(f"Error: {str(e)}")
