@@ -48,7 +48,7 @@ try:
     logger = logging.getLogger(__name__)
     
     # Load test data
-    data_dir = 'data'
+    data_dir = 'data_test'
     output_dir = 'models/track_ensemble_test'
     
     os.makedirs(output_dir, exist_ok=True)
