@@ -30,7 +30,7 @@ print()
 try:
     # Import after path setup
     from src.ml_predictor import load_historical_data_hybrid
-    from src.features import build_feature_matrix
+    from src.features import compute_features
     import pandas as pd
     import numpy as np
     import pickle
@@ -58,7 +58,7 @@ try:
     historical_data = load_historical_data_hybrid(pdf_dir=pdf_dir, csv_dir=csv_dir)
     
     if not historical_data:
-        print("❌ No historical data found!")
+        print("[ERROR] No historical data found!")
         sys.exit(1)
     
     logger.info(f"Loaded {len(historical_data)} races")
@@ -89,7 +89,7 @@ try:
             
             # Build features
             df = pd.DataFrame(race['dogs'])
-            feature_matrix = build_feature_matrix(df)
+            feature_matrix = compute_features(df)
             
             if feature_matrix is None or len(feature_matrix) == 0:
                 continue
@@ -120,7 +120,7 @@ try:
         rf_model.fit(X_numeric, y)
         
         accuracy = rf_model.score(X_numeric, y)
-        logger.info(f"✅ {track} - Accuracy: {accuracy:.1%}")
+        logger.info(f"[SUCCESS] {track} - Accuracy: {accuracy:.1%}")
         
         # Save model
         model_path = os.path.join(output_dir, f"{track}_rf.pkl")
@@ -148,7 +148,7 @@ try:
     
     print()
     print("=" * 60)
-    print("✅ TEST TRAINING COMPLETE!")
+    print("[SUCCESS] TEST TRAINING COMPLETE!")
     print("=" * 60)
     print()
     print(f"Trained {len(config['tracks'])} track models")
@@ -158,7 +158,7 @@ try:
 except Exception as e:
     print()
     print("=" * 60)
-    print("❌ ERROR DURING TRAINING")
+    print("[ERROR] ERROR DURING TRAINING")
     print("=" * 60)
     print()
     print(f"Error: {str(e)}")
