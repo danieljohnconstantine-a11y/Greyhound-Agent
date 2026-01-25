@@ -829,14 +829,14 @@ def main():
     print("=" * 80)
     print("\n[WARNING]  IMPORTANT: Training only creates the model - it does NOT generate Excel reports!")
     print("\nTo generate betting picks and Excel reports:")
-    print("\n1️⃣  Place today's race PDFs in data_predictions/ folder")
+    print("\n[STEP 1] Place today's race PDFs in data_predictions/ folder")
     print("   Example: data_predictions/SANDOWN_12DEC_form.pdf")
     
-    print("\n2️⃣  Run predictions using ONE of these methods:")
+    print("\n[STEP 2] Run predictions using ONE of these methods:")
     print("   Option A: python run_ml_hybrid_enhanced.py")
     print("   Option B: Double-click run_ml_hybrid_enhanced.bat (Windows)")
     
-    print("\n3️⃣  Check outputs/ folder for Excel files:")
+    print("\n[STEP 3] Check outputs/ folder for Excel files:")
     print("   • ml_hybrid_enhanced_picks.xlsx - High-confidence bets")
     print("   • ml_enhanced_all_predictions.xlsx - All predictions ranked")
     print("   • v44_picks_comparison.csv - Baseline v4.4 picks")
