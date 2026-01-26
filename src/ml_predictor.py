@@ -828,8 +828,8 @@ def load_historical_data_hybrid(data_dir='data'):
         
         # DEBUG: Log first 5 lookups to help diagnose matching
         if races_from_pdf + races_skipped_no_pdf < 5:
-            print(f"[DEBUG] Looking for CSV {date} {track} R{race_num} → key: {key_with_date}")
-            logger.debug(f"Looking for CSV {date} {track} R{race_num} → key: {key_with_date}")
+            print(f"[DEBUG] Looking for CSV {date} {track} R{race_num} -> key: {key_with_date}")
+            logger.debug(f"Looking for CSV {date} {track} R{race_num} -> key: {key_with_date}")
         
         df_race = None
         
