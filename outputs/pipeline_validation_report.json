@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-26T05:38:34.836420",
+  "timestamp": "2026-01-26T17:25:37.128818",
   "tests_passed": 5,
   "tests_failed": 0,
   "tests": [
@@ -7,80 +7,40 @@
       "name": "Model Directory Structure",
       "status": "PASSED",
       "details": {
-        "tracks_found": 2,
-        "tracks": {
-          "DARWIN": {
-            "rf.pkl": true,
-            "gb.pkl": true,
-            "scaler.pkl": true,
-            "metadata.json": true
-          },
-          "Bulli": {
-            "rf.pkl": true,
-            "gb.pkl": true,
-            "scaler.pkl": true,
-            "metadata.json": true
-          }
-        },
-        "all_valid": true
+        "error": "No track directories found"
       }
     },
     {
       "name": "Model Loading Functionality",
       "status": "PASSED",
       "details": {
-        "track_tested": "DARWIN",
-        "models_loaded": {
-          "rf.pkl": {
-            "loaded": true,
-            "type": "CalibratedClassifierCV"
-          },
-          "gb.pkl": {
-            "loaded": true,
-            "type": "CalibratedClassifierCV"
-          },
-          "scaler.pkl": {
-            "loaded": true,
-            "type": "StandardScaler"
-          }
-        },
-        "success": true
+        "error": "No tracks to test"
       }
     },
     {
       "name": "Outputs Organization",
       "status": "PASSED",
       "details": {
-        "by_track_exists": true,
-        "combined_exists": true,
-        "tracks_organized": 6,
-        "track_list": [
-          "Maitland",
-          "SANDOWN",
-          "BALLARAT",
-          "SHEPPARTON",
-          "Q STRAIGHT"
-        ],
-        "combined_files": 2
+        "by_track_exists": false,
+        "combined_exists": false,
+        "tracks_organized": 0
       }
     },
     {
       "name": "Training Metrics Files",
       "status": "PASSED",
       "details": {
-        "total_tracks": 2,
-        "tracks_with_metrics": 2,
-        "coverage_pct": 100.0
+        "total_tracks": 0,
+        "tracks_with_metrics": 0,
+        "coverage_pct": 0
       }
     },
     {
       "name": "Logs Directory",
       "status": "PASSED",
       "details": {
-        "logs_found": 1,
-        "log_files": [
-          "train_track_ensemble.log"
-        ]
+        "logs_found": 0,
+        "log_files": []
       }
     }
   ]
