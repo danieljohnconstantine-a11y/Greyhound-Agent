@@ -796,6 +796,12 @@ def load_historical_data_hybrid(data_dir='data'):
     print(f"[SUCCESS] Extracted dog data from {len(pdf_races)} races in PDFs")
     logger.info(f"Extracted dog data from {len(pdf_races)} races in PDFs")
     
+    # DEBUG: Show first 10 PDF race keys to help diagnose matching issues
+    if pdf_races:
+        sample_keys = list(pdf_races.keys())[:10]
+        print(f"[DEBUG] Sample PDF race keys: {sample_keys}")
+        logger.debug(f"Sample PDF race keys: {sample_keys}")
+    
     # Step 4: Process all race results - ONLY USE PDF DATA (NO SYNTHETIC)
     # ENHANCED: Use Top 4 finishers with weighted labels (1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3)
     race_data = []
@@ -819,6 +825,11 @@ def load_historical_data_hybrid(data_dir='data'):
         # Try to match with date first (most accurate)
         key_with_date = f"{date}_{track_code}_R{race_num}"
         key_without_date = f"{track_code}_R{race_num}"
+        
+        # DEBUG: Log first 5 lookups to help diagnose matching
+        if races_from_pdf + races_skipped_no_pdf < 5:
+            print(f"[DEBUG] Looking for CSV {date} {track} R{race_num} → key: {key_with_date}")
+            logger.debug(f"Looking for CSV {date} {track} R{race_num} → key: {key_with_date}")
         
         df_race = None
         

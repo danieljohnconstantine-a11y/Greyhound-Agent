@@ -59,6 +59,18 @@ try:
     if not race_data or not winners:
         print("[ERROR] No historical data found!")
         print(f"[ERROR] race_data: {len(race_data) if race_data else 0}, winners: {len(winners) if winners else 0}")
+        print("[ERROR] This means PDF races could not be matched to CSV winners.")
+        print("[ERROR] Check that:")
+        print(f"[ERROR]   1. PDFs exist in {data_dir}/ with names like CANNG2401form.pdf")
+        print(f"[ERROR]   2. CSV files exist in {data_dir}/ with results_YYYY-MM-DD.csv format")
+        print("[ERROR]   3. Track names and dates match between PDFs and CSVs")
+        
+        # Try to provide more debug info
+        import glob
+        pdfs = glob.glob(f"{data_dir}/*form.pdf")
+        csvs = glob.glob(f"{data_dir}/results_*.csv")
+        print(f"[ERROR] Found {len(pdfs)} PDF files: {[os.path.basename(p) for p in pdfs]}")
+        print(f"[ERROR] Found {len(csvs)} CSV files: {[os.path.basename(c) for c in csvs]}")
         sys.exit(1)
     
     logger.info(f"Loaded {len(race_data)} training samples")
