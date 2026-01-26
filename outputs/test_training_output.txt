@@ -1,0 +1,272 @@
+2026-01-26 11:37:51,011 - INFO - Loading historical data...
+2026-01-26 11:37:51,444 - INFO - Found 3 PDFs and 22 results CSV files
+2026-01-26 11:37:51,693 - INFO - Loaded 658 race results from CSV files
+2026-01-26 11:38:02,160 - INFO - [INFO] Detected race header: Race 1, Cannington, 520m on 2026-01-24 at 07:08PM
+2026-01-26 11:38:02,160 - INFO - [INFO] Detected race header: Race 2, Cannington, 520m on 2026-01-24 at 07:30PM
+2026-01-26 11:38:02,177 - INFO - [INFO] Detected race header: Race 3, Cannington, 601m on 2026-01-24 at 07:47PM
+2026-01-26 11:38:02,177 - INFO - [INFO] Detected race header: Race 4, Cannington, 520m on 2026-01-24 at 08:03PM
+2026-01-26 11:38:02,177 - INFO - [OK] Parsed dog (multi-line format): Box 3 - Our Benson (Race 4)
+2026-01-26 11:38:02,193 - INFO - [INFO] Detected race header: Race 5, Cannington, 520m on 2026-01-24 at 08:27PM
+2026-01-26 11:38:02,193 - INFO - [INFO] Detected race header: Race 6, Cannington, 601m on 2026-01-24 at 08:47PM
+2026-01-26 11:38:02,193 - INFO - [INFO] Detected race header: Race 7, Cannington, 601m on 2026-01-24 at 09:05PM
+2026-01-26 11:38:02,210 - INFO - [INFO] Detected race header: Race 8, Cannington, 520m on 2026-01-24 at 09:23PM
+2026-01-26 11:38:02,210 - INFO - [INFO] Detected race header: Race 9, Cannington, 715m on 2026-01-24 at 09:39PM
+2026-01-26 11:38:02,210 - INFO - [INFO] Detected race header: Race 10, Cannington, 520m on 2026-01-24 at 10:02PM
+2026-01-26 11:38:02,210 - INFO - [INFO] Detected race header: Race 11, Cannington, 520m on 2026-01-24 at 10:18PM
+2026-01-26 11:38:02,210 - INFO - [INFO] Detected race header: Race 12, Cannington, 381m on 2026-01-24 at 10:36PM
+2026-01-26 11:38:02,210 - INFO - Converted timing for Jungle Deluxe: 2 times from other distances -> 29.21s at 520m
+2026-01-26 11:38:02,210 - INFO - Converted timing for Panadero Magic: 2 times from other distances -> 34.66s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Loan Shark: 2 times from other distances -> 34.04s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Our Girl Jess: 1 times from other distances -> 30.41s at 520m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Jai Bubba: 1 times from other distances -> 34.56s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Bangor Tiger: 1 times from other distances -> 34.41s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Capalla: 2 times from other distances -> 34.45s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Hum Bug Monelli: 1 times from other distances -> 34.95s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Naughty Evie: 2 times from other distances -> 34.55s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Nash Mash: 2 times from other distances -> 34.62s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Speed Lee: 2 times from other distances -> 34.63s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Snappy Snacker: 4 times from other distances -> 34.20s at 601m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Tilly Rose: 1 times from other distances -> 30.84s at 520m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Sky Reign: 2 times from other distances -> 29.80s at 520m
+2026-01-26 11:38:02,226 - INFO - Converted timing for Crocodile Crawl: 2 times from other distances -> 22.02s at 381m
+2026-01-26 11:38:02,226 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-26 11:38:02,226 - INFO - [SUCCESS] Parsed 100 dogs across 12 races
+2026-01-26 11:38:02,226 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-26 11:38:02,226 - INFO - [INFO] Distance values (sample): [520, 601, 715, 381]
+2026-01-26 11:38:18,051 - INFO - [INFO] Detected race header: Race 1, DUBBO, 400m on 2026-01-24 at 07:12PM
+2026-01-26 11:38:18,051 - INFO - [INFO] Detected race header: Race 2, DUBBO, 318m on 2026-01-24 at 07:34PM
+2026-01-26 11:38:18,051 - INFO - [INFO] Detected race header: Race 3, DUBBO, 516m on 2026-01-24 at 07:59PM
+2026-01-26 11:38:18,068 - INFO - [INFO] Detected race header: Race 4, DUBBO, 400m on 2026-01-24 at 08:17PM
+2026-01-26 11:38:18,068 - INFO - [INFO] Detected race header: Race 5, DUBBO, 318m on 2026-01-24 at 08:37PM
+2026-01-26 11:38:18,085 - INFO - [INFO] Detected race header: Race 6, DUBBO, 318m on 2026-01-24 at 08:58PM
+2026-01-26 11:38:18,085 - INFO - [OK] Parsed dog (multi-line format): Box 1 - Zara Go On (Race 6)
+2026-01-26 11:38:18,085 - INFO - [INFO] Detected race header: Race 7, DUBBO, 400m on 2026-01-24 at 09:14PM
+2026-01-26 11:38:18,085 - INFO - [INFO] Detected race header: Race 8, DUBBO, 318m on 2026-01-24 at 09:36PM
+2026-01-26 11:38:18,085 - INFO - [OK] Parsed dog (multi-line format): Box 8 - Valentino Beach (Race 8)
+2026-01-26 11:38:18,085 - INFO - [INFO] Detected race header: Race 9, DUBBO, 318m on 2026-01-24 at 09:57PM
+2026-01-26 11:38:18,101 - INFO - [INFO] Detected race header: Race 10, DUBBO, 318m on 2026-01-24 at 10:12PM
+2026-01-26 11:38:18,101 - INFO - [INFO] Detected race header: Race 11, DUBBO, 318m on 2026-01-24 at 10:33PM
+2026-01-26 11:38:18,101 - INFO - [INFO] Detected race header: Race 12, DUBBO, 318m on 2026-01-24 at 10:55PM
+2026-01-26 11:38:18,116 - INFO - Converted timing for Bogan Whiskey: 1 times from other distances -> 23.38s at 400m
+2026-01-26 11:38:18,116 - INFO - Converted timing for Orana Jim: 2 times from other distances -> 23.38s at 400m
+2026-01-26 11:38:18,116 - INFO - Converted timing for Across The Night: 2 times from other distances -> 23.15s at 400m
+2026-01-26 11:38:18,116 - INFO - Converted timing for Urban Outlaw: 2 times from other distances -> 22.66s at 400m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Billie Girl: 3 times from other distances -> 28.87s at 516m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Active Power: 2 times from other distances -> 28.80s at 516m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Magic Breakout: 3 times from other distances -> 29.15s at 516m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Rampager: 3 times from other distances -> 29.15s at 516m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Jacobite Rebel: 1 times from other distances -> 23.45s at 400m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Panda Unleashed: 1 times from other distances -> 23.34s at 400m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Swift Bonnie: 1 times from other distances -> 23.67s at 400m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Adele Cargo: 2 times from other distances -> 22.92s at 400m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Mobile Lad: 2 times from other distances -> 23.44s at 400m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Double Dealings: 4 times from other distances -> 20.07s at 400m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Caddie's Girl: 1 times from other distances -> 22.92s at 400m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Candice Keeping: 4 times from other distances -> 18.02s at 318m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Karoona Kid: 4 times from other distances -> 17.98s at 318m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Aston Joe: 2 times from other distances -> 18.20s at 318m
+2026-01-26 11:38:18,118 - INFO - Converted timing for Tommy Taro: 2 times from other distances -> 18.37s at 318m
+2026-01-26 11:38:18,118 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-26 11:38:18,118 - INFO - [SUCCESS] Parsed 110 dogs across 12 races
+2026-01-26 11:38:18,118 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-01-26 11:38:18,118 - INFO - [INFO] Distance values (sample): [400, 318, 516]
+2026-01-26 11:38:29,233 - INFO - [INFO] Detected race header: Race 1, WENTWORTH PARK, 520m on 2026-01-24 at 07:05PM
+2026-01-26 11:38:29,233 - INFO - [INFO] Detected race header: Race 2, WENTWORTH PARK, 520m on 2026-01-24 at 07:23PM
+2026-01-26 11:38:29,233 - INFO - [INFO] Detected race header: Race 3, WENTWORTH PARK, 520m on 2026-01-24 at 07:45PM
+2026-01-26 11:38:29,233 - INFO - [INFO] Detected race header: Race 4, WENTWORTH PARK, 520m on 2026-01-24 at 08:12PM
+2026-01-26 11:38:29,233 - INFO - [INFO] Detected race header: Race 5, WENTWORTH PARK, 520m on 2026-01-24 at 08:32PM
+2026-01-26 11:38:29,233 - INFO - [OK] Parsed dog (multi-line format): Box 4 - Both Bowers Ace (Race 5)
+2026-01-26 11:38:29,250 - INFO - [INFO] Detected race header: Race 6, WENTWORTH PARK, 720m on 2026-01-24 at 08:53PM
+2026-01-26 11:38:29,250 - INFO - [INFO] Detected race header: Race 7, WENTWORTH PARK, 520m on 2026-01-24 at 09:20PM
+2026-01-26 11:38:29,250 - INFO - [INFO] Detected race header: Race 8, WENTWORTH PARK, 520m on 2026-01-24 at 09:40PM
+2026-01-26 11:38:29,250 - INFO - [INFO] Detected race header: Race 9, WENTWORTH PARK, 520m on 2026-01-24 at 10:01PM
+2026-01-26 11:38:29,250 - INFO - [INFO] Detected race header: Race 10, WENTWORTH PARK, 520m on 2026-01-24 at 10:23PM
+2026-01-26 11:38:29,266 - INFO - [INFO] Detected race header: Race 11, WENTWORTH PARK, 520m on 2026-01-24 at 10:40PM
+2026-01-26 11:38:29,266 - INFO - [INFO] Detected race header: Race 12, WENTWORTH PARK, 520m on 2026-01-24 at 10:58PM
+2026-01-26 11:38:29,266 - INFO - Converted timing for Deadly Cool: 1 times from other distances -> 29.20s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Blue Labubu: 3 times from other distances -> 29.23s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Galba Model: 1 times from other distances -> 29.64s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Upended: 2 times from other distances -> 29.00s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Galactic Spartan: 1 times from other distances -> 41.51s at 720m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Ayden's Warrior: 1 times from other distances -> 41.51s at 720m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Zipping Mooney: 1 times from other distances -> 41.15s at 720m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Mister O'brien: 4 times from other distances -> 41.15s at 720m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Galba Major: 1 times from other distances -> 29.37s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Ascend Fern: 1 times from other distances -> 29.07s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Zipping Zeppelin: 1 times from other distances -> 29.51s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Freight Express: 4 times from other distances -> 27.93s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for Hot Shot Ethics: 1 times from other distances -> 28.76s at 520m
+2026-01-26 11:38:29,266 - INFO - Converted timing for My Monroe: 1 times from other distances -> 29.29s at 520m
+2026-01-26 11:38:29,266 - WARNING - No race date extracted - will rely on CSV matching
+2026-01-26 11:38:29,266 - INFO - [SUCCESS] Parsed 94 dogs across 12 races
+2026-01-26 11:38:29,266 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-01-26 11:38:29,266 - INFO - [INFO] Distance values (sample): [520, 720]
+2026-01-26 11:38:29,649 - INFO - Extracted dog data from 36 races in PDFs
+============================================================
+QUICK TEST TRAINING - 3 TRACKS
+============================================================
+
+Testing tracks:
+  1. Cannington
+  2. Dubbo
+  3. Wentworth Park
+
+============================================================
+
+Starting training...
+
+WATCH FOR THESE MESSAGES:
+  [WARNING] MAIDEN RACE - Using CareerStarts for differentiation
+  [WARNING] MAIDEN RACE (DLW='Mdn') - neutral DLWFactor
+
+============================================================
+
+[INFO] Loading data using HYBRID method (PDFs + CSV results)...
+   [SUCCESS] FACTUAL DATA ONLY - Using real PDF form guides matched to CSV winners
+   [INFO] NO SYNTHETIC DATA - Races without PDFs are skipped
+[INFO] Found 3 PDFs and 22 results CSV files
+[INFO] Loaded 658 race results from CSV files
+[SUCCESS] Parsed 100 dogs
+   [INFO] Timing data extracted: 100/100 dogs have BestTimeSec, 100/100 have SectionalSec
+[WARNING] WARNING: 9 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 100 dogs
+[OK] Calculated TrainerStrikeRate for 29 unique trainers
+  Range: 0.0404 to 1.2182
+  Mean: 0.1947
+[INFO] INFO: RestFactor found or calculated for 100/100 dogs.
+[OK] Calculated PlaceRate for 100 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 100 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 92 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 100}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 100 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (13 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 100 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (21 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 110 dogs
+   [INFO] Timing data extracted: 110/110 dogs have BestTimeSec, 110/110 have SectionalSec
+[WARNING] WARNING: 14 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 110 dogs
+[OK] Calculated TrainerStrikeRate for 39 unique trainers
+  Range: 0.0000 to 2.0222
+  Mean: 0.1938
+[INFO] INFO: RestFactor found or calculated for 110/110 dogs.
+[OK] Calculated PlaceRate for 110 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 110 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 104 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX2_FORM': 110}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 110 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (18 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 110 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (2 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: 4 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 94 dogs
+[OK] Calculated TrainerStrikeRate for 49 unique trainers
+  Range: 0.0370 to 1.1656
+  Mean: 0.3909
+[INFO] INFO: RestFactor found or calculated for 94/94 dogs.
+[OK] Calculated PlaceRate for 94 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 94 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 93 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX7_CLOSER': 94}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 94 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (25 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 94 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (24 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Extracted dog data from 36 races in PDFs
+[DEBUG] Sample PDF race keys: ['2026-01-24_CANN_R1', '2026-01-24_CANN_R2', '2026-01-24_CANN_R3', '2026-01-24_CANN_R4', '2026-01-24_CANN_R5', '2026-01-24_CANN_R6', '2026-01-24_CANN_R7', '2026-01-24_CANN_R8', '2026-01-24_CANN_R9', '2026-01-24_CANN_R10']
+[DEBUG] Looking for CSV 2026-01-01 Richmond Straight R1 -> key: 2026-01-01_RICH_R1
+[DEBUG] Looking for CSV 2026-01-01 Richmond Straight R2 -> key: 2026-01-01_RICH_R2
+[DEBUG] Looking for CSV 2026-01-01 Richmond Straight R3 -> key: 2026-01-01_RICH_R3
+[DEBUG] Looking for CSV 2026-01-01 Richmond Straight R4 -> key: 2026-01-01_RICH_R42026-01-26 11:38:29,649 - INFO - Hybrid loading complete: 0 races with PDF data, 658 skipped (no PDF)
+2026-01-26 11:38:29,649 - INFO - Top 4 weighted training: 0 samples (0 from 2nd/3rd/4th place)
+
+[DEBUG] Looking for CSV 2026-01-01 Richmond Straight R5 -> key: 2026-01-01_RICH_R5
+
+[INFO] HYBRID LOADING SUMMARY (FACTUAL DATA ONLY + TOP 4 WEIGHTED TRAINING):
+   Total race results in CSVs: 658
+   Races with PDF data: 0
+   Races skipped (no PDF): 658
+   Winners added: 0
+   2nd/3rd/4th place finishers added: 0
+   Total training samples: 0 (was 0)
+   Coverage: 0.0% of all races
+   [SUCCESS] Using ONLY factual PDF data - NO synthetic data generated
+   [SUCCESS] Weighted labels: 1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3
+
+[ERROR] No historical data found!
+[ERROR] race_data: 0, winners: 0
+[ERROR] This means PDF races could not be matched to CSV winners.
+[ERROR] Check that:
+[ERROR]   1. PDFs exist in data_test/ with names like CANNG2401form.pdf
+[ERROR]   2. CSV files exist in data_test/ with results_YYYY-MM-DD.csv format
+[ERROR]   3. Track names and dates match between PDFs and CSVs
+[ERROR] Found 3 PDF files: ['CANNG2401form.pdf', 'DUBBG2401form.pdf', 'WENPG2401form.pdf']
+[ERROR] Found 22 CSV files: ['results_2026-01-01.csv', 'results_2026-01-02.csv', 'results_2026-01-03.csv', 'results_2026-01-04.csv', 'results_2026-01-05.csv', 'results_2026-01-06.csv', 'results_2026-01-06_backup.csv', 'results_2026-01-07.csv', 'results_2026-01-10.csv', 'results_2026-01-12.csv', 'results_2026-01-13.csv', 'results_2026-01-14.csv', 'results_2026-01-15.csv', 'results_2026-01-16.csv', 'results_2026-01-17.csv', 'results_2026-01-18.csv', 'results_2026-01-19.csv', 'results_2026-01-20.csv', 'results_2026-01-21.csv', 'results_2026-01-22.csv', 'results_2026-01-23.csv', 'results_2026-01-24.csv']
