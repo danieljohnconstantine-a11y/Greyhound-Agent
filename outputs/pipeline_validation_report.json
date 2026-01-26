@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-26T07:46:23.147847",
+  "timestamp": "2026-01-26T18:34:22.581892",
   "tests_passed": 5,
   "tests_failed": 0,
   "tests": [
@@ -9,13 +9,13 @@
       "details": {
         "tracks_found": 2,
         "tracks": {
-          "DARWIN": {
+          "Bulli": {
             "rf.pkl": true,
             "gb.pkl": true,
             "scaler.pkl": true,
             "metadata.json": true
           },
-          "Bulli": {
+          "DARWIN": {
             "rf.pkl": true,
             "gb.pkl": true,
             "scaler.pkl": true,
@@ -29,7 +29,7 @@
       "name": "Model Loading Functionality",
       "status": "PASSED",
       "details": {
-        "track_tested": "DARWIN",
+        "track_tested": "Bulli",
         "models_loaded": {
           "rf.pkl": {
             "loaded": true,
@@ -55,11 +55,11 @@
         "combined_exists": true,
         "tracks_organized": 6,
         "track_list": [
-          "Maitland",
-          "SANDOWN",
           "BALLARAT",
-          "SHEPPARTON",
-          "Q STRAIGHT"
+          "Maitland",
+          "NOWRA",
+          "Q STRAIGHT",
+          "SANDOWN"
         ],
         "combined_files": 2
       }
