@@ -128,5 +128,7 @@
   },
   "training_date": "2026-01-26T14:31:31.151667",
   "n_samples": 69298,
-  "n_tracks": 37
+  "n_tracks": 37,
+  "model_structure": "track_subdirectories",
+  "model_path_template": "models/{track}/{algorithm}.pkl"
 }
