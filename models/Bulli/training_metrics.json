@@ -1,6 +1,6 @@
 {
   "track_name": "Bulli",
-  "generated_at": "2026-01-26T05:37:56.280128",
+  "generated_at": "2026-01-26T07:46:16.087975",
   "models": {
     "rf": {
       "type": "RF",
@@ -15,7 +15,10 @@
       "n_features": 76
     },
     "xgb": {
-      "error": "No module named 'xgboost'"
+      "type": "XGB",
+      "n_estimators": "N/A",
+      "max_depth": "N/A",
+      "n_features": 76
     }
   },
   "ensemble_performance": {
