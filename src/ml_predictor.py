@@ -660,10 +660,17 @@ def load_historical_data_hybrid(data_dir='data'):
     
     for results_file in sorted(results_files):
         try:
+            # Extract date from filename: results_YYYY-MM-DD.csv
+            import re
+            filename = os.path.basename(results_file)
+            date_match = re.search(r'results_(\d{4}-\d{2}-\d{2})\.csv', filename)
+            file_date = date_match.group(1) if date_match else ''
+            
             df_results = pd.read_csv(results_file)
             for _, row in df_results.iterrows():
                 track = str(row.get('Track', ''))
-                date = str(row.get('Date', ''))
+                # Use date from filename if not in CSV
+                date = str(row.get('Date', file_date))
                 # Handle both "R1" format and plain "1" format
                 race_str = str(row.get('Race', row.get('RaceNumber', '0')))
                 race_num = int(race_str.replace('R', '').replace('r', ''))
