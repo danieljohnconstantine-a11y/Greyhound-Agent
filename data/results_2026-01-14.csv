@@ -1,160 +1,159 @@
-TrackName,RaceDate,RaceNumber,Position1,Position2,Position3,Position4
-Temora,2026-01-14,1,4,7,9,2
-Temora,2026-01-14,2,3,7,4,6
-Temora,2026-01-14,3,2,8,3,4
-Temora,2026-01-14,4,7,8,6,2
-Temora,2026-01-14,5,3,8,7,1
-Temora,2026-01-14,6,5,9,6,2
-Temora,2026-01-14,7,5,7,6,3
-Temora,2026-01-14,8,2,8,7,1
-Temora,2026-01-14,9,1,6,7,2
-Temora,2026-01-14,10,7,2,5,4
-Temora,2026-01-14,11,1,2,3,8
-Temora,2026-01-14,12,1,2,7,4
-Taree,2026-01-14,1,8,7,4,1
-Taree,2026-01-14,2,4,7,2,1
-Taree,2026-01-14,3,2,1,7,3
-Taree,2026-01-14,4,7,8,1,6
-Taree,2026-01-14,5,7,8,4,1
-Taree,2026-01-14,6,3,4,1,5
-Taree,2026-01-14,7,3,8,7,2
-Taree,2026-01-14,8,3,1,6,5
-Taree,2026-01-14,9,1,4,8,2
-Taree,2026-01-14,10,1,2,4,3
-Taree,2026-01-14,11,2,6,1,3
-Taree,2026-01-14,12,1,5,3,2
-Gunnedah,2026-01-14,1,4,6,3,8
-Gunnedah,2026-01-14,2,4,1,3,2
-Gunnedah,2026-01-14,3,7,4,2,6
-Gunnedah,2026-01-14,4,1,7,8,3
-Gunnedah,2026-01-14,5,3,6,8,5
-Gunnedah,2026-01-14,6,6,2,7,1
-Gunnedah,2026-01-14,7,5,8,1,3
-Gunnedah,2026-01-14,8,7,5,8,6
-Gunnedah,2026-01-14,9,5,8,6,1
-Gunnedah,2026-01-14,10,2,6,8,4
-Gunnedah,2026-01-14,11,1,4,7,5
-Gunnedah,2026-01-14,12,7,1,9,8
-Richmond,2026-01-14,1,8,3,1,7
-Richmond,2026-01-14,2,7,8,6,5
-Richmond,2026-01-14,3,1,6,3,2
-Richmond,2026-01-14,4,3,8,5,7
-Richmond,2026-01-14,5,5,6,8,2
-Richmond,2026-01-14,6,6,8,2,1
-Richmond,2026-01-14,7,6,7,5,8
-Richmond,2026-01-14,8,5,4,2,3
-Richmond,2026-01-14,9,6,3,7,4
-Richmond,2026-01-14,10,6,7,2,3
-Richmond,2026-01-14,11,5,8,7,2
-Richmond,2026-01-14,12,1,5,8,4
-Sale,2026-01-14,1,4,1,6,2
-Sale,2026-01-14,2,2,8,4,7
-Sale,2026-01-14,3,6,8,3,1
-Sale,2026-01-14,4,4,2,3,7
-Sale,2026-01-14,5,8,7,2,4
-Sale,2026-01-14,6,2,1,7,8
-Sale,2026-01-14,7,8,1,7,6
-Sale,2026-01-14,8,7,6,2,1
-Sale,2026-01-14,9,6,2,7,1
-Sale,2026-01-14,10,6,7,4,1
-Sale,2026-01-14,11,2,1,5,4
-Sale,2026-01-14,12,3,2,1,6
-Gawler,2026-01-14,1,6,4,1,2
-Gawler,2026-01-14,2,2,8,4,1
-Gawler,2026-01-14,3,5,1,4,7
-Gawler,2026-01-14,4,5,1,7,3
-Gawler,2026-01-14,5,1,7,4,5
-Gawler,2026-01-14,6,9,5,2,7
-Gawler,2026-01-14,7,2,5,1,8
-Gawler,2026-01-14,8,1,3,4,5
-Gawler,2026-01-14,9,7,3,5
-BetDeluxe Capalaba,2026-01-14,1,8,7,5,4
-BetDeluxe Capalaba,2026-01-14,2,5,2,1,8
-BetDeluxe Capalaba,2026-01-14,3,7,8,4,6
-BetDeluxe Capalaba,2026-01-14,4,6,4,1,2
-BetDeluxe Capalaba,2026-01-14,5,7,8,4,2
-BetDeluxe Capalaba,2026-01-14,6,7,8,6,5
-BetDeluxe Capalaba,2026-01-14,7,6,2,3,5
-BetDeluxe Capalaba,2026-01-14,8,1,3,8,2
-BetDeluxe Capalaba,2026-01-14,9,7,6,8,1
-BetDeluxe Capalaba,2026-01-14,10,6,4,7,1
-BetDeluxe Capalaba,2026-01-14,11,2,6,4,3
-Bendigo,2026-01-14,1,1,8,5,2
-Bendigo,2026-01-14,2,6,4,7,3
-Bendigo,2026-01-14,3,6,2,3,5
-Bendigo,2026-01-14,4,4,5,7,1
-Bendigo,2026-01-14,5,8,4,2,3
-Bendigo,2026-01-14,6,4,1,8,7
-Bendigo,2026-01-14,7,4,2,1,8
-Bendigo,2026-01-14,8,5,4,9,6
-Bendigo,2026-01-14,9,2,5,7,8
-Bendigo,2026-01-14,10,5,1,8,4
-Bendigo,2026-01-14,11,1,7,8,3
-Bendigo,2026-01-14,12,7,6,1,4
-Ladbrokes Q1 Lakeside,2026-01-14,1,2,8,5,1
-Ladbrokes Q1 Lakeside,2026-01-14,2,7,5,2,6
-Ladbrokes Q1 Lakeside,2026-01-14,3,8,1,3,5
-Ladbrokes Q1 Lakeside,2026-01-14,4,7,6,8,5
-Ladbrokes Q1 Lakeside,2026-01-14,5,7,4,2,1
-Ladbrokes Q1 Lakeside,2026-01-14,6,2,5,8,3
-Ladbrokes Q1 Lakeside,2026-01-14,7,7,5,3,8
-Ladbrokes Q1 Lakeside,2026-01-14,8,6,7,5,4
-Ladbrokes Q1 Lakeside,2026-01-14,9,8,5,1,2
-Ladbrokes Q1 Lakeside,2026-01-14,10,4,3,1,6
-Ladbrokes Q1 Lakeside,2026-01-14,11,4,2,7,1
-Ladbrokes Q1 Lakeside,2026-01-14,12,4,6,2,1
-Ballarat,2026-01-14,1,5,7,8,4
-Ballarat,2026-01-14,2,5,4,2,3
-Ballarat,2026-01-14,3,5,2,3,1
-Ballarat,2026-01-14,4,4,5,6,7
-Ballarat,2026-01-14,5,5,1,4,2
-Ballarat,2026-01-14,6,2,1,4,7
-Ballarat,2026-01-14,7,2,4,8,7
-Ballarat,2026-01-14,8,3,7,8,2
-Ballarat,2026-01-14,9,3,8,2,5
-Ballarat,2026-01-14,10,8,2,6,7
-Ballarat,2026-01-14,11,1,6,7,3
-Ballarat,2026-01-14,12,2,4,6,8
-Meadows,2026-01-14,1,7,5,4,1
-Meadows,2026-01-14,2,3,1,6,7
-Meadows,2026-01-14,3,4,1,2,7
-Meadows,2026-01-14,4,5,8,2,1
-Meadows,2026-01-14,5,3,1,8,7
-Meadows,2026-01-14,6,3,2,7,1
-Meadows,2026-01-14,7,1,2,6,4
-Meadows,2026-01-14,8,2,8,3,4
-Meadows,2026-01-14,9,3,7,1,2
-Meadows,2026-01-14,10,1,6,4,8
-Meadows,2026-01-14,11,2,4,1,8
-Darwin,2026-01-14,1,7,4,1,5
-Darwin,2026-01-14,2,1,8,5,7
-Darwin,2026-01-14,3,4,2,7,5
-Darwin,2026-01-14,4,2,1,8,4
-Darwin,2026-01-14,5,8,7,1,5
-Darwin,2026-01-14,6,6,1,3,2
-Darwin,2026-01-14,7,7,5,4,8
-Darwin,2026-01-14,8,5,7,4,2
-BetDeluxe Rockhampton,2026-01-14,1,1,4,8,6
-BetDeluxe Rockhampton,2026-01-14,2,7,2,5,4
-BetDeluxe Rockhampton,2026-01-14,3,5,7,1,2
-BetDeluxe Rockhampton,2026-01-14,4,2,3,4,8
-BetDeluxe Rockhampton,2026-01-14,5,8,2,6,7
-BetDeluxe Rockhampton,2026-01-14,6,4,1,6,3
-BetDeluxe Rockhampton,2026-01-14,7,4,8,5,1
-BetDeluxe Rockhampton,2026-01-14,8,1,8,4,2
-BetDeluxe Rockhampton,2026-01-14,9,2,7,3,5
-BetDeluxe Rockhampton,2026-01-14,10,2,3,1,7
-BetDeluxe Rockhampton,2026-01-14,11,3,4,8,7
-BetDeluxe Rockhampton,2026-01-14,12,6,8,4,7
-Cannington,2026-01-14,1,1,8,4,7
-Cannington,2026-01-14,2,1,2,7,4
-Cannington,2026-01-14,3,4,8,6,2
-Cannington,2026-01-14,4,2,8,1,6
-Cannington,2026-01-14,5,2,7,3,6
-Cannington,2026-01-14,6,4,2,5,6
-Cannington,2026-01-14,7,3,8,6,1
-Cannington,2026-01-14,8,2,4,7,5
-Cannington,2026-01-14,9,5,2,1,4
-Cannington,2026-01-14,10,6,5,7,1
-Cannington,2026-01-14,11,1,8,7,5
-Cannington,2026-01-14,12,5,8,7,2
+Track,Race,Position1,Position2,Position3,Position4
+Temora,1,4,7,9,2
+Temora,2,3,7,4,6
+Temora,3,2,8,3,4
+Temora,4,7,8,6,2
+Temora,5,3,8,7,1
+Temora,6,5,9,6,2
+Temora,7,5,7,6,3
+Temora,8,2,8,7,1
+Temora,9,1,6,7,2
+Temora,10,7,2,5,4
+Temora,11,1,2,3,8
+Temora,12,1,2,7,4
+Taree,1,8,7,4,1
+Taree,2,4,7,2,1
+Taree,3,2,1,7,3
+Taree,4,7,8,1,6
+Taree,5,7,8,4,1
+Taree,6,3,4,1,5
+Taree,7,3,8,7,2
+Taree,8,3,1,6,5
+Taree,9,1,4,8,2
+Taree,10,1,2,4,3
+Taree,11,2,6,1,3
+Taree,12,1,5,3,2
+Gunnedah,1,4,6,3,8
+Gunnedah,2,4,1,3,2
+Gunnedah,3,7,4,2,6
+Gunnedah,4,1,7,8,3
+Gunnedah,5,3,6,8,5
+Gunnedah,6,6,2,7,1
+Gunnedah,7,5,8,1,3
+Gunnedah,8,7,5,8,6
+Gunnedah,9,5,8,6,1
+Gunnedah,10,2,6,8,4
+Gunnedah,11,1,4,7,5
+Gunnedah,12,7,1,9,8
+Richmond,1,8,3,1,7
+Richmond,2,7,8,6,5
+Richmond,3,1,6,3,2
+Richmond,4,3,8,5,7
+Richmond,5,5,6,8,2
+Richmond,6,6,8,2,1
+Richmond,7,6,7,5,8
+Richmond,8,5,4,2,3
+Richmond,9,6,3,7,4
+Richmond,10,6,7,2,3
+Richmond,11,5,8,7,2
+Richmond,12,1,5,8,4
+Sale,1,4,1,6,2
+Sale,2,2,8,4,7
+Sale,3,6,8,3,1
+Sale,4,4,2,3,7
+Sale,5,8,7,2,4
+Sale,6,2,1,7,8
+Sale,7,8,1,7,6
+Sale,8,7,6,2,1
+Sale,9,6,2,7,1
+Sale,10,6,7,4,1
+Sale,11,2,1,5,4
+Sale,12,3,2,1,6
+Gawler,1,6,4,1,2
+Gawler,2,2,8,4,1
+Gawler,3,5,1,4,7
+Gawler,4,5,1,7,3
+Gawler,5,1,7,4,5
+Gawler,6,9,5,2,7
+Gawler,7,2,5,1,8
+Gawler,8,1,3,4,5
+BetDeluxe Capalaba,1,8,7,5,4
+BetDeluxe Capalaba,2,5,2,1,8
+BetDeluxe Capalaba,3,7,8,4,6
+BetDeluxe Capalaba,4,6,4,1,2
+BetDeluxe Capalaba,5,7,8,4,2
+BetDeluxe Capalaba,6,7,8,6,5
+BetDeluxe Capalaba,7,6,2,3,5
+BetDeluxe Capalaba,8,1,3,8,2
+BetDeluxe Capalaba,9,7,6,8,1
+BetDeluxe Capalaba,10,6,4,7,1
+BetDeluxe Capalaba,11,2,6,4,3
+Bendigo,1,1,8,5,2
+Bendigo,2,6,4,7,3
+Bendigo,3,6,2,3,5
+Bendigo,4,4,5,7,1
+Bendigo,5,8,4,2,3
+Bendigo,6,4,1,8,7
+Bendigo,7,4,2,1,8
+Bendigo,8,5,4,9,6
+Bendigo,9,2,5,7,8
+Bendigo,10,5,1,8,4
+Bendigo,11,1,7,8,3
+Bendigo,12,7,6,1,4
+Ladbrokes Q1 Lakeside,1,2,8,5,1
+Ladbrokes Q1 Lakeside,2,7,5,2,6
+Ladbrokes Q1 Lakeside,3,8,1,3,5
+Ladbrokes Q1 Lakeside,4,7,6,8,5
+Ladbrokes Q1 Lakeside,5,7,4,2,1
+Ladbrokes Q1 Lakeside,6,2,5,8,3
+Ladbrokes Q1 Lakeside,7,7,5,3,8
+Ladbrokes Q1 Lakeside,8,6,7,5,4
+Ladbrokes Q1 Lakeside,9,8,5,1,2
+Ladbrokes Q1 Lakeside,10,4,3,1,6
+Ladbrokes Q1 Lakeside,11,4,2,7,1
+Ladbrokes Q1 Lakeside,12,4,6,2,1
+Ballarat,1,5,7,8,4
+Ballarat,2,5,4,2,3
+Ballarat,3,5,2,3,1
+Ballarat,4,4,5,6,7
+Ballarat,5,5,1,4,2
+Ballarat,6,2,1,4,7
+Ballarat,7,2,4,8,7
+Ballarat,8,3,7,8,2
+Ballarat,9,3,8,2,5
+Ballarat,10,8,2,6,7
+Ballarat,11,1,6,7,3
+Ballarat,12,2,4,6,8
+Meadows,1,7,5,4,1
+Meadows,2,3,1,6,7
+Meadows,3,4,1,2,7
+Meadows,4,5,8,2,1
+Meadows,5,3,1,8,7
+Meadows,6,3,2,7,1
+Meadows,7,1,2,6,4
+Meadows,8,2,8,3,4
+Meadows,9,3,7,1,2
+Meadows,10,1,6,4,8
+Meadows,11,2,4,1,8
+Darwin,1,7,4,1,5
+Darwin,2,1,8,5,7
+Darwin,3,4,2,7,5
+Darwin,4,2,1,8,4
+Darwin,5,8,7,1,5
+Darwin,6,6,1,3,2
+Darwin,7,7,5,4,8
+Darwin,8,5,7,4,2
+BetDeluxe Rockhampton,1,1,4,8,6
+BetDeluxe Rockhampton,2,7,2,5,4
+BetDeluxe Rockhampton,3,5,7,1,2
+BetDeluxe Rockhampton,4,2,3,4,8
+BetDeluxe Rockhampton,5,8,2,6,7
+BetDeluxe Rockhampton,6,4,1,6,3
+BetDeluxe Rockhampton,7,4,8,5,1
+BetDeluxe Rockhampton,8,1,8,4,2
+BetDeluxe Rockhampton,9,2,7,3,5
+BetDeluxe Rockhampton,10,2,3,1,7
+BetDeluxe Rockhampton,11,3,4,8,7
+BetDeluxe Rockhampton,12,6,8,4,7
+Cannington,1,1,8,4,7
+Cannington,2,1,2,7,4
+Cannington,3,4,8,6,2
+Cannington,4,2,8,1,6
+Cannington,5,2,7,3,6
+Cannington,6,4,2,5,6
+Cannington,7,3,8,6,1
+Cannington,8,2,4,7,5
+Cannington,9,5,2,1,4
+Cannington,10,6,5,7,1
+Cannington,11,1,8,7,5
+Cannington,12,5,8,7,2

@@ -1,133 +1,133 @@
-Date,Track,RaceNumber,Position1,Position2,Position3,Position4,Position5,Position6,Position7,Position8,Position9,Position10
-2025-11-30,Maitland,1,6,8,3,7,,,,,
-2025-11-30,Maitland,2,7,2,4,3,,,,,
-2025-11-30,Maitland,3,6,1,3,5,,,,,
-2025-11-30,Maitland,4,8,4,7,1,,,,,
-2025-11-30,Maitland,5,2,1,8,7,,,,,
-2025-11-30,Maitland,6,7,2,1,6,,,,,
-2025-11-30,Maitland,7,1,2,8,6,,,,,
-2025-11-30,Maitland,8,5,6,4,2,,,,,
-2025-11-30,Maitland,9,8,2,1,7,,,,,
-2025-11-30,Maitland,10,4,6,3,1,,,,,
-2025-11-30,Richmond,1,2,8,6,4,,,,,
-2025-11-30,Richmond,2,1,8,7,3,,,,,
-2025-11-30,Richmond,3,2,3,5,7,,,,,
-2025-11-30,Richmond,4,5,1,8,6,,,,,
-2025-11-30,Richmond,5,7,2,4,1,,,,,
-2025-11-30,Richmond,6,2,5,8,4,,,,,
-2025-11-30,Richmond,7,8,3,2,4,,,,,
-2025-11-30,Richmond,8,2,1,3,4,,,,,
-2025-11-30,Richmond,9,8,2,6,4,,,,,
-2025-11-30,Richmond,10,3,1,4,8,,,,,
-2025-11-30,Richmond,11,7,4,1,8,,,,,
-2025-11-30,Richmond,12,2,4,5,8,,,,,
-2025-11-30,Grafton,1,1,4,5,6,,,,,
-2025-11-30,Grafton,2,4,1,6,5,,,,,
-2025-11-30,Grafton,3,3,7,6,4,,,,,
-2025-11-30,Grafton,4,3,6,1,2,,,,,
-2025-11-30,Grafton,5,8,1,5,6,,,,,
-2025-11-30,Grafton,6,1,6,8,5,,,,,
-2025-11-30,Grafton,7,8,5,4,3,,,,,
-2025-11-30,Grafton,8,3,7,8,6,,,,,
-2025-11-30,Grafton,9,8,1,3,4,,,,,
-2025-11-30,Grafton,10,6,5,8,4,,,,,
-2025-11-30,Grafton,11,5,4,7,1,,,,,
-2025-11-30,Grafton,12,5,2,7,8,,,,,
-2025-11-30,Broken Hill,1,3,1,6,8,,,,,
-2025-11-30,Broken Hill,2,5,8,1,7,,,,,
-2025-11-30,Broken Hill,3,8,1,4,7,,,,,
-2025-11-30,Broken Hill,4,2,1,3,4,,,,,
-2025-11-30,Broken Hill,5,2,8,3,7,,,,,
-2025-11-30,Broken Hill,6,2,8,1,5,,,,,
-2025-11-30,Broken Hill,7,2,7,5,4,,,,,
-2025-11-30,Broken Hill,8,4,1,7,2,,,,,
-2025-11-30,Healesville,1,8,4,1,6,,,,,
-2025-11-30,Healesville,2,4,1,6,2,,,,,
-2025-11-30,Healesville,3,2,7,1,5,,,,,
-2025-11-30,Healesville,4,3,8,5,7,,,,,
-2025-11-30,Healesville,5,6,4,3,1,,,,,
-2025-11-30,Healesville,6,2,3,1,5,,,,,
-2025-11-30,Healesville,7,8,1,3,6,,,,,
-2025-11-30,Healesville,8,2,1,7,8,,,,,
-2025-11-30,Healesville,9,8,7,6,5,,,,,
-2025-11-30,Healesville,10,7,6,3,5,,,,,
-2025-11-30,Healesville,11,3,2,8,6,,,,,
-2025-11-30,Healesville,12,1,4,6,5,,,,,
-2025-11-30,Mount Gambier,1,1,7,2,4,,,,,
-2025-11-30,Mount Gambier,2,5,7,1,4,,,,,
-2025-11-30,Mount Gambier,3,1,8,4,2,,,,,
-2025-11-30,Mount Gambier,4,1,8,2,4,,,,,
-2025-11-30,Mount Gambier,5,2,5,8,1,,,,,
-2025-11-30,Mount Gambier,6,4,2,3,7,,,,,
-2025-11-30,Mount Gambier,7,2,3,8,4,,,,,
-2025-11-30,Mount Gambier,8,7,5,1,4,,,,,
-2025-11-30,Mount Gambier,9,4,2,6,8,,,,,
-2025-11-30,Mount Gambier,10,2,8,4,5,,,,,
-2025-11-30,Mount Gambier,11,1,2,8,4,,,,,
-2025-11-30,BetDeluxe Capalaba,1,4,5,1,7,,,,,
-2025-11-30,BetDeluxe Capalaba,2,5,8,1,7,,,,,
-2025-11-30,BetDeluxe Capalaba,3,6,8,2,1,,,,,
-2025-11-30,BetDeluxe Capalaba,4,1,4,7,8,,,,,
-2025-11-30,BetDeluxe Capalaba,5,8,4,5,7,,,,,
-2025-11-30,BetDeluxe Capalaba,6,4,5,8,1,,,,,
-2025-11-30,BetDeluxe Capalaba,7,7,6,5,2,,,,,
-2025-11-30,BetDeluxe Capalaba,8,6,7,1,4,,,,,
-2025-11-30,BetDeluxe Capalaba,9,1,7,8,5,,,,,
-2025-11-30,BetDeluxe Capalaba,10,2,1,4,5,,,,,
-2025-11-30,Murray Bridge,1,8,7,5,2,,,,,
-2025-11-30,Murray Bridge,2,1,7,2,4,,,,,
-2025-11-30,Murray Bridge,3,8,1,7,2,,,,,
-2025-11-30,Murray Bridge,4,8,4,6,2,,,,,
-2025-11-30,Murray Bridge,5,5,2,1,8,,,,,
-2025-11-30,Murray Bridge,6,2,7,8,1,,,,,
-2025-11-30,Murray Bridge,7,2,1,9,5,,,,,
-2025-11-30,Murray Bridge,8,5,1,7,8,,,,,
-2025-11-30,Murray Bridge,9,7,2,8,4,,,,,
-2025-11-30,Murray Bridge,10,2,1,8,4,,,,,
-2025-11-30,Murray Bridge,11,8,2,4,6,,,,,
-2025-11-30,Murray Bridge,12,8,6,4,1,,,,,
-2025-11-30,Sale,1,7,1,5,3,,,,,
-2025-11-30,Sale,2,7,2,1,5,,,,,
-2025-11-30,Sale,3,1,4,2,5,,,,,
-2025-11-30,Sale,4,2,4,3,8,,,,,
-2025-11-30,Sale,5,3,8,7,1,,,,,
-2025-11-30,Sale,6,8,2,3,6,,,,,
-2025-11-30,Sale,7,5,1,3,2,,,,,
-2025-11-30,Sale,8,4,5,3,8,,,,,
-2025-11-30,Sale,9,1,3,4,5,,,,,
-2025-11-30,Sale,10,4,1,6,8,,,,,
-2025-11-30,Sale,11,1,2,3,4,,,,,
-2025-11-30,Sale,12,8,5,1,3,,,,,
-2025-11-30,BetDeluxe Rockhampton,1,1,7,8,2,,,,,
-2025-11-30,BetDeluxe Rockhampton,2,7,1,4,8,,,,,
-2025-11-30,BetDeluxe Rockhampton,3,3,1,6,7,,,,,
-2025-11-30,BetDeluxe Rockhampton,4,3,2,4,5,,,,,
-2025-11-30,BetDeluxe Rockhampton,5,6,2,7,3,,,,,
-2025-11-30,BetDeluxe Rockhampton,6,8,6,2,4,,,,,
-2025-11-30,BetDeluxe Rockhampton,7,1,2,3,6,,,,,
-2025-11-30,BetDeluxe Rockhampton,8,6,2,1,3,,,,,
-2025-11-30,BetDeluxe Rockhampton,9,3,4,1,8,,,,,
-2025-11-30,BetDeluxe Rockhampton,10,1,5,8,2,,,,,
-2025-11-30,BetDeluxe Rockhampton,11,1,2,8,4,,,,,
-2025-11-30,BetDeluxe Rockhampton,12,8,1,6,3,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,1,3,8,2,7,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,2,2,4,6,7,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,3,8,4,6,7,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,4,6,7,3,2,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,5,5,8,1,7,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,6,6,1,2,3,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,7,2,3,4,6,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,8,4,8,2,3,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,9,2,7,1,8,,,,,
-2025-11-30,Ladbrokes Q2 Parklands,10,2,1,3,7,,,,,
-2025-11-30,Darwin,1,7,1,2,4,,,,,
-2025-11-30,Darwin,2,2,7,4,5,,,,,
-2025-11-30,Darwin,3,3,2,8,7,,,,,
-2025-11-30,Darwin,4,7,2,8,5,,,,,
-2025-11-30,Darwin,5,1,5,2,8,,,,,
-2025-11-30,Darwin,6,7,4,8,5,,,,,
-2025-11-30,Darwin,7,2,1,4,8,,,,,
-2025-11-30,Darwin,8,8,5,7,4,,,,,
-2025-11-30,Darwin,9,2,4,5,8,,,,,
-2025-11-30,Darwin,10,3,6,1,8,,,,,
-2025-11-30,Darwin,11,7,2,8,5,,,,,
+Track,Race,Position1,Position2,Position3,Position4
+Maitland,1,6,8,3,7
+Maitland,2,7,2,4,3
+Maitland,3,6,1,3,5
+Maitland,4,8,4,7,1
+Maitland,5,2,1,8,7
+Maitland,6,7,2,1,6
+Maitland,7,1,2,8,6
+Maitland,8,5,6,4,2
+Maitland,9,8,2,1,7
+Maitland,10,4,6,3,1
+Richmond,1,2,8,6,4
+Richmond,2,1,8,7,3
+Richmond,3,2,3,5,7
+Richmond,4,5,1,8,6
+Richmond,5,7,2,4,1
+Richmond,6,2,5,8,4
+Richmond,7,8,3,2,4
+Richmond,8,2,1,3,4
+Richmond,9,8,2,6,4
+Richmond,10,3,1,4,8
+Richmond,11,7,4,1,8
+Richmond,12,2,4,5,8
+Grafton,1,1,4,5,6
+Grafton,2,4,1,6,5
+Grafton,3,3,7,6,4
+Grafton,4,3,6,1,2
+Grafton,5,8,1,5,6
+Grafton,6,1,6,8,5
+Grafton,7,8,5,4,3
+Grafton,8,3,7,8,6
+Grafton,9,8,1,3,4
+Grafton,10,6,5,8,4
+Grafton,11,5,4,7,1
+Grafton,12,5,2,7,8
+Broken Hill,1,3,1,6,8
+Broken Hill,2,5,8,1,7
+Broken Hill,3,8,1,4,7
+Broken Hill,4,2,1,3,4
+Broken Hill,5,2,8,3,7
+Broken Hill,6,2,8,1,5
+Broken Hill,7,2,7,5,4
+Broken Hill,8,4,1,7,2
+Healesville,1,8,4,1,6
+Healesville,2,4,1,6,2
+Healesville,3,2,7,1,5
+Healesville,4,3,8,5,7
+Healesville,5,6,4,3,1
+Healesville,6,2,3,1,5
+Healesville,7,8,1,3,6
+Healesville,8,2,1,7,8
+Healesville,9,8,7,6,5
+Healesville,10,7,6,3,5
+Healesville,11,3,2,8,6
+Healesville,12,1,4,6,5
+Mount Gambier,1,1,7,2,4
+Mount Gambier,2,5,7,1,4
+Mount Gambier,3,1,8,4,2
+Mount Gambier,4,1,8,2,4
+Mount Gambier,5,2,5,8,1
+Mount Gambier,6,4,2,3,7
+Mount Gambier,7,2,3,8,4
+Mount Gambier,8,7,5,1,4
+Mount Gambier,9,4,2,6,8
+Mount Gambier,10,2,8,4,5
+Mount Gambier,11,1,2,8,4
+BetDeluxe Capalaba,1,4,5,1,7
+BetDeluxe Capalaba,2,5,8,1,7
+BetDeluxe Capalaba,3,6,8,2,1
+BetDeluxe Capalaba,4,1,4,7,8
+BetDeluxe Capalaba,5,8,4,5,7
+BetDeluxe Capalaba,6,4,5,8,1
+BetDeluxe Capalaba,7,7,6,5,2
+BetDeluxe Capalaba,8,6,7,1,4
+BetDeluxe Capalaba,9,1,7,8,5
+BetDeluxe Capalaba,10,2,1,4,5
+Murray Bridge,1,8,7,5,2
+Murray Bridge,2,1,7,2,4
+Murray Bridge,3,8,1,7,2
+Murray Bridge,4,8,4,6,2
+Murray Bridge,5,5,2,1,8
+Murray Bridge,6,2,7,8,1
+Murray Bridge,7,2,1,9,5
+Murray Bridge,8,5,1,7,8
+Murray Bridge,9,7,2,8,4
+Murray Bridge,10,2,1,8,4
+Murray Bridge,11,8,2,4,6
+Murray Bridge,12,8,6,4,1
+Sale,1,7,1,5,3
+Sale,2,7,2,1,5
+Sale,3,1,4,2,5
+Sale,4,2,4,3,8
+Sale,5,3,8,7,1
+Sale,6,8,2,3,6
+Sale,7,5,1,3,2
+Sale,8,4,5,3,8
+Sale,9,1,3,4,5
+Sale,10,4,1,6,8
+Sale,11,1,2,3,4
+Sale,12,8,5,1,3
+BetDeluxe Rockhampton,1,1,7,8,2
+BetDeluxe Rockhampton,2,7,1,4,8
+BetDeluxe Rockhampton,3,3,1,6,7
+BetDeluxe Rockhampton,4,3,2,4,5
+BetDeluxe Rockhampton,5,6,2,7,3
+BetDeluxe Rockhampton,6,8,6,2,4
+BetDeluxe Rockhampton,7,1,2,3,6
+BetDeluxe Rockhampton,8,6,2,1,3
+BetDeluxe Rockhampton,9,3,4,1,8
+BetDeluxe Rockhampton,10,1,5,8,2
+BetDeluxe Rockhampton,11,1,2,8,4
+BetDeluxe Rockhampton,12,8,1,6,3
+Ladbrokes Q2 Parklands,1,3,8,2,7
+Ladbrokes Q2 Parklands,2,2,4,6,7
+Ladbrokes Q2 Parklands,3,8,4,6,7
+Ladbrokes Q2 Parklands,4,6,7,3,2
+Ladbrokes Q2 Parklands,5,5,8,1,7
+Ladbrokes Q2 Parklands,6,6,1,2,3
+Ladbrokes Q2 Parklands,7,2,3,4,6
+Ladbrokes Q2 Parklands,8,4,8,2,3
+Ladbrokes Q2 Parklands,9,2,7,1,8
+Ladbrokes Q2 Parklands,10,2,1,3,7
+Darwin,1,7,1,2,4
+Darwin,2,2,7,4,5
+Darwin,3,3,2,8,7
+Darwin,4,7,2,8,5
+Darwin,5,1,5,2,8
+Darwin,6,7,4,8,5
+Darwin,7,2,1,4,8
+Darwin,8,8,5,7,4
+Darwin,9,2,4,5,8
+Darwin,10,3,6,1,8
+Darwin,11,7,2,8,5

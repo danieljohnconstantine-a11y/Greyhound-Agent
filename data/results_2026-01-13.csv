@@ -1,134 +1,133 @@
-Track,Date,RaceNumber,Box1,Box2,Box3,Box4,Box5,Box6,Box7,Box8,Box9,Box10
-Grafton,2026-01-13,1,4,8,7,6,,,,,,
-Grafton,2026-01-13,2,6,1,7,3,,,,,,
-Grafton,2026-01-13,3,1,2,4,7,,,,,,
-Grafton,2026-01-13,4,2,7,1,5,,,,,,
-Grafton,2026-01-13,5,4,2,1,8,,,,,,
-Grafton,2026-01-13,6,8,3,6,5,,,,,,
-Grafton,2026-01-13,7,7,3,2,1,,,,,,
-Grafton,2026-01-13,8,7,6,8,2,,,,,,
-Grafton,2026-01-13,9,1,7,5,2,,,,,,
-Grafton,2026-01-13,10,2,7,6,8,,,,,,
-Bulli,2026-01-13,1,1,6,8,4,,,,,,
-Bulli,2026-01-13,2,1,7,5,2,,,,,,
-Bulli,2026-01-13,3,1,2,6,8,,,,,,
-Bulli,2026-01-13,4,2,1,3,4,,,,,,
-Bulli,2026-01-13,5,7,1,8,5,,,,,,
-Bulli,2026-01-13,6,2,5,1,8,,,,,,
-Bulli,2026-01-13,7,2,3,1,4,,,,,,
-Bulli,2026-01-13,8,3,1,8,6,,,,,,
-Bulli,2026-01-13,9,3,8,7,1,,,,,,
-Bulli,2026-01-13,10,8,6,2,4,,,,,,
-Bulli,2026-01-13,11,4,8,2,5,,,,,,
-Bulli,2026-01-13,12,4,8,7,3,,,,,,
-Gosford,2026-01-13,1,4,2,5,3,,,,,,
-Gosford,2026-01-13,2,3,8,7,4,,,,,,
-Gosford,2026-01-13,3,7,2,8,1,,,,,,
-Gosford,2026-01-13,4,3,1,8,5,,,,,,
-Gosford,2026-01-13,5,7,1,2,8,,,,,,
-Gosford,2026-01-13,6,8,7,6,5,,,,,,
-Gosford,2026-01-13,7,7,5,8,2,,,,,,
-Gosford,2026-01-13,8,2,6,1,3,,,,,,
-Gosford,2026-01-13,9,5,2,7,8,,,,,,
-Gosford,2026-01-13,10,8,7,3,1,,,,,,
-Gosford,2026-01-13,11,2,6,8,1,,,,,,
-Healesville,2026-01-13,1,5,3,7,8,,,,,,
-Healesville,2026-01-13,2,2,7,8,4,,,,,,
-Healesville,2026-01-13,3,2,3,7,8,,,,,,
-Healesville,2026-01-13,4,1,8,7,4,,,,,,
-Healesville,2026-01-13,5,6,8,3,5,,,,,,
-Healesville,2026-01-13,6,4,8,7,5,,,,,,
-Healesville,2026-01-13,7,8,1,3,4,,,,,,
-Healesville,2026-01-13,8,3,8,6,1,,,,,,
-Healesville,2026-01-13,9,8,1,2,6,,,,,,
-Healesville,2026-01-13,10,8,5,1,6,,,,,,
-Healesville,2026-01-13,11,6,5,7,4,,,,,,
-Healesville,2026-01-13,12,6,7,3,1,,,,,,
-Murray Bridge Straight,2026-01-13,1,1,5,3,7,,,,,,
-Murray Bridge Straight,2026-01-13,2,4,5,2,8,,,,,,
-Murray Bridge Straight,2026-01-13,3,2,8,4,6,,,,,,
-Murray Bridge Straight,2026-01-13,4,7,5,1,8,,,,,,
-Murray Bridge Straight,2026-01-13,5,5,8,7,2,,,,,,
-Murray Bridge Straight,2026-01-13,6,7,8,2,5,,,,,,
-Murray Bridge Straight,2026-01-13,7,1,7,2,8,,,,,,
-Murray Bridge Straight,2026-01-13,8,1,7,6,3,,,,,,
-Murray Bridge Straight,2026-01-13,9,4,8,2,1,,,,,,
-Murray Bridge Straight,2026-01-13,10,6,4,2,1,,,,,,
-Murray Bridge Straight,2026-01-13,11,8,4,2,,,,,,,
-Murray Bridge Straight,2026-01-13,12,2,8,1,7,,,,,,
-Hobart,2026-01-13,1,1,6,3,7,,,,,,
-Hobart,2026-01-13,2,3,1,7,2,,,,,,
-Hobart,2026-01-13,3,1,8,2,3,,,,,,
-Hobart,2026-01-13,4,1,7,6,2,,,,,,
-Hobart,2026-01-13,5,1,5,4,3,,,,,,
-Hobart,2026-01-13,6,1,4,2,5,,,,,,
-Hobart,2026-01-13,7,3,8,2,1,,,,,,
-Hobart,2026-01-13,8,3,6,2,10,,,,,9
-Hobart,2026-01-13,9,1,7,2,8,,,,,,
-Hobart,2026-01-13,10,8,5,2,6,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,1,1,6,4,2,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,2,2,1,6,3,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,3,6,7,8,1,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,4,3,2,8,7,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,5,8,1,4,6,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,6,2,1,6,7,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,7,7,5,6,8,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,8,4,8,3,1,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,9,6,4,5,1,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,10,3,2,4,5,,,,,,
-Ladbrokes Q1 Lakeside,2026-01-13,11,8,1,5,7,,,,,,
-Ballarat,2026-01-13,1,4,3,5,6,,,,,,
-Ballarat,2026-01-13,2,2,7,5,4,,,,,,
-Ballarat,2026-01-13,3,5,9,4,7,,,,,,
-Ballarat,2026-01-13,4,6,3,5,1,,,,,,
-Ballarat,2026-01-13,5,1,8,4,7,,,,,,
-Ballarat,2026-01-13,6,8,4,5,7,,,,,,
-Ballarat,2026-01-13,7,8,2,4,7,,,,,,
-Ballarat,2026-01-13,8,6,2,8,5,,,,,,
-Ballarat,2026-01-13,9,4,1,6,3,,,,,,
-Ballarat,2026-01-13,10,5,6,7,4,,,,,,
-Ballarat,2026-01-13,11,7,4,2,3,,,,,,
-Ballarat,2026-01-13,12,5,6,2,4,,,,,,
-Angle Park,2026-01-13,1,1,7,4,2,,,,,,
-Angle Park,2026-01-13,2,4,5,2,8,,,,,,
-Angle Park,2026-01-13,3,1,5,2,8,,,,,,
-Angle Park,2026-01-13,4,7,1,2,8,,,,,,
-Angle Park,2026-01-13,5,1,8,2,4,,,,,,
-Angle Park,2026-01-13,6,1,2,5,8,,,,,,
-Angle Park,2026-01-13,7,5,8,7,2,,,,,,
-Angle Park,2026-01-13,8,7,4,1,5,,,,,,
-Angle Park,2026-01-13,9,2,1,8,4,,,,,,
-Angle Park,2026-01-13,10,7,2,8,5,,,,,,
-Warragul,2026-01-13,1,2,4,1,8,,,,,,
-Warragul,2026-01-13,2,6,7,1,2,,,,,,
-Warragul,2026-01-13,3,1,4,6,8,,,,,,
-Warragul,2026-01-13,4,2,1,5,8,,,,,,
-Warragul,2026-01-13,5,6,4,10,5,,,,,9
-Warragul,2026-01-13,6,8,2,3,6,,,,,,
-Warragul,2026-01-13,7,3,4,2,6,,,,,,
-Warragul,2026-01-13,8,7,4,2,3,,,,,,
-Warragul,2026-01-13,9,10,4,5,1,,,,,9
-Warragul,2026-01-13,10,2,6,7,8,,,,,,
-Warragul,2026-01-13,11,2,3,5,1,,,,,,
-Warragul,2026-01-13,12,5,7,2,1,,,,,,
-Bet Nation Townsville,2026-01-13,1,5,8,6,3,,,,,,
-Bet Nation Townsville,2026-01-13,2,6,2,8,4,,,,,,
-Bet Nation Townsville,2026-01-13,3,1,3,7,8,,,,,,
-Bet Nation Townsville,2026-01-13,4,6,1,3,7,,,,,,
-Bet Nation Townsville,2026-01-13,5,2,1,3,6,,,,,,
-Bet Nation Townsville,2026-01-13,6,3,7,4,1,,,,,,
-Bet Nation Townsville,2026-01-13,7,6,7,4,3,,,,,,
-Bet Nation Townsville,2026-01-13,8,7,3,5,2,,,,,,
-Bet Nation Townsville,2026-01-13,9,3,5,4,8,,,,,,
-Bet Nation Townsville,2026-01-13,10,5,8,2,3,,,,,,
-Bet Nation Townsville,2026-01-13,11,7,5,3,8,,,,,,
-Bet Nation Townsville,2026-01-13,12,5,6,2,3,,,,,,
-Mandurah,2026-01-13,1,8,5,4,6,,,,,,
-Mandurah,2026-01-13,2,5,8,7,4,,,,,,
-Mandurah,2026-01-13,3,4,2,1,8,,,,,,
-Mandurah,2026-01-13,4,5,7,6,4,,,,,,
-Mandurah,2026-01-13,5,1,3,7,6,,,,,,
-Mandurah,2026-01-13,6,7,1,5,4,,,,,,
-Mandurah,2026-01-13,7,8,5,2,7,,,,,,
-Mandurah,2026-01-13,8,1,2,3,4,,,,,,
-Mandurah,2026-01-13,9,5,2,4,7,,,,,,
+Track,Race,Position1,Position2,Position3,Position4
+Grafton,1,4,8,7,6
+Grafton,2,6,1,7,3
+Grafton,3,1,2,4,7
+Grafton,4,2,7,1,5
+Grafton,5,4,2,1,8
+Grafton,6,8,3,6,5
+Grafton,7,7,3,2,1
+Grafton,8,7,6,8,2
+Grafton,9,1,7,5,2
+Grafton,10,2,7,6,8
+Bulli,1,1,6,8,4
+Bulli,2,1,7,5,2
+Bulli,3,1,2,6,8
+Bulli,4,2,1,3,4
+Bulli,5,7,1,8,5
+Bulli,6,2,5,1,8
+Bulli,7,2,3,1,4
+Bulli,8,3,1,8,6
+Bulli,9,3,8,7,1
+Bulli,10,8,6,2,4
+Bulli,11,4,8,2,5
+Bulli,12,4,8,7,3
+Gosford,1,4,2,5,3
+Gosford,2,3,8,7,4
+Gosford,3,7,2,8,1
+Gosford,4,3,1,8,5
+Gosford,5,7,1,2,8
+Gosford,6,8,7,6,5
+Gosford,7,7,5,8,2
+Gosford,8,2,6,1,3
+Gosford,9,5,2,7,8
+Gosford,10,8,7,3,1
+Gosford,11,2,6,8,1
+Healesville,1,5,3,7,8
+Healesville,2,2,7,8,4
+Healesville,3,2,3,7,8
+Healesville,4,1,8,7,4
+Healesville,5,6,8,3,5
+Healesville,6,4,8,7,5
+Healesville,7,8,1,3,4
+Healesville,8,3,8,6,1
+Healesville,9,8,1,2,6
+Healesville,10,8,5,1,6
+Healesville,11,6,5,7,4
+Healesville,12,6,7,3,1
+Murray Bridge Straight,1,1,5,3,7
+Murray Bridge Straight,2,4,5,2,8
+Murray Bridge Straight,3,2,8,4,6
+Murray Bridge Straight,4,7,5,1,8
+Murray Bridge Straight,5,5,8,7,2
+Murray Bridge Straight,6,7,8,2,5
+Murray Bridge Straight,7,1,7,2,8
+Murray Bridge Straight,8,1,7,6,3
+Murray Bridge Straight,9,4,8,2,1
+Murray Bridge Straight,10,6,4,2,1
+Murray Bridge Straight,12,2,8,1,7
+Hobart,1,1,6,3,7
+Hobart,2,3,1,7,2
+Hobart,3,1,8,2,3
+Hobart,4,1,7,6,2
+Hobart,5,1,5,4,3
+Hobart,6,1,4,2,5
+Hobart,7,3,8,2,1
+Hobart,8,3,6,2,10
+Hobart,9,1,7,2,8
+Hobart,10,8,5,2,6
+Ladbrokes Q1 Lakeside,1,1,6,4,2
+Ladbrokes Q1 Lakeside,2,2,1,6,3
+Ladbrokes Q1 Lakeside,3,6,7,8,1
+Ladbrokes Q1 Lakeside,4,3,2,8,7
+Ladbrokes Q1 Lakeside,5,8,1,4,6
+Ladbrokes Q1 Lakeside,6,2,1,6,7
+Ladbrokes Q1 Lakeside,7,7,5,6,8
+Ladbrokes Q1 Lakeside,8,4,8,3,1
+Ladbrokes Q1 Lakeside,9,6,4,5,1
+Ladbrokes Q1 Lakeside,10,3,2,4,5
+Ladbrokes Q1 Lakeside,11,8,1,5,7
+Ballarat,1,4,3,5,6
+Ballarat,2,2,7,5,4
+Ballarat,3,5,9,4,7
+Ballarat,4,6,3,5,1
+Ballarat,5,1,8,4,7
+Ballarat,6,8,4,5,7
+Ballarat,7,8,2,4,7
+Ballarat,8,6,2,8,5
+Ballarat,9,4,1,6,3
+Ballarat,10,5,6,7,4
+Ballarat,11,7,4,2,3
+Ballarat,12,5,6,2,4
+Angle Park,1,1,7,4,2
+Angle Park,2,4,5,2,8
+Angle Park,3,1,5,2,8
+Angle Park,4,7,1,2,8
+Angle Park,5,1,8,2,4
+Angle Park,6,1,2,5,8
+Angle Park,7,5,8,7,2
+Angle Park,8,7,4,1,5
+Angle Park,9,2,1,8,4
+Angle Park,10,7,2,8,5
+Warragul,1,2,4,1,8
+Warragul,2,6,7,1,2
+Warragul,3,1,4,6,8
+Warragul,4,2,1,5,8
+Warragul,5,6,4,10,5
+Warragul,6,8,2,3,6
+Warragul,7,3,4,2,6
+Warragul,8,7,4,2,3
+Warragul,9,10,4,5,1
+Warragul,10,2,6,7,8
+Warragul,11,2,3,5,1
+Warragul,12,5,7,2,1
+Bet Nation Townsville,1,5,8,6,3
+Bet Nation Townsville,2,6,2,8,4
+Bet Nation Townsville,3,1,3,7,8
+Bet Nation Townsville,4,6,1,3,7
+Bet Nation Townsville,5,2,1,3,6
+Bet Nation Townsville,6,3,7,4,1
+Bet Nation Townsville,7,6,7,4,3
+Bet Nation Townsville,8,7,3,5,2
+Bet Nation Townsville,9,3,5,4,8
+Bet Nation Townsville,10,5,8,2,3
+Bet Nation Townsville,11,7,5,3,8
+Bet Nation Townsville,12,5,6,2,3
+Mandurah,1,8,5,4,6
+Mandurah,2,5,8,7,4
+Mandurah,3,4,2,1,8
+Mandurah,4,5,7,6,4
+Mandurah,5,1,3,7,6
+Mandurah,6,7,1,5,4
+Mandurah,7,8,5,2,7
+Mandurah,8,1,2,3,4
+Mandurah,9,5,2,4,7
