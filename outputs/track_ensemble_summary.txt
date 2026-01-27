@@ -1,0 +1,118 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2026-01-27 10:33:55
+================================================================================
+
+Total PDFs processed: 8
+Successful predictions: 7
+Total dogs predicted: 687
+
+
+Angle Park:
+  Races: 10
+  Dogs: 59
+  Race 1: Box 1 - Lulu Doll (16.4%)
+  Race 2: Box 1 - Slipper's Daisy (16.4%)
+  Race 3: Box 1 - Archer Eleven (16.4%)
+  Race 4: Box 1 - Life's A Joke (16.4%)
+  Race 5: Box 1 - Rico Cappuccino (16.4%)
+  Race 6: Box 1 - Smooth Paradise (16.4%)
+  Race 7: Box 1 - Fancy In Design (16.4%)
+  Race 8: Box 1 - Flying Embers (16.4%)
+  Race 9: Box 1 - Toora Gracie (16.4%)
+  Race 10: Box 1 - Super Wings (16.4%)
+
+Bulli:
+  Races: 12
+  Dogs: 102
+  Race 1: Box 1 - Humble Lomar (12.5%)
+  Race 2: Box 3 - Fancy Carter (12.5%)
+  Race 3: Box 1 - Flash Ethics (12.5%)
+  Race 4: Box 1 - Rion Express (12.5%)
+  Race 5: Box 1 - Cha Cha Ethics (12.5%)
+  Race 6: Box 1 - Pandora Lass (12.5%)
+  Race 7: Box 1 - Magic Linkin (12.5%)
+  Race 8: Box 1 - Non Stop Whiskey (12.5%)
+  Race 9: Box 1 - Greek Sniper (12.5%)
+  Race 10: Box 1 - Taw Galaxy (12.5%)
+  Race 11: Box 1 - Innovation (12.5%)
+  Race 12: Box 3 - Pay Pay Pay (12.5%)
+
+CASINO:
+  Races: 12
+  Dogs: 113
+  Race 1: Box 2 - Sienna Lilly (13.9%)
+  Race 2: Box 7 - Pink Milk (13.9%)
+  Race 3: Box 1 - Robell Ted (13.8%)
+  Race 4: Box 1 - Bull Mundy (13.9%)
+  Race 5: Box 2 - Midnight Bullet (13.8%)
+  Race 6: Box 1 - Kooringa Kate (13.9%)
+  Race 7: Box 1 - Kingsbrae Ebanee (13.9%)
+  Race 8: Box 1 - Last Rupee (13.9%)
+  Race 9: Box 5 - Barcia Cruiser (13.9%)
+  Race 10: Box 6 - Robell Ceaser (13.8%)
+  Race 11: Box 2 - Cheeky Toni (13.9%)
+  Race 12: Box 1 - Loongana Lilly (13.9%)
+
+GOSFORD:
+  Races: 12
+  Dogs: 108
+  Race 1: Box 1 - Jan's Secret (13.2%)
+  Race 2: Box 5 - Mick's Pick (13.2%)
+  Race 3: Box 1 - Bigbad Franky (13.2%)
+  Race 4: Box 2 - Any Ace Bronte (13.2%)
+  Race 5: Box 4 - Bad Knees (13.2%)
+  Race 6: Box 1 - Tickets Please (13.2%)
+  Race 7: Box 1 - Fascinate Maria (13.2%)
+  Race 8: Box 1 - Classic Ethics (13.2%)
+  Race 9: Box 1 - Daphne Zacapa (13.2%)
+  Race 10: Box 3 - Ray's Beauty (13.2%)
+  Race 11: Box 1 - Cheeky Sloy (13.2%)
+  Race 12: Box 2 - Silver Chain (13.2%)
+
+Mandurah:
+  Races: 13
+  Dogs: 117
+  Race 1: Box 2 - Raw Pearl (13.9%)
+  Race 2: Box 1 - Wisdom Goddess (13.9%)
+  Race 3: Box 8 - Patriot Lyndon (13.9%)
+  Race 4: Box 3 - Paradise Peron (13.8%)
+  Race 5: Box 1 - Sunset Paris (13.9%)
+  Race 6: Box 8 - Cerulean Poppy (13.7%)
+  Race 7: Box 2 - Gold Smirch (13.9%)
+  Race 8: Box 3 - Sunset Diablo (13.9%)
+  Race 9: Box 2 - Boom Striker (13.9%)
+  Race 10: Box 1 - Sunset Chromium (13.9%)
+  Race 11: Box 3 - Sensational Star (13.9%)
+  Race 12: Box 1 - Blow Off Steam (13.8%)
+  Race 13: Box 4 - Luxio Wave (13.9%)
+
+Q LAKESIDE:
+  Races: 10
+  Dogs: 88
+  Race 1: Box 1 - Lady Shazam (13.5%)
+  Race 2: Box 1 - Denim Beach (13.5%)
+  Race 3: Box 1 - Fire Up Shazam (13.5%)
+  Race 4: Box 1 - Fuseless Flynn (13.5%)
+  Race 5: Box 3 - Jenny Dutton (13.5%)
+  Race 6: Box 2 - Van Nostrand (13.5%)
+  Race 7: Box 1 - Maximus Malt (13.5%)
+  Race 8: Box 1 - Shout Out Shazam (13.5%)
+  Race 9: Box 7 - Days Of Wonder (13.5%)
+  Race 10: Box 4 - Backburn Bluey (13.5%)
+
+TOWNSVILLE:
+  Races: 12
+  Dogs: 100
+  Race 1: Box 4 - Federal Saki (14.8%)
+  Race 2: Box 1 - Eugene (16.8%)
+  Race 3: Box 8 - Kasey's Way (17.9%)
+  Race 4: Box 5 - Life's Lesson (17.1%)
+  Race 5: Box 8 - Bar One Smokers (18.4%)
+  Race 6: Box 1 - Dinosaur Bones (17.1%)
+  Race 7: Box 8 - Gidgee Bug (19.9%)
+  Race 8: Box 2 - Lucky Fireball (17.9%)
+  Race 9: Box 5 - He's Peeking (15.6%)
+  Race 10: Box 8 - Pickin' Pixies (16.1%)
+  Race 11: Box 1 - Broke Bank Brian (15.0%)
+  Race 12: Box 8 - Need A Tow (16.5%)
