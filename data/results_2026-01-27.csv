@@ -1,92 +1,92 @@
-Date,Track,RaceNum,WinningBoxes
-2026-01-27,Nowra,1,6378
-2026-01-27,Nowra,2,2156
-2026-01-27,Nowra,3,8127
-2026-01-27,Nowra,4,8725
-2026-01-27,Nowra,5,2531
-2026-01-27,Nowra,6,5761
-2026-01-27,Nowra,7,4213
-2026-01-27,Nowra,8,8756
-2026-01-27,Nowra,9,8371
-2026-01-27,Nowra,10,7351
-2026-01-27,Nowra,11,2461
-2026-01-27,Maitland,1,3764
-2026-01-27,Maitland,2,1427
-2026-01-27,Maitland,3,2176
-2026-01-27,Maitland,4,3241
-2026-01-27,Maitland,5,1762
-2026-01-27,Maitland,6,3214
-2026-01-27,Maitland,7,2564
-2026-01-27,Maitland,8,1476
-2026-01-27,Maitland,9,8213
-2026-01-27,Maitland,10,7145
-2026-01-27,Maitland,11,1275
-2026-01-27,Shepparton,1,3268
-2026-01-27,Shepparton,2,5817
-2026-01-27,Shepparton,3,6743
-2026-01-27,Shepparton,4,4257
-2026-01-27,Shepparton,5,8263
-2026-01-27,Shepparton,6,6841
-2026-01-27,Shepparton,7,1235
-2026-01-27,Shepparton,8,4721
-2026-01-27,Shepparton,9,1486
-2026-01-27,Shepparton,10,5872
-2026-01-27,Shepparton,11,6218
-2026-01-27,Shepparton,12,4536
-2026-01-27,Ballarat,1,3548
-2026-01-27,Ballarat,2,4285
-2026-01-27,Ballarat,3,8356
-2026-01-27,Ballarat,4,8576
-2026-01-27,Ballarat,5,7285
-2026-01-27,Ballarat,6,3826
-2026-01-27,Ballarat,7,8213
-2026-01-27,Ballarat,8,3721
-2026-01-27,Ballarat,9,3528
-2026-01-27,Ballarat,10,4798
-2026-01-27,Ballarat,11,4316
-2026-01-27,Ballarat,12,8213
-2026-01-27,Warrnambool,1,2135
-2026-01-27,Warrnambool,2,3546
-2026-01-27,Warrnambool,3,8712
-2026-01-27,Warrnambool,4,4362
-2026-01-27,Warrnambool,5,2385
-2026-01-27,Warrnambool,6,6482
-2026-01-27,Warrnambool,7,4126
-2026-01-27,Warrnambool,8,8351
-2026-01-27,Warrnambool,9,5861
-2026-01-27,Warrnambool,10,7158
-2026-01-27,Warrnambool,11,4286
-2026-01-27,Warrnambool,12,7235
-2026-01-27,Sandown,1,2871
-2026-01-27,Sandown,2,4281
-2026-01-27,Sandown,3,1482
-2026-01-27,Sandown,4,4582
-2026-01-27,Sandown,5,2158
-2026-01-27,Sandown,6,4361
-2026-01-27,Sandown,7,1843
-2026-01-27,Sandown,8,2581
-2026-01-27,Sandown,9,1762
-2026-01-27,Sandown,10,8124
-2026-01-27,Sandown,11,5471
-2026-01-27,Ladbrokes Q Straight,1,8126
-2026-01-27,Ladbrokes Q Straight,2,6218
-2026-01-27,Ladbrokes Q Straight,3,6847
-2026-01-27,Ladbrokes Q Straight,4,5834
-2026-01-27,Ladbrokes Q Straight,5,6271
-2026-01-27,Ladbrokes Q Straight,6,4572
-2026-01-27,Ladbrokes Q Straight,7,1824
-2026-01-27,Ladbrokes Q Straight,8,6521
-2026-01-27,Ladbrokes Q Straight,9,1263
-2026-01-27,Ladbrokes Q Straight,10,3574
-2026-01-27,Ladbrokes Q Straight,11,1256
-2026-01-27,Ladbrokes Q Straight,12,7684
-2026-01-27,Launceston,1,7283
-2026-01-27,Launceston,2,8367
-2026-01-27,Launceston,3,4326
-2026-01-27,Launceston,4,8471
-2026-01-27,Launceston,5,4538
-2026-01-27,Launceston,6,6125
-2026-01-27,Launceston,7,3724
-2026-01-27,Launceston,8,1638
-2026-01-27,Launceston,9,51087
-2026-01-27,Launceston,10,6518
+Track,Race,Position1,Position2,Position3,Position4
+Nowra,1,6,3,7,8
+Nowra,2,2,1,5,6
+Nowra,3,8,1,2,7
+Nowra,4,8,7,2,5
+Nowra,5,2,5,3,1
+Nowra,6,5,7,6,1
+Nowra,7,4,2,1,3
+Nowra,8,8,7,5,6
+Nowra,9,8,3,7,1
+Nowra,10,7,3,5,1
+Nowra,11,2,4,6,1
+Maitland,1,3,7,6,4
+Maitland,2,1,4,2,7
+Maitland,3,2,1,7,6
+Maitland,4,3,2,4,1
+Maitland,5,1,7,6,2
+Maitland,6,3,2,1,4
+Maitland,7,2,5,6,4
+Maitland,8,1,4,7,6
+Maitland,9,8,2,1,3
+Maitland,10,7,1,4,5
+Maitland,11,1,2,7,5
+Shepparton,1,3,2,6,8
+Shepparton,2,5,8,1,7
+Shepparton,3,6,7,4,3
+Shepparton,4,4,2,5,7
+Shepparton,5,8,2,6,3
+Shepparton,6,6,8,4,1
+Shepparton,7,1,2,3,5
+Shepparton,8,4,7,2,1
+Shepparton,9,1,4,8,6
+Shepparton,10,5,8,7,2
+Shepparton,11,6,2,1,8
+Shepparton,12,4,5,3,6
+Ballarat,1,3,5,4,8
+Ballarat,2,4,2,8,5
+Ballarat,3,8,3,5,6
+Ballarat,4,8,5,7,6
+Ballarat,5,7,2,8,5
+Ballarat,6,3,8,2,6
+Ballarat,7,8,2,1,3
+Ballarat,8,3,7,2,1
+Ballarat,9,3,5,2,8
+Ballarat,10,4,7,9,8
+Ballarat,11,4,3,1,6
+Ballarat,12,8,2,1,3
+Warrnambool,1,2,1,3,5
+Warrnambool,2,3,5,4,6
+Warrnambool,3,8,7,1,2
+Warrnambool,4,4,3,6,2
+Warrnambool,5,2,3,8,5
+Warrnambool,6,6,4,8,2
+Warrnambool,7,4,1,2,6
+Warrnambool,8,8,3,5,1
+Warrnambool,9,5,8,6,1
+Warrnambool,10,7,1,5,8
+Warrnambool,11,4,2,8,6
+Warrnambool,12,7,2,3,5
+Sandown,1,2,8,7,1
+Sandown,2,4,2,8,1
+Sandown,3,1,4,8,2
+Sandown,4,4,5,8,2
+Sandown,5,2,1,5,8
+Sandown,6,4,3,6,1
+Sandown,7,1,8,4,3
+Sandown,8,2,5,8,1
+Sandown,9,1,7,6,2
+Sandown,10,8,1,2,4
+Sandown,11,5,4,7,1
+Ladbrokes Q Straight,1,8,1,2,6
+Ladbrokes Q Straight,2,6,2,1,8
+Ladbrokes Q Straight,3,6,8,4,7
+Ladbrokes Q Straight,4,5,8,3,4
+Ladbrokes Q Straight,5,6,2,7,1
+Ladbrokes Q Straight,6,4,5,7,2
+Ladbrokes Q Straight,7,1,8,2,4
+Ladbrokes Q Straight,8,6,5,2,1
+Ladbrokes Q Straight,9,1,2,6,3
+Ladbrokes Q Straight,10,3,5,7,4
+Ladbrokes Q Straight,11,1,2,5,6
+Ladbrokes Q Straight,12,7,6,8,4
+Launceston,1,7,2,8,3
+Launceston,2,8,3,6,7
+Launceston,3,4,3,2,6
+Launceston,4,8,4,7,1
+Launceston,5,4,5,3,8
+Launceston,6,6,1,2,5
+Launceston,7,3,7,2,4
+Launceston,8,1,6,3,8
+Launceston,9,5,1,0,8
+Launceston,10,6,5,1,8
