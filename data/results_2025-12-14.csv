@@ -1,104 +1,103 @@
-Track,Date,RaceNumber,Winner
-Richmond,2025-12-14,1,2
-Richmond,2025-12-14,2,7
-Richmond,2025-12-14,3,6
-Richmond,2025-12-14,4,3
-Richmond,2025-12-14,5,2
-Richmond,2025-12-14,6,2
-Richmond,2025-12-14,7,8
-Richmond,2025-12-14,8,8
-Richmond,2025-12-14,9,5
-Richmond,2025-12-14,10,4
-Richmond,2025-12-14,11,7
-Grafton,2025-12-14,1,8
-Grafton,2025-12-14,2,4
-Grafton,2025-12-14,3,5
-Grafton,2025-12-14,4,5
-Grafton,2025-12-14,5,2
-Grafton,2025-12-14,6,2
-Grafton,2025-12-14,7,3
-Grafton,2025-12-14,8,1
-Grafton,2025-12-14,9,2
-Grafton,2025-12-14,10,2
-Grafton,2025-12-14,11,2
-Grafton,2025-12-14,12,8
-Healesville,2025-12-14,1,7
-Healesville,2025-12-14,2,6
-Healesville,2025-12-14,3,5
-Healesville,2025-12-14,4,6
-Healesville,2025-12-14,5,2
-Healesville,2025-12-14,6,1
-Healesville,2025-12-14,7,8
-Healesville,2025-12-14,8,7
-Healesville,2025-12-14,9,2
-Healesville,2025-12-14,10,3
-Healesville,2025-12-14,11,7
-Healesville,2025-12-14,12,4
-Mount Gambier,2025-12-14,1,1
-Mount Gambier,2025-12-14,2,7
-Mount Gambier,2025-12-14,3,8
-Mount Gambier,2025-12-14,4,1
-Mount Gambier,2025-12-14,5,8
-Mount Gambier,2025-12-14,6,4
-Mount Gambier,2025-12-14,7,8
-Mount Gambier,2025-12-14,8,2
-Mount Gambier,2025-12-14,9,4
-Mount Gambier,2025-12-14,10,8
-Mount Gambier,2025-12-14,11,10
-Mount Gambier,2025-12-14,12,1
-BetDeluxe Capalaba,2025-12-14,1,2
-BetDeluxe Capalaba,2025-12-14,2,4
-BetDeluxe Capalaba,2025-12-14,3,6
-BetDeluxe Capalaba,2025-12-14,4,6
-BetDeluxe Capalaba,2025-12-14,5,1
-BetDeluxe Capalaba,2025-12-14,6,2
-BetDeluxe Capalaba,2025-12-14,7,3
-BetDeluxe Capalaba,2025-12-14,8,3
-BetDeluxe Rockhampton,2025-12-14,1,1
-BetDeluxe Rockhampton,2025-12-14,2,7
-BetDeluxe Rockhampton,2025-12-14,3,1
-BetDeluxe Rockhampton,2025-12-14,4,2
-BetDeluxe Rockhampton,2025-12-14,5,6
-BetDeluxe Rockhampton,2025-12-14,6,5
-BetDeluxe Rockhampton,2025-12-14,7,7
-BetDeluxe Rockhampton,2025-12-14,8,6
-BetDeluxe Rockhampton,2025-12-14,9,1
-BetDeluxe Rockhampton,2025-12-14,10,1
-Sale,2025-12-14,1,4
-Sale,2025-12-14,2,7
-Sale,2025-12-14,3,2
-Sale,2025-12-14,4,8
-Sale,2025-12-14,5,5
-Sale,2025-12-14,6,5
-Sale,2025-12-14,7,8
-Sale,2025-12-14,8,6
-Sale,2025-12-14,9,6
-Sale,2025-12-14,10,1
-Sale,2025-12-14,11,8
-Sale,2025-12-14,12,8
-Gawler,2025-12-14,1,5
-Gawler,2025-12-14,2,8
-Gawler,2025-12-14,3,5
-Gawler,2025-12-14,4,6
-Gawler,2025-12-14,5,5
-Gawler,2025-12-14,6,8
-Gawler,2025-12-14,7,4
-Gawler,2025-12-14,8,8
-Ladbrokes Q2 Parklands,2025-12-14,1,4
-Ladbrokes Q2 Parklands,2025-12-14,2,2
-Ladbrokes Q2 Parklands,2025-12-14,3,1
-Ladbrokes Q2 Parklands,2025-12-14,4,1
-Ladbrokes Q2 Parklands,2025-12-14,5,7
-Ladbrokes Q2 Parklands,2025-12-14,6,5
-Ladbrokes Q2 Parklands,2025-12-14,7,1
-Ladbrokes Q2 Parklands,2025-12-14,8,5
-Darwin,2025-12-14,1,1
-Darwin,2025-12-14,2,2
-Darwin,2025-12-14,3,2
-Darwin,2025-12-14,4,1
-Darwin,2025-12-14,5,1
-Darwin,2025-12-14,6,4
-Darwin,2025-12-14,7,8
-Darwin,2025-12-14,8,2
-Darwin,2025-12-14,9,8
-Darwin,2025-12-14,10,2
+Track,Race,Position1,Position2,Position3,Position4
+Richmond,1,2,6,7,8
+Richmond,2,7,4,1,9
+Richmond,3,6,2,1,3
+Richmond,4,3,2,1,6
+Richmond,5,2,6,4,1
+Richmond,6,2,1,3,7
+Richmond,7,8,5,3,2
+Richmond,8,8,1,2,4
+Richmond,9,5,1,2,8
+Richmond,10,4,3,7,6
+Richmond,11,7,4,6,1
+Grafton,1,8,1,7,5
+Grafton,2,4,5,8,1
+Grafton,3,5,8,1,7
+Grafton,4,5,2,1,6
+Grafton,5,2,3,8,7
+Grafton,6,2,5,1,9
+Grafton,7,3,5,1,6
+Grafton,8,1,2,3,5
+Grafton,9,2,6,1,3
+Grafton,10,2,9,5,7
+Grafton,11,2,6,5,7
+Grafton,12,8,2,1,7
+Healesville,1,7,2,4,5
+Healesville,2,6,1,2,5
+Healesville,3,5,9,1,4
+Healesville,4,6,1,8,2
+Healesville,5,2,1,8,3
+Healesville,6,1,5,6,7
+Healesville,7,8,6,1,7
+Healesville,8,7,6,1,8
+Healesville,9,2,1,8,6
+Healesville,10,3,1,7,5
+Healesville,11,7,1,3,8
+Healesville,12,4,5,6,1
+Mount Gambier,1,1,2,8,3
+Mount Gambier,2,7,1,5,9
+Mount Gambier,3,8,7,2,4
+Mount Gambier,4,1,2,6,5
+Mount Gambier,5,8,4,6,7
+Mount Gambier,6,4,1,3,7
+Mount Gambier,7,8,2,1,6
+Mount Gambier,8,2,8,4,1
+Mount Gambier,9,4,7,1,5
+Mount Gambier,10,8,1,0,1
+Mount Gambier,11,1,0,3,8
+Mount Gambier,12,1,3,6,4
+BetDeluxe Capalaba,1,2,4,3,1
+BetDeluxe Capalaba,2,4,1,8,7
+BetDeluxe Capalaba,3,6,1,3,8
+BetDeluxe Capalaba,4,6,7,3,4
+BetDeluxe Capalaba,5,1,8,2,7
+BetDeluxe Capalaba,6,2,3,7,1
+BetDeluxe Capalaba,7,3,2,7,1
+BetDeluxe Capalaba,8,3,2,8,1
+BetDeluxe Rockhampton,1,1,6,7,2
+BetDeluxe Rockhampton,2,7,2,6,3
+BetDeluxe Rockhampton,3,1,2,4,7
+BetDeluxe Rockhampton,4,2,5,8,4
+BetDeluxe Rockhampton,5,6,3,5,2
+BetDeluxe Rockhampton,6,5,8,3,2
+BetDeluxe Rockhampton,7,7,8,2,1
+BetDeluxe Rockhampton,8,6,3,8,7
+BetDeluxe Rockhampton,9,1,6,5,8
+BetDeluxe Rockhampton,10,1,5,4,2
+Sale,1,4,5,7,6
+Sale,2,7,5,6,1
+Sale,3,2,1,7,4
+Sale,4,8,9,4,2
+Sale,5,5,6,3,8
+Sale,6,5,8,7,1
+Sale,7,8,1,2,4
+Sale,8,6,5,3,7
+Sale,9,6,4,5,8
+Sale,10,1,6,3,5
+Sale,11,8,2,4,1
+Sale,12,8,3,6,1
+Gawler,1,5,7,3,1
+Gawler,2,8,4,1,5
+Gawler,3,5,2,8,7
+Gawler,4,6,4,1,2
+Gawler,6,8,7,4,1
+Gawler,7,4,8,2,3
+Gawler,8,8,2,4,1
+Ladbrokes Q2 Parklands,1,4,2,8,1
+Ladbrokes Q2 Parklands,2,2,7,1,4
+Ladbrokes Q2 Parklands,3,1,4,2,8
+Ladbrokes Q2 Parklands,4,1,6,4,3
+Ladbrokes Q2 Parklands,5,7,4,8,1
+Ladbrokes Q2 Parklands,6,5,7,4,2
+Ladbrokes Q2 Parklands,7,1,3,5,2
+Ladbrokes Q2 Parklands,8,5,1,3,6
+Darwin,1,1,6,8,2
+Darwin,2,2,5,1,8
+Darwin,3,2,1,4,7
+Darwin,4,1,2,6,4
+Darwin,5,1,8,2,4
+Darwin,6,4,2,1,5
+Darwin,7,8,1,2,4
+Darwin,8,2,4,8,5
+Darwin,9,8,6,4,7
+Darwin,10,2,1,4,8

@@ -1,132 +1,131 @@
-Track,Date,RaceNumber,Winner
-Casino,2025-12-09,1,7
-Casino,2025-12-09,2,7
-Casino,2025-12-09,3,5
-Casino,2025-12-09,4,1
-Casino,2025-12-09,5,1
-Casino,2025-12-09,6,3
-Casino,2025-12-09,7,8
-Casino,2025-12-09,8,7
-Casino,2025-12-09,9,4
-Casino,2025-12-09,10,6
-Bulli,2025-12-09,1,4
-Bulli,2025-12-09,2,8
-Bulli,2025-12-09,3,1
-Bulli,2025-12-09,4,2
-Bulli,2025-12-09,5,6
-Bulli,2025-12-09,6,8
-Bulli,2025-12-09,7,4
-Bulli,2025-12-09,8,8
-Bulli,2025-12-09,9,4
-Bulli,2025-12-09,10,7
-Bulli,2025-12-09,11,8
-Gosford,2025-12-09,1,10
-Gosford,2025-12-09,2,1
-Gosford,2025-12-09,3,3
-Gosford,2025-12-09,4,6
-Gosford,2025-12-09,5,1
-Gosford,2025-12-09,6,2
-Gosford,2025-12-09,7,8
-Gosford,2025-12-09,8,8
-Gosford,2025-12-09,9,1
-Gosford,2025-12-09,10,6
-Gosford,2025-12-09,11,7
-Gosford,2025-12-09,12,5
-Launceston,2025-12-09,1,1
-Launceston,2025-12-09,2,6
-Launceston,2025-12-09,3,1
-Launceston,2025-12-09,4,8
-Launceston,2025-12-09,5,3
-Launceston,2025-12-09,6,8
-Launceston,2025-12-09,7,1
-Launceston,2025-12-09,8,1
-Murray Bridge Straight,2025-12-09,1,4
-Murray Bridge Straight,2025-12-09,2,4
-Murray Bridge Straight,2025-12-09,3,4
-Murray Bridge Straight,2025-12-09,4,2
-Murray Bridge Straight,2025-12-09,5,7
-Murray Bridge Straight,2025-12-09,6,1
-Murray Bridge Straight,2025-12-09,7,8
-Murray Bridge Straight,2025-12-09,8,7
-Murray Bridge Straight,2025-12-09,9,8
-Murray Bridge Straight,2025-12-09,10,5
-Ladbrokes Q1 Lakeside,2025-12-09,1,1
-Ladbrokes Q1 Lakeside,2025-12-09,2,1
-Ladbrokes Q1 Lakeside,2025-12-09,3,8
-Ladbrokes Q1 Lakeside,2025-12-09,4,8
-Ladbrokes Q1 Lakeside,2025-12-09,5,3
-Ladbrokes Q1 Lakeside,2025-12-09,6,8
-Ladbrokes Q1 Lakeside,2025-12-09,7,7
-Ladbrokes Q1 Lakeside,2025-12-09,8,5
-Ladbrokes Q1 Lakeside,2025-12-09,9,2
-Ladbrokes Q1 Lakeside,2025-12-09,10,4
-Ladbrokes Q1 Lakeside,2025-12-09,11,2
-Ladbrokes Q1 Lakeside,2025-12-09,12,1
-Horsham,2025-12-09,1,3
-Horsham,2025-12-09,2,1
-Horsham,2025-12-09,3,5
-Horsham,2025-12-09,4,3
-Horsham,2025-12-09,5,1
-Horsham,2025-12-09,6,3
-Horsham,2025-12-09,7,7
-Horsham,2025-12-09,8,6
-Horsham,2025-12-09,9,4
-Horsham,2025-12-09,10,1
-Horsham,2025-12-09,11,2
-Horsham,2025-12-09,12,1
-Geelong,2025-12-09,1,2
-Geelong,2025-12-09,2,8
-Geelong,2025-12-09,3,2
-Geelong,2025-12-09,4,7
-Geelong,2025-12-09,5,4
-Geelong,2025-12-09,6,7
-Geelong,2025-12-09,7,8
-Geelong,2025-12-09,8,2
-Geelong,2025-12-09,9,7
-Geelong,2025-12-09,10,8
-Geelong,2025-12-09,11,6
-Geelong,2025-12-09,12,5
-Angle Park,2025-12-09,1,1
-Angle Park,2025-12-09,2,1
-Angle Park,2025-12-09,3,7
-Angle Park,2025-12-09,4,1
-Angle Park,2025-12-09,5,1
-Angle Park,2025-12-09,6,7
-Angle Park,2025-12-09,7,8
-Angle Park,2025-12-09,8,2
-Angle Park,2025-12-09,9,1
-Angle Park,2025-12-09,10,2
-Warragul,2025-12-09,1,8
-Warragul,2025-12-09,2,1
-Warragul,2025-12-09,3,2
-Warragul,2025-12-09,4,8
-Warragul,2025-12-09,5,8
-Warragul,2025-12-09,6,7
-Warragul,2025-12-09,7,7
-Warragul,2025-12-09,8,3
-Warragul,2025-12-09,9,1
-Warragul,2025-12-09,10,2
-Warragul,2025-12-09,11,1
-Warragul,2025-12-09,12,3
-Bet Nation Townsville,2025-12-09,1,2
-Bet Nation Townsville,2025-12-09,2,8
-Bet Nation Townsville,2025-12-09,3,8
-Bet Nation Townsville,2025-12-09,4,2
-Bet Nation Townsville,2025-12-09,5,4
-Bet Nation Townsville,2025-12-09,6,1
-Bet Nation Townsville,2025-12-09,7,5
-Bet Nation Townsville,2025-12-09,8,5
-Bet Nation Townsville,2025-12-09,9,8
-Bet Nation Townsville,2025-12-09,10,8
-Bet Nation Townsville,2025-12-09,11,7
-Bet Nation Townsville,2025-12-09,12,8
-Mandurah,2025-12-09,1,2
-Mandurah,2025-12-09,2,4
-Mandurah,2025-12-09,3,6
-Mandurah,2025-12-09,4,5
-Mandurah,2025-12-09,5,4
-Mandurah,2025-12-09,6,8
-Mandurah,2025-12-09,7,4
-Mandurah,2025-12-09,8,5
-Mandurah,2025-12-09,9,2
-Mandurah,2025-12-09,10,7
+Track,Race,Position1,Position2,Position3,Position4
+Casino,1,7,5,8,3
+Casino,2,7,2,4,1
+Casino,3,5,4,7,2
+Casino,4,1,5,7,2
+Casino,5,1,8,5,2
+Casino,6,3,4,6,2
+Casino,7,8,7,6,1
+Casino,8,7,2,3,1
+Casino,9,4,3,5,7
+Casino,10,6,8,7,2
+Bulli,1,4,1,8,7
+Bulli,2,8,5,6,3
+Bulli,3,1,3,6,4
+Bulli,4,2,6,4,5
+Bulli,5,6,8,1,4
+Bulli,6,8,1,7,4
+Bulli,7,4,3,7,6
+Bulli,8,8,4,7,1
+Bulli,9,4,6,3,2
+Bulli,10,7,4,2,1
+Bulli,11,8,2,7,5
+Gosford,1,1,0,3,7
+Gosford,2,1,9,2,5
+Gosford,3,3,1,2,1
+Gosford,4,6,3,4,7
+Gosford,5,1,3,6,7
+Gosford,6,2,7,5,8
+Gosford,7,8,4,7,6
+Gosford,8,8,1,4,1
+Gosford,9,1,7,5,9
+Gosford,10,6,4,2,1
+Gosford,11,7,3,5,1
+Gosford,12,5,3,1,4
+Launceston,1,1,4,6,8
+Launceston,2,6,1,4,2
+Launceston,3,1,2,5,8
+Launceston,4,8,1,6,7
+Launceston,5,3,2,8,1
+Launceston,6,8,2,1,7
+Launceston,7,1,4,6,3
+Launceston,8,1,2,4,8
+Murray Bridge Straight,1,4,6,1,2
+Murray Bridge Straight,2,4,5,8,2
+Murray Bridge Straight,3,4,1,8,2
+Murray Bridge Straight,4,2,8,4,6
+Murray Bridge Straight,5,7,4,8,1
+Murray Bridge Straight,6,1,4,2,8
+Murray Bridge Straight,7,8,1,5,7
+Murray Bridge Straight,8,7,1,8,2
+Murray Bridge Straight,9,8,2,1,4
+Ladbrokes Q1 Lakeside,1,1,9,3,2
+Ladbrokes Q1 Lakeside,2,1,4,7,5
+Ladbrokes Q1 Lakeside,3,8,6,1,4
+Ladbrokes Q1 Lakeside,4,8,1,3,2
+Ladbrokes Q1 Lakeside,5,3,2,4,6
+Ladbrokes Q1 Lakeside,6,8,2,1,7
+Ladbrokes Q1 Lakeside,7,7,6,2,1
+Ladbrokes Q1 Lakeside,8,5,1,6,7
+Ladbrokes Q1 Lakeside,9,2,7,4,8
+Ladbrokes Q1 Lakeside,10,4,7,2,6
+Ladbrokes Q1 Lakeside,11,2,4,3,7
+Ladbrokes Q1 Lakeside,12,1,5,6,3
+Horsham,1,3,4,1,9
+Horsham,2,1,4,5,9
+Horsham,3,5,6,7,3
+Horsham,4,3,1,7,6
+Horsham,5,1,3,6,7
+Horsham,6,3,2,6,1
+Horsham,7,7,8,3,4
+Horsham,8,6,1,3,2
+Horsham,9,4,6,2,1
+Horsham,10,1,4,6,8
+Horsham,11,2,7,1,4
+Horsham,12,1,2,8,3
+Geelong,1,2,3,1,6
+Geelong,2,8,1,3,5
+Geelong,3,2,1,5,3
+Geelong,4,7,8,1,3
+Geelong,5,4,6,1,2
+Geelong,6,7,6,8,5
+Geelong,7,8,5,1,4
+Geelong,8,2,6,7,8
+Geelong,9,7,6,5,8
+Geelong,10,8,1,4,2
+Geelong,11,6,1,2,7
+Geelong,12,5,2,1,4
+Angle Park,1,1,2,5,8
+Angle Park,2,1,4,5,8
+Angle Park,3,7,8,4,9
+Angle Park,4,1,4,5,9
+Angle Park,5,1,5,7,9
+Angle Park,6,7,2,9,8
+Angle Park,7,8,4,2,5
+Angle Park,8,2,5,7,8
+Angle Park,9,1,8,4,2
+Angle Park,10,2,5,1,4
+Warragul,1,8,6,2,5
+Warragul,2,1,7,6,5
+Warragul,3,2,1,6,8
+Warragul,4,8,2,3,1
+Warragul,5,8,4,6,3
+Warragul,6,7,4,5,8
+Warragul,7,7,1,2,8
+Warragul,8,3,4,1,5
+Warragul,9,1,4,2,8
+Warragul,10,2,1,3,5
+Warragul,11,1,6,8,2
+Warragul,12,3,2,7,1
+Bet Nation Townsville,1,2,1,7,3
+Bet Nation Townsville,2,8,4,7,1
+Bet Nation Townsville,3,8,6,7,3
+Bet Nation Townsville,4,2,7,1,8
+Bet Nation Townsville,5,4,6,1,3
+Bet Nation Townsville,6,1,6,8,3
+Bet Nation Townsville,7,5,3,7,4
+Bet Nation Townsville,8,5,6,4,1
+Bet Nation Townsville,9,8,7,5,3
+Bet Nation Townsville,10,8,2,3,1
+Bet Nation Townsville,11,7,3,2,1
+Bet Nation Townsville,12,8,5,6,7
+Mandurah,1,2,8,7,5
+Mandurah,2,4,2,9,7
+Mandurah,3,6,7,2,5
+Mandurah,4,5,2,1,8
+Mandurah,5,4,2,8,6
+Mandurah,6,8,7,1,4
+Mandurah,7,4,2,7,5
+Mandurah,8,5,7,8,2
+Mandurah,9,2,1,4,7
+Mandurah,10,7,4,5,1
