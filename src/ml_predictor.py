@@ -641,6 +641,8 @@ def load_historical_data_hybrid(data_dir='data'):
     from src.features import compute_features
     import glob
     import logging
+    import os
+    import re
     
     logger = logging.getLogger(__name__)
     
@@ -661,7 +663,6 @@ def load_historical_data_hybrid(data_dir='data'):
     for results_file in sorted(results_files):
         try:
             # Extract date from filename: results_YYYY-MM-DD.csv
-            import re
             filename = os.path.basename(results_file)
             date_match = re.search(r'results_(\d{4}-\d{2}-\d{2})\.csv', filename)
             file_date = date_match.group(1) if date_match else ''
