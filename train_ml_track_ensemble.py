@@ -246,8 +246,35 @@ def extract_features_and_labels(race_data_list, winners_list, output_dir="models
     all_scalers = {}
     all_metrics = []
     
+    # Add memory monitoring
+    try:
+        import psutil
+        HAS_PSUTIL = True
+    except ImportError:
+        HAS_PSUTIL = False
+        print("⚠️  psutil not available - memory monitoring disabled")
+    
+    import gc  # For garbage collection
+    
     for i, track in enumerate(sorted(tracks), 1):
-        print(f"\n   [{i}/{len(tracks)}] Training models for {track}...")
+        # Check memory before training each track
+        if HAS_PSUTIL:
+            mem = psutil.virtual_memory()
+            mem_percent = mem.percent
+            mem_available_gb = mem.available / (1024**3)
+            
+            if mem_percent > 85:
+                print(f"\n⚠️  WARNING: High memory usage!")
+                print(f"   Memory: {mem_percent:.1f}% used, {mem_available_gb:.1f} GB available")
+                print(f"   Running garbage collection...")
+                gc.collect()
+                mem_after = psutil.virtual_memory()
+                print(f"   After GC: {mem_after.percent:.1f}% used, {mem_after.available/(1024**3):.1f} GB available")
+            
+            print(f"\n   [{i}/{len(tracks)}] Training models for {track}... (Mem: {mem_percent:.1f}%)")
+        else:
+            print(f"\n   [{i}/{len(tracks)}] Training models for {track}...")
+        
         sys.stdout.flush()
         
         try:
@@ -280,6 +307,13 @@ def extract_features_and_labels(race_data_list, winners_list, output_dir="models
             
             # Show results
             print(f"      ✅ Ensemble accuracy: {metrics['ensemble_accuracy']:.1%}")
+            
+            # CRITICAL: Force garbage collection after each track to prevent OOM
+            # This releases memory from calibration objects and intermediate results
+            del models, scaler, metrics, track_df
+            gc.collect()
+            
+            sys.stdout.flush()
             
         except Exception as e:
             print(f"      ❌ ERROR training {track}: {e}")
@@ -352,6 +386,8 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     - Uses sample weights to emphasize winners (1.0) over placers (0.7/0.5/0.3)
     - Still predicts winners specifically, but learns from all competitive dogs
     
+    MEMORY OPTIMIZED: Reduces parameters for large tracks to prevent OOM
+    
     Args:
         df: DataFrame with race data for this track (includes SampleWeight column)
         feature_cols: List of feature column names
@@ -362,6 +398,26 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         scaler: Fitted StandardScaler
         metrics: Dict with performance metrics
     """
+    # Adaptive complexity based on dataset size (prevent OOM for large tracks)
+    n_samples = len(df)
+    if n_samples > 600:
+        # Very large track - reduce complexity significantly
+        n_estimators = 100
+        max_depth_rf = 15
+        max_depth_gb = 4
+        print(f"      📊 Large dataset ({n_samples} samples) - using reduced complexity")
+    elif n_samples > 400:
+        # Large track - moderate reduction
+        n_estimators = 150
+        max_depth_rf = 18
+        max_depth_gb = 5
+        print(f"      📊 Medium-large dataset ({n_samples} samples) - using moderate complexity")
+    else:
+        # Normal track - full complexity
+        n_estimators = 200
+        max_depth_rf = 20
+        max_depth_gb = 5
+    
     # Prepare data with sample weights
     X = df[feature_cols].fillna(0)
     y = df['Winner']
@@ -385,60 +441,60 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     predictions = {}
     calibrated_predictions = {}
     
-    # 1. Random Forest WITH SAMPLE WEIGHTS
+    # 1. Random Forest WITH SAMPLE WEIGHTS (adaptive complexity)
     print(f"      Training RandomForest with weighted samples...")
     rf = RandomForestClassifier(
-        n_estimators=200,
-        max_depth=20,
+        n_estimators=n_estimators,
+        max_depth=max_depth_rf,
         min_samples_split=5,
         random_state=42,
         n_jobs=-1
     )
     rf.fit(X_train_scaled, y_train, sample_weight=w_train)
     
-    # Calibrate Random Forest with Isotonic Regression
+    # Calibrate Random Forest with Isotonic Regression (CV=3 to save memory)
     print(f"      Calibrating RandomForest...")
-    rf_calibrated = CalibratedClassifierCV(rf, method='isotonic', cv=5)
+    rf_calibrated = CalibratedClassifierCV(rf, method='isotonic', cv=3)
     rf_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
     models['rf'] = rf_calibrated
     predictions['rf'] = rf.predict_proba(X_test_scaled)[:, 1]
     calibrated_predictions['rf'] = rf_calibrated.predict_proba(X_test_scaled)[:, 1]
     
     # 2. Gradient Boosting DOESN'T SUPPORT SAMPLE WEIGHTS IN FIT
-    # So we'll use class_weight='balanced' as alternative
+    # So we'll use class_weight='balanced' as alternative (adaptive complexity)
     print(f"      Training GradientBoosting with balanced class weights...")
     gb = GradientBoostingClassifier(
-        n_estimators=200,
+        n_estimators=n_estimators,
         learning_rate=0.05,
-        max_depth=5,
+        max_depth=max_depth_gb,
         random_state=42
     )
     gb.fit(X_train_scaled, y_train)  # GB doesn't support sample_weight directly
     
-    # Calibrate Gradient Boosting with Isotonic Regression
+    # Calibrate Gradient Boosting with Isotonic Regression (CV=3 to save memory)
     print(f"      Calibrating GradientBoosting...")
-    gb_calibrated = CalibratedClassifierCV(gb, method='isotonic', cv=5)
+    gb_calibrated = CalibratedClassifierCV(gb, method='isotonic', cv=3)
     gb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
     models['gb'] = gb_calibrated
     predictions['gb'] = gb.predict_proba(X_test_scaled)[:, 1]
     calibrated_predictions['gb'] = gb_calibrated.predict_proba(X_test_scaled)[:, 1]
     
-    # 3. XGBoost WITH SAMPLE WEIGHTS (if available)
+    # 3. XGBoost WITH SAMPLE WEIGHTS (if available, adaptive complexity)
     if HAS_XGBOOST:
         print(f"      Training XGBoost with weighted samples...")
         xgb_model = xgb.XGBClassifier(
-            n_estimators=200,
+            n_estimators=n_estimators,
             learning_rate=0.05,
-            max_depth=5,
+            max_depth=max_depth_gb,
             random_state=42,
             use_label_encoder=False,
             eval_metric='logloss'
         )
         xgb_model.fit(X_train_scaled, y_train, sample_weight=w_train)
         
-        # Calibrate XGBoost with Isotonic Regression
+        # Calibrate XGBoost with Isotonic Regression (CV=3 to save memory)
         print(f"      Calibrating XGBoost...")
-        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='isotonic', cv=5)
+        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='isotonic', cv=3)
         xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
         models['xgb'] = xgb_calibrated
         predictions['xgb'] = xgb_model.predict_proba(X_test_scaled)[:, 1]
