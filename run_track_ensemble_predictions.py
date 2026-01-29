@@ -64,7 +64,7 @@ def extract_text_from_pdf(pdf_path):
             text += page.extract_text() + "\n"
     return text
 
-def load_track_ensemble(track_name, models_dir="models/track_ensemble"):
+def load_track_ensemble(track_name, models_dir="models"):
     """
     Load all ensemble models for a specific track.
     
@@ -86,16 +86,18 @@ def load_track_ensemble(track_name, models_dir="models/track_ensemble"):
         # Return None to use fallback
         return None, None, config
     
-    # Load models
+    # Load models from subdirectory (models/{track}/{algorithm}.pkl)
+    track_dir = os.path.join(models_dir, track_name)
+    
     models = {}
     for alg in config['algorithms']:
-        model_path = os.path.join(models_dir, f"{track_name}_{alg}.pkl")
+        model_path = os.path.join(track_dir, f"{alg}.pkl")
         if os.path.exists(model_path):
             with open(model_path, 'rb') as f:
                 models[alg] = pickle.load(f)
     
-    # Load scaler
-    scaler_path = os.path.join(models_dir, f"{track_name}_scaler.pkl")
+    # Load scaler from subdirectory
+    scaler_path = os.path.join(track_dir, "scaler.pkl")
     if os.path.exists(scaler_path):
         with open(scaler_path, 'rb') as f:
             scaler = pickle.load(f)
@@ -189,7 +191,7 @@ def main():
     print("=" * 80)
     
     # Check if models exist
-    models_dir = "models/track_ensemble"
+    models_dir = "models"
     config_path = os.path.join(models_dir, "config.pkl")
     
     if not os.path.exists(config_path):
