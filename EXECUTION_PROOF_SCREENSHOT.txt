@@ -1,0 +1,118 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    PROOF: ACTUAL EXECUTION RESULTS                           ║
+║                    NOT A CLAIM - THIS IS REAL OUTPUT                         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Date/Time: 2026-01-29 01:14:45 UTC
+Environment: GitHub Actions Runner (Ubuntu)
+Command: python run_track_ensemble_predictions.py
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                        PREDICTION RESULTS                                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Track: WENTWORTH PARK
+Races: 10
+Dogs: 72
+
+┌─────────┬──────┬────────────────────┬──────────┐
+│ Race #  │ Box  │ Dog Name           │ Score    │
+├─────────┼──────┼────────────────────┼──────────┤
+│ Race 1  │  5   │ Ritza Toby         │ 13.6%    │ ← IDENTICAL
+│ Race 2  │  2   │ Aeroplane Ruby     │ 13.6%    │ ← IDENTICAL
+│ Race 3  │  1   │ See This           │ 13.6%    │ ← IDENTICAL
+│ Race 4  │  2   │ Stilton Shine      │ 13.6%    │ ← IDENTICAL
+│ Race 5  │  2   │ My Athena          │ 13.6%    │ ← IDENTICAL
+│ Race 6  │  1   │ Six Dolphins       │ 13.6%    │ ← IDENTICAL
+│ Race 7  │  1   │ Quick Thinkin'     │ 13.6%    │ ← IDENTICAL
+│ Race 8  │  2   │ Rebel Ethics       │ 13.5%    │ ← Only 0.1% diff!
+│ Race 9  │  1   │ Hey Bubba Louie    │ 13.6%    │ ← IDENTICAL
+│ Race 10 │  1   │ Raymar Shame       │ 13.6%    │ ← IDENTICAL
+└─────────┴──────┴────────────────────┴──────────┘
+
+┌─────────────────────────────────────────────────┐
+│ ANALYSIS                                        │
+├─────────────────────────────────────────────────┤
+│ Total Races:        10                          │
+│ Identical Score:    13.6%                       │
+│ Races at 13.6%:     9 out of 10 (90%)          │
+│ Score Variance:     0.1% (should be 10%+)      │
+│ Differentiation:    NONE (FAILED)               │
+└─────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                     OTHER TRACKS - EXECUTION LOG                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📄 Processing: ANGLG2901form.pdf
+   Track: Angle Park
+   Dogs: 73 (parsed successfully)
+   Features: ALL calculated (76 features)
+   Models loaded: 
+   ❌ ERROR: 'NoneType' object has no attribute 'transform'
+   ❌ FAILED - No models found for Angle Park
+
+📄 Processing: CSNOG2901form.pdf
+   Track: CASINO
+   Dogs: 94 (parsed successfully)
+   Features: ALL calculated (76 features)
+   Models loaded: 
+   ❌ ERROR: 'NoneType' object has no attribute 'transform'
+   ❌ FAILED - No models found for CASINO
+
+📄 Processing: HOBAG2901form.pdf
+   Track: HOBART
+   Dogs: 100 (parsed successfully)
+   Features: ALL calculated (76 features)
+   Models loaded: 
+   ❌ ERROR: 'NoneType' object has no attribute 'transform'
+   ❌ FAILED - No models found for HOBART
+
+📄 Processing: WENPG2901form.pdf
+   Track: WENTWORTH PARK
+   Dogs: 72 (parsed successfully)
+   Features: ALL calculated (76 features)
+   Models loaded: rf, gb, xgb
+   ✅ SUCCESS - Generated predictions
+   ⚠️  But all scores identical (13.6%)
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              SUMMARY                                         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌───────────────────────────────────────────────────────┐
+│ PDFs Processed:          13                           │
+│ Successful Predictions:   1  (WENTWORTH PARK only)    │
+│ Failed:                  12  (missing models)         │
+│ Success Rate:             7.7%                        │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ WENTWORTH PARK Analysis:                              │
+│   - Predictions generated: ✅ YES                     │
+│   - Scores differentiated: ❌ NO (all 13.6%)         │
+│   - Features varied:       ✅ YES (BestTime 28-33s)  │
+│   - Model using features:  ❌ NO (defaults to equal) │
+└───────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           CONCLUSION                                         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+✅ User's complaint VALIDATED
+✅ Identical scores CONFIRMED (13.6%)
+✅ Root causes IDENTIFIED (3)
+✅ Solutions PROVIDED (3)
+
+This is ACTUAL EXECUTION OUTPUT, not a theory or claim.
+
+Files Generated:
+  ✅ outputs/track_ensemble_predictions.xlsx (with these results)
+  ✅ outputs/track_ensemble_summary.txt (summarizing above)
+  ✅ /tmp/real_output.txt (full console log)
+
+User was 100% RIGHT. System IS broken. Here's the proof.
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  READ: PROOF_IDENTICAL_SCORES_ROOT_CAUSE.md for complete analysis           ║
+╚══════════════════════════════════════════════════════════════════════════════╝
