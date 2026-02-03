@@ -1092,12 +1092,14 @@ def compute_features(df):
     # === WINNING STREAK FACTOR ===
     # Dogs on a winning streak have momentum
     if "DLW" in df.columns:
+        # Convert DLW to numeric, handling "Mdn" (maiden) and other non-numeric values
+        df["DLW"] = pd.to_numeric(df["DLW"], errors="coerce")
         df["WinStreakFactor"] = df["DLW"].apply(
             lambda x: 1.2 if pd.notna(x) and x <= 7 else    # Very recent win
                      1.1 if pd.notna(x) and x <= 14 else   # Recent win
                      1.0 if pd.notna(x) and x <= 28 else   # Within a month
                      0.9 if pd.notna(x) and x <= 60 else   # Going cold
-                     0.8                                    # Long time since win
+                     0.8                                    # Long time since win or maiden
         )
     else:
         df["WinStreakFactor"] = 1.0

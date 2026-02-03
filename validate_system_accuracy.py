@@ -21,10 +21,19 @@ from pathlib import Path
 from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
+import pdfplumber
 
 # Import our modules
 from parser import parse_race_form
 from features import compute_features
+
+def extract_text_from_pdf(pdf_path):
+    """Extract text from PDF file"""
+    text = ""
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text() + "\n"
+    return text
 
 def load_results_file(filepath):
     """Load results CSV file"""
@@ -125,23 +134,27 @@ def load_models(track_name=None):
 def predict_race(pdf_path, race_number, models):
     """Generate prediction for a specific race"""
     try:
-        # Parse PDF
-        all_races = parse_race_form(pdf_path)
+        # Extract text from PDF
+        raw_text = extract_text_from_pdf(pdf_path)
         
-        # Find the specific race
-        race_data = None
-        for race in all_races:
-            if race.get('race_number') == race_number:
-                race_data = race
-                break
+        # Parse PDF text
+        dogs_df = parse_race_form(raw_text)
         
-        if not race_data or 'dogs' not in race_data:
+        if dogs_df.empty or len(dogs_df) == 0:
             return None
         
-        # Compute features for each dog
-        dogs_df = pd.DataFrame(race_data['dogs'])
-        features_df = compute_features(dogs_df, race_data.get('track_name', ''), 
-                                       race_data.get('distance', 520))
+        # Filter to specific race number
+        if 'RaceNumber' in dogs_df.columns:
+            race_dogs = dogs_df[dogs_df['RaceNumber'] == race_number]
+        else:
+            # If no RaceNumber column, assume single race or first race
+            race_dogs = dogs_df
+        
+        if race_dogs.empty or len(race_dogs) == 0:
+            return None
+        
+        # Compute features
+        features_df = compute_features(race_dogs)
         
         if features_df.empty or len(features_df) == 0:
             return None
@@ -150,9 +163,15 @@ def predict_race(pdf_path, race_number, models):
         predictions = []
         for idx, row in features_df.iterrows():
             # Prepare features (drop non-feature columns)
-            feature_cols = [col for col in features_df.columns 
-                          if col not in ['Box', 'DogName', 'Form', 'TrainerName', 'OwnerName']]
+            non_feature_cols = ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 
+                              'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney',
+                              'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance']
+            feature_cols = [col for col in features_df.columns if col not in non_feature_cols]
+            
             X = row[feature_cols].values.reshape(1, -1)
+            
+            # Handle any NaN or infinite values
+            X = np.nan_to_num(X, nan=0.0, posinf=1e6, neginf=-1e6)
             
             # Ensemble predictions
             probs = []
@@ -163,15 +182,15 @@ def predict_race(pdf_path, race_number, models):
                     else:
                         prob = model.predict(X)[0]
                     probs.append(prob)
-                except:
+                except Exception as e:
                     pass
             
             if probs:
                 avg_prob = np.mean(probs)
                 predictions.append({
-                    'box': row.get('Box', idx + 1),
-                    'dog_name': row.get('DogName', ''),
-                    'probability': avg_prob
+                    'box': int(row.get('Box', idx + 1)),
+                    'dog_name': str(row.get('DogName', '')),
+                    'probability': float(avg_prob)
                 })
         
         if not predictions:
@@ -184,6 +203,8 @@ def predict_race(pdf_path, race_number, models):
         
     except Exception as e:
         print(f"  Error predicting race {race_number}: {e}")
+        import traceback
+        traceback.print_exc()
         return None
 
 def main():
