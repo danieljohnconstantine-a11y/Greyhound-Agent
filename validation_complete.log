@@ -2,3 +2,585 @@ nohup: ignoring input
 No race date extracted - will rely on CSV matching
 No race date extracted - will rely on CSV matching
 No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+================================================================================
+VALIDATION TEST - SYSTEM ACCURACY ON HISTORICAL RACES
+================================================================================
+
+Testing on 29/01/2026 and 30/01/2026 races...
+
+✓ Loaded 159 races from data/results_2026-01-29.csv
+✓ Loaded 127 races from data/results_2026-01-30.csv
+
+Total races to test: 286
+
+Loading ML models...
+✓ Loaded 2 models: ['rf', 'gb']
+
+================================================================================
+RUNNING PREDICTIONS...
+================================================================================
+
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: 4 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 7 dogs
+[WARNING] MAIDEN RACE DETECTED - Using CareerStarts for ConsistencyIndex differentiation
+[OK] Calculated TrainerStrikeRate for 6 unique trainers
+  Range: 0.0000 to 0.1500
+  Mean: 0.0214
+[INFO] INFO: RestFactor found or calculated for 7/7 dogs.
+[OK] Calculated PlaceRate for 7 dogs
+[WARNING] MAIDEN RACE DETECTED (DLW='Mdn') - Setting neutral DLWFactor=0.5 for all
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 7 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 5 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 7}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 7 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (2 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 7 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: 5 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 8 dogs
+[WARNING] MAIDEN RACE DETECTED - Using CareerStarts for ConsistencyIndex differentiation
+[OK] Calculated TrainerStrikeRate for 8 unique trainers
+  Range: 0.0000 to 0.1500
+  Mean: 0.0375
+[INFO] INFO: RestFactor found or calculated for 8/8 dogs.
+[OK] Calculated PlaceRate for 8 dogs
+[WARNING] MAIDEN RACE DETECTED (DLW='Mdn') - Setting neutral DLWFactor=0.5 for all
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 8 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 4 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 8}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 8 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (1 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 8 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 6 dogs
+[OK] Calculated TrainerStrikeRate for 6 unique trainers
+  Range: 0.0526 to 0.4444
+  Mean: 0.1942
+[INFO] INFO: RestFactor found or calculated for 6/6 dogs.
+[OK] Calculated PlaceRate for 6 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 6 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 6 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 6}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 6 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (1 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 6 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 7 dogs
+[OK] Calculated TrainerStrikeRate for 6 unique trainers
+  Range: 0.0732 to 0.3077
+  Mean: 0.2270
+[INFO] INFO: RestFactor found or calculated for 7/7 dogs.
+[OK] Calculated PlaceRate for 7 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 7 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 7 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 7}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 7 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (0 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 7 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: 2 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 8 dogs
+[OK] Calculated TrainerStrikeRate for 8 unique trainers
+  Range: 0.0169 to 0.3333
+  Mean: 0.0998
+[INFO] INFO: RestFactor found or calculated for 8/8 dogs.
+[OK] Calculated PlaceRate for 8 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 8 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 8 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 8}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 8 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (1 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 8 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: 4 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 8 dogs
+[OK] Calculated TrainerStrikeRate for 7 unique trainers
+  Range: 0.0508 to 0.6667
+  Mean: 0.1875
+[INFO] INFO: RestFactor found or calculated for 8/8 dogs.
+[OK] Calculated PlaceRate for 8 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 8 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 7 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 8}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 8 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (1 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 8 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 7 dogs
+[OK] Calculated TrainerStrikeRate for 7 unique trainers
+  Range: 0.0233 to 0.3333
+  Mean: 0.1062
+[INFO] INFO: RestFactor found or calculated for 7/7 dogs.
+[OK] Calculated PlaceRate for 7 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 7 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 6 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 7}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 7 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (2 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 7 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (1 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: 2 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+[OK] Calculated RestFactor from DLR for 10 dogs
+[OK] Calculated TrainerStrikeRate for 7 unique trainers
+  Range: 0.2162 to 1.5000
+  Mean: 0.5423
+[INFO] INFO: RestFactor found or calculated for 10/10 dogs.
+[OK] Calculated PlaceRate for 10 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 10 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 10 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 10}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 10 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (1 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 10 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 8 dogs
+[OK] Calculated TrainerStrikeRate for 7 unique trainers
+  Range: 0.1452 to 0.5676
+  Mean: 0.2473
+[INFO] INFO: RestFactor found or calculated for 8/8 dogs.
+[OK] Calculated PlaceRate for 8 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 8 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 8 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 8}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 8 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (1 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 8 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 8 dogs
+[OK] Calculated TrainerStrikeRate for 7 unique trainers
+  Range: 0.0833 to 0.1905
+  Mean: 0.1346
+[INFO] INFO: RestFactor found or calculated for 8/8 dogs.
+[OK] Calculated PlaceRate for 8 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 8 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 7 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 8}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 8 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (2 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 8 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: 1 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 9 dogs
+[OK] Calculated TrainerStrikeRate for 7 unique trainers
+  Range: 0.0667 to 0.1875
+  Mean: 0.1132
+[INFO] INFO: RestFactor found or calculated for 9/9 dogs.
+[OK] Calculated PlaceRate for 9 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 9 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 8 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 9}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 9 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (2 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 9 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 94 dogs
+   [INFO] Timing data extracted: 94/94 dogs have BestTimeSec, 94/94 have SectionalSec
+[WARNING] WARNING: 1 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 8 dogs
+[OK] Calculated TrainerStrikeRate for 6 unique trainers
+  Range: 0.0290 to 0.1069
+  Mean: 0.0792
+[INFO] INFO: RestFactor found or calculated for 8/8 dogs.
+[OK] Calculated PlaceRate for 8 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 8 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 8 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'BOX8_CLOSER': 8}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 8 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (2 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 8 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 74 dogs
+   [INFO] Timing data extracted: 74/74 dogs have BestTimeSec, 74/74 have SectionalSec
+[WARNING] WARNING: 1 dogs have missing/empty Last3TimesSec values
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 8 dogs
+[WARNING] MAIDEN RACE DETECTED - Using CareerStarts for ConsistencyIndex differentiation
+[OK] Calculated TrainerStrikeRate for 8 unique trainers
+  Range: 0.0000 to 0.1500
+  Mean: 0.0187
+[INFO] INFO: RestFactor found or calculated for 8/8 dogs.
+[OK] Calculated PlaceRate for 8 dogs
+[WARNING] MAIDEN RACE DETECTED (DLW='Mdn') - Setting neutral DLWFactor=0.5 for all
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 8 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 3 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 8}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 8 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (2 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 8 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 74 dogs
+   [INFO] Timing data extracted: 74/74 dogs have BestTimeSec, 74/74 have SectionalSec
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 6 dogs
+[OK] Calculated TrainerStrikeRate for 4 unique trainers
+  Range: 0.1127 to 0.4286
+  Mean: 0.2148
+[INFO] INFO: RestFactor found or calculated for 6/6 dogs.
+[OK] Calculated PlaceRate for 6 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 6 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 6 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 6}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 6 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+[OK] Calculated Last3FinishFactor (1.8x weight for winners)
+[OK] Calculated DistanceChangeFactor for distance changes
+[OK] Calculated PaceBoxFactor (2 front-runners detected)
+[OK] Enhanced TrainerTier classification
+[OK] Refined FreshnessFactor (optimal 6-10 days)
+[OK] Refined AgeFactor (peak 26-36 months)
+[OK] Calculated SurfacePreferenceFactor for track surface
+[OK] Calculated BestTimePercentile (lower time = higher rank)
+[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for 6 dogs
+[OK] Applied TrackUpsetFactor (track-specific luck factor)
+[OK] Calculated FieldSizeAdjustment based on field size
+[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)
+[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0
+[OK] Calculated CloserBonus (0 dogs with bonus)
+[OK] Calculated TrainerMomentum (trainer hot streak factor)
+[SUCCESS] Parsed 74 dogs
+   [INFO] Timing data extracted: 74/74 dogs have BestTimeSec, 74/74 have SectionalSec
+[WARNING] WARNING: Margins not found in parsed data - setting to empty lists
+[OK] Calculated RestFactor from DLR for 6 dogs
+[OK] Calculated TrainerStrikeRate for 4 unique trainers
+  Range: 0.0980 to 0.1667
+  Mean: 0.1206
+[INFO] INFO: RestFactor found or calculated for 6/6 dogs.
+[OK] Calculated PlaceRate for 6 dogs
+[OK] Calculated DLWFactor based on Days Last Win
+[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs
+[OK] Calculated DrawFactor for 6 dogs
+[OK] Calculated RTCFactor from Racing Times Category for 4 dogs
+[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)
+  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration
+  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora
+  Track patterns identified: {'NEUTRAL': 6}
+[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)
+  Win/Place/Top3 rates analyzed for all 8 boxes
+[OK] Calculated AgeFactor for 6 dogs
+[OK] Calculated BoxPenaltyFactor (v4.3: Box 1=1.05x, Box 2=1.08x, Box 8=1.08x)
+[OK] Calculated GradeFactor for race grade adjustment (v3.6 speed-adjusted)
+No race date extracted - will rely on CSV matching
