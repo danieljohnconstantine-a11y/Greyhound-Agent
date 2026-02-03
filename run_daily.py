@@ -19,4 +19,5 @@ def run_pipeline():
         else:
             print(f"❌ {file} missing.")
 
-if __name
+if __name__ == "__main__":
+    run_pipeline()
