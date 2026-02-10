@@ -20,6 +20,10 @@ ENV/
 *.tmp
 .DS_Store
 
+# Log files in root
+/*.log
+/*.txt
+
 # Output files
 outputs/*.csv
 outputs/*.xlsx
