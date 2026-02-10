@@ -15,13 +15,14 @@ def extract_text_from_pdf(pdf_path):
 # 🚀 Start pipeline
 print("🚀 Starting Greyhound Analytics")
 
-# ✅ Find all PDFs in data folder
-pdf_folder = "data"
+# ✅ Find all PDFs in data_predictions folder
+pdf_folder = "data_predictions"
 pdf_files = [f for f in os.listdir(pdf_folder) if f.lower().endswith(".pdf")]
 pdf_files.sort(key=lambda x: os.path.getmtime(os.path.join(pdf_folder, x)), reverse=True)
 
 if not pdf_files:
-    print("❌ No PDF files found in data folder.")
+    print("❌ No PDF files found in data_predictions folder.")
+    print("Please place today's race form PDFs in data_predictions/ folder.")
     exit()
 
 all_dogs = []
