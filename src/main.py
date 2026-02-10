@@ -5,9 +5,8 @@ import pdfplumber
 import joblib
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler
-from parser import parse_pdf_form
-from exporter import export_to_excel
 from parser import parse_race_form
+from exporter import export_to_excel
 from features import compute_features
 
 INPUT_DIR = "inputs"
