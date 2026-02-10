@@ -1,10 +1,27 @@
 @echo off
 REM ======================================================================
-REM DAILY PREDICTIONS - Get today's predictions
+REM GREYHOUND RACING PREDICTIONS - MAIN ENTRY POINT
 REM ======================================================================
+REM 
+REM This is the main entry point for running predictions with the
+REM track-specific ensemble models (BEST ACCURACY).
+REM
+REM Prerequisites:
+REM   1. Models trained (run train_ml_track_ensemble.bat first)
+REM   2. Race PDFs in data_predictions/ folder
+REM
+REM Output:
+REM   - outputs/track_ensemble_predictions.xlsx
+REM ======================================================================
+
 echo.
 echo ======================================================================
-echo GREYHOUND RACING PREDICTIONS - TODAY
+echo  GREYHOUND RACING PREDICTIONS - ENSEMBLE MODE
+echo ======================================================================
+echo.
+echo  Running predictions with track-specific ensemble models...
+echo  (BEST ACCURACY)
+echo.
 echo ======================================================================
 echo.
 
@@ -30,18 +47,16 @@ if %PDF_COUNT%==0 (
 
 echo Found %PDF_COUNT% race form PDF(s)
 echo.
-echo Running predictions...
-echo.
 
-REM Use existing run_predictions_today.bat which calls main.py
-python main.py data_predictions\*.pdf
+REM Call the track ensemble predictions script
+call run_track_ensemble_predictions.bat
 
 echo.
 echo ======================================================================
-echo PREDICTIONS COMPLETE!
+echo  COMPLETE!
 echo ======================================================================
 echo.
-echo Check the outputs\ folder for results
-echo Look for HIGH CONFIDENCE races to bet on!
+echo  Check outputs\track_ensemble_predictions.xlsx for results
 echo.
+
 pause
