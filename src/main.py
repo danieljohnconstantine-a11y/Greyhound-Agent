@@ -84,14 +84,14 @@ def train_models(data_folder):
         
         X = track_data[feature_cols].fillna(0)
         
-        # Create synthetic target (1 if FinalScore > median, 0 otherwise)
-        # This trains the model to predict above-average performers vs below-average
-        # Using median ensures balanced classes for training
-        # Note: FinalScore must exist in training data (computed by features.py)
+        # Validate FinalScore exists (computed by features.py during data processing)
         if "FinalScore" not in track_data.columns:
             print(f"Warning: FinalScore not found for {track}, skipping...")
             continue
-            
+        
+        # Create synthetic target (1 if FinalScore > median, 0 otherwise)
+        # This trains the model to predict above-average performers vs below-average
+        # Using median ensures balanced classes for training
         y = (track_data["FinalScore"] > track_data["FinalScore"].median()).astype(int)
         
         if len(X) < 10:
