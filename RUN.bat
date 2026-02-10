@@ -24,7 +24,7 @@ if not exist "models\" (
 )
 
 REM Check if data_predictions directory has PDFs
-dir /b data_predictions\*.pdf >nul 2>&1
+dir /b data_predictions\*.pdf 2>nul | findstr "^" >nul
 if errorlevel 1 (
     echo ERROR: No PDFs found in data_predictions\ folder.
     echo Please place today's race form PDFs in data_predictions\ folder.

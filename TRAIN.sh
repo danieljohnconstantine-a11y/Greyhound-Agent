@@ -13,7 +13,7 @@ if ! command -v python3 &> /dev/null; then
 fi
 
 # Check data folder
-if [ ! -d "data" ] || [ -z "$(ls -A data/*.pdf 2>/dev/null)" ]; then
+if [ ! -d "data" ] || ! ls data/*.pdf >/dev/null 2>&1; then
     echo "ERROR: No training PDFs in data/ folder"
     exit 1
 fi
