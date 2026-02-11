@@ -1,0 +1,39 @@
+{
+  "track_name": "SALE",
+  "generated_at": "2026-01-29T10:27:34.674818",
+  "models": {
+    "rf": {
+      "type": "RF",
+      "n_estimators": "N/A",
+      "max_depth": "N/A",
+      "n_features": 76
+    },
+    "gb": {
+      "type": "GB",
+      "n_estimators": "N/A",
+      "max_depth": "N/A",
+      "n_features": 76
+    },
+    "xgb": {
+      "type": "XGB",
+      "n_estimators": "N/A",
+      "max_depth": "N/A",
+      "n_features": 76
+    }
+  },
+  "ensemble_performance": {
+    "accuracy": "To be measured",
+    "precision": "To be measured",
+    "recall": "To be measured",
+    "f1_score": "To be measured",
+    "top_4_accuracy": "To be measured",
+    "notes": "Run training with validation to populate these metrics"
+  },
+  "data_quality": {
+    "total_samples": "Check training logs",
+    "features_used": 76,
+    "missing_data_pct": "To be calculated",
+    "outliers_removed": "To be calculated"
+  },
+  "feature_importance": {}
+}

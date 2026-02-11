@@ -1,0 +1,2 @@
+# This file ensures the data_predictions directory is tracked by git
+# even when empty. Place your daily race form PDFs here for predictions.
