@@ -1,0 +1,151 @@
+Track,Race,Position1,Position2,Position3,Position4
+Temora,1,6,2,7,1
+Temora,2,7,6,5,2
+Temora,3,4,8,2,1
+Temora,4,5,1,7,4
+Temora,5,8,7,4,6
+Temora,6,1,7,2,8
+Temora,7,1,4,6,8
+Temora,8,4,8,7,2
+Temora,9,8,1,2,3
+Temora,10,7,6,8,1
+Temora,11,6,2,3,1
+Temora,12,2,5,7,8
+Taree,1,6,1,8,4
+Taree,2,8,1,4,5
+Taree,3,1,2,3,4
+Taree,4,2,1,8,3
+Taree,5,5,7,4,8
+Taree,6,5,6,8,2
+Taree,7,8,1,3,4
+Taree,8,1,8,5,7
+Taree,9,8,6,7,5
+Taree,10,5,2,4,8
+Taree,11,7,6,3,4
+Taree,12,2,5,1,7
+Gunnedah,1,9,2,6,7
+Gunnedah,2,2,7,1,3
+Gunnedah,3,4,6,7,3
+Gunnedah,4,4,5,6,2
+Gunnedah,5,2,1,6,3
+Gunnedah,6,3,8,4,2
+Gunnedah,7,6,1,8,7
+Gunnedah,8,8,7,1,4
+Gunnedah,9,6,8,7,4
+Gunnedah,10,5,3,1,6
+Gunnedah,11,2,8,6,5
+Gunnedah,12,8,7,1,4
+Richmond,1,5,7,3,2
+Richmond,2,6,1,4,8
+Richmond,3,6,7,5,2
+Richmond,4,1,2,6,3
+Richmond,5,1,3,7,4
+Richmond,6,3,2,1,5
+Richmond,7,3,2,8,6
+Richmond,8,7,2,8,5
+Richmond,9,4,7,3,2
+Richmond,10,1,4,7,8
+Richmond,11,3,7,5,8
+Richmond,12,3,4,2,8
+Gawler,1,5,1,8,2
+Gawler,2,5,1,7,4
+Gawler,3,6,4,8,2
+Gawler,4,6,1,4,2
+Gawler,5,2,8,5,4
+Gawler,6,4,7,2,8
+Gawler,7,1,2,8,4
+Gawler,8,4,2,1,8
+Healesville,1,1,6,3,2
+Healesville,2,4,2,6,3
+Healesville,3,3,8,7,6
+Healesville,4,7,4,1,8
+Healesville,5,5,1,7,8
+Healesville,6,8,3,1,5
+Healesville,7,4,7,8,1
+Healesville,8,5,7,8,6
+Healesville,9,5,3,6,7
+Healesville,10,4,3,5,7
+Healesville,11,3,4,8,2
+Healesville,12,4,8,2,1
+BetDeluxe Capalaba,1,8,2,6,7
+BetDeluxe Capalaba,2,5,3,8,2
+BetDeluxe Capalaba,3,8,1,6,7
+BetDeluxe Capalaba,4,2,3,4,7
+BetDeluxe Capalaba,5,8,5,6,1
+BetDeluxe Capalaba,6,3,2,5,8
+BetDeluxe Capalaba,7,1,7,6,4
+BetDeluxe Capalaba,8,8,1,5,2
+BetDeluxe Capalaba,9,7,1,4,6
+BetDeluxe Capalaba,10,3,7,1,2
+BetDeluxe Capalaba,11,2,5,6,3
+BetDeluxe Capalaba,12,7,5,8,4
+Bendigo,1,1,6,8,2
+Bendigo,2,5,2,8,4
+Bendigo,3,8,2,7,4
+Bendigo,4,7,1,5,2
+Bendigo,5,1,4,6,2
+Bendigo,6,2,6,4,3
+Bendigo,7,8,4,2,1
+Bendigo,8,2,6,1,7
+Bendigo,9,2,7,4,8
+Bendigo,10,4,8,1,7
+Bendigo,11,1,3,8,4
+Bendigo,12,4,3,8,6
+Ladbrokes Q1 Lakeside,1,3,2,4,5
+Ladbrokes Q1 Lakeside,2,4,2,8,7
+Ladbrokes Q1 Lakeside,3,7,2,8,6
+Ladbrokes Q1 Lakeside,4,1,7,3,6
+Ladbrokes Q1 Lakeside,5,1,8,4,5
+Ladbrokes Q1 Lakeside,6,8,7,3,6
+Ladbrokes Q1 Lakeside,7,2,1,8,7
+Ladbrokes Q1 Lakeside,8,3,6,4,1
+Ladbrokes Q1 Lakeside,9,7,6,4,2
+Ladbrokes Q1 Lakeside,10,1,3,2,9
+Ladbrokes Q1 Lakeside,11,3,5,2,1
+Ladbrokes Q1 Lakeside,12,6,8,4,2
+Ballarat,1,1,8,6,4
+Ballarat,2,4,6,2,1
+Ballarat,3,8,1,4,6
+Ballarat,4,6,1,4,3
+Ballarat,5,4,6,2,8
+Ballarat,6,1,2,7,4
+Ballarat,7,2,7,8,4
+Ballarat,8,1,4,2,8
+Ballarat,9,1,7,4,2
+Ballarat,10,2,7,4,1
+Ballarat,11,3,7,8,9
+Ballarat,12,4,7,3,8
+Meadows,1,6,5,1,2
+Meadows,2,1,4,7,8
+Meadows,3,7,4,6,2
+Meadows,4,4,8,2,7
+Meadows,5,5,2,6,4
+Meadows,6,7,8,3,1
+Meadows,7,3,6,8,7
+Meadows,8,8,2,3,7
+Meadows,9,7,4,5,1
+Meadows,10,8,2,5,6
+Meadows,11,4,1,8,2
+Meadows,12,3,4,6,8
+BetDeluxe Rockhampton,1,2,1,7,5
+BetDeluxe Rockhampton,2,2,7,1,5
+BetDeluxe Rockhampton,3,4,2,8,6
+BetDeluxe Rockhampton,4,4,2,7,1
+BetDeluxe Rockhampton,5,1,8,5,2
+BetDeluxe Rockhampton,6,2,7,3,6
+BetDeluxe Rockhampton,7,7,2,5,6
+BetDeluxe Rockhampton,8,2,8,3,4
+BetDeluxe Rockhampton,9,6,7,4,3
+BetDeluxe Rockhampton,10,7,4,8,6
+Cannington,1,5,6,3,7
+Cannington,2,2,1,3,4
+Cannington,3,1,8,2,3
+Cannington,4,2,4,5,1
+Cannington,5,4,1,6,8
+Cannington,6,4,1,2,7
+Cannington,7,5,7,1,3
+Cannington,8,7,8,5,1
+Cannington,9,3,8,7,1
+Cannington,10,1,6,4,8
+Cannington,11,3,2,6,1
+Cannington,12,8,5,2,1
