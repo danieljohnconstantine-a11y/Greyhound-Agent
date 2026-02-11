@@ -18,3 +18,4 @@ Automated parsing and scoring of greyhound racing forms.
 - `todays_form.csv`: Parsed race data
 - `ranked.csv`: Scored dogs
 - `picks.csv`: Top 5 betting picks
+# Clean branch with ML files
