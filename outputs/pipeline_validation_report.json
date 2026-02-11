@@ -1,0 +1,295 @@
+{
+  "timestamp": "2026-01-29T10:27:36.153615",
+  "tests_passed": 5,
+  "tests_failed": 0,
+  "tests": [
+    {
+      "name": "Model Directory Structure",
+      "status": "PASSED",
+      "details": {
+        "tracks_found": 38,
+        "tracks": {
+          "Angle Park": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "BALLARAT": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "BENDIGO": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Bulli": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Cannington": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Capalaba": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "CASINO": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "DARWIN": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "DUBBO": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "GAWLER": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "GEELONG": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "GOSFORD": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "GOULBURN": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "GRAFTON": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "GUNNEDAH": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "HEALESVILLE": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "HOBART": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "HORSHAM": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Maitland": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Mandurah": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Meadows": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "MURRAY BDGE STRAIGHT": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "NOWRA": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Q LAKESIDE": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Q PARKLANDS": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Q STRAIGHT": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "RICHMOND": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "ROCKHAMPTON": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "SALE": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "SANDOWN": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "SHEPPARTON": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Temora": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "The Gardens": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "TOWNSVILLE": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "track_ensemble": {
+            "rf.pkl": false,
+            "gb.pkl": false,
+            "scaler.pkl": false,
+            "metadata.json": false
+          },
+          "WAGGA": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "Warragul": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          },
+          "WENTWORTH PARK": {
+            "rf.pkl": true,
+            "gb.pkl": true,
+            "scaler.pkl": true,
+            "metadata.json": true
+          }
+        },
+        "all_valid": false
+      }
+    },
+    {
+      "name": "Model Loading Functionality",
+      "status": "PASSED",
+      "details": {
+        "track_tested": "Angle Park",
+        "models_loaded": {
+          "rf.pkl": {
+            "loaded": true,
+            "type": "CalibratedClassifierCV"
+          },
+          "gb.pkl": {
+            "loaded": true,
+            "type": "CalibratedClassifierCV"
+          },
+          "scaler.pkl": {
+            "loaded": true,
+            "type": "StandardScaler"
+          }
+        },
+        "success": true
+      }
+    },
+    {
+      "name": "Outputs Organization",
+      "status": "PASSED",
+      "details": {
+        "by_track_exists": false,
+        "combined_exists": false,
+        "tracks_organized": 0
+      }
+    },
+    {
+      "name": "Training Metrics Files",
+      "status": "PASSED",
+      "details": {
+        "total_tracks": 38,
+        "tracks_with_metrics": 38,
+        "coverage_pct": 100.0
+      }
+    },
+    {
+      "name": "Logs Directory",
+      "status": "PASSED",
+      "details": {
+        "logs_found": 1,
+        "log_files": [
+          "train_track_ensemble.log"
+        ]
+      }
+    }
+  ]
+}

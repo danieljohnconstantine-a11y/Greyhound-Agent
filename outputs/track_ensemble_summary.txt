@@ -1,0 +1,23 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2026-01-29 01:14:45
+================================================================================
+
+Total PDFs processed: 13
+Successful predictions: 1
+Total dogs predicted: 72
+
+
+WENTWORTH PARK:
+  Races: 10
+  Dogs: 72
+  Race 1: Box 5 - Ritza Toby (13.6%)
+  Race 2: Box 2 - Aeroplane Ruby (13.6%)
+  Race 3: Box 1 - See This (13.6%)
+  Race 4: Box 2 - Stilton Shine (13.6%)
+  Race 5: Box 2 - My Athena (13.6%)
+  Race 6: Box 1 - Six Dolphins (13.6%)
+  Race 7: Box 1 - Quick Thinkin' (13.6%)
+  Race 8: Box 2 - Rebel Ethics (13.5%)
+  Race 9: Box 1 - Hey Bubba Louie (13.6%)
+  Race 10: Box 1 - Raymar Shame (13.6%)
