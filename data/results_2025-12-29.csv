@@ -1,0 +1,119 @@
+Track,Race,Position1,Position2,Position3,Position4
+Wagga,R1,1,6,7,3
+Wagga,R2,1,8,4,2
+Wagga,R3,7,5,8,1
+Wagga,R4,3,8,6,7
+Wagga,R5,3,1,8,4
+Wagga,R6,6,3,2,4
+Wagga,R7,6,5,7,3
+Wagga,R8,3,4,2,1
+Wagga,R9,3,4,7,2
+Wagga,R10,6,5,8,7
+Nowra,R1,5,4,6,7
+Nowra,R2,2,3,8,1
+Nowra,R3,5,8,1,2
+Nowra,R4,2,8,6,5
+Nowra,R5,5,1,6,2
+Nowra,R6,5,2,8,6
+Nowra,R7,6,1,4,5
+Nowra,R8,4,5,7,1
+Nowra,R9,1,4,2,3
+Nowra,R10,7,6,8,1
+Nowra,R11,2,6,1,7
+Nowra,R12,5,2,1,7
+Maitland,R1,6,2,7,3
+Maitland,R2,8,1,4,2
+Maitland,R3,5,1,3,2
+Maitland,R4,7,1,8,2
+Maitland,R5,8,6,2,1
+Maitland,R6,6,5,8,7
+Maitland,R7,7,8,5,3
+Maitland,R8,5,3,4,8
+Maitland,R9,7,1,8,2
+Maitland,R10,2,6,5,7
+Ballarat,R1,3,2,4,1
+Ballarat,R2,2,5,3,1
+Ballarat,R3,4,5,3,2
+Ballarat,R4,3,1,4,2
+Ballarat,R5,4,1,3,2
+Ballarat,R6,6,1,8,9
+Ballarat,R7,2,1,7,8
+Ballarat,R8,1,6,8,3
+Ballarat,R9,2,1,9,3
+Ballarat,R10,2,6,3,8
+Ballarat,R11,4,7,2,8
+Ballarat,R12,8,7,2,4
+Shepparton,R2,7,3,2,6
+Shepparton,R3,2,3,4,8
+Shepparton,R4,2,1,6,3
+Shepparton,R5,2,8,5,3
+Shepparton,R6,3,6,5,8
+Shepparton,R7,6,8,5,1
+Shepparton,R8,8,7,4,3
+Shepparton,R9,5,4,8,1
+Shepparton,R10,6,1,5,8
+Shepparton,R11,8,9,5,10
+Shepparton,R12,1,4,9,5
+Warrnambool,R1,6,5,3,8
+Warrnambool,R2,4,5,1,2
+Warrnambool,R3,1,5,2,4
+Warrnambool,R4,8,3,1,7
+Warrnambool,R5,2,7,6,8
+Warrnambool,R6,3,4,6,2
+Warrnambool,R7,6,8,1,2
+Warrnambool,R8,8,7,1,3
+Warrnambool,R9,6,2,4,1
+Warrnambool,R10,2,3,8,6
+Warrnambool,R11,6,4,8,3
+Warrnambool,R12,1,8,4,2
+Sandown,R1,5,4,1,2
+Sandown,R2,2,5,7,1
+Sandown,R3,8,7,4,1
+Sandown,R4,2,4,6,1
+Sandown,R5,2,7,1,3
+Sandown,R6,2,1,3,8
+Sandown,R7,3,4,1,5
+Sandown,R8,4,2,1,3
+Sandown,R9,2,7,4,5
+Sandown,R10,1,7,2,8
+Sandown,R11,2,1,7,8
+Launceston,R1,2,3,1,4
+Launceston,R2,8,2,3,6
+Launceston,R3,3,1,7,8
+Launceston,R4,5,1,3,6
+Launceston,R5,1,4,7,8
+Launceston,R6,1,2,8,3
+Launceston,R7,1,2,7,4
+Launceston,R8,4,3,5,8
+Launceston,R9,3,2,1,6
+Launceston,R10,2,4,8,7
+Launceston,R11,4,1,2,5
+Ladbrokes Q2 Parklands,R1,5,7,1,8
+Ladbrokes Q2 Parklands,R2,8,2,4,1
+Ladbrokes Q2 Parklands,R3,1,8,6,7
+Ladbrokes Q2 Parklands,R4,4,8,2,1
+Ladbrokes Q2 Parklands,R5,2,1,8,3
+Ladbrokes Q2 Parklands,R6,1,8,7,4
+Ladbrokes Q2 Parklands,R7,8,2,4,1
+Ladbrokes Q2 Parklands,R8,2,7,1,4
+Ladbrokes Q2 Parklands,R9,7,6,1,8
+Angle Park,R1,7,3,5,1
+Angle Park,R2,2,6,8,1
+Angle Park,R3,8,2,1,6
+Angle Park,R4,2,1,4,7
+Angle Park,R5,4,8,1,5
+Angle Park,R6,5,7,8,2
+Angle Park,R7,8,6,4,1
+Angle Park,R8,1,7,5,4
+Mandurah,R1,1,8,3,4
+Mandurah,R2,6,5,3,7
+Mandurah,R3,6,3,7,5
+Mandurah,R4,6,8,4,5
+Mandurah,R5,8,1,3,2
+Mandurah,R6,2,4,6,1
+Mandurah,R7,2,1,5,8
+Mandurah,R8,3,2,7,4
+Mandurah,R9,3,8,7,1
+Mandurah,R10,4,8,1,3
+Mandurah,R11,1,5,4,2
+Mandurah,R12,3,4,2,6

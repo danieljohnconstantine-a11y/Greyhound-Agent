@@ -1,0 +1,135 @@
+Track,Race,Position1,Position2,Position3,Position4
+Casino,1,1,2,8,6
+Casino,2,2,8,7,1
+Casino,3,4,2,7,5
+Casino,4,8,5,2,4
+Casino,5,3,5,2,6
+Casino,6,7,8,6,2
+Casino,8,5,1,2,7
+Casino,9,5,4,1,7
+Casino,10,2,9,1,5
+Casino,11,2,1,3,7
+Casino,12,6,2,1,3
+Bulli,1,1,8,2,6
+Bulli,2,2,8,3,6
+Bulli,3,4,6,1,8
+Bulli,4,6,4,1,7
+Bulli,5,6,4,2,1
+Bulli,6,1,2,3,4
+Bulli,7,7,6,9,3
+Bulli,8,7,6,1,3
+Bulli,9,2,5,1,3
+Bulli,10,4,2,7,1
+Gosford,1,5,3,2,4
+Gosford,2,7,1,2,3
+Gosford,3,2,1,4,6
+Gosford,4,8,1,4,2
+Gosford,5,3,7,1,8
+Gosford,6,4,8,6,5
+Gosford,7,2,1,4,5
+Gosford,8,6,3,1,8
+Gosford,9,6,1,3,8
+Gosford,10,1,7,2,5
+Gosford,11,6,8,3,1
+Gosford,12,2,7,8,1
+Hobart,1,1,3,6,2
+Hobart,2,1,3,6,7
+Hobart,3,2,3,5,8
+Hobart,4,8,3,4,7
+Hobart,5,4,7,3,1
+Hobart,6,4,1,2,7
+Hobart,7,2,5,1,6
+Hobart,8,3,1,5,7
+Hobart,9,5,1,8,6
+Hobart,10,3,7,6,4
+Murray Bridge Straight,1,3,7,5,1
+Murray Bridge Straight,2,4,8,1,6
+Murray Bridge Straight,3,2,6,8,4
+Murray Bridge Straight,4,8,5,1,2
+Murray Bridge Straight,5,3,7,2,1
+Murray Bridge Straight,6,1,4,8,2
+Murray Bridge Straight,7,4,8,5,2
+Murray Bridge Straight,8,8,2,5,1
+Murray Bridge Straight,9,6,8,1,4
+Murray Bridge Straight,10,8,6,2,1
+Geelong,1,1,3,8,7
+Geelong,2,2,3,4,1
+Geelong,3,1,4,3,7
+Geelong,4,5,6,4,2
+Geelong,5,7,3,2,8
+Geelong,6,5,8,1,2
+Geelong,7,3,7,6,1
+Geelong,8,3,2,1,7
+Geelong,9,2,1,7,8
+Geelong,10,5,8,1,3
+Geelong,11,3,2,6,5
+Geelong,12,1,2,7,5
+Ladbrokes Q1 Lakeside,1,5,4,1,2
+Ladbrokes Q1 Lakeside,2,1,6,8,7
+Ladbrokes Q1 Lakeside,3,1,8,9,4
+Ladbrokes Q1 Lakeside,4,1,5,4,8
+Ladbrokes Q1 Lakeside,5,7,2,5,8
+Ladbrokes Q1 Lakeside,6,4,2,8,5
+Ladbrokes Q1 Lakeside,7,4,7,3,8
+Ladbrokes Q1 Lakeside,8,8,1,5,4
+Ladbrokes Q1 Lakeside,9,8,7,4,5
+Ladbrokes Q1 Lakeside,10,2,8,7,4
+Ladbrokes Q1 Lakeside,11,1,3,7,2
+Ladbrokes Q1 Lakeside,12,1,4,8,2
+Horsham,1,5,8,2,7
+Horsham,2,8,7,5,2
+Horsham,3,1,7,5,8
+Horsham,4,1,3,5,7
+Horsham,5,8,1,6,7
+Horsham,6,4,6,5,1
+Horsham,7,1,8,2,4
+Horsham,8,2,3,4,7
+Horsham,9,1,7,5,2
+Horsham,10,4,8,1,3
+Horsham,11,5,2,8,7
+Horsham,12,2,1,6,3
+Angle Park,1,8,1,7,2
+Angle Park,2,4,2,8,5
+Angle Park,3,8,5,4,2
+Angle Park,4,4,1,8,2
+Angle Park,5,4,1,7,5
+Angle Park,6,2,8,5,1
+Angle Park,7,4,1,8,2
+Angle Park,8,1,4,2,5
+Angle Park,9,1,8,2,5
+Angle Park,10,2,4,5,1
+Warragul,1,7,8,5,6
+Warragul,2,8,2,9,5
+Warragul,3,2,8,5,3
+Warragul,4,6,8,1,3
+Warragul,5,2,3,6,5
+Warragul,6,6,4,7,8
+Warragul,7,8,5,7,3
+Warragul,8,7,2,6,3
+Warragul,9,1,3,4,2
+Warragul,10,2,3,5,7
+Warragul,11,8,6,3,7
+Warragul,12,8,3,6,1
+Bet Nation Townsville,1,1,2,3,7
+Bet Nation Townsville,2,2,3,5,8
+Bet Nation Townsville,3,6,8,5,4
+Bet Nation Townsville,4,6,2,8,3
+Bet Nation Townsville,5,3,4,1,8
+Bet Nation Townsville,6,1,3,2,4
+Bet Nation Townsville,7,6,3,1,5
+Bet Nation Townsville,8,8,2,3,7
+Bet Nation Townsville,9,8,4,2,1
+Bet Nation Townsville,10,6,3,2,7
+Bet Nation Townsville,11,2,8,7,6
+Bet Nation Townsville,12,3,4,1,8
+Mandurah,1,1,8,7,5
+Mandurah,2,1,6,2,3
+Mandurah,3,3,8,7,2
+Mandurah,4,3,1,7,2
+Mandurah,5,4,7,3,1
+Mandurah,6,2,7,8,4
+Mandurah,7,3,7,4,8
+Mandurah,8,8,1,5,2
+Mandurah,9,6,8,2,1
+Mandurah,10,1,7,4,2
+Mandurah,11,2,4,5,8
