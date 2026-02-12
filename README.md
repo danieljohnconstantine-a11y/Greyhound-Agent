@@ -2,17 +2,33 @@
 
 Complete machine learning pipeline for greyhound racing predictions with track-specific ensemble models.
 
-## ⚠️ IMPORTANT: Download Instructions
+---
 
-**Before downloading this repository**, please read **[DOWNLOAD_INSTRUCTIONS.md](DOWNLOAD_INSTRUCTIONS.md)** to avoid issues.
+## 🚨 ZIP DOWNLOAD ISSUE - READ THIS FIRST! 🚨
 
-The ZIP download may fail due to large files (353 MB total). Use `git clone` instead:
+### ❌ The "Download ZIP" button WILL FAIL
+**If you downloaded a ZIP and got "invalid file" error, read this:**
+
+**Problem:** Repository is 353 MB with large ML model files → ZIP download corrupts  
+**Solution:** Use `git clone` instead (works perfectly)
+
+### ✅ Quick Fix - Copy & Paste This:
 
 ```bash
 git clone -b copilot/copy-ml-training-prediction-files https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
 ```
 
-See [DOWNLOAD_INSTRUCTIONS.md](DOWNLOAD_INSTRUCTIONS.md) for all download methods and troubleshooting.
+**Don't have Git?** Download: https://git-scm.com/downloads
+
+**Need help?** → **[ISSUE_RESOLVED.md](ISSUE_RESOLVED.md)** ← Start here!
+
+### 📚 Full Documentation:
+- **[ISSUE_RESOLVED.md](ISSUE_RESOLVED.md)** - Problem & solution explained
+- **[VISUAL_DOWNLOAD_GUIDE.md](VISUAL_DOWNLOAD_GUIDE.md)** - Step-by-step with pictures
+- **[DOWNLOAD_INSTRUCTIONS.md](DOWNLOAD_INSTRUCTIONS.md)** - Complete reference
+- **[ZIP_DOWNLOAD_FIX.md](ZIP_DOWNLOAD_FIX.md)** - Quick reference
+
+---
 
 ---
 
