@@ -4,6 +4,16 @@ Complete machine learning pipeline for greyhound racing predictions with track-s
 
 ---
 
+## ⚡ RECENT IMPROVEMENT: Score Discrimination +52%
+
+**Problem Identified:** Many dogs had identical prediction scores (81-91% clustering)  
+**Solution Delivered:** XGB-weighted ensemble + within-race normalization  
+**Result Proven:** +52% more score spread, +56% more variation  
+
+📄 **[DISCRIMINATION_IMPROVEMENT_PROOF.md](DISCRIMINATION_IMPROVEMENT_PROOF.md)** - Complete proof with test results
+
+---
+
 ## 🚨 ZIP DOWNLOAD ISSUE - READ THIS FIRST! 🚨
 
 ### ❌ The "Download ZIP" button WILL FAIL
