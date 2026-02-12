@@ -78,6 +78,7 @@ curl -sSL https://raw.githubusercontent.com/danieljohnconstantine-a11y/Greyhound
 - **Track-Specific Models**: Separate models for each track
 - **Individual Dog Predictions**: 76 features per dog
 - **Calibrated Probabilities**: Isotonic regression for better confidence
+- **Individual Algorithm Scores**: NEW! RF_Score, GB_Score, XGB_Score columns show each algorithm's prediction
 
 ### Data Processing
 - **PDF Parsing**: Automated extraction of race forms
@@ -86,9 +87,10 @@ curl -sSL https://raw.githubusercontent.com/danieljohnconstantine-a11y/Greyhound
 - **Historical Performance**: Career stats and recent form
 
 ### Outputs
-- **Excel Reports**: Detailed predictions with confidence scores
-- **Summary Statistics**: Track-by-track analysis
+- **Excel Reports**: Detailed predictions with confidence scores + individual RF/GB/XGB scores
+- **Summary Statistics**: Track-by-track analysis with algorithm breakdowns
 - **JSON Validation**: Pipeline integrity checks
+- **Algorithm Transparency**: See how each ML algorithm scored every dog
 
 ---
 
@@ -111,6 +113,18 @@ python run_track_ensemble_predictions.py
 # Or use batch file (Windows)
 run_track_ensemble_predictions.bat
 ```
+
+**Output includes:**
+- `track_ensemble_predictions.xlsx` - Full predictions with **RF_Score, GB_Score, XGB_Score** columns
+- `track_ensemble_summary.txt` - Quick summary with individual algorithm scores
+
+**Example output:**
+```
+Track | RaceNumber | Box | DogName    | ML_Confidence | RF_Score | GB_Score | XGB_Score
+SALE  | 1          | 3   | Paw Ezra   | 15.0          | 14.6     | 15.2     | 15.3
+```
+
+See **[INDIVIDUAL_SCORES_GUIDE.md](INDIVIDUAL_SCORES_GUIDE.md)** for detailed explanation of RF/GB/XGB scores.
 
 ### Organizing Data
 ```bash
