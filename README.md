@@ -40,6 +40,16 @@ git clone -b copilot/copy-ml-training-prediction-files https://github.com/daniel
 ### ⚠️ Common Issues:
 - **[GIT_CLONE_TIMEOUT_FIX.md](GIT_CLONE_TIMEOUT_FIX.md)** - Fix "Connection timed out" errors (5 solutions)
 
+### 🧪 Test Before Download:
+- **[PRE_DOWNLOAD_TEST_GUIDE.md](PRE_DOWNLOAD_TEST_GUIDE.md)** - 🎯 **TEST FIRST!** 8 ways to test pipeline before downloading (4 KB vs 353 MB)
+- **[test_system.py](test_system.py)** - 🔍 **SYSTEM CHECK** - Run this script to verify your system is ready (1 minute test)
+- **[SYSTEM_REQUIREMENTS_CHECK.md](SYSTEM_REQUIREMENTS_CHECK.md)** - Hardware & software requirements
+
+**Quick System Test (4 KB download):**
+```bash
+curl -sSL https://raw.githubusercontent.com/danieljohnconstantine-a11y/Greyhound-Agent/copilot/copy-ml-training-prediction-files/test_system.py | python3
+```
+
 ---
 
 ---
