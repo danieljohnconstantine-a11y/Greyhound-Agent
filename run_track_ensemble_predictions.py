@@ -118,7 +118,8 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
         ensemble_weights: Dict of {algorithm: weight}
     
     Returns:
-        predictions: Array of ensemble probabilities for each dog
+        ensemble_pred: Array of ensemble probabilities for each dog
+        individual_scores: Dict of {algorithm: array of probabilities}
     """
     # Prepare features
     # Check for missing features and warn user
@@ -166,9 +167,12 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     # Get predictions from each algorithm
     all_predictions = []
     used_weights = []
+    individual_scores = {}
     
     for alg, model in models.items():
         pred_proba = model.predict_proba(X_scaled)[:, 1]
+        # Store individual predictions (before weighting)
+        individual_scores[alg] = pred_proba
         weight = ensemble_weights.get(alg, 1.0 / len(models))
         all_predictions.append(pred_proba * weight)
         used_weights.append(weight)
@@ -177,7 +181,7 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     total_weight = sum(used_weights)
     ensemble_pred = np.sum(all_predictions, axis=0) / total_weight
     
-    return ensemble_pred
+    return ensemble_pred, individual_scores
 
 def main():
     print("=" * 80)
@@ -270,13 +274,18 @@ def main():
                 print(f"   Models loaded: {', '.join(models.keys())}")
                 
                 # Generate predictions
-                ensemble_pred = predict_with_ensemble(
+                ensemble_pred, individual_scores = predict_with_ensemble(
                     race_df, models, scaler, config['feature_cols'], config['ensemble_weights']
                 )
                 
-                # Add to race_df
+                # Add to race_df - ensemble average
                 race_df['ML_Confidence'] = (ensemble_pred * 100).round(1)
                 race_df['Ensemble_Score'] = ensemble_pred
+                
+                # Add individual algorithm scores (RF, GB, XGB)
+                for alg, scores in individual_scores.items():
+                    col_name = f'{alg.upper()}_Score'
+                    race_df[col_name] = (scores * 100).round(1)
                 
                 # Add ranking
                 race_df['ML_Rank'] = race_df['ML_Confidence'].rank(ascending=False, method='dense').astype(int)
@@ -294,7 +303,15 @@ def main():
                 else:
                     top_dog = race_df.loc[race_df['ML_Confidence'].idxmax()]
                 
-                print(f"   ✅ Top pick: Box {top_dog['Box']} - {top_dog['DogName']} ({top_dog['ML_Confidence']:.1f}%)")
+                # Build individual scores string if available
+                individual_scores_str = ""
+                if 'RF_Score' in race_df.columns and 'GB_Score' in race_df.columns and 'XGB_Score' in race_df.columns:
+                    rf_score = top_dog.get('RF_Score', 0)
+                    gb_score = top_dog.get('GB_Score', 0)
+                    xgb_score = top_dog.get('XGB_Score', 0)
+                    individual_scores_str = f" (RF={rf_score:.1f}, GB={gb_score:.1f}, XGB={xgb_score:.1f})"
+                
+                print(f"   ✅ Top pick: Box {top_dog['Box']} - {top_dog['DogName']} ({top_dog['ML_Confidence']:.1f}%{individual_scores_str})")
                 
                 # Show sample feature values for first race to help diagnose issues
                 if len(all_predictions) == 0:  # First race only
@@ -340,8 +357,10 @@ def main():
             print(f"   Removing {len(columns_to_remove_existing)} metadata columns: {', '.join(columns_to_remove_existing)}...")
             df_all = df_all.drop(columns=columns_to_remove_existing)
         
-        # Reorder columns: Track, RaceNumber, Box, DogName, ML_Confidence, then rest
-        priority_cols = ['Track', 'RaceNumber', 'Box', 'DogName', 'ML_Confidence']
+        # Reorder columns: Track, RaceNumber, Box, DogName, ML_Confidence, RF_Score, GB_Score, XGB_Score, then rest
+        priority_cols = ['Track', 'RaceNumber', 'Box', 'DogName', 'ML_Confidence', 'RF_Score', 'GB_Score', 'XGB_Score']
+        # Filter priority_cols to only include those that exist in df_all
+        priority_cols = [col for col in priority_cols if col in df_all.columns]
         other_cols = [col for col in df_all.columns if col not in priority_cols]
         df_all = df_all[priority_cols + other_cols]
         
@@ -433,7 +452,11 @@ def main():
                     race_df = track_df[track_df['RaceNumber'] == race_num]
                     if len(race_df) > 0:
                         top = race_df.loc[race_df['ML_Confidence'].idxmax()]
-                        f.write(f"  Race {race_num}: Box {top['Box']} - {top['DogName']} ({top['ML_Confidence']:.1f}%)\n")
+                        # Include individual scores if available
+                        individual_str = ""
+                        if 'RF_Score' in top.index and 'GB_Score' in top.index and 'XGB_Score' in top.index:
+                            individual_str = f" (RF={top['RF_Score']:.1f}, GB={top['GB_Score']:.1f}, XGB={top['XGB_Score']:.1f})"
+                        f.write(f"  Race {race_num}: Box {top['Box']} - {top['DogName']} ({top['ML_Confidence']:.1f}%{individual_str})\n")
         
         print(f"✅ Summary saved: {summary_path}")
         
