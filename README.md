@@ -32,6 +32,9 @@ git clone -b copilot/copy-ml-training-prediction-files https://github.com/daniel
 - **[SUPER_BASIC_UBUNTU_GUIDE.md](SUPER_BASIC_UBUNTU_GUIDE.md)** - ⭐ **START HERE!** Super simple 3-step guide
 - **[UBUNTU_TRAINING_GUIDE.md](UBUNTU_TRAINING_GUIDE.md)** - Complete guide: download → clone → train models
 
+### ⚠️ Common Issues:
+- **[GIT_CLONE_TIMEOUT_FIX.md](GIT_CLONE_TIMEOUT_FIX.md)** - Fix "Connection timed out" errors (5 solutions)
+
 ---
 
 ---
