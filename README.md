@@ -28,6 +28,9 @@ git clone -b copilot/copy-ml-training-prediction-files https://github.com/daniel
 - **[DOWNLOAD_INSTRUCTIONS.md](DOWNLOAD_INSTRUCTIONS.md)** - Complete reference
 - **[ZIP_DOWNLOAD_FIX.md](ZIP_DOWNLOAD_FIX.md)** - Quick reference
 
+### 🐧 Ubuntu Users:
+- **[UBUNTU_TRAINING_GUIDE.md](UBUNTU_TRAINING_GUIDE.md)** - Complete guide: download → clone → train models
+
 ---
 
 ---
