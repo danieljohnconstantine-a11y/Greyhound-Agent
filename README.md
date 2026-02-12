@@ -28,6 +28,9 @@ git clone -b copilot/copy-ml-training-prediction-files https://github.com/daniel
 - **[DOWNLOAD_INSTRUCTIONS.md](DOWNLOAD_INSTRUCTIONS.md)** - Complete reference
 - **[ZIP_DOWNLOAD_FIX.md](ZIP_DOWNLOAD_FIX.md)** - Quick reference
 
+### 🪟 WSL (Windows Subsystem for Linux) Users:
+- **[WSL_QUICK_START.md](WSL_QUICK_START.md)** - 🎯 **WSL USERS START HERE!** Complete command sequence (fixes common typos)
+
 ### 🐧 Ubuntu Users:
 - **[setup_ubuntu.sh](setup_ubuntu.sh)** - 🚀 **ONE-COMMAND SETUP!** Automated script with virtual environment
 - **[UBUNTU_VENV_GUIDE.md](UBUNTU_VENV_GUIDE.md)** - ⭐ **Virtual Environment Guide** - Best for large files & training
