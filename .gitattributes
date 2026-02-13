@@ -1,11 +1,12 @@
 # Git Attributes for Repository Export
+# This reduces ZIP export size by excluding large/unnecessary files
 
-# Exclude large PDF files from ZIP exports
+# Exclude large PDF files from ZIP exports (671 PDFs, ~280MB)
 *.pdf export-ignore
 data/**/*.pdf export-ignore
 data_predictions/**/*.pdf export-ignore
 
-# Exclude large model files from ZIP exports (but keep in git)
+# Exclude large model files from ZIP exports (28MB total)
 models/**/rf.pkl export-ignore
 models/**/gb.pkl export-ignore
 models/**/xgb.pkl export-ignore
@@ -20,9 +21,5 @@ ANSWER_*.md export-ignore
 # Exclude test output files
 pdf_test_results.txt export-ignore
 
-# Keep essential files for users
-!requirements.txt export-ignore
-!README.md export-ignore
-!*.py export-ignore
-!*.bat export-ignore
-!*.sh export-ignore
+# Note: Essential files (.py, .bat, .sh, requirements.txt, README.md) 
+# are automatically included unless explicitly excluded above
