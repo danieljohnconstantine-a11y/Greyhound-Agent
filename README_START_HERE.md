@@ -14,8 +14,10 @@ This document helps you navigate all the documentation for common setup issues.
 2. [ZIP Download Issues](#2-zip-download-issues)
 3. [GitHub Authentication Issues](#3-github-authentication-issues)
 4. [Pip Install Issues](#4-pip-install-issues)
-5. [Model Compatibility](#5-model-compatibility)
-6. [Quick Commands Reference](#6-quick-commands-reference)
+5. [Prediction Errors](#5-prediction-errors)
+6. [Training Issues](#6-training-issues)
+7. [Model Compatibility](#7-model-compatibility)
+8. [Quick Commands Reference](#8-quick-commands-reference)
 
 ---
 
@@ -187,7 +189,73 @@ pip install --timeout 300 -r requirements.txt
 
 ---
 
-## 5. Model Compatibility
+## 5. Prediction Errors
+
+### Problem: AttributeError - 'NoneType' object has no attribute 'transform'
+
+**Error:**
+```
+AttributeError: 'NoneType' object has no attribute 'transform'
+❌ ERROR generating predictions: 'NoneType' object has no attribute 'transform'
+```
+
+**Cause:** You haven't trained the models yet!
+
+**Solution:** Run training FIRST, then predictions
+
+**Files to read:**
+- `FIX_PREDICTION_ERROR.md` - Complete guide
+- `PREDICTION_ERROR_QUICK_FIX.txt` - Quick visual fix
+
+**The fix:**
+```bash
+# Step 1: Train models (45-90 minutes)
+python train_ml_track_ensemble.py
+
+# Step 2: Now run predictions (works!)
+python run_track_ensemble_predictions.py
+```
+
+**Why this happens:**
+- Predictions need trained models + scalers
+- Training creates these files
+- You tried predictions without training
+- Result: Scaler is None → Error
+
+---
+
+## 6. Training Issues
+
+### Problem: Training Not Working or Taking Too Long
+
+**Common issues:**
+- "Why is training not working?" - It IS working, just takes 45-90 minutes
+- "Training seems frozen" - It's processing PDFs, wait
+- "No output for 10 minutes" - Normal during PDF parsing
+
+**Files to read:**
+- `TRAINING_TROUBLESHOOTING.md` - Complete guide
+- `WHY_TRAINING_NOT_WORKING.txt` - Quick answer
+
+**What you should see:**
+```
+════════════════════════════════════════════
+🏁 GREYHOUND RACE PREDICTION - TRACK-SPECIFIC ENSEMBLE
+════════════════════════════════════════════
+✅ Loaded 645 races
+```
+
+**If you see the banner → Training is WORKING!**
+
+**Timeline:**
+- 0-15 minutes: Loading PDFs (seems frozen - normal)
+- 15-20 minutes: Extracting features
+- 20-90 minutes: Training models (bulk of time)
+- 90 minutes: Complete
+
+---
+
+## 7. Model Compatibility
 
 ### Question: Can I Use Old Models? Do I Need to Retrain?
 
@@ -214,7 +282,7 @@ python train_ml_track_ensemble.py
 
 ---
 
-## 6. Quick Commands Reference
+## 8. Quick Commands Reference
 
 ### Initial Setup
 
