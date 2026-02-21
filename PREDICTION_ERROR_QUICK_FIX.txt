@@ -1,0 +1,177 @@
+═══════════════════════════════════════════════════════════════
+  QUICK FIX: Prediction Error
+═══════════════════════════════════════════════════════════════
+
+YOUR ERROR:
+───────────────────────────────────────────────────────────────
+  AttributeError: 'NoneType' object has no attribute 'transform'
+───────────────────────────────────────────────────────────────
+
+WHAT IT MEANS:
+───────────────────────────────────────────────────────────────
+  ❌ YOU HAVEN'T TRAINED THE MODELS YET!
+───────────────────────────────────────────────────────────────
+
+THE PROBLEM:
+───────────────────────────────────────────────────────────────
+  You have PDFs for 7 tracks:
+    • BENDIGO
+    • DUBBO
+    • The Gardens
+    • Mandurah
+    • Meadows
+    • Q LAKESIDE
+    • WENTWORTH PARK
+
+  But models only exist for 2 tracks:
+    ✅ SALE
+    ✅ WENTWORTH PARK
+
+  Missing models for 5 tracks:
+    ❌ BENDIGO
+    ❌ DUBBO
+    ❌ The Gardens
+    ❌ Mandurah
+    ❌ Meadows
+    ❌ Q LAKESIDE
+───────────────────────────────────────────────────────────────
+
+THE SOLUTION (3 STEPS):
+═══════════════════════════════════════════════════════════════
+
+STEP 1: Navigate to directory
+───────────────────────────────────────────────────────────────
+cd C:\Users\danie\OneDrive\Desktop\Greyhound-Agent
+
+
+STEP 2: Activate virtual environment
+───────────────────────────────────────────────────────────────
+venv\Scripts\activate
+
+
+STEP 3: Run training (takes 45-90 minutes)
+───────────────────────────────────────────────────────────────
+python train_ml_track_ensemble.py
+
+  ⏰ This will take 45-90 minutes
+  ⏳ Please wait for completion
+  ✅ Creates models for ALL tracks
+
+
+STEP 4: After training completes, run predictions
+───────────────────────────────────────────────────────────────
+python run_track_ensemble_predictions.py
+
+  ✅ Now works!
+  ⚡ Takes only 2-5 minutes
+
+═══════════════════════════════════════════════════════════════
+
+WHY THIS HAPPENS:
+───────────────────────────────────────────────────────────────
+
+  Prediction workflow:
+
+  ┌──────────────────────────────────┐
+  │ 1. TRAIN (required first!)       │
+  │    python train_ml_track_...py   │
+  │                                  │
+  │    Creates:                      │
+  │    • models/BENDIGO/scaler.pkl   │  ◄─ MISSING!
+  │    • models/DUBBO/scaler.pkl     │  ◄─ MISSING!
+  │    • ... (all tracks)            │
+  └──────────────────────────────────┘
+              ↓
+  ┌──────────────────────────────────┐
+  │ 2. PREDICT (what you tried)      │
+  │    python run_track_...py        │
+  │                                  │
+  │    Loads scaler.pkl files        │
+  │    Uses them to make predictions │
+  └──────────────────────────────────┘
+
+  You tried step 2 without doing step 1!
+
+═══════════════════════════════════════════════════════════════
+
+HOW TO VERIFY MODELS EXIST:
+───────────────────────────────────────────────────────────────
+
+Check models directory:
+───────────────────────────────────────────────────────────────
+dir models /AD
+
+Should see directories for each track:
+  models\BENDIGO\
+  models\DUBBO\
+  models\The Gardens\
+  ... etc
+
+
+Check specific track:
+───────────────────────────────────────────────────────────────
+dir "models\BENDIGO"
+
+Should see 4 files:
+  rf.pkl          (RandomForest model)
+  gb.pkl          (GradientBoosting model)
+  xgb.pkl         (XGBoost model)
+  scaler.pkl      (Feature scaler) ◄─ THIS FIXES ERROR
+
+═══════════════════════════════════════════════════════════════
+
+TRAINING VS PREDICTIONS:
+═══════════════════════════════════════════════════════════════
+
+  Training:
+    • Run: ONCE (first time)
+    • Time: 45-90 minutes
+    • Purpose: Create models
+    • Input: Historical PDFs in data/
+    • Output: Models in models/
+
+  Predictions:
+    • Run: ANYTIME (after training)
+    • Time: 2-5 minutes
+    • Purpose: Predict race winners
+    • Input: Race PDFs in data_predictions/
+    • Output: Excel with predictions
+
+═══════════════════════════════════════════════════════════════
+
+COMMON QUESTIONS:
+═══════════════════════════════════════════════════════════════
+
+Q: Do I train every time I want predictions?
+A: ❌ NO! Train once, predict many times.
+
+Q: How long does training take?
+A: ⏱️ 45-90 minutes (one-time).
+
+Q: How long do predictions take (after training)?
+A: ⚡ 2-5 minutes (fast).
+
+Q: Can I skip training?
+A: ❌ NO! Training is required before predictions.
+
+═══════════════════════════════════════════════════════════════
+
+SUMMARY:
+═══════════════════════════════════════════════════════════════
+
+Your Error:   'NoneType' object has no attribute 'transform'
+Root Cause:   Models not trained yet
+The Fix:      Run training first!
+
+Commands:
+───────────────────────────────────────────────────────────────
+cd C:\Users\danie\OneDrive\Desktop\Greyhound-Agent
+venv\Scripts\activate
+python train_ml_track_ensemble.py       # Wait 45-90 min
+python run_track_ensemble_predictions.py  # Now works!
+
+═══════════════════════════════════════════════════════════════
+
+YOU MUST TRAIN MODELS BEFORE RUNNING PREDICTIONS!
+
+═══════════════════════════════════════════════════════════════
