@@ -21,19 +21,17 @@ def export_to_excel(dogs, output_path):
         "source_file", "Date"
     ]
 
-    # Fill missing keys with None
-    for dog in dogs:
-        for col in columns:
-            if col not in dog:
-                dog[col] = None
+    # Audit: log unexpected keys not in the expected column list
+    all_keys = {k for dog in dogs for k in dog}
+    extra_keys = all_keys - set(columns)
+    if extra_keys:
+        print(f"WARNING: Unexpected keys found across dogs: {extra_keys}")
 
-    # Audit: log any extra keys
-    for i, dog in enumerate(dogs):
-        extras = set(dog.keys()) - set(columns)
-        if extras:
-            print(f"WARNING: Extra keys in dog #{i} ({dog.get('DogsName', 'Unknown')}): {extras}")
+    # Build DataFrame and reindex to the required column order.
+    # fill_value=None matches the original behaviour (missing columns become None,
+    # not NaN, so downstream code that checks `is None` continues to work).
+    df = pd.DataFrame(dogs).reindex(columns=columns, fill_value=None)
 
-    df = pd.DataFrame(dogs)[columns]
     filename = f"greyhound_analysis_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
     filepath = os.path.join(output_path, filename)
     df.to_excel(filepath, index=False)

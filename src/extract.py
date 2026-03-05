@@ -15,16 +15,16 @@ def extract_text_from_latest_pdf(folder):
     pdf_files.sort(key=lambda f: os.path.getmtime(os.path.join(folder, f)), reverse=True)
     pdf_path = os.path.join(folder, pdf_files[0])
 
-    text = ""
+    pages = []
     try:
         with pdfplumber.open(pdf_path) as pdf:
             for page in pdf.pages:
                 page_text = page.extract_text()
                 if page_text:
-                    text += page_text + "\n"
+                    pages.append(page_text)
     except Exception as e:
         print(f"⚠️ Error reading PDF: {e}")
         return None
 
     print(f"✅ Extracted text from {os.path.basename(pdf_path)}")
-    return text
+    return "\n".join(pages)
