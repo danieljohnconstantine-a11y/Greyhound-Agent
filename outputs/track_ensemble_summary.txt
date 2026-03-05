@@ -1,6 +1,6 @@
 ================================================================================
 TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
-Generated: 2026-03-05 01:40:26
+Generated: 2026-03-05 07:15:46
 ================================================================================
 
 Total PDFs processed: 13
@@ -18,6 +18,6 @@ Angle Park:
   Race 5: Box 2 - Wilma's Our Girl (18.0% (RF=14.5, GB=18.0, XGB=17.3))
   Race 6: Box 1 - Sinaloa Bandit (16.0% (RF=12.8, GB=14.4, XGB=16.3))
   Race 7: Box 1 - Zinfandel Trace (16.6% (RF=15.8, GB=17.7, XGB=14.1))
-  Race 8: Box 7 - Mallee Beauty (13.7% (RF=14.6, GB=13.8, XGB=10.5))
+  Race 8: Box 1 - Kisauni (16.7% (RF=15.9, GB=17.2, XGB=14.5))
   Race 9: Box 1 - Right Side Up (13.9% (RF=11.9, GB=12.3, XGB=13.9))
   Race 10: Box 1 - Mickey Haller (16.6% (RF=18.0, GB=11.7, XGB=16.1))
