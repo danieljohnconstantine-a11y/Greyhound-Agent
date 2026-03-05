@@ -1,256 +1,228 @@
 ========================================================================
 GREYHOUND RACE PREDICTION AUDIT REPORT
-Generated: 2026-03-05 10:09:24
+Generated: 2026-03-05 10:26:35
 ========================================================================
 
 Race     : 8
-Date     : 2025-12-13
-Time     : 10:55AM
+Date     : 2026-03-05
+Time     : 08:58pm
 Track    : Angle Park
 Distance : 530m
 
 ────────────────────────────────────────────────────────────────────────
 STEP 1 — DATA EXTRACTION (per-dog, from PDF)
 ────────────────────────────────────────────────────────────────────────
-  Box 1: Zipping Neeson
-    Career     : 1-12-26
-    Prize Money: $4,370
-    RTC/DLR/DLW: 13 / 9 / 151
+  Box 2: Bookaloo
+    Career     : 13-25-60
+    Prize Money: $59,030
+    RTC/DLR/DLW: 38 / 6 / 45
     Age Months : 36
-    Last races : 2/6 @ Angle Park (530m), 2/5 @ Angle Park (530m), 5/5 @ Angle Park (530m)
+    Last races : 4/7 @ MT GAMBIER (512m)
 
-  Box 4: Black Wanda
-    Career     : 1-3-8
-    Prize Money: $1,210
-    RTC/DLR/DLW: 9 / 4 / 39
-    Age Months : 12
-    Last races : 4/6 @ Angle Park (342m), 3/6 @ Angle Park (342m), 2/6 @ Angle Park (342m)
-
-  Box 5: Lala Effie
-    Career     : 5-15-38
-    Prize Money: $18,800
-    RTC/DLR/DLW: 39 / 9 / 36
+  Box 3: Manifesto
+    Career     : 13-13-38
+    Prize Money: $27,585
+    RTC/DLR/DLW: 3 / 11 / 11
     Age Months : 24
-    Last races : 5/6 @ Angle Park (342m), 3/5 @ Angle Park (530m), 3/6 @ Angle Park (342m)
 
-  Box 6: Gebrselassie
-    Career     : 4-6-10
-    Prize Money: $19,110
-    RTC/DLR/DLW: 11 / 16 / 16
-    Age Months : 24
-    Last races : 1/6 @ Angle Park (530m), 1/5 @ Angle Park (530m), 3/7 @ Angle Park (595m)
-
-  Box 7: White Hawke
-    Career     : 2-8-15
-    Prize Money: $8,035
-    RTC/DLR/DLW: 16 / 23 / 62
-    Age Months : 24
-    Last races : 5/6 @ Angle Park (530m), 3/8 @ Angle Park (530m), 2/4 @ Angle Park (530m)
-
-  Box 8: Cawbourne Adele
-    Career     : 2-7-19
-    Prize Money: $6,430
-    RTC/DLR/DLW: 18 / 9 / 44
-    Age Months : 24
-    Last races : 6/6 @ Angle Park (595m), 3/5 @ Angle Park (530m), 7/7 @ Angle Park (530m)
-
-  Box 9: Showtime McLaren
-    Career     : 3-16-68
-    Prize Money: $7,280
-    RTC/DLR/DLW: 3 / 18 / 333
+  Box 4: Nangar Lady
+    Career     : 17-11-44
+    Prize Money: $76,985
+    RTC/DLR/DLW: 20 / 10 / 18
     Age Months : 36
-    Last races : 4/6 @ Angle Park (342m), 5/6 @ Angle Park (342m), 5/5 @ MURRAY BDGE  (300m)
+    Last races : 8/8 @ Angle Park (530m), 6/8 @ Angle Park N (530m)
 
-  Box 2: Victa Graham
-    Career     : 4-3-12
-    Prize Money: $7,910
-    RTC/DLR/DLW: 13 / 6 / 25
-    Age Months : 12
+  Box 5: Reality Is
+    Career     : 15-21-63
+    Prize Money: $86,270
+    RTC/DLR/DLW: 55 / 11 / 28
+    Age Months : 36
 
-  Box 3: Zipping Elly May
-    Career     : 5-17-61
-    Prize Money: $15,840
-    RTC/DLR/DLW: 44 / 12 / 104
+  Box 6: Victory Club
+    Career     : 21-41-101
+    Prize Money: $48,095
+    RTC/DLR/DLW: 28 / 7 / 7
+    Age Months : 36
+
+  Box 7: Mallee Beauty
+    Career     : 33-6-47
+    Prize Money: $257,345
+    RTC/DLR/DLW: 32 / 42 / 55
+    Age Months : 36
+    Last races : 1/7 @ Angle Park (530m)
+
+  Box 8: Flying Artie
+    Career     : 20-12-34
+    Prize Money: $56,480
+    RTC/DLR/DLW: 19 / 7 / 7
+    Age Months : 24
+
+  Box 1: Kisauni
+    Career     : 37-43-117
+    Prize Money: $160,880
+    RTC/DLR/DLW: 118 / 7 / 14
     Age Months : 36
 
 ────────────────────────────────────────────────────────────────────────
 STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
 ────────────────────────────────────────────────────────────────────────
-  Box 1: Zipping Neeson
-    BestTimeSec                   : 30.4500
-    SectionalSec                  : 5.2600
-    Speed_kmh                     : 62.6601
-    EarlySpeedIndex               : 100.7605
-    ConsistencyIndex              : 0.0385
-    PlaceRate                     : 0.4615
-    RecentFormBoost               : 0.5547
-    DLWFactor                     : 0.1805
-    BoxBiasFactor                 : 0.1720
-    DistanceSuit                  : 0.5000
+  Box 2: Bookaloo
+    BestTimeSec                   : 29.5500
+    SectionalSec                  : 4.3700
+    Speed_kmh                     : 64.5685
+    EarlySpeedIndex               : 121.2815
+    ConsistencyIndex              : 0.2167
+    PlaceRate                     : 0.4167
+    RecentFormBoost               : 0.7826
+    DLWFactor                     : 0.8096
+    BoxBiasFactor                 : 0.1300
+    DistanceSuit                  : 0.9286
     AgeFactor                     : 1.1000
     FreshnessFactorV2             : 1.1500
     Last3AvgFinish                : 4.0000
-    TrainerStrikeRate             : 0.0385
-    FinalScore                    : 30.3942
+    TrainerStrikeRate             : 0.4299
+    FinalScore                    : 40.1106
 
-  Box 4: Black Wanda
-    BestTimeSec                   : 32.1400
-    SectionalSec                  : 4.6000
-    Speed_kmh                     : 59.3653
-    EarlySpeedIndex               : 115.2174
-    ConsistencyIndex              : 0.1250
-    PlaceRate                     : 0.3750
-    RecentFormBoost               : 0.8422
-    DLWFactor                     : 0.8862
-    BoxBiasFactor                 : 0.1180
-    DistanceSuit                  : 0.9000
-    AgeFactor                     : 0.9500
+  Box 3: Manifesto
+    BestTimeSec                   : 28.0016
+    SectionalSec                  : 5.1120
+    Speed_kmh                     : 68.1390
+    EarlySpeedIndex               : 103.6776
+    ConsistencyIndex              : 0.3421
+    PlaceRate                     : 0.3421
+    RecentFormBoost               : 0.7934
+    DLWFactor                     : 1.3823
+    BoxBiasFactor                 : 0.1210
+    DistanceSuit                  : 1.2000
+    AgeFactor                     : 1.1000
     FreshnessFactorV2             : 1.0000
-    Last3AvgFinish                : 3.0000
-    TrainerStrikeRate             : 0.1250
-    FinalScore                    : 32.2924
+    Last3AvgFinish                : 3.4737
+    TrainerStrikeRate             : 0.3421
+    FinalScore                    : 34.0158
 
-  Box 5: Lala Effie
-    BestTimeSec                   : 30.8700
-    SectionalSec                  : 5.2800
-    Speed_kmh                     : 61.8076
-    EarlySpeedIndex               : 100.3788
-    ConsistencyIndex              : 0.1316
-    PlaceRate                     : 0.3947
-    RecentFormBoost               : 0.6492
-    DLWFactor                     : 0.9320
-    BoxBiasFactor                 : 0.1120
-    DistanceSuit                  : 0.6053
+  Box 4: Nangar Lady
+    BestTimeSec                   : 30.4500
+    SectionalSec                  : 5.1600
+    Speed_kmh                     : 62.6601
+    EarlySpeedIndex               : 102.7132
+    ConsistencyIndex              : 0.3864
+    PlaceRate                     : 0.2500
+    RecentFormBoost               : 0.6698
+    DLWFactor                     : 1.2373
+    BoxBiasFactor                 : 0.1180
+    DistanceSuit                  : 1.2000
     AgeFactor                     : 1.1000
     FreshnessFactorV2             : 1.1500
-    Last3AvgFinish                : 3.6667
-    TrainerStrikeRate             : 0.1316
-    FinalScore                    : 31.9353
+    Last3AvgFinish                : 7.0000
+    TrainerStrikeRate             : 0.2991
+    FinalScore                    : 37.9278
 
-  Box 6: Gebrselassie
-    BestTimeSec                   : 30.6000
-    SectionalSec                  : 5.2300
-    Speed_kmh                     : 62.3529
-    EarlySpeedIndex               : 101.3384
-    ConsistencyIndex              : 0.4000
-    PlaceRate                     : 0.6000
-    RecentFormBoost               : 0.8611
-    DLWFactor                     : 1.2766
+  Box 5: Reality Is
+    BestTimeSec                   : 28.0292
+    SectionalSec                  : 5.1240
+    Speed_kmh                     : 68.0720
+    EarlySpeedIndex               : 103.4348
+    ConsistencyIndex              : 0.2381
+    PlaceRate                     : 0.3333
+    RecentFormBoost               : 0.7102
+    DLWFactor                     : 1.0588
+    BoxBiasFactor                 : 0.1120
+    DistanceSuit                  : 0.9615
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.0000
+    Last3AvgFinish                : 3.7857
+    TrainerStrikeRate             : 0.2991
+    FinalScore                    : 39.7320
+
+  Box 6: Victory Club
+    BestTimeSec                   : 28.0148
+    SectionalSec                  : 5.1300
+    Speed_kmh                     : 68.1068
+    EarlySpeedIndex               : 103.3138
+    ConsistencyIndex              : 0.2079
+    PlaceRate                     : 0.4059
+    RecentFormBoost               : 0.7843
+    DLWFactor                     : 1.4766
     BoxBiasFactor                 : 0.1090
+    DistanceSuit                  : 0.8333
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 3.8762
+    TrainerStrikeRate             : 0.3037
+    FinalScore                    : 35.7906
+
+  Box 7: Mallee Beauty
+    BestTimeSec                   : 30.2400
+    SectionalSec                  : 5.2300
+    Speed_kmh                     : 63.0952
+    EarlySpeedIndex               : 101.3384
+    ConsistencyIndex              : 0.7021
+    PlaceRate                     : 0.1277
+    RecentFormBoost               : 1.1017
+    DLWFactor                     : 0.6930
+    BoxBiasFactor                 : 0.1060
     DistanceSuit                  : 1.2000
     AgeFactor                     : 1.1000
     FreshnessFactorV2             : 0.8500
-    Last3AvgFinish                : 1.6667
-    TrainerStrikeRate             : 0.4000
-    FinalScore                    : 32.0012
+    Last3AvgFinish                : 1.0000
+    TrainerStrikeRate             : 0.4299
+    FinalScore                    : 55.8739
 
-  Box 7: White Hawke
-    BestTimeSec                   : 30.5900
-    SectionalSec                  : 5.2400
-    Speed_kmh                     : 62.3733
-    EarlySpeedIndex               : 101.1450
-    ConsistencyIndex              : 0.1333
-    PlaceRate                     : 0.5333
-    RecentFormBoost               : 0.5067
-    DLWFactor                     : 0.6209
-    BoxBiasFactor                 : 0.1060
-    DistanceSuit                  : 0.5000
-    AgeFactor                     : 1.1000
-    FreshnessFactorV2             : 0.8500
-    Last3AvgFinish                : 3.3333
-    TrainerStrikeRate             : 0.1333
-    FinalScore                    : 30.5654
-
-  Box 8: Cawbourne Adele
-    BestTimeSec                   : 30.9000
-    SectionalSec                  : 5.2800
-    Speed_kmh                     : 61.7476
-    EarlySpeedIndex               : 100.3788
-    ConsistencyIndex              : 0.1053
-    PlaceRate                     : 0.3684
-    RecentFormBoost               : 0.5282
-    DLWFactor                     : 0.8203
+  Box 8: Flying Artie
+    BestTimeSec                   : 28.0101
+    SectionalSec                  : 5.1420
+    Speed_kmh                     : 68.1184
+    EarlySpeedIndex               : 103.0727
+    ConsistencyIndex              : 0.5882
+    PlaceRate                     : 0.3529
+    RecentFormBoost               : 1.0885
+    DLWFactor                     : 1.4757
     BoxBiasFactor                 : 0.1320
-    DistanceSuit                  : 0.7857
+    DistanceSuit                  : 1.2000
     AgeFactor                     : 1.1000
     FreshnessFactorV2             : 1.1500
-    Last3AvgFinish                : 5.3333
-    TrainerStrikeRate             : 0.1053
-    FinalScore                    : 30.3420
+    Last3AvgFinish                : 2.7353
+    TrainerStrikeRate             : 0.3037
+    FinalScore                    : 36.8586
 
-  Box 9: Showtime McLaren
-    BestTimeSec                   : 30.7000
-    SectionalSec                  : 5.3700
-    Speed_kmh                     : 62.1498
-    EarlySpeedIndex               : 98.6965
-    ConsistencyIndex              : 0.0441
-    PlaceRate                     : 0.2353
-    RecentFormBoost               : 0.3745
-    DLWFactor                     : 0.1000
-    BoxBiasFactor                 : 0.1200
-    DistanceSuit                  : 0.5714
-    AgeFactor                     : 1.1000
-    FreshnessFactorV2             : 0.8500
-    Last3AvgFinish                : 4.6667
-    TrainerStrikeRate             : 0.0441
-    FinalScore                    : 30.0217
-
-  Box 2: Victa Graham
-    BestTimeSec                   : 28.0069
-    SectionalSec                  : 5.1060
-    Speed_kmh                     : 68.1261
-    EarlySpeedIndex               : 103.7995
-    ConsistencyIndex              : 0.3333
-    PlaceRate                     : 0.2500
-    RecentFormBoost               : 0.9160
-    DLWFactor                     : 1.1061
-    BoxBiasFactor                 : 0.1300
+  Box 1: Kisauni
+    BestTimeSec                   : 28.0625
+    SectionalSec                  : 5.1000
+    Speed_kmh                     : 67.9910
+    EarlySpeedIndex               : 103.9216
+    ConsistencyIndex              : 0.3162
+    PlaceRate                     : 0.3675
+    RecentFormBoost               : 0.8709
+    DLWFactor                     : 1.3288
+    BoxBiasFactor                 : 0.1720
     DistanceSuit                  : 1.0000
-    AgeFactor                     : 0.9500
+    AgeFactor                     : 1.1000
     FreshnessFactorV2             : 1.1500
-    Last3AvgFinish                : 3.5000
-    TrainerStrikeRate             : 0.3333
-    FinalScore                    : 32.0712
-
-  Box 3: Zipping Elly May
-    BestTimeSec                   : 28.0233
-    SectionalSec                  : 5.1120
-    Speed_kmh                     : 68.0862
-    EarlySpeedIndex               : 103.6776
-    ConsistencyIndex              : 0.0820
-    PlaceRate                     : 0.2787
-    RecentFormBoost               : 0.5663
-    DLWFactor                     : 0.3371
-    BoxBiasFactor                 : 0.1210
-    DistanceSuit                  : 1.0000
-    AgeFactor                     : 1.1000
-    FreshnessFactorV2             : 1.0000
-    Last3AvgFinish                : 4.2541
-    TrainerStrikeRate             : 0.0820
-    FinalScore                    : 32.6856
+    Last3AvgFinish                : 3.5513
+    TrainerStrikeRate             : 0.3162
+    FinalScore                    : 47.2157
 
 ────────────────────────────────────────────────────────────────────────
 STEP 3 — MODEL PREDICTIONS (individual score per dog)
 ────────────────────────────────────────────────────────────────────────
 
   Uniqueness verification:
-    RF        : ✅ ALL INDIVIDUAL  (std=0.07062)
-    GB        : ✅ ALL INDIVIDUAL  (std=0.33124)
-    XGB       : ✅ ALL INDIVIDUAL  (std=0.40256)
-    Ensemble  : ✅ ALL INDIVIDUAL  (std=0.25285)
+    RF        : ✅ ALL INDIVIDUAL  (std=0.04265)
+    GB        : ✅ ALL INDIVIDUAL  (std=0.24750)
+    XGB       : ✅ ALL INDIVIDUAL  (std=0.00243)
+    Ensemble  : ✅ ALL INDIVIDUAL  (std=0.08797)
 
   Probability scores by dog:
   Box  Dog Name                        RF       GB      XGB   Ensemble   Win%
   ------------------------------------------------------------------------
-    1  Zipping Neeson              0.5094   0.9940   0.7808     0.7614  14.2%
-    2  Victa Graham                0.4971   0.8310   0.9998     0.7759  14.5%
-    3  Zipping Elly May            0.3099   0.0914   0.0102     0.1372   2.6%
-    4  Black Wanda                 0.3466   0.8358   0.9998     0.7274  13.6%
-    5  Lala Effie                  0.3975   0.5830   0.9996     0.6600  12.3%
-    6  Gebrselassie                0.4888   0.8855   0.9990     0.7911  14.8%
-    7  White Hawke                 0.4260   0.4848   0.9907     0.6338  11.8%
-    8  Cawbourne Adele             0.4213   0.8626   0.9603     0.7481  14.0%
-    9  Showtime McLaren            0.3279   0.0471   0.0023     0.1258   2.3%
+    1  Kisauni                     0.4660   0.1319   0.9998     0.5325  10.9%
+    2  Bookaloo                    0.4593   0.3192   0.9996     0.5927  12.1%
+    3  Manifesto                   0.4839   0.7746   0.9993     0.7526  15.4%
+    4  Nangar Lady                 0.4141   0.6021   0.9996     0.6719  13.7%
+    5  Reality Is                  0.3728   0.5262   0.9994     0.6328  12.9%
+    6  Victory Club                0.3901   0.0275   0.9998     0.4725   9.6%
+    7  Mallee Beauty               0.4998   0.6072   0.9923     0.6998  14.3%
+    8  Flying Artie                0.4217   0.2186   0.9998     0.5467  11.2%
 
 ────────────────────────────────────────────────────────────────────────
 STEP 4 — RANKED PREDICTIONS
@@ -258,26 +230,25 @@ STEP 4 — RANKED PREDICTIONS
 
   Rank  Box  Dog Name                    Win%  Key Factors
   ------------------------------------------------------------------------
-     1    6  Gebrselassie               14.8%  Speed=62.4km/h  Consist=0.400  RecentBoost=0.9  DLWFactor=1.3
-     2    2  Victa Graham               14.5%  Speed=68.1km/h  Consist=0.333  RecentBoost=0.9  DLWFactor=1.1
-     3    1  Zipping Neeson             14.2%  Speed=62.7km/h  Consist=0.038  RecentBoost=0.6  DLWFactor=0.2
-     4    8  Cawbourne Adele            14.0%  Speed=61.7km/h  Consist=0.105  RecentBoost=0.5  DLWFactor=0.8
-     5    4  Black Wanda                13.6%  Speed=59.4km/h  Consist=0.125  RecentBoost=0.8  DLWFactor=0.9
-     6    5  Lala Effie                 12.3%  Speed=61.8km/h  Consist=0.132  RecentBoost=0.6  DLWFactor=0.9
-     7    7  White Hawke                11.8%  Speed=62.4km/h  Consist=0.133  RecentBoost=0.5  DLWFactor=0.6
-     8    3  Zipping Elly May            2.6%  Speed=68.1km/h  Consist=0.082  RecentBoost=0.6  DLWFactor=0.3
-     9    9  Showtime McLaren            2.3%  Speed=62.1km/h  Consist=0.044  RecentBoost=0.4  DLWFactor=0.1
+     1    3  Manifesto                  15.4%  Speed=68.1km/h  Consist=0.342  RecentBoost=0.8  DLWFactor=1.4
+     2    7  Mallee Beauty              14.3%  Speed=63.1km/h  Consist=0.702  RecentBoost=1.1  DLWFactor=0.7
+     3    4  Nangar Lady                13.7%  Speed=62.7km/h  Consist=0.386  RecentBoost=0.7  DLWFactor=1.2
+     4    5  Reality Is                 12.9%  Speed=68.1km/h  Consist=0.238  RecentBoost=0.7  DLWFactor=1.1
+     5    2  Bookaloo                   12.1%  Speed=64.6km/h  Consist=0.217  RecentBoost=0.8  DLWFactor=0.8
+     6    8  Flying Artie               11.2%  Speed=68.1km/h  Consist=0.588  RecentBoost=1.1  DLWFactor=1.5
+     7    1  Kisauni                    10.9%  Speed=68.0km/h  Consist=0.316  RecentBoost=0.9  DLWFactor=1.3
+     8    6  Victory Club                9.6%  Speed=68.1km/h  Consist=0.208  RecentBoost=0.8  DLWFactor=1.5
 
 ────────────────────────────────────────────────────────────────────────
 INDIVIDUALITY VERIFICATION
 ────────────────────────────────────────────────────────────────────────
 
   Each dog's score is derived exclusively from their own data:
-    BestTimeSec                   : 9/9 unique  ✅ OK
-    Speed_kmh                     : 9/9 unique  ✅ OK
-    ConsistencyIndex              : 9/9 unique  ✅ OK
-    FinalScore                    : 9/9 unique  ✅ OK
-    Ensemble_Prob                 : 9/9 unique  ✅ OK
+    BestTimeSec                   : 7/8 unique  ⚠️  CHECK
+    Speed_kmh                     : 8/8 unique  ✅ OK
+    ConsistencyIndex              : 8/8 unique  ✅ OK
+    FinalScore                    : 8/8 unique  ✅ OK
+    Ensemble_Prob                 : 8/8 unique  ✅ OK
 
 ========================================================================
 END OF AUDIT REPORT
