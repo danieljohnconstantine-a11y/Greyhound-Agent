@@ -1,0 +1,347 @@
+ML MODEL VERIFICATION REPORT
+Generated: 2026-03-05 08:36:09
+
+==============================================================================
+  1. ENSEMBLE CONFIGURATION
+==============================================================================
+  Training date : 2026-01-29T10:24:01.855950
+  Algorithms    : rf, gb, xgb
+  Feature count : 76
+  Tracks trained: 37
+  Tracks with models: 2
+  ⚠  Tracks in config but NO model files: 35
+       BENDIGO
+       Bulli
+       CASINO
+       Cannington
+       Capalaba
+       DARWIN
+       DUBBO
+       GAWLER
+       GEELONG
+       GOSFORD
+       ... and 25 more
+
+==============================================================================
+  2. MODEL HEALTH: RF / GB / XGB
+==============================================================================
+
+  --- Track: Angle Park ---
+    RF   (RandomForest): ✅ CalibratedClassifierCV → RandomForestClassifier
+         n_estimators=100  n_features_in_=76
+    GB   (GradientBoosting): ✅ CalibratedClassifierCV → GradientBoostingClassifier
+         n_estimators=100  n_features_in_=76
+    XGB  (XGBoost): ✅ CalibratedClassifierCV → XGBClassifier
+         n_estimators=100  n_features_in_=76
+
+  --- Track: BALLARAT ---
+    RF   (RandomForest): ✅ CalibratedClassifierCV → RandomForestClassifier
+         n_estimators=100  n_features_in_=76
+    GB   (GradientBoosting): ✅ CalibratedClassifierCV → GradientBoostingClassifier
+         n_estimators=100  n_features_in_=76
+    XGB  (XGBoost): ✅ CalibratedClassifierCV → XGBClassifier
+         n_estimators=100  n_features_in_=76
+
+==============================================================================
+  3. FEATURE IMPORTANCES (TOP 10 PER ALGORITHM)
+==============================================================================
+
+  --- Track: Angle Park ---
+    RF (RandomForest) — max_importance=0.0361  zero_features=12
+         FinalScore                          0.0361
+         PrizeMoney                          0.0357
+         WinPlaceRate                        0.0352
+         SpeedVsField                        0.0348
+         TimeVsField                         0.0344
+         PlaceRate                           0.0335
+         FieldTimeStd                        0.0335
+         ClassRating                         0.0330
+         FieldSpeedStd                       0.0311
+         ConsistencyIndex                    0.0305
+    GB (GradientBoosting) — max_importance=0.0908  zero_features=16
+         Box                                 0.0908
+         WinPlaceRate                        0.0817
+         PrizeMoney                          0.0574
+         SpeedVsField                        0.0535
+         FinalScore                          0.0493
+         ClassRating                         0.0471
+         ConsistencyIndex                    0.0449
+         TimeVsField                         0.0420
+         FinishConsistency                   0.0328
+         FieldSpeedStd                       0.0325
+    XGB (XGBoost) — max_importance=0.0560  zero_features=30
+         Draw                                0.0560
+         WinStreakFactor                     0.0486
+         Box                                 0.0452
+         PrizeMoney                          0.0288
+         SpeedVsField                        0.0285
+         ExperienceTier                      0.0276
+         FreshnessFactor                     0.0266
+         FieldSizeAdjustment                 0.0265
+         FinalScore                          0.0260
+         DLW                                 0.0253
+
+  --- Track: BALLARAT ---
+    RF (RandomForest) — max_importance=0.0377  zero_features=12
+         FinalScore                          0.0377
+         TimeVsField                         0.0365
+         FieldTimeStd                        0.0350
+         TrainerStrikeRate                   0.0342
+         WinPlaceRate                        0.0336
+         PlaceRate                           0.0324
+         SpeedVsField                        0.0323
+         BestTimeSec                         0.0317
+         SpeedAtDistance                     0.0306
+         FieldSpeedStd                       0.0305
+    GB (GradientBoosting) — max_importance=0.0683  zero_features=13
+         FinalScore                          0.0683
+         WinPlaceRate                        0.0617
+         TrainerStrikeRate                   0.0559
+         Draw                                0.0509
+         FinishConsistency                   0.0471
+         ClassRating                         0.0466
+         SpeedVsField                        0.0465
+         PlaceRate                           0.0463
+         TimeVsField                         0.0359
+         PrizeMoney                          0.0355
+    XGB (XGBoost) — max_importance=0.0689  zero_features=26
+         Draw                                0.0689
+         WinPlaceRate                        0.0389
+         Distance                            0.0322
+         TrackComprehensiveAdjustment        0.0277
+         RTCFactor                           0.0260
+         FinishConsistency                   0.0256
+         WinStreakFactor                     0.0254
+         BoxTop3Rate                         0.0251
+         BoxPenaltyFactor                    0.0249
+         PrizeMoney                          0.0243
+
+==============================================================================
+  4. DEAD-WEIGHT FEATURES (zero importance in ALL models)
+==============================================================================
+  11 features never used by any model:
+    Weight
+    TrackConditionAdj  ← always defaults to 1.0 (no raw data)
+    MarginAvg
+    FormMomentum
+    WeightFactor  ← always defaults to 1.0 (no raw data)
+    FormMomentumNorm
+    MarginFactor
+    Last3AvgFinish
+    Last3FinishFactor
+    TrackUpsetFactor
+    RecentPlaceStreak
+
+  Impact: Dead features add noise and slow prediction without helping accuracy.
+  Fix:    Remove them from the feature list in the next retraining cycle.
+
+==============================================================================
+  5. LIVE PREDICTION DISCRIMINATION TEST (today's PDFs)
+==============================================================================
+  ANGLG0503form.pdf  →  Track: Angle Park  |  10 races  |  63 dogs
+    Race  1: ⚠  RF:COLLAPSED(1/5), GB:COLLAPSED(1/5), XGB:COLLAPSED(1/5)
+    Race  2: ⚠  RF:COLLAPSED(1/6), GB:COLLAPSED(2/6)
+    Race  3: ⚠  RF:COLLAPSED(1/6)
+    Race  4: ⚠  RF:COLLAPSED(1/5)
+    Race  5: ⚠  RF:COLLAPSED(1/6), GB:COLLAPSED(2/6)
+    Race  6: ⚠  RF:COLLAPSED(1/9), GB:COLLAPSED(3/9), XGB:COLLAPSED(2/9)
+    Race  7: ⚠  RF:COLLAPSED(1/7)
+    Race  8: ⚠  RF:COLLAPSED(1/8), GB:COLLAPSED(2/8), XGB:COLLAPSED(3/8)
+    Race  9: ⚠  RF:COLLAPSED(1/6)
+    Race 10: ⚠  RF:COLLAPSED(1/5), GB:COLLAPSED(1/5), XGB:COLLAPSED(1/5)
+  CSNOG0503form.pdf  →  Track: CASINO  |  10 races  |  82 dogs
+  GEELG0503form.pdf  →  Track: GEELONG  |  13 races  |  91 dogs
+  GOSFG0503form.pdf  →  Track: GOSFORD  |  8 races  |  56 dogs
+  MANDG0503form.pdf  →  Track: Mandurah  |  12 races  |  102 dogs
+  MTGG0503form.pdf  →  Track: MT GAMBIER  |  10 races  |  69 dogs
+  NOWRG0503form.pdf  →  Track: NOWRA  |  10 races  |  68 dogs
+  QPRKG0503form.pdf  →  Track: Q PARKLANDS  |  10 races  |  74 dogs
+  QSTRG0503form.pdf  →  Track: Q STRAIGHT  |  10 races  |  80 dogs
+  SANDG0503form.pdf  →  Track: SANDOWN  |  12 races  |  83 dogs
+  SHEPG0503form.pdf  →  Track: SHEPPARTON  |  14 races  |  133 dogs
+  WENPG0503form.pdf  →  Track: WENTWORTH PARK  |  10 races  |  79 dogs
+  WNBLG0503form.pdf  →  Track: WARRNAMBOOL  |  13 races  |  118 dogs
+
+==============================================================================
+  6. DATA FACTUALITY AUDIT
+==============================================================================
+  ANGLG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  CSNOG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  GEELG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  GOSFG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  MANDG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  MTGG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  NOWRG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  QPRKG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  QSTRG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  SANDG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  SHEPG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  WENPG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+  WNBLG0503form.pdf:
+    ✅ Factual PDF fields confirmed (14): Box, Weight, Draw, CareerWins, CareerPlaces, CareerStarts, PrizeMoney, RTC, DLR, DLW, Distance, BestTimeSec, SectionalSec, BoxBiasFactor
+    ℹ  Neutral defaults applied (2):
+       WeightFactor=1.0 (neutral default - no raw data available)
+       TrackConditionAdj=1.0 (neutral default - no raw data available)
+
+==============================================================================
+  7. FACTORS THAT REDUCE PREDICTION PROBABILITY AND HOW TO IMPROVE THEM
+==============================================================================
+
+  A. CALIBRATION COLLAPSE (biggest single issue)
+  ──────────────────────────────────────────────
+  What:   CalibratedClassifierCV (isotonic regression) maps all raw probabilities
+          to the same calibrated value when the race field is small (<6 dogs) or
+          the isotonic mapping was fitted on data with very few races.
+  Effect: RF, GB, or XGB all return e.g. [0.1621, 0.1621, 0.1621] for every dog —
+          no discrimination at all before the within-race normalization step.
+  Fix:    Already implemented — _get_uncalibrated_preds() falls back to the raw
+          base-estimator when ≥50% of dogs receive the same calibrated score.
+          To prevent this at source: retrain with cv=5 in CalibratedClassifierCV
+          and ensure training set has ≥200 races per track before calibrating.
+
+  B. MISSING TIMING DATA (BestTimeSec / SectionalSec)
+  ──────────────────────────────────────────────────
+  What:   Speed_kmh, EarlySpeedIndex, TimeVsField, SpeedVsField,
+          BestTimePercentile, EarlySpeedPercentile are all NaN when a dog has
+          never recorded an official time at the track.
+  Effect: These are among the TOP-10 most important features (SpeedVsField ranks
+          #3-#5 for RF/GB/XGB). A dog with NaN timing gets filled with 0, which
+          is artificially pessimistic (scored as very slow).
+  Fix:    Replace fillna(0) with fillna(median_for_race) so the dog is treated as
+          average-speed rather than slowest in the field. Implement this in the
+          feature engineering step of predict_with_ensemble().
+
+  C. DEAD-WEIGHT FEATURES (11 features with zero importance)
+  ──────────────────────────────────────────────────────────
+  What:   FormMomentum, FormMomentumNorm, Last3AvgFinish, Last3FinishFactor,
+          MarginAvg, MarginFactor, RecentPlaceStreak, TrackConditionAdj,
+          TrackUpsetFactor, Weight, WeightFactor — never used by any model.
+  Effect: Add 11 noisy dimensions to the feature matrix. RF/XGB handle this via
+          feature sub-sampling but they reduce the probability that genuinely
+          informative features appear at each split.
+  Fix:    Remove these 11 features from the feature list when retraining. This
+          reduces the feature matrix from 76 → 65 columns, improving signal density.
+
+  D. ONLY 2/37 TRACKS HAVE TRAINED MODELS
+  ─────────────────────────────────────────
+  What:   Only Angle Park and BALLARAT have RF/GB/XGB models. The other 35 tracks
+          in the configuration (e.g. Goulburn, Shepparton, Nowra, etc.) fall back
+          to rule-based scoring from src/scorer.py.
+  Effect: For non-Angle Park / non-BALLARAT PDFs, ML predictions are unavailable —
+          the pipeline processes those PDFs but cannot generate ensemble scores.
+  Fix:    Run train_ml_track_ensemble.py with all 13 PDFs currently in
+          data_predictions/ to add models for those tracks. Alternatively upload
+          existing pkl files from a machine where training has been completed.
+
+  E. LOW MAX FEATURE IMPORTANCE (3–9% per feature)
+  ──────────────────────────────────────────────────
+  What:   The highest single-feature importance is only ~9% (Box in GB for Angle
+          Park). RF tops out at ~3.8%. This means the models have not found one
+          dominant predictor — they are averaging across many weak signals.
+  Effect: Low-confidence predictions. The ensemble spread (max - min raw probability)
+          is narrow, so within-race normalization is doing most of the work.
+  Fix 1:  Increase training data — more races → better signal separation.
+  Fix 2:  Engineer interaction features:
+          • SpeedVsField × DLWFactor  (fast + recent winner)
+          • CareerWins / CareerStarts × PrizeMoney  (class indicator)
+          • Box × TrackComprehensiveAdjustment  (box*track interaction)
+  Fix 3:  Tune n_estimators=200, max_depth=12 for RF; learning_rate=0.05 for GB.
+
+  F. MAIDEN / NOVICE RACES
+  ─────────────────────────
+  What:   In maiden races all CareerWins=0, ConsistencyIndex=0, WinRate=0.
+          DLWFactor=0.5 for all dogs.
+  Effect: All dogs look identical on career-based features. The model falls back
+          almost entirely to box position and BestTimeSec.
+  Fix:    Add an explicit is_maiden flag feature so the model can learn a separate
+          decision boundary for maiden races where speed and draw matter more.
+
+  G. TRAINER STRIKE RATE IS PER-RACE ONLY (not historical)
+  ──────────────────────────────────────────────────────────
+  What:   TrainerStrikeRate is calculated from career wins/starts of the dogs in
+          the SAME RACE CARD only — not from a historical trainer database.
+  Effect: A trainer with only 1 dog entered shows a biased strike rate.
+  Fix:    Maintain a rolling trainer performance CSV updated after each race day
+          and join it to the prediction dataframe by trainer name.
+
+  H. WITHIN-RACE NORMALIZATION OVERRIDES MODEL CONFIDENCE
+  ─────────────────────────────────────────────────────────
+  What:   All predictions are renormalized to [2%, 18%] within each race
+          regardless of true model confidence.
+  Effect: A race where the model is genuinely uncertain (e.g. 5 dogs, all similar)
+          still shows one dog at 18% — giving a false impression of confidence.
+  Fix:    Add a raw_spread column to the output showing the pre-normalization
+          probability spread (max - min). If spread < 0.005, flag race as
+          LOW_CONFIDENCE so the user knows not to rely on ML pick for that race.
+
+
+==============================================================================
+  8. SUMMARY AND NEXT STEPS
+==============================================================================
+
+  ✅ RF (RandomForestClassifier)    — WORKING. 100 estimators, 76 features, calibrated.
+  ✅ GB (GradientBoostingClassifier)— WORKING. 100 estimators, 76 features, calibrated.
+  ✅ XGB (XGBClassifier)            — WORKING. 100 estimators, 76 features, calibrated.
+  ✅ Isotonic calibration           — WORKING with automatic collapse-guard fallback.
+  ✅ Within-race normalization      — WORKING (guarantees unique per-dog scores).
+  ✅ All factual features           — confirmed PDF-sourced only (no estimation).
+  ⚠  11 dead-weight features        — remove before next retraining.
+  ⚠  Only 2/37 tracks have models   — train remaining tracks.
+  ⚠  Trainer strike rate is local   — build historical trainer database.
+
+  Priority improvements (ranked by impact):
+    1. Fill NaN timing with race median instead of 0        [high impact, easy fix]
+    2. Add raw_spread LOW_CONFIDENCE flag to output         [medium impact, easy fix]
+    3. Remove 11 dead features, retrain                     [medium impact, medium work]
+    4. Add is_maiden feature flag                           [medium impact, easy fix]
+    5. Build SpeedVsField × DLWFactor interaction feature   [medium impact, medium work]
+    6. Build historical trainer database                    [high impact, high work]
+    7. Train models for all 13 PDF tracks                   [high impact, medium work]

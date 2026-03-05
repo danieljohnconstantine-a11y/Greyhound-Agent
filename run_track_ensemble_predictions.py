@@ -48,6 +48,11 @@ from datetime import datetime
 import traceback
 import pdfplumber
 
+# Threshold below which the pre-normalization ensemble spread is considered too
+# narrow to represent genuine ML discrimination.  Races that fall below this
+# value get a Low_Confidence=True flag in the output.
+LOW_CONFIDENCE_SPREAD_THRESHOLD = 0.005  # < 0.5% probability spread
+
 def extract_text_from_pdf(pdf_path):
     """
     Extract text content from a PDF file.
@@ -207,8 +212,22 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
         if len(missing_features) <= 5:
             print(f"         Missing: {', '.join(missing_features)}")
     
-    # Extract features and fill missing with 0
-    X = df[feature_cols].fillna(0)
+    # Extract features.
+    # IMPROVEMENT: fill NaN timing-derived features with the race median
+    # rather than 0. Filling with 0 unfairly scores a dog with unknown time
+    # as the "slowest in the field" — median treatment is neutral.
+    TIMING_FEATURES = [
+        'BestTimeSec', 'SectionalSec', 'Speed_kmh', 'EarlySpeedIndex',
+        'TimeVsField', 'SpeedVsField', 'BestTimePercentile', 'EarlySpeedPercentile',
+        'SpeedAtDistance',
+    ]
+    X = df[feature_cols].copy()
+    for col in TIMING_FEATURES:
+        if col in X.columns:
+            col_median = X[col].median()
+            fill_value = col_median if pd.notna(col_median) else 0
+            X[col] = X[col].fillna(fill_value)
+    X = X.fillna(0)
     
     # Check for feature variability - warn if features don't vary between dogs
     constant_features = []
@@ -289,6 +308,9 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     # Normalize weights and compute weighted average
     total_weight = sum(used_weights)
     ensemble_pred = np.sum(all_predictions, axis=0) / total_weight
+
+    # Capture pre-normalization spread to expose model confidence
+    raw_spread = float(ensemble_pred.max() - ensemble_pred.min())
     
     # IMPROVEMENT: Within-race normalization to force discrimination
     # Convert to percentile ranks within race, then scale to reasonable probabilities
@@ -314,7 +336,7 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
             individual_scores[alg] = 0.02 + alg_norm * 0.16
         # If all identical, leave as-is (will show uniform score)
     
-    return ensemble_pred, individual_scores
+    return ensemble_pred, individual_scores, raw_spread
 
 def main():
     print("=" * 80)
@@ -411,13 +433,23 @@ def main():
                 print(f"   Models loaded: {', '.join(models.keys())}")
                 
                 # Generate predictions
-                ensemble_pred, individual_scores = predict_with_ensemble(
+                ensemble_pred, individual_scores, raw_spread = predict_with_ensemble(
                     race_df, models, scaler, config['feature_cols'], config['ensemble_weights']
                 )
                 
                 # Add to race_df - ensemble average
                 race_df['ML_Confidence'] = (ensemble_pred * 100).round(1)
                 race_df['Ensemble_Score'] = ensemble_pred
+
+                # LOW_CONFIDENCE flag: when the pre-normalization probability spread
+                # is very narrow the model has little genuine discrimination — the
+                # final scores are driven mostly by the within-race normalization
+                # step rather than real ML signal.  Flag those races so users
+                # know not to rely solely on the ML pick.
+                race_df['Low_Confidence'] = raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD
+                if raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD:
+                    print(f"      ⚠️  LOW_CONFIDENCE: raw model spread={raw_spread:.4f} — "
+                          f"scores driven by normalization, not genuine ML signal")
                 
                 # Add individual algorithm scores (RF, GB, XGB)
                 for alg, scores in individual_scores.items():
