@@ -1,39 +1,23 @@
 ================================================================================
 TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
-Generated: 2026-02-12 12:01:54
+Generated: 2026-03-05 01:40:26
 ================================================================================
 
-Total PDFs processed: 11
-Successful predictions: 2
-Total dogs predicted: 163
+Total PDFs processed: 13
+Successful predictions: 1
+Total dogs predicted: 63
 
 
-SALE:
-  Races: 12
-  Dogs: 91
-  Race 1: Box 1 - Paw Ezra (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 2: Box 2 - Rio Izzy (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 3: Box 2 - Lindenow Buffy (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 4: Box 1 - Feikuai Calvin (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 5: Box 1 - Torbek (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 6: Box 1 - Champagne Cuddle (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 7: Box 1 - Woodside Vixen (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 8: Box 1 - Excavator Ticket (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 9: Box 1 - Nobby (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 10: Box 2 - Son Of Ghost (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 11: Box 1 - Mamasan (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-  Race 12: Box 1 - Paw Lauren (15.0% (RF=14.6, GB=15.2, XGB=15.3))
-
-WENTWORTH PARK:
+Angle Park:
   Races: 10
-  Dogs: 72
-  Race 1: Box 5 - Ritza Toby (13.6% (RF=12.9, GB=13.7, XGB=14.3))
-  Race 2: Box 2 - Aeroplane Ruby (13.6% (RF=12.9, GB=13.7, XGB=14.3))
-  Race 3: Box 1 - See This (13.6% (RF=12.9, GB=13.7, XGB=14.3))
-  Race 4: Box 2 - Stilton Shine (13.6% (RF=12.9, GB=13.7, XGB=14.3))
-  Race 5: Box 2 - My Athena (13.6% (RF=12.9, GB=13.7, XGB=14.3))
-  Race 6: Box 1 - Six Dolphins (13.6% (RF=12.9, GB=13.7, XGB=14.3))
-  Race 7: Box 1 - Quick Thinkin' (13.6% (RF=12.9, GB=13.7, XGB=14.3))
-  Race 8: Box 2 - Rebel Ethics (13.5% (RF=12.9, GB=13.7, XGB=13.9))
-  Race 9: Box 1 - Hey Bubba Louie (13.6% (RF=12.9, GB=13.7, XGB=14.3))
-  Race 10: Box 1 - Raymar Shame (13.6% (RF=12.9, GB=13.7, XGB=14.3))
+  Dogs: 63
+  Race 1: Box 2 - Claymore Lass (16.3% (RF=18.0, GB=15.6, XGB=13.4))
+  Race 2: Box 1 - Destroying (16.5% (RF=12.5, GB=15.6, XGB=16.8))
+  Race 3: Box 4 - Gunning Bandit (16.5% (RF=10.6, GB=15.1, XGB=18.0))
+  Race 4: Box 2 - Gina Gulla (16.1% (RF=14.3, GB=13.7, XGB=16.1))
+  Race 5: Box 2 - Wilma's Our Girl (18.0% (RF=14.5, GB=18.0, XGB=17.3))
+  Race 6: Box 1 - Sinaloa Bandit (16.0% (RF=12.8, GB=14.4, XGB=16.3))
+  Race 7: Box 1 - Zinfandel Trace (16.6% (RF=15.8, GB=17.7, XGB=14.1))
+  Race 8: Box 7 - Mallee Beauty (13.7% (RF=14.6, GB=13.8, XGB=10.5))
+  Race 9: Box 1 - Right Side Up (13.9% (RF=11.9, GB=12.3, XGB=13.9))
+  Race 10: Box 1 - Mickey Haller (16.6% (RF=18.0, GB=11.7, XGB=16.1))

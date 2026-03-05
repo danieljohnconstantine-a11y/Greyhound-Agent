@@ -1,0 +1,34 @@
+{
+  "track": "BALLARAT",
+  "generated_at": "2026-03-05T01:23:41.704039",
+  "models": {
+    "rf": {
+      "type": "CalibratedClassifierCV",
+      "base_type": "RandomForestClassifier",
+      "n_features_in_": 76,
+      "n_estimators": 100,
+      "max_depth": 15,
+      "file_size_kb": 23602.7
+    },
+    "gb": {
+      "type": "CalibratedClassifierCV",
+      "base_type": "GradientBoostingClassifier",
+      "n_features_in_": 76,
+      "n_estimators": 100,
+      "max_depth": 4,
+      "file_size_kb": 873.5
+    },
+    "xgb": {
+      "type": "CalibratedClassifierCV",
+      "base_type": "XGBClassifier",
+      "n_features_in_": 76,
+      "n_estimators": 100,
+      "max_depth": 4,
+      "file_size_kb": 551.8
+    }
+  },
+  "scaler": {
+    "present": true,
+    "file_size_kb": 3.5
+  }
+}

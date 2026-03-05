@@ -1,0 +1,69 @@
+================================================================================
+RACE 8 PREDICTIONS - FULL PIPELINE REPORT
+Generated: 2026-03-05 01:41:04
+================================================================================
+
+RACE DETAILS:
+  Date:     05 Mar 26
+  Time:     08:58pm
+  Track:    Angle Park
+  Distance: 530m
+  Grade:    OPEN - FUNDRAISERS AT ANGLE PARK OPEN STAKE
+
+PIPELINE USED:
+  Models:   Angle Park_rf.pkl, Angle Park_gb.pkl, Angle Park_xgb.pkl
+  Scaler:   Angle Park_scaler.pkl
+  Features: 76 features per dog
+  Algo weights: XGB=50%, RF=25%, GB=25%
+  Calibration: CalibratedClassifierCV (isotonic) with collapse-bypass
+
+================================================================================
+Rank  Box Dog Name                ML%    RF%    GB%   XGB%
+------------------------------------------------------------
+  12    7 Mallee Beauty          13.7   14.6   13.8   10.5
+  18    8 Flying Artie           13.0    9.6   10.7   14.2
+  25    3 Manifesto              11.0    8.1   10.4   11.5
+  30    4 Nangar Lady            10.4    6.5    9.2   13.3
+  31    1 Kisauni                10.3    7.9   10.2    9.6
+  32    5 Reality Is             10.1    6.4    8.6   12.4
+  35    2 Bookaloo                9.6    9.4    7.4    8.7
+  46    6 Victory Club            7.2    6.0    5.7    7.8
+
+================================================================================
+CRITICAL REVIEW: Individual Score Analysis
+================================================================================
+
+  Box 7 - Mallee Beauty:
+    RF=14.6%  GB=13.8%  XGB=10.5%  Ensemble=13.7%
+
+  Box 8 - Flying Artie:
+    RF=9.6%  GB=10.7%  XGB=14.2%  Ensemble=13.0%
+
+  Box 3 - Manifesto:
+    RF=8.1%  GB=10.4%  XGB=11.5%  Ensemble=11.0%
+
+  Box 4 - Nangar Lady:
+    RF=6.5%  GB=9.2%  XGB=13.3%  Ensemble=10.4%
+
+  Box 1 - Kisauni:
+    RF=7.9%  GB=10.2%  XGB=9.6%  Ensemble=10.3%
+
+  Box 5 - Reality Is:
+    RF=6.4%  GB=8.6%  XGB=12.4%  Ensemble=10.1%
+
+  Box 2 - Bookaloo:
+    RF=9.4%  GB=7.4%  XGB=8.7%  Ensemble=9.6%
+
+  Box 6 - Victory Club:
+    RF=6.0%  GB=5.7%  XGB=7.8%  Ensemble=7.2%
+
+UNIQUENESS VERIFICATION:
+  ✅ PASS: Ensemble - 8/8 unique values
+  ✅ PASS: RF - 8/8 unique values
+  ✅ PASS: GB - 8/8 unique values
+  ✅ PASS: XGB - 8/8 unique values
+
+VERDICT: All 8 dogs have 100% individual scoring.
+
+NOTE: ML_Rank is relative to all 63 dogs across the full race card.
+Race 8 dogs rank 12-46 out of 63 (a competitive OPEN field).
