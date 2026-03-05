@@ -1,6 +1,6 @@
 ========================================================================
 GREYHOUND RACE PREDICTION AUDIT REPORT
-Generated: 2026-03-05 09:32:36
+Generated: 2026-03-05 10:09:24
 ========================================================================
 
 Race     : 8
@@ -84,7 +84,7 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     ConsistencyIndex              : 0.0385
     PlaceRate                     : 0.4615
     RecentFormBoost               : 0.5547
-    DLWFactor                     : 0.1792
+    DLWFactor                     : 0.1805
     BoxBiasFactor                 : 0.1720
     DistanceSuit                  : 0.5000
     AgeFactor                     : 1.1000
@@ -101,7 +101,7 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     ConsistencyIndex              : 0.1250
     PlaceRate                     : 0.3750
     RecentFormBoost               : 0.8422
-    DLWFactor                     : 0.8853
+    DLWFactor                     : 0.8862
     BoxBiasFactor                 : 0.1180
     DistanceSuit                  : 0.9000
     AgeFactor                     : 0.9500
@@ -118,7 +118,7 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     ConsistencyIndex              : 0.1316
     PlaceRate                     : 0.3947
     RecentFormBoost               : 0.6492
-    DLWFactor                     : 0.9281
+    DLWFactor                     : 0.9320
     BoxBiasFactor                 : 0.1120
     DistanceSuit                  : 0.6053
     AgeFactor                     : 1.1000
@@ -135,7 +135,7 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     ConsistencyIndex              : 0.4000
     PlaceRate                     : 0.6000
     RecentFormBoost               : 0.8611
-    DLWFactor                     : 1.2755
+    DLWFactor                     : 1.2766
     BoxBiasFactor                 : 0.1090
     DistanceSuit                  : 1.2000
     AgeFactor                     : 1.1000
@@ -152,7 +152,7 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     ConsistencyIndex              : 0.1333
     PlaceRate                     : 0.5333
     RecentFormBoost               : 0.5067
-    DLWFactor                     : 0.6193
+    DLWFactor                     : 0.6209
     BoxBiasFactor                 : 0.1060
     DistanceSuit                  : 0.5000
     AgeFactor                     : 1.1000
@@ -169,7 +169,7 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     ConsistencyIndex              : 0.1053
     PlaceRate                     : 0.3684
     RecentFormBoost               : 0.5282
-    DLWFactor                     : 0.8185
+    DLWFactor                     : 0.8203
     BoxBiasFactor                 : 0.1320
     DistanceSuit                  : 0.7857
     AgeFactor                     : 1.1000
@@ -203,7 +203,7 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     ConsistencyIndex              : 0.3333
     PlaceRate                     : 0.2500
     RecentFormBoost               : 0.9160
-    DLWFactor                     : 1.1048
+    DLWFactor                     : 1.1061
     BoxBiasFactor                 : 0.1300
     DistanceSuit                  : 1.0000
     AgeFactor                     : 0.9500
@@ -220,7 +220,7 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     ConsistencyIndex              : 0.0820
     PlaceRate                     : 0.2787
     RecentFormBoost               : 0.5663
-    DLWFactor                     : 0.3327
+    DLWFactor                     : 0.3371
     BoxBiasFactor                 : 0.1210
     DistanceSuit                  : 1.0000
     AgeFactor                     : 1.1000

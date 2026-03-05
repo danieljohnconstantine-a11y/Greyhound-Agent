@@ -290,12 +290,16 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     # ── 13. Derived factor features ───────────────────────────────────────────
-    # DLWFactor: continuous exponential decay — recent win = high score, stale = low
-    # No floor/cap so values remain unique per dog
-    df['DLWFactor'] = df['DLW'].apply(
-        lambda d: round(max(_DLW_MIN_FACTOR, min(_DLW_CAP_FACTOR,
-            _DLW_MAX_FACTOR * np.exp(-d / _DLW_DECAY_DAYS) + _DLW_BASE_OFFSET)), 4)
-    )
+    # DLWFactor: exponential decay on days-since-win, plus a small RTC-based
+    # tiebreaker so dogs with identical DLW still receive individual scores.
+    def _dlw_factor(row):
+        d   = row['DLW']
+        rtc = row.get('RTC', 0)
+        base = _DLW_MAX_FACTOR * np.exp(-d / _DLW_DECAY_DAYS) + _DLW_BASE_OFFSET
+        rtc_adj = (rtc / 200.0) * 0.02   # max 0.02 spread over 0-200 races
+        return round(max(_DLW_MIN_FACTOR, min(_DLW_CAP_FACTOR + 0.02, base + rtc_adj)), 4)
+
+    df['DLWFactor'] = df.apply(_dlw_factor, axis=1)
     df['WeightFactor'] = df['Weight'].apply(
         lambda w: 1.0 + (w - 30.0) * 0.01 if w > 0 else 1.0
     )

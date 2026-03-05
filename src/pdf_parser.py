@@ -191,8 +191,9 @@ def _extract_race_results(lines: List[str], start_idx: int, end_idx: int) -> Lis
 # ─── main parser ──────────────────────────────────────────────────────────────
 
 _RACE_HEADER_RE = re.compile(
-    r'^Race No\s+(\d{2})\s+(\w{3})\s+(\d{2})\s+([\d:APM]+)\s+'
-    r'(.+?)\s+(\d+)m\s*$'
+    r'^Race No\s+(\d{2})\s+(\w{3})\s+(\d{2})\s+([\d:aApPmM]+)\s+'
+    r'(.+?)\s+(\d+)m\s*$',
+    re.IGNORECASE,
 )
 _RACE_NUM_LINE_RE = re.compile(r'^(\d{1,2})\s+\S')  # "8 RACE NAME..."
 
@@ -298,9 +299,77 @@ def parse_form_pdf(pdf_path: str, target_race: Optional[int] = None,
     return df.reset_index(drop=True)
 
 
+def _preprocess_lines(lines: List[str]) -> List[str]:
+    """
+    Pre-process lines to fix common PDF text-extraction artefacts:
+
+    1.  Join "Race No" split lines (some PDFs emit "Race No" on one line and the
+        date on the next).
+    2.  Fix split career records where the PDF wraps the W-P-S across three lines:
+            <W> - <P> -          ← orphan line BEFORE the dog header
+            N. <formcode><name> … $<prize> <RTC> <DLR> <DLW>
+            <S>                  ← starts on the line AFTER the dog header
+        Reconstructed into a single parsable dog-header line.
+    """
+    # ── Pass 1: join "Race No" split lines ──────────────────────────────────
+    out: List[str] = []
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        if line == 'Race No' and i + 1 < len(lines):
+            nxt = lines[i + 1].strip()
+            if nxt and nxt[0].isdigit():
+                out.append(f'Race No {nxt}')
+                i += 2
+                continue
+        out.append(lines[i])
+        i += 1
+
+    # ── Pass 2: fix split career records ────────────────────────────────────
+    _PARTIAL_WPS_RE = re.compile(r'^(\d+)\s*-\s*(\d+)\s*-\s*$')
+    _STARTS_ONLY_RE = re.compile(r'^\d{1,3}$')
+    _DOG_NO_WPS_RE  = re.compile(
+        r'^(?:E)?(\d+)\.\s*'
+        r'([\dxX\-]{3,8})?\s*'
+        r"([A-Za-z'' \-]+?)\s+"
+        r'(\d[a-zA-Z]+)\s+([\d.]+)kg\s+(\d+)\s+'
+        r"([A-Za-z'' \-]+?)\s+"
+        r'\$([\d,]+)'
+        r'\s+(\d+)\s+(\d+)\s+(\d+)\s*$'
+    )
+
+    result: List[str] = []
+    j = 0
+    while j < len(out):
+        line = out[j]
+        m_partial = _PARTIAL_WPS_RE.match(line.strip())
+        if m_partial and j + 1 < len(out) and j + 2 < len(out):
+            dog_line   = out[j + 1]
+            starts_line = out[j + 2].strip()
+            m_dog    = _DOG_NO_WPS_RE.match(dog_line.strip())
+            m_starts = _STARTS_ONLY_RE.match(starts_line)
+            if m_dog and m_starts:
+                W, P = m_partial.group(1), m_partial.group(2)
+                S = starts_line
+                new_dog_line = re.sub(
+                    r'\s+\$([\d,]+)',
+                    f' {W} - {P} - {S} $\\1',
+                    dog_line.strip(),
+                    count=1,
+                )
+                result.append(new_dog_line)
+                j += 3
+                continue
+        result.append(line)
+        j += 1
+    return result
+
+
 def _parse_race_block(lines: List[str], race_meta: Dict) -> List[Dict]:
     """Parse dogs from a single race's text block."""
     dogs: List[Dict] = []
+
+    lines = _preprocess_lines(lines)
 
     # ── 1. collect dog header lines (the summary table rows) ────────────────
     dog_dicts: List[Dict] = []
