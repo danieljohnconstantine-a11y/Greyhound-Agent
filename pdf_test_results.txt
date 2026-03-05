@@ -1,0 +1,166 @@
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+No race date extracted - will rely on CSV matching
+================================================================================
+COMPREHENSIVE PDF VALIDATION TEST
+================================================================================
+
+Found 11 PDF files to test
+
+1. Testing: CAPAG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (184601 chars)
+   Parsing race form... [SUCCESS] Parsed 82 dogs
+   [INFO] Timing data extracted: 82/82 dogs have BestTimeSec, 82/82 have SectionalSec
+✅ Found 82 dogs
+   Validating dog data...
+      Example: Box ? - Backrower
+      Features: 24
+   ✅ SUCCESS - 82/82 valid dogs
+
+2. Testing: DRWNG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (130288 chars)
+   Parsing race form... [SUCCESS] Parsed 55 dogs
+   [INFO] Timing data extracted: 55/55 dogs have BestTimeSec, 55/55 have SectionalSec
+✅ Found 55 dogs
+   Validating dog data...
+      Example: Box ? - So Naive
+      Features: 24
+   ✅ SUCCESS - 55/55 valid dogs
+
+3. Testing: GRAFG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (196640 chars)
+   Parsing race form... [SUCCESS] Parsed 83 dogs
+   [INFO] Timing data extracted: 83/83 dogs have BestTimeSec, 83/83 have SectionalSec
+✅ Found 83 dogs
+   Validating dog data...
+      Example: Box ? - Robell Ceaser
+      Features: 24
+   ✅ SUCCESS - 83/83 valid dogs
+
+4. Testing: HEALG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (258422 chars)
+   Parsing race form... [SUCCESS] Parsed 114 dogs
+   [INFO] Timing data extracted: 114/114 dogs have BestTimeSec, 114/114 have SectionalSec
+✅ Found 114 dogs
+   Validating dog data...
+      Example: Box ? - Chloe's Fault
+      Features: 24
+   ✅ SUCCESS - 114/114 valid dogs
+
+5. Testing: MBRGG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (218570 chars)
+   Parsing race form... [SUCCESS] Parsed 86 dogs
+   [INFO] Timing data extracted: 86/86 dogs have BestTimeSec, 86/86 have SectionalSec
+✅ Found 86 dogs
+   Validating dog data...
+      Example: Box ? - Mickey Haller
+      Features: 24
+   ✅ SUCCESS - 86/86 valid dogs
+
+6. Testing: MTGG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (146053 chars)
+   Parsing race form... [SUCCESS] Parsed 61 dogs
+   [INFO] Timing data extracted: 61/61 dogs have BestTimeSec, 61/61 have SectionalSec
+✅ Found 61 dogs
+   Validating dog data...
+      Example: Box ? - Amazon Prince
+      Features: 24
+   ✅ SUCCESS - 61/61 valid dogs
+
+7. Testing: QPRKG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (212480 chars)
+   Parsing race form... [SUCCESS] Parsed 88 dogs
+   [INFO] Timing data extracted: 88/88 dogs have BestTimeSec, 88/88 have SectionalSec
+✅ Found 88 dogs
+   Validating dog data...
+      Example: Box ? - Eternity Bridge
+      Features: 24
+   ✅ SUCCESS - 88/88 valid dogs
+
+8. Testing: RICHG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (199646 chars)
+   Parsing race form... [SUCCESS] Parsed 87 dogs
+   [INFO] Timing data extracted: 87/87 dogs have BestTimeSec, 87/87 have SectionalSec
+✅ Found 87 dogs
+   Validating dog data...
+      Example: Box ? - Indy's Shine
+      Features: 24
+   ✅ SUCCESS - 87/87 valid dogs
+
+9. Testing: ROCKG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (164541 chars)
+   Parsing race form... [SUCCESS] Parsed 70 dogs
+   [INFO] Timing data extracted: 70/70 dogs have BestTimeSec, 70/70 have SectionalSec
+✅ Found 70 dogs
+   Validating dog data...
+      Example: Box ? - Durambah Beach
+      Features: 24
+   ✅ SUCCESS - 70/70 valid dogs
+
+10. Testing: SALEG0102form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (256191 chars)
+   Parsing race form... [SUCCESS] Parsed 91 dogs
+   [INFO] Timing data extracted: 91/91 dogs have BestTimeSec, 91/91 have SectionalSec
+✅ Found 91 dogs
+   Validating dog data...
+      Example: Box ? - Paw Ezra
+      Features: 24
+   ✅ SUCCESS - 91/91 valid dogs
+
+11. Testing: WENPG2901form.pdf
+------------------------------------------------------------
+   Extracting text... ✅ (171436 chars)
+   Parsing race form... [SUCCESS] Parsed 72 dogs
+   [INFO] Timing data extracted: 72/72 dogs have BestTimeSec, 72/72 have SectionalSec
+✅ Found 72 dogs
+   Validating dog data...
+      Example: Box ? - Billy The Goat
+      Features: 24
+   ✅ SUCCESS - 72/72 valid dogs
+
+================================================================================
+SUMMARY
+================================================================================
+
+Total PDFs tested: 11
+✅ Successful: 11 (100.0%)
+⚠️  No dogs found: 0 (0.0%)
+❌ Failed: 0 (0.0%)
+
+Successful PDFs:
+  ✅ CAPAG0102form.pdf: 82 valid dogs (out of 82)
+  ✅ DRWNG0102form.pdf: 55 valid dogs (out of 55)
+  ✅ GRAFG0102form.pdf: 83 valid dogs (out of 83)
+  ✅ HEALG0102form.pdf: 114 valid dogs (out of 114)
+  ✅ MBRGG0102form.pdf: 86 valid dogs (out of 86)
+  ✅ MTGG0102form.pdf: 61 valid dogs (out of 61)
+  ✅ QPRKG0102form.pdf: 88 valid dogs (out of 88)
+  ✅ RICHG0102form.pdf: 87 valid dogs (out of 87)
+  ✅ ROCKG0102form.pdf: 70 valid dogs (out of 70)
+  ✅ SALEG0102form.pdf: 91 valid dogs (out of 91)
+  ✅ WENPG2901form.pdf: 72 valid dogs (out of 72)
+
+================================================================================
+CONFIDENCE LEVEL: 100.0%
+================================================================================
+✅ 100% CONFIDENCE ACHIEVED!
+   All PDFs can be processed successfully.
+

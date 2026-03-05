@@ -1,168 +1,142 @@
+#!/usr/bin/env python3
 """
-Reorganize Track Ensemble Models into Track-Specific Subdirectories
+Reorganize Model Files by Track
 
-This script reorganizes the flat model directory structure into track-specific subdirectories
-for better organization and scalability.
+This script reorganizes flat model files into track-specific subdirectories.
+Converts: models/TRACKNAME_algorithm.pkl  
+To: models/TRACKNAME/algorithm.pkl
 
-Old structure:
-    models/
-        TRACK1_rf.pkl
-        TRACK1_gb.pkl
-        TRACK1_xgb.pkl
-        TRACK1_scaler.pkl
-        TRACK2_rf.pkl
-        ...
-
-New structure:
-    models/
-        TRACK1/
-            rf.pkl
-            gb.pkl
-            xgb.pkl
-            scaler.pkl
-            metrics.json
-        TRACK2/
-            rf.pkl
-            gb.pkl
-            xgb.pkl
-            scaler.pkl
-            metrics.json
-        ...
+Author: GitHub Copilot
+Date: 2026-03-04
 """
 
 import os
 import shutil
-import json
-import pickle
+import re
 from pathlib import Path
 
 def reorganize_models():
-    """Reorganize models from flat structure to track subdirectories"""
+    """Reorganize models from flat structure to subdirectories."""
     
     models_dir = Path("models")
-    if not models_dir.exists():
-        print("❌ models/ directory not found!")
-        return
     
-    # Find all track-specific model files
-    model_files = list(models_dir.glob("*_*.pkl"))
+    if not models_dir.exists():
+        print(f"❌ ERROR: {models_dir} directory not found!")
+        return False
+    
+    print(f"📁 Scanning {models_dir}/ for model files...")
+    
+    # Find all pkl files (excluding config files)
+    model_files = [f for f in models_dir.glob("*.pkl") if not f.name.startswith("config")]
     
     if not model_files:
-        print("ℹ️  No track-specific models found to reorganize")
-        return
+        print("ℹ️  No model files found to reorganize")
+        return True
+    
+    print(f"   Found {len(model_files)} model files")
     
     # Group files by track
     tracks = {}
+    
     for file_path in model_files:
         filename = file_path.name
         
-        # Skip config files
-        if filename in ['config.pkl', 'ensemble_config.json']:
-            continue
+        # Pattern: TRACKNAME_algorithm.pkl or 'Track Name_algorithm.pkl'
+        # Extract track name and algorithm
+        match = re.match(r"^(.+?)_(rf|gb|xgb|scaler)\.pkl$", filename)
         
-        # Extract track name (everything before last underscore)
-        if '_' in filename:
-            parts = filename.rsplit('_', 1)
-            track_name = parts[0]
-            model_type = parts[1].replace('.pkl', '')
+        if match:
+            track_name = match.group(1)
+            algorithm = match.group(2)
             
             if track_name not in tracks:
                 tracks[track_name] = []
-            tracks[track_name].append((file_path, model_type))
+            tracks[track_name].append((filename, algorithm))
+        else:
+            print(f"   ⚠️  Skipping file with unexpected format: {filename}")
     
     if not tracks:
-        print("ℹ️  No track models found to reorganize")
-        return
+        print("❌ No valid track model files found!")
+        return False
     
-    print(f"\n📁 Found {len(tracks)} tracks with models to reorganize")
-    print("=" * 80)
+    print(f"\n📊 Found {len(tracks)} tracks to organize:")
+    for track in sorted(tracks.keys()):
+        print(f"   • {track} ({len(tracks[track])} files)")
     
-    reorganized_count = 0
+    print(f"\n🔄 Reorganizing models into subdirectories...")
     
-    for track_name, files in sorted(tracks.items()):
+    success_count = 0
+    error_count = 0
+    
+    for track_name, files in tracks.items():
+        # Create track subdirectory
         track_dir = models_dir / track_name
-        track_dir.mkdir(exist_ok=True)
         
-        print(f"\n🔄 Reorganizing {track_name}...")
-        
-        for old_path, model_type in files:
-            new_path = track_dir / f"{model_type}.pkl"
+        try:
+            track_dir.mkdir(exist_ok=True)
+            print(f"\n   📂 {track_name}/")
             
-            # Move file
-            shutil.copy2(old_path, new_path)
-            print(f"   ✅ {old_path.name} -> {track_name}/{new_path.name}")
-            reorganized_count += 1
-        
-        # Create a metadata file
-        metadata = {
-            'track': track_name,
-            'models': [model_type for _, model_type in files],
-            'reorganized_date': str(Path(files[0][0]).stat().st_mtime)
-        }
-        
-        metadata_path = track_dir / 'metadata.json'
-        with open(metadata_path, 'w') as f:
-            json.dump(metadata, f, indent=2)
-        print(f"   📝 Created metadata.json")
+            # Move each file
+            for old_filename, algorithm in files:
+                old_path = models_dir / old_filename
+                new_filename = f"{algorithm}.pkl"
+                new_path = track_dir / new_filename
+                
+                # Move file
+                shutil.move(str(old_path), str(new_path))
+                print(f"      ✅ {old_filename} → {track_name}/{new_filename}")
+                success_count += 1
+                
+        except Exception as e:
+            print(f"      ❌ Error organizing {track_name}: {e}")
+            error_count += 1
     
-    print(f"\n" + "=" * 80)
-    print(f"✅ Successfully reorganized {reorganized_count} model files into {len(tracks)} track directories")
-    print(f"\n📂 New structure: models/TRACK_NAME/{{rf,gb,xgb,scaler}}.pkl")
-    print(f"\nℹ️  Original files kept in models/ directory for backup")
-    print(f"   You can safely delete them after verifying the new structure works.")
+    print(f"\n" + "="*60)
+    print(f"✅ Successfully reorganized: {success_count} files")
+    if error_count > 0:
+        print(f"❌ Errors: {error_count} files")
+        print(f"="*60)
+        return False
+    
+    print(f"="*60)
+    
+    # Verify structure
+    print(f"\n🔍 Verifying new structure...")
+    for track_name in sorted(tracks.keys()):
+        track_dir = models_dir / track_name
+        if track_dir.exists():
+            files_in_dir = list(track_dir.glob("*.pkl"))
+            print(f"   ✅ {track_name}/ contains {len(files_in_dir)} files")
+        else:
+            print(f"   ❌ {track_name}/ directory not found!")
+            return False
+    
+    print(f"\n✅ Reorganization complete!")
+    print(f"   Models now organized in: models/TRACK_NAME/")
+    
+    return True
 
-def update_config_file():
-    """Update the config file to reflect new directory structure"""
-    config_path = Path("models/config.pkl")
-    
-    if not config_path.exists():
-        print("\nℹ️  No config.pkl found - skipping config update")
-        return
-    
-    print("\n🔧 Updating config file...")
-    
-    try:
-        with open(config_path, 'rb') as f:
-            config = pickle.load(f)
-        
-        # Add directory structure info
-        config['model_structure'] = 'track_subdirectories'
-        config['model_path_template'] = 'models/{track}/{algorithm}.pkl'
-        
-        # Save updated config
-        with open(config_path, 'wb') as f:
-            pickle.dump(config, f)
-        
-        # Also save JSON version
-        json_config_path = Path("models/ensemble_config.json")
-        if json_config_path.exists():
-            with open(json_config_path, 'r') as f:
-                json_config = json.load(f)
-            
-            json_config['model_structure'] = 'track_subdirectories'
-            json_config['model_path_template'] = 'models/{track}/{algorithm}.pkl'
-            
-            with open(json_config_path, 'w') as f:
-                json.dump(json_config, f, indent=2)
-        
-        print("   ✅ Config files updated")
-        
-    except Exception as e:
-        print(f"   ⚠️  Could not update config: {e}")
 
 if __name__ == "__main__":
-    print("\n" + "=" * 80)
-    print("REORGANIZING TRACK ENSEMBLE MODELS")
-    print("=" * 80)
+    import sys
     
-    reorganize_models()
-    update_config_file()
-    
-    print("\n" + "=" * 80)
-    print("✅ REORGANIZATION COMPLETE")
-    print("=" * 80)
-    print("\nNext steps:")
-    print("1. Verify new structure: ls -la models/*/")
-    print("2. Test predictions with reorganized models")
-    print("3. Delete old files if everything works: rm models/*_*.pkl")
+    print("="*60)
+    print("🏁 REORGANIZE MODELS BY TRACK")
+    print("="*60)
     print()
+    
+    try:
+        success = reorganize_models()
+        
+        if success:
+            print("\n✅ SUCCESS: All models reorganized")
+            sys.exit(0)
+        else:
+            print("\n❌ FAILED: Reorganization incomplete")
+            sys.exit(1)
+            
+    except Exception as e:
+        print(f"\n❌ CRITICAL ERROR: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)

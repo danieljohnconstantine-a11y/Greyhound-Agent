@@ -1,220 +1,220 @@
 #!/usr/bin/env python3
 """
-Pipeline Validation Script
+Validate Complete Pipeline
 
-Tests the complete greyhound prediction pipeline end-to-end:
-1. Model organization structure
-2. Model loading from subdirectories
-3. Prediction generation
-4. Output organization
-5. Logging system
+This script validates that all models (RF, GB, XGB) can be loaded
+and used for predictions.
+
+Author: GitHub Copilot
+Date: 2026-03-04
 """
 
-import sys
+import os
 import json
 import pickle
+import numpy as np
 from pathlib import Path
 from datetime import datetime
 
-class PipelineValidator:
-    def __init__(self):
-        self.results = {
-            "timestamp": datetime.now().isoformat(),
-            "tests_passed": 0,
-            "tests_failed": 0,
-            "tests": []
-        }
-        
-    def test(self, name, func):
-        """Run a test and record results"""
-        print(f"\n🧪 Testing: {name}")
-        try:
-            result = func()
-            if result:
-                print(f"   ✅ PASSED")
-                self.results["tests_passed"] += 1
-                self.results["tests"].append({"name": name, "status": "PASSED", "details": result})
-                return True
-            else:
-                print(f"   ❌ FAILED")
-                self.results["tests_failed"] += 1
-                self.results["tests"].append({"name": name, "status": "FAILED", "details": "Test returned False"})
-                return False
-        except Exception as e:
-            print(f"   ❌ FAILED: {e}")
-            self.results["tests_failed"] += 1
-            self.results["tests"].append({"name": name, "status": "FAILED", "details": str(e)})
-            return False
-    
-    def validate_model_structure(self):
-        """Test 1: Validate model directory structure"""
-        models_dir = Path("models")
-        
-        # Check for track subdirectories
-        track_dirs = [d for d in models_dir.iterdir() if d.is_dir() and d.name not in ['combined', '__pycache__']]
-        
-        if len(track_dirs) == 0:
-            return {"error": "No track directories found"}
-        
-        structure_valid = True
-        details = {"tracks_found": len(track_dirs), "tracks": {}}
-        
-        for track_dir in track_dirs:
-            track_name = track_dir.name
-            files_found = {}
-            
-            # Check for required files
-            required_files = ['rf.pkl', 'gb.pkl', 'scaler.pkl', 'metadata.json']
-            for req_file in required_files:
-                file_path = track_dir / req_file
-                files_found[req_file] = file_path.exists()
-                if not file_path.exists():
-                    structure_valid = False
-            
-            details["tracks"][track_name] = files_found
-        
-        details["all_valid"] = structure_valid
-        return details
-    
-    def validate_model_loading(self):
-        """Test 2: Load models from track subdirectories"""
-        models_dir = Path("models")
-        track_dirs = [d for d in models_dir.iterdir() if d.is_dir() and d.name not in ['combined', '__pycache__']]
-        
-        if not track_dirs:
-            return {"error": "No tracks to test"}
-        
-        # Test first track
-        test_track = track_dirs[0]
-        models_loaded = {}
-        
-        for model_file in ['rf.pkl', 'gb.pkl', 'scaler.pkl']:
-            model_path = test_track / model_file
-            if model_path.exists():
-                try:
-                    with open(model_path, 'rb') as f:
-                        model = pickle.load(f)
-                    models_loaded[model_file] = {
-                        "loaded": True,
-                        "type": type(model).__name__
-                    }
-                except Exception as e:
-                    models_loaded[model_file] = {
-                        "loaded": False,
-                        "error": str(e)
-                    }
-        
-        return {
-            "track_tested": test_track.name,
-            "models_loaded": models_loaded,
-            "success": all(m.get("loaded", False) for m in models_loaded.values())
-        }
-    
-    def validate_outputs_structure(self):
-        """Test 3: Validate outputs directory structure"""
-        outputs_dir = Path("outputs")
-        
-        if not outputs_dir.exists():
-            return {"error": "outputs directory not found"}
-        
-        by_track_dir = outputs_dir / "by_track"
-        combined_dir = outputs_dir / "combined"
-        
-        details = {
-            "by_track_exists": by_track_dir.exists(),
-            "combined_exists": combined_dir.exists(),
-            "tracks_organized": 0
-        }
-        
-        if by_track_dir.exists():
-            track_outputs = [d for d in by_track_dir.iterdir() if d.is_dir()]
-            details["tracks_organized"] = len(track_outputs)
-            details["track_list"] = [t.name for t in track_outputs[:5]]  # First 5
-        
-        if combined_dir.exists():
-            combined_files = list(combined_dir.glob("*.xlsx")) + list(combined_dir.glob("*.txt"))
-            details["combined_files"] = len(combined_files)
-        
-        return details
-    
-    def validate_metrics_files(self):
-        """Test 4: Check training metrics files"""
-        models_dir = Path("models")
-        track_dirs = [d for d in models_dir.iterdir() if d.is_dir() and d.name not in ['combined', '__pycache__']]
-        
-        metrics_found = 0
-        for track_dir in track_dirs:
-            metrics_file = track_dir / "training_metrics.json"
-            if metrics_file.exists():
-                metrics_found += 1
-        
-        return {
-            "total_tracks": len(track_dirs),
-            "tracks_with_metrics": metrics_found,
-            "coverage_pct": (metrics_found / len(track_dirs) * 100) if track_dirs else 0
-        }
-    
-    def validate_logs_directory(self):
-        """Test 5: Check logs directory"""
-        logs_dir = Path("logs")
-        
-        if not logs_dir.exists():
-            return {"error": "logs directory not found"}
-        
-        log_files = list(logs_dir.glob("*.log"))
-        
-        return {
-            "logs_found": len(log_files),
-            "log_files": [f.name for f in log_files[:5]]
-        }
-    
-    def run_all_tests(self):
-        """Run complete validation suite"""
-        print("=" * 80)
-        print("GREYHOUND PREDICTION PIPELINE VALIDATION")
-        print("=" * 80)
-        
-        # Run all tests
-        self.test("Model Directory Structure", self.validate_model_structure)
-        self.test("Model Loading Functionality", self.validate_model_loading)
-        self.test("Outputs Organization", self.validate_outputs_structure)
-        self.test("Training Metrics Files", self.validate_metrics_files)
-        self.test("Logs Directory", self.validate_logs_directory)
-        
-        # Summary
-        print("\n" + "=" * 80)
-        print("VALIDATION SUMMARY")
-        print("=" * 80)
-        total = self.results["tests_passed"] + self.results["tests_failed"]
-        pass_rate = (self.results["tests_passed"] / total * 100) if total > 0 else 0
-        
-        print(f"\n✅ Tests Passed: {self.results['tests_passed']}")
-        print(f"❌ Tests Failed: {self.results['tests_failed']}")
-        print(f"📊 Pass Rate: {pass_rate:.1f}%")
-        
-        # Save detailed report
-        report_file = Path("outputs") / "pipeline_validation_report.json"
-        with open(report_file, 'w') as f:
-            json.dump(self.results, f, indent=2)
-        
-        print(f"\n💾 Detailed report saved to: {report_file}")
-        
-        # Final verdict
-        print("\n" + "=" * 80)
-        if self.results["tests_failed"] == 0:
-            print("✅ PIPELINE VALIDATION: ALL TESTS PASSED")
-            print("   The pipeline is ready for production use")
-        else:
-            print("⚠️  PIPELINE VALIDATION: SOME TESTS FAILED")
-            print("   Review the detailed report and fix issues")
-        print("=" * 80)
-        
-        return self.results["tests_failed"] == 0
+def test_model_loading(model_path):
+    """Test if a model can be loaded."""
+    try:
+        with open(model_path, 'rb') as f:
+            model = pickle.load(f)
+        return True, "OK"
+    except Exception as e:
+        return False, str(e)
 
-def main():
-    validator = PipelineValidator()
-    success = validator.run_all_tests()
-    sys.exit(0 if success else 1)
+def test_model_prediction(model, X_test):
+    """Test if a model can make predictions."""
+    try:
+        predictions = model.predict(X_test)
+        return True, f"Shape: {predictions.shape}"
+    except Exception as e:
+        return False, str(e)
+
+def validate_pipeline():
+    """Validate the complete prediction pipeline."""
+    
+    models_dir = Path("models")
+    outputs_dir = Path("outputs")
+    outputs_dir.mkdir(exist_ok=True)
+    
+    if not models_dir.exists():
+        print(f"❌ ERROR: {models_dir} directory not found!")
+        return False
+    
+    print(f"🔍 Validating pipeline...")
+    print()
+    
+    # Find all track directories
+    track_dirs = [d for d in models_dir.iterdir() if d.is_dir()]
+    
+    if not track_dirs:
+        print("❌ No track directories found!")
+        return False
+    
+    print(f"📊 Found {len(track_dirs)} tracks to validate")
+    print()
+    
+    validation_results = {
+        "timestamp": datetime.now().isoformat(),
+        "total_tracks": len(track_dirs),
+        "tracks": {}
+    }
+    
+    complete_tracks = 0
+    incomplete_tracks = 0
+    working_tracks = 0
+    
+    for track_dir in sorted(track_dirs):
+        track_name = track_dir.name
+        print(f"📂 {track_name}/")
+        
+        track_result = {
+            "track_name": track_name,
+            "files_present": {},
+            "models_loadable": {},
+            "models_functional": {},
+            "status": "unknown"
+        }
+        
+        # Check file presence
+        rf_path = track_dir / "rf.pkl"
+        gb_path = track_dir / "gb.pkl"
+        xgb_path = track_dir / "xgb.pkl"
+        scaler_path = track_dir / "scaler.pkl"
+        
+        track_result["files_present"] = {
+            "rf": rf_path.exists(),
+            "gb": gb_path.exists(),
+            "xgb": xgb_path.exists(),
+            "scaler": scaler_path.exists()
+        }
+        
+        # Check completeness
+        if all(track_result["files_present"].values()):
+            print(f"   ✅ All 4 files present")
+            complete_tracks += 1
+        else:
+            missing = [k for k, v in track_result["files_present"].items() if not v]
+            print(f"   ⚠️  Incomplete: missing {', '.join(missing)}")
+            incomplete_tracks += 1
+            track_result["status"] = "incomplete"
+            validation_results["tracks"][track_name] = track_result
+            continue
+        
+        # Test model loading
+        models_to_test = [
+            ("rf", rf_path),
+            ("gb", gb_path),
+            ("xgb", xgb_path),
+            ("scaler", scaler_path)
+        ]
+        
+        all_loaded = True
+        loaded_models = {}
+        
+        for model_name, model_path in models_to_test:
+            can_load, msg = test_model_loading(model_path)
+            track_result["models_loadable"][model_name] = can_load
+            
+            if can_load:
+                print(f"   ✅ {model_name}.pkl loads successfully")
+                with open(model_path, 'rb') as f:
+                    loaded_models[model_name] = pickle.load(f)
+            else:
+                print(f"   ❌ {model_name}.pkl failed to load: {msg}")
+                all_loaded = False
+        
+        if not all_loaded:
+            track_result["status"] = "load_failed"
+            validation_results["tracks"][track_name] = track_result
+            continue
+        
+        # Test model functionality with dummy data
+        try:
+            # Create dummy feature data (76 features as per the system)
+            X_test = np.random.rand(5, 76)
+            
+            # Transform with scaler
+            X_scaled = loaded_models["scaler"].transform(X_test)
+            print(f"   ✅ Scaler transforms successfully")
+            
+            # Test each model
+            for model_name in ["rf", "gb", "xgb"]:
+                can_predict, msg = test_model_prediction(loaded_models[model_name], X_scaled)
+                track_result["models_functional"][model_name] = can_predict
+                
+                if can_predict:
+                    print(f"   ✅ {model_name} predicts successfully ({msg})")
+                else:
+                    print(f"   ❌ {model_name} prediction failed: {msg}")
+                    all_loaded = False
+            
+            if all_loaded:
+                print(f"   ✅ PIPELINE WORKING")
+                track_result["status"] = "working"
+                working_tracks += 1
+            else:
+                track_result["status"] = "prediction_failed"
+                
+        except Exception as e:
+            print(f"   ❌ Pipeline test failed: {e}")
+            track_result["status"] = "error"
+            track_result["error"] = str(e)
+        
+        validation_results["tracks"][track_name] = track_result
+        print()
+    
+    # Summary
+    validation_results["summary"] = {
+        "complete_tracks": complete_tracks,
+        "incomplete_tracks": incomplete_tracks,
+        "working_tracks": working_tracks,
+        "success_rate": f"{(working_tracks/len(track_dirs)*100):.1f}%"
+    }
+    
+    print("="*60)
+    print("📊 VALIDATION SUMMARY")
+    print("="*60)
+    print(f"Total tracks: {len(track_dirs)}")
+    print(f"✅ Complete tracks: {complete_tracks}")
+    print(f"⚠️  Incomplete tracks: {incomplete_tracks}")
+    print(f"✅ Working pipelines: {working_tracks}")
+    print(f"Success rate: {validation_results['summary']['success_rate']}")
+    print("="*60)
+    
+    # Save report
+    report_file = outputs_dir / "pipeline_validation_report.json"
+    with open(report_file, 'w') as f:
+        json.dump(validation_results, f, indent=2)
+    print(f"\n📄 Report saved to: {report_file}")
+    
+    return working_tracks == len(track_dirs)
+
 
 if __name__ == "__main__":
-    main()
+    import sys
+    
+    print("="*60)
+    print("🔬 PIPELINE VALIDATION")
+    print("="*60)
+    print()
+    
+    try:
+        success = validate_pipeline()
+        
+        if success:
+            print("\n✅ SUCCESS: All tracks validated")
+            sys.exit(0)
+        else:
+            print("\n⚠️  WARNING: Some tracks have issues")
+            print("   Check outputs/pipeline_validation_report.json for details")
+            sys.exit(1)
+            
+    except Exception as e:
+        print(f"\n❌ CRITICAL ERROR: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
