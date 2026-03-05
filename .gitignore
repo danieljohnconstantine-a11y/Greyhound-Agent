@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 *.pyo
 .DS_Store
+# Local model files (models live on copilot/copy-ml-training-prediction-files)
+models/

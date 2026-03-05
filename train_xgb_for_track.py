@@ -29,7 +29,7 @@ def main():
         sys.exit(1)
 
     track = ' '.join(sys.argv[1:])    # allow multi-word names like "Angle Park"
-    xgb_path = f'{track}_xgb.pkl'
+    xgb_path = os.path.join('models', f'{track}_xgb.pkl')
 
     if os.path.exists(xgb_path):
         print(f"  [SKIP] {xgb_path} already exists")
@@ -71,7 +71,7 @@ def main():
         print(f"  [ERROR] Feature build failed: {e}")
         sys.exit(1)
 
-    model = train_or_load_xgb(track, feat, '.')
+    model = train_or_load_xgb(track, feat, 'models')
     if model:
         print(f"  [OK] XGB model trained and saved → {xgb_path}")
     else:

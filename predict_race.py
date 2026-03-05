@@ -645,7 +645,7 @@ def main():
     parser.add_argument('--race',  type=int, default=None, help='Race number to predict')
     parser.add_argument('--dist',  type=int, default=None, help='Distance filter (e.g. 530)')
     parser.add_argument('--track', default='Angle Park', help='Track name for model loading')
-    parser.add_argument('--models', default='.', help='Directory containing model .pkl files')
+    parser.add_argument('--models', default='models', help='Directory containing model .pkl files (default: models/)')
     parser.add_argument('--output', default='outputs', help='Output directory')
     args = parser.parse_args()
 

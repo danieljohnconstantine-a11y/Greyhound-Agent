@@ -102,7 +102,9 @@ FEATURE_COLS = [
     'GradeFactor', 'Last3AvgFinish', 'Last3FinishFactor', 'DistanceChangeFactor',
     'PaceBoxFactor', 'TrainerTier', 'FreshnessFactorV2', 'AgeFactorV2',
     'SurfacePreferenceFactor', 'WinPlaceRate', 'EarlySpeedPercentile',
-    'BestTimePercentile', 'FieldSpeedStd', 'FieldTimeStd', 'FieldSimilarityIndex',
+    'BestTimePercentile', 'FieldSpeedStd', 'FieldTimeStd',
+    'TimeVsField', 'SpeedVsField',
+    'FieldSimilarityIndex',
     'TrackUpsetFactor', 'CompetitorDensity', 'CompetitorAdjustment', 'FieldSize',
     'FieldSizeAdjustment', 'WinStreakFactorV2', 'RecentPlaceStreak', 'CloserBonus',
     'TrainerMomentum', 'FinalScore',
@@ -454,10 +456,26 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     df['FieldSpeedStd'] = float(np.std(df['Speed_kmh']))
     df['FieldTimeStd']  = float(np.std(times_arr))
 
-    # ── 27. Field similarity index (individual vs field average) ─────────────
-    field_avg_time = float(np.mean(times_arr))
+    # ── 27a. Time vs field / Speed vs field (individual) ─────────────────────
+    # Required by the 76-feature production models on copilot/copy-ml-training-prediction-files.
+    # TimeVsField:  positive = dog is faster than field average (lower time = better)
+    # SpeedVsField: positive = dog is faster than field average (higher speed = better)
+    _field_avg_time  = float(np.mean(times_arr))
+    _field_avg_speed = float(np.mean(df['Speed_kmh']))
+    _field_time_std  = max(float(np.std(times_arr)), 0.1)
+    _field_speed_std = max(float(np.std(df['Speed_kmh'])), 0.1)
+
+    df['TimeVsField']  = df['BestTimeSec'].apply(
+        lambda t: round((_field_avg_time - t) / _field_time_std, 4)   # negative time = fast → positive
+    )
+    df['SpeedVsField'] = df['Speed_kmh'].apply(
+        lambda s: round((s - _field_avg_speed) / _field_speed_std, 4)
+    )
+
+    # ── 27b. Field similarity index (individual vs field average) ─────────────
+    field_avg_time = _field_avg_time
     df['FieldSimilarityIndex'] = df['BestTimeSec'].apply(
-        lambda t: max(0, 1.0 - abs(t - field_avg_time) / max(np.std(times_arr), 0.1))
+        lambda t: max(0, 1.0 - abs(t - field_avg_time) / max(_field_time_std, 0.1))
     )
 
     # ── 28. Track upset factor (individual) ───────────────────────────────────

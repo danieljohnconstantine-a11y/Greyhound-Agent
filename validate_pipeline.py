@@ -6,7 +6,7 @@ End-to-end pipeline validation script.
 
 Checks:
   1. All model files present and loadable
-  2. Feature pipeline produces correct number of features (74)
+  2. Feature pipeline produces correct number of features (76)
   3. Each feature is unique per dog (individual scoring)
   4. RF, GB, XGB all generate predictions
   5. Calibration-collapse guard works
@@ -33,11 +33,13 @@ import joblib
 from src.pdf_parser import parse_form_pdf
 from src.race_features import build_features, get_feature_matrix, FEATURE_COLS
 
+# Model directory — models are in models/ subdirectory on copilot/copy-ml-training-prediction-files
+MODEL_DIR = 'models'
 
 TRACKS = {
     'Angle Park': {
-        'pdf': 'data/ANGLG0112form.pdf',
-        'race': 5,
+        'pdf': 'data/ANGLG0503form.pdf',   # Tonight Mar 5 2026 — Race 8 530m
+        'race': 8,
         'dist': 530,
         'model_prefix': 'Angle Park',
     },
@@ -61,10 +63,10 @@ WARN = '⚠️  WARN'
 
 
 def check_models(track: str, model_prefix: str) -> dict:
-    """Check that model files exist and load correctly."""
+    """Check that model files exist in models/ and load correctly."""
     results = {}
     for algo in ['rf', 'gb', 'xgb', 'scaler']:
-        path = f'{model_prefix}_{algo}.pkl'
+        path = os.path.join(MODEL_DIR, f'{model_prefix}_{algo}.pkl')
         if not os.path.exists(path):
             results[algo] = (WARN if algo == 'xgb' else FAIL, f'{path} not found')
             continue
@@ -77,15 +79,15 @@ def check_models(track: str, model_prefix: str) -> dict:
 
 
 def check_feature_pipeline(df: pd.DataFrame) -> dict:
-    """Check that feature pipeline produces 74 individual features."""
+    """Check that feature pipeline produces 76 individual features."""
     results = {}
     try:
         feat_df = build_features(df)
         X = get_feature_matrix(feat_df)
 
         results['feature_count'] = (
-            PASS if X.shape[1] == 74 else FAIL,
-            f'{X.shape[1]}/74 features'
+            PASS if X.shape[1] == 76 else FAIL,
+            f'{X.shape[1]}/76 features'
         )
         results['dog_count'] = (
             PASS if X.shape[0] == len(df) else FAIL,
@@ -118,8 +120,24 @@ def check_feature_pipeline(df: pd.DataFrame) -> dict:
     return results
 
 
+def _get_uncalibrated_probs(model, X: np.ndarray) -> np.ndarray:
+    """Try to get uncalibrated probabilities from the base estimator."""
+    try:
+        if hasattr(model, 'calibrated_classifiers_'):
+            cal_clf = model.calibrated_classifiers_[0]
+            base = cal_clf.estimator if hasattr(cal_clf, 'estimator') else cal_clf.base_estimator
+            return base.predict_proba(X)[:, 1]
+    except Exception:
+        pass
+    return model.predict_proba(X)[:, 1]
+
+
 def check_model_predictions(rf, gb, xgb_model, scaler, X: pd.DataFrame) -> dict:
-    """Check that all models produce predictions and scores are unique."""
+    """Check that all models produce predictions and scores are unique.
+
+    When calibration collapses probabilities (known for OPEN-grade OPEN races),
+    applies the same uncalibrated fallback as predict_race.py.
+    """
     results = {}
 
     X_vals = X.fillna(0).values
@@ -131,6 +149,8 @@ def check_model_predictions(rf, gb, xgb_model, scaler, X: pd.DataFrame) -> dict:
     else:
         X_scaled = X_vals
 
+    n_dogs = len(X_vals)
+
     for name, model, use_scaled in [
         ('RF', rf, True), ('GB', gb, True), ('XGB', xgb_model, False)
     ]:
@@ -138,15 +158,24 @@ def check_model_predictions(rf, gb, xgb_model, scaler, X: pd.DataFrame) -> dict:
             results[name] = (WARN, 'Model not loaded')
             continue
         try:
-            if use_scaled:
-                probs = model.predict_proba(X_scaled)[:, 1]
-            else:
-                probs = model.predict_proba(X_vals)[:, 1]
+            X_in = X_scaled if use_scaled else X_vals
+            probs = model.predict_proba(X_in)[:, 1]
 
             n_u = len(np.unique(np.round(probs, 6)))
-            unique_ok = n_u == len(probs)
+            # Calibration collapse guard — same logic as predict_race.py
+            if n_u < (n_dogs * 0.5):
+                probs = _get_uncalibrated_probs(model, X_in)
+                n_u = len(np.unique(np.round(probs, 6)))
+                suffix = ' (via uncalibrated fallback)'
+            else:
+                suffix = ''
+
+            unique_ok = n_u == n_dogs
             status = PASS if unique_ok else WARN
-            results[name] = (status, f'{n_u}/{len(probs)} unique probs, range=[{probs.min():.4f}, {probs.max():.4f}]')
+            results[name] = (
+                status,
+                f'{n_u}/{n_dogs} unique probs, range=[{probs.min():.4f}, {probs.max():.4f}]{suffix}'
+            )
         except Exception as e:
             results[name] = (FAIL, str(e))
 
@@ -171,7 +200,7 @@ def run_validation(track: str, pdf_path: str, race: int = None, dist: int = None
         if status == FAIL:
             all_pass = False
         if status == PASS:
-            models[algo] = joblib.load(f'{model_prefix}_{algo}.pkl')
+            models[algo] = joblib.load(os.path.join(MODEL_DIR, f'{model_prefix}_{algo}.pkl'))
         else:
             models[algo] = None
 
@@ -206,7 +235,7 @@ def run_validation(track: str, pdf_path: str, race: int = None, dist: int = None
         return
 
     # 3. Feature pipeline
-    print("\n3. Feature Pipeline (74 individual features):")
+    print("\n3. Feature Pipeline (76 individual features):")
     feat_results = check_feature_pipeline(df)
     feat_df = feat_results.pop('feat_df', None)
     X = feat_results.pop('X', None)
