@@ -1,0 +1,34 @@
+{
+  "track": "Angle Park",
+  "generated_at": "2026-03-05T01:23:40.479412",
+  "models": {
+    "rf": {
+      "type": "CalibratedClassifierCV",
+      "base_type": "RandomForestClassifier",
+      "n_features_in_": 76,
+      "n_estimators": 100,
+      "max_depth": 15,
+      "file_size_kb": 23562.8
+    },
+    "gb": {
+      "type": "CalibratedClassifierCV",
+      "base_type": "GradientBoostingClassifier",
+      "n_features_in_": 76,
+      "n_estimators": 100,
+      "max_depth": 4,
+      "file_size_kb": 902.2
+    },
+    "xgb": {
+      "type": "CalibratedClassifierCV",
+      "base_type": "XGBClassifier",
+      "n_features_in_": 76,
+      "n_estimators": 100,
+      "max_depth": 4,
+      "file_size_kb": 534.7
+    }
+  },
+  "scaler": {
+    "present": true,
+    "file_size_kb": 3.5
+  }
+}

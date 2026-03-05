@@ -1,0 +1,10 @@
+{
+  "track": "BALLARAT",
+  "algorithms": [
+    "rf",
+    "gb",
+    "xgb"
+  ],
+  "has_scaler": true,
+  "last_updated": "2026-03-05T01:23:41.741002"
+}

@@ -1,0 +1,422 @@
+{
+  "generated_at": "2026-03-05T08:39:52.154258",
+  "sections": {
+    "config": {
+      "status": "ok",
+      "issues": [],
+      "tracks": [
+        "Angle Park",
+        "BALLARAT",
+        "BENDIGO",
+        "Bulli",
+        "CASINO",
+        "Cannington",
+        "Capalaba",
+        "DARWIN",
+        "DUBBO",
+        "GAWLER",
+        "GEELONG",
+        "GOSFORD",
+        "GOULBURN",
+        "GRAFTON",
+        "GUNNEDAH",
+        "HEALESVILLE",
+        "HOBART",
+        "HORSHAM",
+        "MURRAY BDGE STRAIGHT",
+        "Maitland",
+        "Mandurah",
+        "Meadows",
+        "NOWRA",
+        "Q LAKESIDE",
+        "Q PARKLANDS",
+        "Q STRAIGHT",
+        "RICHMOND",
+        "ROCKHAMPTON",
+        "SALE",
+        "SANDOWN",
+        "SHEPPARTON",
+        "TOWNSVILLE",
+        "Temora",
+        "The Gardens",
+        "WAGGA",
+        "WENTWORTH PARK",
+        "Warragul"
+      ],
+      "algorithms": [
+        "rf",
+        "gb",
+        "xgb"
+      ],
+      "n_features": 76,
+      "model_structure": "track_subdirectories",
+      "training_date": "2026-01-29T10:24:01.855950"
+    },
+    "models": {
+      "status": "ok",
+      "tracks": {
+        "Angle Park": {
+          "status": "ok",
+          "files": {
+            "rf": {
+              "present": true,
+              "size_kb": 23562.8
+            },
+            "gb": {
+              "present": true,
+              "size_kb": 902.2
+            },
+            "xgb": {
+              "present": true,
+              "size_kb": 534.7
+            },
+            "scaler": {
+              "present": true,
+              "size_kb": 3.5
+            }
+          },
+          "issues": []
+        },
+        "BALLARAT": {
+          "status": "ok",
+          "files": {
+            "rf": {
+              "present": true,
+              "size_kb": 23602.7
+            },
+            "gb": {
+              "present": true,
+              "size_kb": 873.5
+            },
+            "xgb": {
+              "present": true,
+              "size_kb": 551.8
+            },
+            "scaler": {
+              "present": true,
+              "size_kb": 3.5
+            }
+          },
+          "issues": []
+        },
+        "BENDIGO": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/BENDIGO"
+          ]
+        },
+        "Bulli": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Bulli"
+          ]
+        },
+        "CASINO": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/CASINO"
+          ]
+        },
+        "Cannington": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Cannington"
+          ]
+        },
+        "Capalaba": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Capalaba"
+          ]
+        },
+        "DARWIN": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/DARWIN"
+          ]
+        },
+        "DUBBO": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/DUBBO"
+          ]
+        },
+        "GAWLER": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/GAWLER"
+          ]
+        },
+        "GEELONG": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/GEELONG"
+          ]
+        },
+        "GOSFORD": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/GOSFORD"
+          ]
+        },
+        "GOULBURN": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/GOULBURN"
+          ]
+        },
+        "GRAFTON": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/GRAFTON"
+          ]
+        },
+        "GUNNEDAH": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/GUNNEDAH"
+          ]
+        },
+        "HEALESVILLE": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/HEALESVILLE"
+          ]
+        },
+        "HOBART": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/HOBART"
+          ]
+        },
+        "HORSHAM": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/HORSHAM"
+          ]
+        },
+        "MURRAY BDGE STRAIGHT": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/MURRAY BDGE STRAIGHT"
+          ]
+        },
+        "Maitland": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Maitland"
+          ]
+        },
+        "Mandurah": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Mandurah"
+          ]
+        },
+        "Meadows": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Meadows"
+          ]
+        },
+        "NOWRA": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/NOWRA"
+          ]
+        },
+        "Q LAKESIDE": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Q LAKESIDE"
+          ]
+        },
+        "Q PARKLANDS": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Q PARKLANDS"
+          ]
+        },
+        "Q STRAIGHT": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Q STRAIGHT"
+          ]
+        },
+        "RICHMOND": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/RICHMOND"
+          ]
+        },
+        "ROCKHAMPTON": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/ROCKHAMPTON"
+          ]
+        },
+        "SALE": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/SALE"
+          ]
+        },
+        "SANDOWN": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/SANDOWN"
+          ]
+        },
+        "SHEPPARTON": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/SHEPPARTON"
+          ]
+        },
+        "TOWNSVILLE": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/TOWNSVILLE"
+          ]
+        },
+        "Temora": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Temora"
+          ]
+        },
+        "The Gardens": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/The Gardens"
+          ]
+        },
+        "WAGGA": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/WAGGA"
+          ]
+        },
+        "WENTWORTH PARK": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/WENTWORTH PARK"
+          ]
+        },
+        "Warragul": {
+          "status": "missing",
+          "files": {},
+          "issues": [
+            "Track directory not found: models/Warragul"
+          ]
+        }
+      },
+      "issues": [
+        "Missing track directory: BENDIGO",
+        "Missing track directory: Bulli",
+        "Missing track directory: CASINO",
+        "Missing track directory: Cannington",
+        "Missing track directory: Capalaba",
+        "Missing track directory: DARWIN",
+        "Missing track directory: DUBBO",
+        "Missing track directory: GAWLER",
+        "Missing track directory: GEELONG",
+        "Missing track directory: GOSFORD",
+        "Missing track directory: GOULBURN",
+        "Missing track directory: GRAFTON",
+        "Missing track directory: GUNNEDAH",
+        "Missing track directory: HEALESVILLE",
+        "Missing track directory: HOBART",
+        "Missing track directory: HORSHAM",
+        "Missing track directory: MURRAY BDGE STRAIGHT",
+        "Missing track directory: Maitland",
+        "Missing track directory: Mandurah",
+        "Missing track directory: Meadows",
+        "Missing track directory: NOWRA",
+        "Missing track directory: Q LAKESIDE",
+        "Missing track directory: Q PARKLANDS",
+        "Missing track directory: Q STRAIGHT",
+        "Missing track directory: RICHMOND",
+        "Missing track directory: ROCKHAMPTON",
+        "Missing track directory: SALE",
+        "Missing track directory: SANDOWN",
+        "Missing track directory: SHEPPARTON",
+        "Missing track directory: TOWNSVILLE",
+        "Missing track directory: Temora",
+        "Missing track directory: The Gardens",
+        "Missing track directory: WAGGA",
+        "Missing track directory: WENTWORTH PARK",
+        "Missing track directory: Warragul"
+      ],
+      "full_tracks": 2,
+      "total_tracks_in_config": 37
+    },
+    "data_predictions": {
+      "status": "ok",
+      "pdfs": [
+        "ANGLG0503form.pdf",
+        "CSNOG0503form.pdf",
+        "GEELG0503form.pdf",
+        "GOSFG0503form.pdf",
+        "MANDG0503form.pdf",
+        "MTGG0503form.pdf",
+        "NOWRG0503form.pdf",
+        "QPRKG0503form.pdf",
+        "QSTRG0503form.pdf",
+        "SANDG0503form.pdf",
+        "SHEPG0503form.pdf",
+        "WENPG0503form.pdf",
+        "WNBLG0503form.pdf"
+      ],
+      "issues": [],
+      "count": 13
+    },
+    "src": {
+      "status": "ok",
+      "modules": {
+        "parser.py": {
+          "present": true
+        },
+        "features.py": {
+          "present": true
+        }
+      },
+      "issues": []
+    }
+  },
+  "overall_status": "ok"
+}

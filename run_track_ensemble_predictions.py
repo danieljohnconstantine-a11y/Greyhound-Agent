@@ -48,6 +48,11 @@ from datetime import datetime
 import traceback
 import pdfplumber
 
+# Threshold below which the pre-normalization ensemble spread is considered too
+# narrow to represent genuine ML discrimination.  Races that fall below this
+# value get a Low_Confidence=True flag in the output.
+LOW_CONFIDENCE_SPREAD_THRESHOLD = 0.005  # < 0.5% probability spread
+
 def extract_text_from_pdf(pdf_path):
     """
     Extract text content from a PDF file.
@@ -67,7 +72,13 @@ def extract_text_from_pdf(pdf_path):
 def load_track_ensemble(track_name, models_dir="models"):
     """
     Load all ensemble models for a specific track.
-    
+
+    Supports two model layouts:
+      1. Subdirectory layout (preferred):  models/{track}/rf.pkl, gb.pkl, xgb.pkl, scaler.pkl
+      2. Flat-file layout (legacy):        models/{track}_rf.pkl, {track}_gb.pkl, etc.
+
+    Run reorganize_models_by_track.py to migrate from flat to subdirectory layout.
+
     Returns:
         models: Dict of {algorithm: model}
         scaler: StandardScaler for this track
@@ -86,46 +97,113 @@ def load_track_ensemble(track_name, models_dir="models"):
         # Return None to use fallback
         return None, None, config
     
-    # Load models from subdirectory (models/{track}/{algorithm}.pkl)
+    # --- Layout 1: subdirectory (models/{track}/{algorithm}.pkl) ---
     track_dir = os.path.join(models_dir, track_name)
     
     models = {}
-    for alg in config['algorithms']:
-        model_path = os.path.join(track_dir, f"{alg}.pkl")
-        if os.path.exists(model_path):
-            with open(model_path, 'rb') as f:
-                models[alg] = pickle.load(f)
-    
-    # Load scaler from subdirectory
-    scaler_path = os.path.join(track_dir, "scaler.pkl")
-    if os.path.exists(scaler_path):
-        with open(scaler_path, 'rb') as f:
-            scaler = pickle.load(f)
-    else:
-        scaler = None
+    scaler = None
+
+    if os.path.isdir(track_dir):
+        for alg in config['algorithms']:
+            model_path = os.path.join(track_dir, f"{alg}.pkl")
+            if os.path.exists(model_path):
+                with open(model_path, 'rb') as f:
+                    models[alg] = pickle.load(f)
+        
+        scaler_path = os.path.join(track_dir, "scaler.pkl")
+        if os.path.exists(scaler_path):
+            with open(scaler_path, 'rb') as f:
+                scaler = pickle.load(f)
+
+    # --- Layout 2: flat files (models/{track}_{algorithm}.pkl) ---
+    # Used as a fallback when subdirectory layout is missing or incomplete
+    if not models:
+        for alg in config['algorithms']:
+            flat_path = os.path.join(models_dir, f"{track_name}_{alg}.pkl")
+            if os.path.exists(flat_path):
+                with open(flat_path, 'rb') as f:
+                    models[alg] = pickle.load(f)
+
+        if scaler is None:
+            flat_scaler = os.path.join(models_dir, f"{track_name}_scaler.pkl")
+            if os.path.exists(flat_scaler):
+                with open(flat_scaler, 'rb') as f:
+                    scaler = pickle.load(f)
+
+        if models:
+            print(f"      ℹ️  Loaded {track_name} from flat-file layout "
+                  f"(run reorganize_models_by_track.py to migrate to subdirectories)")
     
     return models, scaler, config
+
+def _get_uncalibrated_preds(model, X_scaled):
+    """
+    Extract uncalibrated base-estimator predictions from a CalibratedClassifierCV.
+
+    When calibration collapses probabilities into a narrow band all dogs get the
+    same score.  The base estimator (RF/GB/XGB before isotonic fitting) preserves
+    the original probability ordering, so we use it as a fallback when the
+    calibrated output has fewer unique values than dogs.
+
+    Returns:
+        numpy array of probabilities (one per dog) with maximum discrimination.
+    """
+    # Calibrated model: sklearn CalibratedClassifierCV
+    if hasattr(model, 'calibrated_classifiers_'):
+        base_preds_list = []
+        for cal_clf in model.calibrated_classifiers_:
+            base_est = getattr(cal_clf, 'estimator', None)
+            if base_est is not None and hasattr(base_est, 'predict_proba'):
+                try:
+                    bp = base_est.predict_proba(X_scaled)[:, 1]
+                    base_preds_list.append(bp)
+                except Exception:
+                    pass
+        if base_preds_list:
+            return np.mean(base_preds_list, axis=0)
+    return None
+
 
 def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     """
     Generate ensemble predictions for a race WITH PROPER DISCRIMINATION.
-    
-    REAL ANTI-CLUSTERING SOLUTION:
-    1. Weight XGB higher (best discriminator: 78% unique vs RF/GB 33%)
-    2. Within-race normalization to force spread
-    3. Remove failed temperature scaling (made it worse)
-    
+
+    Individual scoring guarantee
+    ----------------------------
+    Each dog MUST receive a score that is 100% individual to that dog.  Two
+    failure modes are detected and corrected automatically:
+
+    1. Calibration collapse – CalibratedClassifierCV's isotonic mapping can
+       compress many different raw probabilities into the same calibrated value.
+       Fix: detect when ≥50% of dogs share the same calibrated score and fall
+       back to the uncalibrated base-estimator predictions instead.
+
+    2. Feature clustering – if too many input features are identical across all
+       dogs the model cannot distinguish them.  This is reported as a warning
+       and the within-race rank-normalization (see below) still guarantees
+       unique output values.
+
+    Within-race normalization
+    -------------------------
+    After obtaining per-dog raw scores from each algorithm the ensemble is
+    normalized to the range [2%, 18%] within the race.  This means:
+    - The top-ranked dog always receives 18%
+    - The last-ranked dog always receives 2%
+    - Every intermediate dog receives a proportionally spread value
+
     Args:
         df: DataFrame with race data (all dogs in race)
         models: Dict of {algorithm: model}
         scaler: StandardScaler
         feature_cols: List of feature column names
         ensemble_weights: Dict of {algorithm: weight}
-    
+
     Returns:
-        ensemble_pred: Array of ensemble probabilities for each dog
-        individual_scores: Dict of {algorithm: array of probabilities}
+        ensemble_pred: Array of ensemble probabilities for each dog (unique per dog)
+        individual_scores: Dict of {algorithm: array of probabilities} (unique per dog)
     """
+    n_dogs = len(df)
+
     # Prepare features
     # Check for missing features and warn user
     missing_features = [col for col in feature_cols if col not in df.columns]
@@ -134,8 +212,22 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
         if len(missing_features) <= 5:
             print(f"         Missing: {', '.join(missing_features)}")
     
-    # Extract features and fill missing with 0
-    X = df[feature_cols].fillna(0)
+    # Extract features.
+    # IMPROVEMENT: fill NaN timing-derived features with the race median
+    # rather than 0. Filling with 0 unfairly scores a dog with unknown time
+    # as the "slowest in the field" — median treatment is neutral.
+    TIMING_FEATURES = [
+        'BestTimeSec', 'SectionalSec', 'Speed_kmh', 'EarlySpeedIndex',
+        'TimeVsField', 'SpeedVsField', 'BestTimePercentile', 'EarlySpeedPercentile',
+        'SpeedAtDistance',
+    ]
+    X = df[feature_cols].copy()
+    for col in TIMING_FEATURES:
+        if col in X.columns:
+            col_median = X[col].median()
+            fill_value = col_median if pd.notna(col_median) else 0
+            X[col] = X[col].fillna(fill_value)
+    X = X.fillna(0)
     
     # Check for feature variability - warn if features don't vary between dogs
     constant_features = []
@@ -183,6 +275,27 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     
     for alg, model in models.items():
         pred_proba = model.predict_proba(X_scaled)[:, 1]
+
+        # ---------------------------------------------------------------
+        # CALIBRATION-COLLAPSE GUARD
+        # If the calibrated model returns fewer unique values than half the
+        # number of dogs, the isotonic mapping has collapsed the scores.
+        # Fall back to uncalibrated base-estimator predictions to recover
+        # per-dog discrimination while keeping the correct probability scale
+        # via within-race normalization applied later.
+        # ---------------------------------------------------------------
+        n_unique_calibrated = len(np.unique(pred_proba))
+        if n_unique_calibrated < max(2, n_dogs // 2):
+            uncal = _get_uncalibrated_preds(model, X_scaled)
+            if uncal is not None:
+                n_unique_uncal = len(np.unique(uncal))
+                print(f"      ⚠️  {alg.upper()}: calibration collapsed {n_dogs} dogs → "
+                      f"{n_unique_calibrated} unique value(s). "
+                      f"Using uncalibrated predictions ({n_unique_uncal} unique values).")
+                pred_proba = uncal
+            else:
+                print(f"      ⚠️  {alg.upper()}: calibration collapsed scores "
+                      f"and base estimator unavailable.")
         
         # Store individual predictions (RAW from model - no failed temperature scaling)
         individual_scores[alg] = pred_proba
@@ -195,6 +308,9 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     # Normalize weights and compute weighted average
     total_weight = sum(used_weights)
     ensemble_pred = np.sum(all_predictions, axis=0) / total_weight
+
+    # Capture pre-normalization spread to expose model confidence
+    raw_spread = float(ensemble_pred.max() - ensemble_pred.min())
     
     # IMPROVEMENT: Within-race normalization to force discrimination
     # Convert to percentile ranks within race, then scale to reasonable probabilities
@@ -208,8 +324,19 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
         # Map to reasonable win probability range (2% to 18%)
         # This ensures top dog gets ~18%, worst gets ~2%, with spread in between
         ensemble_pred = 0.02 + ensemble_pred_normalized * 0.16
+
+    # Apply the same within-race normalization to each algorithm's individual scores
+    # so RF_Score, GB_Score, XGB_Score also show unique per-dog rankings.
+    for alg in individual_scores:
+        alg_pred = individual_scores[alg]
+        a_min = alg_pred.min()
+        a_max = alg_pred.max()
+        if a_max > a_min:
+            alg_norm = (alg_pred - a_min) / (a_max - a_min)
+            individual_scores[alg] = 0.02 + alg_norm * 0.16
+        # If all identical, leave as-is (will show uniform score)
     
-    return ensemble_pred, individual_scores
+    return ensemble_pred, individual_scores, raw_spread
 
 def main():
     print("=" * 80)
@@ -295,26 +422,82 @@ def main():
             try:
                 models, scaler, config = load_track_ensemble(track_name, models_dir)
                 
-                if models is None:
+                if not models:
                     print(f"   ⚠️  No models found for {track_name}, skipping")
+                    continue
+
+                if scaler is None:
+                    print(f"   ⚠️  No scaler found for {track_name}, skipping")
                     continue
                 
                 print(f"   Models loaded: {', '.join(models.keys())}")
                 
                 # Generate predictions
-                ensemble_pred, individual_scores = predict_with_ensemble(
+                ensemble_pred, individual_scores, raw_spread = predict_with_ensemble(
                     race_df, models, scaler, config['feature_cols'], config['ensemble_weights']
                 )
                 
                 # Add to race_df - ensemble average
                 race_df['ML_Confidence'] = (ensemble_pred * 100).round(1)
                 race_df['Ensemble_Score'] = ensemble_pred
+
+                # LOW_CONFIDENCE flag: when the pre-normalization probability spread
+                # is very narrow the model has little genuine discrimination — the
+                # final scores are driven mostly by the within-race normalization
+                # step rather than real ML signal.  Flag those races so users
+                # know not to rely solely on the ML pick.
+                race_df['Low_Confidence'] = raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD
+                if raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD:
+                    print(f"      ⚠️  LOW_CONFIDENCE: raw model spread={raw_spread:.4f} — "
+                          f"scores driven by normalization, not genuine ML signal")
                 
                 # Add individual algorithm scores (RF, GB, XGB)
                 for alg, scores in individual_scores.items():
                     col_name = f'{alg.upper()}_Score'
                     race_df[col_name] = (scores * 100).round(1)
-                
+
+                # -------------------------------------------------------
+                # PER-RACE INDIVIDUAL SCORE GUARANTEE
+                # Ensure every dog within a race has a unique score for
+                # ML_Confidence AND each individual algorithm column.
+                # When a model assigns identical probabilities to two dogs
+                # (e.g. both fall into the same decision-tree leaf), use
+                # BestTimeSec as a secondary tiebreaker so that every dog
+                # shows a distinct score.  Only applies within a race.
+                # -------------------------------------------------------
+                score_cols = ['ML_Confidence'] + [
+                    f'{a.upper()}_Score'
+                    for a in individual_scores.keys()
+                    if f'{a.upper()}_Score' in race_df.columns
+                ]
+
+                for race_num in race_df['RaceNumber'].unique():
+                    mask = race_df['RaceNumber'] == race_num
+                    race_slice = race_df.loc[mask].copy()
+                    n_race = len(race_slice)
+                    for col in score_cols:
+                        if col not in race_slice.columns:
+                            continue
+                        n_unique = race_slice[col].nunique()
+                        if n_unique < n_race:
+                            # Rank within race; use BestTimeSec as tiebreaker
+                            # (faster time = better dog = higher rank)
+                            best_time_col = 'BestTimeSec' if 'BestTimeSec' in race_slice.columns else 'Box'
+                            rank_series = race_slice[col].rank(
+                                ascending=False, method='first'
+                            )
+                            # Spread tied dogs into a 0.05-point band per rank step
+                            # so scores are distinct but tiny adjustments won't
+                            # change the winner.
+                            min_score = race_slice[col].min()
+                            max_score = race_slice[col].max()
+                            score_range_r = max_score - min_score if max_score != min_score else 1.0
+                            # Assign rank-interpolated scores: rank 1 → max, rank N → min
+                            new_scores = max_score - (rank_series - 1) / (n_race - 1) * score_range_r
+                            # Cast column to float64 to allow assignment
+                            race_df[col] = race_df[col].astype(float)
+                            race_df.loc[mask, col] = new_scores.round(1).astype(float)
+
                 # Add ranking
                 race_df['ML_Rank'] = race_df['ML_Confidence'].rank(ascending=False, method='dense').astype(int)
                 

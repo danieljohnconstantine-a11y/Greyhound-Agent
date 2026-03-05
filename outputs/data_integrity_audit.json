@@ -1,0 +1,155 @@
+{
+  "generated": "2026-03-05T07:18:57.943352",
+  "summary": {
+    "pdfs": 1,
+    "total_dogs": 63,
+    "verified_dogs": 63,
+    "total_issues": 0,
+    "result": "PASS"
+  },
+  "audits": [
+    {
+      "pdf": "ANGLG0503form.pdf",
+      "status": "ok",
+      "issues": [],
+      "dogs_total": 63,
+      "dogs_verified": 63,
+      "dogs_with_issues": [],
+      "races": {
+        "1": {
+          "dogs": 5,
+          "dog_names": [
+            "Huxes Uncle",
+            "Claymore Lass",
+            "Adhana Snappy",
+            "Adhana Remi",
+            "Adhana Tori"
+          ],
+          "distance": 530
+        },
+        "2": {
+          "dogs": 6,
+          "dog_names": [
+            "Destroying",
+            "Mundulla",
+            "Needs Space",
+            "Proclivity",
+            "Black Noir",
+            "Galactic Nemesis"
+          ],
+          "distance": 530
+        },
+        "3": {
+          "dogs": 6,
+          "dog_names": [
+            "City Of Love",
+            "Point Proven",
+            "Gunning Bandit",
+            "Crocodile Roll",
+            "Dakota Ava",
+            "Princess Tilley"
+          ],
+          "distance": 530
+        },
+        "4": {
+          "dogs": 5,
+          "dog_names": [
+            "Zipping Theron",
+            "Gina Gulla",
+            "Pretty Esmay",
+            "Grapefruit Wilma",
+            "Victa Howard"
+          ],
+          "distance": 530
+        },
+        "5": {
+          "dogs": 6,
+          "dog_names": [
+            "Time To Fire",
+            "Wilma's Our Girl",
+            "Jamarra",
+            "Ginny's Run",
+            "Go Forward Sky",
+            "Black Chip"
+          ],
+          "distance": 595
+        },
+        "6": {
+          "dogs": 9,
+          "dog_names": [
+            "Sinaloa Bandit",
+            "Adhana Chucky",
+            "Victa Graham",
+            "Toby Keeping",
+            "Weblec Stella",
+            "Just A Babe",
+            "Forgery",
+            "Weblec Pebbles",
+            "Giggle Monster"
+          ],
+          "distance": 530
+        },
+        "7": {
+          "dogs": 7,
+          "dog_names": [
+            "Zinfandel Trace",
+            "Weblec Polly",
+            "Nitro Neo",
+            "Apilla",
+            "Zenvo Yoyo",
+            "Nitrous",
+            "Canya Vivi"
+          ],
+          "distance": 730
+        },
+        "8": {
+          "dogs": 8,
+          "dog_names": [
+            "Kisauni",
+            "Bookaloo",
+            "Manifesto",
+            "Nangar Lady",
+            "Reality Is",
+            "Victory Club",
+            "Mallee Beauty",
+            "Flying Artie"
+          ],
+          "distance": 530
+        },
+        "9": {
+          "dogs": 6,
+          "dog_names": [
+            "Right Side Up",
+            "Rev Leon",
+            "You Ain't It",
+            "Slim Rusty",
+            "Son Of Maple",
+            "Breaker Of Rules"
+          ],
+          "distance": 342
+        },
+        "10": {
+          "dogs": 5,
+          "dog_names": [
+            "Mickey Haller",
+            "Witcher Rose",
+            "Lenny Limes",
+            "Zing Matilda",
+            "Dimora Bluey"
+          ],
+          "distance": 342
+        }
+      },
+      "feature_issues": {
+        "FormMomentum": {
+          "issue": "all_dogs_same_value",
+          "value": 0.0,
+          "note": "Column should vary between dogs \u2013 check parser extraction"
+        },
+        "RaceDate": {
+          "nan_fraction": 1.0
+        }
+      }
+    }
+  ]
+}
