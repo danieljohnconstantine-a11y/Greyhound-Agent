@@ -45,17 +45,17 @@ def _parse_age_sex(code: str) -> Tuple[float, str]:
 
 _DOG_HEADER_RE = re.compile(
     r'^(?:E)?(\d+)\.\s*'               # box (optional E prefix)
-    r'(\d{3,6})?'                       # optional form code
-    r"([A-Za-z'' \-]+?)\s+"            # dog name
-    r'(\d[a-zA-Z]+)\s+'                # age/sex
-    r'([\d.]+)kg\s+'                   # weight
-    r'(\d+)\s+'                        # BP
-    r"([A-Za-z'' \-]+?)\s+"           # trainer
+    r'([\dxX\-]{3,8})?'               # optional form code (digits, x for scratchings, dashes)
+    r"([A-Za-z'' \-]+?)\s+"           # dog name
+    r'(\d[a-zA-Z]+)\s+'               # age/sex
+    r'([\d.]+)kg\s+'                  # weight
+    r'(\d+)\s+'                       # BP
+    r"([A-Za-z'' \-]+?)\s+"          # trainer
     r'(\d+)\s*-\s*(\d+)\s*-\s*(\d+)' # career W-P-S
-    r'\s+\$([\d,]+)'                   # prize
-    r'\s+(\d+)'                        # RTC
-    r'\s+(\d+)'                        # DLR
-    r'\s+(\d+)'                        # DLW
+    r'\s+\$([\d,]+)'                  # prize
+    r'\s+(\d+)'                       # RTC
+    r'\s+(\d+)'                       # DLR
+    r'\s+(\d+)'                       # DLW
 )
 
 

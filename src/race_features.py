@@ -27,7 +27,13 @@ import numpy as np
 import pandas as pd
 from typing import List, Dict, Optional
 
-# ── Angle Park box-bias from historical data (535m/530m track analysis) ──────
+# ── Named constants for DLWFactor exponential decay ───────────────────────────
+_DLW_MAX_FACTOR    = 1.6    # maximum factor when dog won very recently
+_DLW_DECAY_DAYS    = 60.0   # days for factor to fall to ~37% of max (1/e)
+_DLW_BASE_OFFSET   = 0.05   # small offset to prevent absolute zero
+_DLW_MIN_FACTOR    = 0.1    # floor to prevent negative/near-zero scores
+_DLW_CAP_FACTOR    = 1.6    # ceiling (same as max, prevents runaway values)
+
 # These are track-specific statistics that apply to the BOX number, not the dog.
 # Source: Greyhound Racing SA historical records.
 ANGLE_PARK_530_BOX_WIN_RATES = {
@@ -58,6 +64,28 @@ GRADE_CLASS = {
 }
 
 TRAINER_TIER_MAP: Dict[str, int] = {}   # populated dynamically from data
+
+# ── FinalScore weights per distance category ──────────────────────────────────
+# These define the importance of each factor when computing the composite score.
+# Shorter distances favour early speed; longer distances favour consistency.
+WEIGHTS_SHORT_DIST: Dict[str, float] = {   # < 400m
+    'EarlySpeedIndex': 0.30, 'Speed_kmh': 0.20, 'ConsistencyIndex': 0.10,
+    'FinishConsistency': 0.05, 'PrizeMoney': 0.10, 'RecentFormBoost': 0.10,
+    'BoxBiasFactor': 0.10, 'TrainerStrikeRate': 0.05,
+    'DistanceSuit': 0.05, 'TrackConditionAdj': 0.05,
+}
+WEIGHTS_MEDIUM_DIST: Dict[str, float] = {  # 400–500m
+    'EarlySpeedIndex': 0.25, 'Speed_kmh': 0.20, 'ConsistencyIndex': 0.15,
+    'FinishConsistency': 0.05, 'PrizeMoney': 0.10, 'RecentFormBoost': 0.10,
+    'BoxBiasFactor': 0.05, 'TrainerStrikeRate': 0.05,
+    'DistanceSuit': 0.05, 'TrackConditionAdj': 0.05,
+}
+WEIGHTS_LONG_DIST: Dict[str, float] = {    # > 500m (e.g. 530m)
+    'EarlySpeedIndex': 0.20, 'Speed_kmh': 0.15, 'ConsistencyIndex': 0.20,
+    'FinishConsistency': 0.10, 'PrizeMoney': 0.10, 'RecentFormBoost': 0.10,
+    'BoxBiasFactor': 0.05, 'TrainerStrikeRate': 0.05,
+    'DistanceSuit': 0.05, 'TrackConditionAdj': 0.05,
+}
 
 FEATURE_COLS = [
     'Box', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts',
@@ -265,7 +293,8 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     # DLWFactor: continuous exponential decay — recent win = high score, stale = low
     # No floor/cap so values remain unique per dog
     df['DLWFactor'] = df['DLW'].apply(
-        lambda d: round(max(0.1, min(1.6, 1.6 * np.exp(-d / 60.0) + 0.05)), 4)
+        lambda d: round(max(_DLW_MIN_FACTOR, min(_DLW_CAP_FACTOR,
+            _DLW_MAX_FACTOR * np.exp(-d / _DLW_DECAY_DAYS) + _DLW_BASE_OFFSET)), 4)
     )
     df['WeightFactor'] = df['Weight'].apply(
         lambda w: 1.0 + (w - 30.0) * 0.01 if w > 0 else 1.0
@@ -469,25 +498,15 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     df['CloserBonus'] = df.apply(_closer_bonus, axis=1)
 
     # ── 32. Final composite score (individual) ────────────────────────────────
-    # This is the same formula as the original features.py but using
-    # 100% individual per-dog values.
+    # Uses WEIGHTS_*_DIST constants (defined at module level) based on distance.
     def _final_score(row):
         dist = row['Distance']
         if dist < 400:
-            w = {'EarlySpeedIndex': 0.30, 'Speed_kmh': 0.20, 'ConsistencyIndex': 0.10,
-                 'FinishConsistency': 0.05, 'PrizeMoney': 0.10, 'RecentFormBoost': 0.10,
-                 'BoxBiasFactor': 0.10, 'TrainerStrikeRate': 0.05,
-                 'DistanceSuit': 0.05, 'TrackConditionAdj': 0.05}
+            w = WEIGHTS_SHORT_DIST
         elif dist <= 500:
-            w = {'EarlySpeedIndex': 0.25, 'Speed_kmh': 0.20, 'ConsistencyIndex': 0.15,
-                 'FinishConsistency': 0.05, 'PrizeMoney': 0.10, 'RecentFormBoost': 0.10,
-                 'BoxBiasFactor': 0.05, 'TrainerStrikeRate': 0.05,
-                 'DistanceSuit': 0.05, 'TrackConditionAdj': 0.05}
+            w = WEIGHTS_MEDIUM_DIST
         else:
-            w = {'EarlySpeedIndex': 0.20, 'Speed_kmh': 0.15, 'ConsistencyIndex': 0.20,
-                 'FinishConsistency': 0.10, 'PrizeMoney': 0.10, 'RecentFormBoost': 0.10,
-                 'BoxBiasFactor': 0.05, 'TrainerStrikeRate': 0.05,
-                 'DistanceSuit': 0.05, 'TrackConditionAdj': 0.05}
+            w = WEIGHTS_LONG_DIST
         score = (
             row['EarlySpeedIndex'] * w['EarlySpeedIndex'] +
             row['Speed_kmh'] * w['Speed_kmh'] +

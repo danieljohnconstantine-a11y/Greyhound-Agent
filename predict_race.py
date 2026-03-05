@@ -116,16 +116,22 @@ def train_or_load_xgb(track_name: str, feature_df: pd.DataFrame,
 
     hist_df = pd.concat(all_dfs, ignore_index=True)
 
+    # Proxy-label constants for XGB training
+    # A dog is labelled "likely winner" (1) when its combined score exceeds this threshold.
+    _XGB_WIN_RATE_WEIGHT    = 2.0   # weight of career win rate in proxy score
+    _XGB_LAST3_WEIGHT       = 0.1   # penalise poor last-3 average finish
+    _XGB_LABEL_THRESHOLD    = 0.8   # minimum score to be labelled as class 1
+
     # Build proxy labels from career win rate and recent performance
-    # This is a ranking proxy, not a true win label
+    # (ranking proxy — not a true win label; used to learn relative ordering)
     def make_label(row):
-        win_rate = row['CareerWins'] / max(row['CareerStarts'], 1)
-        place_rate = row['WinPlaceRate']
-        last3_avg = row.get('Last3AvgFinish', 4.0)
+        win_rate    = row['CareerWins'] / max(row['CareerStarts'], 1)
+        place_rate  = row['WinPlaceRate']
+        last3_avg   = row.get('Last3AvgFinish', 4.0)
         recent_boost = row['RecentFormBoost']
-        # Score proxy: high win rate + recent activity + good last 3
-        score = win_rate * 2 + place_rate + recent_boost - (last3_avg - 1) * 0.1
-        return 1 if score > 0.8 else 0
+        score = (win_rate * _XGB_WIN_RATE_WEIGHT + place_rate + recent_boost
+                 - (last3_avg - 1) * _XGB_LAST3_WEIGHT)
+        return 1 if score > _XGB_LABEL_THRESHOLD else 0
 
     try:
         X = hist_df[FEATURE_COLS].fillna(0).values

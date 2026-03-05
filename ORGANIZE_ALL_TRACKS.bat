@@ -91,33 +91,12 @@ set TRAINED_ANY=0
 for %%T in ("Angle Park" BALLARAT BENDIGO) do (
     if not exist "%%~T_xgb.pkl" (
         echo Training XGB for: %%~T
-        %PYTHON% -c "
-import sys, warnings
-warnings.filterwarnings('ignore')
-sys.path.insert(0, '.')
-from predict_race import train_or_load_xgb, _track_to_prefix
-from src.pdf_parser import parse_form_pdf
-from src.race_features import build_features
-import os
-
-track = '%%~T'
-prefix = _track_to_prefix(track)
-pdfs = [f for f in os.listdir('data') if f.upper().startswith(prefix) and f.endswith('.pdf')]
-if pdfs:
-    df = parse_form_pdf(os.path.join('data', sorted(pdfs)[0]))
-    if not df.empty:
-        feat = build_features(df)
-        model = train_or_load_xgb(track, feat, '.')
-        if model:
-            print(f'  XGB trained for {track}')
-        else:
-            print(f'  WARNING: XGB training failed for {track}')
-    else:
-        print(f'  WARNING: No data found for {track}')
-else:
-    print(f'  WARNING: No PDFs found for {track}')
-"
-        set TRAINED_ANY=1
+        %PYTHON% train_xgb_for_track.py %%~T
+        if %errorlevel% equ 0 (
+            set TRAINED_ANY=1
+        ) else (
+            echo   [WARNING] XGB training failed for %%~T
+        )
     )
 )
 

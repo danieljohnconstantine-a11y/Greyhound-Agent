@@ -1,6 +1,6 @@
 ========================================================================
 GREYHOUND RACE PREDICTION AUDIT REPORT
-Generated: 2026-03-05 09:25:52
+Generated: 2026-03-05 09:32:36
 ========================================================================
 
 Race     : 8
@@ -53,6 +53,13 @@ STEP 1 — DATA EXTRACTION (per-dog, from PDF)
     RTC/DLR/DLW: 18 / 9 / 44
     Age Months : 24
     Last races : 6/6 @ Angle Park (595m), 3/5 @ Angle Park (530m), 7/7 @ Angle Park (530m)
+
+  Box 9: Showtime McLaren
+    Career     : 3-16-68
+    Prize Money: $7,280
+    RTC/DLR/DLW: 3 / 18 / 333
+    Age Months : 36
+    Last races : 4/6 @ Angle Park (342m), 5/6 @ Angle Park (342m), 5/5 @ MURRAY BDGE  (300m)
 
   Box 2: Victa Graham
     Career     : 4-3-12
@@ -171,6 +178,23 @@ STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
     TrainerStrikeRate             : 0.1053
     FinalScore                    : 30.3420
 
+  Box 9: Showtime McLaren
+    BestTimeSec                   : 30.7000
+    SectionalSec                  : 5.3700
+    Speed_kmh                     : 62.1498
+    EarlySpeedIndex               : 98.6965
+    ConsistencyIndex              : 0.0441
+    PlaceRate                     : 0.2353
+    RecentFormBoost               : 0.3745
+    DLWFactor                     : 0.1000
+    BoxBiasFactor                 : 0.1200
+    DistanceSuit                  : 0.5714
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 0.8500
+    Last3AvgFinish                : 4.6667
+    TrainerStrikeRate             : 0.0441
+    FinalScore                    : 30.0217
+
   Box 2: Victa Graham
     BestTimeSec                   : 28.0069
     SectionalSec                  : 5.1060
@@ -210,22 +234,23 @@ STEP 3 — MODEL PREDICTIONS (individual score per dog)
 ────────────────────────────────────────────────────────────────────────
 
   Uniqueness verification:
-    RF        : ✅ ALL INDIVIDUAL  (std=0.06987)
-    GB        : ✅ ALL INDIVIDUAL  (std=0.27617)
-    XGB       : ✅ ALL INDIVIDUAL  (std=0.32296)
-    Ensemble  : ✅ ALL INDIVIDUAL  (std=0.20126)
+    RF        : ✅ ALL INDIVIDUAL  (std=0.07062)
+    GB        : ✅ ALL INDIVIDUAL  (std=0.33124)
+    XGB       : ✅ ALL INDIVIDUAL  (std=0.40256)
+    Ensemble  : ✅ ALL INDIVIDUAL  (std=0.25285)
 
   Probability scores by dog:
   Box  Dog Name                        RF       GB      XGB   Ensemble   Win%
   ------------------------------------------------------------------------
-    1  Zipping Neeson              0.5203   0.9947   0.7475     0.7542  14.4%
-    2  Victa Graham                0.5121   0.8310   0.9998     0.7809  14.9%
-    3  Zipping Elly May            0.3189   0.0943   0.0112     0.1414   2.7%
-    4  Black Wanda                 0.3466   0.8358   0.9998     0.7274  13.9%
-    5  Lala Effie                  0.4113   0.5830   0.9996     0.6646  12.7%
-    6  Gebrselassie                0.4948   0.8855   0.9990     0.7931  15.1%
-    7  White Hawke                 0.4127   0.4848   0.9907     0.6294  12.0%
-    8  Cawbourne Adele             0.4350   0.8628   0.9603     0.7527  14.4%
+    1  Zipping Neeson              0.5094   0.9940   0.7808     0.7614  14.2%
+    2  Victa Graham                0.4971   0.8310   0.9998     0.7759  14.5%
+    3  Zipping Elly May            0.3099   0.0914   0.0102     0.1372   2.6%
+    4  Black Wanda                 0.3466   0.8358   0.9998     0.7274  13.6%
+    5  Lala Effie                  0.3975   0.5830   0.9996     0.6600  12.3%
+    6  Gebrselassie                0.4888   0.8855   0.9990     0.7911  14.8%
+    7  White Hawke                 0.4260   0.4848   0.9907     0.6338  11.8%
+    8  Cawbourne Adele             0.4213   0.8626   0.9603     0.7481  14.0%
+    9  Showtime McLaren            0.3279   0.0471   0.0023     0.1258   2.3%
 
 ────────────────────────────────────────────────────────────────────────
 STEP 4 — RANKED PREDICTIONS
@@ -233,25 +258,26 @@ STEP 4 — RANKED PREDICTIONS
 
   Rank  Box  Dog Name                    Win%  Key Factors
   ------------------------------------------------------------------------
-     1    6  Gebrselassie               15.1%  Speed=62.4km/h  Consist=0.400  RecentBoost=0.9  DLWFactor=1.3
-     2    2  Victa Graham               14.9%  Speed=68.1km/h  Consist=0.333  RecentBoost=0.9  DLWFactor=1.1
-     3    1  Zipping Neeson             14.4%  Speed=62.7km/h  Consist=0.038  RecentBoost=0.6  DLWFactor=0.2
-     4    8  Cawbourne Adele            14.4%  Speed=61.7km/h  Consist=0.105  RecentBoost=0.5  DLWFactor=0.8
-     5    4  Black Wanda                13.9%  Speed=59.4km/h  Consist=0.125  RecentBoost=0.8  DLWFactor=0.9
-     6    5  Lala Effie                 12.7%  Speed=61.8km/h  Consist=0.132  RecentBoost=0.6  DLWFactor=0.9
-     7    7  White Hawke                12.0%  Speed=62.4km/h  Consist=0.133  RecentBoost=0.5  DLWFactor=0.6
-     8    3  Zipping Elly May            2.7%  Speed=68.1km/h  Consist=0.082  RecentBoost=0.6  DLWFactor=0.3
+     1    6  Gebrselassie               14.8%  Speed=62.4km/h  Consist=0.400  RecentBoost=0.9  DLWFactor=1.3
+     2    2  Victa Graham               14.5%  Speed=68.1km/h  Consist=0.333  RecentBoost=0.9  DLWFactor=1.1
+     3    1  Zipping Neeson             14.2%  Speed=62.7km/h  Consist=0.038  RecentBoost=0.6  DLWFactor=0.2
+     4    8  Cawbourne Adele            14.0%  Speed=61.7km/h  Consist=0.105  RecentBoost=0.5  DLWFactor=0.8
+     5    4  Black Wanda                13.6%  Speed=59.4km/h  Consist=0.125  RecentBoost=0.8  DLWFactor=0.9
+     6    5  Lala Effie                 12.3%  Speed=61.8km/h  Consist=0.132  RecentBoost=0.6  DLWFactor=0.9
+     7    7  White Hawke                11.8%  Speed=62.4km/h  Consist=0.133  RecentBoost=0.5  DLWFactor=0.6
+     8    3  Zipping Elly May            2.6%  Speed=68.1km/h  Consist=0.082  RecentBoost=0.6  DLWFactor=0.3
+     9    9  Showtime McLaren            2.3%  Speed=62.1km/h  Consist=0.044  RecentBoost=0.4  DLWFactor=0.1
 
 ────────────────────────────────────────────────────────────────────────
 INDIVIDUALITY VERIFICATION
 ────────────────────────────────────────────────────────────────────────
 
   Each dog's score is derived exclusively from their own data:
-    BestTimeSec                   : 8/8 unique  ✅ OK
-    Speed_kmh                     : 8/8 unique  ✅ OK
-    ConsistencyIndex              : 8/8 unique  ✅ OK
-    FinalScore                    : 8/8 unique  ✅ OK
-    Ensemble_Prob                 : 8/8 unique  ✅ OK
+    BestTimeSec                   : 9/9 unique  ✅ OK
+    Speed_kmh                     : 9/9 unique  ✅ OK
+    ConsistencyIndex              : 9/9 unique  ✅ OK
+    FinalScore                    : 9/9 unique  ✅ OK
+    Ensemble_Prob                 : 9/9 unique  ✅ OK
 
 ========================================================================
 END OF AUDIT REPORT
