@@ -1,0 +1,258 @@
+========================================================================
+GREYHOUND RACE PREDICTION AUDIT REPORT
+Generated: 2026-03-05 09:25:52
+========================================================================
+
+Race     : 8
+Date     : 2025-12-13
+Time     : 10:55AM
+Track    : Angle Park
+Distance : 530m
+
+────────────────────────────────────────────────────────────────────────
+STEP 1 — DATA EXTRACTION (per-dog, from PDF)
+────────────────────────────────────────────────────────────────────────
+  Box 1: Zipping Neeson
+    Career     : 1-12-26
+    Prize Money: $4,370
+    RTC/DLR/DLW: 13 / 9 / 151
+    Age Months : 36
+    Last races : 2/6 @ Angle Park (530m), 2/5 @ Angle Park (530m), 5/5 @ Angle Park (530m)
+
+  Box 4: Black Wanda
+    Career     : 1-3-8
+    Prize Money: $1,210
+    RTC/DLR/DLW: 9 / 4 / 39
+    Age Months : 12
+    Last races : 4/6 @ Angle Park (342m), 3/6 @ Angle Park (342m), 2/6 @ Angle Park (342m)
+
+  Box 5: Lala Effie
+    Career     : 5-15-38
+    Prize Money: $18,800
+    RTC/DLR/DLW: 39 / 9 / 36
+    Age Months : 24
+    Last races : 5/6 @ Angle Park (342m), 3/5 @ Angle Park (530m), 3/6 @ Angle Park (342m)
+
+  Box 6: Gebrselassie
+    Career     : 4-6-10
+    Prize Money: $19,110
+    RTC/DLR/DLW: 11 / 16 / 16
+    Age Months : 24
+    Last races : 1/6 @ Angle Park (530m), 1/5 @ Angle Park (530m), 3/7 @ Angle Park (595m)
+
+  Box 7: White Hawke
+    Career     : 2-8-15
+    Prize Money: $8,035
+    RTC/DLR/DLW: 16 / 23 / 62
+    Age Months : 24
+    Last races : 5/6 @ Angle Park (530m), 3/8 @ Angle Park (530m), 2/4 @ Angle Park (530m)
+
+  Box 8: Cawbourne Adele
+    Career     : 2-7-19
+    Prize Money: $6,430
+    RTC/DLR/DLW: 18 / 9 / 44
+    Age Months : 24
+    Last races : 6/6 @ Angle Park (595m), 3/5 @ Angle Park (530m), 7/7 @ Angle Park (530m)
+
+  Box 2: Victa Graham
+    Career     : 4-3-12
+    Prize Money: $7,910
+    RTC/DLR/DLW: 13 / 6 / 25
+    Age Months : 12
+
+  Box 3: Zipping Elly May
+    Career     : 5-17-61
+    Prize Money: $15,840
+    RTC/DLR/DLW: 44 / 12 / 104
+    Age Months : 36
+
+────────────────────────────────────────────────────────────────────────
+STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
+────────────────────────────────────────────────────────────────────────
+  Box 1: Zipping Neeson
+    BestTimeSec                   : 30.4500
+    SectionalSec                  : 5.2600
+    Speed_kmh                     : 62.6601
+    EarlySpeedIndex               : 100.7605
+    ConsistencyIndex              : 0.0385
+    PlaceRate                     : 0.4615
+    RecentFormBoost               : 0.5547
+    DLWFactor                     : 0.1792
+    BoxBiasFactor                 : 0.1720
+    DistanceSuit                  : 0.5000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 4.0000
+    TrainerStrikeRate             : 0.0385
+    FinalScore                    : 30.3942
+
+  Box 4: Black Wanda
+    BestTimeSec                   : 32.1400
+    SectionalSec                  : 4.6000
+    Speed_kmh                     : 59.3653
+    EarlySpeedIndex               : 115.2174
+    ConsistencyIndex              : 0.1250
+    PlaceRate                     : 0.3750
+    RecentFormBoost               : 0.8422
+    DLWFactor                     : 0.8853
+    BoxBiasFactor                 : 0.1180
+    DistanceSuit                  : 0.9000
+    AgeFactor                     : 0.9500
+    FreshnessFactorV2             : 1.0000
+    Last3AvgFinish                : 3.0000
+    TrainerStrikeRate             : 0.1250
+    FinalScore                    : 32.2924
+
+  Box 5: Lala Effie
+    BestTimeSec                   : 30.8700
+    SectionalSec                  : 5.2800
+    Speed_kmh                     : 61.8076
+    EarlySpeedIndex               : 100.3788
+    ConsistencyIndex              : 0.1316
+    PlaceRate                     : 0.3947
+    RecentFormBoost               : 0.6492
+    DLWFactor                     : 0.9281
+    BoxBiasFactor                 : 0.1120
+    DistanceSuit                  : 0.6053
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 3.6667
+    TrainerStrikeRate             : 0.1316
+    FinalScore                    : 31.9353
+
+  Box 6: Gebrselassie
+    BestTimeSec                   : 30.6000
+    SectionalSec                  : 5.2300
+    Speed_kmh                     : 62.3529
+    EarlySpeedIndex               : 101.3384
+    ConsistencyIndex              : 0.4000
+    PlaceRate                     : 0.6000
+    RecentFormBoost               : 0.8611
+    DLWFactor                     : 1.2755
+    BoxBiasFactor                 : 0.1090
+    DistanceSuit                  : 1.2000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 0.8500
+    Last3AvgFinish                : 1.6667
+    TrainerStrikeRate             : 0.4000
+    FinalScore                    : 32.0012
+
+  Box 7: White Hawke
+    BestTimeSec                   : 30.5900
+    SectionalSec                  : 5.2400
+    Speed_kmh                     : 62.3733
+    EarlySpeedIndex               : 101.1450
+    ConsistencyIndex              : 0.1333
+    PlaceRate                     : 0.5333
+    RecentFormBoost               : 0.5067
+    DLWFactor                     : 0.6193
+    BoxBiasFactor                 : 0.1060
+    DistanceSuit                  : 0.5000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 0.8500
+    Last3AvgFinish                : 3.3333
+    TrainerStrikeRate             : 0.1333
+    FinalScore                    : 30.5654
+
+  Box 8: Cawbourne Adele
+    BestTimeSec                   : 30.9000
+    SectionalSec                  : 5.2800
+    Speed_kmh                     : 61.7476
+    EarlySpeedIndex               : 100.3788
+    ConsistencyIndex              : 0.1053
+    PlaceRate                     : 0.3684
+    RecentFormBoost               : 0.5282
+    DLWFactor                     : 0.8185
+    BoxBiasFactor                 : 0.1320
+    DistanceSuit                  : 0.7857
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 5.3333
+    TrainerStrikeRate             : 0.1053
+    FinalScore                    : 30.3420
+
+  Box 2: Victa Graham
+    BestTimeSec                   : 28.0069
+    SectionalSec                  : 5.1060
+    Speed_kmh                     : 68.1261
+    EarlySpeedIndex               : 103.7995
+    ConsistencyIndex              : 0.3333
+    PlaceRate                     : 0.2500
+    RecentFormBoost               : 0.9160
+    DLWFactor                     : 1.1048
+    BoxBiasFactor                 : 0.1300
+    DistanceSuit                  : 1.0000
+    AgeFactor                     : 0.9500
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 3.5000
+    TrainerStrikeRate             : 0.3333
+    FinalScore                    : 32.0712
+
+  Box 3: Zipping Elly May
+    BestTimeSec                   : 28.0233
+    SectionalSec                  : 5.1120
+    Speed_kmh                     : 68.0862
+    EarlySpeedIndex               : 103.6776
+    ConsistencyIndex              : 0.0820
+    PlaceRate                     : 0.2787
+    RecentFormBoost               : 0.5663
+    DLWFactor                     : 0.3327
+    BoxBiasFactor                 : 0.1210
+    DistanceSuit                  : 1.0000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.0000
+    Last3AvgFinish                : 4.2541
+    TrainerStrikeRate             : 0.0820
+    FinalScore                    : 32.6856
+
+────────────────────────────────────────────────────────────────────────
+STEP 3 — MODEL PREDICTIONS (individual score per dog)
+────────────────────────────────────────────────────────────────────────
+
+  Uniqueness verification:
+    RF        : ✅ ALL INDIVIDUAL  (std=0.06987)
+    GB        : ✅ ALL INDIVIDUAL  (std=0.27617)
+    XGB       : ✅ ALL INDIVIDUAL  (std=0.32296)
+    Ensemble  : ✅ ALL INDIVIDUAL  (std=0.20126)
+
+  Probability scores by dog:
+  Box  Dog Name                        RF       GB      XGB   Ensemble   Win%
+  ------------------------------------------------------------------------
+    1  Zipping Neeson              0.5203   0.9947   0.7475     0.7542  14.4%
+    2  Victa Graham                0.5121   0.8310   0.9998     0.7809  14.9%
+    3  Zipping Elly May            0.3189   0.0943   0.0112     0.1414   2.7%
+    4  Black Wanda                 0.3466   0.8358   0.9998     0.7274  13.9%
+    5  Lala Effie                  0.4113   0.5830   0.9996     0.6646  12.7%
+    6  Gebrselassie                0.4948   0.8855   0.9990     0.7931  15.1%
+    7  White Hawke                 0.4127   0.4848   0.9907     0.6294  12.0%
+    8  Cawbourne Adele             0.4350   0.8628   0.9603     0.7527  14.4%
+
+────────────────────────────────────────────────────────────────────────
+STEP 4 — RANKED PREDICTIONS
+────────────────────────────────────────────────────────────────────────
+
+  Rank  Box  Dog Name                    Win%  Key Factors
+  ------------------------------------------------------------------------
+     1    6  Gebrselassie               15.1%  Speed=62.4km/h  Consist=0.400  RecentBoost=0.9  DLWFactor=1.3
+     2    2  Victa Graham               14.9%  Speed=68.1km/h  Consist=0.333  RecentBoost=0.9  DLWFactor=1.1
+     3    1  Zipping Neeson             14.4%  Speed=62.7km/h  Consist=0.038  RecentBoost=0.6  DLWFactor=0.2
+     4    8  Cawbourne Adele            14.4%  Speed=61.7km/h  Consist=0.105  RecentBoost=0.5  DLWFactor=0.8
+     5    4  Black Wanda                13.9%  Speed=59.4km/h  Consist=0.125  RecentBoost=0.8  DLWFactor=0.9
+     6    5  Lala Effie                 12.7%  Speed=61.8km/h  Consist=0.132  RecentBoost=0.6  DLWFactor=0.9
+     7    7  White Hawke                12.0%  Speed=62.4km/h  Consist=0.133  RecentBoost=0.5  DLWFactor=0.6
+     8    3  Zipping Elly May            2.7%  Speed=68.1km/h  Consist=0.082  RecentBoost=0.6  DLWFactor=0.3
+
+────────────────────────────────────────────────────────────────────────
+INDIVIDUALITY VERIFICATION
+────────────────────────────────────────────────────────────────────────
+
+  Each dog's score is derived exclusively from their own data:
+    BestTimeSec                   : 8/8 unique  ✅ OK
+    Speed_kmh                     : 8/8 unique  ✅ OK
+    ConsistencyIndex              : 8/8 unique  ✅ OK
+    FinalScore                    : 8/8 unique  ✅ OK
+    Ensemble_Prob                 : 8/8 unique  ✅ OK
+
+========================================================================
+END OF AUDIT REPORT
+========================================================================
