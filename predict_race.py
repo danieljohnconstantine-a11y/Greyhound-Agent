@@ -5,6 +5,17 @@ Full ML pipeline: PDF parsing → Feature engineering → Model prediction → O
 
 Usage:
     python predict_race.py [--track "Angle Park"] [--race 8] [--pdf data/ANGLG1112form.pdf]
+
+IMPORTANT: This pipeline only works with the correct form guide PDF for the race date
+you want to predict. The PDF must be placed in the data/ folder first.
+
+For Angle Park on DD/MM/YYYY, the file is typically named:  data/ANGLG{DD}{MM}form.pdf
+Example for 05 Mar 2026:  data/ANGLG0503form.pdf
+
+Download current form guides from:
+  https://www.grsa.com.au/racing/form-guides  (SA Racing)
+  https://grv.racing/form-guides              (VIC Racing)
+  https://www.thedogs.com.au                  (National)
 """
 
 import os
@@ -13,11 +24,83 @@ import sys
 import pickle
 import warnings
 import argparse
+import datetime
 import numpy as np
 import pandas as pd
 import pdfplumber
 
 warnings.filterwarnings("ignore")
+
+
+def _scan_available_pdfs(data_dir: str = "data") -> None:
+    """Print a clear inventory of what PDF data is actually available."""
+    RACE_HDR_RE = re.compile(
+        r"Race No\s+(\d{1,2})\s+(\w{3})\s+(\d{2})\s+(\d{1,2}:\d{2}(?:AM|PM))\s+(.+?)\s+(\d+)m",
+        re.IGNORECASE,
+    )
+    pdfs = sorted(f for f in os.listdir(data_dir) if f.lower().endswith(".pdf"))
+    if not pdfs:
+        print("  ❌  data/ folder is empty — no form guides available.")
+        return
+    print(f"  📁  data/ folder contains {len(pdfs)} PDF file(s):")
+    for fname in pdfs:
+        try:
+            with pdfplumber.open(os.path.join(data_dir, fname)) as pdf:
+                text = (pdf.pages[0].extract_text() or "")
+            m = RACE_HDR_RE.search(text)
+            if m:
+                day, mon, yr, time_, track, dist = m.groups()
+                yr4 = int("20" + yr)
+                try:
+                    mon_num = datetime.datetime.strptime(mon.capitalize(), "%b").month
+                    race_date = datetime.date(yr4, mon_num, int(day))
+                    date_str = race_date.strftime("%d %b %Y")
+                except ValueError:
+                    date_str = f"{day} {mon} 20{yr}"
+                print(f"       {fname}  →  {date_str}  {track}")
+            else:
+                print(f"       {fname}  →  (date unknown)")
+        except Exception:
+            print(f"       {fname}  →  (unreadable)")
+
+
+def _abort_wrong_date(race_date_str: str, requested_date_str: str | None) -> None:
+    """
+    Raise a clear error if the PDF's race date does not match today (or requested date).
+    race_date_str: 'YYYY-MM-DD' from parsed PDF
+    requested_date_str: 'YYYY-MM-DD' from --date arg (or None = use today)
+    """
+    today = datetime.date.today()
+    target = today if not requested_date_str else datetime.date.fromisoformat(requested_date_str)
+    try:
+        pdf_date = datetime.date.fromisoformat(race_date_str)
+    except ValueError:
+        return  # can't parse, let it through
+
+    if pdf_date != target:
+        sep = "!" * 80
+        print(f"\n{sep}")
+        print(f"  ❌  WRONG DATE — THIS IS NOT TODAY'S RACE CARD")
+        print(f"  ❌  PDF race date : {pdf_date.strftime('%d %b %Y')}")
+        print(f"  ❌  Target date   : {target.strftime('%d %b %Y')}")
+        print(f"{sep}")
+        print()
+        print("  The dogs listed in this PDF are NOT competing today.")
+        print("  Running predictions on the wrong date produces meaningless results.")
+        print()
+        print("  You need the form guide PDF for the correct date.")
+        print(f"  For Angle Park on {target.strftime('%d %b %Y')}, the file name is likely:")
+        print(f"      data/ANGLG{target.strftime('%d%m')}form.pdf")
+        print()
+        print("  Download it from one of these sources, then re-run:")
+        print("      https://www.grsa.com.au/racing/form-guides   (SA Racing)")
+        print("      https://www.thedogs.com.au                   (National)")
+        print()
+        print("  Available PDFs in data/:")
+        _scan_available_pdfs()
+        print()
+        print(f"{sep}")
+        sys.exit(1)
 
 # ──────────────────────────────────────────────────────────────────────────────
 # 1. PDF PARSER
@@ -740,9 +823,11 @@ def print_race_card(race: dict, result: pd.DataFrame):
 def main():
     parser = argparse.ArgumentParser(description="Greyhound Race Prediction Pipeline")
     parser.add_argument("--track",  default="Angle Park", help="Track name matching model file prefix")
-    parser.add_argument("--pdf",    default=None,         help="Path to race-card PDF (auto-detects latest Angle Park PDF if omitted)")
+    parser.add_argument("--pdf",    default=None,         help="Path to race-card PDF")
     parser.add_argument("--race",   type=int, default=None, help="Race number to show (default: all)")
     parser.add_argument("--dist",   type=int, default=None, help="Filter by distance (e.g. 530)")
+    parser.add_argument("--date",   default=None,         help="Expected race date YYYY-MM-DD (default: today). Used to verify correct PDF.")
+    parser.add_argument("--force",  action="store_true",  help="Skip date validation (use for historical/testing purposes ONLY)")
     parser.add_argument("--output", default="outputs",    help="Output directory")
     args = parser.parse_args()
 
@@ -750,19 +835,41 @@ def main():
     print("  🐾  GREYHOUND ANALYTICS — FULL ML PREDICTION PIPELINE")
     print("═" * 80)
 
+    # ── Show what data is actually available ──────────────────────────────────
+    print("\n── AVAILABLE FORM GUIDES IN data/ ─────────────────────────────────────────")
+    _scan_available_pdfs()
+
+    today = datetime.date.today()
+    target_date = today if not args.date else datetime.date.fromisoformat(args.date)
+    print(f"\n  📅  Target race date: {target_date.strftime('%d %b %Y')}")
+
     # ── Find PDF ──────────────────────────────────────────────────────────────
     pdf_path = args.pdf
     if not pdf_path:
-        # Auto-detect: find most recent Angle Park PDF in data/
+        # Auto-detect: look for a PDF matching the target date by filename convention
+        # Angle Park naming: ANGLG{DD}{MM}form.pdf
         data_dir = "data"
-        candidates = sorted(
-            [f for f in os.listdir(data_dir) if f.startswith("ANGLG") and f.endswith(".pdf")],
-            reverse=True,
-        )
-        if not candidates:
-            print("❌  No Angle Park PDF found in data/. Please supply --pdf <path>.")
+        expected_name = f"ANGLG{target_date.strftime('%d%m')}form.pdf"
+        expected_path = os.path.join(data_dir, expected_name)
+        if os.path.exists(expected_path):
+            pdf_path = expected_path
+            print(f"  ✅  Found matching PDF: {pdf_path}")
+        else:
+            sep = "!" * 80
+            print(f"\n{sep}")
+            print(f"  ❌  NO FORM GUIDE FOUND FOR {target_date.strftime('%d %b %Y')}")
+            print(f"  ❌  Expected file: {expected_path}")
+            print(f"{sep}")
+            print()
+            print("  Cannot predict races without the correct form guide.")
+            print("  Download the form guide PDF and save it as:")
+            print(f"      {expected_path}")
+            print()
+            print("  Download sources:")
+            print("      https://www.grsa.com.au/racing/form-guides   (SA Racing — Angle Park)")
+            print("      https://www.thedogs.com.au                   (National)")
+            print()
             sys.exit(1)
-        pdf_path = os.path.join(data_dir, candidates[0])
 
     print(f"\n📄  PDF: {pdf_path}")
     print(f"🏟  Track: {args.track}")
@@ -772,19 +879,34 @@ def main():
     races = parse_angle_park_pdf(pdf_path)
     print(f"  ✅ Parsed {len(races)} races from PDF")
 
+    if not races:
+        print("❌  Could not parse any races from this PDF.")
+        sys.exit(1)
+
+    # ── DATE VALIDATION — check PDF actually matches target date ──────────────
+    if not args.force:
+        first_race_date = races[0].get("RaceDate", "")
+        _abort_wrong_date(first_race_date, target_date.isoformat())
+
     # Filter by distance if requested
+    all_races_before_filter = races[:]
     if args.dist:
         races = [r for r in races if r["Distance"] == args.dist]
         print(f"  🔍 Filtered to {len(races)} races at {args.dist}m")
 
     # Filter by race number if requested
     if args.race:
-        races = [r for r in races if r["RaceNumber"] == args.race]
-        if not races:
-            print(f"  ⚠️  Race {args.race} not found. Available races: {[r['RaceNumber'] for r in races]}")
+        search_pool = races if args.dist else all_races_before_filter
+        races_filtered = [r for r in search_pool if r["RaceNumber"] == args.race]
+        if not races_filtered:
+            available = [r["RaceNumber"] for r in all_races_before_filter]
+            print(f"  ⚠️  Race {args.race} not found in this PDF.")
+            print(f"  ⚠️  Available race numbers: {available}")
+            sys.exit(1)
+        races = races_filtered
 
     if not races:
-        print("❌  No races to predict.")
+        print("❌  No races matched your filters.")
         sys.exit(1)
 
     # ── Load models ───────────────────────────────────────────────────────────
