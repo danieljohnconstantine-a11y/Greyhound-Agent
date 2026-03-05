@@ -1,0 +1,234 @@
+========================================================================
+GREYHOUND RACE PREDICTION AUDIT REPORT
+Generated: 2026-03-05 09:24:17
+========================================================================
+
+Race     : 5
+Date     : 2025-12-01
+Time     : 07:23PM
+Track    : Angle Park
+Distance : 530m
+
+────────────────────────────────────────────────────────────────────────
+STEP 1 — DATA EXTRACTION (per-dog, from PDF)
+────────────────────────────────────────────────────────────────────────
+  Box 1: Life's A Journey
+    Career     : 6-12-34
+    Prize Money: $11,270
+    RTC/DLR/DLW: 12 / 7 / 56
+    Age Months : 24
+    Last races : 4/6 @ Angle Park (530m), 3/6 @ Angle Park (342m), 4/6 @ GAWLER (531m)
+
+  Box 2: Velaris
+    Career     : 5-22-51
+    Prize Money: $25,795
+    RTC/DLR/DLW: 52 / 6 / 205
+    Age Months : 24
+    Last races : 2/5 @ MURRAY BDGE  (300m), 3/5 @ MURRAY BDGE  (300m), 8/8 @ Q LAKESIDE (457m)
+
+  Box 3: Toora Terry
+    Career     : 11-27-57
+    Prize Money: $22,795
+    RTC/DLR/DLW: 35 / 7 / 52
+    Age Months : 36
+    Last races : 4/7 @ Angle Park (342m), 3/8 @ Angle Park (342m), 7/8 @ Angle Park (342m)
+
+  Box 4: Binnaway Warrior
+    Career     : 10-21-39
+    Prize Money: $21,300
+    RTC/DLR/DLW: 40 / 10 / 33
+    Age Months : 24
+    Last races : 5/7 @ MURRAY BDGE (530m), 5/7 @ Angle Park (595m), 3/7 @ GAWLER (643m)
+
+  Box 6: Shaka Big Chief
+    Career     : 5-13-77
+    Prize Money: $10,395
+    RTC/DLR/DLW: 78 / 7 / 194
+    Age Months : 36
+    Last races : 6/6 @ Angle Park (530m), 5/6 @ MURRAY BDGE (455m), 4/6 @ GAWLER (400m)
+
+  Box 7: Birmingham
+    Career     : 9-16-43
+    Prize Money: $20,535
+    RTC/DLR/DLW: 14 / 7 / 94
+    Age Months : 36
+    Last races : 5/6 @ Angle Park (530m), 5/8 @ MURRAY BDGE (395m), 3/6 @ MURRAY BDGE  (350m)
+
+  Box 8: Dakota Rylen
+    Career     : 17-19-59
+    Prize Money: $68,135
+    RTC/DLR/DLW: 60 / 7 / 28
+    Age Months : 36
+    Last races : 3/6 @ Angle Park (530m), 2/4 @ Angle Park (530m), 3/5 @ MURRAY BDGE (350m)
+
+────────────────────────────────────────────────────────────────────────
+STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
+────────────────────────────────────────────────────────────────────────
+  Box 1: Life's A Journey
+    BestTimeSec                   : 30.4300
+    SectionalSec                  : 3.2500
+    Speed_kmh                     : 62.7013
+    EarlySpeedIndex               : 163.0769
+    ConsistencyIndex              : 0.1765
+    PlaceRate                     : 0.3529
+    RecentFormBoost               : 0.7391
+    DLWFactor                     : 0.6792
+    BoxBiasFactor                 : 0.1720
+    DistanceSuit                  : 0.7222
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 3.6667
+    TrainerStrikeRate             : 0.1765
+    FinalScore                    : 43.8997
+
+  Box 2: Velaris
+    BestTimeSec                   : 30.3500
+    SectionalSec                  : 4.2900
+    Speed_kmh                     : 62.8666
+    EarlySpeedIndex               : 123.5431
+    ConsistencyIndex              : 0.0980
+    PlaceRate                     : 0.4314
+    RecentFormBoost               : 0.6677
+    DLWFactor                     : 0.1025
+    BoxBiasFactor                 : 0.1300
+    DistanceSuit                  : 0.8478
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 4.3333
+    TrainerStrikeRate             : 0.0980
+    FinalScore                    : 37.3337
+
+  Box 3: Toora Terry
+    BestTimeSec                   : 31.3100
+    SectionalSec                  : 4.4900
+    Speed_kmh                     : 60.9390
+    EarlySpeedIndex               : 118.0401
+    ConsistencyIndex              : 0.1930
+    PlaceRate                     : 0.4737
+    RecentFormBoost               : 0.6923
+    DLWFactor                     : 0.7226
+    BoxBiasFactor                 : 0.1210
+    DistanceSuit                  : 0.6538
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 4.6667
+    TrainerStrikeRate             : 0.1930
+    FinalScore                    : 35.2457
+
+  Box 4: Binnaway Warrior
+    BestTimeSec                   : 29.9700
+    SectionalSec                  : 3.1900
+    Speed_kmh                     : 63.6637
+    EarlySpeedIndex               : 166.1442
+    ConsistencyIndex              : 0.2564
+    PlaceRate                     : 0.5385
+    RecentFormBoost               : 0.6859
+    DLWFactor                     : 0.9731
+    BoxBiasFactor                 : 0.1180
+    DistanceSuit                  : 1.0000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 4.3333
+    TrainerStrikeRate             : 0.2564
+    FinalScore                    : 45.4770
+
+  Box 6: Shaka Big Chief
+    BestTimeSec                   : 30.3600
+    SectionalSec                  : 3.1700
+    Speed_kmh                     : 62.8458
+    EarlySpeedIndex               : 167.1924
+    ConsistencyIndex              : 0.0649
+    PlaceRate                     : 0.1688
+    RecentFormBoost               : 0.5699
+    DLWFactor                     : 0.1131
+    BoxBiasFactor                 : 0.1090
+    DistanceSuit                  : 0.5606
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 5.0000
+    TrainerStrikeRate             : 0.0649
+    FinalScore                    : 44.3336
+
+  Box 7: Birmingham
+    BestTimeSec                   : 30.8000
+    SectionalSec                  : 5.3300
+    Speed_kmh                     : 61.9481
+    EarlySpeedIndex               : 99.4371
+    ConsistencyIndex              : 0.2093
+    PlaceRate                     : 0.3721
+    RecentFormBoost               : 0.7254
+    DLWFactor                     : 0.3840
+    BoxBiasFactor                 : 0.1060
+    DistanceSuit                  : 1.0000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 4.3333
+    TrainerStrikeRate             : 0.2093
+    FinalScore                    : 31.9399
+
+  Box 8: Dakota Rylen
+    BestTimeSec                   : 30.7100
+    SectionalSec                  : 5.2800
+    Speed_kmh                     : 62.1296
+    EarlySpeedIndex               : 100.3788
+    ConsistencyIndex              : 0.2881
+    PlaceRate                     : 0.3220
+    RecentFormBoost               : 0.8885
+    DLWFactor                     : 1.0533
+    BoxBiasFactor                 : 0.1320
+    DistanceSuit                  : 1.0000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 2.6667
+    TrainerStrikeRate             : 0.2881
+    FinalScore                    : 36.9964
+
+────────────────────────────────────────────────────────────────────────
+STEP 3 — MODEL PREDICTIONS (individual score per dog)
+────────────────────────────────────────────────────────────────────────
+
+  Uniqueness verification:
+    RF        : ✅ ALL INDIVIDUAL  (std=0.08978)
+    GB        : ✅ ALL INDIVIDUAL  (std=0.39411)
+    XGB       : ✅ ALL INDIVIDUAL  (std=0.34288)
+    Ensemble  : ✅ ALL INDIVIDUAL  (std=0.23622)
+
+  Probability scores by dog:
+  Box  Dog Name                        RF       GB      XGB   Ensemble   Win%
+  ------------------------------------------------------------------------
+    1  Life's A Journey            0.4587   0.3962   0.9997     0.6182  15.9%
+    2  Velaris                     0.3340   0.0201   0.9968     0.4503  11.6%
+    3  Toora Terry                 0.4258   0.7732   0.9998     0.7329  18.8%
+    4  Binnaway Warrior            0.4800   0.8569   0.9995     0.7788  20.0%
+    6  Shaka Big Chief             0.2111   0.0130   0.0194     0.0812   2.1%
+    7  Birmingham                  0.4235   0.9540   0.9999     0.7924  20.3%
+    8  Dakota Rylen                0.3047   0.0180   0.9999     0.4409  11.3%
+
+────────────────────────────────────────────────────────────────────────
+STEP 4 — RANKED PREDICTIONS
+────────────────────────────────────────────────────────────────────────
+
+  Rank  Box  Dog Name                    Win%  Key Factors
+  ------------------------------------------------------------------------
+     1    7  Birmingham                 20.3%  Speed=61.9km/h  Consist=0.209  RecentBoost=0.7  DLWFactor=0.4
+     2    4  Binnaway Warrior           20.0%  Speed=63.7km/h  Consist=0.256  RecentBoost=0.7  DLWFactor=1.0
+     3    3  Toora Terry                18.8%  Speed=60.9km/h  Consist=0.193  RecentBoost=0.7  DLWFactor=0.7
+     4    1  Life's A Journey           15.9%  Speed=62.7km/h  Consist=0.176  RecentBoost=0.7  DLWFactor=0.7
+     5    2  Velaris                    11.6%  Speed=62.9km/h  Consist=0.098  RecentBoost=0.7  DLWFactor=0.1
+     6    8  Dakota Rylen               11.3%  Speed=62.1km/h  Consist=0.288  RecentBoost=0.9  DLWFactor=1.1
+     7    6  Shaka Big Chief             2.1%  Speed=62.8km/h  Consist=0.065  RecentBoost=0.6  DLWFactor=0.1
+
+────────────────────────────────────────────────────────────────────────
+INDIVIDUALITY VERIFICATION
+────────────────────────────────────────────────────────────────────────
+
+  Each dog's score is derived exclusively from their own data:
+    BestTimeSec                   : 7/7 unique  ✅ OK
+    Speed_kmh                     : 7/7 unique  ✅ OK
+    ConsistencyIndex              : 7/7 unique  ✅ OK
+    FinalScore                    : 7/7 unique  ✅ OK
+    Ensemble_Prob                 : 7/7 unique  ✅ OK
+
+========================================================================
+END OF AUDIT REPORT
+========================================================================

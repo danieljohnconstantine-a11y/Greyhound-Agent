@@ -1,0 +1,255 @@
+========================================================================
+GREYHOUND RACE PREDICTION AUDIT REPORT
+Generated: 2026-03-05 10:31:34
+========================================================================
+
+Race     : 8
+Date     : 2026-03-05
+Time     : 08:58pm
+Track    : Angle Park
+Distance : 530m
+
+────────────────────────────────────────────────────────────────────────
+STEP 1 — DATA EXTRACTION (per-dog, from PDF)
+────────────────────────────────────────────────────────────────────────
+  Box 2: Bookaloo
+    Career     : 13-25-60
+    Prize Money: $59,030
+    RTC/DLR/DLW: 38 / 6 / 45
+    Age Months : 36
+    Last races : 4/7 @ MT GAMBIER (512m)
+
+  Box 3: Manifesto
+    Career     : 13-13-38
+    Prize Money: $27,585
+    RTC/DLR/DLW: 3 / 11 / 11
+    Age Months : 24
+
+  Box 4: Nangar Lady
+    Career     : 17-11-44
+    Prize Money: $76,985
+    RTC/DLR/DLW: 20 / 10 / 18
+    Age Months : 36
+    Last races : 8/8 @ Angle Park (530m), 6/8 @ Angle Park N (530m)
+
+  Box 5: Reality Is
+    Career     : 15-21-63
+    Prize Money: $86,270
+    RTC/DLR/DLW: 55 / 11 / 28
+    Age Months : 36
+
+  Box 6: Victory Club
+    Career     : 21-41-101
+    Prize Money: $48,095
+    RTC/DLR/DLW: 28 / 7 / 7
+    Age Months : 36
+
+  Box 7: Mallee Beauty
+    Career     : 33-6-47
+    Prize Money: $257,345
+    RTC/DLR/DLW: 32 / 42 / 55
+    Age Months : 36
+    Last races : 1/7 @ Angle Park (530m)
+
+  Box 8: Flying Artie
+    Career     : 20-12-34
+    Prize Money: $56,480
+    RTC/DLR/DLW: 19 / 7 / 7
+    Age Months : 24
+
+  Box 1: Kisauni
+    Career     : 37-43-117
+    Prize Money: $160,880
+    RTC/DLR/DLW: 118 / 7 / 14
+    Age Months : 36
+
+────────────────────────────────────────────────────────────────────────
+STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
+────────────────────────────────────────────────────────────────────────
+  Box 2: Bookaloo
+    BestTimeSec                   : 29.5500
+    SectionalSec                  : 4.3700
+    Speed_kmh                     : 64.5685
+    EarlySpeedIndex               : 121.2815
+    ConsistencyIndex              : 0.2167
+    PlaceRate                     : 0.4167
+    RecentFormBoost               : 0.7826
+    DLWFactor                     : 0.8096
+    BoxBiasFactor                 : 0.1300
+    DistanceSuit                  : 0.9286
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 4.0000
+    TrainerStrikeRate             : 0.4299
+    FinalScore                    : 40.1106
+
+  Box 3: Manifesto
+    BestTimeSec                   : 28.0016
+    SectionalSec                  : 5.1120
+    Speed_kmh                     : 68.1390
+    EarlySpeedIndex               : 103.6776
+    ConsistencyIndex              : 0.3421
+    PlaceRate                     : 0.3421
+    RecentFormBoost               : 0.7934
+    DLWFactor                     : 1.3823
+    BoxBiasFactor                 : 0.1210
+    DistanceSuit                  : 1.2000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.0000
+    Last3AvgFinish                : 3.4737
+    TrainerStrikeRate             : 0.3421
+    FinalScore                    : 34.0158
+
+  Box 4: Nangar Lady
+    BestTimeSec                   : 30.4500
+    SectionalSec                  : 5.1600
+    Speed_kmh                     : 62.6601
+    EarlySpeedIndex               : 102.7132
+    ConsistencyIndex              : 0.3864
+    PlaceRate                     : 0.2500
+    RecentFormBoost               : 0.6698
+    DLWFactor                     : 1.2373
+    BoxBiasFactor                 : 0.1180
+    DistanceSuit                  : 1.2000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 7.0000
+    TrainerStrikeRate             : 0.2991
+    FinalScore                    : 37.9278
+
+  Box 5: Reality Is
+    BestTimeSec                   : 28.0292
+    SectionalSec                  : 5.1240
+    Speed_kmh                     : 68.0720
+    EarlySpeedIndex               : 103.4348
+    ConsistencyIndex              : 0.2381
+    PlaceRate                     : 0.3333
+    RecentFormBoost               : 0.7102
+    DLWFactor                     : 1.0588
+    BoxBiasFactor                 : 0.1120
+    DistanceSuit                  : 0.9615
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.0000
+    Last3AvgFinish                : 3.7857
+    TrainerStrikeRate             : 0.2991
+    FinalScore                    : 39.7320
+
+  Box 6: Victory Club
+    BestTimeSec                   : 28.0148
+    SectionalSec                  : 5.1300
+    Speed_kmh                     : 68.1068
+    EarlySpeedIndex               : 103.3138
+    ConsistencyIndex              : 0.2079
+    PlaceRate                     : 0.4059
+    RecentFormBoost               : 0.7843
+    DLWFactor                     : 1.4766
+    BoxBiasFactor                 : 0.1090
+    DistanceSuit                  : 0.8333
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 3.8762
+    TrainerStrikeRate             : 0.3037
+    FinalScore                    : 35.7906
+
+  Box 7: Mallee Beauty
+    BestTimeSec                   : 30.2400
+    SectionalSec                  : 5.2300
+    Speed_kmh                     : 63.0952
+    EarlySpeedIndex               : 101.3384
+    ConsistencyIndex              : 0.7021
+    PlaceRate                     : 0.1277
+    RecentFormBoost               : 1.1017
+    DLWFactor                     : 0.6930
+    BoxBiasFactor                 : 0.1060
+    DistanceSuit                  : 1.2000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 0.8500
+    Last3AvgFinish                : 1.0000
+    TrainerStrikeRate             : 0.4299
+    FinalScore                    : 55.8739
+
+  Box 8: Flying Artie
+    BestTimeSec                   : 28.0101
+    SectionalSec                  : 5.1420
+    Speed_kmh                     : 68.1184
+    EarlySpeedIndex               : 103.0727
+    ConsistencyIndex              : 0.5882
+    PlaceRate                     : 0.3529
+    RecentFormBoost               : 1.0885
+    DLWFactor                     : 1.4757
+    BoxBiasFactor                 : 0.1320
+    DistanceSuit                  : 1.2000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 2.7353
+    TrainerStrikeRate             : 0.3037
+    FinalScore                    : 36.8586
+
+  Box 1: Kisauni
+    BestTimeSec                   : 28.0625
+    SectionalSec                  : 5.1000
+    Speed_kmh                     : 67.9910
+    EarlySpeedIndex               : 103.9216
+    ConsistencyIndex              : 0.3162
+    PlaceRate                     : 0.3675
+    RecentFormBoost               : 0.8709
+    DLWFactor                     : 1.3288
+    BoxBiasFactor                 : 0.1720
+    DistanceSuit                  : 1.0000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 3.5513
+    TrainerStrikeRate             : 0.3162
+    FinalScore                    : 47.2157
+
+────────────────────────────────────────────────────────────────────────
+STEP 3 — MODEL PREDICTIONS (individual score per dog)
+────────────────────────────────────────────────────────────────────────
+
+  Uniqueness verification:
+    RF        : ✅ ALL INDIVIDUAL  (std=0.03095)
+    GB        : ✅ ALL INDIVIDUAL  (std=0.12697)
+    XGB       : ⚠️  5/8 unique  (std=0.05664)
+    Ensemble  : ✅ ALL INDIVIDUAL  (std=0.05519)
+
+  Probability scores by dog:
+  Box  Dog Name                        RF       GB      XGB   Ensemble   Win%
+  ------------------------------------------------------------------------
+    1  Kisauni                     0.2515   0.3979   0.1716     0.2737  16.2%
+    2  Bookaloo                    0.2694   0.3559   0.0000     0.2084  12.3%
+    3  Manifesto                   0.2622   0.2469   0.0004     0.1698  10.1%
+    4  Nangar Lady                 0.2604   0.3404   0.0000     0.2003  11.9%
+    5  Reality Is                  0.2750   0.2784   0.0000     0.1845  10.9%
+    6  Victory Club                0.2326   0.1733   0.0000     0.1353   8.0%
+    7  Mallee Beauty               0.3360   0.6246   0.0002     0.3203  19.0%
+    8  Flying Artie                0.3094   0.2750   0.0018     0.1954  11.6%
+
+────────────────────────────────────────────────────────────────────────
+STEP 4 — RANKED PREDICTIONS
+────────────────────────────────────────────────────────────────────────
+
+  Rank  Box  Dog Name                    Win%  Key Factors
+  ------------------------------------------------------------------------
+     1    7  Mallee Beauty              19.0%  Speed=63.1km/h  Consist=0.702  RecentBoost=1.1  DLWFactor=0.7
+     2    1  Kisauni                    16.2%  Speed=68.0km/h  Consist=0.316  RecentBoost=0.9  DLWFactor=1.3
+     3    2  Bookaloo                   12.3%  Speed=64.6km/h  Consist=0.217  RecentBoost=0.8  DLWFactor=0.8
+     4    4  Nangar Lady                11.9%  Speed=62.7km/h  Consist=0.386  RecentBoost=0.7  DLWFactor=1.2
+     5    8  Flying Artie               11.6%  Speed=68.1km/h  Consist=0.588  RecentBoost=1.1  DLWFactor=1.5
+     6    5  Reality Is                 10.9%  Speed=68.1km/h  Consist=0.238  RecentBoost=0.7  DLWFactor=1.1
+     7    3  Manifesto                  10.1%  Speed=68.1km/h  Consist=0.342  RecentBoost=0.8  DLWFactor=1.4
+     8    6  Victory Club                8.0%  Speed=68.1km/h  Consist=0.208  RecentBoost=0.8  DLWFactor=1.5
+
+────────────────────────────────────────────────────────────────────────
+INDIVIDUALITY VERIFICATION
+────────────────────────────────────────────────────────────────────────
+
+  Each dog's score is derived exclusively from their own data:
+    BestTimeSec                   : 7/8 unique  ⚠️  CHECK
+    Speed_kmh                     : 8/8 unique  ✅ OK
+    ConsistencyIndex              : 8/8 unique  ✅ OK
+    FinalScore                    : 8/8 unique  ✅ OK
+    Ensemble_Prob                 : 8/8 unique  ✅ OK
+
+========================================================================
+END OF AUDIT REPORT
+========================================================================

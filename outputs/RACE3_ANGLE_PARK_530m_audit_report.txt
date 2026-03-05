@@ -1,0 +1,208 @@
+========================================================================
+GREYHOUND RACE PREDICTION AUDIT REPORT
+Generated: 2026-03-05 09:16:21
+========================================================================
+
+Race     : 3
+Date     : 2025-12-01
+Time     : 06:42PM
+Track    : Angle Park
+Distance : 530m
+
+────────────────────────────────────────────────────────────────────────
+STEP 1 — DATA EXTRACTION (per-dog, from PDF)
+────────────────────────────────────────────────────────────────────────
+  Box 1: Rock On Bub
+    Career     : 2-12-34
+    Prize Money: $8,340
+    RTC/DLR/DLW: 35 / 9 / 144
+    Age Months : 24
+    Last races : 2/6 @ Angle Park (342m), 5/5 @ MURRAY BDGE  (300m), 6/6 @ Angle Park (342m)
+
+  Box 2: Paw Electra
+    Career     : 2-10-26
+    Prize Money: $6,400
+    RTC/DLR/DLW: 13 / 34 / 293
+    Age Months : 24
+    Last races : 2/5 @ MURRAY BDGE  (300m), 3/6 @ Angle Park (342m), 3/6 @ Angle Park (342m)
+
+  Box 4: Zipping Norris
+    Career     : 1-4-12
+    Prize Money: $2,830
+    RTC/DLR/DLW: 13 / 5 / 75
+    Age Months : 24
+    Last races : 4/6 @ GAWLER (400m), 3/5 @ GAWLER (400m), 6/6 @ GAWLER (400m)
+
+  Box 5: Toby Keeping
+    Career     : 2-5-16
+    Prize Money: $12,731
+    RTC/DLR/DLW: 17 / 11 / 51
+    Age Months : 24
+    Last races : 6/6 @ Angle Park (530m), 3/4 @ Angle Park (530m), 2/6 @ Angle Park (530m)
+
+  Box 7: Vista Cadmium
+    Career     : 3-18-53
+    Prize Money: $20,064
+    RTC/DLR/DLW: 35 / 7 / 439
+    Age Months : 36
+    Last races : 5/5 @ Angle Park (530m), 4/5 @ Angle Park (342m), 3/5 @ Angle Park (342m)
+
+  Box 8: Our Little Force
+    Career     : 3-22-53
+    Prize Money: $10,110
+    RTC/DLR/DLW: 54 / 4 / 34
+    Age Months : 24
+    Last races : 6/6 @ Angle Park (530m), 3/6 @ Angle Park (530m), 6/7 @ Angle Park (530m)
+
+────────────────────────────────────────────────────────────────────────
+STEP 2 — INDIVIDUAL FEATURE COMPUTATION (74 features per dog)
+────────────────────────────────────────────────────────────────────────
+  Box 1: Rock On Bub
+    BestTimeSec                   : 29.5600
+    SectionalSec                  : 4.5100
+    Speed_kmh                     : 64.5467
+    EarlySpeedIndex               : 117.5166
+    ConsistencyIndex              : 0.0588
+    PlaceRate                     : 0.3529
+    RecentFormBoost               : 0.7000
+    DLWFactor                     : 0.8000
+    BoxBiasFactor                 : 0.1720
+    DistanceSuit                  : 0.6818
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 4.3333
+    TrainerStrikeRate             : 0.0588
+    FinalScore                    : 34.3417
+
+  Box 2: Paw Electra
+    BestTimeSec                   : 30.4700
+    SectionalSec                  : 4.5500
+    Speed_kmh                     : 62.6190
+    EarlySpeedIndex               : 116.4835
+    ConsistencyIndex              : 0.0769
+    PlaceRate                     : 0.3846
+    RecentFormBoost               : 0.3000
+    DLWFactor                     : 0.8000
+    BoxBiasFactor                 : 0.1300
+    DistanceSuit                  : 0.5000
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 0.8500
+    Last3AvgFinish                : 2.6667
+    TrainerStrikeRate             : 0.0769
+    FinalScore                    : 33.5854
+
+  Box 4: Zipping Norris
+    BestTimeSec                   : 25.5300
+    SectionalSec                  : 5.1400
+    Speed_kmh                     : 74.7356
+    EarlySpeedIndex               : 103.1128
+    ConsistencyIndex              : 0.0833
+    PlaceRate                     : 0.3333
+    RecentFormBoost               : 1.0000
+    DLWFactor                     : 0.8000
+    BoxBiasFactor                 : 0.1180
+    DistanceSuit                  : 0.6667
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.0500
+    Last3AvgFinish                : 4.3333
+    TrainerStrikeRate             : 0.0833
+    FinalScore                    : 32.3298
+
+  Box 5: Toby Keeping
+    BestTimeSec                   : 30.2800
+    SectionalSec                  : 5.2200
+    Speed_kmh                     : 63.0119
+    EarlySpeedIndex               : 101.5326
+    ConsistencyIndex              : 0.1250
+    PlaceRate                     : 0.3125
+    RecentFormBoost               : 0.3000
+    DLWFactor                     : 0.8000
+    BoxBiasFactor                 : 0.1120
+    DistanceSuit                  : 0.6429
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.0000
+    Last3AvgFinish                : 3.6667
+    TrainerStrikeRate             : 0.1250
+    FinalScore                    : 31.2029
+
+  Box 7: Vista Cadmium
+    BestTimeSec                   : 31.0900
+    SectionalSec                  : 5.3600
+    Speed_kmh                     : 61.3702
+    EarlySpeedIndex               : 98.8806
+    ConsistencyIndex              : 0.0566
+    PlaceRate                     : 0.3396
+    RecentFormBoost               : 0.7000
+    DLWFactor                     : 0.8000
+    BoxBiasFactor                 : 0.1060
+    DistanceSuit                  : 0.6905
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.1500
+    Last3AvgFinish                : 4.0000
+    TrainerStrikeRate             : 0.0566
+    FinalScore                    : 31.6884
+
+  Box 8: Our Little Force
+    BestTimeSec                   : 30.8500
+    SectionalSec                  : 5.2600
+    Speed_kmh                     : 61.8476
+    EarlySpeedIndex               : 100.7605
+    ConsistencyIndex              : 0.0566
+    PlaceRate                     : 0.4151
+    RecentFormBoost               : 1.0000
+    DLWFactor                     : 0.8000
+    BoxBiasFactor                 : 0.1320
+    DistanceSuit                  : 0.5714
+    AgeFactor                     : 1.1000
+    FreshnessFactorV2             : 1.0000
+    Last3AvgFinish                : 5.0000
+    TrainerStrikeRate             : 0.0566
+    FinalScore                    : 30.6470
+
+────────────────────────────────────────────────────────────────────────
+STEP 3 — MODEL PREDICTIONS (individual score per dog)
+────────────────────────────────────────────────────────────────────────
+
+  Uniqueness verification:
+    RF        : ✅ ALL INDIVIDUAL  (std=0.07497)
+    GB        : ✅ ALL INDIVIDUAL  (std=0.31514)
+    XGB       : ✅ ALL INDIVIDUAL  (std=0.43411)
+    Ensemble  : ✅ ALL INDIVIDUAL  (std=0.10631)
+
+  Probability scores by dog:
+  Box  Dog Name                        RF       GB      XGB   Ensemble   Win%
+  ------------------------------------------------------------------------
+    1  Rock On Bub                 0.5222   0.8914   0.2158     0.5431  16.5%
+    2  Paw Electra                 0.4788   0.9822   0.0499     0.5036  15.3%
+    4  Zipping Norris              0.4182   0.6522   0.9830     0.6845  20.8%
+    5  Toby Keeping                0.4006   0.8307   0.0698     0.4337  13.2%
+    7  Vista Cadmium               0.3828   0.7464   0.9471     0.6921  21.0%
+    8  Our Little Force            0.2850   0.0225   0.9897     0.4324  13.1%
+
+────────────────────────────────────────────────────────────────────────
+STEP 4 — RANKED PREDICTIONS
+────────────────────────────────────────────────────────────────────────
+
+  Rank  Box  Dog Name                    Win%  Key Factors
+  ------------------------------------------------------------------------
+     1    7  Vista Cadmium              21.0%  Speed=61.4km/h  Consist=0.057  RecentBoost=0.7  DLWFactor=0.8
+     2    4  Zipping Norris             20.8%  Speed=74.7km/h  Consist=0.083  RecentBoost=1.0  DLWFactor=0.8
+     3    1  Rock On Bub                16.5%  Speed=64.5km/h  Consist=0.059  RecentBoost=0.7  DLWFactor=0.8
+     4    2  Paw Electra                15.3%  Speed=62.6km/h  Consist=0.077  RecentBoost=0.3  DLWFactor=0.8
+     5    5  Toby Keeping               13.2%  Speed=63.0km/h  Consist=0.125  RecentBoost=0.3  DLWFactor=0.8
+     6    8  Our Little Force           13.1%  Speed=61.8km/h  Consist=0.057  RecentBoost=1.0  DLWFactor=0.8
+
+────────────────────────────────────────────────────────────────────────
+INDIVIDUALITY VERIFICATION
+────────────────────────────────────────────────────────────────────────
+
+  Each dog's score is derived exclusively from their own data:
+    BestTimeSec                   : 6/6 unique  ✅ OK
+    Speed_kmh                     : 6/6 unique  ✅ OK
+    ConsistencyIndex              : 5/6 unique  ⚠️  CHECK
+    FinalScore                    : 6/6 unique  ✅ OK
+    Ensemble_Prob                 : 6/6 unique  ✅ OK
+
+========================================================================
+END OF AUDIT REPORT
+========================================================================
