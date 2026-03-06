@@ -1,0 +1,25 @@
+================================================================================
+ML PIPELINE TEST RESULTS
+================================================================================
+
+Test Date: 2026-02-11 23:37:11
+
+PDFs Tested:
+  - SALEG0102form.pdf (SALE track)
+  - WENPG2901form.pdf (WENTWORTH PARK track)
+
+Results:
+  ✓ SALE: 91 dogs predicted
+  ✓ WENTWORTH PARK: 72 dogs predicted
+
+Total dogs with predictions: 163
+
+Models Used:
+  - Random Forest (RF)
+  - Gradient Boosting (GB)
+  - XGBoost (XGB)
+
+ML applied individually to each dog: YES
+Track-specific models used: YES
+
+================================================================================

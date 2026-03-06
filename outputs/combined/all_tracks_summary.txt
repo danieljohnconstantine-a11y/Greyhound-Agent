@@ -1,0 +1,108 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2026-01-26 15:13:44
+================================================================================
+
+Total PDFs processed: 8
+Successful predictions: 6
+Total dogs predicted: 620
+
+
+BALLARAT:
+  Races: 14
+  Dogs: 125
+  Race 1: Box 1 - Where's Wyche (12.6%)
+  Race 2: Box 1 - Chappy's Banshee (12.6%)
+  Race 3: Box 1 - Timmy Time (12.6%)
+  Race 4: Box 1 - Ocean Burn (12.6%)
+  Race 5: Box 1 - Bust Up (12.6%)
+  Race 6: Box 2 - Ancona (12.6%)
+  Race 7: Box 2 - Flying Offshore (12.6%)
+  Race 8: Box 3 - Go Pikachu (12.6%)
+  Race 9: Box 1 - Trenton's Empire (12.6%)
+  Race 10: Box 1 - Paw Oppa (12.6%)
+  Race 11: Box 1 - Lethal Trix (12.6%)
+  Race 12: Box 1 - Can't Park There (12.6%)
+  Race 13: Box 2 - Whodat Whiskey (12.6%)
+  Race 14: Box 1 - Solar Toby (12.6%)
+
+Maitland:
+  Races: 11
+  Dogs: 78
+  Race 1: Box 3 - Cyclone Ethics (14.6%)
+  Race 2: Box 1 - Despicable Goat (14.6%)
+  Race 3: Box 1 - Whitey (14.6%)
+  Race 4: Box 1 - Happy Ethics (14.6%)
+  Race 5: Box 1 - Hera Rolex (14.6%)
+  Race 6: Box 2 - Aussie Rattler (14.6%)
+  Race 7: Box 2 - Bear's Head (14.6%)
+  Race 8: Box 1 - Federal Player (14.6%)
+  Race 9: Box 1 - Nukkunya (14.6%)
+  Race 10: Box 1 - Rise Up Nismo (14.6%)
+  Race 11: Box 2 - President Rolex (14.6%)
+
+NOWRA:
+  Races: 11
+  Dogs: 93
+  Race 1: Box 1 - Zipping Seton (14.7%)
+  Race 2: Box 1 - Majestic Pearl (14.7%)
+  Race 3: Box 1 - Irinka Wayne (14.7%)
+  Race 4: Box 1 - Ashby Cola (14.7%)
+  Race 5: Box 1 - Zipping Lowens (14.7%)
+  Race 6: Box 5 - Big Frost (14.7%)
+  Race 7: Box 2 - Not Certain (14.7%)
+  Race 8: Box 1 - Sunshine Sandy (14.7%)
+  Race 9: Box 4 - Slip Road (14.6%)
+  Race 10: Box 1 - Skedaddle Benny (14.7%)
+  Race 11: Box 1 - Wellness (14.7%)
+
+Q STRAIGHT:
+  Races: 14
+  Dogs: 130
+  Race 1: Box 2 - Sundowner Stop (13.1%)
+  Race 2: Box 6 - Rio Raider (13.1%)
+  Race 3: Box 1 - Walloon Rocket (13.1%)
+  Race 4: Box 5 - Boney Maloney (13.1%)
+  Race 5: Box 1 - Millie Moo Moo (13.0%)
+  Race 6: Box 4 - Smooth Torque (13.0%)
+  Race 7: Box 4 - Marsupilami (13.1%)
+  Race 8: Box 6 - Great Intent (13.1%)
+  Race 9: Box 3 - Heading North (13.1%)
+  Race 10: Box 6 - Zara's Comet (13.1%)
+  Race 11: Box 7 - Keep You Posted (13.1%)
+  Race 12: Box 7 - Rannoch (13.2%)
+  Race 13: Box 3 - Noaki Warrior (12.9%)
+  Race 14: Box 5 - Konstantin (13.1%)
+
+SANDOWN:
+  Races: 11
+  Dogs: 68
+  Race 1: Box 1 - Call Me Hero (14.7%)
+  Race 2: Box 1 - Chevron Stroll (14.7%)
+  Race 3: Box 1 - She's Salty (14.7%)
+  Race 4: Box 1 - Moraine Dylan (14.7%)
+  Race 5: Box 1 - Nighttime (14.7%)
+  Race 6: Box 1 - Jumbuk Damien (14.7%)
+  Race 7: Box 1 - Baywara (14.7%)
+  Race 8: Box 3 - Doongalla Serena (14.7%)
+  Race 9: Box 1 - Tommy The Hood (14.7%)
+  Race 10: Box 1 - Mcivor Olly (14.7%)
+  Race 11: Box 1 - Target Range (14.7%)
+
+SHEPPARTON:
+  Races: 14
+  Dogs: 126
+  Race 1: Box 1 - Perfect Gloss (12.2%)
+  Race 2: Box 3 - Scott Ephraim (12.2%)
+  Race 3: Box 3 - Burma Star (12.2%)
+  Race 4: Box 1 - Hara Hachi Bu (12.2%)
+  Race 5: Box 2 - Alfredo (12.2%)
+  Race 6: Box 1 - Bianca's Boy (12.2%)
+  Race 7: Box 1 - Slick Eclipse (12.2%)
+  Race 8: Box 3 - My Dear Friend (12.2%)
+  Race 9: Box 1 - Sweet Love (12.2%)
+  Race 10: Box 1 - Scott Sigma (12.2%)
+  Race 11: Box 3 - Mia Sienna (12.2%)
+  Race 12: Box 1 - All Champagne (12.2%)
+  Race 13: Box 5 - Son Of Witchy (12.2%)
+  Race 14: Box 7 - Ascend Igloo (12.2%)

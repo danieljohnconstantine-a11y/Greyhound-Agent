@@ -1,0 +1,41 @@
+# Git Attributes for Binary Files
+# This ensures proper handling of binary files and prevents corruption
+
+# Python pickle files (ML models)
+*.pkl binary
+*.pickle binary
+
+# PDF files
+*.pdf binary
+
+# Excel files
+*.xlsx binary
+*.xls binary
+
+# Word documents
+*.docx binary
+*.doc binary
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+
+# Python bytecode
+*.pyc binary
+__pycache__/* binary
+
+# Zip archives
+*.zip binary
+
+# Data files
+*.csv text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+
+# Python files
+*.py text eol=lf
+*.bat text eol=crlf
+*.sh text eol=lf
