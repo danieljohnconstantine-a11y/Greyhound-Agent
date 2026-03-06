@@ -86,7 +86,7 @@ def load_track_ensemble(track_name, models_dir="models"):
         # Return None to use fallback
         return None, None, config
     
-    # Load models from subdirectory (models/{track}/{algorithm}.pkl)
+    # Try subdirectory layout first: models/{track}/{algorithm}.pkl
     track_dir = os.path.join(models_dir, track_name)
     
     models = {}
@@ -96,10 +96,22 @@ def load_track_ensemble(track_name, models_dir="models"):
             with open(model_path, 'rb') as f:
                 models[alg] = pickle.load(f)
     
-    # Load scaler from subdirectory
+    # Fall back to flat-file layout: models/{track_name}_{algorithm}.pkl
+    if not models:
+        for alg in config['algorithms']:
+            flat_path = os.path.join(models_dir, f"{track_name}_{alg}.pkl")
+            if os.path.exists(flat_path):
+                with open(flat_path, 'rb') as f:
+                    models[alg] = pickle.load(f)
+    
+    # Load scaler - try subdirectory first, then flat file
     scaler_path = os.path.join(track_dir, "scaler.pkl")
+    flat_scaler_path = os.path.join(models_dir, f"{track_name}_scaler.pkl")
     if os.path.exists(scaler_path):
         with open(scaler_path, 'rb') as f:
+            scaler = pickle.load(f)
+    elif os.path.exists(flat_scaler_path):
+        with open(flat_scaler_path, 'rb') as f:
             scaler = pickle.load(f)
     else:
         scaler = None
