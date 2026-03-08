@@ -13,6 +13,10 @@ REM   - outputs/track_ensemble_predictions.xlsx
 REM   - outputs/track_ensemble_summary.txt
 REM   - outputs/best_bets_report.txt
 
+REM Enable UTF-8 output so emoji characters (checkmarks, warnings etc.) display correctly
+chcp 65001 > nul
+set PYTHONUTF8=1
+
 echo.
 echo ================================================================================
 echo  TRACK-SPECIFIC ENSEMBLE PREDICTIONS

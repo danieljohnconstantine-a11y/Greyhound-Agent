@@ -557,7 +557,7 @@ def main():
         
         # Save summary
         summary_path = os.path.join(output_dir, "track_ensemble_summary.txt")
-        with open(summary_path, 'w') as f:
+        with open(summary_path, 'w', encoding='utf-8') as f:
             f.write("=" * 80 + "\n")
             f.write("TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
@@ -610,7 +610,7 @@ def main():
             })
         bet_rows.sort(key=lambda r: r['gap'], reverse=True)
 
-        with open(best_bets_path, 'w') as f:
+        with open(best_bets_path, 'w', encoding='utf-8') as f:
             _sep = "-" * 100
             f.write("=" * 80 + "\n")
             f.write("BEST BETS RANKING REPORT\n")
