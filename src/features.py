@@ -18,6 +18,40 @@ NOVICE_FAST_TIME = 20.0        # Fast - good ability shown (+10% grade boost)
 NOVICE_DECENT_TIME = 22.0      # Decent - some potential (+5% grade boost)
 
 def compute_features(df):
+    # =========================================================================
+    # DATA PROVENANCE SUMMARY
+    # =========================================================================
+    # FACTUAL (directly from the race PDF):
+    #   Box, Draw, DogName, SexAge, Weight, Trainer, Distance, Track,
+    #   RaceNumber, RaceDate, RaceTime, CareerWins, CareerPlaces, CareerStarts,
+    #   PrizeMoney, RTC, DLR (Days Last Race), DLW (Days Last Win),
+    #   BestTimeSec, SectionalSec, Last3TimesSec, Margins
+    #
+    # DERIVED FROM PDF DATA (computed, but all inputs are factual):
+    #   Speed_kmh, EarlySpeedIndex, SpeedAtDistance, ConsistencyIndex,
+    #   PlaceRate, WinPlaceRate, WinStreakFactor/DLWFactor (from DLW),
+    #   FreshnessFactor/RestFactor (from DLR), ClassRating (PrizeMoney/field),
+    #   AgeFactor/AgeMonths (from SexAge), RTCFactor (from RTC),
+    #   ExperienceTier (from CareerStarts), TrainerStrikeRate (trainer career
+    #   stats aggregated across the card), BestTimePercentile/EarlySpeedPercentile
+    #   (rank within race), TimeVsField/SpeedVsField, FinishConsistency,
+    #   MarginAvg/MarginFactor/FormMomentum, Last3AvgFinish, FieldSize,
+    #   CompetitorDensity, DrawFactor, PaceBoxFactor, FieldSimilarityIndex
+    #
+    # HISTORICAL (real data from 335+ Sep–Nov 2025 races, NOT the current PDF):
+    #   BoxPositionBias, BoxPlaceRate, BoxTop3Rate, BoxPenaltyFactor,
+    #   TrackBox1Adjustment, TrackBox4Adjustment, TrackComprehensiveAdjustment,
+    #   TrackUpsetFactor, RailPreference
+    #
+    # NEUTRAL PLACEHOLDERS (constant — ML models effectively ignore them):
+    #   TrackConditionAdj (always 1.0 — no track condition in PDF)
+    #   DistanceSuit      (1.0 for all standard distances 300–700 m;
+    #                      kept for model compatibility, constant within any race)
+    #
+    # NOTE: FinalScore (end of this function) is a HEURISTIC composite of all
+    # the above.  It is included in config['feature_cols'] because the ensemble
+    # models were trained with it, but it is NOT directly from the PDF.
+    # =========================================================================
     df = df.copy()
 
     # Ensure numeric types
@@ -139,7 +173,12 @@ def compute_features(df):
         df["BoxBiasFactor"] = 0.0
         print("[WARNING] WARNING: BoxBiasFactor not found in parsed data. Setting to 0.0 (neutral).")
     
-    # TrackConditionAdj: Track-level constant (1.0 = neutral conditions)
+    # TrackConditionAdj: Track condition adjustment.
+    # SOURCE: NOT from PDF — greyhound form PDFs do not include track condition
+    # (Good / Heavy / Wet etc.).  Set to 1.0 (neutral) for all dogs.
+    # Because it is constant across every row in every race, the scaler reduces its
+    # variance to 0 during training and the ML models effectively ignore it.
+    # Kept in the feature list for backward compatibility with trained model files.
     df["TrackConditionAdj"] = 1.0
     
     # RestFactor: Calculate from DLR (Days Last Race) if not in parsed data
@@ -213,7 +252,40 @@ def compute_features(df):
     )
 
     # Distance Suitability
-    df["DistanceSuit"] = df["Distance"].apply(lambda x: 1.0 if x in [515, 595] else 0.7)
+    # SOURCE: race Distance column from PDF (factual).
+    # All dogs in a race run the same distance, so this is a race-level constant —
+    # it cannot discriminate between dogs within the same race.  Its value is kept
+    # purely for ML model compatibility (the model was trained with this feature).
+    # Formula: standard greyhound distances (300–700 m) are all legitimate race
+    # distances; no individual distance is "more suitable" than another in general.
+    # We therefore give every standard distance 1.0 and only shade truly extreme
+    # distances (< 300 m or > 700 m) which are rare and atypical.
+    # PREVIOUS BUG: the formula was `1.0 if x in [515, 595] else 0.7` which
+    # arbitrarily penalised every distance except the exact values 515 m
+    # (Rockhampton) and 595 m (Darwin), effectively hard-coding a track advantage
+    # for two venues rather than measuring distance suitability.
+    def _distance_suit(x):
+        """Return a distance-suitability score from the PDF race distance.
+
+        All standard greyhound distances (300–700 m) are equally suitable, so
+        they all receive 1.0.  Only truly atypical distances outside that range
+        receive a slight reduction.  The value is the same for every dog in the
+        same race (they all run the same distance), so it cannot discriminate
+        between dogs within a race — it is kept solely for ML model compatibility.
+        """
+        if pd.isna(x):
+            return 1.0
+        try:
+            d = float(x)
+        except (ValueError, TypeError):
+            return 1.0
+        if d < 300:
+            return 0.90   # Very short sprint — atypical
+        if d <= 700:
+            return 1.00   # All standard Australian greyhound distances
+        return 0.90       # Very long — atypical
+
+    df["DistanceSuit"] = df["Distance"].apply(_distance_suit)
 
     # Calculate TrainerStrikeRate based on aggregated trainer performance
     if "Trainer" in df.columns and "CareerWins" in df.columns and "CareerStarts" in df.columns:
