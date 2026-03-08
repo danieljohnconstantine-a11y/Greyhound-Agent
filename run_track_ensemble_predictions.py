@@ -274,19 +274,33 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
 
         # ---------------------------------------------------------------
         # CALIBRATION-COLLAPSE GUARD
-        # If the calibrated model returns fewer unique values than half the
-        # number of dogs, the isotonic mapping has collapsed the scores.
-        # Fall back to uncalibrated base-estimator predictions to recover
-        # per-dog discrimination while keeping the correct probability scale
-        # via within-race normalization applied later.
+        # Two failure modes are detected:
+        #
+        # 1. TRUE collapse  – fewer unique probability values than half the
+        #    field (e.g. isotonic mapping folds 8 dogs onto 1 value).
+        #
+        # 2. NEAR-collapse  – values are technically distinct but all within
+        #    0.5 percentage-points of each other.  This happens when the
+        #    calibrated model over-relies on a feature that is absent (e.g.
+        #    Weight=0 for all dogs), causing GB/XGB to output probabilities
+        #    like 0.160711001, 0.160711002 … which round to the same 4 dp
+        #    value (16.0711%) for every dog.  The uncalibrated base estimator
+        #    preserves the original probability ordering and is used instead.
         # ---------------------------------------------------------------
         n_unique_calibrated = len(np.unique(pred_proba))
-        if n_unique_calibrated < max(2, n_dogs // 2):
+        pred_spread = float(pred_proba.max() - pred_proba.min())
+        # Treat as collapsed if true collapse OR near-constant (< 0.5% spread)
+        SPREAD_THRESHOLD = 0.005
+        is_near_constant = pred_spread < SPREAD_THRESHOLD
+        is_true_collapse  = n_unique_calibrated < max(2, n_dogs // 2)
+        if is_true_collapse or is_near_constant:
             uncal = _get_uncalibrated_preds(model, X_scaled)
             if uncal is not None:
                 n_unique_uncal = len(np.unique(uncal))
-                print(f"      ⚠️  {alg.upper()}: calibration collapsed {n_dogs} dogs → "
-                      f"{n_unique_calibrated} unique value(s). "
+                collapse_label = ("calibration collapsed" if is_true_collapse
+                                  else f"near-constant (spread={pred_spread*100:.4f}%)")
+                print(f"      ⚠️  {alg.upper()}: {collapse_label} – "
+                      f"{n_unique_calibrated} unique value(s) across {n_dogs} dogs. "
                       f"Using uncalibrated predictions ({n_unique_uncal} unique values).")
                 pred_proba = uncal
             else:
