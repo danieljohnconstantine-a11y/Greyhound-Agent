@@ -11,6 +11,7 @@ REM
 REM Output:
 REM   - outputs/track_ensemble_predictions.xlsx
 REM   - outputs/track_ensemble_summary.txt
+REM   - outputs/best_bets_report.txt
 
 echo.
 echo ================================================================================
@@ -57,6 +58,7 @@ if %ERRORLEVEL% EQU 0 (
     echo  Check outputs/ folder for:
     echo    - track_ensemble_predictions.xlsx
     echo    - track_ensemble_summary.txt
+    echo    - best_bets_report.txt  (races ranked by score gap - best bet at top)
     echo.
     echo ================================================================================
 ) else (
