@@ -587,6 +587,55 @@ def main():
         
         print(f"✅ Summary saved: {summary_path}")
         
+        # Best bets report: rank every race by the gap between 1st and 2nd place
+        best_bets_path = os.path.join(output_dir, "best_bets_report.txt")
+        bet_rows = []
+        for (track, race_num), grp in df_all.groupby(['Track', 'RaceNumber'], sort=False):
+            sorted_grp = grp.sort_values('ML_Confidence', ascending=False).reset_index(drop=True)
+            if len(sorted_grp) < 2:
+                continue
+            first  = sorted_grp.iloc[0]
+            second = sorted_grp.iloc[1]
+            gap = float(first['ML_Confidence']) - float(second['ML_Confidence'])
+            bet_rows.append({
+                'track':       track,
+                'race_num':    race_num,
+                'box_1st':     int(first['Box']),
+                'dog_1st':     str(first['DogName']),
+                'score_1st':   float(first['ML_Confidence']),
+                'box_2nd':     int(second['Box']),
+                'dog_2nd':     str(second['DogName']),
+                'score_2nd':   float(second['ML_Confidence']),
+                'gap':         gap,
+            })
+        bet_rows.sort(key=lambda r: r['gap'], reverse=True)
+
+        with open(best_bets_path, 'w') as f:
+            _sep = "-" * 100
+            f.write("=" * 80 + "\n")
+            f.write("BEST BETS RANKING REPORT\n")
+            f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write("Races ranked by score gap between 1st and 2nd place dogs.\n")
+            f.write("Largest gap = strongest model confidence / best bet.\n")
+            f.write("=" * 80 + "\n\n")
+            f.write(f"{'Rank':<5} {'Track':<16} {'Race':<5} {'Gap':>8}  "
+                    f"{'1st Dog':<26} {'1st%':>8}  {'2nd Dog':<26} {'2nd%':>8}\n")
+            f.write(_sep + "\n")
+            for rank, row in enumerate(bet_rows, start=1):
+                f.write(
+                    f"{rank:<5} {row['track']:<16} R{row['race_num']:<4} {row['gap']:>7.4f}%  "
+                    f"Box {row['box_1st']} {row['dog_1st']:<22} {row['score_1st']:>7.4f}%  "
+                    f"Box {row['box_2nd']} {row['dog_2nd']:<22} {row['score_2nd']:>7.4f}%\n"
+                )
+            f.write(_sep + "\n")
+            f.write(f"\nTotal races ranked: {len(bet_rows)}\n")
+            if bet_rows:
+                f.write(f"\n🏆 BEST BET: {bet_rows[0]['track']} Race {bet_rows[0]['race_num']} "
+                        f"- Box {bet_rows[0]['box_1st']} {bet_rows[0]['dog_1st']} "
+                        f"(gap: {bet_rows[0]['gap']:.4f}%)\n")
+
+        print(f"✅ Best bets report saved: {best_bets_path}")
+        
         print("\n" + "=" * 80)
         print("✅ PREDICTIONS COMPLETE!")
         print("=" * 80)
@@ -597,6 +646,7 @@ def main():
         print(f"\n📁 Output files:")
         print(f"   {excel_path}")
         print(f"   {summary_path}")
+        print(f"   {best_bets_path}")
         print("=" * 80)
     else:
         print("\n⚠️  No predictions generated")
