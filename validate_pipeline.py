@@ -31,14 +31,6 @@ FAIL = "FAIL"
 WARN = "WARN"
 
 
-def _load_pkl(path: str):
-    """Load a pickle file; return None on failure."""
-    try:
-        with open(path, "rb") as f:
-            return pickle.load(f)
-    except Exception as e:
-        return None, str(e)
-
 
 def load_model(path: str):
     """Load a model file, returning (model, error_message)."""
@@ -66,7 +58,7 @@ def get_n_features(model) -> int:
     return -1
 
 
-def validate_track(track_dir: str, track_name: str, algos: list, n_dogs: int = 8) -> dict:
+def validate_track(track_dir: str, track_name: str, algos: list, n_samples: int = 8) -> dict:
     """Validate one track directory. Returns {check: (status, message)}."""
     results = {}
     import numpy as np
@@ -126,7 +118,7 @@ def validate_track(track_dir: str, track_name: str, algos: list, n_dogs: int = 8
 
     # Synthetic prediction test
     n_feat = n_feat_scaler if n_feat_scaler > 0 else 74
-    X_raw = np.random.default_rng(42).random((n_dogs, n_feat))
+    X_raw = np.random.default_rng(42).random((n_samples, n_feat))
     try:
         X_scaled = scaler.transform(X_raw)
     except Exception as e:
@@ -140,7 +132,7 @@ def validate_track(track_dir: str, track_name: str, algos: list, n_dogs: int = 8
             except Exception:
                 probs = m.predict_proba(X_raw)[:, 1]
             n_unique = len(set(probs.round(6)))
-            results[f"{algo}_predict"] = (PASS, f"{n_unique}/{n_dogs} unique probs")
+            results[f"{algo}_predict"] = (PASS, f"{n_unique}/{n_samples} unique probs")
         except Exception as e:
             results[f"{algo}_predict"] = (FAIL, str(e))
 

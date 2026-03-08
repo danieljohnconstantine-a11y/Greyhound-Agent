@@ -101,7 +101,8 @@ def process_track(track_dir: str, track_name: str, dry_run: bool = False) -> boo
     Returns True if at least one model was successfully loaded.
     """
     algos_found = []
-    metrics = {"track": track_name, "algorithms": {}, "generated_at": datetime.utcnow().isoformat()}
+    generated_at = datetime.utcnow().isoformat()
+    metrics = {"track": track_name, "algorithms": {}, "generated_at": generated_at}
 
     for algo in ["rf", "gb", "xgb"]:
         path = os.path.join(track_dir, f"{algo}.pkl")
@@ -131,7 +132,7 @@ def process_track(track_dir: str, track_name: str, dry_run: bool = False) -> boo
         "track": track_name,
         "algorithms_present": algos_found,
         "scaler_present": os.path.exists(scaler_path),
-        "generated_at": datetime.utcnow().isoformat(),
+        "generated_at": generated_at,
     }
 
     metrics_path = os.path.join(track_dir, "training_metrics.json")
