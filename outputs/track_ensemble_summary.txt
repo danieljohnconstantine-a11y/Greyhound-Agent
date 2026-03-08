@@ -1,0 +1,140 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2026-03-08 14:11:38
+================================================================================
+
+Total PDFs processed: 11
+Successful predictions: 9
+Total dogs predicted: 703
+
+
+Capalaba:
+  Races: 10
+  Dogs: 81
+  Race 1: Box 1 - Front Man (16.2% (RF=13.8, GB=18.0, XGB=17.5))
+  Race 2: Box 1 - Anti Venom (18.0% (RF=17.9, GB=18.0, XGB=18.0))
+  Race 3: Box 1 - Calypso (15.3% (RF=13.2, GB=16.8, XGB=16.6))
+  Race 4: Box 1 - Fragile Frankie (16.1% (RF=13.1, GB=18.0, XGB=17.7))
+  Race 5: Box 4 - Zipping Daytona (15.1% (RF=11.4, GB=17.1, XGB=17.4))
+  Race 6: Box 6 - Zipping Schrub (17.3% (RF=16.0, GB=18.0, XGB=18.0))
+  Race 7: Box 3 - Someone's Idea (16.6% (RF=14.2, GB=18.0, XGB=18.0))
+  Race 8: Box 1 - Sweet As Juice (16.7% (RF=14.4, GB=18.0, XGB=18.0))
+  Race 9: Box 3 - Alston (17.6% (RF=16.8, GB=18.0, XGB=18.0))
+  Race 10: Box 1 - Miss Righteous (15.7% (RF=11.8, GB=18.0, XGB=18.0))
+
+DARWIN:
+  Races: 9
+  Dogs: 49
+  Race 1: Box 2 - Little Riley (16.7% (RF=14.0, GB=12.2, XGB=15.5))
+  Race 2: Box 1 - Mum's Boy (14.6% (RF=13.7, GB=11.5, XGB=12.8))
+  Race 3: Box 2 - Mahogany Drive (9.7% (RF=9.7, GB=7.2, XGB=9.5))
+  Race 4: Box 2 - Mum Knows Best (14.2% (RF=11.1, GB=9.6, XGB=14.4))
+  Race 5: Box 2 - Bing Bing Peril (18.0% (RF=12.9, GB=12.0, XGB=18.0))
+  Race 6: Box 4 - Zelda Chaos (15.6% (RF=18.0, GB=9.7, XGB=13.5))
+  Race 7: Box 8 - Luka Magic (17.5% (RF=13.0, GB=12.8, XGB=16.8))
+  Race 8: Box 1 - Bing Bing Secret (12.8% (RF=10.1, GB=8.8, XGB=13.1))
+  Race 9: Box 1 - Selena's Chance (8.2% (RF=8.8, GB=5.8, XGB=8.3))
+
+GAWLER:
+  Races: 10
+  Dogs: 56
+  Race 1: Box 5 - Significant (13.6% (RF=18.0, GB=12.2, XGB=10.7))
+  Race 2: Box 2 - Hijinkery (13.5% (RF=10.0, GB=12.7, XGB=13.8))
+  Race 3: Box 8 - Fear The Dragon (12.9% (RF=12.5, GB=16.0, XGB=9.7))
+  Race 4: Box 3 - Boots (13.4% (RF=14.0, GB=10.1, XGB=13.4))
+  Race 5: Box 6 - Big Stretch (13.1% (RF=15.8, GB=9.8, XGB=12.3))
+  Race 6: Box 8 - Todd Keeping (18.0% (RF=11.8, GB=18.0, XGB=17.8))
+  Race 7: Box 8 - Diogo Keeping (17.4% (RF=15.3, GB=13.1, XGB=18.0))
+  Race 8: Box 8 - Big Diesel (9.9% (RF=11.3, GB=8.7, XGB=9.3))
+  Race 9: Box 4 - Brother Ernest (14.9% (RF=13.6, GB=13.7, XGB=14.1))
+  Race 10: Box 6 - Carry On Kim (15.3% (RF=14.8, GB=12.3, XGB=15.0))
+
+GRAFTON:
+  Races: 12
+  Dogs: 93
+  Race 1: Box 8 - Power Valley (11.5% (RF=13.4, GB=7.5, XGB=13.1))
+  Race 2: Box 8 - Fix It Fred (14.5% (RF=11.2, GB=13.4, XGB=17.6))
+  Race 3: Box 7 - Cash Riot (11.8% (RF=12.5, GB=11.7, XGB=11.4))
+  Race 4: Box 4 - Sandave Ablaze (13.2% (RF=12.4, GB=10.5, XGB=15.6))
+  Race 5: Box 5 - Rapid Lulu (11.6% (RF=12.1, GB=10.8, XGB=12.0))
+  Race 6: Box 2 - Burnside Bookie (18.0% (RF=18.0, GB=18.0, XGB=18.0))
+  Race 7: Box 1 - For Mercy Sake (15.4% (RF=15.2, GB=16.5, XGB=14.7))
+  Race 8: Box 8 - Pitch Black Bear (11.5% (RF=12.3, GB=8.9, XGB=12.9))
+  Race 9: Box 3 - Kingsbrae Rex (15.0% (RF=11.0, GB=14.7, XGB=18.0))
+  Race 10: Box 4 - Packham Punch (12.7% (RF=12.0, GB=12.2, XGB=13.5))
+  Race 11: Box 7 - Unrecoverable (10.5% (RF=12.7, GB=8.4, XGB=10.6))
+  Race 12: Box 7 - Queen Wok (12.1% (RF=13.8, GB=11.1, XGB=11.6))
+
+HEALESVILLE:
+  Races: 12
+  Dogs: 116
+  Race 1: Box 8 - Ronaldo Jack (17.2% (RF=18.0, GB=15.8, XGB=17.2))
+  Race 2: Box 2 - Commanche Jack (11.6% (RF=15.0, GB=9.7, XGB=10.8))
+  Race 3: Box 4 - Dinosaur Deano (9.3% (RF=9.8, GB=7.7, XGB=9.9))
+  Race 4: Box 6 - Bear Lee Bandit (8.7% (RF=11.3, GB=6.2, XGB=8.8))
+  Race 5: Box 8 - Noctilucent (11.1% (RF=10.6, GB=8.7, XGB=12.7))
+  Race 6: Box 4 - Tarawi Therese (14.0% (RF=16.2, GB=18.0, XGB=10.0))
+  Race 7: Box 8 - Need You Now (10.1% (RF=9.8, GB=10.5, XGB=9.9))
+  Race 8: Box 1 - Paw Sakakibura (14.6% (RF=16.5, GB=12.6, XGB=14.6))
+  Race 9: Box 8 - Crackerjack Matt (13.5% (RF=16.6, GB=10.2, XGB=13.8))
+  Race 10: Box 2 - Dewana Star (18.0% (RF=18.0, GB=17.4, XGB=18.0))
+  Race 11: Box 1 - Aston Lyon (10.9% (RF=10.7, GB=9.8, XGB=11.5))
+  Race 12: Box 6 - Made Up Stories (12.1% (RF=11.7, GB=8.5, XGB=14.4))
+
+Q PARKLANDS:
+  Races: 10
+  Dogs: 87
+  Race 1: Box 2 - Not Half Bad (12.8% (RF=13.0, GB=12.4, XGB=11.1))
+  Race 2: Box 8 - Super Special (10.5% (RF=13.9, GB=9.0, XGB=8.2))
+  Race 3: Box 3 - Ritza Toby (18.0% (RF=16.9, GB=18.0, XGB=15.8))
+  Race 4: Box 2 - Obliging Bill (10.3% (RF=11.0, GB=11.2, XGB=8.2))
+  Race 5: Box 7 - Hara's Ghost (9.2% (RF=12.4, GB=7.8, XGB=7.2))
+  Race 6: Box 3 - Tempting Dash (15.8% (RF=18.0, GB=13.6, XGB=13.5))
+  Race 7: Box 1 - Sampson (14.7% (RF=16.7, GB=14.1, XGB=11.9))
+  Race 8: Box 4 - Non Stop Tommy (13.6% (RF=12.9, GB=12.1, XGB=12.7))
+  Race 9: Box 1 - Tub Star (17.8% (RF=12.5, GB=16.5, XGB=18.0))
+  Race 10: Box 1 - Callisto (15.0% (RF=14.6, GB=13.5, XGB=13.6))
+
+ROCKHAMPTON:
+  Races: 10
+  Dogs: 79
+  Race 1: Box 1 - It's Me Hi (16.1% (RF=15.9, GB=18.0, XGB=14.4))
+  Race 2: Box 7 - Raptor Girl (14.3% (RF=18.0, GB=12.2, XGB=12.6))
+  Race 3: Box 4 - Roxy Cambla (14.6% (RF=10.9, GB=14.4, XGB=15.8))
+  Race 4: Box 1 - George Alexis (18.0% (RF=17.9, GB=15.9, XGB=18.0))
+  Race 5: Box 1 - Tusken Raider (12.3% (RF=16.1, GB=10.9, XGB=10.5))
+  Race 6: Box 5 - Abraxos (14.0% (RF=15.4, GB=11.2, XGB=13.9))
+  Race 7: Box 8 - Wyndra All Sass (15.6% (RF=16.6, GB=17.1, XGB=13.6))
+  Race 8: Box 2 - Tusken Wind (14.2% (RF=13.1, GB=16.7, XGB=12.9))
+  Race 9: Box 4 - Tip Alore Honey (12.5% (RF=9.1, GB=14.0, XGB=12.9))
+  Race 10: Box 5 - Spring Oliver (12.9% (RF=13.7, GB=14.7, XGB=11.2))
+
+SALE:
+  Races: 12
+  Dogs: 71
+  Race 1: Box 3 - Good Odds Luigi (11.1% (RF=7.5, GB=9.7, XGB=12.2))
+  Race 2: Box 1 - Rakin' It In (10.7% (RF=10.2, GB=9.9, XGB=10.4))
+  Race 3: Box 7 - Otto Rose (15.3% (RF=18.0, GB=12.3, XGB=14.2))
+  Race 4: Box 1 - Lisa Rose (13.9% (RF=11.9, GB=13.6, XGB=13.6))
+  Race 5: Box 4 - Chalk And Cheese (11.2% (RF=8.3, GB=9.5, XGB=12.2))
+  Race 6: Box 8 - Daddy Cool (18.0% (RF=14.1, GB=18.0, XGB=18.0))
+  Race 7: Box 8 - Nova Rose (10.5% (RF=7.6, GB=10.4, XGB=10.9))
+  Race 8: Box 2 - Sharni's Secret (13.2% (RF=12.8, GB=13.3, XGB=12.1))
+  Race 9: Box 1 - Matilda Rose (9.9% (RF=9.4, GB=8.6, XGB=10.0))
+  Race 10: Box 7 - Furious Falcon (13.9% (RF=16.0, GB=12.8, XGB=12.3))
+  Race 11: Box 2 - Royal Pride (12.3% (RF=7.9, GB=12.2, XGB=13.1))
+  Race 12: Box 4 - Miss My Brother (10.5% (RF=8.9, GB=10.8, XGB=10.1))
+
+Temora:
+  Races: 10
+  Dogs: 71
+  Race 1: Box 8 - Cabover Carl (6.3% (RF=5.6, GB=6.2, XGB=6.7))
+  Race 2: Box 7 - White And Black (6.3% (RF=6.1, GB=4.5, XGB=7.5))
+  Race 3: Box 8 - Triple Phantom (14.7% (RF=15.2, GB=16.0, XGB=13.3))
+  Race 4: Box 2 - Cawbourne Focus (11.6% (RF=14.3, GB=8.5, XGB=11.6))
+  Race 5: Box 1 - Tin Roof Rusty (13.6% (RF=18.0, GB=14.2, XGB=10.9))
+  Race 6: Box 6 - Irinka Alana (12.9% (RF=12.0, GB=14.7, XGB=12.0))
+  Race 7: Box 1 - Secret Bandit (18.0% (RF=16.5, GB=18.0, XGB=18.0))
+  Race 8: Box 4 - Kert Kert (11.8% (RF=8.7, GB=9.4, XGB=14.2))
+  Race 9: Box 3 - Sadie Mcgraw (11.4% (RF=10.6, GB=9.9, XGB=12.3))
+  Race 10: Box 4 - Kiando Hunt (8.9% (RF=7.7, GB=6.9, XGB=10.5))
