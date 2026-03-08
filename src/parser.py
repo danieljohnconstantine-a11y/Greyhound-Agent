@@ -1,3 +1,4 @@
+import pandas as pd
 import re
 import logging
 from datetime import datetime
@@ -99,6 +100,75 @@ def parse_race_form(text):
         i += 1
     
     lines = processed_lines
+
+    # --------------------------------------------------------------------------
+    # PRE-PROCESSING FIX: Detect "split career record" pattern and merge it back
+    # into the dog line so that wins, places, starts are correct and
+    # RTC / DLR / DLW are preserved.
+    #
+    # Some PDFs wrap long career records across THREE lines:
+    #   Line k  : "37 - 43 -"          ← wins=37, places=43, starts still pending
+    #   Line k+1: "1. 13112Kisauni 3d 0.0kg 1 Ryan Tugwell $160,880 118 7 14"
+    #             (the parser would otherwise read 118/7/14 as career stats)
+    #   Line k+2: "117"                 ← this is actually "starts" for career
+    #
+    # Correct values: CareerWins=37, CareerPlaces=43, CareerStarts=117,
+    #                  RTC=118, DLR=7, DLW=14
+    #
+    # Fix: when pattern is detected, rebuild the dog line as:
+    #   "1. ... Ryan Tugwell 37 - 43 - 117 $160,880 118 7 14"
+    # --------------------------------------------------------------------------
+    _partial_career_re = re.compile(r'^(\d+)\s*-\s*(\d+)\s*-\s*$')
+    _dog_line_re = re.compile(
+        r'^(\d+)\.?\s*[0-9xf]{0,7}[A-Za-z\'\- ]+?\s+\d+[a-z]\s+[\d.]+kg\s+\d+\s+[A-Za-z\'\- ]+?\s+\$?([\d,]+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$'
+    )
+    _only_digits_re = re.compile(r'^(\d+)$')
+    merged_lines = []
+    j = 0
+    while j < len(lines):
+        pcm = _partial_career_re.match(lines[j].strip())
+        if pcm and j + 1 < len(lines) and j + 2 < len(lines):
+            dog_line = lines[j + 1].strip()
+            starts_line = lines[j + 2].strip()
+            dlm = _dog_line_re.match(dog_line)
+            stm = _only_digits_re.match(starts_line)
+            if dlm and stm:
+                # The 3 trailing numbers on the dog line are RTC DLR DLW, NOT career stats.
+                # Rebuild the dog line by inserting the correct career record in front of prize.
+                wins_str = pcm.group(1)
+                places_str = pcm.group(2)
+                starts_str = stm.group(1)
+                prize_and_rest = dlm.group(2)  # prize digits (may include commas)
+                rtc = dlm.group(3)
+                dlr = dlm.group(4)
+                dlw = dlm.group(5)
+
+                # Find prize position in dog_line.
+                # Try with leading '$' first, then without.
+                prize_pos = dog_line.find(f'${prize_and_rest}')
+                if prize_pos == -1:
+                    prize_pos = dog_line.find(prize_and_rest)
+
+                if prize_pos > 0:
+                    # Insert correct career record before prize; keep RTC/DLR/DLW at end.
+                    # Format: "{dog info} {W} - {P} - {S} ${prize} {RTC} {DLR} {DLW}"
+                    before_prize = dog_line[:prize_pos].rstrip()
+                    rebuilt = (
+                        f"{before_prize} {wins_str} - {places_str} - {starts_str} "
+                        f"${prize_and_rest} {rtc} {dlr} {dlw}"
+                    )
+                    logger.info(
+                        f"[FIX] Reconstructed split career record: "
+                        f"(career: {wins_str}-{places_str}-{starts_str}, "
+                        f"RTC={rtc}, DLR={dlr}, DLW={dlw})"
+                    )
+                    merged_lines.append(rebuilt)
+                    j += 3  # consume partial-career + dog + starts lines
+                    continue
+        merged_lines.append(lines[j])
+        j += 1
+    lines = merged_lines
+    # --------------------------------------------------------------------------
 
     for i, line in enumerate(lines):
         line = line.strip()
