@@ -186,17 +186,10 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
        back to the uncalibrated base-estimator predictions instead.
 
     2. Feature clustering – if too many input features are identical across all
-       dogs the model cannot distinguish them.  This is reported as a warning
-       and the within-race rank-normalization (see below) still guarantees
-       unique output values.
+       dogs the model cannot distinguish them.  This is reported as a warning.
 
-    Within-race normalization
-    -------------------------
-    After obtaining per-dog raw scores from each algorithm the ensemble is
-    normalized to the range [2%, 18%] within the race.  This means:
-    - The top-ranked dog always receives 18%
-    - The last-ranked dog always receives 2%
-    - Every intermediate dog receives a proportionally spread value
+    Returns raw model probabilities — no range mapping or normalization is applied.
+    Scores reflect the actual ML confidence derived from PDF form data only.
 
     Args:
         df: DataFrame with race data (all dogs in race)
@@ -206,9 +199,9 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
         ensemble_weights: Dict of {algorithm: weight}
 
     Returns:
-        ensemble_pred: Array of ensemble probabilities for each dog (unique per dog)
-        individual_scores: Dict of {algorithm: array of probabilities} (unique per dog)
-        raw_spread: Float — pre-normalization probability spread (used for Low_Confidence flag)
+        ensemble_pred: Array of raw ensemble probabilities for each dog
+        individual_scores: Dict of {algorithm: array of raw probabilities}
+        raw_spread: Float — probability spread (used for Low_Confidence flag)
     """
     n_dogs = len(df)
 
@@ -315,11 +308,7 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     # Capture pre-normalization spread to expose model confidence
     raw_spread = float(ensemble_pred.max() - ensemble_pred.min())
 
-    # Return raw probabilities. Normalization to [2%-18%] is done in main()
-    # across ALL dogs from the entire race card (not per-race), so that scores
-    # reflect each dog's strength relative to the full day's competition.
-    # A race full of weak dogs will produce lower top scores than a race with
-    # several strong contenders — exactly the cross-race variation the user expects.
+    # Return raw probabilities directly from the model — no normalization applied.
     return ensemble_pred, individual_scores, raw_spread
 
 def main():
@@ -416,28 +405,16 @@ def main():
 
                 print(f"   Models loaded: {', '.join(models.keys())}")
 
-                # PER-RACE MODEL INFERENCE + CROSS-CARD NORMALIZATION
-                #
-                # MODEL INFERENCE is per-race: dogs from Race 1 are never scored
-                # against dogs from Race 2 (they never compete against each other).
-                #
-                # DISPLAY NORMALIZATION is cross-card (whole PDF): after getting raw
-                # probabilities for every race, a single min-max scale [2%-18%] is
-                # applied across ALL dogs from the day's card.  This produces the
-                # natural variation the user expects:
-                #   - A race with genuinely strong, evenly-matched dogs has its top
-                #     dog near 18% and its weakest around 12%.
-                #   - A race of weaker dogs (all low raw probabilities) has its top
-                #     dog at maybe 9-11%, preserving real model confidence differences.
-                #
-                # This is why the user sees Race 3 winner at 9.7% and Race 5 winner
-                # at 18% in the original outputs — the cross-card scale reflects actual
-                # ML signal, not an artificial per-race forced ranking.
+                # PER-RACE MODEL INFERENCE
+                # Predictions are made per race so dogs from Race 1 are never
+                # scored against dogs from Race 2 (they do not compete).
+                # Scores are the raw weighted-ensemble probabilities that the
+                # model derives entirely from the PDF form data — no artificial
+                # range-mapping or normalization is applied.
                 feature_cols = config['feature_cols']
                 ens_weights  = config.get('ensemble_weights', {})
                 race_frames  = []
 
-                # Step 1: per-race inference - collect raw predictions
                 for race_num, single_race_df in race_df.groupby('RaceNumber'):
                     single_race_df = single_race_df.copy()
 
@@ -445,69 +422,36 @@ def main():
                         single_race_df, models, scaler, feature_cols, ens_weights
                     )
 
-                    # Store raw arrays on the frame for cross-card normalization below
-                    single_race_df['_raw_ens'] = raw_ens
+                    # Raw probability * 100 = ML Confidence score
+                    single_race_df['ML_Confidence'] = np.round(raw_ens * 100, 4)
+                    single_race_df['Ensemble_Score'] = raw_ens
+
+                    # Individual algorithm scores — also raw probabilities
                     for alg, arr in raw_ind.items():
-                        single_race_df[f'_raw_{alg}'] = arr
-                    single_race_df['_raw_spread'] = raw_spread
+                        single_race_df[f'{alg.upper()}_Score'] = np.round(arr * 100, 4)
+
+                    # Low-confidence flag when all dogs' raw scores are nearly identical
+                    single_race_df['Low_Confidence'] = raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD
+                    if raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD:
+                        print(f"      ⚠️  Race {race_num} LOW_CONFIDENCE: spread={raw_spread:.4f}")
+
+                    # Per-race rank (rank 1 = top pick within this race)
+                    ranks = single_race_df['ML_Confidence'].rank(ascending=False, method='min').astype(int)
+                    single_race_df['ML_Rank'] = ranks
+
+                    top_r = single_race_df.loc[single_race_df['ML_Confidence'].idxmax()]
+                    rf_s, gb_s, xgb_s = (float(top_r.get(f'{alg}_Score', 0)) for alg in ('RF', 'GB', 'XGB'))
+                    print(f"   Race {int(race_num):2d}: Box {int(top_r['Box'])} - {top_r['DogName']} "
+                          f"({float(top_r['ML_Confidence']):.4f}%  RF={rf_s:.4f}, GB={gb_s:.4f}, XGB={xgb_s:.4f})")
+
                     race_frames.append(single_race_df)
 
-                # Reassemble full card
                 race_df = pd.concat(race_frames, ignore_index=True)
-
-                # Step 2: cross-card min-max normalization to [2%, 18%]
-                # Applied to ensemble and each algorithm independently.
-                def minmax_scale(arr, lo=0.02, hi=0.18):
-                    a_min, a_max = arr.min(), arr.max()
-                    if a_max > a_min:
-                        return lo + (arr - a_min) / (a_max - a_min) * (hi - lo)
-                    return np.full_like(arr, (lo + hi) / 2)
-
-                ens_all  = race_df['_raw_ens'].values.astype(float)
-                ens_norm = minmax_scale(ens_all)
-                race_df['ML_Confidence'] = np.round(ens_norm * 100, 2)
-                race_df['Ensemble_Score'] = ens_norm
-
-                # Low-confidence flag: check per-race spread
-                for race_num, grp in race_df.groupby('RaceNumber'):
-                    spread = float(grp['_raw_spread'].iloc[0])
-                    low_conf = spread < LOW_CONFIDENCE_SPREAD_THRESHOLD
-                    race_df.loc[grp.index, 'Low_Confidence'] = low_conf
-                    if low_conf:
-                        print(f"      ⚠️  Race {race_num} LOW_CONFIDENCE: raw spread={spread:.4f}")
-
-                # Individual algorithm scores: normalize each across the whole card
-                alg_cols = [c for c in race_df.columns if c.startswith('_raw_') and
-                            c not in ('_raw_ens', '_raw_spread')]
-                for raw_col in alg_cols:
-                    alg = raw_col[5:]  # strip '_raw_'
-                    alg_arr  = race_df[raw_col].values.astype(float)
-                    alg_norm = minmax_scale(alg_arr)
-                    race_df[f'{alg.upper()}_Score'] = np.round(alg_norm * 100, 2)
-
-                # Per-race rank (rank 1 = top pick within each race)
-                for race_num, grp in race_df.groupby('RaceNumber'):
-                    ranks = grp['ML_Confidence'].rank(ascending=False, method='min').astype(int)
-                    race_df.loc[grp.index, 'ML_Rank'] = ranks
-
-                # Drop temporary raw columns
-                raw_cols_to_drop = [c for c in race_df.columns if c.startswith('_raw_')]
-                race_df = race_df.drop(columns=raw_cols_to_drop)
-
-                # Print per-race top picks
-                for race_num in sorted(race_df['RaceNumber'].unique()):
-                    grp = race_df[race_df['RaceNumber'] == race_num]
-                    top_r = grp.loc[grp['ML_Confidence'].idxmax()]
-                    rf_s  = top_r.get('RF_Score',  0)
-                    gb_s  = top_r.get('GB_Score',  0)
-                    xgb_s = top_r.get('XGB_Score', 0)
-                    print(f"   Race {int(race_num):2d}: Box {int(top_r['Box'])} - {top_r['DogName']} "
-                          f"({top_r['ML_Confidence']:.2f}%  RF={rf_s:.1f}, GB={gb_s:.1f}, XGB={xgb_s:.1f})")
 
                 top_dog = race_df.loc[race_df['ML_Confidence'].idxmax()]
                 print(f"   ✅ Card top pick: Race {int(top_dog['RaceNumber'])} "
                       f"Box {int(top_dog['Box'])} - {top_dog['DogName']} "
-                      f"({top_dog['ML_Confidence']:.2f}%)")
+                      f"({float(top_dog['ML_Confidence']):.4f}%)")
 
                 all_predictions.append(race_df)
 
@@ -638,8 +582,8 @@ def main():
                         # Include individual scores if available
                         individual_str = ""
                         if 'RF_Score' in top.index and 'GB_Score' in top.index and 'XGB_Score' in top.index:
-                            individual_str = f" (RF={top['RF_Score']:.1f}, GB={top['GB_Score']:.1f}, XGB={top['XGB_Score']:.1f})"
-                        f.write(f"  Race {race_num}: Box {top['Box']} - {top['DogName']} ({top['ML_Confidence']:.2f}%{individual_str})\n")
+                            individual_str = f" (RF={top['RF_Score']:.4f}, GB={top['GB_Score']:.4f}, XGB={top['XGB_Score']:.4f})"
+                        f.write(f"  Race {race_num}: Box {top['Box']} - {top['DogName']} ({top['ML_Confidence']:.4f}%{individual_str})\n")
         
         print(f"✅ Summary saved: {summary_path}")
         
