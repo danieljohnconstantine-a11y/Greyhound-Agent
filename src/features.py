@@ -25,7 +25,16 @@ def compute_features(df):
     #   Box, Draw, DogName, SexAge, Weight, Trainer, Distance, Track,
     #   RaceNumber, RaceDate, RaceTime, CareerWins, CareerPlaces, CareerStarts,
     #   PrizeMoney, RTC, DLR (Days Last Race), DLW (Days Last Win),
-    #   BestTimeSec, SectionalSec, Last3TimesSec, Margins
+    #   BestTimeSec*, SectionalSec*, Last3TimesSec, Margins
+    #
+    #   * BestTimeSec and SectionalSec are extracted from the dog's PAST RACE
+    #     history inside the PDF.  If the PDF contains no race history (new or
+    #     lightly-raced dog), both fields arrive as None/NaN — the parser no
+    #     longer fabricates values for them.  When NaN:
+    #       - Speed_kmh = NaN, EarlySpeedIndex = NaN (excluded from scoring)
+    #       - BestTimePercentile = 1/n percentile (lowest rank, via na_option="top")
+    #       - timing_weight_adjustment = 1.4× (career/form factors boosted)
+    #     The flag TimeEstimated=True is set on those rows.
     #
     # DERIVED FROM PDF DATA (computed, but all inputs are factual):
     #   Speed_kmh, EarlySpeedIndex, SpeedAtDistance, ConsistencyIndex,
@@ -1474,18 +1483,25 @@ def compute_features(df):
     
     # === EARLY SPEED PERCENTILE ===
     # Rank dogs by early speed within race
+    # Higher EarlySpeedIndex = faster early = better.  Dogs with NaN (no sectional
+    # timing in PDF) should get the LOWEST percentile (na_option="top" ensures
+    # this with default ascending=True: rank 1 = lowest → pct = 1/n = lowest).
     if "EarlySpeedIndex" in df.columns:
-        df["EarlySpeedPercentile"] = df.groupby(["Track", "RaceNumber"])["EarlySpeedIndex"].rank(pct=True, na_option="bottom")
+        df["EarlySpeedPercentile"] = df.groupby(["Track", "RaceNumber"])["EarlySpeedIndex"].rank(pct=True, na_option="top")
     else:
         df["EarlySpeedPercentile"] = 0.5
     
     # === BEST TIME PERCENTILE ===
     # Rank dogs by best time within race
-    # LOWER BestTimeSec = FASTER = should get HIGHER percentile rank
+    # LOWER BestTimeSec = FASTER = should get HIGHER percentile rank.
+    # ascending=False → lower time → highest rank number → pct = 1.0 (best) ✓
+    # na_option="top"  → NaN → rank 1 (lowest rank number) → pct = 1/n (worst) ✓
+    # NOTE: "bottom" was the OLD value — it put NaN at rank n → pct=1.0 (BEST),
+    #       which was hidden when BestTimeSec was always non-NaN (previously
+    #       fabricated as distance/15.5).  Now that NaN flows through correctly,
+    #       "top" is required so untimed dogs get the lowest percentile.
     if "BestTimeSec" in df.columns:
-        # Use ascending=False so that lower (faster) times get higher percentile
-        # na_option="bottom" so dogs without timing data get lowest rank
-        df["BestTimePercentile"] = df.groupby(["Track", "RaceNumber"])["BestTimeSec"].rank(pct=True, ascending=False, na_option="bottom")
+        df["BestTimePercentile"] = df.groupby(["Track", "RaceNumber"])["BestTimeSec"].rank(pct=True, ascending=False, na_option="top")
         print(f"[OK] Calculated BestTimePercentile (lower time = higher rank)")
     else:
         df["BestTimePercentile"] = 0.5

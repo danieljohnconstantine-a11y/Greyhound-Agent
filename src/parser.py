@@ -755,26 +755,33 @@ def parse_race_form(text):
     # Add default values for ALL missing data fields
     # This ensures Excel has values instead of blanks
     for dog in dogs:
-        # If BestTimeSec is missing, use a reasonable default based on distance
+        # BestTimeSec: use None (NaN) when no timing data exists in the PDF.
+        # Previously this fell back to `distance / 15.5` (a fabricated "average" time).
+        # That fabrication was NOT from the PDF and caused:
+        #   - Speed_kmh to be computed from a made-up value
+        #   - BestTimePercentile to give a fake "median" rank instead of bottom rank
+        #   - The `has_speed` guard in features.py to be incorrectly True
+        # With None, features.py correctly detects missing timing data and:
+        #   - Speed_kmh = NaN (excluded from scoring)
+        #   - BestTimePercentile = 0.0 (rank bottom, via na_option="bottom")
+        #   - timing_weight_adjustment = 1.4x (career/form factors boosted instead)
         if "BestTimeSec" not in dog or dog["BestTimeSec"] is None or pd.isna(dog.get("BestTimeSec")):
-            distance = dog.get("Distance", 500)
-            # Rough estimate: 15-16 m/s average speed for greyhounds
-            estimated_time = distance / 15.5
-            dog["BestTimeSec"] = round(estimated_time, 2)
-            dog["TimeEstimated"] = True  # Flag that this is an estimate
-            logger.debug(f"Using estimated time for {dog.get('DogName', 'Unknown')}: {estimated_time:.2f}s at {distance}m")
-        
-        # If SectionalSec is missing, use a reasonable default
+            dog["BestTimeSec"] = None
+            dog["TimeEstimated"] = True  # Flag: no timing data available in PDF
+            logger.debug(f"No timing data for {dog.get('DogName', 'Unknown')} — BestTimeSec set to None")
+
+        # SectionalSec: use None (NaN) when no sectional timing exists in the PDF.
+        # Previously fell back to 6.5s (fabricated).  With None, EarlySpeedIndex
+        # is correctly set to NaN and the `has_early` guard fires correctly.
         if "SectionalSec" not in dog or dog["SectionalSec"] is None or pd.isna(dog.get("SectionalSec")):
-            # Typical sectional (first 100-200m) is 5-8 seconds
-            dog["SectionalSec"] = 6.5  # Neutral estimate
+            dog["SectionalSec"] = None
             if "TimeEstimated" not in dog:
                 dog["TimeEstimated"] = True
-        
+
         # Ensure Last3TimesSec exists
         if "Last3TimesSec" not in dog or dog["Last3TimesSec"] is None:
             dog["Last3TimesSec"] = []
-        
+
         # Ensure TimeConverted flag exists
         if "TimeConverted" not in dog:
             dog["TimeConverted"] = False
