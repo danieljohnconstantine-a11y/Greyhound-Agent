@@ -36,12 +36,12 @@ if %ERRORLEVEL% NEQ 0 (
     echo Installing required packages...
     echo This may take a few minutes...
     echo.
-    pip install --upgrade scikit-learn==1.8.0 xgboost pandas numpy pdfplumber
+    pip install scikit-learn xgboost pandas numpy pdfplumber openpyxl
     echo.
 )
 
 REM Verify scikit-learn version
-python -c "import sklearn; print(f'scikit-learn version: {sklearn.__version__}')"
+python -c "import sklearn; print('scikit-learn version: ' + sklearn.__version__)"
 echo.
 
 pause

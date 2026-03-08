@@ -1,6 +1,6 @@
 ================================================================================
 TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
-Generated: 2026-03-08 05:23:51
+Generated: 2026-03-08 06:00:53
 ================================================================================
 
 Total PDFs processed: 11
@@ -11,26 +11,26 @@ Total dogs predicted: 128
 DARWIN:
   Races: 9
   Dogs: 49
-  Race 1: Box 2 - Little Riley (18.00% (RF=18.0, GB=14.0, XGB=14.0))
-  Race 2: Box 6 - So Naive (18.00% (RF=18.0, GB=10.0, XGB=10.0))
-  Race 3: Box 1 - Go Jo (18.00% (RF=18.0, GB=18.0, XGB=18.0))
-  Race 4: Box 2 - Mum Knows Best (18.00% (RF=11.6, GB=14.8, XGB=18.0))
-  Race 5: Box 2 - Bing Bing Peril (18.00% (RF=14.0, GB=18.0, XGB=14.0))
-  Race 6: Box 4 - Zelda Chaos (18.00% (RF=18.0, GB=14.0, XGB=14.0))
-  Race 7: Box 8 - Luka Magic (18.00% (RF=11.6, GB=8.4, XGB=18.0))
-  Race 8: Box 1 - Bing Bing Secret (18.00% (RF=18.0, GB=11.6, XGB=18.0))
-  Race 9: Box 1 - Selena's Chance (18.00% (RF=18.0, GB=18.0, XGB=18.0))
+  Race 1: Box 2 - Little Riley (13.92% (RF=14.0, GB=12.9, XGB=10.6))
+  Race 2: Box 6 - So Naive (13.91% (RF=14.0, GB=12.9, XGB=10.6))
+  Race 3: Box 1 - Go Jo (12.54% (RF=9.8, GB=12.9, XGB=10.6))
+  Race 4: Box 2 - Mum Knows Best (15.87% (RF=11.1, GB=14.1, XGB=15.0))
+  Race 5: Box 2 - Bing Bing Peril (14.87% (RF=12.9, GB=18.0, XGB=10.6))
+  Race 6: Box 4 - Zelda Chaos (15.22% (RF=18.0, GB=12.9, XGB=10.6))
+  Race 7: Box 8 - Luka Magic (18.00% (RF=13.0, GB=12.9, XGB=18.0))
+  Race 8: Box 1 - Bing Bing Secret (14.26% (RF=10.1, GB=12.9, XGB=13.3))
+  Race 9: Box 1 - Selena's Chance (8.98% (RF=8.8, GB=8.1, XGB=7.3))
 
 ROCKHAMPTON:
   Races: 10
   Dogs: 79
-  Race 1: Box 1 - It's Me Hi (18.00% (RF=18.0, GB=18.0, XGB=18.0))
-  Race 2: Box 7 - Raptor Girl (18.00% (RF=18.0, GB=10.0, XGB=14.0))
-  Race 3: Box 6 - Pozzi Tonozzi (18.00% (RF=18.0, GB=4.3, XGB=8.9))
-  Race 4: Box 1 - George Alexis (18.00% (RF=18.0, GB=18.0, XGB=18.0))
-  Race 5: Box 1 - Tusken Raider (18.00% (RF=18.0, GB=18.0, XGB=18.0))
-  Race 6: Box 5 - Abraxos (18.00% (RF=18.0, GB=13.4, XGB=15.7))
-  Race 7: Box 8 - Wyndra All Sass (18.00% (RF=18.0, GB=18.0, XGB=15.7))
-  Race 8: Box 2 - Tusken Wind (18.00% (RF=11.1, GB=18.0, XGB=18.0))
-  Race 9: Box 3 - Hara's Fonzie (18.00% (RF=18.0, GB=4.7, XGB=12.7))
-  Race 10: Box 5 - Spring Oliver (18.00% (RF=18.0, GB=10.0, XGB=18.0))
+  Race 1: Box 1 - It's Me Hi (16.07% (RF=15.9, GB=18.0, XGB=11.6))
+  Race 2: Box 7 - Raptor Girl (14.64% (RF=18.0, GB=10.2, XGB=11.6))
+  Race 3: Box 6 - Pozzi Tonozzi (12.43% (RF=12.5, GB=8.5, XGB=11.6))
+  Race 4: Box 1 - George Alexis (14.62% (RF=17.9, GB=10.2, XGB=11.6))
+  Race 5: Box 1 - Tusken Raider (14.13% (RF=16.1, GB=10.5, XGB=11.6))
+  Race 6: Box 5 - Abraxos (13.77% (RF=15.4, GB=10.1, XGB=11.6))
+  Race 7: Box 8 - Wyndra All Sass (18.00% (RF=16.6, GB=17.1, XGB=15.0))
+  Race 8: Box 2 - Tusken Wind (14.82% (RF=13.1, GB=16.6, XGB=11.6))
+  Race 9: Box 3 - Hara's Fonzie (12.15% (RF=10.9, GB=9.3, XGB=11.6))
+  Race 10: Box 5 - Spring Oliver (13.28% (RF=13.7, GB=10.2, XGB=11.6))
