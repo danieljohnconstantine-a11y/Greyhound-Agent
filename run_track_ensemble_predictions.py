@@ -131,6 +131,16 @@ def load_track_ensemble(track_name, models_dir="models"):
     else:
         scaler = None
     
+    # Reconcile the feature list with the scaler's actual training features.
+    # config.pkl may list more features than the scaler was trained on (e.g. when
+    # new features were added after the scaler was saved). Using the scaler's own
+    # feature names avoids a dimension mismatch error in predict_with_ensemble().
+    if scaler is not None and hasattr(scaler, 'feature_names_in_'):
+        scaler_features = list(scaler.feature_names_in_)
+        if scaler_features != config.get('feature_cols', []):
+            config = dict(config)  # shallow copy — don't mutate the global config
+            config['feature_cols'] = scaler_features
+
     return models, scaler, config
 
 def _get_uncalibrated_preds(model, X_scaled):

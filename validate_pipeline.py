@@ -2,11 +2,15 @@
 """
 validate_pipeline.py
 ====================
-Validates the organized models/ directory structure.
+Validates the models/ directory structure.
+
+Supports two layouts automatically:
+  • Subdirectory layout: models/{Track}/rf.pkl, gb.pkl, scaler.pkl …
+  • Flat-file layout:    models/{Track}_rf.pkl, {Track}_gb.pkl, {Track}_scaler.pkl …
 
 Checks:
-  1. Track subdirectories exist in models/
-  2. Each subdirectory contains the expected model files
+  1. Tracks detected from model files (either layout)
+  2. Each track has the expected model files
   3. Models load without error
   4. Models can generate predictions on synthetic feature data
   5. ensemble_config.json is consistent with actual model layout
@@ -20,6 +24,7 @@ import argparse
 import json
 import os
 import pickle
+import re
 import sys
 import warnings
 
@@ -56,6 +61,87 @@ def get_n_features(model) -> int:
         if base is not None and hasattr(base, "n_features_in_"):
             return int(base.n_features_in_)
     return -1
+
+
+def validate_track_flat(models_dir: str, track_name: str, algos: list, n_samples: int = 8) -> dict:
+    """Validate one track using the flat-file layout ({track_name}_{algo}.pkl)."""
+    results = {}
+    import numpy as np
+
+    OPTIONAL_ALGOS = {"xgb"}
+    scaler_path = os.path.join(models_dir, f"{track_name}_scaler.pkl")
+
+    missing_required = []
+    missing_optional = []
+    present_algos = []
+    for algo in algos:
+        p = os.path.join(models_dir, f"{track_name}_{algo}.pkl")
+        if os.path.exists(p):
+            present_algos.append(algo)
+        elif algo in OPTIONAL_ALGOS:
+            missing_optional.append(algo)
+        else:
+            missing_required.append(algo)
+
+    if not os.path.exists(scaler_path):
+        missing_required.append("scaler")
+
+    if missing_required:
+        results["files"] = (FAIL, f"Missing required files: {missing_required}")
+        return results
+
+    desc = f"{len(present_algos)}/{len(algos)} models + scaler"
+    if missing_optional:
+        results["files"] = (WARN, f"{desc} (optional missing: {missing_optional})")
+    else:
+        results["files"] = (PASS, f"All files present ({desc})")
+
+    # Load scaler
+    scaler, err = load_model(scaler_path)
+    if scaler is None:
+        results["scaler"] = (FAIL, f"Load error: {err}")
+        return results
+    results["scaler"] = (PASS, type(scaler).__name__)
+
+    n_feat_scaler = (
+        int(len(scaler.mean_)) if hasattr(scaler, "mean_") and scaler.mean_ is not None
+        else getattr(scaler, "n_features_in_", -1)
+    )
+
+    # Load present models only
+    loaded_models = {}
+    for algo in present_algos:
+        path = os.path.join(models_dir, f"{track_name}_{algo}.pkl")
+        m, err = load_model(path)
+        if m is None:
+            results[algo] = (FAIL, f"Load error: {err}")
+        else:
+            n_feat = get_n_features(m)
+            results[algo] = (PASS, f"{type(m).__name__}, {n_feat} features")
+            loaded_models[algo] = (m, n_feat)
+
+    # Synthetic prediction test
+    # 74 is the default fallback feature count for pre-trained models on this branch.
+    # It matches the StandardScaler and RF/GB models trained in train_ml_track_ensemble.py.
+    n_feat = n_feat_scaler if n_feat_scaler > 0 else 74
+    X_raw = np.random.default_rng(42).random((n_samples, n_feat))
+    try:
+        X_scaled = scaler.transform(X_raw)
+    except Exception:
+        X_scaled = X_raw
+
+    for algo, (m, _) in loaded_models.items():
+        try:
+            try:
+                probs = m.predict_proba(X_scaled)[:, 1]
+            except Exception:
+                probs = m.predict_proba(X_raw)[:, 1]
+            n_unique = len(set(probs.round(6)))
+            results[f"{algo}_predict"] = (PASS, f"{n_unique}/{n_samples} unique probs")
+        except Exception as e:
+            results[f"{algo}_predict"] = (FAIL, str(e))
+
+    return results
 
 
 def validate_track(track_dir: str, track_name: str, algos: list, n_samples: int = 8) -> dict:
@@ -117,6 +203,8 @@ def validate_track(track_dir: str, track_name: str, algos: list, n_samples: int 
             loaded_models[algo] = (m, n_feat)
 
     # Synthetic prediction test
+    # 74 is the default fallback feature count for pre-trained models on this branch.
+    # It matches the StandardScaler and RF/GB models trained in train_ml_track_ensemble.py.
     n_feat = n_feat_scaler if n_feat_scaler > 0 else 74
     X_raw = np.random.default_rng(42).random((n_samples, n_feat))
     try:
@@ -154,10 +242,7 @@ def validate_config(models_dir: str, track_dirs: list) -> dict:
     if model_structure == "subdirectory":
         results["config_structure"] = (PASS, "model_structure=subdirectory")
     elif model_structure == "flat_files":
-        results["config_structure"] = (
-            WARN,
-            "model_structure=flat_files — run reorganize_models_by_track.py to update",
-        )
+        results["config_structure"] = (PASS, "model_structure=flat_files")
     else:
         results["config_structure"] = (WARN, f"model_structure={model_structure}")
 
@@ -209,20 +294,37 @@ def main() -> None:
         print(f"\n[ERROR] Models directory not found: {models_dir}")
         sys.exit(1)
 
-    # Find track subdirectories
+    # Auto-detect layout: subdirectory vs flat-file
+    # Subdirectory layout: models/{Track Name}/rf.pkl ...
+    # Flat-file layout:    models/{Track Name}_rf.pkl ...
     all_track_dirs = [
         d for d in sorted(os.listdir(models_dir))
         if os.path.isdir(os.path.join(models_dir, d))
     ]
 
-    if not all_track_dirs:
+    flat_file_pattern = re.compile(r"^(.+)_(?:rf|gb|xgb|scaler)\.pkl$")
+    flat_tracks = sorted({
+        m.group(1)
+        for fname in os.listdir(models_dir)
+        for m in [flat_file_pattern.match(fname)] if m
+    })
+
+    use_flat = not all_track_dirs and bool(flat_tracks)
+
+    if not all_track_dirs and not flat_tracks:
         print(
-            "\n[ERROR] No subdirectories found in models/.\n"
-            "        Run reorganize_models_by_track.py first."
+            "\n[ERROR] No model files found in models/.\n"
+            "        Run train_ml_track_ensemble.py first."
         )
         sys.exit(1)
 
-    track_dirs = [args.track] if args.track else all_track_dirs
+    if use_flat:
+        print(f" Layout: flat-file ({{Track}}_algorithm.pkl)")
+        track_dirs = [args.track] if args.track else flat_tracks
+    else:
+        print(f" Layout: subdirectory (models/{{Track}}/algorithm.pkl)")
+        track_dirs = [args.track] if args.track else all_track_dirs
+
     print(f" Validating {len(track_dirs)} track(s)")
     print("=" * 65)
 
@@ -235,7 +337,7 @@ def main() -> None:
         algos = cfg.get("algorithms", algos)
 
     # Validate config
-    config_results = validate_config(models_dir, all_track_dirs)
+    config_results = validate_config(models_dir, flat_tracks if use_flat else all_track_dirs)
     print("\n Config:")
     for check, (status, msg) in config_results.items():
         marker = "OK" if status == PASS else ("!!" if status == FAIL else "??")
@@ -247,14 +349,18 @@ def main() -> None:
     report = {}
 
     for track_name in track_dirs:
-        track_dir = os.path.join(models_dir, track_name)
-        if not os.path.isdir(track_dir):
-            print(f"\n  [!!] {track_name}: directory not found")
-            n_fail += 1
-            continue
+        if use_flat:
+            print(f"\n  {track_name}:")
+            results = validate_track_flat(models_dir, track_name, algos)
+        else:
+            track_dir = os.path.join(models_dir, track_name)
+            if not os.path.isdir(track_dir):
+                print(f"\n  [!!] {track_name}: directory not found")
+                n_fail += 1
+                continue
+            print(f"\n  {track_name}:")
+            results = validate_track(track_dir, track_name, algos)
 
-        print(f"\n  {track_name}:")
-        results = validate_track(track_dir, track_name, algos)
         track_ok = True
         for check, (status, msg) in results.items():
             marker = "OK" if status == PASS else ("!!" if status == FAIL else "??")
