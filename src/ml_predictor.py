@@ -548,10 +548,13 @@ def normalize_track_name(track_name):
         'richmond straight': 'RICH',
         'grafton': 'GRAF',
         'healesville': 'HEAL',
-        'mount gambier': 'MTGG',
+        'mount gambier': 'MTG',
         'sale': 'SALE',
         'gawler': 'GAWL',
-        'betdeluxe capalaba': 'CAPA',
+        'broken hill': 'BRH',
+        'q parklands': 'QPRK',
+        'bet nation townsville': 'TOWN',
+        'warrnambool': 'WNBL',
         'betdeluxe rockhampton': 'ROCK',
         'ladbrokes q1 lakeside': 'QLAK',
         'ladbrokes q2 parklands': 'QPRK',
@@ -753,8 +756,8 @@ def load_historical_data_hybrid(data_dir='data'):
                 pdf_track_code = match.group(1)
                 day = match.group(2)
                 month = match.group(3)
-                # Determine year: December = 2025, January = 2026
-                year = "2026" if month == "01" else "2025"
+                # Determine year: months 01-06 belong to 2026, months 07-12 belong to 2025
+                year = "2026" if month in ("01", "02", "03", "04", "05", "06") else "2025"
                 pdf_date = f"{year}-{month}-{day}"
             
             with pdfplumber.open(pdf_file) as pdf:
@@ -829,25 +832,38 @@ def load_historical_data_hybrid(data_dir='data'):
         
         # Normalize track name to match PDF format (4-letter code)
         track_code = normalize_track_name(track)
-        
-        # Try to match with date first (most accurate)
-        key_with_date = f"{date}_{track_code}_R{race_num}"
-        key_without_date = f"{track_code}_R{race_num}"
-        
+
+        # Build candidate keys. Form guides are sometimes published the day
+        # before the race meeting, so we also check PDF date = race date - 1.
+        from datetime import datetime as _dt, timedelta as _td
+        try:
+            race_dt   = _dt.strptime(date, "%Y-%m-%d")
+            prev_date = (race_dt - _td(days=1)).strftime("%Y-%m-%d")
+        except Exception:
+            prev_date = date
+
+        key_with_date      = f"{date}_{track_code}_R{race_num}"
+        key_prev_date      = f"{prev_date}_{track_code}_R{race_num}"
+        key_without_date   = f"{track_code}_R{race_num}"
+
         # DEBUG: Log first 5 lookups to help diagnose matching
         if races_from_pdf + races_skipped_no_pdf < 5:
             print(f"[DEBUG] Looking for CSV {date} {track} R{race_num} -> key: {key_with_date}")
             logger.debug(f"Looking for CSV {date} {track} R{race_num} -> key: {key_with_date}")
-        
+
         df_race = None
-        
+
         # ONLY use races that have actual PDF data
         if key_with_date in pdf_races:
-            # Best match: date + track + race
+            # Best match: exact date + track + race
             df_race = pdf_races[key_with_date].copy()
             races_from_pdf += 1
+        elif key_prev_date in pdf_races:
+            # Form guide published day before the race meeting
+            df_race = pdf_races[key_prev_date].copy()
+            races_from_pdf += 1
         elif key_without_date in pdf_races:
-            # Fallback: track + race (for older PDFs without date parsing)
+            # Fallback: track + race only (older PDFs without date parsing)
             df_race = pdf_races[key_without_date].copy()
             races_from_pdf += 1
         else:
