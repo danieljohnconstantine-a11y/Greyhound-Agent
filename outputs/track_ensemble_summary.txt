@@ -1,0 +1,148 @@
+================================================================================
+TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
+Generated: 2026-03-10 19:12:35
+================================================================================
+
+Total PDFs processed: 10
+Successful predictions: 9
+Total dogs predicted: 777
+
+
+BALLARAT:
+  Races: 14
+  Dogs: 84
+  Race 1: Box 6 - Gotham Sorceress (11.7838% (RF=11.1536, GB=11.3084, XGB=12.8895))
+  Race 2: Box 8 - Should Be Queen (11.4323% (RF=10.4138, GB=11.0980, XGB=12.7853))
+  Race 3: Box 5 - Devon Ruslie (11.6456% (RF=11.6670, GB=11.0167, XGB=12.2531))
+  Race 4: Box 7 - Keijon Barny (12.4588% (RF=11.2188, GB=13.2410, XGB=12.9167))
+  Race 5: Box 2 - Boston Legal (9.2195% (RF=7.8703, GB=9.7337, XGB=10.0545))
+  Race 6: Box 3 - Morning Mist (11.2942% (RF=10.1454, GB=11.4128, XGB=12.3245))
+  Race 7: Box 1 - Trespassing (10.8243% (RF=8.7550, GB=12.0536, XGB=11.6641))
+  Race 8: Box 7 - Go Pikachu (9.5545% (RF=7.6203, GB=9.7172, XGB=11.3259))
+  Race 9: Box 8 - Alone (11.0827% (RF=10.6262, GB=11.0549, XGB=11.5671))
+  Race 10: Box 1 - Major Orson (8.8428% (RF=8.6731, GB=9.2222, XGB=8.6333))
+  Race 11: Box 2 - Kate's Rift (8.5916% (RF=9.8379, GB=3.3259, XGB=12.6110))
+  Race 12: Box 6 - Super Ceviche (9.1747% (RF=9.1001, GB=8.4552, XGB=9.9689))
+  Race 13: Box 8 - Charge On (10.5596% (RF=9.9659, GB=10.4486, XGB=11.2644))
+  Race 14: Box 7 - Paw Cassian (11.3937% (RF=9.4185, GB=11.5020, XGB=13.2605))
+
+Bulli:
+  Races: 11
+  Dogs: 84
+  Race 1: Box 5 - Papa Guiseppe (14.2048% (RF=12.4214, GB=15.3400, XGB=14.8529))
+  Race 2: Box 8 - Heavy Bound (11.7563% (RF=9.4347, GB=12.8356, XGB=12.9986))
+  Race 3: Box 5 - Glitzy Ethics (11.9801% (RF=10.2149, GB=11.4760, XGB=14.2494))
+  Race 4: Box 7 - Precursor (14.8664% (RF=13.4332, GB=15.5350, XGB=15.6312))
+  Race 5: Box 10 - Siam High (15.1658% (RF=13.6029, GB=15.8989, XGB=15.9958))
+  Race 6: Box 9 - Siam High (16.1101% (RF=13.7736, GB=18.6920, XGB=15.8645))
+  Race 7: Box 8 - Calypso Ethics (13.0607% (RF=9.5828, GB=15.9489, XGB=13.6504))
+  Race 8: Box 8 - Aussie Blend (11.5170% (RF=8.3468, GB=13.9373, XGB=12.2669))
+  Race 9: Box 6 - Appin Way (10.1800% (RF=9.5755, GB=8.5706, XGB=12.3940))
+  Race 10: Box 7 - Westburn Harada (13.1182% (RF=11.3696, GB=13.2814, XGB=14.7036))
+  Race 11: Box 5 - Innovation (13.1669% (RF=11.7083, GB=12.9840, XGB=14.8085))
+
+GOSFORD:
+  Races: 10
+  Dogs: 89
+  Race 1: Box 4 - Jackie Sepol (10.4025% (RF=9.0255, GB=10.4709, XGB=11.7112))
+  Race 2: Box 10 - Tarawi Zoomer (13.1093% (RF=13.9587, GB=11.3829, XGB=13.9864))
+  Race 3: Box 1 - Fear To Excel (9.1705% (RF=6.3161, GB=10.0989, XGB=11.0966))
+  Race 4: Box 9 - Tarawi Zoomer (13.2347% (RF=13.3130, GB=11.8694, XGB=14.5217))
+  Race 5: Box 7 - Great Chat (10.3938% (RF=7.7419, GB=11.3746, XGB=12.0649))
+  Race 6: Box 4 - Pacific Tiger (11.6309% (RF=10.1246, GB=11.0170, XGB=13.7510))
+  Race 7: Box 9 - Ruthless Angel (12.7937% (RF=12.8453, GB=11.7379, XGB=13.7978))
+  Race 8: Box 10 - Ruthless Angel (14.0541% (RF=13.9573, GB=13.4046, XGB=14.8004))
+  Race 9: Box 10 - Ruthless Angel (13.9027% (RF=13.6128, GB=13.2825, XGB=14.8128))
+  Race 10: Box 9 - Exciting Zoey (13.2104% (RF=12.3953, GB=12.9899, XGB=14.2461))
+
+GRAFTON:
+  Races: 9
+  Dogs: 60
+  Race 1: Box 2 - Last Choice (14.3491% (RF=12.0936, GB=14.6110, XGB=16.3428))
+  Race 2: Box 2 - Free Kick (14.7434% (RF=11.5720, GB=16.4672, XGB=16.1910))
+  Race 3: Box 4 - Cash In Colour (14.8580% (RF=14.7681, GB=14.3077, XGB=15.4982))
+  Race 4: Box 1 - Rhythm And Blues (15.1066% (RF=11.8015, GB=16.9804, XGB=16.5379))
+  Race 5: Box 2 - My Warrior (14.3848% (RF=12.3154, GB=15.3282, XGB=15.5109))
+  Race 6: Box 2 - Robell Ceaser (16.4287% (RF=15.6359, GB=16.5247, XGB=17.1256))
+  Race 7: Box 2 - What's The Price (16.4339% (RF=15.9127, GB=16.9966, XGB=16.3924))
+  Race 8: Box 8 - Hootin' Angel (15.2856% (RF=15.1509, GB=13.3249, XGB=17.3811))
+  Race 9: Box 4 - Lilly Bonus (15.6466% (RF=15.4975, GB=14.9198, XGB=16.5224))
+
+HORSHAM:
+  Races: 13
+  Dogs: 106
+  Race 1: Box 4 - Ready To Flip (13.2984% (RF=12.5000, GB=13.7168, XGB=13.6783))
+  Race 2: Box 4 - Weblec Poppy (13.3699% (RF=12.6811, GB=13.6713, XGB=13.7573))
+  Race 3: Box 3 - Free State (11.4623% (RF=11.4032, GB=10.9152, XGB=12.0686))
+  Race 4: Box 5 - Cabao Lapis (13.3673% (RF=12.7009, GB=13.4933, XGB=13.9078))
+  Race 5: Box 7 - Paw Fabian (10.7763% (RF=9.5019, GB=10.6339, XGB=12.1930))
+  Race 6: Box 6 - Pocket Riot (13.0935% (RF=12.6868, GB=12.9877, XGB=13.6060))
+  Race 7: Box 4 - Westar Leo (13.3738% (RF=12.6687, GB=13.6836, XGB=13.7690))
+  Race 8: Box 8 - Elevate (12.7963% (RF=10.8552, GB=13.6858, XGB=13.8480))
+  Race 9: Box 9 - Bit Of Romance (13.0144% (RF=12.4218, GB=13.1064, XGB=13.5148))
+  Race 10: Box 9 - Bit Of Romance (13.5904% (RF=13.1927, GB=13.8542, XGB=13.7243))
+  Race 11: Box 9 - Bit Of Romance (13.7148% (RF=13.5707, GB=13.7697, XGB=13.8039))
+  Race 12: Box 9 - Bit Of Romance (13.6259% (RF=13.2746, GB=13.7892, XGB=13.8137))
+  Race 13: Box 10 - Bit Of Romance (13.9746% (RF=14.2033, GB=13.8855, XGB=13.8352))
+
+MURRAY BDGE STRAIGHT:
+  Races: 9
+  Dogs: 47
+  Race 1: Box 7 - Fern Dreamer (22.4672% (RF=20.3995, GB=23.2415, XGB=23.7606))
+  Race 2: Box 4 - Gin And Juice (16.6010% (RF=14.4667, GB=14.2748, XGB=21.0614))
+  Race 3: Box 2 - Agent Twenty One (20.3094% (RF=18.0527, GB=19.1929, XGB=23.6826))
+  Race 4: Box 3 - Sketchy Toby (18.9609% (RF=16.3968, GB=19.2003, XGB=21.2857))
+  Race 5: Box 7 - Meg's Charm (21.5979% (RF=18.8678, GB=22.6583, XGB=23.2677))
+  Race 6: Box 2 - Jade Palms (19.7579% (RF=14.9380, GB=20.3186, XGB=24.0171))
+  Race 7: Box 2 - Currency Lad (20.1006% (RF=20.5365, GB=16.9597, XGB=22.8056))
+  Race 8: Box 4 - Ice Age (16.5445% (RF=13.6969, GB=13.9788, XGB=21.9577))
+  Race 9: Box 2 - Cheat Code (17.5592% (RF=16.7746, GB=13.5238, XGB=22.3790))
+
+Mandurah:
+  Races: 11
+  Dogs: 91
+  Race 1: Box 7 - Dodgy Rock (11.5643% (RF=11.0631, GB=11.8373, XGB=11.7924))
+  Race 2: Box 5 - Return To Work (10.6988% (RF=9.8852, GB=10.5462, XGB=11.6650))
+  Race 3: Box 3 - Spare Me (11.5144% (RF=10.4198, GB=11.4716, XGB=12.6519))
+  Race 4: Box 9 - Patch Of Blue (11.5682% (RF=11.3592, GB=11.6039, XGB=11.7416))
+  Race 5: Box 9 - Speed Lee (10.4245% (RF=10.3068, GB=10.6496, XGB=10.3172))
+  Race 6: Box 9 - Sunset Vanadium (10.6261% (RF=10.9261, GB=10.4992, XGB=10.4530))
+  Race 7: Box 9 - Crackerjack Scud (12.1671% (RF=11.7353, GB=12.3928, XGB=12.3732))
+  Race 8: Box 6 - Quick Lands (10.8269% (RF=10.5801, GB=10.7223, XGB=11.1784))
+  Race 9: Box 9 - My Moet (10.7662% (RF=10.2470, GB=10.5893, XGB=11.4623))
+  Race 10: Box 7 - Spider Gwen (12.7278% (RF=12.9035, GB=12.7803, XGB=12.4997))
+  Race 11: Box 1 - Examiner (10.3370% (RF=9.4414, GB=10.2080, XGB=11.3617))
+
+Q LAKESIDE:
+  Races: 14
+  Dogs: 115
+  Race 1: Box 8 - Dixie Dean (16.5328% (RF=14.2009, GB=18.9243, XGB=16.4732))
+  Race 2: Box 8 - Balance The Till (15.6088% (RF=14.9314, GB=16.6620, XGB=15.2331))
+  Race 3: Box 8 - Big Eddie (15.1299% (RF=14.9441, GB=15.4036, XGB=15.0420))
+  Race 4: Box 8 - Sally Vision (16.1189% (RF=16.3581, GB=16.4498, XGB=15.5489))
+  Race 5: Box 4 - Blazing Vision (15.3998% (RF=14.8855, GB=15.5270, XGB=15.7868))
+  Race 6: Box 8 - Maywyns Quetzal (15.1313% (RF=12.4335, GB=16.6875, XGB=16.2730))
+  Race 7: Box 8 - Federal Rocket (15.3932% (RF=15.3482, GB=15.7688, XGB=15.0624))
+  Race 8: Box 9 - Goldstar Saint (16.1483% (RF=16.0263, GB=16.4503, XGB=15.9682))
+  Race 9: Box 4 - White Mack (14.7832% (RF=13.4642, GB=15.6115, XGB=15.2739))
+  Race 10: Box 10 - Installer (15.2206% (RF=15.4665, GB=15.6473, XGB=14.5481))
+  Race 11: Box 1 - Fun Day (14.2540% (RF=13.3592, GB=15.0753, XGB=14.3276))
+  Race 12: Box 8 - Deal 'Em High (15.0893% (RF=13.5296, GB=16.1520, XGB=15.5863))
+  Race 13: Box 10 - Installer (14.6898% (RF=14.1278, GB=15.6124, XGB=14.3293))
+  Race 14: Box 10 - Sugar Baby (15.6943% (RF=15.2612, GB=16.1419, XGB=15.6797))
+
+TOWNSVILLE:
+  Races: 12
+  Dogs: 101
+  Race 1: Box 9 - Lightning Tully (12.8598% (RF=13.0362, GB=12.3349, XGB=13.2084))
+  Race 2: Box 7 - Hit After Hit (12.5724% (RF=11.7336, GB=12.8275, XGB=13.1561))
+  Race 3: Box 8 - Princess Toes (12.3499% (RF=11.4034, GB=12.6957, XGB=12.9505))
+  Race 4: Box 1 - Lemon Slice (10.8976% (RF=10.4695, GB=10.5863, XGB=11.6370))
+  Race 5: Box 4 - She's Snappy (11.6148% (RF=11.0186, GB=11.2613, XGB=12.5645))
+  Race 6: Box 3 - Pink Car (12.9652% (RF=12.3672, GB=13.2923, XGB=13.2360))
+  Race 7: Box 4 - Black Falcon (11.3665% (RF=11.6851, GB=10.4798, XGB=11.9346))
+  Race 8: Box 8 - Party At Harpers (11.3861% (RF=10.6560, GB=11.2297, XGB=12.2727))
+  Race 9: Box 1 - Call Me Alice (12.4804% (RF=11.8080, GB=12.6749, XGB=12.9584))
+  Race 10: Box 2 - Drink Shiraz (11.5558% (RF=10.1618, GB=11.6042, XGB=12.9012))
+  Race 11: Box 5 - Move Lightly (11.9300% (RF=11.6606, GB=11.6223, XGB=12.5071))
+  Race 12: Box 4 - Hippy (13.3946% (RF=13.6148, GB=13.2705, XGB=13.2983))
