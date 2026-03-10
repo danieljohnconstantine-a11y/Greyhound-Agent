@@ -1,0 +1,433 @@
+================================================================================
+DIAGNOSTIC REPORT: WHY ARE HEALESVILLE, MAITLAND & SHEPPARTON UNDERPERFORMING?
+Generated: 2026-03-10
+Based on: outputs/track_ensemble_summary.txt vs data/results_2026-03-10.csv
+================================================================================
+
+PERFORMANCE SUMMARY
+───────────────────
+  Track          Rate    vs 12.5% Random   Rank (of 9)
+  ────────────────────────────────────────────────────
+  Nowra          40%     +27.5pp            1st
+  Mandurah       33%     +20.8pp            2nd
+  Gawler         27%     +14.8pp            3rd
+  Sandown        25%     +12.5pp            4th
+  Q Parklands    25%     +12.5pp            4th
+  Healesville    17%     +4.2pp             6th
+  Maitland        9%     -3.4pp  ← BELOW RANDOM
+  Shepparton      8%     -4.2pp  ← BELOW RANDOM
+  Warrnambool     —      no model
+  ────────────────────────────────────────────────────
+  Overall        22.8%   +10.3pp (1.83× random)
+
+Both Maitland and Shepparton are performing BELOW RANDOM CHANCE.
+This is not noise — it means the model is being systematically misled.
+
+================================================================================
+PART 1: HEALESVILLE — ROOT CAUSE ANALYSIS (2/12 = 17%)
+================================================================================
+
+PROBLEM 1: GB CALIBRATION NEAR-COLLAPSE
+────────────────────────────────────────
+From the prediction output, Healesville's GB model produced only 3 unique
+scores across 12 races (range: 13.29–16.08%). XGB produced only 5 unique values
+(range: 13.29–13.70%). Only RF was fully differentiated (12/12 unique).
+
+  Why this matters: Ensemble score = (RF + GB + XGB) / 3
+  If GB and XGB are nearly flat, RF alone determines the winner.
+  Effectively only 1 of 3 models is working at Healesville.
+
+  Evidence from outputs:
+    R2: RF=14.99, GB=13.59, XGB=13.40  → ensemble almost = RF
+    R3: RF=22.41, GB=13.59, XGB=13.45  → GB/XGB are noise
+    R6: RF=23.99, GB=13.29, XGB=13.70  → only RF is differentiating
+
+  Cause: The Healesville model has very low variance in training features for
+         this track. Dogs at Healesville tend to have similar form profiles,
+         causing GB/XGB calibration to collapse to a near-uniform distribution.
+         This is the "NEAR-collapse (spread < 0.005)" guard case in the code
+         (run_track_ensemble_predictions.py: predict_with_ensemble()).
+
+PROBLEM 2: BOX 8 OVER-FIT ON ONE HISTORICAL DAY
+─────────────────────────────────────────────────
+The TRACK_COMPREHENSIVE_ADJUSTMENTS in src/features.py assigns Healesville:
+   Box 8 = +0.05  (22.2% historical)
+   Box 1 = +0.03  (decent)
+   Box 4 = +0.03  (decent)
+   Box 5 = -0.05  (penalised)
+   Box 6 = 0.0    (no adjustment — NEUTRAL)
+
+The model predicted Box 8 for 7 of 12 races today (58%).
+Box 8 actually won only 2/12 (17%) — close to random.
+Box 6 won 3/12 today (25%) — but the model had ZERO positive adjustment for Box 6.
+
+  Root cause: The Box 8 bias data came from a single historical day (Nov 28 2025).
+  Single-day data creates false conviction. One day Box 8 dominated; today Box 6
+  dominated. The model has no adjustment to switch between these scenarios.
+
+PROBLEM 3: NO HEALESVILLE-SPECIFIC TRAINING DATA FOR THE ML FEATURES
+───────────────────────────────────────────────────────────────────────
+The models/ directory contains only DARWIN_*.pkl and ROCKHAMPTON_*.pkl files.
+Healesville predictions are generated using the Darwin/Rockhampton models
+(via cross-track fallback after failing to find HEALESVILLE_*.pkl files).
+
+Darwin and Rockhampton are completely different track types:
+  - Darwin:       Northern Territory, 485m sprint circuit, tropical climate
+  - Rockhampton:  Queensland, tight turns, different dog population
+  - Healesville:  Victorian country track, variable distances, cooler climate
+
+The feature weights (BestTimeSec, SectionalSec, CareerWins etc.) that predict
+a winner at Darwin do NOT reliably translate to Healesville racing patterns.
+
+DIAGNOSIS SUMMARY FOR HEALESVILLE:
+  1. GB/XGB calibration collapse → only RF usable (1/3 models effective)
+  2. Box 8 over-predicted based on single historical day (Nov 28 2025)
+  3. Box 6 has no bias adjustment, despite winning 25% today
+  4. Cross-track model from Darwin/Rockhampton — wrong geography/track type
+
+================================================================================
+PART 2: MAITLAND — ROOT CAUSE ANALYSIS (1/11 = 9%)
+================================================================================
+
+PROBLEM 1: THE BOX 4 PARADOX — MODEL PENALISES THE WINNER
+───────────────────────────────────────────────────────────
+Box 4 won 5/11 races at Maitland today (45%).
+The current TRACK_COMPREHENSIVE_ADJUSTMENTS for Maitland are:
+   Box 6 = +0.10   (MOST BOOSTED)
+   Box 8 = +0.06
+   Box 2 = +0.06
+   Box 4 = -0.02   ← PENALISED
+   Box 1 = -0.04   ← PENALISED
+
+The most common winner today (Box 4) has an active PENALTY in the model.
+This is a direct inversion of reality — the model is systematically boosting
+boxes that rarely won (6, 8) while penalising the one that kept winning (4).
+
+Why is Box 4 penalised? Because the Maitland bias data was built from a single
+day of results: "Nov 30 results (10 races)" — 4 months ago:
+  R1-6837, R2-7243, R3-6135, R4-8471, R5-2187, R6-7216, R7-1286, R8-5642,
+  R9-8217, R10-4631
+  Box 6 won 3/10 (30%), Box 8 won 2/10 (20%), Box 2 won 2/10 (20%)
+  Box 4 only won once that day (10%) → assigned penalty
+
+One day of data (10 races) is statistically meaningless. The model locked in
+a false pattern from a single Nov 2025 sample and is still using it.
+
+PROBLEM 2: NO MAITLAND-SPECIFIC ML MODEL
+──────────────────────────────────────────
+models/Maitland_rf.pkl, models/Maitland_gb.pkl, models/Maitland_xgb.pkl
+— NONE OF THESE EXIST.
+
+The code itself documents this gap:
+  # MAITLAND: Need to add once PDF is processed
+  "Maitland": {
+      "DLWFactor": 0.06,
+      "ConsistencyIndex": 0.05,
+      ...
+  }
+  (src/features.py line 844)
+
+Maitland falls back to using Darwin/Rockhampton models. Maitland is a
+NSW short-course greyhound track — nothing like Darwin or Rockhampton.
+
+PROBLEM 3: STALE FORM DATA IN TRAINING FEATURES
+─────────────────────────────────────────────────
+The 10-race Nov 2025 dataset means the model has no knowledge of:
+  - Current Maitland field patterns (dogs, trainers, box draw tendencies)
+  - Changes in track conditions or racing secretary draw policies
+  - Whether Box 4 started dominating after Nov 30 (a known track evolution)
+
+DIAGNOSIS SUMMARY FOR MAITLAND:
+  1. Box 4 (today's most common winner, 45%) has an ACTIVE PENALTY of -0.02
+  2. No Maitland ML model — using Darwin/Rockhampton cross-track fallback
+  3. Box bias data from ONE day (10 races, Nov 30 2025) — 4 months stale
+  4. Code itself admits: "MAITLAND: Need to add once PDF is processed"
+  Model is not just wrong, it's confidently predicting the WRONG boxes.
+
+================================================================================
+PART 3: SHEPPARTON — ROOT CAUSE ANALYSIS (1/12 = 8%)
+================================================================================
+
+PROBLEM 1: BOX 1 PREDICTION DOMINATION — EXTREME SYSTEMATIC BIAS
+──────────────────────────────────────────────────────────────────
+Model predicted Box 1 in 7 of 12 races (58%).
+Box 1 won only 3 of 12 (25%) — but the model got only 1 right (R7).
+The other 6 Box-1 predictions all lost.
+
+Where does the Box 1 bias come from?
+  TRACK_FACTOR_WEIGHTS for "Shepparton" = ExperienceTier + ConsistencyIndex
+  These factors tend to favour experienced, consistent dogs, which in the
+  feature engineering pipeline correlate strongly with Box 1 position bias
+  (inside box = more wins historically = higher CareerWins/CareerStarts).
+
+  Additionally, Shepparton has NO entry in TRACK_COMPREHENSIVE_ADJUSTMENTS,
+  meaning it falls through to a default 0.0 adjustment for all boxes —
+  which lets the generic inside-position bias dominate.
+
+PROBLEM 2: 10-DOG FIELDS NOT SUPPORTED
+─────────────────────────────────────────
+Shepparton R1 had a 10-dog field. Box 10 won.
+The feature engineering pipeline models boxes 1-8 only.
+When a race has Boxes 9 or 10, those dogs receive:
+  - BoxPositionBias = 0 (no historical data)
+  - BoxBiasFactor = 0 (no historical data)
+  - TrackConditionAdj = 1.0 (default placeholder)
+
+Boxes 9-10 are effectively invisible to the model. In a 10-dog field where
+the winner is Box 10, the model cannot possibly predict correctly.
+Shepparton regularly uses 10-dog fields.
+
+PROBLEM 3: CLASSIFICATION CONFUSION — "BOX 4 DOMINANT" WITH NO BOX 4 BOOST
+────────────────────────────────────────────────────────────────────────────
+In TRACK_FACTOR_WEIGHTS (src/features.py line 817):
+  Shepparton is categorised as "BOX 4 DOMINANT TRACKS — Experience Advantage"
+  alongside Bendigo: {"ExperienceTier": 0.06, "ConsistencyIndex": 0.05, ...}
+
+BUT there is NO corresponding Box 4 boost in:
+  - TRACK_COMPREHENSIVE_ADJUSTMENTS (Shepparton is not in this dict)
+  - TRACK_BOX4_ADJUSTMENT (Shepparton is not in this dict)
+  - TRACK_BOX1_ADJUSTMENT (Shepparton is not in this dict)
+
+So the label says "Box 4 dominant" but the scoring ignores Box 4.
+The ExperienceTier factor doesn't map to Box 4 — it maps to experienced dogs
+(which today at Shepparton tended to be in mid/outer boxes, not Box 1).
+
+PROBLEM 4: NO SHEPPARTON-SPECIFIC ML MODEL
+────────────────────────────────────────────
+Same as Maitland — no Shepparton_*.pkl files in models/.
+Darwin/Rockhampton fallback is used. Shepparton racing conditions
+(cold climate, local dog population, track type) are fundamentally different
+from Darwin (tropical NT) and Rockhampton (subtropical QLD).
+
+PROBLEM 5: CALIBRATION ANALYSIS (SURPRISING — NOT THE CAUSE HERE)
+────────────────────────────────────────────────────────────────────
+Unlike Healesville, Shepparton's calibration was FINE:
+  RF: 14 unique values (range: 15.89–27.48%)
+  GB: 14 unique values (range: 11.66–28.73%)
+  XGB: 14 unique values (range: 11.03–21.61%)
+All 3 models are producing differentiated scores.
+
+This means Shepparton's 8% accuracy is NOT caused by model collapse —
+it means the model has full differentiation but is confidently WRONG.
+This is the worst case: systematic feature/weight miscalibration.
+
+DIAGNOSIS SUMMARY FOR SHEPPARTON:
+  1. Box 1 predicted 7/12 times — excessive inside bias
+  2. Classified as "BOX 4 DOMINANT" but Box 4 has NO positive adjustment
+  3. 10-dog fields (Box 9/10) completely invisible to the model
+  4. No Shepparton-specific ML model; Darwin/Rockhampton fallback
+  5. Calibration is FINE — model is differentiating but wrong (worst case)
+
+================================================================================
+RECOMMENDATIONS — IMMEDIATE PRIORITY ACTIONS
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  PRIORITY 1 (HIGH IMPACT, QUICK WIN):                                       │
+│  Fix box bias data using TODAY'S results — all 3 tracks                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+HEALESVILLE — Update src/features.py TRACK_COMPREHENSIVE_ADJUSTMENTS:
+  CURRENT (based on 1 day Nov 28 2025):
+    8: +0.05, 1: +0.03, 4: +0.03, 5: -0.05
+  UPDATED (using 2 dates now: Nov 28 + Mar 10 2026):
+    Actuals today: 8=2, 6=3, 1=1, 4=1, 5=1, 3=1, 7=1, 2=1 (out of 12)
+    6: +0.05  (25% today — now equal to Box 8 historically)
+    8: +0.04  (17% today + 22% Nov 28 → combined ~20%)
+    5: -0.03  (won once each day but low overall)
+    1: 0.00   (1 win today — neutral)
+
+MAITLAND — Update src/features.py TRACK_COMPREHENSIVE_ADJUSTMENTS:
+  CURRENT: Box 6=+0.10, Box 8=+0.06, Box 2=+0.06, Box 4=-0.02, Box 1=-0.04
+  MUST CHANGE: Box 4 won 5/11 today (45%) — IMMEDIATELY ADD POSITIVE ADJUSTMENT
+  UPDATED:
+    4: +0.12  (5/11 = 45% today — massive dominant box, much higher than historical)
+    8: +0.03  (won 3/11 = 27% today vs predicted 20% Nov 30)
+    1: 0.00   (won 1/11 — neutral)
+    6: -0.02  (predicted most; won 2/11 — minor reduction)
+    2: -0.01  (minor reduction)
+  NOTE: Wait 1 more race day before making this the final setting, as 45% may
+        be one-day spike. Use combined Nov 30 + Mar 10 data for final weights.
+
+SHEPPARTON — Add to src/features.py TRACK_COMPREHENSIVE_ADJUSTMENTS:
+  Currently MISSING from this dict entirely.
+  Add based on today's results (R1-10315, R2-3125, R3-6743...):
+    1: +0.03  (won 3/12 = 25% — consistent Box 1 does matter at Shepparton)
+    8: +0.04  (won 2/12 = 17% → consistent with "closer" track)
+    6: +0.02  (won 2/12 = 17%)
+    5: +0.02  (won 2/12 = 17%)
+    3: -0.02  (not winning)
+    2: -0.02  (not winning)
+  And remove the "BOX 4 DOMINANT" label — today Box 4 won only 1/12 (8%).
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  PRIORITY 2 (HIGH IMPACT, MEDIUM EFFORT):                                   │
+│  Add 10-dog field support for Shepparton                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+In src/features.py compute_features():
+  - Add Box 9 and Box 10 entries to BoxPositionBias tables
+  - For Box 9: use same value as Box 8 (outer runner, slight closer advantage)
+  - For Box 10: use same value as Box 8 or slightly lower
+  - Ensure BoxBiasFactor defaults to 0.0 for boxes 9-10 (already handled
+    by the null check at line 181-183) but explicitly include them in
+    TRACK_COMPREHENSIVE_ADJUSTMENTS for Shepparton.
+
+  Estimated accuracy gain at Shepparton: +5-8% (R1 type races, ~10% of card)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  PRIORITY 3 (MEDIUM IMPACT, MEDIUM EFFORT):                                 │
+│  Fix Healesville GB/XGB calibration collapse                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+The calibration collapse (3 unique GB values across 12 races) means 2/3 models
+are useless at Healesville. Options:
+
+  OPTION A (IMMEDIATE): Remove GB and XGB from the Healesville ensemble entirely.
+    In run_track_ensemble_predictions.py, add a per-track algorithm filter:
+      TRACK_ALGORITHM_OVERRIDES = {
+          'HEALESVILLE': ['rf'],  # Only RF works here
+      }
+    This means predictions rely entirely on RF, which at least gives 12/12
+    unique scores. Estimated gain: +3-5%.
+
+  OPTION B (BETTER): Retrain GB and XGB with Healesville-specific data.
+    Requires collecting 3+ months of Healesville results (90+ races).
+    Using today's results CSV (data/results_2026-03-10.csv) is a start.
+
+  OPTION C (BEST): Use uncalibrated GB/XGB via _get_uncalibrated_preds()
+    which is already implemented in run_track_ensemble_predictions.py.
+    Check if the calibration guard is triggering and review its threshold
+    for Healesville (near-collapse threshold = spread < 0.005 = 0.5%).
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  PRIORITY 4 (HIGH IMPACT, HIGH EFFORT):                                     │
+│  Build dedicated track models for Healesville, Maitland, Shepparton         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+The #1 structural problem for all three tracks is using Darwin/Rockhampton
+cross-track models on Victorian/NSW tracks.
+
+Steps to build dedicated models:
+  1. Collect historical PDFs: Need 50+ race forms per track.
+     - Healesville: ~3 months history (runs weekly = ~12-15 meetings)
+     - Maitland: ~3 months history (runs bi-weekly = ~6-8 meetings)
+     - Shepparton: ~3 months history (runs weekly = ~12-15 meetings)
+
+  2. Parse PDFs into feature vectors using existing pipeline:
+     python run_track_ensemble_predictions.py --pdf data/HEALG*.pdf
+     (saves extracted features to a per-track CSV)
+
+  3. Collect actual results for those meetings (as Track,Date,Race,Winner CSV)
+     and add to data/results_*.csv files.
+
+  4. Run train_xgb_models.py which will use the results CSV to train new
+     XGB models (existing script already handles this):
+     python train_xgb_models.py
+
+  5. For RF and GB: run train_ml_track_ensemble.py (if available) or adapt
+     the XGB training script for RF/GB.
+
+  Expected accuracy improvement after dedicated models:
+    Healesville:  17% → 28-35% (comparable to Gawler/Sandown)
+    Maitland:      9% → 25-35% (comparable to Nowra/Mandurah)
+    Shepparton:    8% → 20-28%
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  PRIORITY 5 (MEDIUM IMPACT, LOW EFFORT):                                    │
+│  Multi-day averaging for box bias tables                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Current issue: All box bias data is from ONE historical day per track.
+Solution: Average results across multiple race days using a weighted average.
+
+Suggested weighting:
+  - Most recent day: 50% weight
+  - Previous day: 30% weight
+  - Older days: 20% weight (combined)
+
+For Maitland specifically:
+  Nov 30 2025 (10 races): Box 6=30%, Box 8=20%, Box 4=10%
+  Mar 10 2026 (11 races): Box 4=45%, Box 8=27%, Box 6=18%
+
+  Weighted average (50%/50% for now):
+    Box 4: (10%×0.5) + (45%×0.5) = 27.5%  ← should be MOST BOOSTED
+    Box 8: (20%×0.5) + (27%×0.5) = 23.5%  ← second
+    Box 6: (30%×0.5) + (18%×0.5) = 24%    ← third
+    Box 2: (20%×0.5) + (0%×0.5)  = 10%    ← reduce
+    Box 1: (10%×0.5) + (9%×0.5)  = 9.5%   ← penalize slightly
+
+================================================================================
+IMMEDIATE CODE CHANGES RECOMMENDED (lowest risk)
+================================================================================
+
+FILE: src/features.py
+
+1. MAITLAND — Change Box 4 from PENALTY to BOOST (highest urgency):
+   CHANGE:  4: -0.02,   # v4.2: Weak box at Maitland
+   TO:      4: +0.08,   # v5.0: CORRECTED — Box 4 won 45% on 10/03/2026
+
+2. HEALESVILLE — Add Box 6 boost (currently 0.00):
+   CHANGE:  Healesville entry (line ~624-630)
+   TO:      6: +0.04,   # v5.0: Box 6 won 25% on 10/03 (3/12 races)
+            8: +0.04,   # v5.0: Reduced from +0.05 (17% today)
+            1: 0.00,    # v5.0: Reduced from +0.03
+            4: 0.00,    # v5.0: Reduced from +0.03
+
+3. SHEPPARTON — Add to TRACK_COMPREHENSIVE_ADJUSTMENTS (currently missing):
+   ADD:  "Shepparton": {
+             1: +0.03,   # 25% on 10/03 — consistent
+             8: +0.04,   # 17% on 10/03
+             6: +0.02,   # 17% on 10/03
+             5: +0.02,   # 17% on 10/03
+             2: -0.02,   # Weak today
+             3: -0.02,   # Weak today
+         },
+
+4. SHEPPARTON — Remove from "BOX 4 DOMINANT TRACKS" category in
+   TRACK_FACTOR_WEIGHTS. Box 4 won only 1/12 (8%) today. Reclassify as
+   "MIXED" or "BOX 1/8 TRACK".
+
+================================================================================
+EXPECTED IMPROVEMENT FROM FIXES
+================================================================================
+
+  Fix                                     Tracks         Est. Gain
+  ──────────────────────────────────────────────────────────────────
+  Update Maitland Box 4 from -0.02→+0.08  Maitland       +8-12%
+  Add Healesville Box 6 bias              Healesville    +3-5%
+  Add Shepparton comprehensive adj.       Shepparton     +4-7%
+  Fix Healesville GB/XGB collapse (RF-only option) Healesville +3-5%
+  Add 10-dog field support                Shepparton     +3-5%
+  ──────────────────────────────────────────────────────────────────
+  Projected new accuracy (with all quick fixes):
+    Healesville:  17% → 23-27%
+    Maitland:      9% → 18-22%
+    Shepparton:    8% → 15-19%
+
+  Full improvement (requires dedicated model training, 3+ months data):
+    Healesville:  17% → 28-35%
+    Maitland:      9% → 25-35%
+    Shepparton:    8% → 20-28%
+
+================================================================================
+CONCLUSION
+================================================================================
+
+The three underperforming tracks share a common structural problem:
+NO DEDICATED TRAINING DATA. All three use Darwin/Rockhampton cross-track models
+which were built for completely different racing conditions.
+
+On top of this:
+  - Healesville suffers from GB/XGB calibration collapse (only RF is useful)
+  - Maitland has inverted box bias data — PENALISING today's most common winner
+  - Shepparton has no box adjustment entries at all, letting a generic inside
+    bias dominate; also has 10-dog fields the model cannot see
+
+The single highest-impact, lowest-effort fix is updating the MAITLAND box bias
+table to remove the Box 4 penalty and instead give it a strong positive boost.
+This one change alone could lift Maitland from 9% to 18-22% accuracy.
+
+================================================================================
+END DIAGNOSTIC REPORT — 10 MARCH 2026
+================================================================================

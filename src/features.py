@@ -622,9 +622,13 @@ def compute_features(df):
             2: -0.05, 5: -0.05  # Weak
         },
         "Healesville": {
-            8: 0.05,    # 22.2% Box 8
-            1: 0.03, 4: 0.03,  # Also decent
-            5: -0.05  # Weak
+            6: 0.04,    # v5.0: Box 6 won 25% on 10/03/2026 (3/12) — added
+            8: 0.04,    # v5.0: Updated (was +0.05); 17% 10/03 + 22% Nov28 = ~20%
+            1: 0.00,    # v5.0: Reduced from +0.03; only 8% today
+            4: 0.00,    # v5.0: Reduced from +0.03; only 8% today
+            5: -0.04,   # v5.0: Slightly less penalised (did win once today)
+            2: -0.02,   # v5.0: Weak today
+            3: -0.02,   # v5.0: Weak today
         },
         "Sale": {
             8: 0.05,    # 22.9% Box 8
@@ -755,17 +759,34 @@ def compute_features(df):
             3: -0.05, 7: -0.05, 8: -0.05  # Weak
         },
         
-        # v4.2: MAITLAND - Based on Nov 30 results (10 races)
-        # Results: R1-6837, R2-7243, R3-6135, R4-8471, R5-2187, R6-7216, R7-1286, R8-5642, R9-8217, R10-4631
-        # Box 6 won 3/10 (30%), Box 8 won 2/10 (20%), Box 2 won 2/10 (20%)
-        # Box 1 only won 1/10 (10%) - we probably over-predicted Box 1
+        # v5.0: MAITLAND — Combined Nov 30 2025 + Mar 10 2026 (21 races)
+        # Nov 30 2025 (10 races): Box 6=30%, Box 8=20%, Box 2=20%, Box 4=10%
+        # Mar 10 2026 (11 races): Box 4=45%, Box 8=27%, Box 6=18%, Box 1=9%
+        # Weighted average (50%/50%):
+        #   Box 4=27.5%, Box 8=23.5%, Box 6=24%, Box 2=10%, Box 1=9.5%
         "Maitland": {
-            6: 0.10,    # v4.2: Box 6 won 30%! MAJOR BOOST
-            8: 0.06,    # v4.2: Box 8 won 20%
-            2: 0.06,    # v4.2: Box 2 won 20%
-            1: -0.04,   # v4.2: Box 1 only won 10%, penalize
-            7: 0.04,    # v4.2: Box 7 won 10%
-            3: -0.02, 4: -0.02, 5: -0.02  # Weak boxes
+            4: 0.08,    # v5.0: CORRECTED — Box 4 won 45% on 10/03 (was penalised at -0.02!)
+            6: 0.05,    # v5.0: Reduced from +0.10; still strong combined average
+            8: 0.05,    # v5.0: Consistent across both days (20-27%)
+            2: 0.02,    # v5.0: Reduced from +0.06; only 0% on 10/03
+            7: 0.02,    # v5.0: Kept minor positive
+            1: -0.03,   # v5.0: Updated (was -0.04); 9% today — still weak
+            3: -0.02, 5: -0.02  # Weak boxes (both days)
+        },
+
+        # v5.0: SHEPPARTON — Based on Mar 10 2026 results (12 races)
+        # R1-10315, R2-3125, R3-6743, R4-1269, R5-8174, R6-2871,
+        # R7-1659, R8-1673, R9-4135, R10-2758, R11-5671, R12-8723
+        # Box 1=3, Box 8=2, Box 5=2, Box 6=2, Box 2=1, Box 3=1, Box 4=1 (from 1st digits)
+        # Note: R1=Box10 win — Box 10 not in model, treat as outer track
+        "Shepparton": {
+            1: 0.03,    # v5.0: 25% today (3/12) — consistent inside bias
+            8: 0.04,    # v5.0: 17% today (2/12) — outer runner competes
+            5: 0.02,    # v5.0: 17% today (2/12)
+            6: 0.02,    # v5.0: 17% today (2/12)
+            2: -0.02,   # v5.0: Only 1 win today
+            3: -0.02,   # v5.0: Only 1 win today
+            4: -0.01,   # v5.0: Only 1 win today (not penalised heavily — small sample)
         },
     }
     
@@ -810,11 +831,16 @@ def compute_features(df):
         "Horsham": {"CloserBonus": 0.07, "BestTimePercentile": 0.05, "ExperienceTier": 0.04},
         "Warrnambool": {"CloserBonus": 0.07, "BestTimePercentile": 0.06, "ExperienceTier": 0.04},
         "Healesville": {"CloserBonus": 0.06, "BestTimePercentile": 0.06, "ExperienceTier": 0.05},
-        
+
         # BOX 4 DOMINANT TRACKS - Experience Advantage
         # Prioritize: ExperienceTier, ConsistencyIndex
         "Bendigo": {"ExperienceTier": 0.06, "ConsistencyIndex": 0.05, "BestTimePercentile": 0.04, "FormMomentumNorm": 0.03},
-        "Shepparton": {"ExperienceTier": 0.06, "ConsistencyIndex": 0.05, "BestTimePercentile": 0.04},
+        # v5.0: Shepparton REMOVED from BOX 4 DOMINANT — Box 4 only 8% on 10/03/2026.
+        # Reclassified below as MIXED (Box 1/8 — see TRACK_COMPREHENSIVE_ADJUSTMENTS).
+
+        # MIXED (BOX 1 + OUTER) TRACKS - Speed + Closing combo
+        # Prioritize: BestTimePercentile + CloserBonus equally
+        "Shepparton": {"BestTimePercentile": 0.05, "CloserBonus": 0.04, "ConsistencyIndex": 0.04, "ExperienceTier": 0.03},
         
         # BOX 6 DOMINANT TRACKS - Form Momentum Advantage
         # Prioritize: ExperienceTier, FormMomentum
