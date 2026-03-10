@@ -563,8 +563,10 @@ def main():
     print(f"\n📝 LOG FILE: {os.path.abspath(log_file)}")
     print("=" * 80)
     
-    # Create output directory
-    output_dir = "models/track_ensemble"
+    # Save models directly into models/ using the flat-file layout so that
+    # run_track_ensemble_predictions.py can find them without needing a
+    # models/track_ensemble/ subdirectory.
+    output_dir = "models"
     os.makedirs(output_dir, exist_ok=True)
     
     # Step 1: Load historical data
