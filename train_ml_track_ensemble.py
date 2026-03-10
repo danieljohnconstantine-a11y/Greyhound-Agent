@@ -399,23 +399,26 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         metrics: Dict with performance metrics
     """
     # Adaptive complexity based on dataset size (prevent OOM for large tracks)
+    # RF max_depth capped at 10 across all tiers — deeper trees produce very large .pkl
+    # files (24 MB+) that exceed GitHub's 100 MB limit when many features are present.
+    # Depth 10 still captures all meaningful split combinations in a 76-feature space.
     n_samples = len(df)
     if n_samples > 600:
-        # Very large track - reduce complexity significantly
+        # Very large track - reduce n_estimators to save memory
         n_estimators = 100
-        max_depth_rf = 15
+        max_depth_rf = 10
         max_depth_gb = 4
         print(f"      📊 Large dataset ({n_samples} samples) - using reduced complexity")
     elif n_samples > 400:
-        # Large track - moderate reduction
-        n_estimators = 150
-        max_depth_rf = 18
-        max_depth_gb = 5
+        # Large track
+        n_estimators = 100
+        max_depth_rf = 10
+        max_depth_gb = 4
         print(f"      📊 Medium-large dataset ({n_samples} samples) - using moderate complexity")
     else:
-        # Normal track - full complexity
-        n_estimators = 200
-        max_depth_rf = 20
+        # Normal track
+        n_estimators = 100
+        max_depth_rf = 10
         max_depth_gb = 5
     
     # Prepare data with sample weights
@@ -452,9 +455,14 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     )
     rf.fit(X_train_scaled, y_train, sample_weight=w_train)
     
-    # Calibrate Random Forest with Isotonic Regression (CV=3 to save memory)
-    print(f"      Calibrating RandomForest...")
-    rf_calibrated = CalibratedClassifierCV(rf, method='isotonic', cv=3)
+    # Calibrate Random Forest with Sigmoid (Platt scaling) instead of isotonic.
+    # Isotonic regression builds a step-function lookup that maps all real-world
+    # RF probabilities (0.10–0.37 for 8-dog races) onto a single constant when the
+    # training set is small — causing ALL dogs in a race to score identically.
+    # Sigmoid/Platt scaling fits a monotonic logistic curve: it cannot produce a
+    # flat plateau and always preserves full discrimination.
+    print(f"      Calibrating RandomForest (sigmoid)...")
+    rf_calibrated = CalibratedClassifierCV(rf, method='sigmoid', cv=3)
     rf_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
     models['rf'] = rf_calibrated
     predictions['rf'] = rf.predict_proba(X_test_scaled)[:, 1]
@@ -471,9 +479,9 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     )
     gb.fit(X_train_scaled, y_train)  # GB doesn't support sample_weight directly
     
-    # Calibrate Gradient Boosting with Isotonic Regression (CV=3 to save memory)
-    print(f"      Calibrating GradientBoosting...")
-    gb_calibrated = CalibratedClassifierCV(gb, method='isotonic', cv=3)
+    # Calibrate Gradient Boosting with Sigmoid (Platt scaling — same reason as RF above)
+    print(f"      Calibrating GradientBoosting (sigmoid)...")
+    gb_calibrated = CalibratedClassifierCV(gb, method='sigmoid', cv=3)
     gb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
     models['gb'] = gb_calibrated
     predictions['gb'] = gb.predict_proba(X_test_scaled)[:, 1]
@@ -492,9 +500,9 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         )
         xgb_model.fit(X_train_scaled, y_train, sample_weight=w_train)
         
-        # Calibrate XGBoost with Isotonic Regression (CV=3 to save memory)
-        print(f"      Calibrating XGBoost...")
-        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='isotonic', cv=3)
+        # Calibrate XGBoost with Sigmoid (Platt scaling — same reason as RF/GB above)
+        print(f"      Calibrating XGBoost (sigmoid)...")
+        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='sigmoid', cv=3)
         xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
         models['xgb'] = xgb_calibrated
         predictions['xgb'] = xgb_model.predict_proba(X_test_scaled)[:, 1]

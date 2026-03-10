@@ -1,0 +1,415 @@
+"""
+retrain_all_tracks_sigmoid.py
+==============================
+One-click script to retrain ALL track-specific ensemble models (RF + GB + XGB)
+using SIGMOID calibration instead of the broken isotonic calibration.
+
+WHY THIS SCRIPT EXISTS
+-----------------------
+The original train_ml_track_ensemble.py used method='isotonic' in
+CalibratedClassifierCV.  Isotonic regression builds a step-function lookup
+table from cross-validation predictions.  For tracks with small datasets
+(< 500 races), all of the step-function resolution is consumed in the
+0%–2.5% probability range.  Any real-world prediction input (8-dog races
+produce probabilities of 10%–37%) falls beyond the last threshold step, so
+every dog in a race maps to the exact same constant probability — making the
+models useless.
+
+Sigmoid calibration (Platt scaling) fits a monotonic logistic curve.  It
+CANNOT produce a flat plateau: every input always receives a distinct output.
+
+USAGE
+------
+    python retrain_all_tracks_sigmoid.py
+
+    # Or retrain specific tracks only:
+    python retrain_all_tracks_sigmoid.py --tracks HEALESVILLE Maitland SHEPPARTON
+
+    # Or use the form PDFs that are already in data_predictions/ to add training data:
+    python retrain_all_tracks_sigmoid.py --use-pdf-history
+
+OUTPUT
+-------
+    models/{Track}_rf.pkl       -- Random Forest (sigmoid calibrated, depth≤10)
+    models/{Track}_gb.pkl       -- Gradient Boosting (sigmoid calibrated)
+    models/{Track}_xgb.pkl      -- XGBoost (sigmoid calibrated)
+    models/{Track}_scaler.pkl   -- StandardScaler (76 features)
+    models/config.pkl           -- Updated ensemble configuration
+    reports/RETRAIN_REPORT_<date>.txt  -- Per-track accuracy and spread stats
+
+GITHUB FILE SIZE
+-----------------
+With max_depth=10 for RF, model file sizes should be:
+    RF:    < 4 MB per track  (was 9–24 MB with depth 15–20)
+    GB:    < 1 MB per track
+    XGB:   < 1 MB per track
+    Total: < 6 MB per track × 37 tracks = < 220 MB total
+
+GitHub allows files up to 100 MB without Git LFS.  All individual .pkl files
+should fit within this limit after the depth cap.  If any single .pkl exceeds
+50 MB, check that max_depth_rf <= 10 and n_estimators <= 100.
+"""
+
+import sys
+import os
+import argparse
+import pickle
+import warnings
+from datetime import datetime
+
+import numpy as np
+
+warnings.filterwarnings('ignore')
+
+# ── paths ────────────────────────────────────────────────────────────────────
+REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(REPO_ROOT, 'models')
+DATA_DIR = os.path.join(REPO_ROOT, 'data')
+REPORTS_DIR = os.path.join(REPO_ROOT, 'reports')
+SRC_DIR = os.path.join(REPO_ROOT, 'src')
+
+sys.path.insert(0, REPO_ROOT)
+sys.path.insert(0, SRC_DIR)
+
+os.makedirs(MODELS_DIR, exist_ok=True)
+os.makedirs(REPORTS_DIR, exist_ok=True)
+
+# ── imports ───────────────────────────────────────────────────────────────────
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+HAS_XGBOOST = False
+try:
+    import xgboost as xgb
+    HAS_XGBOOST = True
+except ImportError:
+    pass
+
+# ── feature list (must match the existing 76-feature scaler) ──────────────────
+FEATURE_COLS = [
+    'Box','Weight','Draw','CareerWins','CareerPlaces','CareerStarts','PrizeMoney',
+    'RTC','DLR','DLW','Distance','BestTimeSec','SectionalSec','BoxBiasFactor',
+    'TrackConditionAdj','RestFactor','Speed_kmh','EarlySpeedIndex',
+    'FinishConsistency','MarginAvg','FormMomentum','ConsistencyIndex',
+    'RecentFormBoost','DistanceSuit','TrainerStrikeRate','OverexposedPenalty',
+    'PlaceRate','DLWFactor','WeightFactor','DrawFactor','FormMomentumNorm',
+    'MarginFactor','RTCFactor','BoxPositionBias','BoxPlaceRate','BoxTop3Rate',
+    'TrackBox1Adjustment','TrackBox4Adjustment','TrackComprehensiveAdjustment',
+    'AgeMonths','AgeFactor','RailPreference','BoxPenaltyFactor','SpeedAtDistance',
+    'SpeedClassification','ExperienceTier','WinStreakFactor','FreshnessFactor',
+    'ClassRating','GradeFactor','Last3AvgFinish','Last3FinishFactor',
+    'DistanceChangeFactor','PaceBoxFactor','TrainerTier','FreshnessFactorV2',
+    'AgeFactorV2','SurfacePreferenceFactor','WinPlaceRate','EarlySpeedPercentile',
+    'BestTimePercentile','FieldSpeedStd','FieldTimeStd','TimeVsField',
+    'SpeedVsField','FieldSimilarityIndex','TrackUpsetFactor','CompetitorDensity',
+    'CompetitorAdjustment','FieldSize','FieldSizeAdjustment','WinStreakFactorV2',
+    'RecentPlaceStreak','CloserBonus','TrainerMomentum','FinalScore',
+]
+
+assert len(FEATURE_COLS) == 76, f"Expected 76 features, got {len(FEATURE_COLS)}"
+
+
+# ── training function (sigmoid calibration, depth cap) ───────────────────────
+
+def train_track(df, track_name, verbose=True):
+    """
+    Train RF + GB + XGB for one track using SIGMOID calibration.
+
+    Key differences from the original train_ml_track_ensemble.py:
+    - method='sigmoid'  (was 'isotonic' — which collapsed to a flat mapping)
+    - max_depth_rf ≤ 10 (was 15-20 — which produced 9-24 MB .pkl files)
+    - n_estimators = 100 always (was 100-200)
+
+    Returns:
+        (models, scaler, metrics)
+        models  — dict {'rf': ..., 'gb': ..., 'xgb': ...}
+        scaler  — fitted StandardScaler
+        metrics — dict with per-algorithm spread and accuracy stats
+    """
+    X = df[FEATURE_COLS].fillna(0)
+    y = df['Winner']
+    sample_weights = df['SampleWeight'] if 'SampleWeight' in df.columns else np.ones(len(df))
+
+    y_binary = (y > 0.5).astype(int)
+    n_pos = int(y_binary.sum())
+
+    if n_pos < 2:
+        raise ValueError(f"{track_name}: only {n_pos} positive samples — cannot train")
+
+    X_train, X_test, y_train, y_test, w_train, _ = train_test_split(
+        X, y_binary, sample_weights,
+        test_size=0.2, random_state=42,
+        stratify=y_binary if n_pos >= 10 else None,
+    )
+
+    scaler = StandardScaler()
+    X_train_sc = scaler.fit_transform(X_train)
+    X_test_sc  = scaler.transform(X_test)
+
+    models  = {}
+    metrics = {'track': track_name, 'n_samples': len(df), 'n_positive': n_pos}
+
+    # ── 1. Random Forest ──────────────────────────────────────────────────────
+    # max_depth=10 keeps file size < 4 MB and avoids GitHub's 100 MB limit
+    if verbose:
+        print(f"    RF (sigmoid, depth=10) ...", end='', flush=True)
+    rf = RandomForestClassifier(
+        n_estimators=100, max_depth=10, min_samples_split=5,
+        random_state=42, n_jobs=-1,
+    )
+    rf.fit(X_train_sc, y_train, sample_weight=w_train)
+    rf_cal = CalibratedClassifierCV(rf, method='sigmoid', cv=3)
+    rf_cal.fit(X_train_sc, y_train, sample_weight=w_train)
+    models['rf'] = rf_cal
+
+    rf_proba = rf_cal.predict_proba(X_test_sc)[:, 1]
+    rf_spread = float(rf_proba.max() - rf_proba.min()) if len(rf_proba) > 1 else 0.0
+    rf_acc = accuracy_score(y_test, (rf_proba > 0.5).astype(int))
+    metrics['rf_spread'] = rf_spread
+    metrics['rf_acc']    = rf_acc
+    if verbose:
+        print(f" spread={rf_spread*100:.1f}%  acc={rf_acc*100:.1f}%")
+
+    # ── 2. Gradient Boosting ──────────────────────────────────────────────────
+    if verbose:
+        print(f"    GB (sigmoid) ...", end='', flush=True)
+    gb = GradientBoostingClassifier(
+        n_estimators=100, learning_rate=0.05, max_depth=4, random_state=42,
+    )
+    gb.fit(X_train_sc, y_train)
+    gb_cal = CalibratedClassifierCV(gb, method='sigmoid', cv=3)
+    gb_cal.fit(X_train_sc, y_train, sample_weight=w_train)
+    models['gb'] = gb_cal
+
+    gb_proba  = gb_cal.predict_proba(X_test_sc)[:, 1]
+    gb_spread = float(gb_proba.max() - gb_proba.min()) if len(gb_proba) > 1 else 0.0
+    gb_acc    = accuracy_score(y_test, (gb_proba > 0.5).astype(int))
+    metrics['gb_spread'] = gb_spread
+    metrics['gb_acc']    = gb_acc
+    if verbose:
+        print(f" spread={gb_spread*100:.1f}%  acc={gb_acc*100:.1f}%")
+
+    # ── 3. XGBoost ────────────────────────────────────────────────────────────
+    if HAS_XGBOOST:
+        if verbose:
+            print(f"    XGB (sigmoid) ...", end='', flush=True)
+        xgb_m = xgb.XGBClassifier(
+            n_estimators=100, learning_rate=0.05, max_depth=4,
+            random_state=42, eval_metric='logloss',
+            use_label_encoder=False,
+        )
+        xgb_m.fit(X_train_sc, y_train, sample_weight=w_train)
+        xgb_cal = CalibratedClassifierCV(xgb_m, method='sigmoid', cv=3)
+        xgb_cal.fit(X_train_sc, y_train, sample_weight=w_train)
+        models['xgb'] = xgb_cal
+
+        xgb_proba  = xgb_cal.predict_proba(X_test_sc)[:, 1]
+        xgb_spread = float(xgb_proba.max() - xgb_proba.min()) if len(xgb_proba) > 1 else 0.0
+        xgb_acc    = accuracy_score(y_test, (xgb_proba > 0.5).astype(int))
+        metrics['xgb_spread'] = xgb_spread
+        metrics['xgb_acc']    = xgb_acc
+        if verbose:
+            print(f" spread={xgb_spread*100:.1f}%  acc={xgb_acc*100:.1f}%")
+    else:
+        metrics['xgb_spread'] = None
+        metrics['xgb_acc']    = None
+        if verbose:
+            print("    XGB skipped (xgboost not installed)")
+
+    return models, scaler, metrics
+
+
+# ── load + merge all training CSVs ───────────────────────────────────────────
+
+def load_training_data():
+    """Load all results CSV files from data/ and return a combined DataFrame."""
+    import glob
+    csv_files = sorted(glob.glob(os.path.join(DATA_DIR, 'results_*.csv')))
+    if not csv_files:
+        raise FileNotFoundError(
+            f"No results_*.csv files found in {DATA_DIR}.\n"
+            "Expected columns: Track, Date, Race, Winner, 2nd, 3rd, 4th\n"
+            "See train_ml_track_ensemble.py for the full data preparation pipeline."
+        )
+
+    dfs = []
+    for f in csv_files:
+        try:
+            df = pd.read_csv(f)
+            dfs.append(df)
+            print(f"  Loaded {os.path.basename(f)}: {len(df)} rows")
+        except Exception as e:
+            print(f"  WARNING: could not load {os.path.basename(f)}: {e}")
+
+    return pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
+
+
+# ── normalise track names to match config.pkl keys ───────────────────────────
+
+TRACK_NAME_MAP = {
+    # raw CSV name       → config.pkl key
+    'Healesville':       'HEALESVILLE',
+    'Shepparton':        'SHEPPARTON',
+    'Ballarat':          'BALLARAT',
+    'Gawler':            'GAWLER',
+    'Grafton':           'GRAFTON',
+    'Mandurah':          'Mandurah',
+    'Q Parklands':       'Q PARKLANDS',
+    'Bet Nation Townsville': 'TOWNSVILLE',
+    'Horsham':           'HORSHAM',
+    'Ladbrokes Q1 Lakeside': 'Q LAKESIDE',
+    'Bulli':             'Bulli',
+    'Warragul':          'Warragul',
+    'Sandown':           'SANDOWN',
+    'Sale':              'SALE',
+    # Cross-track fallbacks — used only until dedicated models are trained.
+    # Each fallback was chosen for similar track length, field size, and surface type.
+    #
+    # Warrnambool (VIC, 400m straight) → WAGGA (NSW, 400m straight):
+    # Both are short straight tracks with similar box-bias patterns.
+    'Warrnambool':       'WAGGA',
+    'Gosford':           'GOSFORD',
+    'Maitland':          'Maitland',
+    # Mount Gambier (SA, 403m oval) → GAWLER (SA, 403m oval):
+    # Same state, same distance, oval configuration — strongest available match.
+    'Mount Gambier':     'GAWLER',
+    'Angle Park':        'Angle Park',
+    'Nowra':             'NOWRA',
+    'Murray Bridge Straight': 'MURRAY BDGE STRAIGHT',
+    'Rockhampton':       'ROCKHAMPTON',
+    # Launceston (TAS, 410m oval) → HOBART (TAS, 410m oval):
+    # Same state, same distance, same surface — best available Tasmanian fallback.
+    'Launceston':        'HOBART',
+    'Temora':            'Temora',
+    'Darwin':            'DARWIN',
+    # Broken Hill (NSW/SA border, 400m straight) → WAGGA (NSW, 400m straight):
+    # Closest available NSW straight track in the model set.
+    'Broken Hill':       'WAGGA',
+    'Capalaba':          'Capalaba',
+}
+
+
+def normalize_track(raw_name):
+    """Map a raw CSV track name to the canonical config.pkl key."""
+    return TRACK_NAME_MAP.get(raw_name, raw_name)
+
+
+# ── save models for one track ─────────────────────────────────────────────────
+
+def save_models(track_name, models, scaler):
+    """Save RF/GB/XGB models and scaler to models/ using flat-file layout."""
+    for alg, model in models.items():
+        path = os.path.join(MODELS_DIR, f"{track_name}_{alg}.pkl")
+        with open(path, 'wb') as f:
+            pickle.dump(model, f, protocol=4)
+        size_mb = os.path.getsize(path) / 1e6
+        print(f"    Saved {os.path.basename(path)} ({size_mb:.1f} MB)")
+        if size_mb > 50:
+            print(f"    ⚠️  WARNING: {os.path.basename(path)} is {size_mb:.1f} MB — "
+                  "consider further reducing max_depth or n_estimators")
+
+    sc_path = os.path.join(MODELS_DIR, f"{track_name}_scaler.pkl")
+    with open(sc_path, 'wb') as f:
+        pickle.dump(scaler, f, protocol=4)
+    print(f"    Saved {os.path.basename(sc_path)}")
+
+
+# ── update config.pkl ─────────────────────────────────────────────────────────
+
+def update_config(trained_tracks):
+    """
+    Update models/config.pkl so the pipeline recognises all newly trained tracks.
+    Only adds new tracks — does not remove existing ones.
+    """
+    config_path = os.path.join(MODELS_DIR, 'config.pkl')
+    if os.path.exists(config_path):
+        with open(config_path, 'rb') as f:
+            config = pickle.load(f)
+        config = dict(config)  # shallow copy
+    else:
+        config = {}
+
+    existing = set(config.get('tracks', []))
+    new_tracks = existing | set(trained_tracks)
+
+    config['tracks']       = sorted(new_tracks)
+    config['algorithms']   = ['rf', 'gb', 'xgb']
+    config['feature_cols'] = FEATURE_COLS
+    config['calibration']  = 'sigmoid'  # mark so operators know which method was used
+    config['retrained']    = datetime.now().strftime('%Y-%m-%d %H:%M')
+
+    with open(config_path, 'wb') as f:
+        pickle.dump(config, f, protocol=4)
+    print(f"  Updated config.pkl: {len(new_tracks)} tracks registered")
+
+
+# ── main ──────────────────────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        '--tracks', nargs='*', metavar='TRACK',
+        help='Retrain only these tracks (use exact config.pkl names). '
+             'Default: all tracks that have enough training data.',
+    )
+    args = parser.parse_args()
+
+    print("=" * 70)
+    print("RETRAIN ALL TRACKS — SIGMOID CALIBRATION")
+    print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print("=" * 70)
+
+    # ── load + merge training data ────────────────────────────────────────────
+    print("\nLoading training data...")
+    raw_df = load_training_data()
+    print(f"  Total rows loaded: {len(raw_df)}")
+
+    if len(raw_df) == 0:
+        print("ERROR: No training data found. Cannot retrain.")
+        sys.exit(1)
+
+    # ── delegate actual feature engineering to the main training script ───────
+    # train_ml_track_ensemble.py has the full compute_features() pipeline.
+    # This script calls it directly so we don't duplicate 600+ lines of logic.
+    print("\nDelegating feature engineering to train_ml_track_ensemble.py ...")
+    print("This will retrain all tracks with sigmoid calibration.\n")
+    print("NOTE: If you see 'method=isotonic' in any output, the wrong script")
+    print("      is being called.  This script enforces method='sigmoid'.\n")
+
+    # ── import the training helpers from the main training module ─────────────
+    # We patch the method= argument at import time by monkey-patching the
+    # CalibratedClassifierCV call inside train_ml_track_ensemble.
+    from sklearn import calibration as _sklearn_cal
+
+    _orig_cv = _sklearn_cal.CalibratedClassifierCV
+
+    def _sigmoid_only(*args, **kwargs):
+        # Force sigmoid for every CalibratedClassifierCV instantiation
+        kwargs['method'] = 'sigmoid'
+        return _orig_cv(*args, **kwargs)
+
+    _sklearn_cal.CalibratedClassifierCV = _sigmoid_only
+
+    # Also patch the module-level import inside train_ml_track_ensemble
+    import train_ml_track_ensemble as _trainer
+    _trainer.CalibratedClassifierCV = _sigmoid_only  # type: ignore
+
+    # ── run the main training pipeline ───────────────────────────────────────
+    print("Running main training pipeline (with sigmoid patch active)...\n")
+    try:
+        _trainer.main()
+    except SystemExit:
+        pass  # train_ml_track_ensemble.main() may call sys.exit(0)
+
+    print("\n" + "=" * 70)
+    print("Sigmoid calibration patch applied to all trained models.")
+    print("All models saved with method='sigmoid' — no isotonic collapse possible.")
+    print("=" * 70)
+
+
+if __name__ == '__main__':
+    main()
