@@ -262,11 +262,16 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
     used_weights = []
     individual_scores = {}
     
-    # IMPROVEMENT: Weight XGB higher since it has best discrimination (78% vs 33%)
+    # Equal weights for track-specific dedicated models (HEALESVILLE/Maitland/SHEPPARTON).
+    # The previous 50/25/25 XGB-dominant weighting was tuned for Darwin/Rockhampton
+    # cross-track fallback models where XGB had 78% discrimination vs RF 33%.
+    # With dedicated track models the RF and GB uncalibrated fallback predictions
+    # have equal or better spread (0.10-0.18) than the calibrated XGB (0.017-0.061),
+    # so equal weighting is more appropriate.
     improved_weights = {
-        'xgb': 0.50,  # XGB gets 50% weight (best discriminator)
-        'rf': 0.25,   # RF gets 25% weight
-        'gb': 0.25    # GB gets 25% weight
+        'xgb': 1 / 3,
+        'rf':  1 / 3,
+        'gb':  1 / 3,
     }
     
     for alg, model in models.items():
