@@ -63,10 +63,31 @@ TIMING_FEATURES = [
     'SpeedAtDistance',
 ]
 
-# NO fallback mapping — every track must have its own dedicated trained model.
+# NO cross-track fallbacks — every track uses only its own dedicated model.
 # If a PDF contains a track name with no model in models/, the pipeline raises
 # a hard error and stops.  This guarantees only factual, track-specific data
 # is ever used in predictions.
+#
+# TRACK_NAME_ALIASES handles sponsor/branding name variants for the same
+# physical venue.  This is NOT a cross-track fallback — the same track may
+# appear under different names depending on the season (e.g. the naming-rights
+# sponsor may change).  All aliases must refer to the exact same physical track.
+TRACK_NAME_ALIASES = {
+    # Alias (upper)                        → canonical model name
+    'LADBROKES Q1 LAKESIDE':               'Q LAKESIDE',
+    'LADBROKES Q2 PARKLANDS':              'Q PARKLANDS',
+    'LADBROKES Q STRAIGHT':                'Q STRAIGHT',
+    'LADBROKES GARDENS':                   'GARDENS',
+    'BETDELUXE ROCKHAMPTON':               'ROCKHAMPTON',
+    'BETDELUXE CAPALABA':                  'Capalaba',
+    'BET NATION TOWNSVILLE':               'TOWNSVILLE',
+    'LAKESIDE':                            'Q LAKESIDE',
+    'Q PARKLANDS':                         'Q PARKLANDS',
+    'GARDENS':                             'GARDENS',
+    'TASMANIA':                            'HOBART',
+    'MURRAY BRIDGE STRAIGHT':              'MURRAY BDGE STRAIGHT',
+    'MOUNT GAMBIER':                       'MOUNT GAMBIER',
+}
 
 def extract_text_from_pdf(pdf_path):
     """
@@ -107,9 +128,17 @@ def load_track_ensemble(track_name, models_dir="models"):
 
     known_tracks = config['tracks'] if isinstance(config['tracks'], list) else list(config['tracks'].keys())
 
-    # Case-insensitive exact-match against trained tracks.
+    # Step 1: case-insensitive exact-match against trained tracks.
     known_tracks_upper = {t.upper(): t for t in known_tracks}
     model_track = known_tracks_upper.get(track_name.upper())
+
+    # Step 2: if no exact match, try the sponsor-name alias table.
+    # This resolves e.g. "Ladbrokes Q1 Lakeside" → "Q LAKESIDE" which is
+    # the same physical venue.  This is NOT a cross-track fallback.
+    if model_track is None:
+        alias_canonical = TRACK_NAME_ALIASES.get(track_name.upper())
+        if alias_canonical is not None:
+            model_track = known_tracks_upper.get(alias_canonical.upper())
 
     if model_track is None:
         raise RuntimeError(
