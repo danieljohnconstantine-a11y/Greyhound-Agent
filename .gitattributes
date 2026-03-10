@@ -1,0 +1,11 @@
+# Git Large File Storage (LFS) — track all pickle model files.
+# GitHub blocks files > 100 MB. The Random Forest model files were 9-24 MB
+# before the depth cap fix (depth capped at 10 in train_ml_track_ensemble.py).
+# After the fix each RF model should be < 5 MB and does NOT need LFS.
+# If model files grow beyond ~50 MB again, uncomment the lines below to
+# re-enable LFS tracking.
+#
+# models/*.pkl filter=lfs diff=lfs merge=lfs -text
+# models/**/*.pkl filter=lfs diff=lfs merge=lfs -text
+#
+# For now, all .pkl files are committed directly as they are all under 25 MB.

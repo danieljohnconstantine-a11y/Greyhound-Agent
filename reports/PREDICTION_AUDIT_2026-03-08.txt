@@ -1,0 +1,254 @@
+================================================================================
+PREDICTION AUDIT REPORT — 08 MARCH 2026
+================================================================================
+Predictions source : outputs/track_ensemble_summary.txt (generated 2026-03-08 21:25:56)
+Actuals source     : Race results supplied by user for 08/03/2026
+Report generated   : 2026-03-08
+--------------------------------------------------------------------------------
+KEY: ✅ = Winner correctly predicted  ❌ = Incorrect  N/A = ABD or no model
+
+LEGEND
+  Pred  = Predicted box number (ML ensemble)
+  Act   = Actual winning box
+  Gap   = Score gap between 1st and 2nd predicted dog (confidence proxy)
+  %     = ML_Confidence of predicted dog
+--------------------------------------------------------------------------------
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+GRAFTON  (12 races)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=8  Power Valley        16.92%  gap=1.63%   Act=8  ✅  HIT
+R2   Pred=8  Fix It Fred         15.13%  gap=0.65%   Act=8  ✅  HIT
+R3   Pred=7  Cash Riot           15.70%  gap=0.66%   Act=7  ✅  HIT
+R4   Pred=4  Sandave Ablaze      20.85%  gap=1.96%   Act=1  ❌
+R5   Pred=5  Rapid Lulu          19.43%  gap=3.98%   Act=5  ✅  HIT
+R6   Pred=2  Burnside Bookie     24.69%  gap=4.21%   Act=2  ✅  HIT
+R7   Pred=1  For Mercy Sake      26.56%  gap=0.93%   Act=4  ❌
+R8   Pred=8  Pitch Black Bear    19.19%  gap=3.66%   Act=2  ❌
+R9   Pred=3  Kingsbrae Rex       25.53%  gap=2.51%   Act=1  ❌
+R10  Pred=7  Bailey Dutton       16.01%  gap=0.46%   Act=4  ❌
+R11  Pred=7  Unrecoverable       16.01%  gap=2.13%   Act=2  ❌
+R12  Pred=7  Queen Wok           20.19%  gap=1.61%   Act=2  ❌
+Result: 5/12 correct (41.7%)  ← 3.3× random (12.5%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TEMORA  (10 races)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=2  High Current        15.64%  gap=2.38%   Act=6  ❌
+R2   Pred=2  Roto Road           13.27%  gap=0.56%   Act=7  ❌
+R3   Pred=8  Triple Phantom      26.62%  gap=1.22%   Act=3  ❌
+R4   Pred=8  My Rupee            20.50%  gap=0.06%   Act=2  ❌
+R5   Pred=1  Tin Roof Rusty      25.69%  gap=0.03%   Act=2  ❌
+R6   Pred=7  Eriza Sparkles      24.61%  gap=0.28%   Act=7  ✅  HIT
+R7   Pred=1  Secret Bandit       34.52%  gap=3.69%   Act=1  ✅  HIT  ★ TOP BET
+R8   Pred=8  Faith Keeping       14.90%  gap=0.15%   Act=2  ❌
+R9   Pred=3  Sadie Mcgraw        16.98%  gap=2.27%   Act=6  ❌
+R10  Pred=4  Kiando Hunt         13.96%  gap=0.89%   Act=4  ✅  HIT
+Result: 3/10 correct (30.0%)  ← 2.4× random (12.5%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BROKEN HILL  (8 races)  — ⚠️ NO MODEL / PIPELINE FAILED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Actual results (for record):
+R1=7  R2=1  R3=2  R4=7  R5=8  R6=1  R7=2  R8=1
+No predictions were generated — Broken Hill has no trained model.
+ACTION REQUIRED: Add Broken Hill to model training pipeline.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HEALESVILLE  (12 races)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=8  Ronaldo Jack        29.80%  gap=10.98%  Act=1  ❌  (Best Bet #1 — missed)
+R2   Pred=2  Commanche Jack      18.93%  gap=0.57%   Act=8  ❌
+R3   Pred=8  Oliver Kelton       15.37%  gap=1.94%   Act=2  ❌
+R4   Pred=6  Bear Lee Bandit     14.54%  gap=0.11%   Act=1  ❌
+R5   Pred=8  Noctilucent         16.40%  gap=1.55%   Act=1  ❌
+R6   Pred=4  Tarawi Therese      23.60%  gap=0.22%   Act=4  ✅  HIT
+R7   Pred=6  Pretty Pipa         15.24%  gap=0.25%   Act=3  ❌
+R8   Pred=1  Paw Sakakibura      25.73%  gap=3.91%   Act=7  ❌
+R9   Pred=8  Crackerjack Matt    18.90%  gap=1.63%   Act=8  ✅  HIT
+R10  Pred=2  Dewana Star         28.75%  gap=3.68%   Act=4  ❌
+R11  Pred=1  Aston Lyon          18.14%  gap=3.55%   Act=5  ❌
+R12  Pred=2  Hawk Magic          15.62%  gap=0.42%   Act=1  ❌
+Result: 2/12 correct (16.7%)  ← 1.3× random (12.5%)
+NOTE: Healesville was the second-worst performer today (Sale was worse at 8.3%).
+The top-confidence pick (R1 Ronaldo Jack, 10.98% gap) was the day's biggest-gap
+call and missed. Possible cause: PDF data coverage for Healesville is thin —
+GB/XGB scores were flat (13.x%), meaning only RF was genuinely differentiating.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MOUNT GAMBIER  (10 races)  — ⚠️ NO MODEL / PIPELINE FAILED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Actual results (for record):
+R1=1  R2=2  R3=6  R4=4  R5=7  R6=8  R7=4  R8=2  R9=3  R10=4
+No predictions were generated — Mount Gambier has no trained model.
+ACTION REQUIRED: Add Mount Gambier to model training pipeline.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CAPALABA  (10 races — 8 ABANDONED, only 2 ran)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=1  Front Man           17.63%  gap=1.50%   Act=4  ❌
+R2   Pred=1  Anti Venom          18.89%  gap=0.47%   Act=1  ✅  HIT
+R3–R10  ABANDONED (ABD) — no comparison possible
+Result: 1/2 correct (50.0%) from races that ran
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SALE  (12 races)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=3  Good Odds Luigi     18.53%  gap=1.51%   Act=7  ❌
+R2   Pred=5  Craving It          18.54%  gap=0.26%   Act=5  ✅  HIT
+R3   Pred=7  Otto Rose           19.77%  gap=3.08%   Act=6  ❌
+R4   Pred=1  Lisa Rose           19.34%  gap=2.62%   Act=3  ❌
+R5   Pred=3  Terrorising Tom     16.98%  gap=0.02%   Act=8  ❌
+R6   Pred=8  Daddy Cool          31.10%  gap=10.69%  Act=6  ❌  (Best Bet #2 — missed)
+R7   Pred=5  Maudie Rose         16.21%  gap=0.15%   Act=8  ❌
+R8   Pred=6  Breakn' A Sweat     26.44%  gap=1.77%   Act=3  ❌
+R9   Pred=4  Let It Linger       16.63%  gap=0.05%   Act=6  ❌
+R10  Pred=7  Furious Falcon      23.41%  gap=1.89%   Act=2  ❌
+R11  Pred=2  Royal Pride         19.76%  gap=2.93%   Act=7  ❌
+R12  Pred=4  Miss My Brother     16.45%  gap=1.12%   Act=2  ❌
+Result: 1/12 correct (8.3%)  ← below random (12.5%)
+NOTE: Sale was the worst-performing track today. The high-confidence R6 pick
+(Daddy Cool, 31.10%, gap=10.69%) missed. Sale models may need more local training
+data — RF was dominant but diverging sharply from GB/XGB on this card.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+GAWLER  (10 races)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=5  Significant         24.95%  gap=4.93%   Act=4  ❌
+R2   Pred=2  Hijinkery           25.93%  gap=4.25%   Act=8  ❌
+R3   Pred=8  Fear The Dragon     23.81%  gap=5.04%   Act=8  ✅  HIT  (Best Bet #5)
+R4   Pred=3  Boots               24.12%  gap=1.14%   Act=3  ✅  HIT
+R5   Pred=6  Big Stretch         23.30%  gap=4.25%   Act=3  ❌
+R6   Pred=2  Zipping Fontana     18.47%  gap=0.14%   Act=8  ❌
+R7   Pred=8  Diogo Keeping       27.66%  gap=4.21%   Act=8  ✅  HIT
+R8   Pred=8  Big Diesel          19.10%  gap=4.04%   Act=3  ❌
+R9   Pred=1  Dakota Rylen        27.50%  gap=3.08%   Act=1  ✅  HIT
+R10  Pred=6  Carry On Kim        28.35%  gap=8.57%   Act=6  ✅  HIT  (Best Bet #3)
+Result: 5/10 correct (50.0%)  ← 4.0× random (12.5%)  ★ BEST TRACK TODAY
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROCKHAMPTON  (10 races)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=1  It's Me Hi          17.85%  gap=0.99%   Act=4  ❌
+R2   Pred=7  Raptor Girl         18.52%  gap=1.94%   Act=7  ✅  HIT
+R3   Pred=5  Wyndra All Smoke    17.80%  gap=0.13%   Act=5  ✅  HIT
+R4   Pred=1  George Alexis       18.49%  gap=1.53%   Act=4  ❌
+R5   Pred=1  Tusken Raider       19.15%  gap=3.16%   Act=8  ❌
+R6   Pred=5  Abraxos             17.43%  gap=2.60%   Act=5  ✅  HIT
+R7   Pred=8  Wyndra All Sass     22.71%  gap=0.25%   Act=8  ✅  HIT
+R8   Pred=2  Tusken Wind         23.15%  gap=3.01%   Act=3  ❌
+R9   Pred=3  Hara's Fonzie       15.42%  gap=0.27%   Act=4  ❌
+R10  Pred=5  Spring Oliver       16.83%  gap=1.33%   Act=5  ✅  HIT
+Result: 5/10 correct (50.0%)  ← 4.0× random (12.5%)  ★ BEST TRACK TODAY (joint)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Q PARKLANDS  (10 races)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=2  Not Half Bad        16.87%  gap=1.67%   Act=7  ❌
+R2   Pred=8  Super Special       16.43%  gap=3.09%   Act=8  ✅  HIT
+R3   Pred=3  Ritza Toby          23.03%  gap=6.76%   Act=8  ❌  (Best Bet #4 — missed)
+R4   Pred=2  Obliging Bill       14.40%  gap=0.15%   Act=2  ✅  HIT
+R5   Pred=1  Tote Deor           13.64%  gap=0.69%   Act=4  ❌
+R6   Pred=3  Tempting Dash       21.64%  gap=4.39%   Act=3  ✅  HIT
+R7   Pred=1  Sampson             19.30%  gap=4.93%   Act=4  ❌
+R8   Pred=4  Non Stop Tommy      19.47%  gap=1.23%   Act=5  ❌
+R9   Pred=1  Tub Star            19.90%  gap=2.85%   Act=7  ❌
+R10  Pred=1  Callisto            16.49%  gap=2.43%   Act=7  ❌
+Result: 3/10 correct (30.0%)  ← 2.4× random (12.5%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DARWIN  (9 races)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+R1   Pred=2  Little Riley        18.06%  gap=0.10%   Act=6  ❌
+R2   Pred=6  So Naive            17.95%  gap=0.07%   Act=8  ❌
+R3   Pred=1  Go Jo               16.80%  gap=0.03%   Act=1  ✅  HIT
+R4   Pred=2  Mum Knows Best      19.61%  gap=0.46%   Act=2  ✅  HIT
+R5   Pred=6  Zipping Kimble      18.32%  gap=0.59%   Act=8  ❌
+R6   Pred=4  Zelda Chaos         19.07%  gap=1.43%   Act=8  ❌
+R7   Pred=8  Luka Magic          24.53%  gap=0.09%   Act=2  ❌
+R8   Pred=1  Bing Bing Secret    18.25%  gap=1.37%   Act=8  ❌
+R9   Pred=1  Selena's Chance     13.80%  gap=2.91%   Act=5  ❌
+Result: 2/9 correct (22.2%)  ← 1.8× random (12.5%)
+NOTE: Darwin gaps were generally tiny (<1.5%), indicating low model confidence
+across the card. All Darwin scores were clustered in the 13-25% range, suggesting
+the GB/XGB models were near-collapse for this track's PDF.
+
+================================================================================
+DAILY SUMMARY
+================================================================================
+
+Track             Predicted  Correct  %    vs 12.5% baseline   Notes
+----------------------------------------------------------------------
+Gawler            10         5        50%  +37.5pp  ★ BEST
+Rockhampton       10         5        50%  +37.5pp  ★ BEST (joint)
+Capalaba           2         1        50%  +37.5pp  (only 2 races ran)
+Grafton           12         5       41.7%  +29.2pp
+Temora            10         3        30%  +17.5pp
+Q Parklands       10         3        30%  +17.5pp
+Darwin             9         2        22%  +10.0pp
+Healesville       12         2        17%   +4.2pp
+Sale              12         1         8%   -4.2pp  ⚠️ WORST
+Broken Hill        0        N/A       N/A   N/A     ⚠️ NO MODEL
+Mount Gambier      0        N/A       N/A   N/A     ⚠️ NO MODEL
+----------------------------------------------------------------------
+TOTAL (predicted) 87        27       31.0%  +18.5pp above random
+
+Random baseline (1/8 race average): 12.5%
+Observed win rate: 27/87 = 31.0%
+Performance uplift: +18.5 percentage points (2.5× random)
+
+================================================================================
+BEST BET PERFORMANCE (top 5 confidence picks)
+================================================================================
+Rank  Track          Race  Predicted Dog        Gap%    Actual   Result
+----------------------------------------------------------------------
+#1    Healesville    R1    Box 8 Ronaldo Jack   10.98%  Box 1    ❌ MISS
+#2    Sale           R6    Box 8 Daddy Cool     10.69%  Box 6    ❌ MISS
+#3    Gawler         R10   Box 6 Carry On Kim    8.57%  Box 6    ✅ HIT
+#4    Q Parklands    R3    Box 3 Ritza Toby      6.76%  Box 8    ❌ MISS
+#5    Gawler         R3    Box 8 Fear The Dragon 5.04%  Box 8    ✅ HIT
+----------------------------------------------------------------------
+Best bets hit rate: 2/5 (40%)
+
+Other notable hits:
+  • Temora R7 Secret Bandit (34.52%, gap=3.69%) ✅ — highest raw confidence of day
+  • Gawler R9 Dakota Rylen (27.50%, gap=3.08%) ✅
+  • Gawler R7 Diogo Keeping (27.66%, gap=4.21%) ✅
+  • Grafton R7 For Mercy Sake (26.56%, gap=0.93%) ❌ — narrow gap, narrow miss
+  • Healesville R10 Dewana Star (28.75%, gap=3.68%) ❌ — wide miss
+
+================================================================================
+GAPS vs WHAT WAS MISSED IN EARLIER AUDIT
+================================================================================
+Issues already fixed before today's run:
+  [x] DistanceSuit bug (was [515-595] only) — fixed to 1.0 for all 300-700m
+  [x] TrackConditionAdj placeholder (always 1.0) — documented in provenance
+  [x] BestTimeSec estimated default (distance/15.5) — now None/unmeasured
+  [x] Calibration collapse guard (spread < 0.5%) — active
+  [x] Split career record parser fix — active
+
+Issues STILL outstanding (potential reasons for today's misses):
+  ❗ Broken Hill — no model. BRHG0803form.pdf parsed but no model exists.
+  ❗ Mount Gambier — no model. MTGG0803form.pdf parsed but no model exists.
+  ❗ Healesville R1 — highest-gap call missed. GB/XGB were near-flat (34.71%/26.62%)
+     vs RF (31.24%). The score spread was genuine but the underlying race was upset.
+  ❗ Sale — 1/12 (8.3%). Model consistently picks favourites that don't win.
+     Sale models may need re-training with more recent Sale race data.
+  ❗ Darwin R7 Luka Magic (24.53%, 0.09% gap) — gap was effectively zero; confidence
+     was an illusion. The spread-based calibration guard threshold (0.5%) did not
+     fire here because the ENSEMBLE spread was fine; only the gap to 2nd was tiny.
+  ❗ 5 of 9 predicted tracks had at least one race where GB+XGB were both flat
+     (~13-17%) and only RF gave differentiated scores. This means 2/3 of the
+     ensemble was contributing little signal on those races.
+
+RECOMMENDED NEXT STEPS:
+  1. Train Broken Hill model (add BRHG*.csv training data)
+  2. Train Mount Gambier model (add MTGG*.csv training data)
+  3. Investigate Sale model — consider retraining with last 3 months Sale data
+  4. Add a "low-signal" flag when GB+XGB are both within 1% of each other
+     (currently only the ensemble winner is flagged Low_Confidence)
+  5. Consider raising the calibration-collapse spread threshold from 0.5% to 1.0%
+     to catch more near-collapse cases like Darwin and Capalaba
+================================================================================
+END OF REPORT
+================================================================================

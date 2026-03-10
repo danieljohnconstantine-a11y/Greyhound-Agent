@@ -1,0 +1,299 @@
+================================================================================
+MODEL AUDIT REPORT — HEALESVILLE / MAITLAND / SHEPPARTON
+Generated: 2026-03-10  |  Branch: copilot/copy-ml-training-prediction-files-again
+================================================================================
+
+SCOPE
+-----
+User uploaded 3 sets of track-specific ensemble models (RF + GB + XGB + Scaler)
+to models/ directory. This audit checks for issues that would cause poor prediction
+performance.  All 9 .pkl files + config.pkl + ensemble_config.json inspected.
+
+================================================================================
+SECTION 1 — FILE INVENTORY & SIZES
+================================================================================
+
+File                        Size      Status
+--------------------------  --------  ----------
+HEALESVILLE_rf.pkl          24.3 MB   ✅ Present
+HEALESVILLE_gb.pkl           0.9 MB   ✅ Present
+HEALESVILLE_xgb.pkl          0.5 MB   ✅ Present
+HEALESVILLE_scaler.pkl       3.5 KB   ✅ Present
+Maitland_rf.pkl              9.6 MB   ✅ Present
+Maitland_gb.pkl              0.9 MB   ✅ Present
+Maitland_xgb.pkl             0.6 MB   ✅ Present
+Maitland_scaler.pkl          3.5 KB   ✅ Present
+SHEPPARTON_rf.pkl           18.6 MB   ✅ Present
+SHEPPARTON_gb.pkl            0.9 MB   ✅ Present
+SHEPPARTON_xgb.pkl           0.6 MB   ✅ Present
+SHEPPARTON_scaler.pkl        3.5 KB   ✅ Present
+config.pkl                   2.0 KB   ✅ Present
+ensemble_config.json         2.6 KB   ✅ Present
+
+All 14 required files are present. ✅
+
+NOTE: Healesville RF is 24 MB — very large compared to other RF models.
+      This indicates a deep/wide forest that may be overfit to training data.
+      Maitland RF (9.6 MB) and SHEPPARTON RF (18.6 MB) are also large.
+
+
+================================================================================
+SECTION 2 — STRUCTURAL CHECKS
+================================================================================
+
+Feature dimensions
+  All 9 models:         n_features_in_ = 76  ✅
+  All 3 scalers:        n_features_in_ = 76  ✅
+  config.pkl:           76 features listed   ✅
+  Scaler vs config:     PERFECT MATCH (all 76 names identical, same order) ✅
+
+Model types
+  All 9 models:         CalibratedClassifierCV (outer)  ✅
+  HEALESVILLE RF/GB/XGB inner: RandomForest / GradientBoosting / XGBClassifier ✅
+  Maitland RF/GB/XGB inner:    same ✅
+  SHEPPARTON RF/GB/XGB inner:  same ✅
+  Calibration method:  isotonic  (⚠️ SEE SECTION 3)
+  Calibration cv:      3 folds
+
+Track name matching
+  config.pkl lists 'HEALESVILLE', 'Maitland', 'SHEPPARTON'  ✅
+  File prefixes match config names exactly                   ✅
+  load_track_ensemble() will find all models without fallback ✅
+
+Training metadata
+  Training date:   2026-01-29
+  n_samples:       172,368 total across 37 tracks
+  n_tracks:        37
+
+
+================================================================================
+SECTION 3 — CRITICAL ISSUE: ISOTONIC CALIBRATION COLLAPSE
+================================================================================
+
+SUMMARY: 6 out of 9 models have broken isotonic calibration.
+         When tested on realistic 8-dog race data:
+
+Track        Algorithm  Calibrated       Calibrated   Status
+                        Spread           Unique/8
+-----------  ---------  ---------------  -----------  ----------------------
+HEALESVILLE  RF         0.0000 (0%)      1 / 8        ❌ COLLAPSED
+HEALESVILLE  GB         0.0768 (7.7%)    4 / 8        ✅ OK
+HEALESVILLE  XGB        0.0614 (6.1%)    7 / 8        ✅ OK
+Maitland     RF         0.0000 (0%)      1 / 8        ❌ COLLAPSED
+Maitland     GB         0.0080 (0.8%)    3 / 8        ❌ COLLAPSED (near-flat)
+Maitland     XGB        0.0171 (1.7%)    4 / 8        ✅ OK (marginal)
+SHEPPARTON   RF         0.0000 (0%)      1 / 8        ❌ COLLAPSED
+SHEPPARTON   GB         0.0132 (1.3%)    3 / 8        ❌ COLLAPSED (near-flat)
+SHEPPARTON   XGB        0.0368 (3.7%)    2 / 8        ❌ COLLAPSED (true: 2<4)
+
+ROOT CAUSE — WHY ISOTONIC CALIBRATION COLLAPSES
+-----------------------------------------------
+The isotonic regression calibration maps raw model probability → calibrated
+probability using a lookup table learned from cross-validation predictions.
+
+Example (HEALESVILLE RF, fold 0):
+  X_thresholds = [0.000, 0.009, 0.009, 0.024, 0.024, 0.748]
+  Y_thresholds = [0.000, 0.000, 0.073, 0.073, 0.127, 0.127]
+
+  → The X (input) range 0.000–0.025 is finely resolved
+  → ANY input ≥ 0.024 maps to exactly 0.1267
+
+The RF model's real-world output probabilities (8-dog races) are:
+  min = 0.099, max = 0.360, mean = 0.234
+
+Because all real-world RF outputs (0.10–0.36) are well above the last threshold
+step (0.024), every single dog maps to the identical output of 0.1267.
+This is not a bug in the guard code — it is a training data artefact:
+the isotonic calibration was trained on fold-held-out predictions where the
+proportion of winners was so low that all the step-function resolution was
+consumed by the 0.00–0.02 range, leaving a flat plateau for the practical range.
+
+This is a KNOWN scikit-learn limitation of isotonic calibration on small/sparse
+win-event datasets.  The sigmoid method ('Platt scaling') does not have this
+problem and should be used instead when retraining.
+
+IMPACT IF NOT HANDLED
+---------------------
+If the calibration guard did NOT exist:
+  - All 3 RF models would give every dog an identical score → random winner
+  - Both SHEPPARTON GB and XGB would also collapse → SHEPPARTON completely broken
+  - Maitland GB would be near-collapsed (0.8% spread) → very weak discrimination
+
+CURRENT MITIGATION — CALIBRATION GUARD (WORKING ✅)
+----------------------------------------------------
+run_track_ensemble_predictions.py contains a guard that detects:
+  1. TRUE collapse: fewer than n_dogs//2 unique calibrated scores
+  2. NEAR-collapse: score spread < 0.5% (0.005)
+
+When detected, it falls back to the UNCALIBRATED base estimator predictions.
+These uncalibrated predictions show MUCH better discrimination:
+
+Track        Algorithm  Uncalibrated     Uncalibrated  Result after fallback
+                        Spread           Unique/8
+-----------  ---------  ---------------  -----------   ---------------------
+HEALESVILLE  RF         0.116 (11.6%)    8 / 8         ✅ RESCUED
+Maitland     RF         0.109 (10.9%)    8 / 8         ✅ RESCUED
+Maitland     GB         0.137 (13.7%)    7 / 8         ✅ RESCUED
+SHEPPARTON   RF         0.129 (12.9%)    8 / 8         ✅ RESCUED
+SHEPPARTON   GB         0.179 (17.9%)    8 / 8         ✅ RESCUED
+SHEPPARTON   XGB        0.071 ( 7.1%)    8 / 8         ✅ RESCUED
+
+RECOMMENDATION 1 (RETRAIN — HIGH PRIORITY)
+-------------------------------------------
+Retrain all 3 tracks with `method='sigmoid'` instead of `method='isotonic'`
+in the CalibratedClassifierCV constructor:
+
+  OLD:  CalibratedClassifierCV(base_estimator, method='isotonic', cv=3)
+  NEW:  CalibratedClassifierCV(base_estimator, method='sigmoid',  cv=3)
+
+Sigmoid (Platt scaling) fits a logistic curve to map raw → calibrated probabilities.
+Unlike isotonic, it cannot produce a step-function that maps a whole range to one
+value — the output is always a strictly monotonic curve with full discrimination.
+
+Alternatively, increase cv folds from 3 → 5 with more training data per track so
+the isotonic lookup table covers the full practical probability range.
+
+
+================================================================================
+SECTION 4 — ENSEMBLE WEIGHTING ISSUE
+================================================================================
+
+Current code (run_track_ensemble_predictions.py):
+
+  improved_weights = {
+      'xgb': 0.50,   # 50% weight
+      'rf':  0.25,   # 25% weight
+      'gb':  0.25    # 25% weight
+  }
+
+  COMMENT: "Weight XGB higher since it has best discrimination (78% vs 33%)"
+
+THIS COMMENT IS NOW OUTDATED.
+The 78%/33% discrimination figures were measured on the old DARWIN/ROCKHAMPTON
+cross-track fallback models, NOT on the newly uploaded track-specific models.
+
+With the new models:
+  HEALESVILLE: RF=collapsed (rescued), GB=OK, XGB=OK
+  Maitland:    RF=collapsed (rescued), GB=collapsed (rescued), XGB=marginal OK
+  SHEPPARTON:  RF=collapsed (rescued), GB=collapsed (rescued), XGB=collapsed (rescued)
+
+When ALL 3 models fall back to uncalibrated predictions (e.g. SHEPPARTON), the
+50/25/25 weighting still gives XGB half the vote even though the uncalibrated
+RF and GB have 12.9% and 17.9% spread vs XGB's 7.1% spread.
+
+CODE FIX APPLIED: Changed to equal weights 1/3 each for these dedicated
+track-specific models. This reflects that RF/GB uncalibrated predictions are
+now equally or more informative than XGB for these three tracks.
+
+
+================================================================================
+SECTION 5 — FEATURE IMPORTANCE FINDINGS
+================================================================================
+
+Top predictive features by track (base estimator, before calibration):
+
+HEALESVILLE
+  RF:  FinalScore (3.8%), TimeVsField (3.5%), TrainerStrikeRate (3.5%)
+  GB:  TimeVsField (6.7%), TrainerStrikeRate (5.9%), DrawFactor (5.8%)
+  XGB: Draw (5.9%), WinPlaceRate (4.7%), WinStreakFactor (2.9%)
+  → Form, time comparison, and trainer form are the key drivers
+  → Box position has low importance for HEALESVILLE ← consistent with track
+
+Maitland
+  RF:  TimeVsField (3.8%), FinalScore (3.6%), ConsistencyIndex (3.4%)
+  GB:  ConsistencyIndex (8.0%), PlaceRate (7.4%), SectionalSec (5.6%)
+  XGB: Distance (6.3%), ConsistencyIndex (4.4%), AgeMonths (3.3%)
+  → Consistency/sectional time are Maitland's key signals
+  → TrackBox4Adjustment has ZERO importance in RF and GB  ⚠️
+    (The Mar 10 fix already increased Maitland Box4 heuristic weight — good)
+
+SHEPPARTON
+  RF:  ClassRating (3.7%), FinalScore (3.7%), TimeVsField (3.6%)
+  GB:  Box (10.4%), WinPlaceRate (8.0%), FinalScore (6.9%)
+  XGB: CareerWins (6.4%), Box (5.9%), WinPlaceRate (4.2%)
+  → Box is a strong SHEPPARTON signal in GB and XGB (10.4%, 5.9%)
+  → The Mar 10 fix added SHEPPARTON to TRACK_COMPREHENSIVE_ADJUSTMENTS — good
+
+Zero-importance features (all 3 tracks — dead features in training):
+  Weight, TrackConditionAdj, MarginAvg, FormMomentum, DistanceSuit,
+  WeightFactor, FormMomentumNorm, MarginFactor
+  → These 8 features contribute nothing and can be dropped in a future retrain
+  → TrackConditionAdj is always 1.0 (placeholder) — confirmed dead weight
+
+
+================================================================================
+SECTION 6 — SCALER STATISTICS ANOMALY
+================================================================================
+
+  Feature 'Weight' (index 1):
+    HEALESVILLE scaler: mean=0.0000, std=1.0000
+    Maitland scaler:    mean=0.0000, std=1.0000
+    SHEPPARTON scaler:  mean=0.0000, std=1.0000
+
+  Weight appears to have been pre-normalised BEFORE fitting the scaler —
+  otherwise a mean of exactly 0 and std of exactly 1 is impossible on real data.
+  This means the scaler double-standardises Weight, which is harmless but
+  suggests the training pipeline was pre-scaling it separately.
+
+  Feature 'RecentPlaceStreak' (index 72):
+    All 3 scalers: mean=1.0000, std=1.0000
+  Feature 'CloserBonus' (index 73):
+    HEALESVILLE: mean=1.0000, std=1.0000
+    Others: mean~1.003, std~0.011
+  → Same double-normalisation pattern.  Not harmful but worth noting.
+
+
+================================================================================
+SECTION 7 — RECOMMENDATIONS SUMMARY
+================================================================================
+
+Priority  Action
+--------  -----------------------------------------------------------------------
+HIGH      Retrain all 3 tracks with method='sigmoid' instead of method='isotonic'
+          in CalibratedClassifierCV.  This permanently fixes the calibration
+          collapse for RF models and reduces GB/XGB instability.
+
+HIGH      Increase training sample size per track.  With isotonic cv=3,
+          each fold has ~1/3 of track data.  Small tracks (<500 races) produce
+          isotonic tables with only 5-10 threshold points, all ≤ 0.025 raw prob.
+          Target: ≥1000 races per track before using cv=3 isotonic calibration.
+
+MEDIUM    Drop 8 zero-importance dead features from the next retrain:
+          Weight, TrackConditionAdj, MarginAvg, FormMomentum, DistanceSuit,
+          WeightFactor, FormMomentumNorm, MarginFactor.
+          Removing them will speed up inference and may improve model accuracy
+          by reducing noise dimensions.
+
+MEDIUM    The existing calibration guard (spread < 0.005) successfully rescues
+          all 6 collapsed models.  No code change needed for correctness.
+          DONE: Updated improved_weights from 50/25/25 → equal 33/33/33
+          since prior XGB-dominant weighting was tuned for Darwin/Rockhampton
+          fallback models, not these track-specific dedicated models.
+
+LOW       Consider adding a per-track spread diagnostic to the prediction output
+          so operators can see which models triggered the fallback guard.
+
+LOW       TrackConditionAdj is always 1.0 (placeholder, no live data).
+          Until live track condition data is available, remove from feature set.
+
+
+================================================================================
+SECTION 8 — CURRENT PREDICTION QUALITY (POST-FALLBACK)
+================================================================================
+
+After the calibration guard rescues the collapsed models, predicted spreads:
+
+HEALESVILLE: ensemble spread ~12-20%, winner confidence ~18-28%  GOOD
+Maitland:    ensemble spread ~7-15%, winner confidence ~15-25%   ACCEPTABLE
+SHEPPARTON:  ensemble spread ~10-15%, winner confidence ~20-30%  GOOD
+
+These are significantly better than the previous Darwin/Rockhampton
+cross-track fallback which produced typical ensemble spreads of 3-8%.
+
+OVERALL STATUS: Models are usable with the guard in place.
+                Performance should improve noticeably vs old cross-track fallback.
+                Critical fix for future: retrain with method='sigmoid'.
+
+================================================================================
+END OF AUDIT
+================================================================================
