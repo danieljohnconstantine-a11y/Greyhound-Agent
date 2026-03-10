@@ -1,11 +1,14 @@
 ================================================================================
 TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
-Generated: 2026-03-10 19:12:35
+Generated: 2026-03-10 11:47:58
 ================================================================================
 
 Total PDFs processed: 10
-Successful predictions: 9
-Total dogs predicted: 777
+Successful predictions: 10
+Total dogs predicted: 895
+
+⚠️  NEAREST-TRACK FALLBACK USED (no dedicated model for these tracks):
+   GEELONG → model: SANDOWN
 
 
 BALLARAT:
@@ -40,6 +43,23 @@ Bulli:
   Race 9: Box 6 - Appin Way (10.1800% (RF=9.5755, GB=8.5706, XGB=12.3940))
   Race 10: Box 7 - Westburn Harada (13.1182% (RF=11.3696, GB=13.2814, XGB=14.7036))
   Race 11: Box 5 - Innovation (13.1669% (RF=11.7083, GB=12.9840, XGB=14.8085))
+
+GEELONG [FALLBACK MODEL: SANDOWN]:
+  Races: 13
+  Dogs: 118
+  Race 1: Box 8 - Aussie Mirage (13.0620% (RF=11.3197, GB=12.3598, XGB=15.5067))
+  Race 2: Box 5 - Aussie Adonis (12.8332% (RF=11.9374, GB=11.4982, XGB=15.0640))
+  Race 3: Box 6 - Prince Laroi (18.1756% (RF=15.6832, GB=16.6971, XGB=22.1465))
+  Race 4: Box 4 - Hot Saki (19.7526% (RF=16.7832, GB=21.4125, XGB=21.0620))
+  Race 5: Box 1 - Stojanovic (17.8294% (RF=13.1167, GB=19.3733, XGB=20.9982))
+  Race 6: Box 3 - Aston Boost (21.2763% (RF=19.1500, GB=20.1969, XGB=24.4819))
+  Race 7: Box 6 - Forbes Dynasty (15.9928% (RF=11.9443, GB=16.9986, XGB=19.0354))
+  Race 8: Box 1 - Aston Yamato (21.3474% (RF=20.9570, GB=20.7397, XGB=22.3455))
+  Race 9: Box 5 - Black Raider (19.8428% (RF=18.7205, GB=19.5045, XGB=21.3033))
+  Race 10: Box 2 - Roads End (16.0028% (RF=13.4658, GB=13.9687, XGB=20.5741))
+  Race 11: Box 2 - She Rebel (22.2998% (RF=20.6795, GB=21.8304, XGB=24.3895))
+  Race 12: Box 6 - Go Me Go (20.0406% (RF=19.4842, GB=16.4683, XGB=24.1693))
+  Race 13: Box 3 - Paw Xanthie (19.7404% (RF=17.7610, GB=19.6593, XGB=21.8009))
 
 GOSFORD:
   Races: 10

@@ -1,0 +1,79 @@
+================================================================================
+PIPELINE AUDIT REPORT
+Generated: 2026-03-10 11:42:48
+================================================================================
+
+SECTION 1: MODEL INVENTORY
+----------------------------------------
+Training date: 2026-03-10T19:04:57.525476
+Tracks with dedicated models: 26
+Algorithms: ['rf', 'gb', 'xgb']
+Feature columns: 76
+Calibration method: sigmoid (verified all 78 models)
+Training samples: 9913
+
+Model files: ALL 104 files present (3 models + 1 scaler per track)
+
+SECTION 2: PDF PARSING
+----------------------------------------
+PDFs found: 10
+  OK: BRATG1003form.pdf -> BALLARAT: 84 dogs, 14 races (timing: 81/84 BestTime, 81/84 Sectional)
+  OK: BULIG1003form.pdf -> Bulli: 84 dogs, 11 races (timing: 78/84 BestTime, 70/84 Sectional)
+  OK: GEELG1003form.pdf -> GEELONG: 118 dogs, 13 races (timing: 98/118 BestTime, 90/118 Sectional)
+  OK: GOSFG1003form.pdf -> GOSFORD: 89 dogs, 10 races (timing: 75/89 BestTime, 74/89 Sectional)
+  OK: GRAFG1003form.pdf -> GRAFTON: 60 dogs, 9 races (timing: 59/60 BestTime, 57/60 Sectional)
+  OK: HSHMG1003form.pdf -> HORSHAM: 106 dogs, 13 races (timing: 91/106 BestTime, 98/106 Sectional)
+  OK: MANDG1003form.pdf -> Mandurah: 91 dogs, 11 races (timing: 85/91 BestTime, 83/91 Sectional)
+  OK: MBRSG1003form.pdf -> MURRAY BDGE STRAIGHT: 47 dogs, 9 races (timing: 35/47 BestTime, 23/47 Sectional)
+  OK: QLAKG1003form.pdf -> Q LAKESIDE: 115 dogs, 14 races (timing: 108/115 BestTime, 87/115 Sectional)
+  OK: TOWNG1003form.pdf -> TOWNSVILLE: 101 dogs, 12 races (timing: 92/101 BestTime, 88/101 Sectional)
+
+SECTION 3: ALGORITHM SCORING AUDIT (per track, per race)
+----------------------------------------
+For each race: verifies RF/GB/XGB produce DISTINCT scores for every dog.
+
+BALLARAT: 14 races, 84 dogs | ens spread avg=3.7973 min=1.7537
+  [OK] All 3 algorithms produced distinct scores for every dog
+Bulli: 11 races, 84 dogs | ens spread avg=7.2190 min=4.6258
+  [OK] All 3 algorithms produced distinct scores for every dog
+GEELONG: 13 races, 118 dogs | ens spread avg=8.3573 min=5.5337
+  [OK] All 3 algorithms produced distinct scores for every dog
+GOSFORD: 10 races, 89 dogs | ens spread avg=4.0726 min=1.1473
+  [OK] All 3 algorithms produced distinct scores for every dog
+GRAFTON: 9 races, 60 dogs | ens spread avg=5.1949 min=3.6302
+  [OK] All 3 algorithms produced distinct scores for every dog
+HORSHAM: 13 races, 106 dogs | ens spread avg=3.9284 min=1.6843
+  [OK] All 3 algorithms produced distinct scores for every dog
+MURRAY BDGE STRAIGHT: 9 races, 47 dogs | ens spread avg=7.8353 min=4.3220
+  [OK] All 3 algorithms produced distinct scores for every dog
+Mandurah: 11 races, 91 dogs | ens spread avg=3.3720 min=2.0954
+  [OK] All 3 algorithms produced distinct scores for every dog
+Q LAKESIDE: 14 races, 115 dogs | ens spread avg=5.9473 min=3.9810
+  [OK] All 3 algorithms produced distinct scores for every dog
+TOWNSVILLE: 12 races, 101 dogs | ens spread avg=4.4533 min=2.8862
+  [OK] All 3 algorithms produced distinct scores for every dog
+
+SECTION 4: FALLBACK TRACK USAGE
+----------------------------------------
+  GEELONG -> FALLBACK MODEL: SANDOWN (no dedicated trained model exists)
+
+SECTION 5: DATA INTEGRITY CHECK
+----------------------------------------
+Total dogs in output: 895
+Dogs with NULL scores: 0
+[OK] Every dog has ML_Confidence, RF_Score, GB_Score, XGB_Score populated
+
+SECTION 6: SUMMARY
+----------------------------------------
+PDFs processed: 10 / 10
+Tracks with dedicated models: 26
+Tracks using nearest-track fallback: 1
+Total dogs scored: 895
+Total races: 116
+Algorithm scoring issues: 0
+NULL score issues: 0
+
+VERDICT:
+  PASS - All dogs individually scored by RF, GB and XGB.
+  No default scoring or silent shortcuts detected.
+  All scores derived from PDF form data only.

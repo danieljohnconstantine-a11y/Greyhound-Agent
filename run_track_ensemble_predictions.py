@@ -5,7 +5,7 @@ Uses the track-specific ensemble models trained by train_ml_track_ensemble.py
 to generate predictions on today's races in data_predictions/ folder.
 
 For each race:
-1. Loads track-specific models (RF, GB, XGB) - ALL CALIBRATED with Isotonic Regression
+1. Loads track-specific models (RF, GB, XGB) - ALL CALIBRATED with Sigmoid Regression
 2. Generates prediction from each algorithm (calibrated probabilities)
 3. Combines predictions using ensemble averaging
 4. Produces ML confidence score that accurately reflects win probability
@@ -63,6 +63,44 @@ TIMING_FEATURES = [
     'SpeedAtDistance',
 ]
 
+# Nearest-track fallback map.
+# When a PDF contains a track name that has no dedicated trained model, we use
+# the geographically/style-closest trained track rather than silently skipping
+# the entire card.  All predictions made via a fallback are flagged with
+# FallbackTrack set to the name of the model track used.
+#
+# Keys: uppercased track names as they might appear in an unrecognised PDF.
+# Values: exact config track names (case must match config['tracks'] precisely).
+TRACK_NEAREST_FALLBACK = {
+    # Victoria — straight/minor tracks
+    'GEELONG':          'SANDOWN',
+    'CRANBOURNE':       'SANDOWN',
+    'MELTON':           'SANDOWN',
+    'TRARALGON':        'SANDOWN',
+    'DONALD':           'HORSHAM',
+    'HAMILTON':         'WARRNAMBOOL',
+    'ARARAT':           'BALLARAT',
+    # Queensland
+    'IPSWICH':          'Q PARKLANDS',
+    'CAIRNS':           'TOWNSVILLE',
+    'TOOWOOMBA':        'Q PARKLANDS',
+    # NSW — config uses title-case for these two tracks
+    'DAPTO':            'Bulli',
+    'RICHMOND':         'Maitland',
+    'WENTWORTH PARK':   'GOSFORD',
+    'LISMORE':          'GRAFTON',
+    # SA
+    'MOUNT GAMBIER':    'MT GAMBIER',
+    # WA — config uses title-case for Mandurah
+    'CANNINGTON':       'Mandurah',
+    'NORTHAM':          'Mandurah',
+    # NT
+    'ALICE SPRINGS':    'DARWIN',
+    # TAS
+    'LAUNCESTON':       'SANDOWN',
+    'HOBART':           'SANDOWN',
+}
+
 def extract_text_from_pdf(pdf_path):
     """
     Extract text content from a PDF file.
@@ -82,11 +120,16 @@ def extract_text_from_pdf(pdf_path):
 def load_track_ensemble(track_name, models_dir="models"):
     """
     Load all ensemble models for a specific track.
-    
+
+    When the exact track has no trained model, TRACK_NEAREST_FALLBACK is
+    consulted and the geographically/style-closest known track's models are
+    loaded instead.  The returned config dict gains a 'fallback_track' key so
+    callers can surface the substitution to the user.
+
     Returns:
         models: Dict of {algorithm: model}
-        scaler: StandardScaler for this track
-        config: Ensemble configuration
+        scaler: StandardScaler for this track (or fallback track)
+        config: Ensemble configuration (may include 'fallback_track' key)
     """
     config_path = os.path.join(models_dir, "config.pkl")
     
@@ -95,14 +138,30 @@ def load_track_ensemble(track_name, models_dir="models"):
     
     with open(config_path, 'rb') as f:
         config = pickle.load(f)
-    
-    # Check if this track has models
-    if track_name not in config['tracks']:
-        # Return None to use fallback
-        return None, None, config
-    
+
+    known_tracks = config['tracks'] if isinstance(config['tracks'], list) else list(config['tracks'].keys())
+
+    # Build an uppercase-keyed lookup so case differences in PDF track names
+    # (e.g. "Geelong" vs "GEELONG") don't prevent an exact-match hit.
+    known_tracks_upper = {t.upper(): t for t in known_tracks}
+
+    # Resolve the model track: exact match first (case-insensitive), then nearest fallback
+    model_track = None
+    fallback_used = None
+    exact_match = known_tracks_upper.get(track_name.upper())
+    if exact_match is not None:
+        model_track = exact_match
+    else:
+        fallback_candidate = TRACK_NEAREST_FALLBACK.get(track_name.upper())
+        if fallback_candidate and fallback_candidate in known_tracks:
+            model_track = fallback_candidate
+            fallback_used = fallback_candidate
+        else:
+            # No exact match and no known fallback — caller will skip
+            return None, None, config
+
     # Try subdirectory layout first: models/{track}/{algorithm}.pkl
-    track_dir = os.path.join(models_dir, track_name)
+    track_dir = os.path.join(models_dir, model_track)
     
     models = {}
     for alg in config['algorithms']:
@@ -111,17 +170,17 @@ def load_track_ensemble(track_name, models_dir="models"):
             with open(model_path, 'rb') as f:
                 models[alg] = pickle.load(f)
     
-    # Fall back to flat-file layout: models/{track_name}_{algorithm}.pkl
+    # Fall back to flat-file layout: models/{model_track}_{algorithm}.pkl
     if not models:
         for alg in config['algorithms']:
-            flat_path = os.path.join(models_dir, f"{track_name}_{alg}.pkl")
+            flat_path = os.path.join(models_dir, f"{model_track}_{alg}.pkl")
             if os.path.exists(flat_path):
                 with open(flat_path, 'rb') as f:
                     models[alg] = pickle.load(f)
     
     # Load scaler - try subdirectory first, then flat file
     scaler_path = os.path.join(track_dir, "scaler.pkl")
-    flat_scaler_path = os.path.join(models_dir, f"{track_name}_scaler.pkl")
+    flat_scaler_path = os.path.join(models_dir, f"{model_track}_scaler.pkl")
     if os.path.exists(scaler_path):
         with open(scaler_path, 'rb') as f:
             scaler = pickle.load(f)
@@ -135,11 +194,14 @@ def load_track_ensemble(track_name, models_dir="models"):
     # config.pkl may list more features than the scaler was trained on (e.g. when
     # new features were added after the scaler was saved). Using the scaler's own
     # feature names avoids a dimension mismatch error in predict_with_ensemble().
+    config = dict(config)  # shallow copy — don't mutate the global config
     if scaler is not None and hasattr(scaler, 'feature_names_in_'):
         scaler_features = list(scaler.feature_names_in_)
         if scaler_features != config.get('feature_cols', []):
-            config = dict(config)  # shallow copy — don't mutate the global config
             config['feature_cols'] = scaler_features
+
+    if fallback_used:
+        config['fallback_track'] = fallback_used
 
     return models, scaler, config
 
@@ -415,14 +477,20 @@ def main():
                 models, scaler, config = load_track_ensemble(track_name, models_dir)
 
                 if models is None or not models:
-                    print(f"   ⚠️  No models found for {track_name}, skipping")
+                    print(f"   ⚠️  No models found for {track_name} and no nearest-track fallback configured. Skipping.")
                     continue
 
                 if scaler is None:
                     print(f"   ⚠️  No scaler for {track_name} (registered in config but no .pkl file), skipping")
                     continue
 
-                print(f"   Models loaded: {', '.join(models.keys())}")
+                fallback_track = config.get('fallback_track')
+                if fallback_track:
+                    print(f"   ⚠️  FALLBACK: No dedicated model for {track_name}. "
+                          f"Using nearest-track model: {fallback_track}")
+                    print(f"   Models loaded ({fallback_track}): {', '.join(models.keys())}")
+                else:
+                    print(f"   Models loaded: {', '.join(models.keys())}")
 
                 # PER-RACE MODEL INFERENCE
                 # Predictions are made per race so dogs from Race 1 are never
@@ -453,6 +521,10 @@ def main():
                     single_race_df['Low_Confidence'] = raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD
                     if raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD:
                         print(f"      ⚠️  Race {race_num} LOW_CONFIDENCE: spread={raw_spread:.4f}")
+
+                    # Tag rows that used a nearest-track fallback model
+                    if fallback_track:
+                        single_race_df['FallbackTrack'] = fallback_track
 
                     # Per-race rank (rank 1 = top pick within this race)
                     ranks = single_race_df['ML_Confidence'].rank(ascending=False, method='min').astype(int)
@@ -585,11 +657,26 @@ def main():
             f.write(f"Total PDFs processed: {len(pdf_files)}\n")
             f.write(f"Successful predictions: {len(all_predictions)}\n")
             f.write(f"Total dogs predicted: {len(df_all)}\n\n")
+
+            # Warn about any fallback tracks used
+            if 'FallbackTrack' in df_all.columns:
+                fallback_rows = df_all[df_all['FallbackTrack'].notna() & (df_all['FallbackTrack'] != '')]
+                if len(fallback_rows) > 0:
+                    fallback_tracks = fallback_rows[['Track','FallbackTrack']].drop_duplicates()
+                    f.write("⚠️  NEAREST-TRACK FALLBACK USED (no dedicated model for these tracks):\n")
+                    for _, fb_row in fallback_tracks.iterrows():
+                        f.write(f"   {fb_row['Track']} → model: {fb_row['FallbackTrack']}\n")
+                    f.write("\n")
             
             # Per-track summary
             for track in df_all['Track'].unique():
                 track_df = df_all[df_all['Track'] == track]
-                f.write(f"\n{track}:\n")
+                fallback_note = ""
+                if 'FallbackTrack' in track_df.columns:
+                    fb_vals = track_df['FallbackTrack'].dropna().unique()
+                    if len(fb_vals) > 0 and fb_vals[0]:
+                        fallback_note = f" [FALLBACK MODEL: {fb_vals[0]}]"
+                f.write(f"\n{track}{fallback_note}:\n")
                 f.write(f"  Races: {track_df['RaceNumber'].nunique()}\n")
                 f.write(f"  Dogs: {len(track_df)}\n")
                 
