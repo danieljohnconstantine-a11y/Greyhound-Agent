@@ -21,15 +21,15 @@
 ## 2 — Clone the correct branch
 
 ```bash
-cd /mnt/c/Users/danie/OneDrive/Desktop   # or any folder you prefer
+cd /mnt/c/Users/danie/OneDrive/Desktop
 rm -rf Greyhound-Agent
-git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again \
-    https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
 cd Greyhound-Agent
 ```
 
-> ⚠️ **Branch name has changed** from the old instructions.
-> The new branch is `copilot/copy-ml-training-prediction-files-again`.
+> ⚠️ **Branch name has changed** from the old instructions — use `copilot/copy-ml-training-prediction-files-again`.
+>
+> ⚠️ **Common mistake:** do NOT split the `git clone` line with a backslash `\` across two lines when typing in a terminal. If you copy-paste and a space appears before `https`, git will fail with `fatal: protocol ' https' is not supported`. Keep the whole command on one line.
 
 ---
 
@@ -122,6 +122,7 @@ If prompted, use your GitHub username and a Personal Access Token (not your pass
 
 | Problem | Fix |
 |---|---|
+| `fatal: protocol ' https' is not supported` | You have a **space before `https`** — copy the `git clone` line as one unbroken line; never split it with `\` |
 | `ModuleNotFoundError: pdfplumber` | Run `pip install pdfplumber` |
 | `ModuleNotFoundError: xgboost` | Run `pip install xgboost` |
 | `0 tracks trained` | Make sure you are in the repo root and `data/*.pdf` files exist |
