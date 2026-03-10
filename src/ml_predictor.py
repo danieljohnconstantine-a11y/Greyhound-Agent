@@ -790,9 +790,9 @@ def load_historical_data_hybrid(data_dir='data'):
             
             processed_pdfs += 1
             
-            # Progress update every 50 PDFs
-            if processed_pdfs % 50 == 0:
-                print(f"   [INFO] Processed {processed_pdfs}/{total_pdfs} PDFs ({processed_pdfs*100//total_pdfs}%)")
+            # Progress update every 10 PDFs so the terminal doesn't look frozen
+            if processed_pdfs % 10 == 0 or processed_pdfs == 1:
+                print(f"   [INFO] Processed {processed_pdfs}/{total_pdfs} PDFs ({processed_pdfs*100//total_pdfs}%)...")
                 sys.stdout.flush()
                 
             # Force garbage collection every 100 PDFs to prevent memory buildup
