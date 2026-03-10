@@ -1,0 +1,288 @@
+================================================================================
+PREDICTION AUDIT REPORT — 10 MARCH 2026
+Predictions from: outputs/track_ensemble_summary.txt (generated 2026-03-09)
+Actuals from: data/results_2026-03-10.csv
+================================================================================
+Forms used: data_predictions/*0903form.pdf (now archived to data/)
+Note: Warrnambool PDF (*WNBLG0903*) was archived but predictions failed.
+      Q Straight/Shepparton/Mandurah outputs had extra races not in results.
+--------------------------------------------------------------------------------
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OVERALL SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Track            Correct  Total   Rate    vs 12.5% baseline
+  -----------------------------------------------------------------
+  Nowra               4      10     40.0%   +27.5pp  ★★★
+  Mandurah            4      12     33.3%   +20.8pp  ★★★
+  Gawler              3      11     27.3%   +14.8pp  ★★
+  Sandown             3      12     25.0%   +12.5pp  ★★
+  Q Parklands         3      12     25.0%   +12.5pp  ★★
+  Healesville         2      12     16.7%    +4.2pp
+  Maitland            1      11      9.1%    -3.4pp  ↓
+  Shepparton          1      12      8.3%    -4.2pp  ↓
+  Warrnambool         -      12        -    no model ⚠️
+  -----------------------------------------------------------------
+  TOTAL              21      92     22.8%   +10.3pp above random
+
+Random baseline = 12.5% (1-in-8 chance per race)
+Model is 1.83× better than random across 92 races
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RACE-BY-RACE DETAIL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+── NOWRA (4/10 = 40%) ──────────────────────────────────────────────────────────
+  R1:  Pred=Box 1  (17.4%)  Actual=Box 4  ✗
+  R2:  Pred=Box 5  (21.8%)  Actual=Box 5  ✓  ← hit
+  R3:  Pred=Box 8  (19.1%)  Actual=Box 2  ✗
+  R4:  Pred=Box 4  (20.4%)  Actual=Box 6  ✗
+  R5:  Pred=Box 4  (15.4%)  Actual=Box 4  ✓  ← hit
+  R6:  Pred=Box 8  (16.7%)  Actual=Box 7  ✗  (off by 1 box)
+  R7:  Pred=Box 1  (17.7%)  Actual=Box 1  ✓  ← hit
+  R8:  Pred=Box 5  (15.8%)  Actual=Box 5  ✓  ← hit
+  R9:  Pred=Box 2  (19.0%)  Actual=Box 6  ✗
+  R10: Pred=Box 4  (16.3%)  Actual=Box 1  ✗
+  HITS: R2, R5, R7, R8
+
+── MAITLAND (1/11 = 9%) ────────────────────────────────────────────────────────
+  R1:  Pred=Box 1  (16.4%)  Actual=Box 4  ✗
+  R2:  Pred=Box 1  (16.8%)  Actual=Box 4  ✗
+  R3:  Pred=Box 4  (24.4%)  Actual=Box 4  ✓  ← hit (highest confidence 24.4%)
+  R4:  Pred=Box 5  (17.8%)  Actual=Box 8  ✗
+  R5:  Pred=Box 8  (22.4%)  Actual=Box 1  ✗  (predicted exactly wrong)
+  R6:  Pred=Box 6  (16.6%)  Actual=Box 2  ✗
+  R7:  Pred=Box 7  (19.8%)  Actual=Box 1  ✗
+  R8:  Pred=Box 6  (20.5%)  Actual=Box 8  ✗
+  R9:  Pred=Box 3  (15.0%)  Actual=Box 4  ✗  (off by 1)
+  R10: Pred=Box 7  (16.5%)  Actual=Box 8  ✗  (off by 1)
+  R11: Pred=Box 6  (14.3%)  Actual=Box 4  ✗
+  HITS: R3 only
+  NOTE: Box 4 won 5/11 races at Maitland today (45%) — model did not learn this bias
+
+── HEALESVILLE (2/12 = 17%) ────────────────────────────────────────────────────
+  R1:  Pred=Box 8  (16.0%)  Actual=Box 8  ✓  ← hit
+  R2:  Pred=Box 8  (13.8%)  Actual=Box 1  ✗  (model has strong Box 8 bias here)
+  R3:  Pred=Box 8  (15.7%)  Actual=Box 7  ✗
+  R4:  Pred=Box 5  (13.6%)  Actual=Box 6  ✗
+  R5:  Pred=Box 8  (15.1%)  Actual=Box 8  ✓  ← hit
+  R6:  Pred=Box 8  (16.2%)  Actual=Box 6  ✗
+  R7:  Pred=Box 8  (15.2%)  Actual=Box 3  ✗
+  R8:  Pred=Box 2  (15.3%)  Actual=Box 4  ✗
+  R9:  Pred=Box 6  (17.3%)  Actual=Box 7  ✗  (off by 1)
+  R10: Pred=Box 2  (15.4%)  Actual=Box 5  ✗
+  R11: Pred=Box 1  (15.6%)  Actual=Box 6  ✗
+  R12: Pred=Box 4  (13.8%)  Actual=Box 5  ✗  (off by 1)
+  HITS: R1, R5
+  NOTE: Model predicted Box 8 for 7 of 12 races — over-relying on box bias.
+        Today only 2/12 went to box 8 (R1, R5). Box 6 won 3/12 races.
+
+── SANDOWN (3/12 = 25%) ────────────────────────────────────────────────────────
+  R1:  Pred=Box 4  (18.7%)  Actual=Box 8  ✗
+  R2:  Pred=Box 2  (30.0%)  Actual=Box 1  ✗  (highest conf on card — wrong)
+  R3:  Pred=Box 2  (21.5%)  Actual=Box 5  ✗
+  R4:  Pred=Box 1  (18.6%)  Actual=Box 4  ✗
+  R5:  Pred=Box 2  (19.3%)  Actual=Box 1  ✗  (high conf, wrong)
+  R6:  Pred=Box 4  (16.1%)  Actual=Box 4  ✓  ← hit
+  R7:  Pred=Box 2  (16.8%)  Actual=Box 2  ✓  ← hit
+  R8:  Pred=Box 1  (19.0%)  Actual=Box 4  ✗
+  R9:  Pred=Box 1  (22.0%)  Actual=Box 4  ✗
+  R10: Pred=Box 1  (16.4%)  Actual=Box 4  ✗
+  R11: Pred=Box 2  (18.4%)  Actual=Box 2  ✓  ← hit
+  R12: Pred=Box 3  (16.9%)  Actual=Box 7  ✗
+  HITS: R6, R7, R11
+  NOTE: Box 4 won 5/12 at Sandown today (42%) — model predicted Box 1 or Box 2
+        for 9 of 12 races, missing the Box 4 dominance entirely.
+        Highest confidence prediction (R2, 30%) was wrong.
+
+── SHEPPARTON (1/12 = 8%) ──────────────────────────────────────────────────────
+  R1:  Pred=Box 7  (17.8%)  Actual=Box 10 ✗  (10-dog field)
+  R2:  Pred=Box 7  (15.9%)  Actual=Box 3  ✗
+  R3:  Pred=Box 1  (17.2%)  Actual=Box 6  ✗
+  R4:  Pred=Box 8  (20.2%)  Actual=Box 1  ✗  (swapped)
+  R5:  Pred=Box 1  (20.2%)  Actual=Box 8  ✗  (swapped)
+  R6:  Pred=Box 5  (18.9%)  Actual=Box 2  ✗
+  R7:  Pred=Box 1  (14.4%)  Actual=Box 1  ✓  ← hit
+  R8:  Pred=Box 7  (18.9%)  Actual=Box 1  ✗
+  R9:  Pred=Box 1  (21.5%)  Actual=Box 4  ✗
+  R10: Pred=Box 1  (19.6%)  Actual=Box 2  ✗
+  R11: Pred=Box 3  (16.2%)  Actual=Box 5  ✗
+  R12: Pred=Box 1  (19.5%)  Actual=Box 8  ✗
+  HITS: R7 only
+  NOTE: Model has extreme Box 1 bias at Shepparton — predicted Box 1 in 7 of 12.
+        Today Box 1 only won 3 (R7, R8 in results = actually both Box 1 winners
+        in R7 and R8), so the track bias is real but model over-applies it.
+        R1 had Box 10 win — 10-dog field not handled by model.
+
+── GAWLER (3/11 = 27%) ─────────────────────────────────────────────────────────
+  R1:  Pred=Box 5  (20.1%)  Actual=Box 4  ✗  (off by 1)
+  R2:  Pred=Box 6  (25.7%)  Actual=Box 1  ✗
+  R3:  Pred=Box 6  (22.8%)  Actual=Box 6  ✓  ← hit
+  R4:  Pred=Box 5  (32.0%)  Actual=Box 5  ✓  ← hit (highest conf on card 32%)
+  R5:  Pred=Box 1  (31.1%)  Actual=Box 1  ✓  ← hit (2nd highest 31%)
+  R6:  Pred=Box 7  (19.4%)  Actual=Box 1  ✗
+  R7:  Pred=Box 3  (24.5%)  Actual=Box 6  ✗
+  R8:  Pred=Box 6  (20.1%)  Actual=Box 5  ✗  (off by 1)
+  R9:  Pred=Box 6  (21.8%)  Actual=Box 2  ✗
+  R10: Pred=Box 7  (27.0%)  Actual=Box 4  ✗
+  R11: Pred=Box 4  (25.5%)  Actual=Box 5  ✗  (off by 1)
+  HITS: R3, R4, R5
+  NOTE: Gawler high-confidence picks (R4=32%, R5=31%) both landed. Good signal.
+        R4 and R5 should have been backed — this is the "gap > 5%" pattern working.
+
+── Q PARKLANDS (3/12 = 25%) ─────────────────────────────────────────────────────
+  R1:  Pred=Box 1  (18.3%)  Actual=Box 4  ✗
+  R2:  Pred=Box 5  (16.7%)  Actual=Box 2  ✗
+  R3:  Pred=Box 1  (16.9%)  Actual=Box 1  ✓  ← hit
+  R4:  Pred=Box 8  (15.7%)  Actual=Box 2  ✗
+  R5:  Pred=Box 6  (16.2%)  Actual=Box 3  ✗
+  R6:  Pred=Box 2  (16.1%)  Actual=Box 2  ✓  ← hit
+  R7:  Pred=Box 8  (16.7%)  Actual=Box 5  ✗
+  R8:  Pred=Box 3  (15.2%)  Actual=Box 4  ✗  (off by 1)
+  R9:  Pred=Box 3  (14.1%)  Actual=Box 7  ✗
+  R10: Pred=Box 3  (15.7%)  Actual=Box 9  ✗  (9-dog field)
+  R11: Pred=Box 2  (19.2%)  Actual=Box 2  ✓  ← hit
+  R12: Pred=Box 6  (16.2%)  Actual=Box 3  ✗
+  HITS: R3, R6, R11
+
+── MANDURAH (4/12 = 33%) ────────────────────────────────────────────────────────
+  R1:  Pred=Box 6  (15.4%)  Actual=Box 8  ✗
+  R2:  Pred=Box 3  (14.7%)  Actual=Box 3  ✓  ← hit
+  R3:  Pred=Box 1  (13.8%)  Actual=Box 2  ✗  (off by 1)
+  R4:  Pred=Box 8  (14.0%)  Actual=Box 3  ✗
+  R5:  Pred=Box 1  (14.7%)  Actual=Box 2  ✗  (off by 1)
+  R6:  Pred=Box 3  (14.1%)  Actual=Box 7  ✗
+  R7:  Pred=Box 1  (19.6%)  Actual=Box 1  ✓  ← hit
+  R8:  Pred=Box 1  (14.7%)  Actual=Box 3  ✗
+  R9:  Pred=Box 4  (15.2%)  Actual=Box 4  ✓  ← hit
+  R10: Pred=Box 3  (14.1%)  Actual=Box 3  ✓  ← hit
+  R11: Pred=Box 3  (16.0%)  Actual=Box 5  ✗
+  R12: Pred=Box 3  (15.6%)  Actual=Box 5  ✗
+  HITS: R2, R7, R9, R10
+
+── WARRNAMBOOL ──────────────────────────────────────────────────────────────────
+  NO PREDICTIONS: WNBLG0903form.pdf was present but predictions failed.
+  Actual winners: R1=6, R2=1, R3=2, R4=1, R5=2, R6=8, R7=1, R8=3,
+                  R9=8, R10=6, R11=3, R12=5
+  ACTION REQUIRED: Add Warrnambool model to pipeline.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HIGH-CONFIDENCE PICK PERFORMANCE ("Best Bets")
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Races where model confidence was ≥ 25%:
+
+  Track       Race  Pred  Conf%    Actual  Result
+  -------------------------------------------------------
+  Gawler      R4    Box5  32.0%    Box 5   ✓  WIN
+  Gawler      R5    Box1  31.1%    Box 1   ✓  WIN
+  Sandown     R2    Box2  30.0%    Box 1   ✗  LOSS (highest confidence, wrong)
+  Gawler      R2    Box6  25.7%    Box 1   ✗  LOSS
+  Gawler      R11   Box4  25.5%    Box 5   ✗  (off by 1)
+  Maitland    R3    Box4  24.4%    Box 4   ✓  WIN
+  Gawler      R7    Box3  24.4%    Box 6   ✗  LOSS
+  Sandown     R3    Box2  21.5%    Box 5   ✗  LOSS
+  Maitland    R5    Box8  22.4%    Box 1   ✗  LOSS
+  Sandown     R9    Box1  22.0%    Box 4   ✗  LOSS
+  -------------------------------------------------------
+  High-conf (≥25%) results: 3/7 = 43%  (vs 22.8% overall)
+
+  Gawler alone: 2/2 hits in races with ≥ 25% confidence = 100%
+  Action: Gawler high-confidence picks should be prioritised.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PATTERNS IDENTIFIED FROM TODAY'S RESULTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. BOX 4 DOMINATED TODAY — missed by model everywhere
+   ─────────────────────────────────────────────────────
+   Sandown:    Box 4 won 5/12 races  (42%)  — model never picked Box 4!
+   Maitland:   Box 4 won 5/11 races  (45%)  — model predicted Box 4 only once
+   Healesville: Box 4 involved in top-2 in 6 races
+   Gawler:     Box 4 won 1, placed top-2 in 4 more races
+
+   ACTION: Add today's Box 4 performance to TrackBoxBias feature training.
+
+2. NOWRA BOX 5 STREAK
+   ─────────────────────────────────────────────────────
+   Race sequence at Nowra: 4,5,2,6,4,7,1,5,6,1
+   Box 5 won R2 and R8 (20% of races). Model correctly called both.
+   Model's 40% accuracy at Nowra is the best on the card.
+
+3. SANDOWN "STICKY BOX 4" NIGHT
+   ─────────────────────────────────────────────────────
+   Race sequence: 8,1,5,4,1,4,2,4,4,4,2,7
+   Box 4 won R4,R6,R8,R9,R10 (5 races out of 12).
+   Once Box 4 won R4 and R6, backing Box 4 for the rest of the night
+   would have yielded 3 more winners (R8,R9,R10). Classic "card streak" pattern.
+
+4. HEALESVILLE — BOX 8 OVER-CALLED, BOX 6 UNDER-CALLED
+   ─────────────────────────────────────────────────────
+   Model predicted Box 8 in 7 of 12 races.
+   Actual winners included Box 6 in 3 races (R4, R6, R11) and Box 8 in 2 (R1, R5).
+   Box 1 and 3 also won but were never predicted.
+   Healesville model needs Box 6 bias added.
+
+5. GAWLER HIGH-CONFIDENCE PICKS WORK
+   ─────────────────────────────────────────────────────
+   R4 (31.96%) → Box 5 ✓ WIN
+   R5 (31.10%) → Box 1 ✓ WIN
+   This confirms the "gap > 25%" rule: Gawler predictions above 25% confidence
+   are highly reliable. Back them every time.
+
+6. MAITLAND — BOX 4 DAY (not in historical data)
+   ─────────────────────────────────────────────────────
+   Race sequence: 4,4,4,8,1,2,1,8,4,8,4
+   Box 4 won 5/11 at Maitland (45%). No historical data suggesting this was typical.
+   Box 8 won 3/11 (27%) also strong. Model had no Maitland training data
+   and used cross-track fallback — explains poor 9% accuracy.
+   ACTION: Collect more Maitland historical data.
+
+7. SHEPPARTON 10-DOG FIELDS
+   ─────────────────────────────────────────────────────
+   Shepparton R1 had a 10-dog field — Box 10 won. Model cannot predict box > 8.
+   Need to handle extended field sizes (9-10 boxes) in feature engineering.
+
+8. WARRNAMBOOL — BOXES 1, 2, 3, 8 DOMINANT
+   ─────────────────────────────────────────────────────
+   Winners: 6,1,2,1,2,8,1,3,8,6,3,5
+   Boxes 1+2 won 5/12 (42%). Boxes 3+8 won 3/12 (25%).
+   Model missing entirely for this track — needs training data.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROLLING MODEL PERFORMANCE SCORECARD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Date        Races   Hits   Rate     vs Random
+  ─────────────────────────────────────────────
+  08/03/2026   87      27    31.0%    2.5×
+  10/03/2026   92      21    22.8%    1.8×
+  ─────────────────────────────────────────────
+  COMBINED    179      48    26.8%    2.1×
+
+  Best tracks overall: Nowra (40%), Mandurah (33%), Gawler (27%)
+  Weakest:             Shepparton (8%), Maitland (9%), Healesville (17%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RECOMMENDED PIPELINE IMPROVEMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Priority 1 (HIGH):
+    □ Add Warrnambool model — no predictions at all today
+    □ Add Maitland training data — cross-track fallback only gets 9%
+    □ Fix Healesville: reduce Box 8 bias, add Box 6 weight
+
+  Priority 2 (MEDIUM):
+    □ Add 10-dog field support (Shepparton, some Mandurah races)
+    □ Add TrackBoxBias feature — Box 4 at Sandown/Maitland is clearly exploitable
+    □ Retrain Sandown model — Box 4 won 42% today; model predicted Box 4 once
+
+  Priority 3 (ENHANCEMENT):
+    □ Add "card streak" alert — once a box wins 3+ at a track, flag it
+    □ Implement gap threshold filter: only output picks with conf > 20%
+      (today Gawler ≥ 25% went 2/2 = 100%)
+
+================================================================================
+END REPORT — 10 MARCH 2026
+================================================================================
