@@ -1,9 +1,14 @@
-# How to Train All Track Models Locally (Updated March 2026)
+# How to Train and Run Predictions Locally (Updated March 2026)
 
-> **Use this guide** — the branch has been updated with sigmoid calibration, correct
-> PDF year detection, and track-code fixes. Training now takes ~20 minutes on a
-> modern laptop. Each model file is ≤ 2.3 MB (was 9–24 MB), so all files commit to
-> GitHub directly without LFS.
+> **Quick-start summary for Windows users (double-click the bat file):**
+>
+> | Step | Script | Bat file |
+> |---|---|---|
+> | Train all track models | `retrain_all_tracks_sigmoid.py` | **`retrain_all_tracks_sigmoid.bat`** ✅ |
+> | Run predictions on today's PDFs | `run_track_ensemble_predictions.py` | `run_track_ensemble_predictions.bat` |
+> | Parse PDFs to Excel (heuristic only) | `src/main.py` | `run_parser.bat` |
+>
+> ❌ **Do NOT use `train_ml_track_ensemble.bat`** — it calls the old isotonic script and is obsolete.
 
 ---
 
@@ -62,6 +67,12 @@ rm -f models/*.pkl
 
 ## 6 — Run full training (uses ALL PDFs + results CSVs in `data/`)
 
+**Windows users — just double-click:**
+```
+retrain_all_tracks_sigmoid.bat
+```
+
+**Or from the terminal:**
 ```bash
 python retrain_all_tracks_sigmoid.py
 ```
@@ -119,6 +130,37 @@ git push origin copilot/copy-ml-training-prediction-files-again
 ```
 
 If prompted, use your GitHub username and a Personal Access Token (not your password).
+
+---
+
+## 9 — Run predictions on today's races
+
+1. Copy today's PDF form guides into the `data_predictions/` folder.
+2. **Windows users — double-click:**
+   ```
+   run_track_ensemble_predictions.bat
+   ```
+   **Or from the terminal:**
+   ```bash
+   python run_track_ensemble_predictions.py
+   ```
+3. Open `outputs/track_ensemble_predictions.xlsx` for the results.
+
+---
+
+## Bat file reference
+
+## Bat file reference
+
+| Bat file | What it runs | When to use |
+|---|---|---|
+| `retrain_all_tracks_sigmoid.bat` | `retrain_all_tracks_sigmoid.py` | After getting new results CSVs — retrain all models |
+| `run_track_ensemble_predictions.bat` | `run_track_ensemble_predictions.py` | Daily — generate predictions from PDFs in `data_predictions/` |
+| `run_parser.bat` | `src/main.py` | Parse PDFs with heuristic scorer only (no ML) |
+| `run_main.bat` | `main.py` | Legacy entry point |
+| `ORGANIZE_ALL_TRACKS.bat` | `reorganize_models_by_track.py` + `add_training_metrics.py` | One-off: reorganise models into subdirectories |
+
+> ❌ **`train_ml_track_ensemble.bat`** — **DO NOT USE** — obsolete isotonic script.
 
 ---
 
