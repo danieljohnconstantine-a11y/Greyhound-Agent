@@ -185,9 +185,10 @@ def compute_features(df):
     # TrackConditionAdj: Track condition adjustment.
     # SOURCE: NOT from PDF — greyhound form PDFs do not include track condition
     # (Good / Heavy / Wet etc.).  Set to 1.0 (neutral) for all dogs.
-    # Because it is constant across every row in every race, the scaler reduces its
-    # variance to 0 during training and the ML models effectively ignore it.
-    # Kept in the feature list for backward compatibility with trained model files.
+    # NOTE: This column is excluded from ML training (excluded in retrain_all_tracks_sigmoid.py
+    # and train_ml_track_ensemble.py) because it is constant across every row in every race
+    # and contributes zero information to the models.  Computed here only for any
+    # legacy code that may reference it directly.
     df["TrackConditionAdj"] = 1.0
     
     # RestFactor: Calculate from DLR (Days Last Race) if not in parsed data
@@ -373,28 +374,25 @@ def compute_features(df):
         df["DLWFactor"] = 0.5
         print("[WARNING] WARNING: DLW not found - setting DLWFactor to 0.5 (neutral).")
     
-    # Weight Factor: Optimal racing weight typically 28-32kg for greyhounds
-    # Analysis of 320 races showed dogs at 30-31kg have slightly higher win rates
-    # FACTUAL DATA ONLY: If Weight=0 for all dogs (common in greyhound PDFs), neutralize this feature
+    # Weight Factor: Greyhound PDFs never include weight data → Weight=0 always.
+    # WeightFactor is therefore always 1.0 (neutral) for every dog in every race.
+    # NOTE: Both 'Weight' and 'WeightFactor' are excluded from ML training (removed
+    # from FEATURE_COLS in retrain_all_tracks_sigmoid.py and added to exclude_cols
+    # in train_ml_track_ensemble.py).  They are computed here only for any legacy
+    # code that may reference them directly.
     if "Weight" in df.columns:
         df["Weight"] = pd.to_numeric(df["Weight"], errors="coerce")
-        # Check if all weights are 0 or missing (factual data shows 0 for greyhounds)
         valid_weights = df["Weight"][(df["Weight"].notna()) & (df["Weight"] > 0)]
         if len(valid_weights) == 0:
-            # All weights are 0 or missing - neutralize this feature (don't create constant)
-            df["WeightFactor"] = 1.0  # Neutral value - no differentiation
-            print("[INFO] INFO: All weights are 0 or missing (factual data) - WeightFactor set to neutral 1.0 for all dogs")
+            df["WeightFactor"] = 1.0
         else:
-            # Valid weight data exists - calculate normally
             df["WeightFactor"] = df["Weight"].apply(
                 lambda w: 1.0 if pd.notna(w) and 29.5 <= w <= 31.5 else 
                          0.9 if pd.notna(w) and 28 <= w <= 33 else 
                          0.7 if pd.notna(w) and 25 <= w <= 36 else 0.5
             )
-            print(f"[OK] Calculated WeightFactor for {len(valid_weights)} dogs with valid weight data")
     else:
         df["WeightFactor"] = 1.0
-        print("[INFO] INFO: Weight not found - WeightFactor set to neutral 1.0 (no differentiation).")
     
     # Draw Factor: Inside draws (1-4) generally perform better
     # Analysis of 320 races showed draws 1-3 have ~17% higher win rate than draws 7-10

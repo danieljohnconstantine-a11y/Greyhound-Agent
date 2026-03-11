@@ -185,10 +185,14 @@ def extract_features_and_labels(race_data_list, winners_list, output_dir="models
     
     logger.info(f"Combined dataframe has {len(df)} rows")
     
-    # Identify feature columns (exclude metadata and labels)
+    # Identify feature columns (exclude metadata, labels, and zero-variance constants)
+    # Weight/WeightFactor are always 0/1.0 (PDFs have no weight data).
+    # TrackConditionAdj is always 1.0 (PDFs have no track condition data).
+    # Constant features contribute nothing to model quality and inflate file sizes.
     exclude_cols = ['Winner', 'SampleWeight', 'FinishPosition', 'DogName', 'Track', 
                     'Date', 'Race', 'RaceNumber', 'Trainer', 'Owner', 'Sire', 'Dam', 
-                    'Color', 'Sex', 'Age']
+                    'Color', 'Sex', 'Age',
+                    'Weight', 'WeightFactor', 'TrackConditionAdj']
     feature_cols = [col for col in df.columns if col not in exclude_cols and df[col].dtype in [np.float64, np.int64]]
     
     logger.info(f"Identified {len(feature_cols)} feature columns")

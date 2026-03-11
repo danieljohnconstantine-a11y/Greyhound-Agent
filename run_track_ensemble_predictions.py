@@ -372,15 +372,17 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
             uncal = _get_uncalibrated_preds(model, X_scaled)
             if uncal is not None:
                 n_unique_uncal = len(np.unique(uncal))
-                collapse_label = ("calibration collapsed" if is_true_collapse
-                                  else f"near-constant (spread={pred_spread*100:.4f}%)")
+                collapse_label = ("calibration collapsed (isotonic)" if is_true_collapse
+                                  else f"near-collapsed (spread={pred_spread*100:.4f}%)")
                 print(f"      ⚠️  {alg.upper()}: {collapse_label} – "
                       f"{n_unique_calibrated} unique value(s) across {n_dogs} dogs. "
-                      f"Using uncalibrated predictions ({n_unique_uncal} unique values).")
+                      f"Falling back to uncalibrated predictions ({n_unique_uncal} unique values). "
+                      f"FIX: retrain this track with: python retrain_all_tracks_sigmoid.py --tracks <track>")
                 pred_proba = uncal
             else:
                 print(f"      ⚠️  {alg.upper()}: calibration collapsed scores "
-                      f"and base estimator unavailable.")
+                      f"and base estimator unavailable. "
+                      f"FIX: retrain this track with: python retrain_all_tracks_sigmoid.py --tracks <track>")
 
         # Store individual predictions (RAW from model - no failed temperature scaling)
         individual_scores[alg] = pred_proba

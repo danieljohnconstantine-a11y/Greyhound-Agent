@@ -89,14 +89,21 @@ try:
 except ImportError:
     pass
 
-# ── feature list (must match the existing 76-feature scaler) ──────────────────
+# ── feature list ──────────────────────────────────────────────────────────────
+# THREE features removed vs the original 76-feature list:
+#   'Weight'           — always 0 in greyhound PDFs; zero-variance → useless
+#   'WeightFactor'     — derived from Weight; always 1.0 (neutral) → useless
+#   'TrackConditionAdj'— always 1.0 (no track condition in PDFs) → useless
+# Zero-variance features are scaled to 0 by StandardScaler and contribute
+# nothing to model quality but inflate the feature vector and distort feature
+# importance calculations.  Removing them improves GB discrimination spread.
 FEATURE_COLS = [
-    'Box','Weight','Draw','CareerWins','CareerPlaces','CareerStarts','PrizeMoney',
+    'Box','Draw','CareerWins','CareerPlaces','CareerStarts','PrizeMoney',
     'RTC','DLR','DLW','Distance','BestTimeSec','SectionalSec','BoxBiasFactor',
-    'TrackConditionAdj','RestFactor','Speed_kmh','EarlySpeedIndex',
+    'RestFactor','Speed_kmh','EarlySpeedIndex',
     'FinishConsistency','MarginAvg','FormMomentum','ConsistencyIndex',
     'RecentFormBoost','DistanceSuit','TrainerStrikeRate','OverexposedPenalty',
-    'PlaceRate','DLWFactor','WeightFactor','DrawFactor','FormMomentumNorm',
+    'PlaceRate','DLWFactor','DrawFactor','FormMomentumNorm',
     'MarginFactor','RTCFactor','BoxPositionBias','BoxPlaceRate','BoxTop3Rate',
     'TrackBox1Adjustment','TrackBox4Adjustment','TrackComprehensiveAdjustment',
     'AgeMonths','AgeFactor','RailPreference','BoxPenaltyFactor','SpeedAtDistance',
@@ -110,10 +117,22 @@ FEATURE_COLS = [
     'RecentPlaceStreak','CloserBonus','TrainerMomentum','FinalScore',
 ]
 
-assert len(FEATURE_COLS) == 76, f"Expected 76 features, got {len(FEATURE_COLS)}"
+assert len(FEATURE_COLS) == 73, f"Expected 73 features, got {len(FEATURE_COLS)}"
 
+# ── adaptive GB hyperparameter thresholds ─────────────────────────────────────
+# GradientBoostingClassifier risk of near-flat outputs rises sharply when the
+# training set is small.  A shallower tree with lower learning rate prevents the
+# ensemble from saturating at extreme log-odds values on tiny datasets.
+# Thresholds determined empirically from the spread-collapse history:
+#   < 200 rows → "small"  (e.g. Gunnedah 93 train rows, Murray Bridge 41 rows)
+#   200–499    → "medium" (e.g. Maitland 180, Shepparton 200)
+#   ≥ 500      → "large"  (e.g. Sandown 900+, Meadows 600+)
+GB_SMALL_THRESHOLD  = 200   # rows in training split; below → use shallow config
+GB_MEDIUM_THRESHOLD = 500   # rows; below (but ≥ SMALL) → use standard config
 
-# ── training function (sigmoid calibration, depth cap) ───────────────────────
+GB_SMALL_PARAMS  = dict(n_estimators=100, learning_rate=0.05, max_depth=3, min_samples_leaf=5)
+GB_MEDIUM_PARAMS = dict(n_estimators=150, learning_rate=0.08, max_depth=4, min_samples_leaf=4)
+GB_LARGE_PARAMS  = dict(n_estimators=200, learning_rate=0.10, max_depth=4, min_samples_leaf=3)
 
 def train_track(df, track_name, verbose=True):
     """
@@ -179,13 +198,27 @@ def train_track(df, track_name, verbose=True):
     # Wrapping it with CalibratedClassifierCV(sigmoid) squashes the output
     # to near-constant (< 0.5% spread) on small fields.  We train GB directly
     # and store the raw model — no additional calibration layer needed.
+    #
+    # Adaptive hyperparameters based on dataset size:
+    #   < 200 rows  → lighter model to avoid overfitting on tiny dataset
+    #   200-500 rows → standard model
+    #   > 500 rows  → richer model
+    n_train = len(X_train)
+    if n_train < GB_SMALL_THRESHOLD:
+        gb_params = GB_SMALL_PARAMS
+        gb_label = f"depth={GB_SMALL_PARAMS['max_depth']}, lr={GB_SMALL_PARAMS['learning_rate']} (small dataset)"
+    elif n_train < GB_MEDIUM_THRESHOLD:
+        gb_params = GB_MEDIUM_PARAMS
+        gb_label = f"depth={GB_MEDIUM_PARAMS['max_depth']}, lr={GB_MEDIUM_PARAMS['learning_rate']} (medium dataset)"
+    else:
+        gb_params = GB_LARGE_PARAMS
+        gb_label = f"depth={GB_LARGE_PARAMS['max_depth']}, lr={GB_LARGE_PARAMS['learning_rate']} (large dataset)"
     if verbose:
-        print(f"    GB (native, no extra cal) ...", end='', flush=True)
+        print(f"    GB (native, no extra cal, {gb_label}) ...", end='', flush=True)
     gb = GradientBoostingClassifier(
-        n_estimators=150, learning_rate=0.10, max_depth=4,
-        min_samples_leaf=3, subsample=0.8, random_state=42,
+        **gb_params, subsample=0.8, random_state=42,
     )
-    gb.fit(X_train_sc, y_train)  # GB does not support sample_weight in fit()
+    gb.fit(X_train_sc, y_train, sample_weight=w_train)
     models['gb'] = gb
 
     gb_proba  = gb.predict_proba(X_test_sc)[:, 1]
@@ -274,12 +307,15 @@ TRACK_NAME_MAP = {
     'BetDeluxe Rockhampton':       'ROCKHAMPTON',
     'BETDELUXE ROCKHAMPTON':       'ROCKHAMPTON',
     'Rockhampton':                 'ROCKHAMPTON',
+    'ROCKHAMPTON':                 'ROCKHAMPTON',
     'Broken Hill':                 'BROKEN HILL',
+    'BROKEN HILL':                 'BROKEN HILL',
     'Bulli':                       'Bulli',
     'BULLI':                       'Bulli',
     'Cannington':                  'CANNINGTON',
     'CANNINGTON':                  'CANNINGTON',
     'Casino':                      'CASINO',
+    'CASINO':                      'CASINO',
     'Darwin':                      'DARWIN',
     'DARWIN':                      'DARWIN',
     'Dubbo':                       'DUBBO',
@@ -295,11 +331,14 @@ TRACK_NAME_MAP = {
     'Grafton':                     'GRAFTON',
     'GRAFTON':                     'GRAFTON',
     'Gunnedah':                    'GUNNEDAH',
+    'GUNNEDAH':                    'GUNNEDAH',
     'Healesville':                 'HEALESVILLE',
     'HEALESVILLE':                 'HEALESVILLE',
     'Hobart':                      'HOBART',
     'Tasmania':                    'HOBART',
+    'HOBART':                      'HOBART',
     'Horsham':                     'HORSHAM',
+    'HORSHAM':                     'HORSHAM',
     'Ladbrokes Gardens':           'GARDENS',
     'LADBROKES GARDENS':           'GARDENS',
     'Gardens':                     'GARDENS',
@@ -330,6 +369,7 @@ TRACK_NAME_MAP = {
     'Richmond':                    'RICHMOND',
     'RICHMOND':                    'RICHMOND',
     'Richmond Straight':           'RICHMOND STRAIGHT',
+    'RICHMOND STRAIGHT':           'RICHMOND STRAIGHT',
     'Sale':                        'SALE',
     'SALE':                        'SALE',
     'Sandown':                     'SANDOWN',
