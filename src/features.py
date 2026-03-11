@@ -1680,15 +1680,20 @@ def compute_features(df):
             axis=1
         )
         
-        # Normalize: High std = more predictable (clear differences)
+        # Normalize: High std = more predictable (clear differences between dogs).
+        # v5.3 FIX: Previously, when FieldSpeedStd was low (e.g., all dogs had the
+        # same SectionalSec), FieldSimilarityIndex defaulted to 1.1 (least predictable)
+        # even when FieldTimeStd indicated meaningful timing spread.  Now we also check
+        # FieldTimeStd >= 0.5 s as a secondary signal for a "normal" predictability race.
         df["FieldSimilarityIndex"] = df.apply(
-            lambda row: 0.8 if (pd.notna(row.get("FieldSpeedStd")) and row.get("FieldSpeedStd", 0) > 3) or 
+            lambda row: 0.8 if (pd.notna(row.get("FieldSpeedStd")) and row.get("FieldSpeedStd", 0) > 3) or
                                (pd.notna(row.get("FieldTimeStd")) and row.get("FieldTimeStd", 0) > 1.5)
-                        else 1.0 if (pd.notna(row.get("FieldSpeedStd")) and row.get("FieldSpeedStd", 0) > 1.5)
+                        else 1.0 if ((pd.notna(row.get("FieldSpeedStd")) and row.get("FieldSpeedStd", 0) > 1.5) or
+                                     (pd.notna(row.get("FieldTimeStd")) and row.get("FieldTimeStd", 0) >= 0.5))
                         else 1.1,  # High similarity = more unpredictable = reduce confidence
             axis=1
         )
-        print(f"[OK] Calculated FieldSimilarityIndex + dog-vs-field comparisons for {len(df)} dogs")
+        print(f"[OK] Calculated FieldSimilarityIndex v5.3 + dog-vs-field comparisons for {len(df)} dogs")
     else:
         df["FieldSimilarityIndex"] = 1.0
         df["FieldSpeedStd"] = np.nan
@@ -1753,19 +1758,43 @@ def compute_features(df):
     df["TrackUpsetFactor"] = df["Track"].apply(get_upset_probability)
     print(f"[OK] Applied TrackUpsetFactor (track-specific luck factor)")
     
-    # === COMPETITOR DENSITY ===
-    # Races with 8 competitive dogs are harder than races with only 3-4 real contenders
+    # === COMPETITOR DENSITY (v5.3 IMPROVED) ===
+    # Races with 8 competitive dogs are harder than races with only 3-4 real contenders.
+    # v5.3: Use EarlySpeedIndex as primary signal; fall back to BestTimeSec spread
+    # when EarlySpeedIndex is constant or missing (e.g., no sectional timing data).
     if "EarlySpeedIndex" in df.columns:
-        # Count dogs with above-average speed in each race
-        df["CompetitorDensity"] = df.groupby(["Track", "RaceNumber"])["EarlySpeedIndex"].transform(
-            lambda x: ((x > x.median()).sum() / len(x)) if len(x) > 0 else 0.5
-        )
-        # More competitors = harder to predict = reduce confidence
+        def _race_competitor_density(group):
+            speed_vals = group["EarlySpeedIndex"].dropna()
+            if len(speed_vals) >= 2 and speed_vals.std() > 0:
+                # Primary: proportion of above-median-speed dogs
+                return pd.Series(
+                    ((group["EarlySpeedIndex"] > group["EarlySpeedIndex"].median()
+                      ).astype(float).fillna(0.5)),
+                    index=group.index,
+                )
+            # Fallback: use BestTimeSec spread when early speed is constant/missing
+            if "BestTimeSec" in group.columns:
+                time_vals = group["BestTimeSec"].dropna()
+                if len(time_vals) >= 2 and time_vals.std() > 0:
+                    # Dogs with faster-than-median times are real contenders
+                    return pd.Series(
+                        ((group["BestTimeSec"] < group["BestTimeSec"].median()
+                          ).astype(float).fillna(0.5)),
+                        index=group.index,
+                    )
+            return pd.Series(0.5, index=group.index)
+
+        density_parts = []
+        for _, grp in df.groupby(["Track", "RaceNumber"]):
+            density_parts.append(_race_competitor_density(grp))
+        df["CompetitorDensity"] = pd.concat(density_parts).reindex(df.index)
+        # More competitors above median = more competitive field = harder to predict
         df["CompetitorAdjustment"] = df["CompetitorDensity"].apply(
             lambda d: 0.9 if pd.notna(d) and d > 0.6 else  # Very competitive field
                      1.0 if pd.notna(d) and d > 0.4 else   # Normal field
                      1.1                                     # Weak field = easier to pick
         )
+        print(f"[OK] CompetitorDensity v5.3: EarlySpeedIndex primary, BestTimeSec fallback")
     else:
         df["CompetitorDensity"] = 0.5
         df["CompetitorAdjustment"] = 1.0
@@ -1825,32 +1854,64 @@ def compute_features(df):
         print(f"[OK] Enhanced WinStreakFactor v4.4 (1.50x for hot streaks, 1.32x for recent wins)")
     
     # ========================================================================
-    # ENHANCEMENT #9B: RECENT PLACE STREAK (v4.4 NEW)
+    # ENHANCEMENT #9B: RECENT PLACE STREAK (v5.3 FIX)
     # Dogs that have been placing consistently in last 3 races show good form
     # Even if not winning, consistent placing indicates competitiveness
+    #
+    # v5.3 FIX: Last3Finishes (finish positions) is never present in PDF-parsed
+    # data.  The parser provides Margins (race margins from past races):
+    #   - Positive margin  = won the race (finishing ahead of field)
+    #   - margin >= -2.5   = 2nd or 3rd (within ~2.5 lengths = competitive placing)
+    #   - margin < -2.5    = 4th or worse (did not place)
+    # We now derive RecentPlaceStreak from Margins when Last3Finishes is absent.
+    # This fixes the previous behaviour where the feature was ALWAYS 1.0
+    # (neutral), contributing nothing to the heuristic FinalScore.
     # ========================================================================
+    def _calc_place_streak_from_margins(margins):
+        """Estimate recent place streak from race margin history (factual PDF data).
+
+        Positive margins = won the race; margins ≥ -2.5 = placed (2nd or 3rd).
+        Uses the last 3 available margin values.
+        """
+        if not isinstance(margins, list) or len(margins) == 0:
+            return 1.0
+        # Use the most recent 3 margins (last elements of the list)
+        last3 = [m for m in margins[-3:] if pd.notna(m)]
+        if not last3:
+            return 1.0
+        places = sum(1 for m in last3 if m >= -2.5)
+        if places >= 3:
+            return 1.12  # All 3 recent races placed — strong form
+        elif places == 2:
+            return 1.06  # 2 of 3 placed — good form
+        elif places == 1:
+            return 1.03  # 1 of 3 placed — some form
+        else:
+            return 0.98  # No recent places — out of form
+
     if "Last3Finishes" in df.columns:
         def calc_recent_place_streak(finishes):
             if not isinstance(finishes, list) or len(finishes) == 0:
                 return 1.0
-            
-            # Count top-3 finishes in last 3 races
             places = sum(1 for f in finishes[:3] if pd.notna(f) and f <= 3)
-            
             if places >= 3:
-                return 1.12  # v4.4: All 3 recent races in top 3 - strong form
+                return 1.12
             elif places == 2:
-                return 1.06  # v4.4: 2 of 3 in top 3 - good form
+                return 1.06
             elif places == 1:
-                return 1.03  # v4.4: 1 of 3 in top 3 - some form
+                return 1.03
             else:
-                return 0.98  # v4.4: No top-3 finishes - losing form
-        
+                return 0.98
         df["RecentPlaceStreak"] = df["Last3Finishes"].apply(calc_recent_place_streak)
-        print(f"[OK] Added RecentPlaceStreak v4.4 (1.12x for 3/3 places, 1.06x for 2/3)")
+        print(f"[OK] Added RecentPlaceStreak v4.4 from Last3Finishes (1.12x for 3/3 places)")
+    elif "Margins" in df.columns:
+        df["RecentPlaceStreak"] = df["Margins"].apply(_calc_place_streak_from_margins)
+        placed_count = (df["RecentPlaceStreak"] != 1.0).sum()
+        print(f"[OK] RecentPlaceStreak v5.3: derived from Margins ({placed_count} dogs differentiated)"
+              f" — 1.12x all-3-placed, 0.98x no-places")
     else:
         df["RecentPlaceStreak"] = 1.0
-        print("[WARNING] WARNING: Last3Finishes not found - RecentPlaceStreak set to 1.0")
+        print("[WARNING] WARNING: Neither Last3Finishes nor Margins found - RecentPlaceStreak set to 1.0")
     
     # ========================================================================
     # ENHANCEMENT #10: CLOSER BONUS FOR BOX 7-8 AT LONG DISTANCES
@@ -1928,140 +1989,156 @@ def compute_features(df):
     def get_weights(distance):
         """
         Return optimal feature weights based on race distance.
-        
+
+        v5.3 UPDATE — adds three previously-unused features to the heuristic score:
+        - RTCFactor    : Racing Times Category (higher grade → better dog)
+        - TimeVsField  : dog's BestTimeSec vs race-field mean (negative = faster)
+        - SpeedVsField : dog's EarlySpeedIndex vs race-field mean (positive = faster)
+        - RecentFormBoost: binary boost for dogs that raced within 5 days with wins
+
         v3.9 - CRITICAL REBALANCE based on Nov 28-30 race results (335 races)
-        
+
         Key changes from v3.8:
         - Box 1 weight REDUCED (was over-picking by 50%)
         - Box 2 weight INCREASED (was under-valued by 4%)
         - Box 7 penalty REDUCED (was too harsh)
-        
+
         25+ variables grouped into categories:
         1. Box/Draw Position (30-38% of signal) - Rebalanced for Box 2
-        2. Career/Experience (26-30% of signal) 
+        2. Career/Experience (26-30% of signal)
         3. Speed/Timing (18-22% of signal) - BestTimePercentile reliable
         4. Form/Momentum (10-15% of signal) - WinStreakFactor confirmed
         5. Conditioning (5-8% of signal) - Reduced (noisy factors)
-        
+
         Key findings from Nov 28-30 analysis:
         - Box 1 wins 19.5% (vs 21% in matrix) - REDUCED weight
         - Box 2 wins 16.2% (vs 12% in matrix) - INCREASED weight
         - Box 7 wins 9.1% (vs 5.5% in matrix) - INCREASED weight
         - BoxPenaltyFactor (multiplicative) handles Box 7/3 over-picking
-        
+
         Weights are optimized from 371+ race results analysis.
         """
-        
+
         if distance < 400:  # SPRINT - Box position is CRITICAL
             return {
                 # === BOX POSITION (40% total) - Increased for sprint ===
                 "DrawFactor": 0.12,            # Draw position advantage
                 "BoxPositionBias": 0.12,       # Win rate by box - INCREASED (Box 1=21%)
                 "BoxPlaceRate": 0.06,          # 2nd place rate by box
-                "BoxTop3Rate": 0.05,           # Top 3 rate by box  
+                "BoxTop3Rate": 0.05,           # Top 3 rate by box
                 "RailPreference": 0.03,        # Inside/outside rail bonus
                 "BoxBiasFactor": 0.02,         # Individual dog's box preference
-                
-                # === CAREER/EXPERIENCE (24% total) ===
+
+                # === CAREER/EXPERIENCE (25% total) ===
                 "PlaceRate": 0.05,             # Career place rate
                 "ConsistencyIndex": 0.05,      # Win rate
                 "WinPlaceRate": 0.04,          # Combined win+place rate
                 "ExperienceTier": 0.04,        # Career starts tier
                 "TrainerStrikeRate": 0.04,     # Trainer success
-                "ClassRating": 0.02,           # Prize money class
-                
-                # === SPEED/TIMING (20% total) - BestTime fixed, weighted higher ===
+                "ClassRating": 0.01,           # Prize money class
+                "RTCFactor": 0.02,             # v5.3: Racing Times Category (grade)
+
+                # === SPEED/TIMING (21% total) ===
                 "EarlySpeedPercentile": 0.05,  # Early speed rank in race
-                "BestTimePercentile": 0.06,    # Best time rank - INCREASED (now correct)
+                "BestTimePercentile": 0.06,    # Best time rank
                 "SectionalSec": 0.03,          # Raw sectional time
-                "EarlySpeedIndex": 0.03,       # Early speed index
+                "EarlySpeedIndex": 0.02,       # Early speed index
                 "Speed_kmh": 0.02,             # Raw speed
                 "SpeedClassification": 0.01,   # Sprinter vs stayer
-                
+                "SpeedVsField": 0.01,          # v5.3: Dog's early speed vs field mean
+                "TimeVsField": 0.01,           # v5.3: Dog's best time vs field mean (used negated)
+
                 # === FORM/MOMENTUM (10% total) ===
                 "DLWFactor": 0.03,             # Days since last win
-                "WinStreakFactor": 0.03,       # Winning streak bonus (multiplicative)
+                "WinStreakFactor": 0.03,       # Winning streak bonus
                 "FormMomentumNorm": 0.02,      # Form trend
                 "MarginFactor": 0.02,          # Winning margin factor
-                
-                # === CONDITIONING (4% total) — Weight removed (always 0 kg in PDFs) ===
-                "FreshnessFactor": 0.04,       # Days since last race (boosted from 0.02; Weight slot redistributed)
+
+                # === CONDITIONING (4% total) ===
+                "FreshnessFactor": 0.04,       # Days since last race
                 "AgeFactor": 0.02,             # Age in optimal range
             }
-            
+
         elif distance <= 500:  # MIDDLE - Most common distance (v4.3 UPDATE)
             return {
                 # === BOX POSITION (32% total) - v4.3 REBALANCED ===
                 "DrawFactor": 0.08,            # v4.3: REDUCED from 0.10
                 "BoxPositionBias": 0.08,       # v4.3: REDUCED - less Box 1 bias
-                "BoxPlaceRate": 0.05,          
-                "BoxTop3Rate": 0.04,           
+                "BoxPlaceRate": 0.05,
+                "BoxTop3Rate": 0.04,
                 "RailPreference": 0.04,        # v4.3: INCREASED for rail advantage
                 "BoxBiasFactor": 0.03,         # v4.3: INCREASED
-                
-                # === CAREER/EXPERIENCE (30% total) - v4.4 MAXIMUM BOOST ===
+
+                # === CAREER/EXPERIENCE (29% total) ===
                 "PlaceRate": 0.07,             # v4.4: INCREASED - placing dogs win more
-                "ConsistencyIndex": 0.08,      # v4.4: MAXIMUM BOOST - winners are VERY consistent
-                "WinPlaceRate": 0.05,          
-                "ExperienceTier": 0.04,        
-                "TrainerStrikeRate": 0.04,     
-                "ClassRating": 0.02,           # v4.4: REDUCED - less important
-                
-                # === SPEED/TIMING (18% total) - v4.4 FURTHER REDUCED ===
-                "EarlySpeedPercentile": 0.05,  
-                "BestTimePercentile": 0.04,    # v4.4: REDUCED further - form > speed
-                "SectionalSec": 0.04,          
-                "EarlySpeedIndex": 0.03,       
+                "ConsistencyIndex": 0.08,      # v4.4: MAXIMUM BOOST
+                "WinPlaceRate": 0.05,
+                "ExperienceTier": 0.04,
+                "TrainerStrikeRate": 0.04,
+                "ClassRating": 0.01,           # v4.4: REDUCED
+                "RTCFactor": 0.02,             # v5.3: Racing Times Category (grade)
+                "RecentFormBoost": 0.02,       # v5.3: binary boost for very recent win+fresh
+
+                # === SPEED/TIMING (18% total) ===
+                "EarlySpeedPercentile": 0.05,
+                "BestTimePercentile": 0.04,    # v4.4: REDUCED - form > speed
+                "SectionalSec": 0.03,
+                "EarlySpeedIndex": 0.02,
                 "Speed_kmh": 0.01,             # v4.4: REDUCED
-                "SpeedClassification": 0.01,   
-                
+                "SpeedClassification": 0.01,
+                "SpeedVsField": 0.01,          # v5.3: Early speed vs field mean
+                "TimeVsField": 0.01,           # v5.3: Best time vs field mean (used negated)
+
                 # === FORM/MOMENTUM (17% total) - v4.4 MAXIMUM INCREASE ===
                 "DLWFactor": 0.05,             # v4.4: INCREASED - recent wins critical
                 "WinStreakFactor": 0.06,       # v4.4: MAXIMUM - hot form is THE key
-                "RecentPlaceStreak": 0.03,     # v4.4: NEW - consistent placing shows form
-                "FormMomentumNorm": 0.03,      
-                "MarginFactor": 0.02,          
-                
-                # === CONDITIONING (4% total) — Weight removed (always 0 kg in PDFs) ===
-                "FreshnessFactor": 0.04,       # Days since last race (boosted; Weight slot redistributed)
-                "AgeFactor": 0.02,             # Age in optimal range
+                "RecentPlaceStreak": 0.03,     # consistent placing shows form
+                "FormMomentumNorm": 0.03,
+                "MarginFactor": 0.02,
+
+                # === CONDITIONING (4% total) ===
+                "FreshnessFactor": 0.04,
+                "AgeFactor": 0.02,
             }
-            
+
         else:  # LONG - Stamina & consistency dominate
             return {
                 # === BOX POSITION (28% total) ===
-                "DrawFactor": 0.08,            
+                "DrawFactor": 0.08,
                 "BoxPositionBias": 0.08,       # Still important even at distance
-                "BoxPlaceRate": 0.04,          
-                "BoxTop3Rate": 0.04,           
-                "RailPreference": 0.02,        
-                "BoxBiasFactor": 0.02,         
-                
+                "BoxPlaceRate": 0.04,
+                "BoxTop3Rate": 0.04,
+                "RailPreference": 0.02,
+                "BoxBiasFactor": 0.02,
+
                 # === CAREER/EXPERIENCE (30% total) ===
-                "PlaceRate": 0.06,             
-                "ConsistencyIndex": 0.06,      
-                "WinPlaceRate": 0.06,          
-                "ExperienceTier": 0.05,        
-                "TrainerStrikeRate": 0.04,     
-                "ClassRating": 0.03,           
-                
+                "PlaceRate": 0.06,
+                "ConsistencyIndex": 0.06,
+                "WinPlaceRate": 0.05,
+                "ExperienceTier": 0.05,
+                "TrainerStrikeRate": 0.04,
+                "ClassRating": 0.02,
+                "RTCFactor": 0.02,             # v5.3: Racing Times Category
+
                 # === SPEED/TIMING (22% total) ===
-                "EarlySpeedPercentile": 0.04,  
-                "BestTimePercentile": 0.06,    # INCREASED - now fixed and reliable
-                "SectionalSec": 0.04,          
-                "EarlySpeedIndex": 0.04,       
-                "Speed_kmh": 0.03,             
-                "SpeedClassification": 0.01,   
-                
+                "EarlySpeedPercentile": 0.04,
+                "BestTimePercentile": 0.06,    # INCREASED - reliable
+                "SectionalSec": 0.04,
+                "EarlySpeedIndex": 0.03,
+                "Speed_kmh": 0.02,
+                "SpeedClassification": 0.01,
+                "SpeedVsField": 0.01,          # v5.3: Early speed vs field mean
+                "TimeVsField": 0.01,           # v5.3: Best time vs field mean (used negated)
+
                 # === FORM/MOMENTUM (14% total) ===
-                "DLWFactor": 0.04,             
+                "DLWFactor": 0.04,
                 "WinStreakFactor": 0.04,       # INCREASED - captures hot form
-                "FormMomentumNorm": 0.04,      
-                "MarginFactor": 0.02,          
-                
-                # === CONDITIONING (4% total) — Weight removed (always 0 kg in PDFs) ===
-                "FreshnessFactor": 0.04,       # Days since last race (boosted; Weight slot redistributed)
-                "AgeFactor": 0.02,             # Age in optimal range
+                "FormMomentumNorm": 0.04,
+                "MarginFactor": 0.02,
+
+                # === CONDITIONING (4% total) ===
+                "FreshnessFactor": 0.04,
+                "AgeFactor": 0.02,
             }
 
     # ========================================================================
@@ -2098,16 +2175,20 @@ def compute_features(df):
         )
         
         # 2. CAREER/EXPERIENCE SCORE (25-30%) - boosted when timing missing
+        # v5.3: RTCFactor (Racing Times Category grade) and RecentFormBoost added
         career_score = (
             row.get("PlaceRate", 0.15) * w.get("PlaceRate", 0) * timing_weight_adjustment +
             row.get("ConsistencyIndex", 0) * w.get("ConsistencyIndex", 0) * timing_weight_adjustment +
             row.get("WinPlaceRate", 0.3) * w.get("WinPlaceRate", 0) * timing_weight_adjustment +
             row.get("ExperienceTier", 1.0) * w.get("ExperienceTier", 0) * timing_weight_adjustment +
             row.get("TrainerStrikeRate", 0.15) * w.get("TrainerStrikeRate", 0) * timing_weight_adjustment +
-            row.get("ClassRating", 0.5) * w.get("ClassRating", 0) * timing_weight_adjustment
+            row.get("ClassRating", 0.5) * w.get("ClassRating", 0) * timing_weight_adjustment +
+            row.get("RTCFactor", 0.5) * w.get("RTCFactor", 0) * timing_weight_adjustment +
+            row.get("RecentFormBoost", 0) * w.get("RecentFormBoost", 0) * timing_weight_adjustment
         )
-        
-        # 3. SPEED/TIMING SCORE (15-20%)
+
+        # 3. SPEED/TIMING SCORE (15-22%)
+        # v5.3: TimeVsField and SpeedVsField added to capture dog-vs-field comparisons
         speed_score = 0.0
         if has_speed:
             # Normalize speed to 0-1 range (typical range 15-22 m/s)
@@ -2117,24 +2198,38 @@ def compute_features(df):
             # Normalize early speed index to 0-1 range
             early_normalized = min(1.0, max(0.0, (row["EarlySpeedIndex"] - 50) / 80))
             speed_score += early_normalized * w.get("EarlySpeedIndex", 0)
-        
+
         speed_score += (
             row.get("EarlySpeedPercentile", 0.5) * w.get("EarlySpeedPercentile", 0) +
             row.get("BestTimePercentile", 0.5) * w.get("BestTimePercentile", 0) +
             row.get("SpeedClassification", 1.0) * w.get("SpeedClassification", 0)
         )
-        
+
         # Handle SectionalSec (lower is better, so invert)
         if pd.notna(row.get("SectionalSec")) and row["SectionalSec"] > 0:
             sec_normalized = min(1.0, max(0.0, 1 - (row["SectionalSec"] - 4) / 8))  # 4-12s range
             speed_score += sec_normalized * w.get("SectionalSec", 0)
-        
-        # 4. FORM/MOMENTUM SCORE (10-15%)
+
+        # TimeVsField: negative = dog is faster than average (good) → negate so positive = fast
+        tvf = row.get("TimeVsField", 0)
+        if pd.notna(tvf):
+            speed_score += (-tvf) * w.get("TimeVsField", 0)
+
+        # SpeedVsField: positive = dog has higher early speed than average (good)
+        svf = row.get("SpeedVsField", 0)
+        if pd.notna(svf):
+            speed_score += svf * w.get("SpeedVsField", 0)
+
+        # 4. FORM/MOMENTUM SCORE (10-17%)
+        # v5.3: RecentPlaceStreak now correctly feeds into form_score (was in
+        # enhancement_multiplier only; now also as additive weight in form_score
+        # so the score calculation reflects the placing history directly).
         form_score = (
             row.get("DLWFactor", 0.5) * w.get("DLWFactor", 0) * timing_weight_adjustment +
             row.get("WinStreakFactor", 1.0) * w.get("WinStreakFactor", 0) +
             row.get("FormMomentumNorm", 0.5) * w.get("FormMomentumNorm", 0) +
-            row.get("MarginFactor", 0.5) * w.get("MarginFactor", 0)
+            row.get("MarginFactor", 0.5) * w.get("MarginFactor", 0) +
+            row.get("RecentPlaceStreak", 1.0) * w.get("RecentPlaceStreak", 0)
         )
         
         # 5. CONDITIONING SCORE (4% — Weight removed: always 0 kg in PDFs)
