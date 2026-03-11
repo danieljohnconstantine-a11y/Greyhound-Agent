@@ -108,6 +108,18 @@ except ImportError:
 #                          Tree models split cleanly on "rank ≤ 2" or "rank ≥ 7".
 #   'BoxWinAdvantage'    — binary (1/0) whether this box is top-4 for this track.
 #                          Simple feature; complements continuous TrackBoxWinRatePct.
+#
+# v5.2 FIX — TrackBox1Adjustment and TrackBox4Adjustment (previously zero-variance):
+#   These columns previously used TRACK_BOX1_ADJUSTMENT / TRACK_BOX4_ADJUSTMENT dicts
+#   that contained only {"DEFAULT": 0.0} after consolidation — every dog received 0.0,
+#   making them useless zero-variance features.
+#   Fixed: now populated from TRACK_COMPREHENSIVE_ADJUSTMENTS[track][1] and [4] for
+#   ALL dogs in the race — a TRACK-LEVEL characteristic signal, not dog-specific.
+#   'TrackBox1Adjustment' = Box 1 win-rate advantage at this track (same for all dogs).
+#     e.g. Launceston = 0.150 (Box 1 wins 33% = strongest inside bias in dataset).
+#          Darwin      = 0.000 (Box 1 is neutral; Box 2 dominates at 30.5%).
+#   'TrackBox4Adjustment' = Box 4 win-rate advantage at this track (same for all dogs).
+#   Models learn: "high TrackBox1Adjustment → inside-speed track → outside boxes lose more".
 FEATURE_COLS = [
     'Box','Draw','CareerWins','CareerPlaces','CareerStarts','PrizeMoney',
     'RTC','DLR','DLW','Distance','BestTimeSec','SectionalSec',

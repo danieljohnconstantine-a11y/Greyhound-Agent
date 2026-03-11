@@ -47,9 +47,11 @@ def compute_features(df):
     #   MarginAvg/MarginFactor/FormMomentum, Last3AvgFinish, FieldSize,
     #   CompetitorDensity, DrawFactor, PaceBoxFactor, FieldSimilarityIndex
     #
-    # HISTORICAL (real data from 335+ Sep–Nov 2025 races, NOT the current PDF):
+    # HISTORICAL (real data from 7,108+ factual race results, NOT the current PDF):
     #   BoxPositionBias, BoxPlaceRate, BoxTop3Rate, BoxPenaltyFactor,
-    #   TrackBox1Adjustment, TrackBox4Adjustment, TrackComprehensiveAdjustment,
+    #   TrackBox1Adjustment (v5.2: track's Box 1 win-rate adj for ALL dogs at venue),
+    #   TrackBox4Adjustment (v5.2: track's Box 4 win-rate adj for ALL dogs at venue),
+    #   TrackComprehensiveAdjustment (each dog's own box adj at this track),
     #   TrackUpsetFactor, RailPreference
     #
     # NEUTRAL PLACEHOLDERS (constant — ML models effectively ignore them):
@@ -991,28 +993,33 @@ def compute_features(df):
             lambda x: (BOX_TOP3_RATE.get(int(x), 0.375) - 0.375) / 3 if pd.notna(x) else 0.0
         )
         
-        # === TRACK-SPECIFIC BOX 1 ADJUSTMENT ===
-        # Apply extra bonus/penalty for Box 1 based on track historical data
-        # This is added AFTER the base BoxPositionBias calculation
+        # === TRACK-SPECIFIC BOX 1 + BOX 4 CHARACTERISTIC FEATURES (v5.2) ===
+        # These features inform ALL dogs at a venue about how strongly Box 1 and
+        # Box 4 are historically biased there — giving all 3 models (RF/GB/XGB)
+        # a track-type signal that is independent of each dog's own box.
+        #
+        # Previously TRACK_BOX1_ADJUSTMENT and TRACK_BOX4_ADJUSTMENT contained
+        # only {"DEFAULT": 0.0} after being consolidated into
+        # TRACK_COMPREHENSIVE_ADJUSTMENTS, so every dog received 0.0 (zero-variance).
+        # These two columns were wasting 2 of the 75 feature slots.
+        #
+        # Fix: derive the value from TRACK_COMPREHENSIVE_ADJUSTMENTS[track][1] and
+        # TRACK_COMPREHENSIVE_ADJUSTMENTS[track][4] for ALL dogs in the race.
+        # Example: at Launceston every dog (not just Box 1) gets
+        #   TrackBox1Adjustment = 0.150 (strongest inside-bias in the dataset).
+        # This lets the model learn "at an inside-speed track, outside boxes lose more".
+        #
+        # NOT added to BoxPositionBias — they are independent track-level features.
+        # BoxPositionBias already captures each dog's own box via
+        # TrackComprehensiveAdjustment (added below).
         if "Track" in df.columns:
-            df["TrackBox1Adjustment"] = df.apply(
-                lambda row: get_track_box1_adjustment(row.get("Track", "")) 
-                            if pd.notna(row.get("Box")) and int(row.get("Box", 0)) == 1 
-                            else 0.0,
-                axis=1
+            df["TrackBox1Adjustment"] = df["Track"].apply(
+                lambda t: get_track_comprehensive_adjustment(t, 1) if pd.notna(t) else 0.0
             )
-            # Add track-specific adjustment to Box 1 dogs only
-            df["BoxPositionBias"] = df["BoxPositionBias"] + df["TrackBox1Adjustment"]
-            
-            # === TRACK-SPECIFIC BOX 4 ADJUSTMENT (v3.5) ===
-            df["TrackBox4Adjustment"] = df.apply(
-                lambda row: get_track_box4_adjustment(row.get("Track", "")) 
-                            if pd.notna(row.get("Box")) and int(row.get("Box", 0)) == 4 
-                            else 0.0,
-                axis=1
+            df["TrackBox4Adjustment"] = df["Track"].apply(
+                lambda t: get_track_comprehensive_adjustment(t, 4) if pd.notna(t) else 0.0
             )
-            df["BoxPositionBias"] = df["BoxPositionBias"] + df["TrackBox4Adjustment"]
-            
+
             # === v4.0: COMPREHENSIVE TRACK-SPECIFIC BOX ADJUSTMENT ===
             # Applies to ALL boxes (1-8) based on track-specific winner patterns
             # This is the key fix for Darwin (9.1%) and Rockhampton (0%) accuracy
@@ -1132,7 +1139,8 @@ def compute_features(df):
             # BoxWinAdvantage: 1 if this box is in the top half (≤4) for this track
             df["BoxWinAdvantage"] = (df["TrackBoxRank"] <= 4).astype(float)
 
-            print(f"[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v5.1)")
+            print(f"[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v5.2)")
+            print(f"  TrackBox1Adjustment and TrackBox4Adjustment now reflect actual track bias for ALL dogs")
             print(f"  Added TrackBoxWinRatePct, TrackBoxRank, BoxWinAdvantage for all 8 boxes")
             print(f"  Track patterns identified: {df['TrackPattern'].value_counts().to_dict()}")
         else:
