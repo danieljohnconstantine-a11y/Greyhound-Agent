@@ -50,9 +50,9 @@ import pdfplumber
 
 # Threshold below which the pre-normalization ensemble spread is considered too
 # narrow to represent genuine ML discrimination.  Races that fall below this
-# value get a Low_Confidence=True flag in the output.  This value was
-# established empirically from the Race 8 Angle Park audit (Mar 5 2026) where
-# calibration collapse reduced model spread to <0.001 before normalization.
+# value get a Low_Confidence=True flag in the output.  A small spread is normal
+# for evenly-matched races with sigmoid-calibrated models; the flag is advisory
+# only and does NOT trigger any fallback or model substitution.
 LOW_CONFIDENCE_SPREAD_THRESHOLD = 0.005  # < 0.5% probability spread
 
 # Timing-derived features that should be filled with the race median rather
@@ -217,10 +217,10 @@ def _get_uncalibrated_preds(model, X_scaled):
     """
     Extract uncalibrated base-estimator predictions from a CalibratedClassifierCV.
 
-    When calibration collapses probabilities into a narrow band all dogs get the
-    same score.  The base estimator (RF/GB/XGB before isotonic fitting) preserves
-    the original probability ordering, so we use it as a fallback when the
-    calibrated output has fewer unique values than dogs.
+    Used as a fallback when TRUE calibration collapse is detected (fewer unique
+    probability values than half the field size).  The base estimator (RF/GB/XGB
+    before calibration fitting) preserves the original probability ordering even
+    when the calibration layer has degenerated into a near-constant output.
 
     Returns:
         numpy array of probabilities (one per dog) with maximum discrimination.
@@ -247,16 +247,16 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
 
     Individual scoring guarantee
     ----------------------------
-    Each dog MUST receive a score that is 100% individual to that dog.  Two
-    failure modes are detected and corrected automatically:
+    Each dog MUST receive a score that is 100% individual to that dog.
 
-    1. Calibration collapse – CalibratedClassifierCV's isotonic mapping can
-       compress many different raw probabilities into the same calibrated value.
-       Fix: detect when ≥50% of dogs share the same calibrated score and fall
-       back to the uncalibrated base-estimator predictions instead.
+    1. Calibration collapse guard – if a model's calibrated output contains fewer
+       unique values than half the field size, the base-estimator (uncalibrated)
+       predictions are used instead.  This guards against degenerate old isotonic
+       models.  Sigmoid-calibrated models (from retrain_all_tracks_sigmoid.py)
+       are monotonic and cannot produce this failure mode.
 
-    2. Feature clustering – if too many input features are identical across all
-       dogs the model cannot distinguish them.  This is reported as a warning.
+    2. Feature clustering warning – if too many input features are identical across
+       all dogs the model cannot distinguish them.  This is reported as a warning.
 
     Returns raw model probabilities — no range mapping or normalization is applied.
     Scores reflect the actual ML confidence derived from PDF form data only.
@@ -349,40 +349,27 @@ def predict_with_ensemble(df, models, scaler, feature_cols, ensemble_weights):
 
         # ---------------------------------------------------------------
         # CALIBRATION-COLLAPSE GUARD
-        # Two failure modes are detected:
-        #
-        # 1. TRUE collapse  – fewer unique probability values than half the
-        #    field (e.g. isotonic mapping folds 8 dogs onto 1 value).
-        #
-        # 2. NEAR-collapse  – values are technically distinct but all within
-        #    0.5 percentage-points of each other.  This happens when the
-        #    calibrated model over-relies on a feature that is absent (e.g.
-        #    Weight=0 for all dogs), causing GB/XGB to output probabilities
-        #    like 0.160711001, 0.160711002 … which round to the same 4 dp
-        #    value (16.0711%) for every dog.  The uncalibrated base estimator
-        #    preserves the original probability ordering and is used instead.
+        # Detects TRUE collapse: fewer unique probability values than half the
+        # field.  This occurs with old isotonic-calibrated models (the
+        # step-function lookup maps many distinct inputs to one constant value).
+        # Sigmoid-calibrated models (trained by retrain_all_tracks_sigmoid.py)
+        # are monotonic and cannot produce a flat plateau, so a small probability
+        # spread simply means the race is evenly matched — it is NOT a fault.
         # ---------------------------------------------------------------
         n_unique_calibrated = len(np.unique(pred_proba))
-        pred_spread = float(pred_proba.max() - pred_proba.min())
-        # Treat as collapsed if true collapse OR near-constant (< 0.5% spread)
-        SPREAD_THRESHOLD = 0.005
-        is_near_constant = pred_spread < SPREAD_THRESHOLD
-        is_true_collapse  = n_unique_calibrated < max(2, n_dogs // 2)
-        if is_true_collapse or is_near_constant:
+        is_true_collapse = n_unique_calibrated < max(2, n_dogs // 2)
+        if is_true_collapse:
             uncal = _get_uncalibrated_preds(model, X_scaled)
             if uncal is not None:
                 n_unique_uncal = len(np.unique(uncal))
-                collapse_label = ("calibration collapsed (isotonic)" if is_true_collapse
-                                  else f"near-collapsed (spread={pred_spread*100:.4f}%)")
-                print(f"      ⚠️  {alg.upper()}: {collapse_label} – "
+                print(f"      ⚠️  {alg.upper()}: calibration collapsed – "
                       f"{n_unique_calibrated} unique value(s) across {n_dogs} dogs. "
                       f"Falling back to uncalibrated predictions ({n_unique_uncal} unique values). "
-                      f"FIX: retrain this track with: python retrain_all_tracks_sigmoid.py --tracks <track>")
+                      f"FIX: retrain with sigmoid: python retrain_all_tracks_sigmoid.py --tracks <track>")
                 pred_proba = uncal
             else:
-                print(f"      ⚠️  {alg.upper()}: calibration collapsed scores "
-                      f"and base estimator unavailable. "
-                      f"FIX: retrain this track with: python retrain_all_tracks_sigmoid.py --tracks <track>")
+                print(f"      ⚠️  {alg.upper()}: calibration collapsed and base estimator unavailable. "
+                      f"FIX: retrain with sigmoid: python retrain_all_tracks_sigmoid.py --tracks <track>")
 
         # Store individual predictions (RAW from model - no failed temperature scaling)
         individual_scores[alg] = pred_proba

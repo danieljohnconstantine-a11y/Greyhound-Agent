@@ -60,51 +60,41 @@ rm -f models/*.pkl
 
 ---
 
-## 6 — Run full training (uses ALL 96 PDFs + 3 results CSVs)
+## 6 — Run full training (uses ALL PDFs + results CSVs in `data/`)
 
 ```bash
-python train_ml_track_ensemble.py
+python retrain_all_tracks_sigmoid.py
 ```
 
 **What this does:**
-- Parses all 96 PDF form guides in `data/` (~15 min — reads every page of every PDF)
-- Matches each race in the 3 results CSVs to its form guide PDF
-- Trains RF + GB + XGB with **sigmoid calibration** for every track that has data
-- Saves flat `.pkl` files to `models/` (e.g. `models/Angle Park_rf.pkl`)
-- Prints a summary table of ensemble accuracy per track when done
+- Reads all results CSVs in `data/` and matches them to PDF form guides
+- Trains RF + GB + XGB with **sigmoid calibration** for every track that has enough data
+- Saves per-track `.pkl` files to `models/` (e.g. `models/BENDIGO_rf.pkl`, `models/BENDIGO_gb.pkl`, `models/BENDIGO_xgb.pkl`, `models/BENDIGO_scaler.pkl`)
+- Writes a retrain report to `reports/RETRAIN_REPORT_<date>.txt`
+- Prints accuracy and probability-spread stats per track when done
+
+> ❌ **Do NOT run** `train_ml_track_ensemble.py` — it uses the old isotonic calibration and a flat model-file layout that the prediction script no longer expects.
 
 **What you will see on screen:**
 
 ```
-📁 STEP 1: Loading historical race data...
-[INFO] Loading data using HYBRID method (PDFs + CSV results)...
-[INFO] Found 96 PDFs and 3 results CSV files
-   [INFO] Processed 1/96 PDFs (1%)...
-   [INFO] Processed 10/96 PDFs (10%)...
-   [INFO] Processed 20/96 PDFs (20%)...
-   ...  (one line every ~60–90 seconds)
-   [INFO] Processed 90/96 PDFs (93%)...
-[SUCCESS] Extracted dog data from NNN races in PDFs
-🔧 STEP 2: Extracting features...
-🚀 STEP 3: Training track-specific ensemble models...
-   [1/N] Training models for Angle Park...
+🔁 RETRAIN ALL TRACKS — SIGMOID CALIBRATION
+============================================================
+Found NN tracks with enough data to train
+[1/NN] BENDIGO  (NNN samples) ...
+   RF  accuracy=xx.x%  spread=0.xxx
+   GB  accuracy=xx.x%  spread=0.xxx
+   XGB accuracy=xx.x%  spread=0.xxx
+[2/NN] CANNINGTON ...
    ...
-🎉 SUCCESS! Trained N track-specific ensembles
+============================================================
+✅  NN/NN tracks retrained successfully
+Report saved: reports/RETRAIN_REPORT_<date>.txt
 ```
 
-> ⏳ **The first progress line (`1/96 PDFs`) appears after ~60 seconds. This is normal — pdfplumber is reading every page of every PDF. If nothing appears for 2–3 minutes, the script is still running.** Do NOT press Ctrl+C.
-
-To watch detailed progress in a second terminal:
-
-```bash
-tail -f logs/train_track_ensemble.log
+**Expected output (summary line):**
 ```
-
-**Expected output (final line):**
-```
-🎉 SUCCESS! Trained N track-specific ensembles
-   Models saved to: .../models/
-📊 Average ensemble accuracy: 87–89%
+✅  NN/NN tracks retrained successfully
 ```
 
 ---
@@ -112,19 +102,19 @@ tail -f logs/train_track_ensemble.log
 ## 7 — Verify models were created
 
 ```bash
-ls -lh models/*.pkl
+ls -lh models/
 ```
 
-You should see `rf.pkl`, `gb.pkl`, `xgb.pkl`, and `scaler.pkl` for each track.
-Every file should be **under 5 MB**.
+You should see four `.pkl` files per track, named `{TRACK}_rf.pkl`, `{TRACK}_gb.pkl`, `{TRACK}_xgb.pkl`, and `{TRACK}_scaler.pkl` (e.g. `BENDIGO_rf.pkl`).
+Every individual `.pkl` file should be **under 5 MB**.
 
 ---
 
 ## 8 — Push new models to GitHub
 
 ```bash
-git add models/*.pkl models/config.pkl models/ensemble_config.json
-git commit -m "retrain all tracks: full PDF+CSV data, sigmoid calibration"
+git add models/*.pkl
+git commit -m "retrain all tracks: sigmoid calibration"
 git push origin copilot/copy-ml-training-prediction-files-again
 ```
 
@@ -137,7 +127,10 @@ If prompted, use your GitHub username and a Personal Access Token (not your pass
 | Area | Old behaviour | New behaviour |
 |---|---|---|
 | Branch name | `copy-ml-training-prediction-files` | `copy-ml-training-prediction-files-again` |
-| Calibration | `isotonic` (collapsed to flat step functions) | `sigmoid` (no collapse) |
+| Training script | `train_ml_track_ensemble.py` (isotonic, flat model layout) | `retrain_all_tracks_sigmoid.py` (sigmoid, per-track model layout) |
+| Calibration | `isotonic` (collapsed to flat step functions on small datasets) | `sigmoid` (monotonic — no collapse possible) |
+| Model filenames | `rf.pkl`, `gb.pkl` etc. (shared) | `{TRACK}_rf.pkl`, `{TRACK}_gb.pkl` etc. (per-track) |
+| Collapse detection | Triggered on both true collapse AND spread < 0.5% (near-constant) | Only triggers on true collapse (n_unique < half field); low spread = evenly-matched race, not a model fault |
 | RF max_depth | 15–30 → 9–24 MB files, too large for GitHub | 10 → ~2.3 MB, fits in GitHub |
 | Year detection | Only January PDFs treated as 2026 | Months Jan–Jun correctly treated as 2026 |
 | Track codes | Broken Hill, Mount Gambier, Q Parklands, Warrnambool silently skipped | All 4 now matched to their PDFs |
@@ -150,9 +143,9 @@ If prompted, use your GitHub username and a Personal Access Token (not your pass
 | Problem | Fix |
 |---|---|
 | `fatal: protocol ' https' is not supported` | You have a **space before `https`** — copy the `git clone` line as one unbroken line; never split it with `\` |
-| `python train_ml_track_ensemble.py` shows nothing for 2–3 min | **Normal** — pdfplumber reads 96 PDFs silently at startup. First progress line appears after ~60 s. Run `tail -f logs/train_track_ensemble.log` in a second terminal to see live detail. |
+| `python retrain_all_tracks_sigmoid.py` shows nothing for 2–3 min | **Normal** — the script reads all results CSVs and PDFs silently at startup. First progress line appears after ~30–60 s. |
 | `ModuleNotFoundError: pdfplumber` | Run `pip install pdfplumber` |
 | `ModuleNotFoundError: xgboost` | Run `pip install xgboost` |
-| `0 tracks trained` | Make sure you are in the repo root and `data/*.pdf` files exist |
-| Git push rejected (file too large) | All models should be < 5 MB now; if one is > 100 MB, re-check you used the right branch |
-| Training takes > 40 min | Normal on older hardware — the PDF parsing is CPU-bound |
+| `0 tracks trained` | Make sure you are in the repo root and `data/*.csv` results files exist |
+| Git push rejected (file too large) | All models should be < 5 MB each; if one is > 100 MB, re-check you used `retrain_all_tracks_sigmoid.py` and not `train_ml_track_ensemble.py` |
+| Training takes > 40 min | Normal on older hardware — PDF parsing is CPU-bound |
