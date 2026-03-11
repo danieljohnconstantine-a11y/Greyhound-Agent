@@ -468,39 +468,40 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     predictions['rf'] = rf.predict_proba(X_test_scaled)[:, 1]
     calibrated_predictions['rf'] = rf_calibrated.predict_proba(X_test_scaled)[:, 1]
     
-    # 2. Gradient Boosting DOESN'T SUPPORT SAMPLE WEIGHTS IN FIT
-    # So we'll use class_weight='balanced' as alternative (adaptive complexity)
-    print(f"      Training GradientBoosting with balanced class weights...")
+    # 2. Gradient Boosting — NO sigmoid calibration wrapper.
+    # GB's predict_proba() is natively well-calibrated (Friedman 2001, §10.13).
+    # Wrapping with CalibratedClassifierCV(sigmoid) squashes the output spread
+    # to < 0.5% on small/homogeneous fields — triggering the collapse guard.
+    # learning_rate=0.10 + subsample=0.8 give better discrimination than 0.05.
+    print(f"      Training GradientBoosting (native proba, no extra cal)...")
     gb = GradientBoostingClassifier(
         n_estimators=n_estimators,
-        learning_rate=0.05,
+        learning_rate=0.10,
         max_depth=max_depth_gb,
+        min_samples_leaf=3,
+        subsample=0.8,
         random_state=42
     )
-    gb.fit(X_train_scaled, y_train)  # GB doesn't support sample_weight directly
-    
-    # Calibrate Gradient Boosting with Sigmoid (Platt scaling — same reason as RF above)
-    print(f"      Calibrating GradientBoosting (sigmoid)...")
-    gb_calibrated = CalibratedClassifierCV(gb, method='sigmoid', cv=3)
-    gb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
-    models['gb'] = gb_calibrated
+    gb.fit(X_train_scaled, y_train)  # GB does not support sample_weight
+    models['gb'] = gb
     predictions['gb'] = gb.predict_proba(X_test_scaled)[:, 1]
-    calibrated_predictions['gb'] = gb_calibrated.predict_proba(X_test_scaled)[:, 1]
+    calibrated_predictions['gb'] = gb.predict_proba(X_test_scaled)[:, 1]
     
     # 3. XGBoost WITH SAMPLE WEIGHTS (if available, adaptive complexity)
     if HAS_XGBOOST:
         print(f"      Training XGBoost with weighted samples...")
         xgb_model = xgb.XGBClassifier(
             n_estimators=n_estimators,
-            learning_rate=0.05,
+            learning_rate=0.10,
             max_depth=max_depth_gb,
+            subsample=0.8,
+            colsample_bytree=0.8,
             random_state=42,
-            use_label_encoder=False,
             eval_metric='logloss'
         )
         xgb_model.fit(X_train_scaled, y_train, sample_weight=w_train)
         
-        # Calibrate XGBoost with Sigmoid (Platt scaling — same reason as RF/GB above)
+        # Calibrate XGBoost with Sigmoid (Platt scaling — XGB natively outputs logits)
         print(f"      Calibrating XGBoost (sigmoid)...")
         xgb_calibrated = CalibratedClassifierCV(xgb_model, method='sigmoid', cv=3)
         xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)

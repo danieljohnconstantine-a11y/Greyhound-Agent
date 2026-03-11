@@ -1,48 +1,48 @@
 ================================================================================
 BEST BETS RANKING REPORT
-Generated: 2026-03-11 01:39:05
+Generated: 2026-03-11 02:36:28
 Races ranked by score gap between 1st and 2nd place dogs.
 Largest gap = strongest model confidence / best bet.
 ================================================================================
 
 Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
 ----------------------------------------------------------------------------------------------------
-1     GUNNEDAH         R3     3.2909%  Box 7 Ava's Milo             17.3035%  Box 4 Cookie Man             14.0126%
-2     GUNNEDAH         R7     0.8860%  Box 10 Paw Kinsley            14.4634%  Box 9 Merger                 13.5774%
-3     GUNNEDAH         R4     0.8611%  Box 2 Waltzin' Ethics        13.3202%  Box 1 Snooping               12.4591%
-4     GUNNEDAH         R8     0.8601%  Box 10 Paw Kinsley            14.5342%  Box 4 John's Promise         13.6741%
-5     GUNNEDAH         R9     0.8564%  Box 10 Paw Kinsley            14.3525%  Box 9 Merger                 13.4961%
-6     GUNNEDAH         R6     0.8414%  Box 10 Paw Kinsley            14.4232%  Box 9 Merger                 13.5818%
-7     GUNNEDAH         R1     0.8155%  Box 4 Hot To Hop             12.7591%  Box 3 Timely Lesson          11.9436%
-8     ROCKHAMPTON      R2     0.7813%  Box 8 Avalon Beach           12.7914%  Box 7 Sass And Soul          12.0101%
-9     GUNNEDAH         R2     0.7571%  Box 4 Sweet Bevely Ann       12.5124%  Box 1 Blue Supreme           11.7553%
-10    GUNNEDAH         R10    0.7119%  Box 9 Paw Kinsley            14.3988%  Box 10 Merger                 13.6869%
-11    ROCKHAMPTON      R8     0.5299%  Box 10 Another Meghan         12.8004%  Box 9 Next Black Jack        12.2705%
-12    ROCKHAMPTON      R6     0.5144%  Box 5 Farmor Leeway          13.6782%  Box 6 Aston Hayes            13.1638%
-13    GUNNEDAH         R12    0.5107%  Box 9 Paw Kinsley            14.2675%  Box 10 Merger                 13.7568%
-14    ROCKHAMPTON      R10    0.4946%  Box 8 Jester Beach           13.9824%  Box 4 Sunburnt Dawn          13.4878%
-15    GUNNEDAH         R5     0.4939%  Box 7 Mully The Master       13.3147%  Box 6 Lovely Bubbly          12.8208%
-16    GUNNEDAH         R11    0.4738%  Box 9 Paw Kinsley            14.4723%  Box 10 Merger                 13.9985%
-17    Angle Park       R8     0.3532%  Box 10 Hot Ruby               16.0988%  Box 7 Goldie Rusty           15.7456%
-18    Angle Park       R5     0.3254%  Box 7 Golden Zeal            15.7144%  Box 4 Bonmati                15.3890%
-19    Angle Park       R11    0.2862%  Box 4 Runaway Merv           15.7520%  Box 8 Starlet Edition        15.4658%
-20    Angle Park       R9     0.2692%  Box 8 Bella Maple            15.7417%  Box 7 Antecedent             15.4725%
-21    ROCKHAMPTON      R3     0.2581%  Box 6 Another Scrub          19.6362%  Box 4 Packham Rose           19.3781%
-22    Angle Park       R3     0.2310%  Box 4 Catch My Design        15.7306%  Box 2 Adhana Lulu            15.4996%
-23    Angle Park       R1     0.2288%  Box 5 Sebon Star             15.6213%  Box 4 Lulu Doll              15.3925%
-24    ROCKHAMPTON      R9     0.1873%  Box 8 Mustang Beach          14.4071%  Box 6 Bev Beach              14.2198%
-25    ROCKHAMPTON      R4     0.1570%  Box 3 Rocky Ride             13.3800%  Box 8 Quinlan                13.2230%
-26    Angle Park       R6     0.1532%  Box 5 Ella's Destiny         15.6726%  Box 2 Crying Tiger           15.5194%
-27    Angle Park       R10    0.1100%  Box 7 Wait And See           15.7498%  Box 4 Cool It Miss           15.6398%
-28    ROCKHAMPTON      R1     0.0839%  Box 4 Canya Gold             13.6804%  Box 8 Sunburnt Comet         13.5965%
-29    Angle Park       R2     0.0757%  Box 7 Exultant Mclaren       15.8788%  Box 4 Time Of Design         15.8031%
-30    Angle Park       R7     0.0480%  Box 10 Ultimate               15.7818%  Box 4 Dawn Said So           15.7338%
-31    ROCKHAMPTON      R5     0.0412%  Box 8 Wonder Stratus         14.0831%  Box 9 Sirius Billy           14.0419%
-32    ROCKHAMPTON      R7     0.0264%  Box 4 King Eternal           12.6872%  Box 6 Zipping Gatsby         12.6608%
-33    Angle Park       R4     0.0179%  Box 6 Our Bella Rose         15.4055%  Box 8 Chicken Knight         15.3876%
-34    Angle Park       R12    0.0032%  Box 6 Sudoku Rosie           15.4687%  Box 4 Tenacious Design       15.4655%
+1     GUNNEDAH         R1    11.7211%  Box 8 Batman Cargo           28.9909%  Box 6 Urban Cindy            17.2698%
+2     GUNNEDAH         R12    9.7774%  Box 8 Face Of Chaos          21.2090%  Box 2 Bogan Whiskey          11.4316%
+3     ROCKHAMPTON      R6     4.9777%  Box 8 Legends Told           20.0718%  Box 6 Aston Hayes            15.0941%
+4     ROCKHAMPTON      R4     4.3901%  Box 5 Next Black Jack        25.1550%  Box 1 Dish Liquor            20.7649%
+5     ROCKHAMPTON      R9     4.3552%  Box 2 Tough One              18.1884%  Box 3 Crisp Ride On          13.8332%
+6     Angle Park       R10    2.9650%  Box 8 Bonnie Diva            20.7364%  Box 2 Cabao Nickel           17.7714%
+7     Angle Park       R8     2.9425%  Box 8 Aileen's Shine         24.7197%  Box 4 Busy Earnin'           21.7772%
+8     ROCKHAMPTON      R8     2.6650%  Box 6 Riding Solo            14.6098%  Box 1 Edgewood               11.9448%
+9     Angle Park       R6     2.6351%  Box 1 Fancy In Design        19.1609%  Box 5 Ella's Destiny         16.5258%
+10    GUNNEDAH         R2     2.6039%  Box 3 Don't Blush Baby       16.7106%  Box 7 Levings                14.1067%
+11    GUNNEDAH         R11    2.5927%  Box 5 Go Forward Blaze       20.7649%  Box 2 Urban Boy              18.1722%
+12    Angle Park       R5     2.5183%  Box 4 Bonmati                19.9230%  Box 1 Elegant Cindy          17.4047%
+13    GUNNEDAH         R3     2.3713%  Box 7 Ava's Milo             21.8035%  Box 1 Mick The Master        19.4322%
+14    Angle Park       R11    2.2195%  Box 2 Prime Voltage          21.2223%  Box 4 Runaway Merv           19.0028%
+15    Angle Park       R9     2.1174%  Box 8 Bella Maple            17.5432%  Box 5 Sebon Diva             15.4258%
+16    GUNNEDAH         R8     2.0780%  Box 1 Cluster One            18.7909%  Box 7 Prince Bernardo        16.7129%
+17    Angle Park       R2     1.9805%  Box 4 Time Of Design         21.1993%  Box 1 Master Kilcoy          19.2188%
+18    Angle Park       R7     1.8187%  Box 4 Dawn Said So           24.2721%  Box 7 Rio Hope               22.4534%
+19    GUNNEDAH         R10    1.8139%  Box 2 Robin Cargo            15.6748%  Box 6 Maybe Yes              13.8609%
+20    ROCKHAMPTON      R3     1.3648%  Box 1 Indigo Beach           18.6711%  Box 4 Packham Rose           17.3063%
+21    ROCKHAMPTON      R2     1.2887%  Box 1 Farmor Again           21.8521%  Box 4 Midnight Mila          20.5634%
+22    GUNNEDAH         R4     1.2340%  Box 1 Snooping               18.5197%  Box 2 Waltzin' Ethics        17.2857%
+23    GUNNEDAH         R7     1.0489%  Box 4 Casual Escape          15.6229%  Box 5 Hybrid Blue            14.5740%
+24    Angle Park       R3     0.8086%  Box 4 Catch My Design        19.0418%  Box 1 Life's A Joke          18.2332%
+25    GUNNEDAH         R6     0.7706%  Box 1 Go Forward Block       14.4272%  Box 3 Royman                 13.6566%
+26    ROCKHAMPTON      R7     0.5578%  Box 2 Rolling Along          22.6331%  Box 1 Imprisonment           22.0753%
+27    ROCKHAMPTON      R10    0.5454%  Box 8 Jester Beach           14.2366%  Box 4 Sunburnt Dawn          13.6912%
+28    Angle Park       R4     0.5441%  Box 4 Slim Rusty             16.5319%  Box 6 Our Bella Rose         15.9878%
+29    GUNNEDAH         R9     0.4470%  Box 4 Scootin' Scooby        14.0919%  Box 6 Bentley Fisher         13.6449%
+30    Angle Park       R12    0.3364%  Box 4 Tenacious Design       19.2588%  Box 2 Ivory Pygmy            18.9224%
+31    ROCKHAMPTON      R1     0.1919%  Box 2 My Donuts              12.2457%  Box 1 It's Snowtime          12.0538%
+32    ROCKHAMPTON      R5     0.1484%  Box 4 Bahama Blue            15.0729%  Box 2 Miss Manaudou          14.9245%
+33    GUNNEDAH         R5     0.0880%  Box 4 Irinka Clay            14.8436%  Box 5 Wongaboori Belle       14.7556%
+34    Angle Park       R1     0.0248%  Box 1 Taz Maniac             17.5923%  Box 2 South Girls            17.5675%
 ----------------------------------------------------------------------------------------------------
 
 Total races ranked: 34
 
-🏆 BEST BET: GUNNEDAH Race 3 - Box 7 Ava's Milo (gap: 3.2909%)
+🏆 BEST BET: GUNNEDAH Race 1 - Box 8 Batman Cargo (gap: 11.7211%)

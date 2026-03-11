@@ -175,17 +175,20 @@ def train_track(df, track_name, verbose=True):
         print(f" spread={rf_spread*100:.1f}%  acc={rf_acc*100:.1f}%")
 
     # ── 2. Gradient Boosting ──────────────────────────────────────────────────
+    # GB's predict_proba is natively well-calibrated (Friedman 2001).
+    # Wrapping it with CalibratedClassifierCV(sigmoid) squashes the output
+    # to near-constant (< 0.5% spread) on small fields.  We train GB directly
+    # and store the raw model — no additional calibration layer needed.
     if verbose:
-        print(f"    GB (sigmoid) ...", end='', flush=True)
+        print(f"    GB (native, no extra cal) ...", end='', flush=True)
     gb = GradientBoostingClassifier(
-        n_estimators=100, learning_rate=0.05, max_depth=4, random_state=42,
+        n_estimators=150, learning_rate=0.10, max_depth=4,
+        min_samples_leaf=3, subsample=0.8, random_state=42,
     )
-    gb.fit(X_train_sc, y_train)
-    gb_cal = CalibratedClassifierCV(gb, method='sigmoid', cv=3)
-    gb_cal.fit(X_train_sc, y_train, sample_weight=w_train)
-    models['gb'] = gb_cal
+    gb.fit(X_train_sc, y_train, sample_weight=w_train)
+    models['gb'] = gb
 
-    gb_proba  = gb_cal.predict_proba(X_test_sc)[:, 1]
+    gb_proba  = gb.predict_proba(X_test_sc)[:, 1]
     gb_spread = float(gb_proba.max() - gb_proba.min()) if len(gb_proba) > 1 else 0.0
     gb_acc    = accuracy_score(y_test, (gb_proba > 0.5).astype(int))
     metrics['gb_spread'] = gb_spread
@@ -194,13 +197,15 @@ def train_track(df, track_name, verbose=True):
         print(f" spread={gb_spread*100:.1f}%  acc={gb_acc*100:.1f}%")
 
     # ── 3. XGBoost ────────────────────────────────────────────────────────────
+    # XGBoost with use_label_encoder removed (deprecated) and a higher
+    # learning_rate so calibrated output has sufficient spread.
     if HAS_XGBOOST:
         if verbose:
             print(f"    XGB (sigmoid) ...", end='', flush=True)
         xgb_m = xgb.XGBClassifier(
-            n_estimators=100, learning_rate=0.05, max_depth=4,
+            n_estimators=150, learning_rate=0.10, max_depth=4,
+            subsample=0.8, colsample_bytree=0.8,
             random_state=42, eval_metric='logloss',
-            use_label_encoder=False,
         )
         xgb_m.fit(X_train_sc, y_train, sample_weight=w_train)
         xgb_cal = CalibratedClassifierCV(xgb_m, method='sigmoid', cv=3)

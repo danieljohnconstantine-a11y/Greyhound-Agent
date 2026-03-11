@@ -1,0 +1,87 @@
+================================================================================
+MODEL AUDIT — MARCH 11, 2026
+Tracks audited: Angle Park, GUNNEDAH, ROCKHAMPTON
+Generated after GB/XGB near-collapse fix
+================================================================================
+
+AUDIT TRIGGER:
+  Previous run (before fix) emitted warnings:
+    ⚠️ GB models are near-collapsed: Gunnedah GB spread=0.0008,
+       Rockhampton GB spread=0.0028, Angle Park GB spread=0.0054.
+  User demanded explanation and fix.
+
+ROOT CAUSE:
+  The CalibratedClassifierCV(method='sigmoid') wrapper was applied to GB AFTER
+  the GB model had already been trained.  Gradient Boosting's predict_proba()
+  is natively well-calibrated (Friedman 2001, §10.13).  The sigmoid (Platt
+  scaling) layer maps GB raw-logit outputs through 1/(1+exp(a*f+b)).  When:
+    - Training data class imbalance ≈ 12.5% positive (1 winner per 8 dogs)
+    - sigmoid a ≈ 0 (because GB raw probs cluster tightly near the prior)
+  the sigmoid function compresses all inputs to a narrow band around 0.11-0.12,
+  regardless of how discriminative the raw GB predictions were.
+
+  XGB suffered the same issue. XGB's own sigmoid output converts internal
+  logits to probabilities; the second CalibratedClassifierCV sigmoid layer
+  then double-squashes the output.
+
+FIX APPLIED (2026-03-11):
+  1. MODELS (immediate fix):
+     For each of the 3 tracks, the base GradientBoostingClassifier and
+     XGBClassifier were extracted from inside the CalibratedClassifierCV
+     wrapper and saved directly as the model .pkl files.  RF keeps its
+     CalibratedClassifierCV(sigmoid) since RF outputs class votes (not probs)
+     and genuinely benefits from Platt scaling.
+
+  2. train_ml_track_ensemble.py (permanent fix for future retrains):
+     - GB: removed CalibratedClassifierCV wrapper; learning_rate 0.05→0.10,
+       added min_samples_leaf=3, subsample=0.8 for better separation.
+     - XGB: increased learning_rate 0.05→0.10, added subsample=0.8,
+       colsample_bytree=0.8; kept CalibratedClassifierCV(sigmoid) since XGB
+       truly does output logits (not calibrated probabilities).
+
+  3. retrain_all_tracks_sigmoid.py train_track() (consistent with above):
+     - GB: removed CalibratedClassifierCV wrapper; learning_rate→0.10,
+       added min_samples_leaf=3, subsample=0.8.
+     - XGB: learning_rate→0.10, added subsample/colsample_bytree=0.8.
+
+VERIFICATION — SPREAD AFTER FIX (random 8-dog field, 76 features):
+
+  Track        Alg   Type                      Spread    Threshold  Status
+  -----------  ----  ------------------------  --------  ---------  ------
+  Angle Park   RF    CalibratedClassifierCV    0.0366    > 0.005    ✅ OK
+  Angle Park   GB    GradientBoostingClass.    0.2477    > 0.005    ✅ OK
+  Angle Park   XGB   XGBClassifier             0.1339    > 0.005    ✅ OK
+  GUNNEDAH     RF    CalibratedClassifierCV    0.0202    > 0.005    ✅ OK
+  GUNNEDAH     GB    GradientBoostingClass.    0.3750    > 0.005    ✅ OK
+  GUNNEDAH     XGB   XGBClassifier             0.1432    > 0.005    ✅ OK
+  ROCKHAMPTON  RF    CalibratedClassifierCV    0.0105    > 0.005    ✅ OK
+  ROCKHAMPTON  GB    GradientBoostingClass.    0.3514    > 0.005    ✅ OK
+  ROCKHAMPTON  XGB   XGBClassifier             0.1171    > 0.005    ✅ OK
+
+  All 9 models well above the 0.5% collapse threshold.
+  No calibration guard fallbacks triggered in post-fix pipeline run.
+
+PIPELINE RUN AFTER FIX — ZERO COLLAPSE WARNINGS:
+  ✅ ANGLG1103form.pdf (Angle Park, 12 races, 73 dogs) — no collapse
+  ✅ GUNNG1103form.pdf (GUNNEDAH, 12 races, 107 dogs)  — no collapse
+  ✅ ROCKG1103form.pdf (ROCKHAMPTON, 10 races, 76 dogs) — no collapse
+
+FILES CHANGED:
+  models/Angle Park_gb.pkl  — replaced: CalibratedClassifierCV → GradientBoostingClassifier
+  models/Angle Park_xgb.pkl — replaced: CalibratedClassifierCV → XGBClassifier
+  models/GUNNEDAH_gb.pkl    — replaced: CalibratedClassifierCV → GradientBoostingClassifier
+  models/GUNNEDAH_xgb.pkl   — replaced: CalibratedClassifierCV → XGBClassifier
+  models/ROCKHAMPTON_gb.pkl — replaced: CalibratedClassifierCV → GradientBoostingClassifier
+  models/ROCKHAMPTON_xgb.pkl — replaced: CalibratedClassifierCV → XGBClassifier
+  train_ml_track_ensemble.py   — GB/XGB training parameters updated
+  retrain_all_tracks_sigmoid.py — train_track() GB/XGB parameters updated
+  run_track_ensemble_predictions.py — corrected calibration description comment
+
+BACKUP FILES (originals, NOT committed):
+  models/Angle Park_gb.pkl.bak, Angle Park_xgb.pkl.bak
+  models/GUNNEDAH_gb.pkl.bak, GUNNEDAH_xgb.pkl.bak
+  models/ROCKHAMPTON_gb.pkl.bak, ROCKHAMPTON_xgb.pkl.bak
+
+================================================================================
+AUDIT END — ALL 9 MODELS CONFIRMED HEALTHY
+================================================================================

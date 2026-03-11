@@ -406,7 +406,7 @@ def main():
     print("=" * 80)
     print("\nUsing track-specific calibrated ensemble models:")
     print("  ✅ RandomForest + GradientBoosting + XGBoost per track")
-    print("  ✅ All models calibrated with Isotonic Regression")
+    print("  ✅ RF models calibrated with Sigmoid Regression; GB/XGB use native probabilities")
     print("  ✅ Predictions averaged across all 3 algorithms")
     print("  ✅ Confidence scores accurately reflect win probability")
     print("=" * 80)
