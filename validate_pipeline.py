@@ -120,7 +120,7 @@ def validate_track_flat(models_dir: str, track_name: str, algos: list, n_samples
             results[algo] = (PASS, f"{type(m).__name__}, {n_feat} features")
             loaded_models[algo] = (m, n_feat)
 
-    # Synthetic prediction test
+    # Pipeline smoke test — random feature vector to verify model loading (NOT race prediction data)
     # 74 is the default fallback feature count for pre-trained models on this branch.
     # It matches the StandardScaler and RF/GB models trained in train_ml_track_ensemble.py.
     n_feat = n_feat_scaler if n_feat_scaler > 0 else 74
@@ -202,7 +202,7 @@ def validate_track(track_dir: str, track_name: str, algos: list, n_samples: int 
             results[algo] = (PASS, f"{type(m).__name__}, {n_feat} features")
             loaded_models[algo] = (m, n_feat)
 
-    # Synthetic prediction test
+    # Pipeline smoke test — random feature vector to verify model loading (NOT race prediction data)
     # 74 is the default fallback feature count for pre-trained models on this branch.
     # It matches the StandardScaler and RF/GB models trained in train_ml_track_ensemble.py.
     n_feat = n_feat_scaler if n_feat_scaler > 0 else 74
