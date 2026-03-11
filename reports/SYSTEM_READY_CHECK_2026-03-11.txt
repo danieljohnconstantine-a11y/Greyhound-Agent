@@ -1,0 +1,211 @@
+==============================================================================
+  GREYHOUND AGENT — SYSTEM READINESS CHECK
+  Generated: 2026-03-11 11:07
+==============================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 1: MODEL FILES PRESENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅  3 track(s) have complete model sets: GUNNEDAH, Angle Park, ROCKHAMPTON
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 2: MODEL CALIBRATION (spread > 0.5%?)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅  GUNNEDAH RF — spread=0.0183 type=CalibratedClassifierCV
+  ✅  GUNNEDAH GB — spread=0.3033 type=GradientBoostingClassifier
+  ✅  GUNNEDAH XGB — spread=0.2710 type=XGBClassifier
+  ✅  Angle Park RF — spread=0.0259 type=CalibratedClassifierCV
+  ✅  Angle Park GB — spread=0.2652 type=GradientBoostingClassifier
+  ✅  Angle Park XGB — spread=0.1952 type=XGBClassifier
+  ✅  ROCKHAMPTON RF — spread=0.0177 type=CalibratedClassifierCV
+  ✅  ROCKHAMPTON GB — spread=0.6608 type=GradientBoostingClassifier
+  ✅  ROCKHAMPTON XGB — spread=0.1271 type=XGBClassifier
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 3: MODEL TYPE AUDIT (RF=CalibratedCV, GB/XGB=native)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅  GUNNEDAH RF  — CalibratedClassifierCV ✓ (expected)
+  ✅  GUNNEDAH GB  — GradientBoostingClassifier ✓ (native proba, expected)
+  ✅  GUNNEDAH XGB — XGBClassifier ✓ (native proba, expected)
+  ✅  Angle Park RF  — CalibratedClassifierCV ✓ (expected)
+  ✅  Angle Park GB  — GradientBoostingClassifier ✓ (native proba, expected)
+  ✅  Angle Park XGB — XGBClassifier ✓ (native proba, expected)
+  ✅  ROCKHAMPTON RF  — CalibratedClassifierCV ✓ (expected)
+  ✅  ROCKHAMPTON GB  — GradientBoostingClassifier ✓ (native proba, expected)
+  ✅  ROCKHAMPTON XGB — XGBClassifier ✓ (native proba, expected)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 4: RETRAIN QUEUE (tracks with data but no model)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚠️   LADBROKES Q1 LAKESIDE (392 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   MANDURAH (363 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   HEALESVILLE (277 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   BALLARAT (263 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   RICHMOND (256 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   WARRAGUL (250 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   WARRNAMBOOL (215 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   SHEPPARTON (203 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   BENDIGO (202 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   SALE (190 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   LADBROKES Q STRAIGHT (183 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   CANNINGTON (180 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   NOWRA (178 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   GAWLER (173 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   TAREE (169 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   GEELONG (168 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   MOUNT GAMBIER (165 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   SANDOWN (159 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   MEADOWS (158 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   BETDELUXE CAPALABA (156 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   LADBROKES GARDENS (156 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   BET NATION TOWNSVILLE (143 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   GRAFTON (142 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   LADBROKES Q2 PARKLANDS (140 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   LAUNCESTON (140 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   CASINO (137 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   WENTWORTH PARK (136 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   BETDELUXE ROCKHAMPTON (131 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   DUBBO (126 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   GOSFORD (115 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   HOBART (113 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   BULLI (101 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   WAGGA (100 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   MAITLAND (98 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   DARWIN (93 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   TEMORA (90 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   MURRAY BRIDGE STRAIGHT (88 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   HORSHAM (84 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   GOULBURN (74 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   RICHMOND STRAIGHT (65 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   MURRAY BRIDGE (51 races) — needs model.  Run: python retrain_all_tracks_sigmoid.py
+  ⚠️   BROKEN HILL (24 races) — too few races for reliable model; excluded from training.
+  ⚠️   Q PARKLANDS (22 races) — too few races for reliable model; excluded from training.
+  ⚠️   GARDENS (12 races) — too few races for reliable model; excluded from training.
+  ⚠️   TASMANIA (12 races) — too few races for reliable model; excluded from training.
+  ⚠️   LAKESIDE (10 races) — too few races for reliable model; excluded from training.
+  ⚠️   ABD (3 races) — too few races for reliable model; excluded from training.
+  ⚠️   CAPALABA (2 races) — too few races for reliable model; excluded from training.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 5: RESULTS CSV COVERAGE (which tracks have actuals data?)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Tracks with results CSVs in data/: 51
+  Tracks with trained models:        3
+  ✅  Tracks with BOTH results data AND model: ANGLE PARK, GUNNEDAH, ROCKHAMPTON
+  ⚠️   BALLARAT — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   BENDIGO — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   BET NATION TOWNSVILLE — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   BETDELUXE CAPALABA — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   BETDELUXE ROCKHAMPTON — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   BULLI — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   CANNINGTON — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   CASINO — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   DARWIN — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   DUBBO — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   GAWLER — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   GEELONG — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   GOSFORD — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   GOULBURN — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   GRAFTON — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   HEALESVILLE — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   HOBART — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   HORSHAM — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   LADBROKES GARDENS — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   LADBROKES Q STRAIGHT — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   LADBROKES Q1 LAKESIDE — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   LADBROKES Q2 PARKLANDS — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   LAUNCESTON — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   MAITLAND — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   MANDURAH — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   MEADOWS — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   MOUNT GAMBIER — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   MURRAY BRIDGE — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   MURRAY BRIDGE STRAIGHT — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   NOWRA — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   RICHMOND — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   RICHMOND STRAIGHT — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   SALE — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   SANDOWN — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   SHEPPARTON — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   TAREE — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   TEMORA — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   WAGGA — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   WARRAGUL — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   WARRNAMBOOL — results data exists but NO model yet. Cannot make predictions until model is trained.
+  ⚠️   WENTWORTH PARK — results data exists but NO model yet. Cannot make predictions until model is trained.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 6: KNOWN CRITICAL ISSUES (as of 2026-03-11)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚠️   [OPEN ] Only 3 of ~44 canonical tracks have trained models (GUNNEDAH, Angle Park, ROCKHAMPTON). 41 more tracks will raise RuntimeError when their PDFs are loaded. FIX: run retrain_all_tracks_sigmoid.py on a machine with full data/ PDFs.
+  ⚠️   [OPEN ] Australian form PDFs do NOT publish greyhound weights. Weight=0 for every dog in every PDF. WeightFactor is always neutral (1.0). This is factual — not a bug — but weight-based features carry zero predictive signal.
+  ⚠️   [OPEN ] TrackConditionAdj always 1.0 (placeholder). No live track condition or weather data is integrated. Heavy/Soft tracks are treated identically to Good tracks.
+  ⚠️   [OPEN ] Historical box stats in src/features.py are hard-coded from a 386-race sample. These will drift as more races occur. FIX: periodically refresh TRACK_BOX_STATS from new results CSVs.
+  ✅  [FIXED] Maitland Box4 penalty was -0.02 while Box4 won 45% of races. Fixed to +0.08 BOOST in src/features.py (Mar 10 2026).
+  ✅  [FIXED] Healesville Box8 overfit. RF models had isotonic collapse. Fixed by retraining with sigmoid calibration (Mar 10 2026).
+  ✅  [FIXED] Shepparton missing from TRACK_COMPREHENSIVE_ADJUSTMENTS. Added with MIXED classification (Mar 10 2026).
+  ✅  [FIXED] GB and XGB models were wrapped in CalibratedClassifierCV(sigmoid) causing near-collapse (spread 0.017-0.061). Fixed by storing native classifiers directly (Mar 11 2026).
+  ✅  [FIXED] BestTimeSec/SectionalSec emitting distance/15.5 or 6.5 as a fake time when PDF had no timing. Fixed to emit None → race-median fill (Mar 8 2026).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 7: EXPECTED WIN RATE (from historical audits)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Based on PREDICTION_AUDIT_2026-03-10.txt (92 races, 9 tracks, 8-dog fields):
+
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │  Metric                              Result                         │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │  Random baseline (8-dog field)       12.5%  (1-in-8)               │
+  │  Overall model win rate              22.8%  (21/92 races)          │
+  │  Model vs baseline                   +10.3 percentage points       │
+  │  Model is                            1.83× better than random      │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │  Best tracks (with dedicated models) 27–40%                        │
+  │    Nowra                             40.0%  (4/10)                 │
+  │    Mandurah                          33.3%  (4/12)                 │
+  │    Gawler                            27.3%  (3/11)                 │
+  │  Worst tracks (cross-track models)   8–17%                         │
+  │    Maitland                           9.1%  (1/11)                 │
+  │    Shepparton                         8.3%  (1/12)                 │
+  ├─────────────────────────────────────────────────────────────────────┤
+  │  High-confidence filter (≥25%):                                    │
+  │    Gawler ≥25%                        100% (2/2)                   │
+  │    Maitland ≥25% (R3, 24.4%)         1/1                          │
+  │  → Filtering to predictions ≥25% confidence raises hit rate        │
+  │    dramatically.  Only bet when ML_Confidence ≥ 25%.               │
+  └─────────────────────────────────────────────────────────────────────┘
+
+  REALISTIC EXPECTATION GOING FORWARD:
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │  All predictions (no filter)         ~22–25%  win rate expected    │
+  │  Predictions with ≥20% confidence    ~28–35%  win rate expected    │
+  │  Predictions with ≥25% confidence    ~35–45%  win rate expected    │
+  │                                                                     │
+  │  NOTE: These estimates are based on ONE audit day (10 Mar 2026).   │
+  │  Run backtest_win_rate.py for a full multi-day analysis.           │
+  └─────────────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 8: GO / NO-GO SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅ PASS  :  25
+  ⚠️  WARN  :  93
+  ❌ FAIL  :   0
+  Total   : 118
+
+  🟡  SYSTEM STATUS: CONDITIONAL GO
+      Core pipeline is working.  Open warnings should be
+      addressed (especially the retrain queue) to improve accuracy.
+
+  WHAT YOU MUST DO BEFORE BETTING:
+  1. Run retrain_all_tracks_sigmoid.py on a machine with full data/
+     (trains models for 20 more tracks — currently only 3 tracks ready)
+  2. For each race day: copy PDFs to data_predictions/ and run
+     run_track_ensemble_predictions.py
+  3. Only act on predictions with ML_Confidence >= 20%
+  4. Prioritise tracks where model beat baseline (Nowra, Mandurah,
+     Gawler, Sandown, Q Parklands) over weaker tracks
+  5. Run backtest_win_rate.py periodically to monitor real performance
+
+==============================================================================
