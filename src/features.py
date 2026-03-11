@@ -470,115 +470,70 @@ def compute_features(df):
     # Source: data/race_results_nov_2025.csv | 90.3% timing data coverage
     # ========================================================================
     
-    # === WIN RATE Analysis (primary predictor) ===
-    # Average expected: 12.5% (1/8 boxes)
-    # UPDATED v3.9: Based on 335 races (Nov 28-30, 2025)
-    # Critical finding: Box 2 was MASSIVELY under-valued (actual 16.2% vs 12% matrix)
-    # Box 7 was OVER-penalized (actual 9.1% vs 5.5% matrix)
+    # === BOX WIN RATE — computed from 7,108 factual race results (Mar 2026) ===
+    # All 57 results CSVs across all tracks; zero synthetic data.
     BOX_WIN_RATE = {
-        1: 0.195,   # v3.9: REDUCED from 21.0% - Nov 30 showed only 15.5%, 3-day avg 19.5%
-        2: 0.160,   # v3.9: INCREASED from 12.0% - Nov 30 showed 23.8%! 3-day avg 16.2%
-        3: 0.087,   # v3.9: Slight increase - 3-day avg 8.7%
-        4: 0.135,   # v3.9: REDUCED from 15.5% - 3-day avg 13.5%
-        5: 0.088,   # v3.9: Slight reduction - 3-day avg 8.8%
-        6: 0.092,   # v3.9: REDUCED from 12.2% - 3-day avg 9.2%
-        7: 0.091,   # v3.9: INCREASED from 5.5% - Nov 30 showed 9.7%, 3-day avg 9.1%
-        8: 0.150,   # v3.9: Slight reduction - 3-day avg 15.0%
+        1: 0.183,   # 1298/7108 = 18.3%  (+5.8 pp above random)
+        2: 0.159,   # 1127/7108 = 15.9%  (+3.4 pp)
+        3: 0.102,   #  728/7108 = 10.2%  (-2.3 pp)
+        4: 0.122,   #  870/7108 = 12.2%  (-0.3 pp, near-random)
+        5: 0.093,   #  663/7108 =  9.3%  (-3.2 pp)
+        6: 0.094,   #  668/7108 =  9.4%  (-3.1 pp)
+        7: 0.110,   #  781/7108 = 11.0%  (-1.5 pp)
+        8: 0.130,   #  922/7108 = 13.0%  (+0.5 pp)
     }
-    
-    # === PLACE RATE Analysis (2nd place) ===
-    # Average expected: 12.5%
+
+    # === PLACE RATE (2nd place) — computed from 7,108 results ===
     BOX_PLACE_RATE = {
-        1: 0.142,   # 14.2% 2nds (55/386)
-        2: 0.161,   # 16.1% 2nds (62/386) - BEST placer
-        3: 0.083,   # 8.3% 2nds (32/386) - Weakest
-        4: 0.145,   # 14.5% 2nds (56/386)
-        5: 0.096,   # 9.6% 2nds (37/386)
-        6: 0.101,   # 10.1% 2nds (39/386)
-        7: 0.117,   # 11.7% 2nds (45/386)
-        8: 0.142,   # 14.2% 2nds (55/386)
+        1: 0.159,   # 1127/7108 = 15.9%
+        2: 0.151,   # 1075/7108 = 15.1%
+        3: 0.098,   #  698/7108 =  9.8%
+        4: 0.121,   #  860/7108 = 12.1%
+        5: 0.093,   #  663/7108 =  9.3%
+        6: 0.105,   #  743/7108 = 10.5%
+        7: 0.122,   #  868/7108 = 12.2%
+        8: 0.142,   # 1012/7108 = 14.2%
     }
-    
-    # === TOP 3 RATE Analysis (win + place + show) ===
-    # Average expected: 37.5% (3/8 boxes) 
+
+    # === TOP 3 RATE (1st+2nd+3rd) — computed from 7,108 results ===
     BOX_TOP3_RATE = {
-        1: 0.497,   # 49.7% Top 3 (192/386) - STRONGEST overall
-        2: 0.417,   # 41.7% Top 3 (161/386) - #2 overall
-        3: 0.256,   # 25.6% Top 3 (99/386) - WEAKEST overall
-        4: 0.391,   # 39.1% Top 3 (151/386)
-        5: 0.288,   # 28.8% Top 3 (111/386)
-        6: 0.345,   # 34.5% Top 3 (133/386)
-        7: 0.334,   # 33.4% Top 3 (129/386)
-        8: 0.446,   # 44.6% Top 3 (172/386) - #3 overall
+        1: 0.493,   # 3507/7108 = 49.3%
+        2: 0.434,   # 3087/7108 = 43.4%
+        3: 0.303,   # 2157/7108 = 30.3%
+        4: 0.375,   # 2665/7108 = 37.5%
+        5: 0.291,   # 2070/7108 = 29.1%
+        6: 0.301,   # 2140/7108 = 30.1%
+        7: 0.357,   # 2540/7108 = 35.7%
+        8: 0.414,   # 2944/7108 = 41.4%
     }
     
-    # === EXACTA PATTERNS - Most common winning combinations ===
-    # Pattern analysis: which boxes run 1-2 together most often?
-    # Top patterns: 1-2 (15x), 1-8 (15x), 2-4 (13x), 8-2 (12x)
+    # === EXACTA PATTERNS — computed from 7,108 factual race results (Mar 2026) ===
     EXACTA_BONUS = {
-        (1, 2): 0.039,  # 15/386 = 3.9%
-        (1, 8): 0.039,  # 15/386 = 3.9% - Inside-outside combo
-        (2, 4): 0.034,  # 13/386 = 3.4%
-        (8, 2): 0.031,  # 12/386 = 3.1%
-        (1, 7): 0.028,  # 11/386 = 2.8%
-        (2, 1): 0.028,  # 11/386 = 2.8%
-        (6, 1): 0.028,  # 11/386 = 2.8%
+        (1, 2): 0.036,  # 257/7108 = 3.6% — most common
+        (2, 1): 0.035,  # 246/7108 = 3.5%
+        (1, 8): 0.032,  # 227/7108 = 3.2% — inside/outside combo
+        (2, 8): 0.028,  # 196/7108 = 2.8%
+        (4, 1): 0.026,  # 183/7108 = 2.6%
+        (1, 4): 0.025,  # 178/7108 = 2.5%
+        (8, 2): 0.025,  # 177/7108 = 2.5%
+        (8, 1): 0.024,  # 173/7108 = 2.4%
+        (1, 7): 0.024,  # 171/7108 = 2.4%
+        (2, 7): 0.023,  # 163/7108 = 2.3%
     }
     
     # === TRACK-SPECIFIC BOX 1 BIAS ===
-    # v4.2 UPDATE: MAJOR OVERHAUL based on Nov 30 analysis (132 races)
-    # Critical finding: We over-predicted Box 1 at Darwin (64% picks, 9% wins) and Richmond (42% picks, 8% wins)
+    # NOTE: All track+box adjustments are now consolidated in TRACK_COMPREHENSIVE_ADJUSTMENTS
+    # below (computed from 7,108 real races). TRACK_BOX1_ADJUSTMENT is zeroed to prevent
+    # double-counting — the comprehensive dict already covers Box 1 for every track.
+    # The TrackBox1Adjustment column is kept for model compatibility (trained models expect it).
     TRACK_BOX1_ADJUSTMENT = {
-        # STRONG Box 1 tracks (>35% Box 1 win rate) - Extra boost
-        "Cannington": 0.10,      # 41.7% Box 1 (Nov 29)
-        "Goulburn": 0.08,        # 41.7% Box 1 win rate
-        "Angle Park": 0.08,      # 50% Box 1 win rate (Nov 27)
-        "Sandown": 0.06,         # 33.3% Box 1 (Nov 29)
-        "Meadows": 0.06,         # 42% Box 1 win rate (Nov 27)
-        # GOOD Box 1 tracks (25-35%) - Medium boost
-        "Rockhampton": 0.04,     # v4.2: Box 1 won 33.3% on Nov 30 (better than before)
-        "Capalaba": 0.05,        # v3.9: 30% success (Nov 30)
-        "Wentworth Park": 0.05,  # 30% Box 1 (Nov 29)
-        "Dubbo": 0.05,           # 27.3% Box 1 (Nov 29)
-        "Bendigo": 0.05,         # 33% Box 1 win rate (Nov 28)
-        "Gawler": 0.05,          # 33% Box 1 win rate (Nov 28)
-        "Temora": 0.05,          # 22% Box 1 win rate (Nov 27)
-        "Broken Hill": 0.03,     # v3.9: 25% success (Nov 30)
-        # Normal Box 1 tracks (15-25%) - Small adjustment
-        "Grafton": 0.02,         # v3.9: 16.7% success (Nov 30)
-        "Mount Gambier": 0.02,   # v3.9: 18.2% success (Nov 30)
-        "Sale": 0.01,            # v3.9: 16.7% success (Nov 30)
-        "Lakeside": 0.02,        # 20% Box 1 (Nov 29)
-        "Ladbrokes Q": 0.02,     # 30% Box 1 win rate
-        "Warragul": 0.02,        # 25% Box 1 win rate
-        "Wagga": 0.02,           # 27% Box 1 win rate
-        # WEAK Box 1 tracks (<15%) - Reduce Box 1 advantage  
-        # v4.2: MAJOR PENALTIES for tracks where we massively over-predict Box 1
-        "Darwin": -0.08,         # v4.2: Box 1 only 9.1% but we picked 64%! MAJOR PENALTY
-        "Richmond": -0.08,       # v4.2: Box 1 only 8.3% but we picked 42%! MAJOR PENALTY
-        "Q Parklands": -0.06,    # v4.2: Box 1 only 10% but we picked 30%! 
-        "Q2 Parklands": -0.06,   # v4.2: Same as Q Parklands
-        "Taree": -0.03,          # 9.1% Box 1 (Nov 29) - upset track
-        "Gardens": -0.03,        # 8.3% Box 1 (Nov 29)
-        "Ballarat": -0.03,       # 8.3% Box 1 (Nov 29)
-        "Healesville": -0.03,    # 0% Box 1 (Nov 28) - Outlier day
-        "Mandurah": -0.02,       # 9% Box 1 (Nov 28)
-        "DEFAULT": 0.0
+        "DEFAULT": 0.0,
     }
     
-    # === TRACK-SPECIFIC BOX 4 BOOST (v3.5) ===
-    # Nov 29 showed Box 4 winning 16.7% overall - above 12.7% historical
-    # Some tracks have strong Box 4 performance
+    # === TRACK-SPECIFIC BOX 4 BOOST ===
+    # NOTE: Consolidated into TRACK_COMPREHENSIVE_ADJUSTMENTS. Zeroed to prevent double-counting.
     TRACK_BOX4_ADJUSTMENT = {
-        "Cannington": 0.05,      # Box 4 won 25% on Nov 29
-        "Ballarat": 0.03,        # Box 4 active at this track
-        "Gardens": 0.03,         # Box 4 won 16.7% on Nov 29
-        "Wentworth Park": 0.02,  # Box 4 competitive
-        "Broken Hill": 0.05,     # v4.0: Box 4 wins 33.3%
-        "Grafton": 0.04,         # v4.0: Box 4 wins 27.3%
-        "Bendigo": 0.03,         # v4.0: Box 4 wins 21.2%
-        "Q Straight": 0.03,      # v4.0: Box 4 wins 25%
-        "DEFAULT": 0.0
+        "DEFAULT": 0.0,
     }
     
     # ========================================================================
@@ -589,357 +544,254 @@ def compute_features(df):
     # SOLUTION: Track-specific box adjustments for ALL boxes, not just Box 1/4
     # 
     # Key findings:
-    # - Box 8 dominant: Healesville, Sale, Grafton, BetDeluxe Capalaba, Temora
-    # - Box 7 dominant: Wentworth Park, Q2 Parklands, Gunnedah  
-    # - Box 6 dominant: Warragul, Richmond, Mount Gambier, Capalaba
-    # - Box 2 dominant: Dubbo, Gawler, Ballarat
-    # - Box 1 dominant: Darwin, BetDeluxe Rockhampton, Lakeside
+    # Updated with data-driven values computed from 7,108 real race results (Mar 2026)
+    # Formula: adjustment = (win_rate_pct - 12.5) * 0.008, capped at ±0.15
+    # Only adjustments with |value| >= 0.005 are included (noise threshold).
     # ========================================================================
-    
+
     TRACK_COMPREHENSIVE_ADJUSTMENTS = {
-        # === HIGH BOX 8 TRACKS ===
-        # These tracks favor Box 8 significantly above average (14.2%)
-        "Temora": {
-            1: 0.10,    # 40% Box 1 - very strong
-            8: 0.15,    # 50% Box 8 - STRONGEST
-            2: -0.05, 3: -0.05, 4: -0.05, 6: -0.05, 7: -0.05  # Penalize others
-        },
-        "BetDeluxe Capalaba": {
-            8: 0.12,    # 36.4% Box 8
-            3: 0.02, 6: 0.02,  # Also decent
-            4: -0.05, 5: -0.05  # Weak
-        },
-        "Wentworth Park": {
-            7: 0.08,    # 30% Box 7
-            8: 0.08,    # 30% Box 8
-            5: -0.05, 6: -0.05  # Weak
-        },
-        "Grafton": {
-            8: 0.08,    # 27.3% Box 8
-            4: 0.06,    # 27.3% Box 4
-            2: -0.05, 5: -0.05  # Weak
-        },
-        "Healesville": {
-            # 253 races: Box 8=15.4%, Box 2=14.2%, Box 1=13.0%, Box 7=13.0%
-            # v5.1: Box 2 penalty REMOVED (was -0.02; Box 2 is 2nd most common winner)
-            8: 0.04,    # 15.4% Box 8 - top box
-            2: 0.02,    # 14.2% Box 2 - 2nd (was wrongly penalised at -0.02)
-            1: 0.01,    # 13.0% Box 1
-            7: 0.01,    # 13.0% Box 7
-            5: -0.04,   # Below average
-            4: -0.02, 3: -0.02,  # Below average
-            6: 0.00,    # ~12% — neutral
-        },
-        "Sale": {
-            8: 0.05,    # 22.9% Box 8
-            2: 0.03,    # 18.8% Box 2
-            3: -0.05, 6: -0.03  # Weak
-        },
-        
-        # === HIGH BOX 7/6 TRACKS ===
-        # v4.2: Updated based on Nov 30 actual results
-        "Q2 Parklands": {
-            # Nov 30 ACTUAL: Box 2 won 40% (4/10), Box 6 won 20%
-            # WE PREDICTED: Box 1 (30%), Box 8 (30%) - COMPLETELY WRONG!
-            # FIX: Strong Box 2 boost, Box 6 secondary, penalize Box 1/8
-            2: 0.12,    # v4.2: Box 2 won 40%! MAJOR BOOST
-            6: 0.06,    # v4.2: Box 6 won 20%
-            1: -0.06,   # v4.2: Box 1 only won 10% but we over-picked
-            8: -0.06,   # v4.2: Box 8 won 10% but we over-picked 30%!
-            4: 0.02,    # v4.2: Secondary (10%)
-        },
-        "Q Parklands": {
-            # Same as Q2 Parklands
-            2: 0.12, 6: 0.06, 1: -0.06, 8: -0.06, 4: 0.02,
-        },
-        "Gunnedah": {
-            # 116 races: Box 2=16.4%, Box 7=12.1%, Box 6=12.1%, Box 4=10.3%
-            # v5.1: CORRECTED — Box 2 dominant (was Box 7: +0.10, overstated)
-            2: 0.06,    # 16.4% Box 2 - STRONGEST
-            7: 0.02, 6: 0.02,  # 12.1% each (slightly above 12.5% avg)
-            1: -0.04, 8: -0.04, 5: -0.03,  # Below average
-        },
-        "Warragul": {
-            # 226 races: Box 2=19.9%, Box 3=15.9%, Box 8=14.6%, Box 1=14.6%
-            # v5.1: CORRECTED — data clearly shows Box 2 dominant (was Box 6: +0.12, wrong)
-            2: 0.08,    # 19.9% Box 2 - STRONGEST
-            3: 0.04,    # 15.9% Box 3
-            8: 0.02, 1: 0.02,  # 14.6% each
-            6: -0.04, 4: -0.03, 7: -0.03,  # Below average
-        },
-        "Richmond": {
-            # v4.2: Nov 30 ACTUAL: Box 2 won 41.7% (5/12), Box 7/8 won 16.7% each
-            # WE PREDICTED: Box 1 (42%), Box 2 (17%) - WRONG BOX!
-            # FIX: Strong Box 2 boost, add Box 7 bonus, penalize Box 1
-            2: 0.14,    # v4.2: Box 2 won 41.7%! MAJOR BOOST
-            7: 0.05,    # v4.2: Box 7 won 16.7%
-            8: 0.05,    # v4.2: Box 8 won 16.7%
-            1: -0.08,   # v4.2: Box 1 only won 8.3% but we over-picked 42%!
-            4: -0.05,   # v4.2: Box 4 weak
-        },
-        "Mount Gambier": {
-            6: 0.08,    # 27.3% Box 6
-            1: 0.02, 2: 0.02, 8: 0.02,  # Spread out
-            3: -0.05, 7: -0.05  # Weak
-        },
-        "Capalaba": {
-            6: 0.03,    # 16.7% Box 6 (top)
-            5: -0.05  # Weak
-        },
-        
-        # === HIGH BOX 2 TRACKS ===
-        "Gawler": {
-            2: 0.12,    # 36.8% Box 2 - STRONGEST
-            1: 0.06,    # 26.3% Box 1
-            5: -0.05, 6: -0.05, 8: -0.05  # Weak
-        },
-        "Dubbo": {
-            2: 0.08,    # 25% Box 2
-            1: -0.05   # 0% Box 1 - VERY WEAK
-        },
-        "Ballarat": {
-            1: 0.06, 2: 0.06,  # Both 25%
-            7: -0.05, 8: -0.05  # Weak
-        },
+        # ====================================================================
+        # DATA-DRIVEN BOX ADJUSTMENTS — computed from 7,108 factual race results
+        # Each value = (actual_win_pct - 12.5%) × 0.008, capped ±0.15
+        # Source: data/results_*.csv — ALL factual, zero synthetic data
+        # ====================================================================
+
+        # Angle Park (254 races): Box1=24%, Box2=21%, Box3=4%, Box6=6%
         "Angle Park": {
-            2: 0.06, 5: 0.06,  # Both 25%
-            7: -0.05, 8: -0.05  # Weak
+            1:  0.089, 2:  0.067,
+            3: -0.065, 6: -0.056, 5: -0.024, 8: -0.009, 7: -0.006,
         },
+        # Ballarat (239 races): Box1=20%, Box3=8%, Box5=9%, Box7=10%
+        "Ballarat": {
+            1:  0.057, 4:  0.014,
+            3: -0.036, 5: -0.026, 7: -0.020, 6: -0.010,
+        },
+        # Bendigo (178 races): Box2=16%, Box8=16%, Box5=8%, Box6=9%
         "Bendigo": {
-            2: 0.05,    # 21.2% Box 2
-            4: 0.05,    # 21.2% Box 4
-            7: -0.03, 8: -0.04  # Weak
+            2:  0.030, 8:  0.030, 1:  0.012, 4:  0.012,
+            5: -0.033, 6: -0.028, 7: -0.019,
         },
-        
-        # === PROBLEMATIC TRACKS - Darwin and Rockhampton ===
-        # v4.2: MAJOR OVERHAUL based on Nov 30 actual results
-        "Darwin": {
-            # Nov 30 ACTUAL: Box 7 won 36.4% (4/11), Box 2 won 27.3% (3/11)
-            # WE PREDICTED: Box 1 (64%!!) - MASSIVELY WRONG!
-            # FIX: Strong Box 7 boost, Box 2 secondary, MAJOR Box 1 penalty
-            7: 0.12,    # v4.2: Box 7 won 36.4%! MAJOR BOOST
-            2: 0.10,    # v4.2: Box 2 won 27.3%! STRONG BOOST
-            3: 0.04,    # v4.2: Box 3 won 18.2%
-            1: -0.10,   # v4.2: Box 1 only won 9.1% but we picked 64%!!! MAJOR PENALTY
-            8: 0.02,    # v4.2: Box 8 won 9.1%
-            4: -0.03, 5: -0.03, 6: -0.03  # Weak boxes
-        },
-        "BetDeluxe Rockhampton": {
-            # Nov 30 ACTUAL: Box 1 won 33.3% (4/12), Box 3 won 25% (3/12)
-            # WE PREDICTED: Box 8 (42%), Box 4 (25%) - WRONG BOXES!
-            # FIX: Strong Box 1/3 boost, MAJOR Box 8/4 penalty
-            1: 0.12,    # v4.2: Box 1 won 33.3%! MAJOR BOOST
-            3: 0.08,    # v4.2: Box 3 won 25%! STRONG BOOST
-            6: 0.04,    # v4.2: Box 6 won 16.7%
-            8: -0.10,   # v4.2: Box 8 won 16.7% but we over-picked 42%! MAJOR PENALTY
-            4: -0.08,   # v4.2: Box 4 won 0% but we picked 25%! STRONG PENALTY
-            2: -0.05, 5: -0.03, 7: -0.05  # Weak boxes
-        },
-        "Rockhampton": {
-            # Same as BetDeluxe Rockhampton
-            1: 0.12, 3: 0.08, 6: 0.04, 8: -0.10, 4: -0.08, 2: -0.05, 5: -0.03, 7: -0.05
-        },
-        
-        # === HIGH BOX 1 TRACKS (Reinforce existing) ===
-        "Lakeside": {
-            1: 0.15,    # 41.7% Box 1 - VERY STRONG
-            8: 0.06,    # 25% Box 8
-            4: -0.05, 7: -0.05  # Weak
-        },
-        
-        # === OTHER TRACKS ===
-        "Horsham": {
-            5: 0.06,    # 25% Box 5 (unusual)
-            6: -0.05  # Weak
-        },
-        "Q Straight": {
-            4: 0.06,    # 25% Box 4
-            8: -0.05  # Weak
-        },
-        "Sandown Park": {
-            1: 0.06, 3: 0.06,  # Both 25%
-            6: -0.05, 8: -0.05  # Weak
-        },
-        "Broken Hill": {
-            4: 0.10,    # 33.3% Box 4 - STRONG
-            1: 0.04, 5: 0.04,  # Also decent
-            3: -0.05, 7: -0.05, 8: -0.05  # Weak
-        },
-        
-        # v5.0: MAITLAND — Combined Nov 30 2025 + Mar 10 2026 (21 races)
-        # Nov 30 2025 (10 races): Box 6=30%, Box 8=20%, Box 2=20%, Box 4=10%
-        # Mar 10 2026 (11 races): Box 4=45%, Box 8=27%, Box 6=18%, Box 1=9%
-        # Weighted average (50%/50%):
-        #   Box 4=27.5%, Box 8=23.5%, Box 6=24%, Box 2=10%, Box 1=9.5%
-        "Maitland": {
-            4: 0.08,    # v5.0: CORRECTED — Box 4 won 45% on 10/03 (was penalised at -0.02!)
-            6: 0.05,    # v5.0: Reduced from +0.10; still strong combined average
-            8: 0.05,    # v5.0: Consistent across both days (20-27%)
-            2: 0.02,    # v5.0: Reduced from +0.06; only 0% on 10/03
-            7: 0.02,    # v5.0: Kept minor positive
-            1: -0.03,   # v5.0: Updated (was -0.04); 9% today — still weak
-            3: -0.02, 5: -0.02  # Weak boxes (both days)
-        },
-
-        # v5.0: SHEPPARTON — Based on Mar 10 2026 results (12 races)
-        # R1-10315, R2-3125, R3-6743, R4-1269, R5-8174, R6-2871,
-        # R7-1659, R8-1673, R9-4135, R10-2758, R11-5671, R12-8723
-        # Box 1=3, Box 8=2, Box 5=2, Box 6=2, Box 2=1, Box 3=1, Box 4=1 (from 1st digits)
-        # Note: R1=Box10 win — Box 10 not in model, treat as outer track
-        "Shepparton": {
-            1: 0.03,    # v5.0: 25% today (3/12) — consistent inside bias
-            8: 0.04,    # v5.0: 17% today (2/12) — outer runner competes
-            5: 0.02,    # v5.0: 17% today (2/12)
-            6: 0.02,    # v5.0: 17% today (2/12)
-            2: -0.02,   # v5.0: Only 1 win today
-            3: -0.02,   # v5.0: Only 1 win today
-            4: -0.01,   # v5.0: Only 1 win today (not penalised heavily — small sample)
-        },
-
-        # ====================================================================
-        # v5.1: TRACKS ADDED — All data from actual results CSVs (factual only)
-        # ====================================================================
-
-        # CANNINGTON (168 races): Box 1=26.2%, Box 2=17.3%, Box 5=11.9%, Box 3=10.1%
-        "Cannington": {
-            1: 0.10,    # 26.2% — VERY STRONG inside advantage
-            2: 0.04,    # 17.3% — secondary
-            5: -0.02, 3: -0.03, 4: -0.03, 8: -0.03, 7: -0.03,
-        },
-
-        # CASINO (137 races): Box 1=25.5%, Box 4=15.3%, Box 2=14.6%, Box 7=13.1%
-        "Casino": {
-            1: 0.08,    # 25.5% — dominant
-            4: 0.04,    # 15.3% — secondary
-            2: 0.03,    # 14.6%
-            3: -0.04, 8: -0.04, 6: -0.03,
-        },
-
-        # GEELONG (144 races): Box 2=16%, Box 4=15.3%, Box 7=14.6%, Box 3=13.9%
-        # Very mixed — no dominant box. Slight outside+ middle pattern.
-        "Geelong": {
-            2: 0.03, 4: 0.03, 7: 0.02,  # Marginally above average
-            1: -0.03, 5: -0.03, 6: -0.02,  # Below average
-        },
-
-        # GOSFORD (104 races): Box 2=14.4%, Box 8=14.4%, Box 7=13.5%, Box 1=13.5%
-        # Very even — all boxes within 2% of each other. Slight outside spread.
-        "Gosford": {
-            2: 0.02, 8: 0.02, 7: 0.01,
-            3: -0.03, 4: -0.02, 6: -0.01,
-        },
-
-        # GOULBURN (64 races): Box 1=21.9%, Box 8=15.6%, Box 4=14.1%, Box 5=14.1%
-        "Goulburn": {
-            1: 0.06,    # 21.9% — dominant
-            8: 0.03, 4: 0.02, 5: 0.02,
-            3: -0.04, 6: -0.04, 7: -0.03, 2: -0.02,
-        },
-
-        # HOBART / TASMANIA (113 races): Box 1=21.2%, Box 3=15.0%, Box 4=14.2%, Box 8=14.2%
-        "Hobart": {
-            1: 0.06,    # 21.2% — dominant inside
-            3: 0.03, 4: 0.02, 8: 0.02,
-            2: -0.03, 7: -0.04, 6: -0.03, 5: -0.03,
-        },
-
-        # LADBROKES GARDENS (132 races): Box 1=18.9%, Box 2=16.7%, Box 6=13.6%, Box 4=12.1%
-        "Ladbrokes Gardens": {
-            1: 0.04,    # 18.9%
-            2: 0.03,    # 16.7%
-            6: 0.01,
-            5: -0.04, 7: -0.03, 8: -0.03, 3: -0.02,
-        },
-
-        # LAUNCESTON (120 races): Box 1=33.3%, Box 2=14.2%, Box 3=12.5%, Box 8=10.8%
-        # VERY STRONG Box 1 — strongest inside bias in the dataset
-        "Launceston": {
-            1: 0.14,    # 33.3% — extremely dominant inside
-            2: 0.02,
-            7: -0.05, 6: -0.05, 5: -0.04, 4: -0.03,
-        },
-
-        # MANDURAH (334 races): Box 1=17.1%, Box 2=15.9%, Box 3=15.0%, Box 8=14.7%
-        # Very even — large sample. Slight inside advantage.
-        "Mandurah": {
-            1: 0.03, 2: 0.02, 3: 0.01,
-            7: -0.02, 6: -0.02, 5: -0.01,
-        },
-
-        # MEADOWS (146 races): Box 1=21.2%, Box 2=13.7%, Box 4=13.0%, Box 7=11.0%
-        "Meadows": {
-            1: 0.07,    # 21.2% — dominant inside
-            2: 0.02, 4: 0.01,
-            7: -0.03, 8: -0.04, 6: -0.03, 5: -0.02,
-        },
-
-        # MURRAY BRIDGE (41 races): Box 8=22.0%, Box 2=19.5%, Box 1=17.1%, Box 5=14.6%
-        "Murray Bridge": {
-            8: 0.06,    # 22.0% — top box
-            2: 0.05,    # 19.5%
-            1: 0.03,
-            4: -0.04, 7: -0.04, 6: -0.03, 3: -0.03,
-        },
-
-        # MURRAY BRIDGE STRAIGHT (78 races): Box 1=19.2%, Box 4=19.2%, Box 8=16.7%, Box 2=16.7%
-        "Murray Bridge Straight": {
-            1: 0.04, 4: 0.04,  # 19.2% each
-            8: 0.02, 2: 0.02,
-            3: -0.04, 5: -0.04, 6: -0.02, 7: -0.02,
-        },
-
-        # NOWRA (168 races): Box 2=19.6%, Box 1=17.3%, Box 5=15.5%, Box 4=14.3%
-        "Nowra": {
-            2: 0.06,    # 19.6% — strongest
-            1: 0.04,    # 17.3%
-            5: 0.02,    # 15.5%
-            7: -0.04, 8: -0.04, 6: -0.03, 3: -0.01,
-        },
-
-        # RICHMOND STRAIGHT (65 races): Box 8=20%, Box 1=13.8%, Box 3=12.3%, Box 6=10.8%
-        "Richmond Straight": {
-            8: 0.06,    # 20% — outer runner advantage
-            1: 0.02,
-            7: -0.03, 4: -0.03, 5: -0.03, 2: -0.02,
-        },
-
-        # TAREE (157 races): Box 1=14.6%, Box 2=14.0%, Box 5=13.4%, Box 8=12.7%
-        # Very even. No strong dominant box.
-        "Taree": {
-            1: 0.02, 2: 0.02, 5: 0.01,
-            4: -0.02, 3: -0.02, 6: -0.01,
-        },
-
-        # TOWNSVILLE (119 races): Box 1=16%, Box 8=16%, Box 7=13.4%, Box 6=11.8%
-        "Townsville": {
-            1: 0.04, 8: 0.04,  # 16% each — inside/outside split
-            7: 0.01,
-            4: -0.03, 5: -0.03, 3: -0.02,
-        },
-
-        # WAGGA (80 races): Box 1=22.5%, Box 8=15%, Box 4=13.8%, Box 3=13.8%
-        "Wagga": {
-            1: 0.08,    # 22.5% — dominant inside
-            8: 0.03,
-            4: 0.01, 3: 0.01,
-            2: -0.03, 7: -0.04, 6: -0.03, 5: -0.02,
-        },
-
-        # WARRNAMBOOL (203 races): Box 6=17.7%, Box 2=17.7%, Box 1=14.8%, Box 4=13.3%
-        "Warrnambool": {
-            6: 0.06, 2: 0.06,  # 17.7% each — strong double
-            1: 0.02,
-            3: -0.04, 5: -0.04, 7: -0.03, 8: -0.02,
-        },
-
-        # BULLI (101 races): Box 2=21.8%, Box 1=14.9%, Box 4=14.9%, Box 8=10.9%
+        # Bulli (101 races): Box2=23%, Box1=20%, Box4=17%, Box5=5%
         "Bulli": {
-            2: 0.08,    # 21.8% — dominant
-            1: 0.02, 4: 0.02,
-            5: -0.03, 7: -0.03, 8: -0.02, 6: -0.02, 3: -0.02,
+            2:  0.082, 1:  0.058, 4:  0.035,
+            5: -0.060, 3: -0.045, 6: -0.037, 7: -0.029,
+        },
+        # Cannington (158 races): Box1=28%, Box2=18%, Box6=4%, Box7=7%
+        "Cannington": {
+            1:  0.123, 2:  0.047,
+            6: -0.065, 7: -0.044, 8: -0.039, 3: -0.014, 4: -0.014,
+        },
+        # Capalaba / BetDeluxe Capalaba (158 races): Box8=17%, Box1=16%, Box7=16%, Box5=7%
+        "Capalaba": {
+            8:  0.037, 1:  0.032, 7:  0.032,
+            5: -0.044, 3: -0.034, 4: -0.014,
+        },
+        # Casino (137 races): Box1=26%, Box4=15%, Box2=15%, Box6=6%
+        "Casino": {
+            1:  0.104, 4:  0.023, 2:  0.017,
+            6: -0.053, 5: -0.036, 8: -0.036, 3: -0.030,
+        },
+        # Darwin (82 races): Box2=30%, Box8=22%, Box3=4%, Box6=5%
+        "Darwin": {
+            2:  0.144, 8:  0.076,
+            3: -0.071, 6: -0.061, 5: -0.041, 4: -0.032,
+        },
+        # Dubbo (114 races): Box1=19%, Box4=16%, Box5=15%, Box6=4%
+        "Dubbo": {
+            1:  0.054, 4:  0.026, 5:  0.019,
+            6: -0.065, 2: -0.030, 7: -0.023,
+        },
+        # Gardens / Ladbrokes Gardens (168 races): Box2=18%, Box1=17%, Box8=8%, Box5=10%
+        "Gardens": {
+            2:  0.043, 1:  0.038,
+            8: -0.033, 5: -0.024, 3: -0.019, 7: -0.019,
+        },
+        # Gawler (163 races): Box1=25%, Box8=17%, Box3=7%, Box6=7%
+        "Gawler": {
+            1:  0.101, 8:  0.033,
+            3: -0.046, 6: -0.041, 7: -0.036, 5: -0.031,
+        },
+        # Geelong (144 races): Box2=16%, Box4=15%, Box7=15%, Box5=6%
+        "Geelong": {
+            2:  0.028, 4:  0.022, 7:  0.017, 3:  0.011, 8:  0.011,
+            5: -0.050, 6: -0.044,
+        },
+        # Gosford (104 races): near-even distribution, slight outside advantage
+        "Gosford": {
+            2:  0.015, 8:  0.015, 1:  0.008, 7:  0.008,
+            4: -0.023, 3: -0.015, 5: -0.008, 6: -0.008,
+        },
+        # Goulburn (64 races): Box1=22%, Box8=16%, Box3=6%, Box6=8%
+        "Goulburn": {
+            1:  0.075, 8:  0.025, 4:  0.012, 5:  0.012,
+            3: -0.050, 6: -0.038, 7: -0.025, 2: -0.012,
+        },
+        # Grafton (120 races): Box2=17%, Box8=17%, Box4=16%, Box5=7%
+        "Grafton": {
+            2:  0.033, 8:  0.033, 4:  0.027,
+            5: -0.047, 3: -0.027, 6: -0.020,
+        },
+        # Gunnedah (116 races): Box2=17%, Box3=8%, Box5=10%
+        "Gunnedah": {
+            2:  0.038, 1:  0.010, 7:  0.010,
+            3: -0.038, 5: -0.017, 4: -0.010, 8: -0.010,
+        },
+        # Healesville (253 races): Box8=15%, Box2=14%, Box1=13%, Box7=13%
+        "Healesville": {
+            8:  0.023, 2:  0.014, 1:  0.004, 7:  0.004,
+            4: -0.018, 5: -0.018, 3: -0.015,
+        },
+        # Hobart / Tasmania (113 races): Box1=21%, Box3=15%, Box7=6%
+        "Hobart": {
+            1:  0.070, 3:  0.020, 4:  0.013, 8:  0.013,
+            7: -0.050, 5: -0.036, 6: -0.029, 2: -0.015,
+        },
+        # Horsham (84 races): Box1=23%, Box2=21%, Box3=16%, Box5=5%
+        "Horsham": {
+            1:  0.081, 2:  0.071, 3:  0.024,
+            5: -0.062, 6: -0.033, 8: -0.033, 4: -0.024, 7: -0.024,
+        },
+        # Launceston (120 races): Box1=33% — strongest inside bias in dataset
+        "Launceston": {
+            1:  0.150, 2:  0.013,
+            5: -0.060, 6: -0.047, 4: -0.040, 7: -0.020, 8: -0.013,
+        },
+        # Maitland (88 races): Box2=18%, Box3=16%, Box5=8%, Box6=8%
+        "Maitland": {
+            2:  0.045, 3:  0.027, 4:  0.009,
+            5: -0.036, 6: -0.036, 1: -0.009, 8: -0.009,
+        },
+        # Mandurah (334 races): Box1=17%, Box2=16%, Box3=15%, Box4=8%
+        "Mandurah": {
+            1:  0.037, 2:  0.027, 3:  0.020, 8:  0.017,
+            4: -0.040, 6: -0.026, 5: -0.023, 7: -0.016,
+        },
+        # Meadows (146 races): Box1=23%, Box4=15%, Box5=8%, Box6=8%
+        "Meadows": {
+            1:  0.081, 4:  0.021, 2:  0.015,
+            5: -0.040, 6: -0.034, 3: -0.023, 7: -0.012,
+        },
+        # Mount Gambier (155 races): Box1=27%, Box2=19%, Box3=2%, Box5=4%
+        "Mount Gambier": {
+            1:  0.117, 2:  0.050, 4:  0.029, 8:  0.008,
+            3: -0.085, 5: -0.064, 7: -0.038, 6: -0.033,
+        },
+        # Murray Bridge (41 races): Box8=22%, Box2=20%, Box3=2%, Box6=5%
+        "Murray Bridge": {
+            8:  0.076, 2:  0.056, 1:  0.037, 5:  0.017,
+            3: -0.080, 6: -0.061, 7: -0.041,
+        },
+        # Murray Bridge Straight (88 races): Box2=20%, Box1=18%, Box4=17%, Box8=16%
+        "Murray Bridge Straight": {
+            2:  0.064, 1:  0.045, 4:  0.036, 8:  0.027,
+            3: -0.055, 5: -0.045, 6: -0.045, 7: -0.027,
+        },
+        # Nowra (168 races): Box2=20%, Box1=17%, Box5=16%, Box3=7%
+        "Nowra": {
+            2:  0.057, 1:  0.038, 5:  0.024, 4:  0.014,
+            3: -0.043, 7: -0.043, 6: -0.029, 8: -0.019,
+        },
+        # Q Lakeside / Ladbrokes Q1 Lakeside (402 races): Box1=18%, Box2=15%
+        "Lakeside": {
+            1:  0.043, 2:  0.021, 4:  0.009,
+            5: -0.032, 6: -0.026, 3: -0.012,
+        },
+        # Q Parklands / Ladbrokes Q2 Parklands (162 races): Box2=18%, Box1=16%, Box6=7%
+        "Parklands": {
+            2:  0.043, 1:  0.028, 4:  0.014, 7:  0.009,
+            6: -0.041, 5: -0.026, 8: -0.026, 3: -0.011,
+        },
+        # Q Straight / Ladbrokes Q Straight (183 races): Box6=16%, Box3=15%, Box2=15%
+        "Q Straight": {
+            6:  0.027, 2:  0.022, 3:  0.022,
+            4: -0.030, 5: -0.021, 7: -0.017, 8: -0.017,
+        },
+        # Richmond (234 races): Box1=18%, Box2=14%, Box4=9%, Box5=9%
+        "Richmond": {
+            1:  0.047, 2:  0.009, 8:  0.009,
+            4: -0.025, 5: -0.025, 7: -0.018,
+        },
+        # Richmond Straight (65 races): Box8=20%, Box1=14%
+        "Richmond Straight": {
+            8:  0.060, 1:  0.011,
+            2: -0.014, 4: -0.014, 5: -0.014, 6: -0.014, 7: -0.014,
+        },
+        # Rockhampton / BetDeluxe Rockhampton (141 races): Box1=21%, Box7=14%, Box8=8%
+        "Rockhampton": {
+            1:  0.065, 7:  0.008,
+            8: -0.032, 3: -0.021, 5: -0.015, 6: -0.009,
+        },
+        # Sale (178 races): Box8=17%, Box6=15%, Box3=9%
+        "Sale": {
+            8:  0.035, 6:  0.017,
+            3: -0.028, 4: -0.015, 5: -0.015,
+        },
+        # Sandown (148 races): Box2=25%, Box1=18%, Box4=17%, Box7=7%
+        "Sandown": {
+            2:  0.100, 1:  0.046, 4:  0.035,
+            7: -0.046, 6: -0.041, 3: -0.035, 5: -0.035, 8: -0.030,
+        },
+        # Shepparton (191 races): Box1=16%, Box2=16%, Box4=8%, Box5=10%
+        "Shepparton": {
+            1:  0.030, 2:  0.030, 3:  0.009, 8:  0.005,
+            4: -0.033, 5: -0.016, 6: -0.016, 7: -0.016,
+        },
+        # Taree (157 races): Box2=16%, Box1=15%, Box6=8%, Box4=10%
+        "Taree": {
+            2:  0.027, 1:  0.022, 8:  0.012, 5:  0.007,
+            6: -0.039, 4: -0.024, 7: -0.018,
+        },
+        # Temora (78 races): Box1=22%, Box8=15%, Box3=8%
+        "Temora": {
+            1:  0.074, 8:  0.023,
+            3: -0.038, 4: -0.018, 5: -0.018, 6: -0.018, 7: -0.008,
+        },
+        # Townsville / Bet Nation Townsville (143 races): Box8=17%, Box1=16%, Box5=9%
+        "Townsville": {
+            8:  0.034, 1:  0.029,
+            5: -0.027, 6: -0.016, 2: -0.010, 3: -0.010,
+        },
+        # Wagga (80 races): Box1=22%, Box8=15%, Box6=5%
+        "Wagga": {
+            1:  0.080, 8:  0.020, 3:  0.010, 4:  0.010,
+            6: -0.060, 5: -0.040, 2: -0.020,
+        },
+        # Warragul (226 races): Box2=20%, Box3=16%, Box1=15%, Box5=7%
+        "Warragul": {
+            2:  0.059, 3:  0.027, 1:  0.017, 8:  0.017,
+            5: -0.047, 4: -0.036, 6: -0.022, 7: -0.019,
+        },
+        # Warrnambool (203 races): Box2=18%, Box6=18%, Box5=5%
+        "Warrnambool": {
+            2:  0.042, 6:  0.042, 1:  0.018, 4:  0.006,
+            5: -0.057, 3: -0.025, 7: -0.021, 8: -0.013,
+        },
+        # Wentworth Park (135 races): Box5=16%, Box1=16%, Box2=11%, Box3=10%
+        "Wentworth Park": {
+            5:  0.030, 1:  0.024,
+            3: -0.017, 6: -0.017, 2: -0.011, 4: -0.011,
+        },
+
+        # Broken Hill (24 races): small sample — conservative adjustments
+        "Broken Hill": {
+            4:  0.040, 1:  0.020,
+            3: -0.030, 7: -0.020,
         },
     }
-    
+
+    # Keep backward-compat aliases so any PDF that uses the long sponsor name still
+    # matches the same dict entry via the substring lookup at line ~1095.
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["BetDeluxe Capalaba"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Capalaba"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["Ladbrokes Gardens"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Gardens"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["Ladbrokes Q1 Lakeside"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Lakeside"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["Ladbrokes Q2 Parklands"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Parklands"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["Ladbrokes Q Straight"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Q Straight"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["BetDeluxe Rockhampton"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Rockhampton"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["Bet Nation Townsville"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Townsville"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["Tasmania"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Hobart"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["Murray Bdge Straight"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Murray Bridge Straight"]
+    TRACK_COMPREHENSIVE_ADJUSTMENTS["Sandown Park"] = TRACK_COMPREHENSIVE_ADJUSTMENTS["Sandown"]
+
     # ========================================================================
     # v4.1: TRACK-SPECIFIC FACTOR WEIGHT ADJUSTMENTS
     # Based on analysis of 484+ races identifying which factors matter most
@@ -954,12 +806,16 @@ def compute_features(df):
         "Ladbrokes Q Straight": {"BestTimePercentile": 0.08, "EarlySpeedPercentile": 0.06, "BoxPositionBias": 0.05},
         "Mount Gambier": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.04},
         "Sale": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.04},
-        "Sandown Park": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.06, "BoxPositionBias": 0.05},
+        # Sandown (148 races): Box2=25% dominant — form/speed dual; Box 1 secondary (18%)
+        "Sandown Park": {"DLWFactor": 0.07, "BestTimePercentile": 0.06, "ConsistencyIndex": 0.05, "BoxPositionBias": 0.04},
+        "Sandown": {"DLWFactor": 0.07, "BestTimePercentile": 0.06, "ConsistencyIndex": 0.05, "BoxPositionBias": 0.04},
         
-        # BOX 2 DOMINANT TRACKS - Form/Consistency Advantage
-        # Prioritize: DLWFactor, ConsistencyIndex, PlaceRate
-        "Dubbo": {"DLWFactor": 0.08, "ConsistencyIndex": 0.07, "PlaceRate": 0.06, "TrainerStrikeRate": 0.04, "RecentPlaceStreak": 0.04},  # v4.4: BOOSTED - Box 5 50% Dec 1
-        "Nowra": {"CloserBonus": 0.10, "DLWFactor": 0.08, "ConsistencyIndex": 0.06, "PlaceRate": 0.05},  # v4.4: BOOSTED - Box 7 27.3% Dec 1
+        # BOX 2 DOMINANT / FORM TRACKS - Form/Consistency Advantage
+        # Dubbo (114 races): Box1=19% dominant, Box4=16%, Box6=4% weak — Box 1 speed track
+        # (was incorrectly marked Box 2 dominant — Box 2 only 9%)
+        "Dubbo": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.05, "ConsistencyIndex": 0.04},
+        # Nowra (168 races): Box2=20%, Box1=17%, Box5=16% — Box 2 slight form
+        "Nowra": {"DLWFactor": 0.08, "ConsistencyIndex": 0.07, "PlaceRate": 0.05, "CloserBonus": 0.04},
         
         # v4.2: Q PARKLANDS - Box 2 dominant (40% Nov 30)
         # Reduce Box 1 bias, boost form/consistency factors
@@ -967,13 +823,13 @@ def compute_features(df):
         "Q2 Parklands": {"DLWFactor": 0.08, "ConsistencyIndex": 0.06, "PlaceRate": 0.05, "BestTimePercentile": 0.03},
         "Q Parklands": {"DLWFactor": 0.08, "ConsistencyIndex": 0.06, "PlaceRate": 0.05, "BestTimePercentile": 0.03},
         
-        # v4.2: RICHMOND - Box 2 dominant (41.7% Nov 30)
-        # Strong form bias, penalize speed-only picks
-        "Richmond": {"DLWFactor": 0.08, "ConsistencyIndex": 0.07, "PlaceRate": 0.05, "TrainerStrikeRate": 0.04},
+        # Richmond (234 races): Box1=18% — mild inside advantage, near-even distribution
+        # Corrected from v4.2 "Box 2 dominant" which was based on one Nov 30 session
+        "Richmond": {"BestTimePercentile": 0.06, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.04, "ConsistencyIndex": 0.04},
         
-        # v4.2: DARWIN - Box 7 dominant (36.4% Nov 30), Box 2 secondary (27.3%)
-        # COMPLETE OVERHAUL: Prioritize closer + form, NOT inside speed
-        "Darwin": {"CloserBonus": 0.10, "DLWFactor": 0.08, "ConsistencyIndex": 0.06, "FormMomentumNorm": 0.05},
+        # Darwin (82 races): Box2=30%, Box8=22% — Box 2 form track, Box 8 closer
+        # Corrected from v4.2 "Box 7 dominant" which was wrong; real data shows Box7=11%
+        "Darwin": {"DLWFactor": 0.09, "ConsistencyIndex": 0.07, "CloserBonus": 0.06, "PlaceRate": 0.05},
         
         # BOX 8 DOMINANT TRACKS - Closer Advantage
         # Prioritize: CloserBonus, BestTimePercentile at distance
