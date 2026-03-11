@@ -566,8 +566,16 @@ def main():
             print(f"   Removing {len(columns_to_remove_existing)} metadata columns: {', '.join(columns_to_remove_existing)}...")
             df_all = df_all.drop(columns=columns_to_remove_existing)
         
-        # Reorder columns: Track, RaceNumber, Box, DogName, ML_Confidence, Low_Confidence, RF_Score, GB_Score, XGB_Score, then rest
-        priority_cols = ['Track', 'RaceNumber', 'Box', 'DogName', 'ML_Confidence', 'Low_Confidence', 'RF_Score', 'GB_Score', 'XGB_Score']
+        # Reorder columns: Track, RaceNumber, Box, DogName, ML_Confidence, Low_Confidence,
+        # box-bias transparency columns, RF/GB/XGB scores, then rest.
+        # TrackBoxWinRatePct / TrackBoxRank / BoxWinAdvantage make the box-bias signal
+        # visible to the user so they can see WHY a dog was ranked higher or lower.
+        priority_cols = [
+            'Track', 'RaceNumber', 'Box', 'DogName',
+            'ML_Confidence', 'ML_Rank', 'Low_Confidence',
+            'TrackBoxWinRatePct', 'TrackBoxRank', 'BoxWinAdvantage',
+            'RF_Score', 'GB_Score', 'XGB_Score',
+        ]
         # Filter priority_cols to only include those that exist in df_all
         priority_cols = [col for col in priority_cols if col in df_all.columns]
         other_cols = [col for col in df_all.columns if col not in priority_cols]

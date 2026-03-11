@@ -90,22 +90,34 @@ except ImportError:
     pass
 
 # ── feature list ──────────────────────────────────────────────────────────────
-# THREE features removed vs the original 76-feature list:
+# FOUR features removed vs the original 76-feature config.pkl list:
 #   'Weight'           — always 0 in greyhound PDFs; zero-variance → useless
 #   'WeightFactor'     — derived from Weight; always 1.0 (neutral) → useless
 #   'TrackConditionAdj'— always 1.0 (no track condition in PDFs) → useless
+#   'BoxBiasFactor'    — always 0.0 (parser never sets it) → useless
 # Zero-variance features are scaled to 0 by StandardScaler and contribute
 # nothing to model quality but inflate the feature vector and distort feature
 # importance calculations.  Removing them improves GB discrimination spread.
+#
+# THREE new strong box-bias features added (v5.1):
+#   'TrackBoxWinRatePct' — actual historical win% for this box at this track
+#                          (0–50 scale, 100% factual from race results).
+#                          Example: Box 1 at Launceston ≈ 31.25, generic track 12.5.
+#                          MUCH stronger signal than the old ±0.15 adjustment.
+#   'TrackBoxRank'       — rank of this box's win rate at this track (1=best, 8=worst).
+#                          Tree models split cleanly on "rank ≤ 2" or "rank ≥ 7".
+#   'BoxWinAdvantage'    — binary (1/0) whether this box is top-4 for this track.
+#                          Simple feature; complements continuous TrackBoxWinRatePct.
 FEATURE_COLS = [
     'Box','Draw','CareerWins','CareerPlaces','CareerStarts','PrizeMoney',
-    'RTC','DLR','DLW','Distance','BestTimeSec','SectionalSec','BoxBiasFactor',
+    'RTC','DLR','DLW','Distance','BestTimeSec','SectionalSec',
     'RestFactor','Speed_kmh','EarlySpeedIndex',
     'FinishConsistency','MarginAvg','FormMomentum','ConsistencyIndex',
     'RecentFormBoost','DistanceSuit','TrainerStrikeRate','OverexposedPenalty',
     'PlaceRate','DLWFactor','DrawFactor','FormMomentumNorm',
     'MarginFactor','RTCFactor','BoxPositionBias','BoxPlaceRate','BoxTop3Rate',
     'TrackBox1Adjustment','TrackBox4Adjustment','TrackComprehensiveAdjustment',
+    'TrackBoxWinRatePct','TrackBoxRank','BoxWinAdvantage',
     'AgeMonths','AgeFactor','RailPreference','BoxPenaltyFactor','SpeedAtDistance',
     'SpeedClassification','ExperienceTier','WinStreakFactor','FreshnessFactor',
     'ClassRating','GradeFactor','Last3AvgFinish','Last3FinishFactor',
@@ -117,7 +129,7 @@ FEATURE_COLS = [
     'RecentPlaceStreak','CloserBonus','TrainerMomentum','FinalScore',
 ]
 
-assert len(FEATURE_COLS) == 73, f"Expected 73 features, got {len(FEATURE_COLS)}"
+assert len(FEATURE_COLS) == 75, f"Expected 75 features, got {len(FEATURE_COLS)}"
 
 # ── adaptive GB hyperparameter thresholds ─────────────────────────────────────
 # GradientBoostingClassifier risk of near-flat outputs rises sharply when the

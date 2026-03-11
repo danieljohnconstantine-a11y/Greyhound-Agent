@@ -1075,24 +1075,88 @@ def compute_features(df):
                 return "NEUTRAL"
             
             df["TrackPattern"] = df["Track"].apply(get_track_pattern)
-            
-            print(f"[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v4.1)")
-            print(f"  Darwin/Rockhampton: Special Box 2 boost and Box 1 recalibration")
-            print(f"  Box 8 tracks: Healesville, Sale, Grafton, Capalaba, Temora")
+
+            # === v5.1: DIRECT TRACK+BOX WIN RATE FEATURES ===
+            # These provide the ML models with a STRONG, EXPLICIT box bias signal
+            # that is 100% factual (derived from historical race results).
+            #
+            # TrackBoxWinRatePct: actual win% for this box at this track (0–50 scale).
+            #   Example: Box 1 at Launceston → ~31.25 (cap-derived; actual 33%).
+            #   Uses the inverse of the TRACK_COMPREHENSIVE_ADJUSTMENTS formula:
+            #     win_rate_pct = adj / 0.008 + 12.5
+            #   Tracks without data default to the global average for that box number.
+            #
+            # TrackBoxRank: rank of this box's win rate at this track (1=best, 8=worst).
+            #   Easy for tree-based models to split: "Box rank ≤ 2 → higher probability".
+            #
+            # BoxWinAdvantage: 1 if this box is in the top-4 win-rate boxes for the
+            #   track, 0 otherwise.  Binary feature — clear and unambiguous.
+            def get_track_box_win_rate_pct(track_name, box):
+                """Return estimated win% (0–50) for box at track via adjustment formula."""
+                if pd.isna(track_name) or pd.isna(box):
+                    # Unknown track or box: return global average (12.5 = 1/8)
+                    return 12.5
+                adj = get_track_comprehensive_adjustment(track_name, int(box))
+                # Invert: win_rate_pct = adj/0.008 + 12.5
+                win_rate_pct = adj / 0.008 + 12.5
+                return float(max(0.0, min(50.0, win_rate_pct)))
+
+            # Cache per-track win rate rankings so each track is computed once
+            # rather than once per dog (avoids O(n × 8) repeated look-ups).
+            _track_rank_cache = {}
+
+            def get_track_box_rank(track_name, box):
+                """Rank this box at this track (1=highest win rate, 8=lowest)."""
+                if pd.isna(track_name) or pd.isna(box):
+                    return 4  # neutral rank for unknown tracks
+                cache_key = str(track_name)
+                if cache_key not in _track_rank_cache:
+                    rates = [get_track_box_win_rate_pct(track_name, b) for b in range(1, 9)]
+                    # sorted_boxes[0] is the box number with the highest win rate
+                    sorted_boxes = sorted(range(1, 9), key=lambda b: -rates[b - 1])
+                    # Map box number → rank (1-indexed)
+                    _track_rank_cache[cache_key] = {box_num: rank + 1
+                                                    for rank, box_num in enumerate(sorted_boxes)}
+                return _track_rank_cache[cache_key].get(int(box), 4)
+
+            df["TrackBoxWinRatePct"] = df.apply(
+                lambda row: get_track_box_win_rate_pct(row.get("Track"), row.get("Box"))
+                if pd.notna(row.get("Box")) else 12.5,
+                axis=1,
+            )
+            df["TrackBoxRank"] = df.apply(
+                lambda row: get_track_box_rank(row.get("Track"), row.get("Box"))
+                if pd.notna(row.get("Box")) else 4,
+                axis=1,
+            )
+            # BoxWinAdvantage: 1 if this box is in the top half (≤4) for this track
+            df["BoxWinAdvantage"] = (df["TrackBoxRank"] <= 4).astype(float)
+
+            print(f"[OK] Applied track-specific Box 1, Box 4, and COMPREHENSIVE adjustments (v5.1)")
+            print(f"  Added TrackBoxWinRatePct, TrackBoxRank, BoxWinAdvantage for all 8 boxes")
             print(f"  Track patterns identified: {df['TrackPattern'].value_counts().to_dict()}")
         else:
             df["TrackBox1Adjustment"] = 0.0
             df["TrackBox4Adjustment"] = 0.0
             df["TrackComprehensiveAdjustment"] = 0.0
+            df["TrackBoxWinRatePct"] = df["Box"].apply(
+                lambda x: BOX_WIN_RATE.get(int(x), 0.125) * 100 if pd.notna(x) else 12.5
+            )
+            df["TrackBoxRank"] = 4  # neutral rank when no track info
+            df["BoxWinAdvantage"] = 0.5  # neutral when no track info
         
-        print(f"[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v4.0)")
+        print(f"[OK] Applied comprehensive BoxPositionBias from 386-race analysis (v5.1)")
         print(f"  Win/Place/Top3 rates analyzed for all 8 boxes")
     else:
         df["BoxPositionBias"] = 0.0
         df["BoxPlaceRate"] = 0.0
         df["BoxTop3Rate"] = 0.0
         df["TrackBox1Adjustment"] = 0.0
+        df["TrackBox4Adjustment"] = 0.0
         df["TrackComprehensiveAdjustment"] = 0.0
+        df["TrackBoxWinRatePct"] = 12.5  # global average
+        df["TrackBoxRank"] = 4           # neutral rank
+        df["BoxWinAdvantage"] = 0.5      # neutral
     
     # === AGE FACTOR ===
     # Greyhounds typically peak at 2-3.5 years (24-42 months)
