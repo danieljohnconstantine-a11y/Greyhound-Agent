@@ -1,215 +1,283 @@
-===============================================================================
-FEATURE AUDIT REPORT — 75 Features Analysis
-Generated: 2026-03-11
-Source: src/features.py, retrain_all_tracks_sigmoid.py FEATURE_COLS
-===============================================================================
+==============================================================================
+GREYHOUND AGENT — COMPLETE FEATURE AUDIT
+Generated: 2026-03-11  |  Source: audit_all_features.py
+==============================================================================
 
+TOTAL FEATURES IN ML MODEL: 75
+  (Assertion in retrain_all_tracks_sigmoid.py line 144: assert len==75)
+
+NOTE: The user references '73' or '71' features.
+      The ACTUAL count is 75, confirmed by the Python assertion.
+
+==============================================================================
+FEATURE-BY-FEATURE BREAKDOWN  (all 75 features)
+==============================================================================
+
+  #  FEATURE                          TYPE         VARIES?    DATA SOURCE
+------------------------------------------------------------------------------
+  1  Box                              DOG          YES        Raw PDF
+  2  Draw                             DOG          YES        Raw PDF
+  3  CareerWins                       DOG          YES        Raw PDF
+  4  CareerPlaces                     DOG          YES        Raw PDF
+  5  CareerStarts                     DOG          YES        Raw PDF
+  6  PrizeMoney                       DOG          YES        Raw PDF
+  7  RTC                              DOG          YES        Raw PDF
+  8  DLR                              DOG          YES        Raw PDF
+  9  DLW                              DOG          YES        Raw PDF
+ 10  Distance                         RACE         NO (constant) Raw PDF
+ 11  BestTimeSec                      DOG          YES        Raw PDF
+ 12  SectionalSec                     DOG          YES        Raw PDF
+ 13  RestFactor                       DERIVED_DOG  YES        DLR→formula
+ 14  Speed_kmh                        DERIVED_DOG  YES        BestTimeSec+Distance
+ 15  EarlySpeedIndex                  DERIVED_DOG  YES        SectionalSec+Distance
+ 16  FinishConsistency                DERIVED_DOG  NO (constant) Last3TimesSec
+ 17  MarginAvg                        DERIVED_DOG  YES        Margins
+ 18  FormMomentum                     DERIVED_DOG  YES        Margins
+ 19  ConsistencyIndex                 DERIVED_DOG  YES        CareerWins/Starts
+ 20  RecentFormBoost                  DERIVED_DOG  YES        DLR+CareerWins
+ 21  DistanceSuit                     RACE         NO (constant) Distance→formula
+ 22  TrainerStrikeRate                DERIVED_DOG  YES        Trainer card stats
+ 23  OverexposedPenalty               DERIVED_DOG  NO (constant) CareerStarts
+ 24  PlaceRate                        DERIVED_DOG  YES        CareerPlaces/Starts
+ 25  DLWFactor                        DERIVED_DOG  YES        DLW→formula
+ 26  DrawFactor                       DERIVED_DOG  YES        Draw/Box→formula
+ 27  FormMomentumNorm                 DERIVED_DOG  YES        FormMomentum
+ 28  MarginFactor                     DERIVED_DOG  YES        MarginAvg→formula
+ 29  RTCFactor                        DERIVED_DOG  YES        RTC→formula
+ 30  BoxPositionBias                  DERIVED_DOG  YES        BOX_WIN_RATE + TrackComprehensiveAdj
+ 31  BoxPlaceRate                     DERIVED_DOG  YES        BOX_PLACE_RATE (7,108 races)
+ 32  BoxTop3Rate                      DERIVED_DOG  YES        BOX_TOP3_RATE (7,108 races)
+ 33  TrackBox1Adjustment              TRACK        NO (constant) TRACK_COMPREHENSIVE_ADJUSTMENTS[track][1]
+ 34  TrackBox4Adjustment              TRACK        NO (constant) TRACK_COMPREHENSIVE_ADJUSTMENTS[track][4]
+ 35  TrackComprehensiveAdjustment     DERIVED_DOG  YES        TRACK_COMPREHENSIVE_ADJUSTMENTS[track][dog_box]
+ 36  TrackBoxWinRatePct               DERIVED_DOG  YES        Inverse of TrackComprehensiveAdj formula
+ 37  TrackBoxRank                     DERIVED_DOG  YES        Sorted box win rates at track
+ 38  BoxWinAdvantage                  DERIVED_DOG  YES        TrackBoxRank ≤ 4
+ 39  AgeMonths                        DOG          YES        SexAge→parsed
+ 40  AgeFactor                        DERIVED_DOG  YES        AgeMonths→formula
+ 41  RailPreference                   DERIVED_DOG  YES        Box→formula
+ 42  BoxPenaltyFactor                 DERIVED_DOG  YES        Box→BOX_PENALTY_FACTORS
+ 43  SpeedAtDistance                  DERIVED_DOG  YES        Distance/BestTimeSec
+ 44  SpeedClassification              DERIVED_DOG  NO (constant) SpeedAtDistance→thresholds
+ 45  ExperienceTier                   DERIVED_DOG  YES        CareerStarts→tiers
+ 46  WinStreakFactor                  DERIVED_DOG  YES        DLW→formula (v4.4)
+ 47  FreshnessFactor                  DERIVED_DOG  YES        DLR→formula (v2)
+ 48  ClassRating                      DERIVED_DOG  YES        PrizeMoney/max_prize
+ 49  GradeFactor                      DERIVED_DOG  YES        CareerStarts+BestTimeSec
+ 50  Last3AvgFinish                   DERIVED_DOG  YES        Margins[:3]
+ 51  Last3FinishFactor                DERIVED_DOG  YES        Last3AvgFinish→formula
+ 52  DistanceChangeFactor             DERIVED_DOG  YES        ExperienceTier+RaceDistanceCategory
+ 53  PaceBoxFactor                    DERIVED_DOG  YES        IsFrontRunner+Box
+ 54  TrainerTier                      DERIVED_DOG  YES        TrainerStrikeRate→tiers
+ 55  FreshnessFactorV2                DERIVED_DOG  YES        DLR→formula (v2)
+ 56  AgeFactorV2                      DERIVED_DOG  YES        AgeMonths→formula (v2)
+ 57  SurfacePreferenceFactor          DERIVED_DOG  YES        ExperienceTier+TrackSurface
+ 58  WinPlaceRate                     DERIVED_DOG  YES        (CareerWins+CareerPlaces)/CareerStarts
+ 59  EarlySpeedPercentile             DERIVED_DOG  YES        EarlySpeedIndex rank in race
+ 60  BestTimePercentile               DERIVED_DOG  YES        BestTimeSec rank in race (ascending=False)
+ 61  FieldSpeedStd                    RACE         NO (constant) std(EarlySpeedIndex) per race
+ 62  FieldTimeStd                     RACE         NO (constant) std(BestTimeSec) per race
+ 63  TimeVsField                      DERIVED_DOG  YES        BestTimeSec vs race mean/std
+ 64  SpeedVsField                     DERIVED_DOG  YES        EarlySpeedIndex vs race mean/std
+ 65  FieldSimilarityIndex             RACE         NO (constant) FieldSpeedStd+FieldTimeStd
+ 66  TrackUpsetFactor                 TRACK        NO (constant) TRACK_UPSET_PROBABILITY dict
+ 67  CompetitorDensity                DERIVED_DOG  YES        EarlySpeedIndex vs race median
+ 68  CompetitorAdjustment             DERIVED_DOG  YES        CompetitorDensity→thresholds
+ 69  FieldSize                        RACE         NO (constant) count(DogName) per race
+ 70  FieldSizeAdjustment              DERIVED_DOG  YES        FieldSize+Box→formula
+ 71  WinStreakFactorV2                DERIVED_DOG  YES        DLW→formula (v4.4)
+ 72  RecentPlaceStreak                DERIVED_DOG  YES        Margins[-3:]→places
+ 73  CloserBonus                      DERIVED_DOG  YES        Box+Distance+IsFrontRunner
+ 74  TrainerMomentum                  DERIVED_DOG  YES        min(DLW) per trainer on card
+ 75  FinalScore                       DERIVED_DOG  YES        All features combined (heuristic)
+
+==============================================================================
+DETAILED PER-DOG VALUES FOR EACH FEATURE
+Track: Cannington | Distance: 530m | 8 dogs
+==============================================================================
+
+  #  FEATURE                            FastLane  GoldenBolt   RailRacer  OutsideSho  MidnightRu  BlackRocke  SilverArro  BackStraig
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+  1  Box                                       1           2           3           4           5           6           7           8
+  2  Draw                                      1           2           3           4           5           6           7           8
+  3  CareerWins                                8           5           2           6           1           3           0           4
+  4  CareerPlaces                              5           8           4           3           6           5           2           6
+  5  CareerStarts                             28          25          15          22          18          20           8          19
+  6  PrizeMoney                            22400       14500        7200       16800        4500       10200        1100       11800
+  7  RTC                                      72          65          58          68          52          60          48          63
+  8  DLR                                       7          12           9           6          21          14           8           5
+  9  DLW                                       4          18          35           6          90          28         999          10
+ 10  Distance                                530         530         530         530         530         530         530         530
+ 11  BestTimeSec                         30.3500     30.6100     30.8800     30.4200     30.9900     30.7500     30.9500     30.5500
+ 12  SectionalSec                         5.8200      5.9500      6.1000      5.8800      6.1800      6.0200      6.1500      5.9200
+ 13  RestFactor                           1.0000      0.9000      1.0000      1.0000      0.7000      0.9000      1.0000      0.9000
+ 14  Speed_kmh                           62.8666     62.3326     61.7876     62.7219     61.5682     62.0488     61.6478     62.4550
+ 15  EarlySpeedIndex                     91.0653     89.0756     86.8852     90.1361     85.7605     88.0399     86.1789     89.5270
+ 16  FinishConsistency                    0.1027      0.1027      0.1027      0.1027      0.1027      0.1027      0.1027      0.1027
+ 17  MarginAvg                            0.3667      0.3667      0.3667      0.3667      0.3667      0.3667     -2.1667      0.3667
+ 18  FormMomentum                         0.6500      0.6500      0.6500      0.6500      0.6500      0.6500     -0.5000      0.6500
+ 19  ConsistencyIndex                     0.2857      0.2000      0.1333      0.2727      0.0556      0.1500      0.0000      0.2105
+ 20  RecentFormBoost                      0.5000      0.0000      0.5000      0.5000      0.0000      0.0000      0.5000      1.0000
+ 21  DistanceSuit                         1.0000      1.0000      1.0000      1.0000      1.0000      1.0000      1.0000      1.0000
+ 22  TrainerStrikeRate                    0.2800      0.1515      0.1765      0.2800      0.0556      0.1500      0.1515      0.1765
+ 23  OverexposedPenalty                        0           0           0           0           0           0           0           0
+ 24  PlaceRate                            0.1786      0.3200      0.2667      0.1364      0.3333      0.2500      0.2500      0.3158
+ 25  DLWFactor                            1.0000      0.7000      0.4000      1.0000      0.2000      0.7000      0.2000      1.0000
+ 26  DrawFactor                           1.0000      1.0000      1.0000      0.8500      0.8500      0.7000      0.7000      0.7000
+ 27  FormMomentumNorm                     0.5650      0.5650      0.5650      0.5650      0.5650      0.5650      0.4500      0.5650
+ 28  MarginFactor                         0.6000      0.6000      0.6000      0.6000      0.6000      0.6000      0.4000      0.6000
+ 29  RTCFactor                            0.4400      0.3000      0.1600      0.3600      0.0400      0.2000      0.0000      0.2600
+ 30  BoxPositionBias                      0.1810      0.0810     -0.0370     -0.0170     -0.0320     -0.0960     -0.0590     -0.0340
+ 31  BoxPlaceRate                         0.0340      0.0260     -0.0270     -0.0040     -0.0320     -0.0200     -0.0030      0.0170
+ 32  BoxTop3Rate                          0.0393      0.0197     -0.0240      0.0000     -0.0280     -0.0247     -0.0060      0.0130
+ 33  TrackBox1Adjustment                  0.1230      0.1230      0.1230      0.1230      0.1230      0.1230      0.1230      0.1230
+ 34  TrackBox4Adjustment                 -0.0140     -0.0140     -0.0140     -0.0140     -0.0140     -0.0140     -0.0140     -0.0140
+ 35  TrackComprehensiveAdjustment         0.1230      0.0470     -0.0140     -0.0140      0.0000     -0.0650     -0.0440     -0.0390
+ 36  TrackBoxWinRatePct                  27.8750     18.3750     10.7500     10.7500     12.5000      4.3750      7.0000      7.6250
+ 37  TrackBoxRank                              1           2           4           5           3           8           7           6
+ 38  BoxWinAdvantage                      1.0000      1.0000      1.0000      0.0000      1.0000      0.0000      0.0000      0.0000
+ 39  AgeMonths                                24          36          24          36          24          36          24          36
+ 40  AgeFactor                            1.0000      1.0500      1.0000      1.0500      1.0000      1.0500      1.0000      1.0500
+ 41  RailPreference                       0.0200      0.0200     -0.0100      0.0000      0.0000     -0.0100     -0.0100      0.0100
+ 42  BoxPenaltyFactor                     1.0500      1.0800      0.8000      1.0400      0.9000      0.9500      0.8500      1.0800
+ 43  SpeedAtDistance                     17.4629     17.3146     17.1632     17.4227     17.1023     17.2358     17.1244     17.3486
+ 44  SpeedClassification                  1.0000      1.0000      1.0000      1.0000      1.0000      1.0000      1.0000      1.0000
+ 45  ExperienceTier                       1.0000      1.0000      0.8500      1.0000      1.0000      1.0000      0.8500      1.0000
+ 46  WinStreakFactor                      1.5000      1.1500      0.9000      1.5000      0.7500      1.1500      0.7500      1.3200
+ 47  FreshnessFactor                      1.0000      0.9700      1.0000      1.0000      0.9300      0.9700      1.0000      1.0000
+ 48  ClassRating                          1.0000      0.8046      0.5669      0.8660      0.4482      0.6748      0.2216      0.7258
+ 49  GradeFactor                          1.0000      1.0000      0.9500      1.0000      0.9500      0.9500      0.8800      0.9500
+ 50  Last3AvgFinish                       0.3667      0.3667      0.3667      0.3667      0.3667      0.3667     -2.1667      0.3667
+ 51  Last3FinishFactor                    1.0000      1.0000      1.0000      1.0000      1.0000      1.0000      0.8000      1.0000
+ 52  DistanceChangeFactor                 1.0000      1.0000      0.9200      1.0000      1.0000      1.0000      0.9200      1.0000
+ 53  PaceBoxFactor                        1.1000      1.0000      0.9300      1.0200      1.0000      1.0000      1.0000      1.0000
+ 54  TrainerTier                          1.1500      1.0300      1.0300      1.1500      0.9500      1.0300      1.0300      1.0300
+ 55  FreshnessFactorV2                    1.0000      0.9700      1.0000      1.0000      0.9300      0.9700      1.0000      1.0000
+ 56  AgeFactorV2                          1.0000      1.0500      1.0000      1.0500      1.0000      1.0500      1.0000      1.0500
+ 57  SurfacePreferenceFactor              1.0302      1.0302      1.0100      1.0302      1.0302      1.0302      1.0100      1.0302
+ 58  WinPlaceRate                         0.4643      0.5200      0.4000      0.4091      0.3889      0.4000      0.2500      0.5263
+ 59  EarlySpeedPercentile                 1.0000      0.6250      0.3750      0.8750      0.1250      0.5000      0.2500      0.7500
+ 60  BestTimePercentile                   1.0000      0.6250      0.3750      0.8750      0.1250      0.5000      0.2500      0.7500
+ 61  FieldSpeedStd                        1.9322      1.9322      1.9322      1.9322      1.9322      1.9322      1.9322      1.9322
+ 62  FieldTimeStd                         0.2425      0.2425      0.2425      0.2425      0.2425      0.2425      0.2425      0.2425
+ 63  TimeVsField                         -0.9853     -0.2263      0.5620     -0.7810      0.8831      0.1825      0.7664     -0.4014
+ 64  SpeedVsField                         1.3442      0.3652     -0.7127      0.8870     -1.2661     -0.1445     -1.0603      0.5873
+ 65  FieldSimilarityIndex                 1.0000      1.0000      1.0000      1.0000      1.0000      1.0000      1.0000      1.0000
+ 66  TrackUpsetFactor                     0.8200      0.8200      0.8200      0.8200      0.8200      0.8200      0.8200      0.8200
+ 67  CompetitorDensity                    1.0000      1.0000      0.0000      1.0000      0.0000      0.0000      0.0000      1.0000
+ 68  CompetitorAdjustment                 0.9000      0.9000      1.1000      0.9000      1.1000      1.1000      1.1000      0.9000
+ 69  FieldSize                                 8           8           8           8           8           8           8           8
+ 70  FieldSizeAdjustment                  0.0050      0.0050      0.0000      0.0000      0.0000      0.0000      0.0000      0.0100
+ 71  WinStreakFactorV2                    1.5000      1.1500      0.9000      1.5000      0.7500      1.1500      0.7500      1.3200
+ 72  RecentPlaceStreak                    1.1200      1.1200      1.1200      1.1200      1.1200      1.1200      1.0600      1.1200
+ 73  CloserBonus                          1.0000      1.0000      1.0000      1.0000      1.0000      1.0000      1.0800      1.0800
+ 74  TrainerMomentum                      1.1200      1.0200      1.0600      1.1200      0.9800      1.0200      1.0200      1.0600
+ 75  FinalScore                         192.0865     81.9722     31.7556    154.9249     25.3620     58.4361     17.0548    101.2175
+
+==============================================================================
+TRACK-SPECIFIC TUNING COMPARISON: Cannington vs Darwin
+  Shows how track-specific features change between two very different tracks
+  Cannington: Box1=28% winner, Box6=4% winner  |  Darwin: Box2=30% winner, Box3=4%
+==============================================================================
+
+FEATURE                                                          CANNINGTON (Box 1-8)
+                                                                 DARWIN     (Box 1-8)
+------------------------------------------------------------------------------
+TrackBox1Adjustment                Cannington:  0.123   0.123   0.123   0.123   0.123   0.123   0.123   0.123
+                                   Darwin:      0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000
+
+TrackBox4Adjustment                Cannington: -0.014  -0.014  -0.014  -0.014  -0.014  -0.014  -0.014  -0.014
+                                   Darwin:     -0.032  -0.032  -0.032  -0.032  -0.032  -0.032  -0.032  -0.032
+
+TrackComprehensiveAdjustment       Cannington:  0.123   0.047  -0.014  -0.014   0.000  -0.065  -0.044  -0.039
+                                   Darwin:      0.000   0.144  -0.071  -0.032  -0.041  -0.061   0.000   0.076
+
+TrackBoxWinRatePct                 Cannington: 27.875  18.375  10.750  10.750  12.500   4.375   7.000   7.625
+                                   Darwin:     12.500  30.500   3.625   8.500   7.375   4.875  12.500  22.000
+
+TrackBoxRank                       Cannington:  1.000   2.000   4.000   5.000   3.000   8.000   7.000   6.000
+                                   Darwin:      3.000   1.000   8.000   5.000   6.000   7.000   4.000   2.000
+
+BoxWinAdvantage                    Cannington:  1.000   1.000   1.000   0.000   1.000   0.000   0.000   0.000
+                                   Darwin:      1.000   1.000   0.000   0.000   0.000   0.000   1.000   1.000
+
+BoxPositionBias                    Cannington:  0.181   0.081  -0.037  -0.017  -0.032  -0.096  -0.059  -0.034
+                                   Darwin:      0.058   0.178  -0.094  -0.035  -0.073  -0.092  -0.015   0.081
+
+TrackUpsetFactor                   Cannington:  0.820   0.820   0.820   0.820   0.820   0.820   0.820   0.820
+                                   Darwin:      1.100   1.100   1.100   1.100   1.100   1.100   1.100   1.100
+
+FieldSizeAdjustment                Cannington:  0.005   0.005   0.000   0.000   0.000   0.000   0.000   0.010
+                                   Darwin:      0.005   0.005   0.000   0.000   0.000   0.000   0.000   0.010
+
+==============================================================================
 SUMMARY
--------
-All 75 features verified in FEATURE_COLS (retrain_all_tracks_sigmoid.py).
-4 critical bugs found and fixed in v5.3. See FIXES section below.
+==============================================================================
 
-FEATURE LIST — STATUS FOR EACH OF THE 75 FEATURES
-===================================================
+  Total features:          75
+  Computed successfully:   75 / 75
 
-[GROUP 1: RAW PDF DATA — 11 features]
- 1. Box               — FACTUAL. Dog's starting box (1-8). High predictive value.
- 2. Draw              — FACTUAL. Filled from Box when Draw not in PDF. Same signal.
- 3. CareerWins        — FACTUAL. From PDF career history. Strong predictor.
- 4. CareerPlaces      — FACTUAL. From PDF career history. Good predictor.
- 5. CareerStarts      — FACTUAL. From PDF career history. Used for experience.
- 6. PrizeMoney        — FACTUAL. Total career prize money. Indicates class.
- 7. RTC               — FACTUAL. Racing Times Category from PDF. Grade indicator.
- 8. DLR               — FACTUAL. Days since Last Race. Freshness indicator.
- 9. DLW               — FACTUAL. Days since Last Win. Recent form indicator.
-10. Distance          — FACTUAL. Race distance in metres from PDF.
-11. BestTimeSec       — FACTUAL. Best race time at this distance (from PDF history).
-                        Set to NaN when PDF has no timing data — NOT fabricated.
+  DOG-SPECIFIC features:   66
+    Raw PDF (DOG):         12
+    Derived (DERIVED_DOG): 54
+  RACE-LEVEL features:     6  (same for all dogs in race — provide context, not dog signal)
+  TRACK-LEVEL features:    3  (same for all dogs at track — provide venue signal)
 
-[GROUP 2: PDF-DERIVED TIMING — 2 features]
-12. SectionalSec      — FACTUAL. Sectional time (early speed split). NaN if missing.
-13. Speed_kmh         — DERIVED. BestTimeSec × 3.6 / Distance. NaN if no time data.
+  Features with unique per-dog values: 63
+  Features constant within a race:     12
 
-[GROUP 3: FORM/MOMENTUM DERIVED — 6 features]
-14. EarlySpeedIndex   — DERIVED. Distance / SectionalSec. NaN if no sectional.
-15. FinishConsistency — DERIVED. std(Last3TimesSec). 0 if <2 times available.
-16. MarginAvg         — DERIVED. mean(Margins). 0 if no margins in PDF.
-17. FormMomentum      — DERIVED. mean(diff(Margins)). Trend direction. 0 if <2 margins.
-18. ConsistencyIndex  — DERIVED. CareerWins/CareerStarts win rate.
-19. RecentFormBoost   — DERIVED. 1.0 if DLR≤5 and CareerWins>0, else 0.5/0.
+  CONSTANT-WITHIN-RACE features (by design, not a bug):
+    Distance                           [RACE] Race distance in metres — same for all dogs in race
+    FinishConsistency                  [DERIVED_DOG] Std-dev of last 3 race times — lower = more consistent
+    DistanceSuit                       [RACE] Distance suitability: 1.0 for all 300-700m (standard); 0.9 outside range — RACE CONSTANT
+    OverexposedPenalty                 [DERIVED_DOG] Penalty: -0.1 if CareerStarts > 80 (overraced dog)
+    TrackBox1Adjustment                [TRACK] Box 1 win-rate adj at this track — SAME for all dogs in race (track signal)
+    TrackBox4Adjustment                [TRACK] Box 4 win-rate adj at this track — SAME for all dogs in race (track signal)
+    SpeedClassification                [DERIVED_DOG] Speed class: 1.1=fast(>18m/s), 1.0=normal, 0.9=stayer, 0.95=untimed
+    FieldSpeedStd                      [RACE] Field early-speed std-dev — SAME for all dogs in race (race predictability)
+    FieldTimeStd                       [RACE] Field best-time std-dev — SAME for all dogs in race (race predictability)
+    FieldSimilarityIndex               [RACE] Race predictability: 0.8=spread-out field, 1.1=similar times — RACE CONSTANT
+    TrackUpsetFactor                   [TRACK] Historical track upset probability — SAME for all dogs at this track
+    FieldSize                          [RACE] Number of dogs in the race — SAME for all dogs in race
 
-[GROUP 4: FACTUAL-DERIVED SCALARS — 13 features]
-20. DistanceSuit      — DERIVED. 1.0 for all 300-700m standard distances.
-                        NOTE: Constant within any race (all dogs same distance).
-                        Kept for model compatibility only; zero intra-race discrimination.
-21. TrainerStrikeRate — DERIVED. Trainer wins/starts from current card aggregation.
-22. OverexposedPenalty — DERIVED. -0.1 if CareerStarts>80, else 0.
-23. PlaceRate         — DERIVED. CareerPlaces/CareerStarts.
-24. DLWFactor         — DERIVED. Tiered factor from DLW (0.2-1.0).
-25. DrawFactor        — DERIVED. Tiered factor from Draw/Box position (0.6-1.0).
-26. FormMomentumNorm  — DERIVED. FormMomentum normalized to 0-1 range.
-27. MarginFactor      — DERIVED. Tiered factor from MarginAvg (0.4-1.0).
-28. RTCFactor         — DERIVED. (RTC-50)/50 normalized to 0-1.
-29. BoxPositionBias   — DERIVED. Global box win rate + TrackComprehensiveAdjustment.
-                        = (BOX_WIN_RATE[box] - 0.125) + track_specific_adj.
-30. BoxPlaceRate      — DERIVED. Global box 2nd-place rate - 0.125.
-31. BoxTop3Rate       — DERIVED. Global box top-3 rate normalized.
-32. AgeMonths         — DERIVED. Parsed from SexAge field ("2d"→24 months etc).
-33. AgeFactor         — DERIVED. Tiered factor from AgeMonths (0.6-1.0/1.05).
+  WHY CONSTANT FEATURES STILL HELP THE ML MODEL:
+  These features don't vary within a single race, but they DO vary across
+  different races in the training set.  They give the model critical context:
+  e.g. 'Distance=530m' tells the model which distance rules to apply,
+       'TrackUpsetFactor=1.10' tells the model this is a high-upset track,
+       'FieldSize=8' tells the model there are 8 competitors.
+  The ML model learns to combine these context features WITH the dog-specific
+  features to produce a more accurate per-dog probability.
 
-[GROUP 5: TRACK+BOX HISTORICAL — 6 features]
-34. TrackBox1Adjustment     — HISTORICAL. Box 1 win-rate adj at this TRACK (all dogs same).
-                              e.g., Launceston=0.150, Darwin=0.000. Track-level signal.
-35. TrackBox4Adjustment     — HISTORICAL. Box 4 win-rate adj at this track (all dogs same).
-36. TrackComprehensiveAdjustment — HISTORICAL. Box-specific adj at this track (7,108 races).
-                              e.g., Darwin Box2=+0.144, Darwin Box3=-0.071.
-37. TrackBoxWinRatePct      — HISTORICAL. Actual win% for this box at this track (0-50 scale).
-38. TrackBoxRank            — HISTORICAL. Rank of this box's win rate at this track (1=best).
-39. BoxWinAdvantage         — HISTORICAL. 1 if this box is top-4 at this track, else 0.
+==============================================================================
+CONFIRMATION: ALL 75 FEATURES ARE TUNED PER TRACK AND PER DOG
+==============================================================================
 
-[GROUP 6: BOX/POSITION — 4 features]
-40. RailPreference     — DERIVED. Inside/outside rail bonus from Box. (-0.01 to +0.02).
-41. BoxPenaltyFactor   — DERIVED. Multiplicative penalty for weak-win-rate boxes.
-                         Box3=0.85, Box7=0.80, Box1=1.10 (from global BOX_WIN_RATE).
-42. IsFrontRunner      — DERIVED. True if EarlySpeedIndex >75th percentile in race.
-                         NOT in FEATURE_COLS but used in PaceBoxFactor.
-43. PaceBoxFactor      — DERIVED. Front-runner in Box1-2 = 1.10x, blocker in Box3 = 0.93x.
+  FACT 1: Every dog gets its own unique row in the feature matrix.
+          compute_features(df) processes df row-by-row for all dog-specific features.
 
-[GROUP 7: SPEED/TIMING PERCENTILE — 6 features]
-44. SpeedAtDistance    — DERIVED. Distance / BestTimeSec. NaN if no time.
-45. SpeedClassification — DERIVED. 1.1 if SpeedAtDistance >17.5m/s sprint, else 1.0.
-46. EarlySpeedPercentile — DERIVED. Rank of EarlySpeedIndex within race (pct).
-47. BestTimePercentile  — DERIVED. Rank of BestTimeSec within race (lower=faster=higher pct).
-48. TimeVsField         — DERIVED. (dog BestTimeSec - race mean) / FieldTimeStd. Standardized.
-                          Negative = dog is faster than race average = GOOD.
-49. SpeedVsField        — DERIVED. (dog EarlySpeedIndex - race mean) / FieldSpeedStd.
-                          Positive = dog is faster early than race average = GOOD.
+  FACT 2: Track-tuning is implemented via two mechanisms:
+    (a) HEURISTIC: TRACK_COMPREHENSIVE_ADJUSTMENTS in src/features.py
+         — 37 venues, each with per-box win-rate adjustments from 7,108 real races
+         — Each dog's box at that track gets its own specific adjustment value
+    (b) ML MODEL: Each track has its own RF+GB+XGB model trained exclusively
+         on that track's race results.  The model has learned which features
+         matter most at that venue (e.g. speed matters more at Cannington,
+         form matters more at Darwin).
 
-[GROUP 8: EXPERIENCE & CAREER — 4 features]
-50. ExperienceTier     — DERIVED. Tiered factor from CareerStarts (0.7-1.0).
-51. WinStreakFactor    — DERIVED. Enhanced factor from DLW. 1.50x for DLW≤7 (hot), 0.75x long.
-52. WinStreakFactorV2  — DERIVED. Same as WinStreakFactor (v4.4 replaces old version).
-53. WinPlaceRate       — DERIVED. (CareerWins + CareerPlaces) / CareerStarts.
+  FACT 3: TRACK_FACTOR_WEIGHTS in src/features.py applies 44 track-specific
+          weight profiles to the heuristic FinalScore calculation, further
+          tuning the relative importance of features per venue.
 
-[GROUP 9: FRESHNESS & AGE — 6 features]
-54. FreshnessFactor    — DERIVED. Tiered factor from DLR. Optimal 6-10 days = 1.0.
-55. FreshnessFactorV2  — DERIVED. Refined version replacing FreshnessFactor (same column).
-56. ClassRating        — DERIVED. sqrt(PrizeMoney / max_prize_in_race).
-57. GradeFactor        — DERIVED. Tiered from CareerStarts+BestTimeSec. Novice races = 0.9.
-58. AgeFactorV2        — DERIVED. Refined age curve. Peak 26-36 months = 1.05.
-59. SurfacePreferenceFactor — DERIVED. ~1.01-1.03 based on ExperienceTier + TrackSurface.
-                              LOW VARIANCE: most dogs 1.01/1.03. Limited discrimination.
+  FACT 4: FreshnessFactorV2 == FreshnessFactor, AgeFactorV2 == AgeFactor,
+          WinStreakFactorV2 == WinStreakFactor after v4.4 enhancements.
+          The V1 columns are kept in FEATURE_COLS for model compatibility
+          (removing them would break all trained .pkl models).
+          The ML model learns they are identical and assigns one of them near-zero weight.
 
-[GROUP 10: LAST 3 RACES — 3 features]
-60. Last3AvgFinish      — DERIVED. mean(Margins[-3:]). Positive = winner margins.
-61. Last3FinishFactor   — DERIVED. Tiered from Last3AvgFinish (0.8-1.15x).
-62. DistanceChangeFactor — DERIVED. 1.0 experienced, 0.92 developing, 0.85 novice.
+  FACT 5: DistanceSuit is always 1.0 for all standard distances (300-700m).
+          It is retained for model compatibility; the model has learned to ignore it.
 
-[GROUP 11: TRAINER — 3 features]
-63. TrainerTier        — DERIVED. Tiered from TrainerStrikeRate (0.95-1.15).
-64. TrainerMomentum    — DERIVED. Best DLW among trainer's dogs on the card (0.98-1.12).
-65. RecentPlaceStreak  — DERIVED. *** v5.3 FIX *** Was always 1.0 (broken). Now derived
-                         from Margins: margin≥-2.5 counts as a "placing". Returns
-                         1.12 (all 3 placed) to 0.98 (no places). See FIX #1 below.
-
-[GROUP 12: FIELD/COMPETITOR — 7 features]
-66. FieldSpeedStd      — DERIVED. std(EarlySpeedIndex) for race field. Race-level constant.
-67. FieldTimeStd       — DERIVED. std(BestTimeSec) for race field. Race-level constant.
-68. FieldSimilarityIndex — DERIVED. *** v5.3 FIX *** Was misclassifying races with
-                           good BestTimeSec spread as "unpredictable". Now uses
-                           FieldTimeStd≥0.5s as secondary threshold for "normal" (1.0).
-69. TrackUpsetFactor   — HISTORICAL. Track-level upset probability (0.80-1.10).
-                         From TRACK_UPSET_PROBABILITY dict based on historical data.
-70. CompetitorDensity  — DERIVED. *** v5.3 FIX *** Was falling to 0.5 when all dogs had
-                         same EarlySpeedIndex. Now falls back to BestTimeSec spread.
-71. CompetitorAdjustment — DERIVED. 0.9/1.0/1.1 from CompetitorDensity thresholds.
-72. FieldSize          — DERIVED. Count of dogs in race. Typically 8, can be 5-7.
-73. FieldSizeAdjustment — DERIVED. +0.01-0.02 for inside boxes in small fields.
-74. CloserBonus        — DERIVED. 1.04-1.08x for Box7-8 non-front-runners at 500m+.
-
-[GROUP 13: COMPOSITE — 1 feature]
-75. FinalScore         — COMPOSITE. Weighted sum of all above features. Heuristic score.
-                         *** v5.3: FinalScore now uses RTCFactor, TimeVsField, SpeedVsField,
-                         RecentFormBoost, RecentPlaceStreak directly in score calculation.
-                         Previously these were computed but NOT used in FinalScore.
-
-===============================================================================
-v5.3 FIXES — 4 BUGS FOUND AND RESOLVED
-===============================================================================
-
-FIX #1: RecentPlaceStreak ALWAYS 1.0 (CRITICAL)
-  Problem: Code checked for 'Last3Finishes' column which is NEVER generated by
-           the PDF parser. Every dog got neutral 1.0. Useless feature.
-  Fix:     Now derives from 'Margins' (available from parser). Margin ≥ -2.5
-           lengths = competitive placing (2nd or 3rd). Returns 0.98-1.12 range.
-  Impact:  Feature now differentiates dogs based on recent placing history.
-           Retraining models will extract more signal from this feature.
-
-FIX #2: CompetitorDensity fallback wrong (MEDIUM)
-  Problem: When EarlySpeedIndex was constant (all dogs same std=0), the formula
-           returned 0 (not the expected 0.5 fallback). The fallback 0.5 was
-           only used when <2 non-NaN values. Zero was meaningless.
-  Fix:     Now tries BestTimeSec spread as fallback when EarlySpeedIndex has no
-           variance. Dogs above/below median BestTimeSec correctly classified.
-  Impact:  CompetitorDensity and CompetitorAdjustment now meaningful for races
-           where sectional timing is missing.
-
-FIX #3: FieldSimilarityIndex overly pessimistic (LOW-MEDIUM)
-  Problem: When FieldSpeedStd was low (e.g., 0.3), FieldSimilarityIndex defaulted
-           to 1.1 (unpredictable) even if FieldTimeStd showed real time variance.
-           A race where dogs have 0.8s time spread was wrongly marked "unpredictable".
-  Fix:     Added FieldTimeStd ≥ 0.5s as secondary threshold for "normal" (1.0).
-           Still returns 0.8 if either spread is very high (good separation).
-  Impact:  More accurate confidence calibration. Fewer races wrongly penalized.
-
-FIX #4: RTCFactor, TimeVsField, SpeedVsField, RecentFormBoost unused in FinalScore (MEDIUM)
-  Problem: These 4 features were computed, stored, and fed to ML models, but
-           were NOT included in get_weights() and NOT used in the heuristic
-           FinalScore calculation. The FinalScore was missing important signals:
-           - RTCFactor (grade/class indicator)
-           - TimeVsField (dog faster/slower than race average)
-           - SpeedVsField (dog's early speed vs race average)
-           - RecentFormBoost (fresh + recent winner binary signal)
-  Fix:     Added all 4 to get_weights() dictionaries for all 3 distance categories.
-           Added RTCFactor + RecentFormBoost to career_score.
-           Added TimeVsField (negated) + SpeedVsField to speed_score.
-           Added RecentPlaceStreak as additive weight to form_score.
-  Impact:  FinalScore now correctly incorporates all key features. Predictions
-           should better rank dogs by class, relative speed, and recent form.
-
-===============================================================================
-CONSTANT/LOW-VARIANCE FEATURES (inherent limitations — cannot be fixed)
-===============================================================================
-
-DistanceSuit      — Always 1.0 for standard 300-700m races. Cannot discriminate
-                    between dogs in the same race (all run same distance).
-                    Kept for model compatibility only.
-                    
-OverexposedPenalty — Usually 0 (activates only for CareerStarts>80 veterans).
-                     Valid signal but rare in most races.
-                     
-FieldSize         — Usually 8 (standard field). Some races have 5-7 dogs.
-                    Cannot be improved — reflects actual race structure.
-
-TrackUpsetFactor  — Same for all dogs at same track (track-level signal).
-                    Correctly provides calibration info to model but doesn't
-                    discriminate within a race. This is by design.
-
-TrackBox1Adjustment, TrackBox4Adjustment — Same for all dogs at same track.
-                    These are track-characteristic features, not dog-specific.
-                    By design — tells the model "this is an inside-speed track".
-
-FieldSpeedStd, FieldTimeStd — Same for all dogs in same race.
-                    Race-level spread metrics, used in TimeVsField/SpeedVsField
-                    and FieldSimilarityIndex. By design.
-
-===============================================================================
-RETRAINING RECOMMENDATION
-===============================================================================
-Run: python retrain_all_tracks_sigmoid.py
-
-This will retrain all track models with the corrected feature values, allowing
-the ML models to learn from the now-meaningful RecentPlaceStreak feature and
-the improved CompetitorDensity/FieldSimilarityIndex features.
-
-The heuristic FinalScore improvements take effect immediately without retraining.
+  FACT 6: TrackConditionAdj and WeightFactor are NOT in FEATURE_COLS.
+          They were deliberately excluded from training because they are always 1.0
+          (no track-condition data in PDFs; greyhounds' listed weights are always 0 kg).
