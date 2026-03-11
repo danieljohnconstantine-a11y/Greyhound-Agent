@@ -620,13 +620,15 @@ def compute_features(df):
             2: -0.05, 5: -0.05  # Weak
         },
         "Healesville": {
-            6: 0.04,    # v5.0: Box 6 won 25% on 10/03/2026 (3/12) — added
-            8: 0.04,    # v5.0: Updated (was +0.05); 17% 10/03 + 22% Nov28 = ~20%
-            1: 0.00,    # v5.0: Reduced from +0.03; only 8% today
-            4: 0.00,    # v5.0: Reduced from +0.03; only 8% today
-            5: -0.04,   # v5.0: Slightly less penalised (did win once today)
-            2: -0.02,   # v5.0: Weak today
-            3: -0.02,   # v5.0: Weak today
+            # 253 races: Box 8=15.4%, Box 2=14.2%, Box 1=13.0%, Box 7=13.0%
+            # v5.1: Box 2 penalty REMOVED (was -0.02; Box 2 is 2nd most common winner)
+            8: 0.04,    # 15.4% Box 8 - top box
+            2: 0.02,    # 14.2% Box 2 - 2nd (was wrongly penalised at -0.02)
+            1: 0.01,    # 13.0% Box 1
+            7: 0.01,    # 13.0% Box 7
+            5: -0.04,   # Below average
+            4: -0.02, 3: -0.02,  # Below average
+            6: 0.00,    # ~12% — neutral
         },
         "Sale": {
             8: 0.05,    # 22.9% Box 8
@@ -651,12 +653,19 @@ def compute_features(df):
             2: 0.12, 6: 0.06, 1: -0.06, 8: -0.06, 4: 0.02,
         },
         "Gunnedah": {
-            7: 0.10,    # 33.3% Box 7 - STRONG
-            1: -0.05, 8: -0.05  # Weak Box 1 here
+            # 116 races: Box 2=16.4%, Box 7=12.1%, Box 6=12.1%, Box 4=10.3%
+            # v5.1: CORRECTED — Box 2 dominant (was Box 7: +0.10, overstated)
+            2: 0.06,    # 16.4% Box 2 - STRONGEST
+            7: 0.02, 6: 0.02,  # 12.1% each (slightly above 12.5% avg)
+            1: -0.04, 8: -0.04, 5: -0.03,  # Below average
         },
         "Warragul": {
-            6: 0.12,    # 41.7% Box 6 - VERY STRONG
-            3: -0.05, 7: -0.05, 8: -0.05  # Weak
+            # 226 races: Box 2=19.9%, Box 3=15.9%, Box 8=14.6%, Box 1=14.6%
+            # v5.1: CORRECTED — data clearly shows Box 2 dominant (was Box 6: +0.12, wrong)
+            2: 0.08,    # 19.9% Box 2 - STRONGEST
+            3: 0.04,    # 15.9% Box 3
+            8: 0.02, 1: 0.02,  # 14.6% each
+            6: -0.04, 4: -0.03, 7: -0.03,  # Below average
         },
         "Richmond": {
             # v4.2: Nov 30 ACTUAL: Box 2 won 41.7% (5/12), Box 7/8 won 16.7% each
@@ -786,6 +795,149 @@ def compute_features(df):
             3: -0.02,   # v5.0: Only 1 win today
             4: -0.01,   # v5.0: Only 1 win today (not penalised heavily — small sample)
         },
+
+        # ====================================================================
+        # v5.1: TRACKS ADDED — All data from actual results CSVs (factual only)
+        # ====================================================================
+
+        # CANNINGTON (168 races): Box 1=26.2%, Box 2=17.3%, Box 5=11.9%, Box 3=10.1%
+        "Cannington": {
+            1: 0.10,    # 26.2% — VERY STRONG inside advantage
+            2: 0.04,    # 17.3% — secondary
+            5: -0.02, 3: -0.03, 4: -0.03, 8: -0.03, 7: -0.03,
+        },
+
+        # CASINO (137 races): Box 1=25.5%, Box 4=15.3%, Box 2=14.6%, Box 7=13.1%
+        "Casino": {
+            1: 0.08,    # 25.5% — dominant
+            4: 0.04,    # 15.3% — secondary
+            2: 0.03,    # 14.6%
+            3: -0.04, 8: -0.04, 6: -0.03,
+        },
+
+        # GEELONG (144 races): Box 2=16%, Box 4=15.3%, Box 7=14.6%, Box 3=13.9%
+        # Very mixed — no dominant box. Slight outside+ middle pattern.
+        "Geelong": {
+            2: 0.03, 4: 0.03, 7: 0.02,  # Marginally above average
+            1: -0.03, 5: -0.03, 6: -0.02,  # Below average
+        },
+
+        # GOSFORD (104 races): Box 2=14.4%, Box 8=14.4%, Box 7=13.5%, Box 1=13.5%
+        # Very even — all boxes within 2% of each other. Slight outside spread.
+        "Gosford": {
+            2: 0.02, 8: 0.02, 7: 0.01,
+            3: -0.03, 4: -0.02, 6: -0.01,
+        },
+
+        # GOULBURN (64 races): Box 1=21.9%, Box 8=15.6%, Box 4=14.1%, Box 5=14.1%
+        "Goulburn": {
+            1: 0.06,    # 21.9% — dominant
+            8: 0.03, 4: 0.02, 5: 0.02,
+            3: -0.04, 6: -0.04, 7: -0.03, 2: -0.02,
+        },
+
+        # HOBART / TASMANIA (113 races): Box 1=21.2%, Box 3=15.0%, Box 4=14.2%, Box 8=14.2%
+        "Hobart": {
+            1: 0.06,    # 21.2% — dominant inside
+            3: 0.03, 4: 0.02, 8: 0.02,
+            2: -0.03, 7: -0.04, 6: -0.03, 5: -0.03,
+        },
+
+        # LADBROKES GARDENS (132 races): Box 1=18.9%, Box 2=16.7%, Box 6=13.6%, Box 4=12.1%
+        "Ladbrokes Gardens": {
+            1: 0.04,    # 18.9%
+            2: 0.03,    # 16.7%
+            6: 0.01,
+            5: -0.04, 7: -0.03, 8: -0.03, 3: -0.02,
+        },
+
+        # LAUNCESTON (120 races): Box 1=33.3%, Box 2=14.2%, Box 3=12.5%, Box 8=10.8%
+        # VERY STRONG Box 1 — strongest inside bias in the dataset
+        "Launceston": {
+            1: 0.14,    # 33.3% — extremely dominant inside
+            2: 0.02,
+            7: -0.05, 6: -0.05, 5: -0.04, 4: -0.03,
+        },
+
+        # MANDURAH (334 races): Box 1=17.1%, Box 2=15.9%, Box 3=15.0%, Box 8=14.7%
+        # Very even — large sample. Slight inside advantage.
+        "Mandurah": {
+            1: 0.03, 2: 0.02, 3: 0.01,
+            7: -0.02, 6: -0.02, 5: -0.01,
+        },
+
+        # MEADOWS (146 races): Box 1=21.2%, Box 2=13.7%, Box 4=13.0%, Box 7=11.0%
+        "Meadows": {
+            1: 0.07,    # 21.2% — dominant inside
+            2: 0.02, 4: 0.01,
+            7: -0.03, 8: -0.04, 6: -0.03, 5: -0.02,
+        },
+
+        # MURRAY BRIDGE (41 races): Box 8=22.0%, Box 2=19.5%, Box 1=17.1%, Box 5=14.6%
+        "Murray Bridge": {
+            8: 0.06,    # 22.0% — top box
+            2: 0.05,    # 19.5%
+            1: 0.03,
+            4: -0.04, 7: -0.04, 6: -0.03, 3: -0.03,
+        },
+
+        # MURRAY BRIDGE STRAIGHT (78 races): Box 1=19.2%, Box 4=19.2%, Box 8=16.7%, Box 2=16.7%
+        "Murray Bridge Straight": {
+            1: 0.04, 4: 0.04,  # 19.2% each
+            8: 0.02, 2: 0.02,
+            3: -0.04, 5: -0.04, 6: -0.02, 7: -0.02,
+        },
+
+        # NOWRA (168 races): Box 2=19.6%, Box 1=17.3%, Box 5=15.5%, Box 4=14.3%
+        "Nowra": {
+            2: 0.06,    # 19.6% — strongest
+            1: 0.04,    # 17.3%
+            5: 0.02,    # 15.5%
+            7: -0.04, 8: -0.04, 6: -0.03, 3: -0.01,
+        },
+
+        # RICHMOND STRAIGHT (65 races): Box 8=20%, Box 1=13.8%, Box 3=12.3%, Box 6=10.8%
+        "Richmond Straight": {
+            8: 0.06,    # 20% — outer runner advantage
+            1: 0.02,
+            7: -0.03, 4: -0.03, 5: -0.03, 2: -0.02,
+        },
+
+        # TAREE (157 races): Box 1=14.6%, Box 2=14.0%, Box 5=13.4%, Box 8=12.7%
+        # Very even. No strong dominant box.
+        "Taree": {
+            1: 0.02, 2: 0.02, 5: 0.01,
+            4: -0.02, 3: -0.02, 6: -0.01,
+        },
+
+        # TOWNSVILLE (119 races): Box 1=16%, Box 8=16%, Box 7=13.4%, Box 6=11.8%
+        "Townsville": {
+            1: 0.04, 8: 0.04,  # 16% each — inside/outside split
+            7: 0.01,
+            4: -0.03, 5: -0.03, 3: -0.02,
+        },
+
+        # WAGGA (80 races): Box 1=22.5%, Box 8=15%, Box 4=13.8%, Box 3=13.8%
+        "Wagga": {
+            1: 0.08,    # 22.5% — dominant inside
+            8: 0.03,
+            4: 0.01, 3: 0.01,
+            2: -0.03, 7: -0.04, 6: -0.03, 5: -0.02,
+        },
+
+        # WARRNAMBOOL (203 races): Box 6=17.7%, Box 2=17.7%, Box 1=14.8%, Box 4=13.3%
+        "Warrnambool": {
+            6: 0.06, 2: 0.06,  # 17.7% each — strong double
+            1: 0.02,
+            3: -0.04, 5: -0.04, 7: -0.03, 8: -0.02,
+        },
+
+        # BULLI (101 races): Box 2=21.8%, Box 1=14.9%, Box 4=14.9%, Box 8=10.9%
+        "Bulli": {
+            2: 0.08,    # 21.8% — dominant
+            1: 0.02, 4: 0.02,
+            5: -0.03, 7: -0.03, 8: -0.02, 6: -0.02, 3: -0.02,
+        },
     }
     
     # ========================================================================
@@ -825,9 +977,9 @@ def compute_features(df):
         
         # BOX 8 DOMINANT TRACKS - Closer Advantage
         # Prioritize: CloserBonus, BestTimePercentile at distance
-        "Casino": {"CloserBonus": 0.08, "BestTimePercentile": 0.06, "ExperienceTier": 0.04},
+        # v5.1: Casino MOVED to BOX 1 — actual data (137 races) shows Box 1=25.5%
         "Horsham": {"CloserBonus": 0.07, "BestTimePercentile": 0.05, "ExperienceTier": 0.04},
-        "Warrnambool": {"CloserBonus": 0.07, "BestTimePercentile": 0.06, "ExperienceTier": 0.04},
+        "Warrnambool": {"ConsistencyIndex": 0.07, "DLWFactor": 0.06, "PlaceRate": 0.05, "BestTimePercentile": 0.04},
         "Healesville": {"CloserBonus": 0.06, "BestTimePercentile": 0.06, "ExperienceTier": 0.05},
 
         # BOX 4 DOMINANT TRACKS - Experience Advantage
@@ -840,14 +992,14 @@ def compute_features(df):
         # Prioritize: BestTimePercentile + CloserBonus equally
         "Shepparton": {"BestTimePercentile": 0.05, "CloserBonus": 0.04, "ConsistencyIndex": 0.04, "ExperienceTier": 0.03},
         
-        # BOX 6 DOMINANT TRACKS - Form Momentum Advantage
-        # Prioritize: ExperienceTier, FormMomentum
-        "Warragul": {"ExperienceTier": 0.06, "FormMomentumNorm": 0.05, "TrainerStrikeRate": 0.04, "FreshnessFactor": 0.03},
+        # BOX 2 DOMINANT TRACKS (updated) — Warragul reclassified from BOX 6 to BOX 2
+        # v5.1: 226 race data confirms Box 2=19.9% dominant
+        "Warragul": {"DLWFactor": 0.07, "ConsistencyIndex": 0.06, "PlaceRate": 0.05, "TrainerStrikeRate": 0.04},
         
         # BOX 7 DOMINANT TRACKS - Closer Advantage
         # Prioritize: CloserBonus, FormMomentum
         "Wentworth Park": {"CloserBonus": 0.08, "FormMomentumNorm": 0.05, "BestTimePercentile": 0.04, "AgeFactor": 0.03},
-        "Mandurah": {"BestTimePercentile": 0.08, "EarlySpeedPercentile": 0.07, "BoxPositionBias": 0.06, "WinStreakFactor": 0.05},  # v4.4: SPEED TRACK - Box 1 36.4% Dec 1
+        "Mandurah": {"BestTimePercentile": 0.06, "EarlySpeedPercentile": 0.05, "ConsistencyIndex": 0.05, "WinStreakFactor": 0.04},
         
         # v4.2: PROBLEMATIC TRACKS - MAJOR OVERHAUL based on Nov 30 actual results
         # ROCKHAMPTON: Box 1 (33.3%) + Box 3 (25%) - Inside track advantage
@@ -865,13 +1017,46 @@ def compute_features(df):
             "BestTimePercentile": 0.02,
         },
         
-        # MAITLAND: Need to add once PDF is processed
         "Maitland": {
             "DLWFactor": 0.06,
             "ConsistencyIndex": 0.05,
             "BestTimePercentile": 0.05,
             "PlaceRate": 0.04,
         },
+
+        # ====================================================================
+        # v5.1: NEW TRACK ENTRIES — based on actual results CSV data
+        # ====================================================================
+
+        # BOX 1 DOMINANT — speed/inside advantage
+        "Cannington": {"BestTimePercentile": 0.09, "EarlySpeedPercentile": 0.07, "BoxPositionBias": 0.06, "WinStreakFactor": 0.04},
+        "Casino": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.05, "ConsistencyIndex": 0.04},
+        "Goulburn": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.05},
+        "Hobart": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.05, "ConsistencyIndex": 0.03},
+        "Launceston": {"BestTimePercentile": 0.09, "EarlySpeedPercentile": 0.07, "BoxPositionBias": 0.07, "WinStreakFactor": 0.04},
+        "Wagga": {"BestTimePercentile": 0.07, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.05, "ConsistencyIndex": 0.03},
+
+        # BOX 2 DOMINANT — form/consistency advantage
+        "Bulli": {"DLWFactor": 0.08, "ConsistencyIndex": 0.07, "PlaceRate": 0.05, "TrainerStrikeRate": 0.04},
+
+        # MIXED / EVEN — balanced approach
+        "Geelong": {"ConsistencyIndex": 0.06, "DLWFactor": 0.05, "BestTimePercentile": 0.05, "PlaceRate": 0.04},
+        "Gosford": {"ConsistencyIndex": 0.06, "DLWFactor": 0.05, "PlaceRate": 0.04, "WinStreakFactor": 0.04},
+        "Taree": {"ConsistencyIndex": 0.06, "DLWFactor": 0.05, "BestTimePercentile": 0.04, "PlaceRate": 0.04},
+        "Townsville": {"BestTimePercentile": 0.06, "EarlySpeedPercentile": 0.05, "CloserBonus": 0.05, "ConsistencyIndex": 0.04},
+
+        # GARDENS — slight Box 1/2 inside bias
+        "Ladbrokes Gardens": {"BestTimePercentile": 0.06, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.04, "ConsistencyIndex": 0.04},
+
+        # MANDURAH — very even; balanced
+        # (already in dict above, kept for canonical name)
+
+        # MURRAY BRIDGE — Box 8/2 outer-inner split
+        "Murray Bridge": {"CloserBonus": 0.07, "DLWFactor": 0.06, "ConsistencyIndex": 0.05, "PlaceRate": 0.04},
+        "Murray Bridge Straight": {"BestTimePercentile": 0.06, "EarlySpeedPercentile": 0.05, "BoxPositionBias": 0.04, "CloserBonus": 0.04},
+
+        # RICHMOND STRAIGHT — Box 8 closer advantage
+        "Richmond Straight": {"CloserBonus": 0.08, "BestTimePercentile": 0.06, "ExperienceTier": 0.04},
     }
     
     def get_track_factor_adjustments(track_name):
@@ -880,16 +1065,16 @@ def compute_features(df):
             return {}
         track_str = str(track_name).strip().lower()
         
-        # Use more precise matching with word boundaries
-        for key in TRACK_FACTOR_WEIGHTS:
+        # Three safe matching conditions (no startswith to avoid "Murray Bridge"
+        # matching "Murray Bridge Straight"):
+        #   1) exact match
+        #   2) track ends with key  (e.g. "Ladbrokes Q Straight" → key "Q Straight")
+        #   3) key ends with track  (e.g. track "Capalaba" → key "BetDeluxe Capalaba")
+        # Sort longest-first as a safety net for remaining ambiguities.
+        for key in sorted(TRACK_FACTOR_WEIGHTS, key=len, reverse=True):
             key_lower = key.lower()
-            # Check if key appears as a complete word or phrase in track name
-            # or if track name appears as a complete word/phrase in key
-            if (key_lower == track_str or 
-                track_str.startswith(key_lower + " ") or 
+            if (key_lower == track_str or
                 track_str.endswith(" " + key_lower) or
-                " " + key_lower + " " in " " + track_str + " " or
-                key_lower.startswith(track_str + " ") or
                 key_lower.endswith(" " + track_str)):
                 return TRACK_FACTOR_WEIGHTS[key]
         return {}  # Return empty dict for tracks without specific adjustments
@@ -901,9 +1086,17 @@ def compute_features(df):
         track_str = str(track_name).strip().lower()
         box = int(box)
         
-        for key in TRACK_COMPREHENSIVE_ADJUSTMENTS:
+        # Three safe matching conditions (no startswith to avoid "Murray Bridge"
+        # matching "Murray Bridge Straight"):
+        #   1) exact match
+        #   2) track ends with key  (e.g. "Ladbrokes Q Straight" → key "Q Straight")
+        #   3) key ends with track  (e.g. track "Capalaba" → key "BetDeluxe Capalaba")
+        # Sort longest-first as a safety net for remaining ambiguities.
+        for key in sorted(TRACK_COMPREHENSIVE_ADJUSTMENTS, key=len, reverse=True):
             key_lower = key.lower()
-            if key_lower in track_str or track_str in key_lower:
+            if (key_lower == track_str or
+                track_str.endswith(" " + key_lower) or
+                key_lower.endswith(" " + track_str)):
                 adjustments = TRACK_COMPREHENSIVE_ADJUSTMENTS[key]
                 return adjustments.get(box, 0.0)
         return 0.0
@@ -1863,10 +2056,9 @@ def compute_features(df):
                 "FormMomentumNorm": 0.02,      # Form trend
                 "MarginFactor": 0.02,          # Winning margin factor
                 
-                # === CONDITIONING (6% total) ===
-                "FreshnessFactor": 0.02,       # Days since last race
+                # === CONDITIONING (4% total) — Weight removed (always 0 kg in PDFs) ===
+                "FreshnessFactor": 0.04,       # Days since last race (boosted from 0.02; Weight slot redistributed)
                 "AgeFactor": 0.02,             # Age in optimal range
-                "WeightFactor": 0.02,          # Weight optimization
             }
             
         elif distance <= 500:  # MIDDLE - Most common distance (v4.3 UPDATE)
@@ -1902,10 +2094,9 @@ def compute_features(df):
                 "FormMomentumNorm": 0.03,      
                 "MarginFactor": 0.02,          
                 
-                # === CONDITIONING (6% total) ===
-                "FreshnessFactor": 0.02,       
-                "AgeFactor": 0.02,             
-                "WeightFactor": 0.02,          
+                # === CONDITIONING (4% total) — Weight removed (always 0 kg in PDFs) ===
+                "FreshnessFactor": 0.04,       # Days since last race (boosted; Weight slot redistributed)
+                "AgeFactor": 0.02,             # Age in optimal range
             }
             
         else:  # LONG - Stamina & consistency dominate
@@ -1940,10 +2131,9 @@ def compute_features(df):
                 "FormMomentumNorm": 0.04,      
                 "MarginFactor": 0.02,          
                 
-                # === CONDITIONING (6% total) ===
-                "FreshnessFactor": 0.02,       
-                "AgeFactor": 0.02,             
-                "WeightFactor": 0.02,          
+                # === CONDITIONING (4% total) — Weight removed (always 0 kg in PDFs) ===
+                "FreshnessFactor": 0.04,       # Days since last race (boosted; Weight slot redistributed)
+                "AgeFactor": 0.02,             # Age in optimal range
             }
 
     # ========================================================================
@@ -2019,11 +2209,10 @@ def compute_features(df):
             row.get("MarginFactor", 0.5) * w.get("MarginFactor", 0)
         )
         
-        # 5. CONDITIONING SCORE (5-10%)
+        # 5. CONDITIONING SCORE (4% — Weight removed: always 0 kg in PDFs)
         conditioning_score = (
             row.get("FreshnessFactor", 1.0) * w.get("FreshnessFactor", 0) +
-            row.get("AgeFactor", 0.85) * w.get("AgeFactor", 0) +
-            row.get("WeightFactor", 0.8) * w.get("WeightFactor", 0)
+            row.get("AgeFactor", 0.85) * w.get("AgeFactor", 0)
         )
         
         # COMBINE ALL SCORES
