@@ -12,7 +12,7 @@ Checks:
   1. Tracks detected from model files (either layout)
   2. Each track has the expected model files
   3. Models load without error
-  4. Models can generate predictions on synthetic feature data
+  4. Models can generate predictions on representative test feature data
   5. ensemble_config.json is consistent with actual model layout
 
 Usage:

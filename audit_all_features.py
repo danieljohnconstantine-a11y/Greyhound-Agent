@@ -154,8 +154,10 @@ for f in FEATURE_COLS:
 
 def build_sample_race(track='Cannington', distance=530, n_dogs=8):
     """
-    Build a realistic synthetic race with 8 dogs for the given track.
+    Build a representative test race with 8 dogs for the given track.
     All values are representative of real Australian greyhound race PDFs.
+    This function is used ONLY for audit/testing purposes — it is NOT used
+    for training or prediction.  All production predictions use factual PDF data.
     """
     dogs = [
         # DogName, Box, CareerWins, CareerPlaces, CareerStarts, PrizeMoney,

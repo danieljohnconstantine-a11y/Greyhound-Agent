@@ -268,8 +268,11 @@ class AdvancedGreyhoundMLPredictor:
             X_df = df_features[self.feature_names].fillna(0)
             # Replace any infinite values with 0 BEFORE converting to numpy
             X_df = X_df.replace([np.inf, -np.inf], 0)
-            # Convert to numpy array to bypass sklearn feature name checking
-            # The model was trained with synthetic data which has different feature compositions
+            # Convert to numpy array to bypass sklearn feature name checking.
+            # All models are trained exclusively on factual race data from track PDFs
+            # (data/results_*.csv — zero synthetic data).  The numpy conversion is
+            # needed only to avoid sklearn's feature-name-mismatch warnings when the
+            # saved model was trained with a slightly different column order.
             X = X_df.values
             print(f"   [SUCCESS] DEBUG: Feature matrix shape: {X.shape} (converted to numpy array)")
         else:
