@@ -256,3 +256,4 @@ If prompted for a password, use a [Personal Access Token](https://github.com/set
 | Git push rejected (file too large) | Re-check you used `retrain_all_tracks_sigmoid.py`, not `train_ml_track_ensemble.py`; each `.pkl` must be < 100 MB |
 | Training takes > 40 min | Normal on older hardware — PDF parsing is CPU-bound |
 | PowerShell says `running scripts is disabled` | Run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` once, then retry |
+| `❌ ERROR training <TRACK>: Can't pickle` | Fixed in current code (`n_jobs=1` in `CalibratedClassifierCV`). Update to latest code and retry. |

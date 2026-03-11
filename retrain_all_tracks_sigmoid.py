@@ -205,7 +205,9 @@ def train_track(df, track_name, verbose=True):
         random_state=42, n_jobs=-1,
     )
     rf.fit(X_train_sc, y_train, sample_weight=w_train)
-    rf_cal = CalibratedClassifierCV(rf, method='sigmoid', cv=3)
+    # n_jobs=1 forces single-threaded CV, avoiding "Can't pickle" errors that
+    # occur when joblib tries to serialize estimators across worker processes.
+    rf_cal = CalibratedClassifierCV(rf, method='sigmoid', cv=3, n_jobs=1)
     rf_cal.fit(X_train_sc, y_train, sample_weight=w_train)
     models['rf'] = rf_cal
 
@@ -265,7 +267,9 @@ def train_track(df, track_name, verbose=True):
             random_state=42, eval_metric='logloss',
         )
         xgb_m.fit(X_train_sc, y_train, sample_weight=w_train)
-        xgb_cal = CalibratedClassifierCV(xgb_m, method='sigmoid', cv=3)
+        # n_jobs=1 forces single-threaded CV, avoiding "Can't pickle" errors that
+        # occur when joblib tries to serialize XGBClassifier across worker processes.
+        xgb_cal = CalibratedClassifierCV(xgb_m, method='sigmoid', cv=3, n_jobs=1)
         xgb_cal.fit(X_train_sc, y_train, sample_weight=w_train)
         models['xgb'] = xgb_cal
 

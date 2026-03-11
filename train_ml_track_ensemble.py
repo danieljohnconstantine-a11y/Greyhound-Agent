@@ -466,7 +466,9 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     # Sigmoid/Platt scaling fits a monotonic logistic curve: it cannot produce a
     # flat plateau and always preserves full discrimination.
     print(f"      Calibrating RandomForest (sigmoid)...")
-    rf_calibrated = CalibratedClassifierCV(rf, method='sigmoid', cv=3)
+    # n_jobs=1 forces single-threaded CV, avoiding "Can't pickle" errors that
+    # occur when joblib tries to serialize estimators across worker processes.
+    rf_calibrated = CalibratedClassifierCV(rf, method='sigmoid', cv=3, n_jobs=1)
     rf_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
     models['rf'] = rf_calibrated
     predictions['rf'] = rf.predict_proba(X_test_scaled)[:, 1]
@@ -505,9 +507,11 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         )
         xgb_model.fit(X_train_scaled, y_train, sample_weight=w_train)
         
-        # Calibrate XGBoost with Sigmoid (Platt scaling — XGB natively outputs logits)
+        # Calibrate XGBoost with Sigmoid (Platt scaling — XGB natively outputs logits).
+        # n_jobs=1 forces single-threaded CV, avoiding "Can't pickle" errors that
+        # occur when joblib tries to serialize XGBClassifier across worker processes.
         print(f"      Calibrating XGBoost (sigmoid)...")
-        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='sigmoid', cv=3)
+        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='sigmoid', cv=3, n_jobs=1)
         xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
         models['xgb'] = xgb_calibrated
         predictions['xgb'] = xgb_model.predict_proba(X_test_scaled)[:, 1]
