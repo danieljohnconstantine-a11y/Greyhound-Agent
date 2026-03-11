@@ -185,7 +185,7 @@ def train_track(df, track_name, verbose=True):
         n_estimators=150, learning_rate=0.10, max_depth=4,
         min_samples_leaf=3, subsample=0.8, random_state=42,
     )
-    gb.fit(X_train_sc, y_train, sample_weight=w_train)
+    gb.fit(X_train_sc, y_train)  # GB does not support sample_weight in fit()
     models['gb'] = gb
 
     gb_proba  = gb.predict_proba(X_test_sc)[:, 1]
