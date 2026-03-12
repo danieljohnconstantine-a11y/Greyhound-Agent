@@ -509,36 +509,22 @@ def main():
     # This script calls it directly so we don't duplicate 600+ lines of logic.
     print("\nDelegating feature engineering to train_ml_track_ensemble.py ...")
     print("This will retrain all tracks with sigmoid calibration.\n")
-    print("NOTE: If you see 'method=isotonic' in any output, the wrong script")
-    print("      is being called.  This script enforces method='sigmoid'.\n")
 
     # ── import the training helpers from the main training module ─────────────
-    # We patch the method= argument at import time by monkey-patching the
-    # CalibratedClassifierCV call inside train_ml_track_ensemble.
-    from sklearn import calibration as _sklearn_cal
-
-    _orig_cv = _sklearn_cal.CalibratedClassifierCV
-
-    def _sigmoid_only(*args, **kwargs):
-        # Force sigmoid for every CalibratedClassifierCV instantiation
-        kwargs['method'] = 'sigmoid'
-        return _orig_cv(*args, **kwargs)
-
-    _sklearn_cal.CalibratedClassifierCV = _sigmoid_only
-
-    # Also patch the module-level import inside train_ml_track_ensemble
+    # train_ml_track_ensemble.py already uses method='sigmoid' for all
+    # CalibratedClassifierCV calls — no monkey-patching needed.
+    # Monkey-patching sklearn.calibration.CalibratedClassifierCV breaks pickle
+    # because the class identity check fails (_pickle.PicklingError).
     import train_ml_track_ensemble as _trainer
-    _trainer.CalibratedClassifierCV = _sigmoid_only  # type: ignore
 
     # ── run the main training pipeline ───────────────────────────────────────
-    print("Running main training pipeline (with sigmoid patch active)...\n")
+    print("Running main training pipeline (sigmoid calibration)...\n")
     try:
         _trainer.main()
     except SystemExit:
         pass  # train_ml_track_ensemble.main() may call sys.exit(0)
 
     print("\n" + "=" * 70)
-    print("Sigmoid calibration patch applied to all trained models.")
     print("All models saved with method='sigmoid' — no isotonic collapse possible.")
     print("=" * 70)
 
