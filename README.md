@@ -9,19 +9,21 @@ Automated parsing and scoring of greyhound racing forms.
 - Feature scoring
 - Top pick selection
 
-## Quick Setup
+## 🟢 Quick Setup
+
+> **New here?** See [`HOW_TO_TRAIN_LOCALLY.md`](HOW_TO_TRAIN_LOCALLY.md) for a **basic step-by-step guide** — every command on its own numbered line, for both Ubuntu and Windows.
 
 ### 1 — Clone the repo
 
 **WSL / Linux / macOS:**
 ```bash
-git clone --depth 1 https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
 cd Greyhound-Agent
 ```
 
 **Windows PowerShell:**
 ```powershell
-git clone --depth 1 https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
 cd Greyhound-Agent
 ```
 
@@ -63,7 +65,18 @@ pip install pandas numpy scikit-learn xgboost pdfplumber openpyxl
 
 ### 4 — Train models and run predictions
 
-On Windows, just double-click the `.bat` files. See [`HOW_TO_TRAIN_LOCALLY.md`](HOW_TO_TRAIN_LOCALLY.md) for the full step-by-step guide.
+**Ubuntu/WSL (recommended):**
+```bash
+python retrain_all_tracks_sigmoid.py
+```
+
+**Windows — double-click in Explorer:**
+```
+retrain_all_tracks_sigmoid.bat
+```
+
+> ❌ Do NOT run `train_ml_track_ensemble.py` — obsolete isotonic script.  
+> See [`HOW_TO_TRAIN_LOCALLY.md`](HOW_TO_TRAIN_LOCALLY.md) for the complete basic step-by-step guide.
 
 ## Usage
 1. Place your `.txt` form file in the `data/` folder.

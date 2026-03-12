@@ -2,6 +2,135 @@
 
 ---
 
+## 🟢 BASIC STEP-BY-STEP — copy and paste ONE line at a time
+
+> **Wait for each command to finish before typing the next one.**  
+> A command is finished when you see the `$` prompt again (or "Press any key" on Windows).
+
+---
+
+### Option A — Ubuntu or WSL (Windows Subsystem for Linux)
+
+Open an **Ubuntu** terminal window, then type each line below and press **Enter**:
+
+**Step 1 — Go to your home folder**
+```bash
+cd ~
+```
+
+**Step 2 — Clone the repository** *(downloads all code and data — ~200 MB, takes 2–5 min)*
+```bash
+git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+```
+
+**Step 3 — Go into the folder**
+```bash
+cd Greyhound-Agent
+```
+
+**Step 4 — Create a Python virtual environment** *(a self-contained Python install)*
+```bash
+python3 -m venv venv
+```
+
+**Step 5 — Activate the virtual environment** *(you must do this every new terminal session)*
+```bash
+source venv/bin/activate
+```
+> ✅ You should now see `(venv)` at the start of your prompt.
+
+**Step 6 — Install required Python packages** *(one-time; takes 1–3 min)*
+```bash
+pip install pandas numpy scikit-learn xgboost pdfplumber openpyxl
+```
+
+**Step 7 — Train all models** *(takes ~20 min; output appears after ~30–60 s)*
+```bash
+python retrain_all_tracks_sigmoid.py
+```
+
+**Step 8 — Check models were created** *(should list 4 files per track)*
+```bash
+ls -lh models/*.pkl | head -20
+```
+
+**That's it!** Models are saved in `models/`. To run predictions, see Step 11 below.
+
+---
+
+### Option B — Windows (PowerShell or Command Prompt)
+
+Open **PowerShell** (search "PowerShell" in the Start menu), then type each line:
+
+**Step 1 — Go to your Desktop**
+```powershell
+cd $env:USERPROFILE\Desktop
+```
+
+**Step 2 — Clone the repository** *(keep this on ONE line — no space before "https")*
+```powershell
+git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+```
+
+**Step 3 — Go into the folder**
+```powershell
+cd Greyhound-Agent
+```
+
+**Step 4 — Create a Python virtual environment**
+```powershell
+python -m venv venv
+```
+
+**Step 5 — Allow scripts to run** *(one-time; PowerShell only)*
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+> Press `Y` and Enter when asked.
+
+**Step 6 — Activate the virtual environment**
+```powershell
+venv\Scripts\Activate.ps1
+```
+> ✅ You should now see `(venv)` at the start of your prompt.
+
+**Step 7 — Install required Python packages**
+```powershell
+pip install pandas numpy scikit-learn xgboost pdfplumber openpyxl
+```
+
+**Step 8 — Delete any old models** *(start clean)*
+```powershell
+Remove-Item models\*.pkl -Force -ErrorAction SilentlyContinue
+```
+
+**Step 9 — Train all models** *(takes ~20 min; ⚠️ PowerShell may time out on slow PCs — use Ubuntu instead)*
+```powershell
+python retrain_all_tracks_sigmoid.py
+```
+
+**Alternatively — double-click this file in Explorer instead of Step 9:**
+```
+retrain_all_tracks_sigmoid.bat
+```
+
+**Step 10 — Run daily predictions**
+```
+1. Put today's PDF form guides in the  data_predictions\  folder
+2. Double-click  run_track_ensemble_predictions.bat
+3. Open  outputs\track_ensemble_predictions.xlsx  for results
+```
+
+---
+
+### ❌ DO NOT run this — it is the OLD wrong script:
+```bash
+python train_ml_track_ensemble.py   ← WRONG (isotonic calibration, wrong file layout)
+```
+Always use `python retrain_all_tracks_sigmoid.py` or `bash train_ubuntu.sh` instead.
+
+---
+
 ## ⚠️ CORRECTED Ubuntu Quick-Start (replaces old instructions)
 
 > The **old** instructions contained a critical error — `python train_ml_track_ensemble.py`  
