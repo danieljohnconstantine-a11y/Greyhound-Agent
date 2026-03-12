@@ -46,6 +46,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.calibration import CalibratedClassifierCV
+from sklearn.linear_model import LogisticRegression
 from joblib import parallel_backend
 import pickle
 import logging
@@ -57,6 +58,49 @@ try:
 except ImportError:
     HAS_XGBOOST = False
     print("⚠️  XGBoost not available - using RandomForest + GradientBoosting only")
+
+
+class _PlattCalibratedXGB:
+    """Lightweight Platt-scaling wrapper for XGBClassifier.
+
+    Replaces ``CalibratedClassifierCV(xgb_model, cv=3)`` which requires
+    joblib to pickle the XGBoost C++ booster into worker processes.  On
+    some Linux/Ubuntu environments this raises "Can't pickle
+    <class 'xgboost.sklearn.XGBClassifier'>", blocking training entirely.
+
+    This class fits a LogisticRegression (the Platt sigmoid) directly on
+    the *training-set* probability outputs of the already-fitted XGB model
+    (equivalent to ``cv='prefit'`` in older scikit-learn).  No
+    multiprocessing or pickling of the booster is required during fitting.
+    The resulting object is picklable by Python's standard pickle module
+    because both XGBClassifier and LogisticRegression are serialisable.
+    """
+
+    def __init__(self, base_estimator):
+        self.base_estimator = base_estimator
+        self._calibrator = None
+
+    def fit(self, X, y, sample_weight=None):
+        # base_estimator must already be fitted before calling this.
+        # We get its training-set probabilities and fit the calibration sigmoid.
+        raw = self.base_estimator.predict_proba(X)[:, 1].reshape(-1, 1)
+        # C=1e9: near-zero L2 regularisation.  Platt scaling is a two-parameter
+        # logistic regression (intercept + single weight on the raw score).  With
+        # only one feature, over-fitting is not a concern; strong regularisation
+        # would shrink the sigmoid toward a flat line and undo the calibration.
+        self._calibrator = LogisticRegression(
+            C=1e9, solver='lbfgs', max_iter=1000
+        )
+        self._calibrator.fit(raw, y, sample_weight=sample_weight)
+        return self
+
+    def predict_proba(self, X):
+        raw = self.base_estimator.predict_proba(X)[:, 1].reshape(-1, 1)
+        p1 = self._calibrator.predict_proba(raw)[:, 1]
+        return np.column_stack([1.0 - p1, p1])
+
+    def predict(self, X):
+        return (self.predict_proba(X)[:, 1] >= 0.5).astype(int)
 
 # Set up logging
 log_file = "logs/train_track_ensemble.log"
@@ -511,14 +555,16 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         )
         xgb_model.fit(X_train_scaled, y_train, sample_weight=w_train)
         
-        # Calibrate XGBoost with Sigmoid (Platt scaling — XGB natively outputs logits).
-        # n_jobs=1 + threading backend: avoids "Can't pickle" errors on Linux/Ubuntu.
-        # loky (default joblib backend) forks worker processes and requires
-        # XGBClassifier to be picklable; n_jobs=1 + threading backend bypasses this.
+        # Calibrate XGBoost with Sigmoid (Platt scaling).
+        # Uses _PlattCalibratedXGB instead of CalibratedClassifierCV(cv=3) to
+        # completely bypass joblib/multiprocessing.  cv=3 requires joblib to
+        # pickle the XGB C++ booster into worker processes, which raises
+        # "Can't pickle <class 'xgboost.sklearn.XGBClassifier'>" on some
+        # Linux/Ubuntu environments.  Manual Platt scaling is equivalent to
+        # cv='prefit' (removed in scikit-learn 1.2+) and is version-agnostic.
         print(f"      Calibrating XGBoost (sigmoid)...")
-        xgb_calibrated = CalibratedClassifierCV(xgb_model, method='sigmoid', cv=3, n_jobs=1)
-        with parallel_backend('threading'):
-            xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
+        xgb_calibrated = _PlattCalibratedXGB(xgb_model)
+        xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
         models['xgb'] = xgb_calibrated
         predictions['xgb'] = xgb_model.predict_proba(X_test_scaled)[:, 1]
         calibrated_predictions['xgb'] = xgb_calibrated.predict_proba(X_test_scaled)[:, 1]
