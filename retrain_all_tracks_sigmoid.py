@@ -206,10 +206,12 @@ def train_track(df, track_name, verbose=True):
         random_state=42, n_jobs=-1,
     )
     rf.fit(X_train_sc, y_train, sample_weight=w_train)
-    # n_jobs=1 forces single-threaded CV, avoiding "Can't pickle" errors that
-    # occur when joblib tries to serialize estimators across worker processes.
+    # n_jobs=1 + threading backend: avoids "Can't pickle" errors on Linux/Ubuntu.
+    # loky (default joblib backend) forks worker processes and requires the RF
+    # to be picklable; threading backend runs CV folds in-process (no pickling).
     rf_cal = CalibratedClassifierCV(rf, method='sigmoid', cv=3, n_jobs=1)
-    rf_cal.fit(X_train_sc, y_train, sample_weight=w_train)
+    with parallel_backend('threading'):
+        rf_cal.fit(X_train_sc, y_train, sample_weight=w_train)
     models['rf'] = rf_cal
 
     rf_proba = rf_cal.predict_proba(X_test_sc)[:, 1]
@@ -266,12 +268,12 @@ def train_track(df, track_name, verbose=True):
             n_estimators=150, learning_rate=0.10, max_depth=4,
             subsample=0.8, colsample_bytree=0.8,
             random_state=42, eval_metric='logloss',
-            nthread=1,  # Fix "Can't pickle" on Linux: avoids OpenMP thread-local state
+            n_jobs=1,  # Fix "Can't pickle" on Linux: single-threaded avoids OpenMP thread-local state
         )
         xgb_m.fit(X_train_sc, y_train, sample_weight=w_train)
         # n_jobs=1 + threading backend: avoids "Can't pickle" errors on Linux/Ubuntu.
         # loky (the default joblib backend) forks worker processes and requires
-        # XGBClassifier to be picklable; nthread=1 + threading backend bypasses this.
+        # XGBClassifier to be picklable; n_jobs=1 + threading backend bypasses this.
         xgb_cal = CalibratedClassifierCV(xgb_m, method='sigmoid', cv=3, n_jobs=1)
         with parallel_backend('threading'):
             xgb_cal.fit(X_train_sc, y_train, sample_weight=w_train)
