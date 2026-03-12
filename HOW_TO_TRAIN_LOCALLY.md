@@ -1,5 +1,71 @@
 # How to Train and Run Predictions Locally (Updated March 2026)
 
+---
+
+## 🐧 NEW: Train on Ubuntu → Run Predictions on Windows
+
+> Windows PowerShell times out on large training jobs.  
+> **Train on Ubuntu instead, then copy the models to Windows and run predictions with the normal bat file.**
+
+### Ubuntu training + Windows predictions — quick-start
+
+| Step | Platform | What to do |
+|---|---|---|
+| **1 — Setup Ubuntu** | Ubuntu | Run `bash setup_ubuntu.sh` (first time only) |
+| **2 — Train all models** | Ubuntu | Run `bash train_ubuntu.sh` |
+| **3 — Copy models to Windows** | Windows | Copy `models/*.pkl` from Ubuntu to your Windows `models\` folder |
+| **4 — Daily predictions** | Windows | Double-click **`run_track_ensemble_predictions.bat`** |
+
+### Step-by-step: Ubuntu training
+
+```bash
+# ── 1. Open a terminal on Ubuntu ──────────────────────────────────────────
+# If this is your first time on this machine, run the one-time setup:
+bash setup_ubuntu.sh
+# This installs prerequisites, clones the repo, creates a venv, and
+# installs all Python packages.  Skip if already set up.
+
+# ── 2. Navigate to the repo ───────────────────────────────────────────────
+cd ~/Greyhound-Agent       # or wherever you cloned the repo
+
+# ── 3. Activate virtual environment ──────────────────────────────────────
+source venv/bin/activate
+
+# ── 4. Run training (one command) ────────────────────────────────────────
+bash train_ubuntu.sh
+# Duration: ~20 minutes
+# Output: models/{TRACK}_rf.pkl  _gb.pkl  _xgb.pkl  _scaler.pkl
+
+# ── 5. Verify models were created ────────────────────────────────────────
+ls -lh models/*.pkl | wc -l   # should be 4× number of tracks
+
+# ── 6. Transfer models to Windows ────────────────────────────────────────
+# Option A — commit and push to GitHub, then pull on Windows:
+git add models/*.pkl
+git commit -m "retrain all tracks: sigmoid calibration"
+git push
+
+# Option B — copy over the network (adjust IP/path):
+# scp models/*.pkl user@windows-machine:/path/to/Greyhound-Agent/models/
+
+# Option C — USB drive or shared folder
+```
+
+### Step-by-step: Windows predictions (after models are copied)
+
+```
+1. Put today's PDF form guides into the  data_predictions\  folder
+2. Double-click  run_track_ensemble_predictions.bat
+3. Open  outputs\track_ensemble_predictions.xlsx  for results
+```
+
+> ✅ The bat file works exactly the same whether the models were trained on  
+> Ubuntu or Windows — `.pkl` files are fully cross-platform.
+
+---
+
+## ⚡ Quick-start for Windows-only (training + predictions on the same machine)
+
 > ### ⚡ Quick-start for Windows — just double-click the bat file
 >
 > | Step | What to do | Bat file to double-click |
@@ -25,7 +91,9 @@
 
 ## 2 — Clone the repo
 
-**WSL or Linux terminal:**
+> 💡 **Ubuntu users:** Run `bash setup_ubuntu.sh` (see the Ubuntu quick-start section above) — it clones the repo and sets everything up automatically.
+
+**Ubuntu / Linux terminal (manual):**
 ```bash
 cd ~
 git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
@@ -105,12 +173,20 @@ del /Q models\*.pkl
 
 ## 6 — Train all models
 
+> 🐧 **Ubuntu users:** Use `bash train_ubuntu.sh` — it handles venv activation and provides coloured progress output.  
+> 🪟 **Windows users:** Use the bat file below.
+
+**Ubuntu (recommended for large datasets):**
+```bash
+bash train_ubuntu.sh
+```
+
 **Double-click (Windows):**
 ```
 retrain_all_tracks_sigmoid.bat
 ```
 
-**Terminal:**
+**Terminal (any platform):**
 ```bash
 python retrain_all_tracks_sigmoid.py
 ```
