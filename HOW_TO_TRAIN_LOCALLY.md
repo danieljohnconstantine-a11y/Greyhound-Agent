@@ -2,6 +2,58 @@
 
 ---
 
+## ⚠️ CORRECTED Ubuntu Quick-Start (replaces old instructions)
+
+> The **old** instructions contained a critical error — `python train_ml_track_ensemble.py`  
+> uses obsolete isotonic calibration and writes models in the wrong layout.  
+> Use the corrected commands below.
+
+### ❌ OLD (wrong — do not use)
+```bash
+cd /mnt/c/Users/danie/OneDrive/Desktop   # ← slow Windows filesystem via WSL
+git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again \
+    https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+cd Greyhound-Agent
+python3 -m venv venv && source venv/bin/activate
+pip install pandas numpy scikit-learn xgboost pdfplumber openpyxl
+rm -f models/*.pkl
+python train_ml_track_ensemble.py   # ← WRONG SCRIPT (isotonic, wrong layout)
+```
+
+### ✅ CORRECT — one-time setup on Ubuntu
+```bash
+# Run from any Ubuntu terminal (native Ubuntu or WSL — use the Ubuntu home directory,
+# NOT /mnt/c/ which is slow and may hit permission issues)
+cd ~
+
+# Option A — if you already cloned the repo (recommended: inspect before running):
+git clone --depth 1 -b copilot/copy-ml-training-prediction-files-again \
+    https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+cd Greyhound-Agent
+cat setup_ubuntu.sh          # inspect the script first
+bash setup_ubuntu.sh         # then run it
+# This creates venv/ and installs all Python packages.
+```
+
+If you already have the repo cloned, skip setup and just do:
+```bash
+cd ~/Greyhound-Agent              # ← native Ubuntu home dir (fast)
+source venv/bin/activate
+bash train_ubuntu.sh              # ← CORRECT training script (sigmoid calibration)
+```
+
+### What changed vs the old instructions
+
+| | Old (wrong) | New (correct) |
+|---|---|---|
+| **Training script** | `python train_ml_track_ensemble.py` | `bash train_ubuntu.sh` → runs `retrain_all_tracks_sigmoid.py` |
+| **Calibration** | isotonic (collapses on small datasets) | sigmoid (always monotonic) |
+| **Working directory** | `/mnt/c/…` (Windows drive via WSL — slow) | `~/Greyhound-Agent` (Ubuntu native — fast) |
+| **Model filenames** | shared `rf.pkl`, `gb.pkl` | per-track `{TRACK}_rf.pkl`, `{TRACK}_gb.pkl` |
+| **After training** | manually copy models | `git push` then `git pull` on Windows |
+
+---
+
 ## 🐧 NEW: Train on Ubuntu → Run Predictions on Windows
 
 > Windows PowerShell times out on large training jobs.  

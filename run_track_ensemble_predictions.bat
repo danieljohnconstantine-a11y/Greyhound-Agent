@@ -5,7 +5,7 @@ REM Uses the track-specific ensemble models to generate predictions
 REM on today's races in data_predictions/ folder
 REM
 REM Prerequisites:
-REM   1. Models trained (run train_ml_track_ensemble.bat first)
+REM   1. Models trained (run retrain_all_tracks_sigmoid.bat first -- NOT train_ml_track_ensemble.bat)
 REM   2. Race PDFs in data_predictions/ folder
 REM
 REM Output:
