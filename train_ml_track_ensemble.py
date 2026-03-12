@@ -503,16 +503,20 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
             subsample=0.8,
             colsample_bytree=0.8,
             random_state=42,
-            eval_metric='logloss'
+            eval_metric='logloss',
+            nthread=1,  # Fix "Can't pickle" on Linux: avoids OpenMP thread-local state
         )
         xgb_model.fit(X_train_scaled, y_train, sample_weight=w_train)
         
         # Calibrate XGBoost with Sigmoid (Platt scaling — XGB natively outputs logits).
-        # n_jobs=1 forces single-threaded CV, avoiding "Can't pickle" errors that
-        # occur when joblib tries to serialize XGBClassifier across worker processes.
+        # n_jobs=1 + threading backend: avoids "Can't pickle" errors on Linux/Ubuntu.
+        # loky (default joblib backend) forks worker processes and requires
+        # XGBClassifier to be picklable; nthread=1 + threading backend bypasses this.
         print(f"      Calibrating XGBoost (sigmoid)...")
         xgb_calibrated = CalibratedClassifierCV(xgb_model, method='sigmoid', cv=3, n_jobs=1)
-        xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
+        from joblib import parallel_backend
+        with parallel_backend('threading'):
+            xgb_calibrated.fit(X_train_scaled, y_train, sample_weight=w_train)
         models['xgb'] = xgb_calibrated
         predictions['xgb'] = xgb_model.predict_proba(X_test_scaled)[:, 1]
         calibrated_predictions['xgb'] = xgb_calibrated.predict_proba(X_test_scaled)[:, 1]
