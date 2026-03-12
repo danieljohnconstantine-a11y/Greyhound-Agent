@@ -630,7 +630,7 @@ def load_historical_data_hybrid(data_dir='data'):
     2. Extract complete dog data from PDFs
     3. Match PDF races to CSV winners using track name normalization
     
-    IMPORTANT: ONLY USES FACTUAL PDF DATA - NO SYNTHETIC/GENERATED DATA!
+    IMPORTANT: ONLY USES FACTUAL PDF DATA — 100% real race data.
     Only races that have BOTH PDF dog data AND CSV winners are used for training.
     
     Args:
@@ -651,7 +651,7 @@ def load_historical_data_hybrid(data_dir='data'):
     
     print("[INFO] Loading data using HYBRID method (PDFs + CSV results)...")
     print("   [SUCCESS] FACTUAL DATA ONLY - Using real PDF form guides matched to CSV winners")
-    print("   [INFO] NO SYNTHETIC DATA - Races without PDFs are skipped")
+    print("   [INFO] FACTUAL DATA ONLY — races without PDF form guides are skipped")
     
     # Step 1: Find all files
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
@@ -813,7 +813,7 @@ def load_historical_data_hybrid(data_dir='data'):
         print(f"[DEBUG] Sample PDF race keys: {sample_keys}")
         logger.debug(f"Sample PDF race keys: {sample_keys}")
     
-    # Step 4: Process all race results - ONLY USE PDF DATA (NO SYNTHETIC)
+    # Step 4: Process all race results — FACTUAL PDF DATA ONLY
     # ENHANCED: Use Top 4 finishers with weighted labels (1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3)
     race_data = []
     winners = []
@@ -867,7 +867,7 @@ def load_historical_data_hybrid(data_dir='data'):
             df_race = pdf_races[key_without_date].copy()
             races_from_pdf += 1
         else:
-            # Skip races without PDF data - NO SYNTHETIC DATA GENERATED
+            # Skip races without PDF data — factual data only, so this race is excluded
             races_skipped_no_pdf += 1
             continue
         
@@ -907,7 +907,7 @@ def load_historical_data_hybrid(data_dir='data'):
         print(f"   Training data expansion: {len(race_data)/races_from_pdf:.1f}x")
     if len(all_results) > 0:
         print(f"   Coverage: {races_from_pdf/len(all_results)*100:.1f}% of all races")
-    print(f"   [SUCCESS] Using ONLY factual PDF data - NO synthetic data generated")
+    print(f"   [SUCCESS] Using ONLY factual PDF data — 100% real race data")
     print(f"   [SUCCESS] Weighted labels: 1st=1.0, 2nd=0.7, 3rd=0.5, 4th=0.3\n")
     
     logger.info(f"Hybrid loading complete: {races_from_pdf} races with PDF data, {races_skipped_no_pdf} skipped (no PDF)")
@@ -919,7 +919,7 @@ def load_historical_data_hybrid(data_dir='data'):
 def load_historical_data(data_dir='data'):
     """
     Load historical race PDFs and results for ML training.
-    USES ONLY FACTUAL PDF DATA - NO SYNTHETIC DATA!
+    USES ONLY FACTUAL PDF DATA — 100% real race data.
     
     This function matches PDF dog data with CSV race results to identify winners.
     Only races with both PDF data AND CSV results are used for training.
@@ -940,7 +940,7 @@ def load_historical_data(data_dir='data'):
     logger = logging.getLogger(__name__)
     
     print("[INFO] Using PDF-ONLY loading method for factual training data...")
-    print("   NO SYNTHETIC DATA - Only races with actual PDF form guides")
+    print("   FACTUAL DATA ONLY — real PDF form guides matched to CSV results")
     
     # Track name normalization map (PDF names -> CSV names)
     TRACK_NORMALIZATIONS = {
@@ -1148,7 +1148,7 @@ def load_historical_data(data_dir='data'):
     print(f"   Races matched with results: {races_matched}")
     print(f"   Races unmatched: {races_unmatched}")
     print(f"   Total races for training: {len(race_data)}")
-    print(f"   Coverage: 100% FACTUAL DATA (no synthetic races)\n")
+    print(f"   Coverage: 100% FACTUAL DATA — real races only\n")
     
     if unmatched_examples:
         print(f"[INFO] Sample unmatched races (first 5):")

@@ -270,7 +270,7 @@ class AdvancedGreyhoundMLPredictor:
             X_df = X_df.replace([np.inf, -np.inf], 0)
             # Convert to numpy array to bypass sklearn feature name checking.
             # All models are trained exclusively on factual race data from track PDFs
-            # (data/results_*.csv — zero synthetic data).  The numpy conversion is
+            # (data/results_*.csv — 100% real race results).  The numpy conversion is
             # needed only to avoid sklearn's feature-name-mismatch warnings when the
             # saved model was trained with a slightly different column order.
             X = X_df.values

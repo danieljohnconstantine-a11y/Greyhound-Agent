@@ -473,7 +473,7 @@ def compute_features(df):
     # ========================================================================
     
     # === BOX WIN RATE — computed from 7,108 factual race results (Mar 2026) ===
-    # All 57 results CSVs across all tracks; zero synthetic data.
+    # All 57 results CSVs across all tracks; 100% factual race data.
     BOX_WIN_RATE = {
         1: 0.183,   # 1298/7108 = 18.3%  (+5.8 pp above random)
         2: 0.159,   # 1127/7108 = 15.9%  (+3.4 pp)
@@ -555,7 +555,7 @@ def compute_features(df):
         # ====================================================================
         # DATA-DRIVEN BOX ADJUSTMENTS — computed from 7,108 factual race results
         # Each value = (actual_win_pct - 12.5%) × 0.008, capped ±0.15
-        # Source: data/results_*.csv — ALL factual, zero synthetic data
+        # Source: data/results_*.csv — 100% factual race data
         # ====================================================================
 
         # Angle Park (254 races): Box1=24%, Box2=21%, Box3=4%, Box6=6%
