@@ -1,0 +1,33 @@
+==============================================================================
+DATA ACCURACY AUDIT — PDF vs Excel
+Run: 2026-03-13 08:04:20
+Excel: /home/runner/work/Greyhound-Agent/Greyhound-Agent/outputs/track_ensemble_predictions.xlsx
+PDFs:  /home/runner/work/Greyhound-Agent/Greyhound-Agent/data_predictions
+==============================================================================
+
+SUMMARY
+-------
+Total dogs in PDFs  : 1049
+Total dogs in Excel : 1049
+Exact matches       : 1049  (Track+Race+Box key found + ALL fields match)
+Field mismatches    : 0  (key found but ≥1 field differs)
+PDF dog not in Excel: 0
+Excel dog not in PDF: 0
+
+==============================================================================
+FIELD MISMATCHES (detailed)
+==============================================================================
+  ✓ ZERO field mismatches detected.
+
+==============================================================================
+MISSING DOGS (detailed)
+==============================================================================
+  ✓ No missing dogs detected.
+
+==============================================================================
+VERDICT
+==============================================================================
+✅ PASS — All PDF data matches Excel exactly. ZERO discrepancies.
+
+Report generated: 2026-03-13 08:04:21
+==============================================================================
