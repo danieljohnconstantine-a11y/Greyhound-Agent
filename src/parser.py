@@ -120,7 +120,7 @@ def parse_race_form(text):
     # --------------------------------------------------------------------------
     _partial_career_re = re.compile(r'^(\d+)\s*-\s*(\d+)\s*-\s*$')
     _dog_line_re = re.compile(
-        r'^(\d+)\.?\s*[0-9xf]{0,7}[A-Za-z\'\- ]+?\s+\d+[a-z]\s+[\d.]+kg\s+\d+\s+[A-Za-z\'\- ]+?\s+\$?([\d,]+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$'
+        r'^(\d+)\.?\s*[0-9xf]{0,7}[A-Za-z\''\-\. ]+?\s+\d+[a-z]\s+[\d.]+kg\s+\d+\s+[A-Za-z\''\-\. ]+?\s+\$?([\d,]+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$'
     )
     _only_digits_re = re.compile(r'^(\d+)$')
     merged_lines = []
@@ -264,7 +264,7 @@ def parse_race_form(text):
         # CRITICAL FIX #22: Handle multi-line dog entries where career stats wrap to next lines
         # ENHANCED: More flexible pattern to handle edge cases and spacing variations
         dog_match = re.match(
-            r"""^(\d+)\.?\s*([0-9xf]{0,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+            r"""^(\d+)\.?\s*([0-9xf]{0,7})?([A-Za-z''.\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''.\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
             line
         )
         
@@ -274,7 +274,7 @@ def parse_race_form(text):
         # Where "173 7 96" are partial career stats on same line, and rest is on next line
         if not dog_match:
             partial_dog_match = re.match(
-                r"""^(\d+)\.?\s*([0-9xf]{0,7})?([A-Za-z''\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''\- ]+?)\s+\$?([\d,]+)(?:\s+(\d+)\s+(\d+)\s+(\d+))?""",
+                r"""^(\d+)\.?\s*([0-9xf]{0,7})?([A-Za-z''.\- ]+?)\s+(\d+[a-z])\s+([\d.]+)kg\s+(\d+)\s+([A-Za-z''.\- ]+?)\s+\$?([\d,]+)(?:\s+(\d+)\s+(\d+)\s+(\d+))?""",
                 line
             )
             if partial_dog_match and i + 2 < len(lines):
@@ -419,14 +419,14 @@ def parse_race_form(text):
         # RELAXED to accept dogs with minimal form data
         if not dog_match and line and line[0].isdigit():
             simple_dog_match = re.match(
-                r"""^(\d+)[\.\s]+([0-9xf]{0,7})?\s*([A-Za-z''\- ]+?)\s+(\d+[a-z])?\s*([\d.]+)?kg""",
+                r"""^(\d+)[\.\s]+([0-9xf]{0,7})?\s*([A-Za-z''.\- ]+?)\s+(\d+[a-z])?\s*([\d.]+)?kg""",
                 line
             )
             if simple_dog_match:
                 logger.debug(f"Using fallback pattern for line: {line[:80]}...")
                 # Try to extract remaining fields with more flexible pattern
                 remaining_pattern = re.search(
-                    r"""(\d+)\s+([A-Za-z''\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
+                    r"""(\d+)\s+([A-Za-z''.\- ]+)\s+(\d+)\s*-\s*(\d+)\s*-\s*(\d+)\s+\$?([\d,]+)\s+(\S+)\s+(\S+)\s+(\S+)""",
                     line[simple_dog_match.end():]
                 )
                 if remaining_pattern:
