@@ -1,0 +1,102 @@
+================================================================================
+RUN SUMMARY — 13/03/2026  (run13032026.docx)
+Generated: 2026-03-13
+================================================================================
+
+OVERVIEW
+--------
+Full pipeline run executed on 13 March 2026. This report documents training of
+fresh ensemble models incorporating all race data up to and including 12/03/2026.
+
+DATA INGESTION
+--------------
+• Total race results in CSVs         : 7,402 races
+• Races with matching PDF data       : 6,889 (93.1% coverage)
+• Races skipped (no PDF)             : 513
+• Training samples after expansion   : 27,174 (6,889 races × top-4 weighting)
+  - Winners (label=1.0)              : 6,889
+  - 2nd place (label=0.7)            : 6,889
+  - 3rd place (label=0.5)            : 6,889
+  - 4th place (label=0.3)            : 6,678
+• Total dogs in dataset              : 217,191
+• Feature columns identified         : 76
+• Memory footprint (post-optimise)   : 243 MB
+
+DATA PROVENANCE
+---------------
+Source: 100% real PDF race-card data — no synthetic fallback data used.
+Parsing: 91/93 dogs had BestTimeSec; 89/93 had SectionalSec (on sample race).
+Feature engineering: v5.2 box adjustments, v5.1 BoxPositionBias (386-race analysis),
+  v4.4 WinStreakFactor, v5.3 RecentPlaceStreak, FieldSimilarityIndex v5.3.
+Calibration: sigmoid throughout — isotonic collapse fully prevented.
+
+MODEL TRAINING RESULTS — 40 TRACKS
+------------------------------------
+Track                    | Dogs   | Ensemble Accuracy
+-------------------------|--------|------------------
+Angle Park               |  7,607 | 84.4%
+BALLARAT                 |  8,901 | 88.3%
+BENDIGO                  |  6,696 | 87.1%
+BROKEN HILL              |    672 | 85.9%
+Bulli                    |  3,336 | 87.9%
+CASINO                   |  4,861 | 87.9%
+Cannington               |  5,677 | 88.0%
+Capalaba                 |  5,203 | 87.3%
+DARWIN                   |  2,494 | 84.6%
+DUBBO                    |  3,856 | 88.1%
+GAWLER                   |  4,041 | 82.9%
+GEELONG                  |  6,122 | 88.2%
+GOSFORD                  |  4,073 | 88.8%  ← HIGHEST
+GOULBURN                 |  2,203 | 86.6%
+GRAFTON                  |  4,719 | 87.5%
+GUNNEDAH                 |  4,229 | 88.2%
+HEALESVILLE              |  9,114 | 88.5%
+HOBART                   |  4,956 | 88.3%
+HORSHAM                  |  2,668 | 87.5%
+MT GAMBIER               |  3,991 | 83.2%
+MURRAY BDGE STRAIGHT     |  1,876 | 80.9%  ← LOWEST
+Maitland                 |  2,615 | 86.0%
+Mandurah                 | 12,424 | 88.0%
+Meadows                  |  5,159 | 87.1%
+NOWRA                    |  5,249 | 86.4%
+Q LAKESIDE               | 14,371 | 88.5%
+Q PARKLANDS              |  5,010 | 86.8%
+Q STRAIGHT               |  6,417 | 88.5%
+RICHMOND                 | 10,682 | 87.8%
+ROCKHAMPTON              |  4,591 | 86.0%
+SALE                     |  4,934 | 85.4%
+SANDOWN                  |  4,941 | 86.1%
+SHEPPARTON               |  7,115 | 88.2%
+TOWNSVILLE               |  4,749 | 87.8%
+Temora                   |  3,331 | 88.0%
+The Gardens              |  6,031 | 88.3%
+WAGGA                    |  2,890 | 86.0%
+WARRNAMBOOL              |  6,667 | 87.9%
+WENTWORTH PARK           |  4,502 | 87.0%
+Warragul                 |  8,218 | 88.0%
+
+SUMMARY STATISTICS
+------------------
+• Tracks trained                     : 40
+• Algorithms per track               : 3  (Random Forest + Gradient Boosting + XGBoost)
+• Total models saved                 : 120 (40 × 3)
+• AVERAGE ensemble accuracy          : 86.9%
+• Highest accuracy                   : GOSFORD  88.8%
+• Lowest accuracy                    : MURRAY BDGE STRAIGHT  80.9%
+• All models < 5MB (sigmoid calibration keeps RF compact)
+
+OUTPUT
+------
+• Models saved to: models/{Track}_rf.pkl / _gb.pkl / _xgb.pkl / _scaler.pkl
+• Configuration: models/ensemble_config.json + models/config.pkl
+• Calibration: ALL sigmoid — no isotonic collapse risk
+
+NOTES / FOLLOW-ON ACTIONS
+--------------------------
+1. New 13/03/2026 race card PDFs (Bendigo, The Gardens, Geelong, Goulburn,
+   Healesville, Mandurah, Q Lakeside, Richmond, Sale, Townsville, Wagga)
+   have been archived from data_predictions/ → data/ post-prediction run.
+2. Models uploaded to GitHub — 7aed1a2 commit (13/03/2026 14:36 AEST).
+3. Next daily cycle: add 13/03/2026 results CSV → retrain → predict 14/03.
+
+================================================================================
