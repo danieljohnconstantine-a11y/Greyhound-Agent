@@ -1,18 +1,18 @@
 ================================================================================
 TRACK-SPECIFIC ENSEMBLE PREDICTIONS SUMMARY
-Generated: 2026-03-13 13:21:38
+Generated: 2026-03-13 07:22:29
 ================================================================================
 
 Total PDFs processed: 11
 Successful predictions: 11
-Total dogs predicted: 1033
+Total dogs predicted: 1049
 All predictions use dedicated track-specific models only — no fallbacks.
 
 
 BENDIGO:
   Races: 12
-  Dogs: 114
-  Race 1: Box 4 - Whisky Bella (13.7188% (RF=10.9777, GB=18.3245, XGB=11.8542))
+  Dogs: 115
+  Race 1: Box 4 - Whisky Bella (12.8467% (RF=11.0456, GB=18.4866, XGB=9.0079))
   Race 2: Box 8 - Pilot Prince (16.7116% (RF=9.1848, GB=16.0789, XGB=24.8712))
   Race 3: Box 2 - I'm Too Messy (12.7294% (RF=11.1457, GB=15.0293, XGB=12.0133))
   Race 4: Box 8 - Paw Quebec (18.3788% (RF=7.1834, GB=18.0536, XGB=29.8994))
@@ -27,7 +27,7 @@ BENDIGO:
 
 GEELONG:
   Races: 12
-  Dogs: 89
+  Dogs: 90
   Race 1: Box 6 - Aston Sunshine (12.5220% (RF=11.0466, GB=16.1985, XGB=10.3210))
   Race 2: Box 7 - Blackpool Iris (12.4487% (RF=10.4450, GB=17.1287, XGB=9.7724))
   Race 3: Box 7 - Star Fury (26.5596% (RF=7.9946, GB=25.1048, XGB=46.5795))
@@ -35,9 +35,9 @@ GEELONG:
   Race 5: Box 8 - Aston Lace (12.0668% (RF=9.9728, GB=19.6252, XGB=6.6025))
   Race 6: Box 1 - Rothwell Kane (16.0195% (RF=10.5624, GB=21.4400, XGB=16.0561))
   Race 7: Box 6 - Little Flower (16.0878% (RF=9.1964, GB=21.6842, XGB=17.3828))
-  Race 8: Box 8 - Whodat Jewel (14.3149% (RF=8.7215, GB=19.5005, XGB=14.7228))
+  Race 8: Box 8 - Whodat Jewel (13.5507% (RF=9.0203, GB=17.5329, XGB=14.0989))
   Race 9: Box 5 - General Franky (40.8984% (RF=6.7880, GB=25.0387, XGB=90.8683))
-  Race 10: Box 8 - Springer's Boy (37.4523% (RF=5.8014, GB=42.3375, XGB=64.2179))
+  Race 10: Box 3 - Ubiquitous (19.7888% (RF=7.5527, GB=22.1997, XGB=29.6139))
   Race 11: Box 5 - Blackpool Finn (13.3267% (RF=11.9468, GB=14.6589, XGB=13.3743))
   Race 12: Box 8 - Pay Up Sally (10.5816% (RF=11.2642, GB=15.5402, XGB=4.9406))
 
@@ -57,7 +57,7 @@ GOULBURN:
 
 HEALESVILLE:
   Races: 12
-  Dogs: 105
+  Dogs: 106
   Race 1: Box 8 - Chloe's Fault (22.6567% (RF=8.9544, GB=27.1117, XGB=31.9039))
   Race 2: Box 7 - Be A Secret (16.2809% (RF=11.3018, GB=17.8068, XGB=19.7342))
   Race 3: Box 8 - Soda Turkey (14.0224% (RF=11.0235, GB=20.0781, XGB=10.9658))
@@ -67,8 +67,8 @@ HEALESVILLE:
   Race 7: Box 1 - Bruree Pat (14.9760% (RF=10.1637, GB=18.7794, XGB=15.9847))
   Race 8: Box 5 - Aussie Savannah (20.4873% (RF=10.8430, GB=13.0531, XGB=37.5657))
   Race 9: Box 1 - Tribal Advisor (46.2285% (RF=8.2266, GB=36.5169, XGB=93.9420))
-  Race 10: Box 4 - Spud Bug (17.4168% (RF=10.7858, GB=16.1182, XGB=25.3465))
-  Race 11: Box 8 - Destini Paladin (23.6113% (RF=7.8112, GB=20.0348, XGB=42.9880))
+  Race 10: Box 4 - Spud Bug (16.6158% (RF=10.6802, GB=16.1182, XGB=23.0491))
+  Race 11: Box 8 - Destini Paladin (20.2189% (RF=7.9573, GB=17.3224, XGB=35.3770))
   Race 12: Box 4 - Chasing Sunset (16.1252% (RF=10.3895, GB=12.7790, XGB=25.2070))
 
 Mandurah:
@@ -90,7 +90,7 @@ Mandurah:
 
 Q LAKESIDE:
   Races: 12
-  Dogs: 113
+  Dogs: 114
   Race 1: Box 4 - Boom Two Down (27.5804% (RF=10.5526, GB=20.4775, XGB=51.7112))
   Race 2: Box 4 - Nanase (19.7557% (RF=10.4898, GB=21.5151, XGB=27.2623))
   Race 3: Box 4 - Breakout Lad (17.6501% (RF=10.6487, GB=21.4498, XGB=20.8520))
@@ -98,7 +98,7 @@ Q LAKESIDE:
   Race 5: Box 8 - Miles On It (29.5935% (RF=10.5404, GB=30.5056, XGB=47.7346))
   Race 6: Box 1 - All Dressed Up (30.2081% (RF=10.7025, GB=26.3987, XGB=53.5230))
   Race 7: Box 4 - Scrub's Blue (32.9513% (RF=10.5135, GB=37.5382, XGB=50.8022))
-  Race 8: Box 2 - Slack (15.2755% (RF=11.0794, GB=15.5147, XGB=19.2326))
+  Race 8: Box 4 - Mr. O'malley (24.5806% (RF=10.4656, GB=25.4227, XGB=37.8535))
   Race 9: Box 3 - From A Distance (20.8398% (RF=10.8970, GB=20.1815, XGB=31.4408))
   Race 10: Box 1 - Finest Cut (16.0994% (RF=10.7220, GB=18.8215, XGB=18.7547))
   Race 11: Box 4 - Whiskey Sipper (13.2606% (RF=11.1207, GB=18.2491, XGB=10.4120))
@@ -122,16 +122,16 @@ RICHMOND:
 
 SALE:
   Races: 12
-  Dogs: 65
+  Dogs: 75
   Race 1: Box 4 - Hurry Dusty (24.5303% (RF=11.8217, GB=22.9630, XGB=38.8062))
-  Race 2: Box 3 - Akina Dash (29.4222% (RF=11.9363, GB=27.1534, XGB=49.1770))
-  Race 3: Box 1 - Daintree Damage (15.0332% (RF=10.4222, GB=13.1940, XGB=21.4833))
-  Race 4: Box 2 - Excavator Ticket (19.3501% (RF=9.4726, GB=19.5676, XGB=29.0101))
-  Race 5: Box 8 - Holly Rose (25.1631% (RF=8.2335, GB=15.7657, XGB=51.4903))
-  Race 6: Box 7 - Daddy Cool (36.0594% (RF=6.5670, GB=67.2430, XGB=34.3680))
+  Race 2: Box 3 - Akina Dash (16.2322% (RF=12.6137, GB=15.0606, XGB=21.0221))
+  Race 3: Box 2 - Audacious Paddy (13.4962% (RF=13.1097, GB=16.1545, XGB=11.2245))
+  Race 4: Box 2 - Excavator Ticket (15.0424% (RF=10.4303, GB=22.7642, XGB=11.9327))
+  Race 5: Box 8 - Holly Rose (23.9881% (RF=8.9439, GB=18.0341, XGB=44.9864))
+  Race 6: Box 7 - Daddy Cool (27.2093% (RF=6.5752, GB=50.6921, XGB=24.3605))
   Race 7: Box 4 - Breakn' A Sweat (35.1233% (RF=10.4634, GB=38.4841, XGB=56.4223))
   Race 8: Box 1 - Carry On Maci (26.8914% (RF=8.3152, GB=29.3771, XGB=42.9819))
-  Race 9: Box 4 - Joey (21.0045% (RF=9.2322, GB=38.0015, XGB=15.7797))
+  Race 9: Box 1 - Dr. Azure (23.0723% (RF=9.7959, GB=25.3924, XGB=34.0285))
   Race 10: Box 1 - Need You Now (22.9145% (RF=9.9632, GB=11.9133, XGB=46.8670))
   Race 11: Box 8 - Mad Hatter Rose (24.7191% (RF=10.1125, GB=29.4959, XGB=34.5489))
   Race 12: Box 8 - Catch Maxwell (15.8259% (RF=12.0862, GB=16.3958, XGB=18.9957))
@@ -154,17 +154,17 @@ TOWNSVILLE:
 
 The Gardens:
   Races: 10
-  Dogs: 78
+  Dogs: 80
   Race 1: Box 2 - Ferocious Outlaw (13.7650% (RF=9.5989, GB=20.6096, XGB=11.0867))
   Race 2: Box 1 - Rolled You (15.1487% (RF=10.3800, GB=21.7415, XGB=13.3247))
   Race 3: Box 8 - You Never Lose (18.5953% (RF=5.6427, GB=34.1471, XGB=15.9962))
   Race 4: Box 5 - Wow Party Time (12.5069% (RF=11.0192, GB=12.7061, XGB=13.7953))
-  Race 5: Box 1 - Flying Saucer (15.4575% (RF=9.3539, GB=21.0756, XGB=15.9431))
+  Race 5: Box 1 - Flying Saucer (15.9232% (RF=9.2785, GB=22.7854, XGB=15.7057))
   Race 6: Box 1 - Full Tilt Tom (18.1822% (RF=9.7101, GB=16.8418, XGB=27.9948))
   Race 7: Box 5 - Just Us Boys (14.4591% (RF=7.9622, GB=13.9853, XGB=21.4298))
   Race 8: Box 1 - Chloe's Comet (32.2512% (RF=6.7709, GB=33.9694, XGB=56.0133))
-  Race 9: Box 7 - Super Storm (18.0365% (RF=10.5606, GB=22.5393, XGB=21.0095))
-  Race 10: Box 3 - Train Of Thought (13.8565% (RF=9.3982, GB=17.3535, XGB=14.8179))
+  Race 9: Box 7 - Super Storm (16.6525% (RF=10.6112, GB=18.3368, XGB=21.0095))
+  Race 10: Box 3 - Train Of Thought (11.9953% (RF=9.6584, GB=15.8885, XGB=10.4390))
 
 WAGGA:
   Races: 10

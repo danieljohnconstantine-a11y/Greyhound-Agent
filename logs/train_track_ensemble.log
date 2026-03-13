@@ -1,0 +1,314 @@
+2026-03-13 07:20:53,723 - INFO - [FIX] Reconstructed split career record: (career: 12-41-161, RTC=162, DLR=7, DLW=7)
+2026-03-13 07:20:53,724 - INFO - [FIX] Reconstructed split career record: (career: 18-46-105, RTC=53, DLR=6, DLW=35)
+2026-03-13 07:20:53,724 - INFO - [INFO] Detected race header: Race 1, The Gardens, 515m on 2026-03-13 at 03:17PM
+2026-03-13 07:20:53,725 - INFO - [INFO] Detected race header: Race 2, The Gardens, 272m on 2026-03-13 at 03:35PM
+2026-03-13 07:20:53,727 - INFO - [INFO] Detected race header: Race 3, The Gardens, 400m on 2026-03-13 at 03:57PM
+2026-03-13 07:20:53,730 - INFO - [INFO] Detected race header: Race 4, The Gardens, 400m on 2026-03-13 at 04:15PM
+2026-03-13 07:20:53,733 - INFO - [INFO] Detected race header: Race 5, The Gardens, 400m on 2026-03-13 at 04:37PM
+2026-03-13 07:20:53,736 - INFO - [INFO] Detected race header: Race 6, The Gardens, 400m on 2026-03-13 at 04:55PM
+2026-03-13 07:20:53,738 - INFO - [INFO] Detected race header: Race 7, The Gardens, 515m on 2026-03-13 at 05:17PM
+2026-03-13 07:20:53,741 - INFO - [INFO] Detected race header: Race 8, The Gardens, 400m on 2026-03-13 at 05:37PM
+2026-03-13 07:20:53,743 - INFO - [INFO] Detected race header: Race 9, The Gardens, 400m on 2026-03-13 at 05:57PM
+2026-03-13 07:20:53,746 - INFO - [INFO] Detected race header: Race 10, The Gardens, 400m on 2026-03-13 at 06:19PM
+2026-03-13 07:20:53,749 - INFO - Converted timing for Ferocious Outlaw: 1 times from other distances -> 29.43s at 515m
+2026-03-13 07:20:53,750 - INFO - Converted timing for Ferocious Vaughn: 4 times from other distances -> 28.15s at 515m
+2026-03-13 07:20:53,750 - INFO - Converted timing for Big Red Miyagi: 1 times from other distances -> 15.63s at 272m
+2026-03-13 07:20:53,750 - INFO - Converted timing for She's A Robbo: 3 times from other distances -> 15.31s at 272m
+2026-03-13 07:20:53,750 - INFO - Converted timing for Fascinate Glory: 2 times from other distances -> 15.48s at 272m
+2026-03-13 07:20:53,750 - INFO - Converted timing for Let's Trot Fox: 5 times from other distances -> 22.79s at 400m
+2026-03-13 07:20:53,750 - INFO - Converted timing for Sail Away Sam: 2 times from other distances -> 22.82s at 400m
+2026-03-13 07:20:53,750 - INFO - Converted timing for Very Savage: 5 times from other distances -> 22.75s at 400m
+2026-03-13 07:20:53,751 - INFO - Converted timing for Fireball Zed: 3 times from other distances -> 23.16s at 400m
+2026-03-13 07:20:53,751 - INFO - Converted timing for Matt Jet Power: 1 times from other distances -> 22.69s at 400m
+2026-03-13 07:20:53,751 - INFO - Converted timing for Fascinate Bailey: 1 times from other distances -> 28.99s at 515m
+2026-03-13 07:20:53,751 - INFO - Converted timing for Witchy Woman: 2 times from other distances -> 23.06s at 400m
+2026-03-13 07:20:53,753 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:20:53,753 - INFO - [SUCCESS] Parsed 80 dogs across 10 races
+2026-03-13 07:20:53,753 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-03-13 07:20:53,753 - INFO - [INFO] Distance values (sample): [515, 272, 400]
+2026-03-13 07:21:02,867 - INFO - [FIX] Reconstructed split career record: (career: 16-36-122, RTC=123, DLR=8, DLW=53)
+2026-03-13 07:21:02,867 - INFO - [FIX] Reconstructed split career record: (career: 11-33-104, RTC=105, DLR=3, DLW=44)
+2026-03-13 07:21:02,868 - INFO - [INFO] Detected race header: Race 1, GEELONG, 400m on 2026-03-13 at 07:12PM
+2026-03-13 07:21:02,869 - INFO - [INFO] Detected race header: Race 2, GEELONG, 400m on 2026-03-13 at 07:27PM
+2026-03-13 07:21:02,872 - INFO - [INFO] Detected race header: Race 3, GEELONG, 400m on 2026-03-13 at 07:50PM
+2026-03-13 07:21:02,873 - INFO - [INFO] Detected race header: Race 4, GEELONG, 400m on 2026-03-13 at 08:12PM
+2026-03-13 07:21:02,876 - INFO - [INFO] Detected race header: Race 5, GEELONG, 460m on 2026-03-13 at 08:27PM
+2026-03-13 07:21:02,878 - INFO - [INFO] Detected race header: Race 6, GEELONG, 460m on 2026-03-13 at 08:53PM
+2026-03-13 07:21:02,880 - INFO - [INFO] Detected race header: Race 7, GEELONG, 460m on 2026-03-13 at 09:12PM
+2026-03-13 07:21:02,882 - INFO - [INFO] Detected race header: Race 8, GEELONG, 460m on 2026-03-13 at 09:36PM
+2026-03-13 07:21:02,884 - INFO - [INFO] Detected race header: Race 9, GEELONG, 460m on 2026-03-13 at 09:53PM
+2026-03-13 07:21:02,886 - INFO - [INFO] Detected race header: Race 10, GEELONG, 400m on 2026-03-13 at 10:13PM
+2026-03-13 07:21:02,889 - INFO - [INFO] Detected race header: Race 11, GEELONG, 400m on 2026-03-13 at 10:33PM
+2026-03-13 07:21:02,892 - INFO - [INFO] Detected race header: Race 12, GEELONG, 400m on 2026-03-13 at 10:50PM
+2026-03-13 07:21:02,895 - INFO - Converted timing for Just Imagine: 1 times from other distances -> 23.02s at 400m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Twenty Knots: 3 times from other distances -> 22.63s at 400m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Elusive Curl: 1 times from other distances -> 22.67s at 400m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Paw Xantippe: 2 times from other distances -> 22.73s at 400m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Aston Lace: 2 times from other distances -> 25.89s at 460m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Paw Ortiz: 2 times from other distances -> 26.28s at 460m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Algebra: 1 times from other distances -> 26.21s at 460m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Paw Mantra: 1 times from other distances -> 26.15s at 460m
+2026-03-13 07:21:02,895 - INFO - Converted timing for General Franky: 2 times from other distances -> 26.16s at 460m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Fractions: 2 times from other distances -> 26.09s at 460m
+2026-03-13 07:21:02,895 - INFO - Converted timing for Vital Step: 2 times from other distances -> 21.88s at 400m
+2026-03-13 07:21:02,897 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:21:02,897 - INFO - [SUCCESS] Parsed 90 dogs across 12 races
+2026-03-13 07:21:02,897 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-03-13 07:21:02,898 - INFO - [INFO] Distance values (sample): [400, 460]
+2026-03-13 07:21:11,256 - INFO - [FIX] Reconstructed split career record: (career: 19-34-118, RTC=33, DLR=10, DLW=123)
+2026-03-13 07:21:11,257 - INFO - [INFO] Detected race header: Race 1, GOULBURN, 350m on 2026-03-13 at 12:47PM
+2026-03-13 07:21:11,258 - INFO - [INFO] Detected race header: Race 2, GOULBURN, 440m on 2026-03-13 at 01:07PM
+2026-03-13 07:21:11,260 - INFO - [INFO] Detected race header: Race 3, GOULBURN, 350m on 2026-03-13 at 01:32PM
+2026-03-13 07:21:11,262 - INFO - [INFO] Detected race header: Race 4, GOULBURN, 350m on 2026-03-13 at 01:50PM
+2026-03-13 07:21:11,264 - INFO - [INFO] Detected race header: Race 5, GOULBURN, 440m on 2026-03-13 at 02:14PM
+2026-03-13 07:21:11,266 - INFO - [INFO] Detected race header: Race 6, GOULBURN, 440m on 2026-03-13 at 02:32PM
+2026-03-13 07:21:11,268 - INFO - [INFO] Detected race header: Race 7, GOULBURN, 440m on 2026-03-13 at 02:52PM
+2026-03-13 07:21:11,271 - INFO - [INFO] Detected race header: Race 8, GOULBURN, 350m on 2026-03-13 at 03:14PM
+2026-03-13 07:21:11,274 - INFO - [INFO] Detected race header: Race 9, GOULBURN, 350m on 2026-03-13 at 03:40PM
+2026-03-13 07:21:11,277 - INFO - [INFO] Detected race header: Race 10, GOULBURN, 350m on 2026-03-13 at 04:01PM
+2026-03-13 07:21:11,280 - INFO - Converted timing for Dark Noise: 2 times from other distances -> 25.21s at 440m
+2026-03-13 07:21:11,280 - INFO - Converted timing for Dizzy Donkey: 3 times from other distances -> 19.71s at 350m
+2026-03-13 07:21:11,280 - INFO - Converted timing for Mawonga Man: 3 times from other distances -> 19.72s at 350m
+2026-03-13 07:21:11,280 - INFO - Converted timing for Billie Girl: 1 times from other distances -> 25.13s at 440m
+2026-03-13 07:21:11,280 - INFO - Converted timing for Cha Cha Ethics: 2 times from other distances -> 25.42s at 440m
+2026-03-13 07:21:11,281 - INFO - Converted timing for Paw Berry: 2 times from other distances -> 25.16s at 440m
+2026-03-13 07:21:11,281 - INFO - Converted timing for Sugar Bug: 3 times from other distances -> 25.37s at 440m
+2026-03-13 07:21:11,281 - INFO - Converted timing for Aston Aisling: 1 times from other distances -> 25.23s at 440m
+2026-03-13 07:21:11,281 - INFO - Converted timing for Zipping Stitch: 3 times from other distances -> 24.64s at 440m
+2026-03-13 07:21:11,281 - INFO - Converted timing for Cawbourne Dollar: 1 times from other distances -> 25.24s at 440m
+2026-03-13 07:21:11,281 - INFO - Converted timing for Flying Sicario: 3 times from other distances -> 24.64s at 440m
+2026-03-13 07:21:11,281 - INFO - Converted timing for Natural Essence: 3 times from other distances -> 24.26s at 440m
+2026-03-13 07:21:11,282 - INFO - Converted timing for Morale Sponge: 3 times from other distances -> 19.84s at 350m
+2026-03-13 07:21:11,284 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:21:11,284 - INFO - [SUCCESS] Parsed 73 dogs across 10 races
+2026-03-13 07:21:11,284 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-03-13 07:21:11,284 - INFO - [INFO] Distance values (sample): [350, 440]
+2026-03-13 07:21:22,089 - INFO - [FIX] Reconstructed split career record: (career: 16-36-103, RTC=98, DLR=42, DLW=287)
+2026-03-13 07:21:22,089 - INFO - [FIX] Reconstructed split career record: (career: 10-45-104, RTC=27, DLR=7, DLW=313)
+2026-03-13 07:21:22,089 - INFO - [FIX] Reconstructed split career record: (career: 11-24-136, RTC=86, DLR=7, DLW=9)
+2026-03-13 07:21:22,089 - INFO - [FIX] Reconstructed split career record: (career: 17-23-106, RTC=106, DLR=7, DLW=21)
+2026-03-13 07:21:22,090 - INFO - [FIX] Reconstructed split career record: (career: 13-34-110, RTC=111, DLR=21, DLW=98)
+2026-03-13 07:21:22,090 - INFO - [FIX] Reconstructed split career record: (career: 14-24-106, RTC=3, DLR=50, DLW=141)
+2026-03-13 07:21:22,090 - INFO - [FIX] Reconstructed split career record: (career: 16-27-105, RTC=106, DLR=4, DLW=4)
+2026-03-13 07:21:22,090 - INFO - [INFO] Detected race header: Race 1, HEALESVILLE, 300m on 2026-03-13 at 10:24AM
+2026-03-13 07:21:22,093 - INFO - [INFO] Detected race header: Race 2, HEALESVILLE, 300m on 2026-03-13 at 10:49AM
+2026-03-13 07:21:22,095 - INFO - [INFO] Detected race header: Race 3, HEALESVILLE, 300m on 2026-03-13 at 11:04AM
+2026-03-13 07:21:22,098 - INFO - [INFO] Detected race header: Race 4, HEALESVILLE, 350m on 2026-03-13 at 11:19AM
+2026-03-13 07:21:22,100 - INFO - [INFO] Detected race header: Race 5, HEALESVILLE, 350m on 2026-03-13 at 11:37AM
+2026-03-13 07:21:22,102 - INFO - [INFO] Detected race header: Race 6, HEALESVILLE, 350m on 2026-03-13 at 12:02PM
+2026-03-13 07:21:22,105 - INFO - [INFO] Detected race header: Race 7, HEALESVILLE, 300m on 2026-03-13 at 12:23PM
+2026-03-13 07:21:22,108 - INFO - [INFO] Detected race header: Race 8, HEALESVILLE, 350m on 2026-03-13 at 12:38PM
+2026-03-13 07:21:22,111 - INFO - [INFO] Detected race header: Race 9, HEALESVILLE, 300m on 2026-03-13 at 12:58PM
+2026-03-13 07:21:22,114 - INFO - [INFO] Detected race header: Race 10, HEALESVILLE, 300m on 2026-03-13 at 01:22PM
+2026-03-13 07:21:22,117 - INFO - [INFO] Detected race header: Race 11, HEALESVILLE, 300m on 2026-03-13 at 01:42PM
+2026-03-13 07:21:22,121 - INFO - [INFO] Detected race header: Race 12, HEALESVILLE, 300m on 2026-03-13 at 02:07PM
+2026-03-13 07:21:22,125 - INFO - Converted timing for Inchgower: 1 times from other distances -> 17.31s at 300m
+2026-03-13 07:21:22,125 - INFO - Converted timing for Spark Lightning: 4 times from other distances -> 19.93s at 350m
+2026-03-13 07:21:22,125 - INFO - Converted timing for Bengal Beast: 1 times from other distances -> 20.17s at 350m
+2026-03-13 07:21:22,125 - INFO - Converted timing for Harvey Intention: 1 times from other distances -> 20.48s at 350m
+2026-03-13 07:21:22,125 - INFO - Converted timing for Wild Venus: 2 times from other distances -> 19.79s at 350m
+2026-03-13 07:21:22,125 - INFO - Converted timing for Dim Sim Rixi: 1 times from other distances -> 17.13s at 300m
+2026-03-13 07:21:22,125 - INFO - Converted timing for White Shiraz: 1 times from other distances -> 20.20s at 350m
+2026-03-13 07:21:22,126 - INFO - Converted timing for Mighty Hercules: 2 times from other distances -> 19.85s at 350m
+2026-03-13 07:21:22,126 - INFO - Converted timing for Aston Crypto: 3 times from other distances -> 16.97s at 300m
+2026-03-13 07:21:22,126 - INFO - Converted timing for Show Boat Johnny: 1 times from other distances -> 16.88s at 300m
+2026-03-13 07:21:22,126 - INFO - Converted timing for Let's Play Ball: 2 times from other distances -> 16.86s at 300m
+2026-03-13 07:21:22,126 - INFO - Converted timing for Clause Edward: 3 times from other distances -> 17.03s at 300m
+2026-03-13 07:21:22,126 - INFO - Converted timing for Scott Lil Diva: 6 times from other distances -> 17.12s at 300m
+2026-03-13 07:21:22,129 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:21:22,129 - INFO - [SUCCESS] Parsed 106 dogs across 12 races
+2026-03-13 07:21:22,129 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-03-13 07:21:22,129 - INFO - [INFO] Distance values (sample): [300, 350]
+2026-03-13 07:21:35,297 - INFO - [FIX] Reconstructed split career record: (career: 17-50-144, RTC=145, DLR=8, DLW=102)
+2026-03-13 07:21:35,297 - INFO - [FIX] Reconstructed split career record: (career: 15-46-130, RTC=49, DLR=7, DLW=136)
+2026-03-13 07:21:35,298 - INFO - [INFO] Detected race header: Race 1, Mandurah, 300m on 2026-03-13 at 06:25PM
+2026-03-13 07:21:35,301 - INFO - [INFO] Detected race header: Race 2, Mandurah, 488m on 2026-03-13 at 06:47PM
+2026-03-13 07:21:35,303 - INFO - [INFO] Detected race header: Race 3, Mandurah, 488m on 2026-03-13 at 07:07PM
+2026-03-13 07:21:35,305 - INFO - [INFO] Detected race header: Race 4, Mandurah, 400m on 2026-03-13 at 07:26PM
+2026-03-13 07:21:35,308 - INFO - [INFO] Detected race header: Race 5, Mandurah, 488m on 2026-03-13 at 07:47PM
+2026-03-13 07:21:35,311 - INFO - [INFO] Detected race header: Race 6, Mandurah, 488m on 2026-03-13 at 08:02PM
+2026-03-13 07:21:35,314 - INFO - [INFO] Detected race header: Race 7, Mandurah, 400m on 2026-03-13 at 08:27PM
+2026-03-13 07:21:35,317 - INFO - [INFO] Detected race header: Race 8, Mandurah, 488m on 2026-03-13 at 08:42PM
+2026-03-13 07:21:35,320 - INFO - [INFO] Detected race header: Race 9, Mandurah, 488m on 2026-03-13 at 08:58PM
+2026-03-13 07:21:35,324 - INFO - [INFO] Detected race header: Race 10, Mandurah, 400m on 2026-03-13 at 09:15PM
+2026-03-13 07:21:35,327 - INFO - [INFO] Detected race header: Race 11, Mandurah, 400m on 2026-03-13 at 09:39PM
+2026-03-13 07:21:35,331 - INFO - [INFO] Detected race header: Race 12, Mandurah, 400m on 2026-03-13 at 09:54PM
+2026-03-13 07:21:35,335 - INFO - [INFO] Detected race header: Race 13, Mandurah, 300m on 2026-03-13 at 10:18PM
+2026-03-13 07:21:35,340 - INFO - Converted timing for Fearless Cobra: 1 times from other distances -> 17.10s at 300m
+2026-03-13 07:21:35,340 - INFO - Converted timing for New Hope: 3 times from other distances -> 17.07s at 300m
+2026-03-13 07:21:35,340 - INFO - Converted timing for Impress Rocks: 1 times from other distances -> 17.06s at 300m
+2026-03-13 07:21:35,340 - INFO - Converted timing for Hot Minute: 1 times from other distances -> 27.95s at 488m
+2026-03-13 07:21:35,340 - INFO - Converted timing for Ashley Keeping: 2 times from other distances -> 27.27s at 488m
+2026-03-13 07:21:35,341 - INFO - Converted timing for Solid Axle: 1 times from other distances -> 28.26s at 488m
+2026-03-13 07:21:35,341 - INFO - Converted timing for Time Has Come: 1 times from other distances -> 23.20s at 400m
+2026-03-13 07:21:35,341 - INFO - Converted timing for Turbo Tate: 2 times from other distances -> 22.66s at 400m
+2026-03-13 07:21:35,341 - INFO - Converted timing for Choosing Texas: 1 times from other distances -> 27.27s at 488m
+2026-03-13 07:21:35,341 - INFO - Converted timing for Rambo's Shout: 5 times from other distances -> 22.45s at 400m
+2026-03-13 07:21:35,341 - INFO - Converted timing for Myles Keeping: 2 times from other distances -> 27.50s at 488m
+2026-03-13 07:21:35,342 - INFO - Converted timing for All About Coal: 2 times from other distances -> 27.83s at 488m
+2026-03-13 07:21:35,342 - INFO - Converted timing for Girls Like You: 2 times from other distances -> 27.55s at 488m
+2026-03-13 07:21:35,342 - INFO - Converted timing for Just A Pirate: 2 times from other distances -> 27.83s at 488m
+2026-03-13 07:21:35,342 - INFO - Converted timing for Aston Walker: 2 times from other distances -> 23.03s at 400m
+2026-03-13 07:21:35,342 - INFO - Converted timing for Speedy Ed: 1 times from other distances -> 22.76s at 400m
+2026-03-13 07:21:35,342 - INFO - Converted timing for Elle's Bella: 2 times from other distances -> 22.61s at 400m
+2026-03-13 07:21:35,342 - INFO - Converted timing for Fletcher Keeping: 2 times from other distances -> 16.99s at 300m
+2026-03-13 07:21:35,345 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:21:35,345 - INFO - [SUCCESS] Parsed 128 dogs across 13 races
+2026-03-13 07:21:35,345 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-03-13 07:21:35,345 - INFO - [INFO] Distance values (sample): [300, 488, 400]
+2026-03-13 07:21:47,608 - INFO - [FIX] Reconstructed split career record: (career: 24-33-108, RTC=109, DLR=19, DLW=140)
+2026-03-13 07:21:47,608 - INFO - [FIX] Reconstructed split career record: (career: 14-44-125, RTC=126, DLR=7, DLW=98)
+2026-03-13 07:21:47,609 - INFO - [INFO] Detected race header: Race 1, Q LAKESIDE, 390m on 2026-03-13 at 02:00PM
+2026-03-13 07:21:47,611 - INFO - [INFO] Detected race header: Race 2, Q LAKESIDE, 390m on 2026-03-13 at 02:21PM
+2026-03-13 07:21:47,613 - INFO - [INFO] Detected race header: Race 3, Q LAKESIDE, 390m on 2026-03-13 at 02:43PM
+2026-03-13 07:21:47,616 - INFO - [INFO] Detected race header: Race 4, Q LAKESIDE, 390m on 2026-03-13 at 03:04PM
+2026-03-13 07:21:47,620 - INFO - [INFO] Detected race header: Race 5, Q LAKESIDE, 390m on 2026-03-13 at 03:23PM
+2026-03-13 07:21:47,623 - INFO - [INFO] Detected race header: Race 6, Q LAKESIDE, 390m on 2026-03-13 at 03:44PM
+2026-03-13 07:21:47,626 - INFO - [INFO] Detected race header: Race 7, Q LAKESIDE, 390m on 2026-03-13 at 04:03PM
+2026-03-13 07:21:47,630 - INFO - [INFO] Detected race header: Race 8, Q LAKESIDE, 390m on 2026-03-13 at 04:22PM
+2026-03-13 07:21:47,633 - INFO - [INFO] Detected race header: Race 9, Q LAKESIDE, 390m on 2026-03-13 at 04:43PM
+2026-03-13 07:21:47,635 - INFO - [INFO] Detected race header: Race 10, Q LAKESIDE, 390m on 2026-03-13 at 05:09PM
+2026-03-13 07:21:47,639 - INFO - [INFO] Detected race header: Race 11, Q LAKESIDE, 390m on 2026-03-13 at 05:31PM
+2026-03-13 07:21:47,643 - INFO - [INFO] Detected race header: Race 12, Q LAKESIDE, 390m on 2026-03-13 at 05:50PM
+2026-03-13 07:21:47,648 - INFO - Converted timing for Canya Hold On: 4 times from other distances -> 22.36s at 390m
+2026-03-13 07:21:47,648 - INFO - Converted timing for Sausage Gambler: 2 times from other distances -> 21.93s at 390m
+2026-03-13 07:21:47,648 - INFO - Converted timing for Breakout Lad: 2 times from other distances -> 21.90s at 390m
+2026-03-13 07:21:47,648 - INFO - Converted timing for Howdy Cyndie: 1 times from other distances -> 21.87s at 390m
+2026-03-13 07:21:47,648 - INFO - Converted timing for Maywyn's King: 1 times from other distances -> 21.91s at 390m
+2026-03-13 07:21:47,648 - INFO - Converted timing for Sarilda: 2 times from other distances -> 22.38s at 390m
+2026-03-13 07:21:47,648 - INFO - Converted timing for Pretty Posh: 1 times from other distances -> 22.47s at 390m
+2026-03-13 07:21:47,649 - INFO - Converted timing for Titanium Blue: 2 times from other distances -> 21.55s at 390m
+2026-03-13 07:21:47,649 - INFO - Converted timing for Star Turn: 3 times from other distances -> 22.02s at 390m
+2026-03-13 07:21:47,649 - INFO - Converted timing for Chasing Snow: 3 times from other distances -> 21.45s at 390m
+2026-03-13 07:21:47,649 - INFO - Converted timing for Perky Penny: 3 times from other distances -> 21.78s at 390m
+2026-03-13 07:21:47,649 - INFO - Converted timing for Shian Quirky: 2 times from other distances -> 21.60s at 390m
+2026-03-13 07:21:47,649 - INFO - Converted timing for Finest Cut: 1 times from other distances -> 21.44s at 390m
+2026-03-13 07:21:47,650 - INFO - Converted timing for Marsupilami: 2 times from other distances -> 21.54s at 390m
+2026-03-13 07:21:47,650 - INFO - Converted timing for Howdy Hope: 2 times from other distances -> 21.78s at 390m
+2026-03-13 07:21:47,650 - INFO - Converted timing for Spring Focus: 2 times from other distances -> 21.64s at 390m
+2026-03-13 07:21:47,652 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:21:47,652 - INFO - [SUCCESS] Parsed 114 dogs across 12 races
+2026-03-13 07:21:47,652 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-03-13 07:21:47,653 - INFO - [INFO] Distance values (sample): [390]
+2026-03-13 07:21:57,677 - INFO - [FIX] Reconstructed split career record: (career: 20-31-138, RTC=29, DLR=38, DLW=315)
+2026-03-13 07:21:57,677 - INFO - [INFO] Detected race header: Race 1, RICHMOND, 320m on 2026-03-13 at 06:57PM
+2026-03-13 07:21:57,679 - INFO - [INFO] Detected race header: Race 2, RICHMOND, 320m on 2026-03-13 at 07:20PM
+2026-03-13 07:21:57,681 - INFO - [INFO] Detected race header: Race 3, RICHMOND, 401m on 2026-03-13 at 07:42PM
+2026-03-13 07:21:57,682 - INFO - [INFO] Detected race header: Race 4, RICHMOND, 622m on 2026-03-13 at 07:57PM
+2026-03-13 07:21:57,684 - INFO - [INFO] Detected race header: Race 5, RICHMOND, 401m on 2026-03-13 at 08:20PM
+2026-03-13 07:21:57,687 - INFO - [INFO] Detected race header: Race 6, RICHMOND, 401m on 2026-03-13 at 08:42PM
+2026-03-13 07:21:57,690 - INFO - [INFO] Detected race header: Race 7, RICHMOND, 401m on 2026-03-13 at 09:02PM
+2026-03-13 07:21:57,694 - INFO - [INFO] Detected race header: Race 8, RICHMOND, 401m on 2026-03-13 at 09:23PM
+2026-03-13 07:21:57,697 - INFO - [INFO] Detected race header: Race 9, RICHMOND, 520m on 2026-03-13 at 09:42PM
+2026-03-13 07:21:57,699 - INFO - [INFO] Detected race header: Race 10, RICHMOND, 320m on 2026-03-13 at 10:04PM
+2026-03-13 07:21:57,702 - INFO - [INFO] Detected race header: Race 11, RICHMOND, 320m on 2026-03-13 at 10:23PM
+2026-03-13 07:21:57,705 - INFO - [INFO] Detected race header: Race 12, RICHMOND, 401m on 2026-03-13 at 10:39PM
+2026-03-13 07:21:57,707 - INFO - Converted timing for Cheri Pop: 2 times from other distances -> 18.49s at 320m
+2026-03-13 07:21:57,707 - INFO - Converted timing for Blue Franky: 3 times from other distances -> 22.70s at 401m
+2026-03-13 07:21:57,707 - INFO - Converted timing for Go Forward Tiger: 2 times from other distances -> 22.08s at 401m
+2026-03-13 07:21:57,707 - INFO - Converted timing for Betty Bullpit: 2 times from other distances -> 35.90s at 622m
+2026-03-13 07:21:57,707 - INFO - Converted timing for Jigsaw Billy: 3 times from other distances -> 35.67s at 622m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Long Island Blue: 5 times from other distances -> 35.47s at 622m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Heavy Bound: 3 times from other distances -> 34.99s at 622m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Tap Out Kitty: 3 times from other distances -> 22.98s at 401m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Silent Minute: 2 times from other distances -> 22.47s at 401m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Our Frankie Girl: 4 times from other distances -> 22.90s at 401m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Platinum Zeal: 2 times from other distances -> 22.74s at 401m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Lady Chaos: 4 times from other distances -> 23.03s at 401m
+2026-03-13 07:21:57,708 - INFO - Converted timing for True Request: 3 times from other distances -> 22.73s at 401m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Terrell Banner: 2 times from other distances -> 21.72s at 401m
+2026-03-13 07:21:57,708 - INFO - Converted timing for Brett Keeping: 2 times from other distances -> 29.11s at 520m
+2026-03-13 07:21:57,709 - INFO - Converted timing for Blurry: 4 times from other distances -> 29.48s at 520m
+2026-03-13 07:21:57,709 - INFO - Converted timing for Hello How Low: 4 times from other distances -> 29.16s at 520m
+2026-03-13 07:21:57,709 - INFO - Converted timing for Zipping Zeppelin: 4 times from other distances -> 29.11s at 520m
+2026-03-13 07:21:57,709 - INFO - Converted timing for Sam's Tears: 2 times from other distances -> 18.23s at 320m
+2026-03-13 07:21:57,709 - INFO - Converted timing for Sydneysider: 3 times from other distances -> 17.94s at 320m
+2026-03-13 07:21:57,709 - INFO - Converted timing for Beth Dutton: 2 times from other distances -> 22.63s at 401m
+2026-03-13 07:21:57,711 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:21:57,711 - INFO - [SUCCESS] Parsed 95 dogs across 12 races
+2026-03-13 07:21:57,711 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-03-13 07:21:57,711 - INFO - [INFO] Distance values (sample): [320, 401, 622, 520]
+2026-03-13 07:22:06,066 - INFO - [FIX] Reconstructed split career record: (career: 23-44-125, RTC=29, DLR=7, DLW=31)
+2026-03-13 07:22:06,066 - INFO - [FIX] Reconstructed split career record: (career: 12-29-123, RTC=52, DLR=9, DLW=23)
+2026-03-13 07:22:06,066 - INFO - [FIX] Reconstructed split career record: (career: 14-29-143, RTC=144, DLR=7, DLW=429)
+2026-03-13 07:22:06,066 - INFO - [FIX] Reconstructed split career record: (career: 16-33-104, RTC=45, DLR=5, DLW=28)
+2026-03-13 07:22:06,067 - INFO - [FIX] Reconstructed split career record: (career: 12-27-102, RTC=17, DLR=7, DLW=22)
+2026-03-13 07:22:06,067 - INFO - [INFO] Detected race header: Race 1, SALE, 435m on 2026-03-13 at 02:25PM
+2026-03-13 07:22:06,068 - INFO - [INFO] Detected race header: Race 2, SALE, 435m on 2026-03-13 at 02:42PM
+2026-03-13 07:22:06,070 - INFO - [INFO] Detected race header: Race 3, SALE, 435m on 2026-03-13 at 03:07PM
+2026-03-13 07:22:06,072 - INFO - [INFO] Detected race header: Race 4, SALE, 435m on 2026-03-13 at 03:27PM
+2026-03-13 07:22:06,074 - INFO - [INFO] Detected race header: Race 5, SALE, 435m on 2026-03-13 at 03:47PM
+2026-03-13 07:22:06,076 - INFO - [INFO] Detected race header: Race 6, SALE, 435m on 2026-03-13 at 04:07PM
+2026-03-13 07:22:06,078 - INFO - [INFO] Detected race header: Race 7, SALE, 435m on 2026-03-13 at 04:27PM
+2026-03-13 07:22:06,080 - INFO - [INFO] Detected race header: Race 8, SALE, 435m on 2026-03-13 at 04:47PM
+2026-03-13 07:22:06,083 - INFO - [INFO] Detected race header: Race 9, SALE, 510m on 2026-03-13 at 05:07PM
+2026-03-13 07:22:06,085 - INFO - [INFO] Detected race header: Race 10, SALE, 510m on 2026-03-13 at 05:27PM
+2026-03-13 07:22:06,087 - INFO - [INFO] Detected race header: Race 11, SALE, 435m on 2026-03-13 at 05:47PM
+2026-03-13 07:22:06,088 - INFO - [INFO] Detected race header: Race 12, SALE, 435m on 2026-03-13 at 06:12PM
+2026-03-13 07:22:06,091 - INFO - Converted timing for Excavator Ticket: 3 times from other distances -> 24.45s at 435m
+2026-03-13 07:22:06,091 - INFO - Converted timing for Greta's Gold: 1 times from other distances -> 23.91s at 435m
+2026-03-13 07:22:06,091 - INFO - Converted timing for Woodside Vixen: 3 times from other distances -> 24.28s at 435m
+2026-03-13 07:22:06,091 - INFO - Converted timing for Whipping It: 1 times from other distances -> 28.42s at 510m
+2026-03-13 07:22:06,091 - INFO - Converted timing for Need You Now: 1 times from other distances -> 28.53s at 510m
+2026-03-13 07:22:06,091 - INFO - Converted timing for Nobby: 1 times from other distances -> 28.62s at 510m
+2026-03-13 07:22:06,092 - INFO - Converted timing for Kenzie Kid: 1 times from other distances -> 25.20s at 435m
+2026-03-13 07:22:06,094 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:22:06,094 - INFO - [SUCCESS] Parsed 75 dogs across 12 races
+2026-03-13 07:22:06,094 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-03-13 07:22:06,094 - INFO - [INFO] Distance values (sample): [435, 510]
+2026-03-13 07:22:16,345 - INFO - [FIX] Reconstructed split career record: (career: 16-40-142, RTC=143, DLR=7, DLW=136)
+2026-03-13 07:22:16,345 - INFO - [FIX] Reconstructed split career record: (career: 14-42-110, RTC=111, DLR=7, DLW=101)
+2026-03-13 07:22:16,345 - INFO - [INFO] Detected race header: Race 1, TOWNSVILLE, 380m on 2026-03-13 at 11:44AM
+2026-03-13 07:22:16,346 - INFO - [INFO] Detected race header: Race 2, TOWNSVILLE, 380m on 2026-03-13 at 12:04PM
+2026-03-13 07:22:16,348 - INFO - [INFO] Detected race header: Race 3, TOWNSVILLE, 380m on 2026-03-13 at 12:19PM
+2026-03-13 07:22:16,349 - INFO - [INFO] Detected race header: Race 4, TOWNSVILLE, 380m on 2026-03-13 at 12:38PM
+2026-03-13 07:22:16,352 - INFO - [INFO] Detected race header: Race 5, TOWNSVILLE, 498m on 2026-03-13 at 12:54PM
+2026-03-13 07:22:16,354 - INFO - [INFO] Detected race header: Race 6, TOWNSVILLE, 380m on 2026-03-13 at 01:11PM
+2026-03-13 07:22:16,357 - INFO - [INFO] Detected race header: Race 7, TOWNSVILLE, 380m on 2026-03-13 at 01:29PM
+2026-03-13 07:22:16,360 - INFO - [INFO] Detected race header: Race 8, TOWNSVILLE, 380m on 2026-03-13 at 01:49PM
+2026-03-13 07:22:16,364 - INFO - [INFO] Detected race header: Race 9, TOWNSVILLE, 380m on 2026-03-13 at 02:11PM
+2026-03-13 07:22:16,367 - INFO - [INFO] Detected race header: Race 10, TOWNSVILLE, 380m on 2026-03-13 at 02:32PM
+2026-03-13 07:22:16,370 - INFO - [INFO] Detected race header: Race 11, TOWNSVILLE, 380m on 2026-03-13 at 02:50PM
+2026-03-13 07:22:16,373 - INFO - [INFO] Detected race header: Race 12, TOWNSVILLE, 380m on 2026-03-13 at 03:12PM
+2026-03-13 07:22:16,377 - INFO - Converted timing for Fly Like Potter: 1 times from other distances -> 21.60s at 380m
+2026-03-13 07:22:16,377 - INFO - Converted timing for Hara's Sonya: 2 times from other distances -> 28.82s at 498m
+2026-03-13 07:22:16,377 - INFO - Converted timing for Birdie's Charm: 1 times from other distances -> 28.90s at 498m
+2026-03-13 07:22:16,377 - INFO - Converted timing for Zero Limerick: 1 times from other distances -> 28.71s at 498m
+2026-03-13 07:22:16,378 - INFO - Converted timing for Maisie Moo Moo: 3 times from other distances -> 21.75s at 380m
+2026-03-13 07:22:16,380 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:22:16,380 - INFO - [SUCCESS] Parsed 102 dogs across 12 races
+2026-03-13 07:22:16,380 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'TimeConverted', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'Age', 'Sex', 'TimeEstimated']
+2026-03-13 07:22:16,380 - INFO - [INFO] Distance values (sample): [380, 498]
+2026-03-13 07:22:24,282 - INFO - [FIX] Reconstructed split career record: (career: 18-29-120, RTC=121, DLR=21, DLW=35)
+2026-03-13 07:22:24,283 - INFO - [INFO] Detected race header: Race 1, WAGGA, 400m on 2026-03-13 at 07:04PM
+2026-03-13 07:22:24,284 - INFO - [INFO] Detected race header: Race 2, WAGGA, 320m on 2026-03-13 at 07:23PM
+2026-03-13 07:22:24,286 - INFO - [INFO] Detected race header: Race 3, WAGGA, 525m on 2026-03-13 at 07:46PM
+2026-03-13 07:22:24,288 - INFO - [INFO] Detected race header: Race 4, WAGGA, 400m on 2026-03-13 at 08:09PM
+2026-03-13 07:22:24,290 - INFO - [INFO] Detected race header: Race 5, WAGGA, 400m on 2026-03-13 at 08:32PM
+2026-03-13 07:22:24,292 - INFO - [INFO] Detected race header: Race 6, WAGGA, 400m on 2026-03-13 at 08:51PM
+2026-03-13 07:22:24,294 - INFO - [INFO] Detected race header: Race 7, WAGGA, 320m on 2026-03-13 at 09:09PM
+2026-03-13 07:22:24,296 - INFO - [INFO] Detected race header: Race 8, WAGGA, 320m on 2026-03-13 at 09:28PM
+2026-03-13 07:22:24,299 - INFO - [INFO] Detected race header: Race 9, WAGGA, 320m on 2026-03-13 at 09:50PM
+2026-03-13 07:22:24,301 - INFO - [INFO] Detected race header: Race 10, WAGGA, 320m on 2026-03-13 at 10:10PM
+2026-03-13 07:22:24,304 - INFO - Converted timing for Daisy's Doll: 4 times from other distances -> 22.80s at 400m
+2026-03-13 07:22:24,304 - INFO - Converted timing for Paw Colten: 4 times from other distances -> 29.79s at 525m
+2026-03-13 07:22:24,304 - INFO - Converted timing for Paw Inflame: 4 times from other distances -> 29.41s at 525m
+2026-03-13 07:22:24,304 - INFO - Converted timing for Cawbourne Pip: 1 times from other distances -> 23.11s at 400m
+2026-03-13 07:22:24,304 - INFO - Converted timing for Bianca's Secret: 2 times from other distances -> 22.56s at 400m
+2026-03-13 07:22:24,304 - INFO - Converted timing for Sycamore Shorty: 1 times from other distances -> 23.01s at 400m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Tell Me Where: 1 times from other distances -> 23.70s at 400m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Tell Me Ryhmes: 3 times from other distances -> 23.36s at 400m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Miami Vice: 2 times from other distances -> 23.11s at 400m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Muddy Duck: 2 times from other distances -> 23.01s at 400m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Dance Her Home: 1 times from other distances -> 23.11s at 400m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Paw Lilibet: 2 times from other distances -> 22.55s at 400m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Seven Inn: 1 times from other distances -> 22.55s at 400m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Tommy's Ava: 1 times from other distances -> 18.33s at 320m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Lyn's Bianca: 2 times from other distances -> 18.05s at 320m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Aston Clooney: 1 times from other distances -> 18.35s at 320m
+2026-03-13 07:22:24,305 - INFO - Converted timing for Boracay Beauty: 1 times from other distances -> 18.50s at 320m
+2026-03-13 07:22:24,306 - INFO - Converted timing for Magic Eclipse: 2 times from other distances -> 18.61s at 320m
+2026-03-13 07:22:24,307 - WARNING - No race date extracted - will rely on CSV matching
+2026-03-13 07:22:24,308 - INFO - [SUCCESS] Parsed 71 dogs across 10 races
+2026-03-13 07:22:24,308 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-03-13 07:22:24,308 - INFO - [INFO] Distance values (sample): [400, 320, 525]

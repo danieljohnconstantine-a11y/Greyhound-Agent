@@ -120,7 +120,7 @@ def parse_race_form(text):
     # --------------------------------------------------------------------------
     _partial_career_re = re.compile(r'^(\d+)\s*-\s*(\d+)\s*-\s*$')
     _dog_line_re = re.compile(
-        r'^(\d+)\.?\s*[0-9xf]{0,7}[A-Za-z\''\-\. ]+?\s+\d+[a-z]\s+[\d.]+kg\s+\d+\s+[A-Za-z\''\-\. ]+?\s+\$?([\d,]+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$'
+        r"""^(\d+)\.?\s*[0-9xf]{0,7}[A-Za-z''\-\. ]+?\s+\d+[a-z]\s+[\d.]+kg\s+\d+\s+[A-Za-z''\-\. ]+?\s+\$?([\d,]+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$"""
     )
     _only_digits_re = re.compile(r'^(\d+)$')
     merged_lines = []
