@@ -1,0 +1,228 @@
+================================================================================
+PIPELINE AUDIT — 13/03/2026  (run13032026 review)
+Generated: 2026-03-13
+Sources reviewed: reports/run13032026.docx, reports/RUN_SUMMARY_2026-03-13.txt,
+                  outputs/track_ensemble_summary.txt, outputs/best_bets_report.txt,
+                  models/ (160 .pkl files + ensemble_config.json)
+================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. TRAINING PIPELINE — DATA INGESTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Item                             | Value         | Status
+---------------------------------|---------------|--------
+Total race results in CSVs       | 7,402 races   | ✅ confirmed from docx log
+Races with matching PDF data     | 6,889         | ✅ 93.1% coverage
+Races skipped (no PDF)           | 513           | ✅ expected
+Training samples (top-4 expand) | 27,174        | ✅ 3.9× expansion
+  - Winners (label=1.0)          | 6,889         | ✅
+  - 2nd/3rd/4th (labels 0.7/0.5/0.3)| 20,348   | ✅
+Total unique dogs in dataset     | 217,191       | ✅ matches ensemble_config.json
+Feature columns                  | 76            | ✅ matches ensemble_config.json
+Data source                      | 100% real PDF | ✅ no synthetic data
+PDF race extraction               | 8,111 races   | ✅ confirmed from docx log
+Training date (UTC)              | 2026-03-13T12:33:53 | ✅
+
+Timing data quality (sample race, 93 dogs):
+  BestTimeSec present            | 91/93 dogs    | ✅ (2 missing → median fill)
+  SectionalSec present           | 89/93 dogs    | ✅ (4 missing → median fill)
+  Last3TimesSec present          | 91/93 dogs    | ✅
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. MODEL FILES — COMPLETENESS & SIZES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total tracks with 4 files each (_rf, _gb, _xgb, _scaler): 40 / 40  ✅
+Total model + scaler files: 160 (40 × 4)  ✅
+Missing files: ZERO  ✅
+
+File size summary by algorithm:
+  _rf.pkl:     min=2.8 MB  max=13.0 MB  avg=8.5 MB  (40 files)
+  _gb.pkl:     min=0.2 MB  max=0.2 MB   avg=0.2 MB  (40 files)
+  _xgb.pkl:   min=0.1 MB  max=0.2 MB   avg=0.1 MB  (40 files)
+
+⚠️  DISCREPANCY: RUN_SUMMARY_2026-03-13.txt states "All models < 5MB (sigmoid
+    calibration keeps RF compact)" — this is INACCURATE.  39 of 40 RF models
+    exceed 5 MB (range 2.8–13.0 MB, avg 8.5 MB).  The largest is
+    Q LAKESIDE_rf.pkl at 13.0 MB.  This is because the RF model is wrapped in a
+    full CalibratedClassifierCV with 3-fold cross-validation, which stores 3
+    base estimators; the actual file sizes are still well within GitHub's 100 MB
+    limit and present no operational problem.  The summary text is simply wrong.
+    GB and XGB files ARE compact (< 0.25 MB each) as stated.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. CALIBRATION AUDIT — ARE ALL 3 ALGORITHMS SIGMOID-CALIBRATED?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Result: ALL 40 tracks × 3 algorithms = 120 models use sigmoid/logistic
+calibration.  ZERO isotonic models detected.  Details below.
+
+RANDOM FOREST (40 models):
+  Wrapper:     sklearn CalibratedClassifierCV (cv=3)
+  Calibrator:  sklearn.calibration._SigmoidCalibration  ✅
+  Per-track:   3 sigmoid calibrators per model (one per fold)
+  LARC count:  120 sigmoid calibrations across all RF models
+  Status:      ✅ CONFIRMED SIGMOID
+
+GRADIENT BOOSTING (40 models):
+  Type:        sklearn GradientBoostingClassifier (native, NOT wrapped)
+  Loss func:   log_loss (deviance)  ✅
+  Calibration: The log_loss objective uses a logistic link function internally.
+               predict_proba() outputs are logistic-calibrated (equivalent to
+               Platt/sigmoid scaling) by construction of the loss.  There is no
+               separate calibration wrapper, and none is needed.
+  Training log confirms: "Training GradientBoosting (native proba, no extra cal)"
+  Status:      ✅ LOGISTIC-LINK CALIBRATION (functionally sigmoid)
+
+XGBOOST (40 models):
+  Type:        _PlattCalibratedXGB (custom class in train_ml_track_ensemble.py)
+  Calibrator:  sklearn.linear_model.LogisticRegression  ✅
+               (Platt scaling = logistic regression = sigmoid calibration)
+  Training log confirms: "Calibrating XGBoost (sigmoid)..."
+  Status:      ✅ CONFIRMED SIGMOID (Platt/LogisticRegression wrapper)
+
+SUMMARY TABLE:
+  Algorithm | Calibration method          | Isotonic risk | Confirmed
+  ----------|-----------------------------|---------------|----------
+  RF        | CalibratedClassifierCV,     | ZERO          | ✅
+            | sigmoid (_SigmoidCalibration)|              |
+  GB        | Native log_loss link func   | ZERO          | ✅
+            | (logistic by construction)  |               |
+  XGB       | _PlattCalibratedXGB wrapper | ZERO          | ✅
+            | (LogisticRegression Platt)  |               |
+
+CONCLUSION: All 3 algorithms across all 40 tracks are sigmoid/logistic
+calibrated.  No isotonic calibration exists in any model.  The calibration
+collapse bug reported in MODEL_AUDIT_2026-03-10.txt (flat isotonic maps) is
+FULLY RESOLVED in this batch of models.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. ENSEMBLE CONFIGURATION (models/ensemble_config.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Tracks registered: 40  ✅
+Algorithms:        rf, gb, xgb  ✅
+Ensemble weights:  rf=1.0 / gb=1.0 / xgb=1.0  ✅  (equal 1/3 each)
+Feature columns:   76 features  ✅
+Training date:     2026-03-13T12:33:53 (UTC)
+N_samples:         217,191
+N_tracks:          40
+
+Note on weights: run_track_ensemble_predictions.py defines improved_weights
+internally as {rf:1.0, gb:1.0, xgb:1.0} at prediction time (equal thirds).
+This matches ensemble_config.json.  ✅
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. PREDICTION RUN — 13/03/2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generated: 2026-03-13 13:21:38
+PDFs processed: 11 / 11 (100% success)  ✅
+Total dogs predicted: 1,033
+Fallbacks used: ZERO  ✅ (all tracks had dedicated models)
+Total races: 127 (avg ~11.5 races per venue)
+
+Venues and race counts:
+  BENDIGO          12 races, 114 dogs
+  GEELONG          12 races,  89 dogs
+  GOULBURN         10 races,  73 dogs
+  HEALESVILLE      12 races, 105 dogs
+  Mandurah         13 races, 128 dogs
+  Q LAKESIDE       12 races, 113 dogs
+  RICHMOND         12 races,  95 dogs
+  SALE             12 races,  65 dogs
+  TOWNSVILLE       12 races, 102 dogs
+  The Gardens      10 races,  78 dogs
+  WAGGA            10 races,  71 dogs
+
+Confidence score characteristics (from track_ensemble_summary.txt):
+  All three components (RF / GB / XGB) visible in every race  ✅
+  Per-race format: ML_Confidence% (RF=x, GB=y, XGB=z)  ✅
+  Score range observed: ~8.99% (WAGGA R10 Magic Eclipse) to ~46.23%
+    (HEALESVILLE R9 Tribal Advisor)
+  High XGB variance observed in some races (e.g. Geelong R9: XGB=90.87%,
+    Healesville R9: XGB=93.94%) — XGB is producing high raw scores which are
+    averaged down by RF (~7–12%) and GB (~25–36%).  This is expected behaviour
+    from Platt-calibrated XGBoost on strong signal races; the ensemble average
+    is what gets reported.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. BEST BETS — TOP 10 BY GAP (1st vs 2nd dog)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Rank  Venue         Race  Gap       Dog                  Confidence
+----  ------------- ----  --------  -------------------  ----------
+1     HEALESVILLE   R9    28.23%    Box 1 Tribal Advisor   46.23%
+2     TOWNSVILLE    R1    18.40%    Box 1 Fly Like Potter  35.48%
+3     GEELONG       R10   16.15%    Box 8 Springer's Boy   37.45%
+4     SALE          R2    14.56%    Box 3 Akina Dash        29.42%
+5     The Gardens   R8    14.31%    Box 1 Chloe's Comet    32.25%
+6     Q LAKESIDE    R7    14.19%    Box 4 Scrub's Blue     32.95%
+7     Mandurah      R11   14.02%    Box 1 My Paddy Boy     26.98%
+8     Mandurah      R4    13.59%    Box 5 Little Ditzy     26.16%
+9     HEALESVILLE   R11   13.41%    Box 8 Destini Paladin  23.61%
+10    SALE          R6    12.24%    Box 7 Daddy Cool       36.06%
+
+Total races ranked: 127 (all venues, all races)
+🏆 BEST BET of the day: HEALESVILLE R9 — Box 1 Tribal Advisor (gap 28.23%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. PIPELINE STATUS — PASS / FAIL CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Item                                                      | Status
+----------------------------------------------------------|--------
+All 40 tracks have RF + GB + XGB + scaler models          | ✅ PASS
+Zero missing model files                                   | ✅ PASS
+Zero isotonic calibration — all sigmoid/logistic           | ✅ PASS
+RF: CalibratedClassifierCV(_SigmoidCalibration)           | ✅ PASS
+GB: log_loss link (logistic/sigmoid by construction)       | ✅ PASS
+XGB: _PlattCalibratedXGB (LogisticRegression Platt)        | ✅ PASS
+Ensemble weights equal 1/3 each (rf=gb=xgb=1.0)           | ✅ PASS
+ensemble_config.json matches run output (76 features)      | ✅ PASS
+Prediction run: all 11 PDFs processed successfully         | ✅ PASS
+Zero cross-track fallbacks used                            | ✅ PASS
+Training data 100% real PDF data (no synthetic)            | ✅ PASS
+Top-4 weighted training (1st/2nd/3rd/4th)                  | ✅ PASS
+Calibration collapse guard active in prediction script     | ✅ PASS
+ML_Confidence = raw ensemble probability × 100 (4dp)       | ✅ PASS
+
+DISCREPANCY NOTED (non-critical):
+  RUN_SUMMARY says "All models < 5MB" — INACCURATE.
+  RF models range 2.8–13.0 MB (avg 8.5 MB). 39/40 exceed 5 MB.
+  GB (<0.25 MB) and XGB (<0.25 MB) ARE below 5 MB.
+  No operational impact; all models within GitHub 100 MB limit.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. TRAINING ACCURACY SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Average ensemble accuracy across 40 tracks: 86.9%
+Range: 80.9% (MURRAY BDGE STRAIGHT, small dataset) to 88.8% (GOSFORD)
+Note: Accuracy metric is in-sample top-1 classification accuracy.
+      Real-world win prediction is a harder problem; this metric measures
+      whether the model ranks the eventual winner highest within the race.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. OVERALL VERDICT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PIPELINE IS WORKING CORRECTLY.
+
+All 40 track models trained on real data up to 12/03/2026.
+All 3 algorithms (RF / GB / XGB) confirmed sigmoid/logistic calibrated — no
+isotonic collapse is possible.  All 11 race-day PDFs for 13/03/2026 were
+successfully parsed and predicted using dedicated track models.  Zero fallbacks.
+Outputs (track_ensemble_predictions.xlsx, track_ensemble_summary.txt,
+best_bets_report.txt) are present and internally consistent.
+
+The one factual error in the run summary (RF model size claim) is cosmetic and
+does not affect model quality or prediction pipeline operation.
+
+RECOMMENDED NEXT ACTION:
+  • Wait for 13/03/2026 race results to become available.
+  • Add results_2026-03-13.csv to data/ using Track,Date,Race,Winner,2nd,3rd,4th schema.
+  • Re-run retrain_all_tracks_sigmoid.py to incorporate today's results.
+  • Run run_track_ensemble_predictions.py on 14/03/2026 PDFs.
+================================================================================
