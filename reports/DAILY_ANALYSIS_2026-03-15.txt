@@ -47,13 +47,13 @@ STRONG CONFIDENCE FILTER (gap ≥ 10%)
         Gap ≥ 20% bets hit at 100% win rate (1/1) on 14/03/2026.
 
 ================================================================================
-NEXT 10 (moderate confidence, gap 5–10%)
+RANKS 11–20 (gap 7–11%, borderline to moderate confidence)
 ================================================================================
 Rank  Track           Race   Box  Dog                      Gap
 --------------------------------------------------------------------
-11    SALE            R6     3    Dr. Leviate             11.13%
-12    SALE            R5     4    Check It Out            10.96%
-13    Capalaba        R8     5    Zipping Schrub          10.06%
+11    SALE            R6     3    Dr. Leviate             11.13%   (>=10%)
+12    SALE            R5     4    Check It Out            10.96%   (>=10%)
+13    Capalaba        R8     5    Zipping Schrub          10.06%   (>=10%)
 14    HEALESVILLE     R1     7    Mccreery                 9.95%
 15    SALE            R1     3    Love Grows               9.36%
 16    BROKEN HILL     R3     5    Wrinkled Henry           8.56%
