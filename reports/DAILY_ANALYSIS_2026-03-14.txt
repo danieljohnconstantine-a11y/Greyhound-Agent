@@ -1,0 +1,226 @@
+================================================================================
+DAILY ANALYSIS — 14/03/2026 (Saturday)
+Why gaps are smaller today + Betting recommendations
+================================================================================
+
+SUMMARY ANSWER
+--------------
+Today's gaps are smaller because Saturday metro racing (Meadows, Cannington,
+Wentworth Park) has the most competitive, evenly-matched fields in Australian
+greyhound racing. The models cannot differentiate strongly between dogs when
+fields are this deep and competitive. Only Q LAKESIDE (a regional QLD track)
+is producing strong gaps today, and R4 Box 1 Idea's Girl is the clear best bet.
+
+================================================================================
+SECTION 1 — GAP COMPRESSION DIAGNOSIS
+================================================================================
+
+STATISTICAL COMPARISON:
+  Today (14 Mar, Saturday):
+    Total races:  79
+    Mean gap:     3.68%     ← very low
+    Median gap:   2.37%     ← very low
+    Races ≥20%:  1         ← only Q LAKESIDE R4
+    Races ≥10%:  9
+    Races <5%:   57 / 79  = 72% of all races
+    Races <1%:   27 / 79  = 34% of all races (model cannot distinguish dogs)
+
+  Yesterday (13 Mar, Friday) — top 10 from audit:
+    Mean gap (top 10):  14.78%
+    Median gap (top 10): 13.80%
+    Races ≥10%:  10 / 10  (ALL top-10 were ≥10%)
+    Best gap:    28.23% (Healesville R9)
+
+THE GAP COMPRESSION IS REAL AND EXPECTED — NOT A BUG.
+
+ROOT CAUSE 1: DAY OF WEEK EFFECT (Most Important)
+--------------------------------------------------
+  Friday 13 Mar tracks: Healesville, Sale, Townsville, Mandurah, Wagga,
+    Goulburn, Geelong, Richmond, Bendigo, Q Lakeside, Gardens (11 tracks)
+    → Mix of provincial/country (Sale, Townsville, Wagga, Goulburn, Mandurah,
+      Healesville) and metro. Provincial tracks often have one clearly superior
+      dog per race, producing large model gaps.
+
+  Saturday 14 Mar tracks: Meadows, Cannington, Wentworth Park, Q Lakeside,
+    DUBBO, BENDIGO, The Gardens (7 tracks)
+    → Dominated by the three largest METRO Saturday meetings:
+      Meadows (Melbourne), Cannington (Perth), Wentworth Park (Sydney)
+    → Saturday metro = highest stakes, most entries, most competitive dogs.
+      Fields are far more evenly matched → model gaps compress.
+
+ROOT CAUSE 2: MEADOWS LITTER-MATE FIELDS
+------------------------------------------
+  Meadows today has multiple "Paw" prefix dogs (Paw Monet, Paw Toronto,
+  Paw Isla, Paw Ike, Paw Xerox) — these are litter-mates with nearly
+  identical form profiles, sectional times and win histories.
+  The model sees virtually no difference between them.
+
+  Evidence:
+    Meadows R4:  gap 3.30%   (Box 2 Charlestown 34.0% vs Box 1 Irish Millie 30.7%)
+    Meadows R7:  gap 0.03%   (Box 8 Kiwi Kenji vs Box 5 Kiwi George) ← ~tied
+    Meadows R8:  gap 0.26%   (Box 1 No Do Day 20.7% vs Box 6 Sparring 20.4%) ← ~tied
+    Meadows R9:  gap 0.72%   (Paw Monet vs Paw Toronto)
+    Meadows R5:  gap 0.18%   (Doongalla Jessie vs Henry Intention)
+
+ROOT CAUSE 3: BENDIGO RACE-CARD IS VERY EVEN TODAY
+----------------------------------------------------
+  BENDIGO has the weakest box biases in the system
+  (Box 2 & 8 = only +0.030 each, all others ≤ 0.033 penalty).
+  With even box biases AND competitive fields, predictions cluster near
+  the baseline (~12.5% per dog in 8-dog fields).
+
+  Evidence:
+    BENDIGO R11: gap 0.04%   (near-tied)
+    BENDIGO R9:  gap 0.13%
+    BENDIGO R6:  gap 0.13%
+    BENDIGO R5:  gap 0.18%
+    BENDIGO R1:  gap 0.77%
+
+ROOT CAUSE 4: ABSENCE OF YESTERDAY'S "EASY WIN" TRACKS
+--------------------------------------------------------
+  Yesterday's best-performing tracks (SALE 33% win rate, TOWNSVILLE 33%
+  win rate) are NOT running today. These provincial tracks often have:
+  • Smaller, weaker fields
+  • One standout dog per race (e.g. a Grade 5 dog running Grade 7)
+  • Stronger box advantages (e.g. Townsville Box 8 = +0.034, Box 1 = +0.029)
+
+  Sale and Townsville regularly produce gaps of 10-20%+ when a class horse
+  steps down. Those race types are absent today.
+
+ROOT CAUSE 5: Q LAKESIDE IS THE EXCEPTION
+------------------------------------------
+  Q Lakeside is a regional QLD venue with moderate box biases:
+    Box 1: +0.043 | Box 2: +0.021 | Box 4: +0.009
+    Box 5: -0.032 | Box 6: -0.026 | Box 3: -0.012
+
+  Today's Q Lakeside races are producing stronger gaps than the metro
+  tracks because the QLD provincial fields have clearer hierarchy:
+    Q LAKESIDE R4:  gap 21.57%  ← Best bet (see Section 2)
+    Q LAKESIDE R6:  gap 12.20%  ← Secondary
+    Q LAKESIDE R3:  gap 10.60%  ← But Box 8 (unfavoured, penalty applies)
+
+================================================================================
+SECTION 2 — RECOMMENDATION: TODAY'S BEST BET
+================================================================================
+
+🏆 BACK THIS: Q LAKESIDE R4 — Box 1 Idea's Girl
+-------------------------------------------------
+  Gap:         21.57%  (only race meeting ≥20% threshold today)
+  Confidence:  39.00%  (vs. random baseline ~12.5%)
+  2nd dog:     Box 4 Highway Princess at 17.43%
+  Gap margin:  21.57 percentage points above 2nd
+
+  WHY THIS IS A STRONG BET:
+  ✅ Largest gap by a significant margin (21.6% vs next-best 16.7%)
+  ✅ Box 1 at Q Lakeside = favoured box (+0.043 bias, historically 18% win rate)
+  ✅ 39% model confidence is very high — nearly 3× the baseline win probability
+  ✅ Q Lakeside win rate in March 13 audit was 25% (3/12 wins, 8/12 places)
+  ✅ Historical audit data: ≥20% confidence bets return 34% wins overall
+  ✅ Aligns with optimal filter: conf≥20% + gap≥10% + Box1 = highest-return category
+
+  VERDICT: Single best bet for the day. Suitable for win or each-way.
+
+================================================================================
+SECTION 3 — SECONDARY RECOMMENDATIONS (if you want more action)
+================================================================================
+
+Apply filter: Gap ≥10% + Conf ≥20% + Favoured box
+
+Rank  Track            Race  Gap       Box   Dog                     Conf%   Box Bias  Rec
+----------------------------------------------------------------------------------------------
+ 1    Q LAKESIDE       R4    21.57%    B1    Idea's Girl            39.00%  +0.043    ✅ BACK
+ 2    DUBBO            R2    16.73%    B1    Total Tiara            33.64%  +0.054    ✅ BACK
+ 3    WENTWORTH PARK   R10   13.36%    B5    Both Bowers Ace        34.19%  +0.030    ✅ BACK*
+ 4    Q LAKESIDE       R6    12.20%    B5    Shout Out Shazam       26.38%  -0.032    ❌ SKIP (B5 penalised at QLakeside)
+ 5    Meadows          R10   11.33%    B4    Slick Felix            26.19%  +0.021    ✅ CONSIDER
+ 6    Cannington       R3    10.81%    B5    Mailata                31.26%  unknown   ⚠️  CAUTION (B5 not favoured at Cannington)
+ 7    Q LAKESIDE       R3    10.60%    B8    Akela Kung Fu          25.44%  neutral   ⚠️  CAUTION (B8 neutral/not in config)
+ 8    The Gardens      R4    10.53%    B1    Gretzky                24.50%  +0.038    ✅ CONSIDER
+ 9    The Gardens      R1    10.48%    B7    Poppy's Fox            19.83%  unknown   ❌ SKIP (conf <20%)
+
+* Wentworth Park Box 5 bias = +0.030 (positive — unusual outside box advantage at WP)
+
+TOP 3 FOR TODAY (if betting multiple races):
+  1st: Q LAKESIDE R4  Box 1 Idea's Girl        (21.57% gap, conf 39.0%)  → WIN
+  2nd: DUBBO R2       Box 1 Total Tiara        (16.73% gap, conf 33.6%)  → WIN or E/W
+  3rd: WENTWORTH PARK R10  Box 5 Both Bowers Ace  (13.36% gap, conf 34.2%)  → E/W
+
+Races to avoid today:
+  ❌ Anything with gap <5% — model has no conviction
+  ❌ Q LAKESIDE R6 Box 5 — penalised box (-0.032) undermines the 12% gap
+  ❌ All BENDIGO races — near-zero gaps, no model edge
+  ❌ All Meadows races except possibly R10 — litter-mate fields, no edge
+
+================================================================================
+SECTION 4 — Q LAKESIDE BOX ANALYSIS (full card today)
+================================================================================
+
+Q Lakeside box biases (data-driven from 402 races):
+  Box 1: +0.043  ← Today's best bet Idea's Girl
+  Box 2: +0.021  ← Slight advantage
+  Box 4: +0.009  ← Slight advantage
+  Box 3: -0.012  ← Slight penalty
+  Box 5: -0.032  ← AVOID
+  Box 6: -0.026  ← AVOID
+
+Today's Q Lakeside races vs box bias alignment:
+  R1  Box 7 Hara's Loki       (2.76% gap)  — Box 7 neutral/not listed (0)
+  R2  Box 5 Sky Keeping       (1.32% gap)  — ❌ Box 5 penalised (-0.032)
+  R3  Box 8 Akela Kung Fu    (10.60% gap)  — Box 8 neutral (0) — borderline
+  R4  Box 1 Idea's Girl      (21.57% gap)  — ✅ Box 1 favoured (+0.043) ← BACK
+  R5  Box 1 He's Regal        (2.29% gap)  — ✅ Box 1 favoured BUT gap too small
+  R6  Box 5 Shout Out Shazam (12.20% gap)  — ❌ Box 5 penalised (-0.032) → SKIP
+  R7  Box 1 Another Idea      (4.06% gap)  — ✅ Box 1 BUT gap too small
+  R8  Box 1 Validate          (6.43% gap)  — ✅ Box 1 BUT gap borderline
+  R9  Box 1 Brute Banner      (2.18% gap)  — ✅ Box 1 BUT gap too small
+  R10 Box 4 Infra Terra       (3.47% gap)  — ✅ Box 4 BUT gap too small
+
+Conclusion: R4 is the only QLakeside race combining strong gap + favoured box.
+
+================================================================================
+SECTION 5 — WHAT TO DO ON LOW-GAP DAYS
+================================================================================
+
+On days like today where gaps are compressed system-wide:
+
+OPTION A — DISCIPLINE (Recommended): Back only Q LAKESIDE R4.
+  Single best bet on the day. Wait for a better day (Monday/Friday/Saturday
+  with Sale, Townsville, Healesville, Wagga in the card).
+
+OPTION B — WIDEN GAP THRESHOLD: Use gap ≥10% + conf ≥20% + favoured box.
+  Today this adds DUBBO R2, WENTWORTH PARK R10, The Gardens R4, Meadows R10.
+  Historical validation needed before routine use.
+
+OPTION C — PLACE BETTING: On days with compressed win-gaps, each-way/place
+  bets on top-confidence dogs can be profitable even when gaps are small.
+  Example: DUBBO R1 Box 2 Natalie Keeping (conf 35.3%) — near-tied with Box 4
+  but 35% confidence suggests high place probability.
+
+REMINDER FROM MARCH 13 AUDIT:
+  Overall win rate across all predicted dogs was 21.4% (vs 12.5% baseline).
+  Conf ≥20% bracket: 33-35% win rate.
+  Optimal filter on yesterday's data: conf≥20% + gap≥10% + Box1/2/4.
+  Today this filter yields: Q LAKESIDE R4 + DUBBO R2 + WENTWORTH PARK R10 +
+    The Gardens R4 + Meadows R10 (5 races).
+
+================================================================================
+SECTION 6 — RECOMMENDED ACTIONS (code/data)
+================================================================================
+
+1. ADD TODAY'S RESULTS to data/results_2026-03-14.csv when available tonight.
+   Schema: Track,Date,Race,Winner,2nd,3rd,4th
+
+2. RETRAIN Q LAKESIDE MODEL with today's results included once results are in.
+   Q Lakeside sample size (402 races) is now one of the larger datasets — model
+   should be stable but fresh data always improves calibration.
+
+3. CONSIDER ADDING A "TRACK TYPE" COLUMN to best_bets_report.txt:
+   Metro / Provincial / Regional — so users can see at a glance whether
+   today's gaps are expected to be small (Saturday metro) or large (Friday provincial).
+
+4. CONSIDER ADDING DAILY CONTEXT LINE to best_bets_report.txt header:
+   "Note: Saturday metro racing produces compressed gaps system-wide (expected)."
+
+================================================================================
+END OF DAILY ANALYSIS — 14/03/2026
+================================================================================

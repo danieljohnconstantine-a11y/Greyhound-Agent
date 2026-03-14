@@ -1,8 +1,11 @@
 ================================================================================
 BEST BETS RANKING REPORT
-Generated: 2026-03-14 09:41:29
+Generated: 2026-03-14 09:41:29 (Saturday)
 Races ranked by score gap between 1st and 2nd place dogs.
 Largest gap = strongest model confidence / best bet.
+================================================================================
+⚠️  DAY CONTEXT (Saturday): 3 major metro meeting(s) in card (Meadows/Cannington/WP). Metro Saturday fields are highly competitive — smaller gaps than provincial days are normal and expected.
+📊 GAP SUMMARY: median 2.37%  |  ≥20%: 1 race(s)  |  ≥10%: 9 race(s)  |  Total: 79 races
 ================================================================================
 
 Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%

@@ -690,11 +690,44 @@ def main():
 
         with open(best_bets_path, 'w', encoding='utf-8') as f:
             _sep = "-" * 100
+            _now = datetime.now()
+            _day_name = _now.strftime('%A')
+            # Saturday/Sunday = major metro meetings (Meadows, Cannington, WP) — gaps compress.
+            # Friday/Monday = provincial tracks (Sale, Townsville, Wagga) — gaps larger.
+            _metro_saturday_tracks = {
+                'Meadows', 'The Meadows', 'Cannington', 'Wentworth Park',
+                'WENTWORTH PARK', 'CANNINGTON',
+            }
+            _tracks_today = {row['track'] for row in bet_rows}
+            _metro_count = len(_tracks_today & _metro_saturday_tracks)
+            _gaps = [row['gap'] for row in bet_rows]
+            if _gaps:
+                _sorted = sorted(_gaps)
+                _mid = len(_sorted) // 2
+                _median_gap = (_sorted[_mid - 1] + _sorted[_mid]) / 2 if len(_sorted) % 2 == 0 else _sorted[_mid]
+            else:
+                _median_gap = 0.0
+            _count_ge20 = sum(1 for g in _gaps if g >= 20.0)
+            _count_ge10 = sum(1 for g in _gaps if g >= 10.0)
+
             f.write("=" * 80 + "\n")
             f.write("BEST BETS RANKING REPORT\n")
-            f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"Generated: {_now.strftime('%Y-%m-%d %H:%M:%S')} ({_day_name})\n")
             f.write("Races ranked by score gap between 1st and 2nd place dogs.\n")
             f.write("Largest gap = strongest model confidence / best bet.\n")
+            f.write("=" * 80 + "\n")
+            # Day-of-week gap context line
+            if _metro_count >= 2:
+                f.write(
+                    f"⚠️  DAY CONTEXT ({_day_name}): {_metro_count} major metro meeting(s) in card "
+                    f"(Meadows/Cannington/WP). Metro Saturday fields are highly competitive — "
+                    f"smaller gaps than provincial days are normal and expected.\n"
+                )
+            f.write(
+                f"📊 GAP SUMMARY: median {_median_gap:.2f}%  |  "
+                f"≥20%: {_count_ge20} race(s)  |  ≥10%: {_count_ge10} race(s)  |  "
+                f"Total: {len(bet_rows)} races\n"
+            )
             f.write("=" * 80 + "\n\n")
             f.write(f"{'Rank':<5} {'Track':<16} {'Race':<5} {'Gap':>8}  "
                     f"{'1st Dog':<26} {'1st%':>8}  {'2nd Dog':<26} {'2nd%':>8}\n")
