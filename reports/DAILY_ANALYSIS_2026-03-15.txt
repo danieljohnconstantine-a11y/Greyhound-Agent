@@ -1,0 +1,128 @@
+================================================================================
+DAILY ANALYSIS — 15/03/2026 (Sunday)
+Generated: 2026-03-15  |  Source: outputs/best_bets_report.txt (06:31:32)
+Model: track_ensemble (RF+GB+XGB equal weights)
+================================================================================
+
+TRACKS PREDICTED (11):
+  GAWLER, BROKEN HILL, GRAFTON, HEALESVILLE, SALE,
+  ROCKHAMPTON, DARWIN, Q PARKLANDS, MT GAMBIER, Capalaba, Temora
+
+Total races ranked: 113
+
+================================================================================
+🏆 BEST BET OF THE DAY
+================================================================================
+  GAWLER Race 4 — Box 4 Boots
+  Confidence: 39.14%   Gap: 23.42%   (HIGHEST gap today)
+
+================================================================================
+TOP 10 BEST BETS (ranked by model confidence gap)
+================================================================================
+Rank  Track           Race   Box  Dog                      Gap      Conf%
+--------------------------------------------------------------------
+ 1    GAWLER          R4     4    Boots                   23.42%   39.14%   ⭐⭐ ≥20%
+ 2    GAWLER          R7     1    Jukebox Duke            19.32%   33.75%   ⭐ ≥15%
+ 3    BROKEN HILL     R6     2    Sweet Pea               15.52%   29.31%   ⭐ ≥15%
+ 4    GRAFTON         R6     3    Backcreek Butch         15.32%   25.96%   ⭐ ≥15%
+ 5    HEALESVILLE     R2     8    Mookaite                15.10%   31.90%   ⭐ ≥15%
+ 6    GAWLER          R5     1    Make Some Noise         14.69%   30.91%
+ 7    SALE            R9     7    Warrior Jack            12.22%   31.38%
+ 8    ROCKHAMPTON     R8     2    Wyndra All Smoke        11.64%   27.31%
+ 9    HEALESVILLE     R4     3    Especial Hugo           11.36%   25.94%
+10    GRAFTON         R7     2    Sandave Apache          11.32%   23.86%
+
+Top 10 median gap: ~15.3%
+
+================================================================================
+STRONG CONFIDENCE FILTER (gap ≥ 10%)
+================================================================================
+  Races with gap ≥ 10%: ranks 1–10 (10 races)
+  These are the recommended bets based on yesterday's audit:
+    Gap >= 20%: 1 race  (GAWLER R4 — highest conviction bet)
+    Gap >= 15%: 5 races (ranks 1–5)
+    Gap >= 10%: 10 races (ranks 1–10)
+
+  NOTE: Gap ≥ 10% bets hit at 55.6% win rate, 88.9% placed rate on 14/03/2026.
+        Gap ≥ 20% bets hit at 100% win rate (1/1) on 14/03/2026.
+
+================================================================================
+NEXT 10 (moderate confidence, gap 5–10%)
+================================================================================
+Rank  Track           Race   Box  Dog                      Gap
+--------------------------------------------------------------------
+11    SALE            R6     3    Dr. Leviate             11.13%
+12    SALE            R5     4    Check It Out            10.96%
+13    Capalaba        R8     5    Zipping Schrub          10.06%
+14    HEALESVILLE     R1     7    Mccreery                 9.95%
+15    SALE            R1     3    Love Grows               9.36%
+16    BROKEN HILL     R3     5    Wrinkled Henry           8.56%
+17    GRAFTON         R4     6    Goldstar Hector          7.88%
+18    BROKEN HILL     R5     2    Introduced               7.87%
+19    HEALESVILLE     R3     4    Tribal Advisor           7.30%
+20    Q PARKLANDS     R12    4    Blow Bayou               7.10%
+
+================================================================================
+BY TRACK — NUMBER OF HIGH-GAP RACES
+================================================================================
+  GAWLER        : 3 races in top 10 (R4, R5, R7)      ← best track today
+  HEALESVILLE   : 2 races in top 10 (R2, R4)
+  GRAFTON       : 2 races in top 10 (R6, R7)
+  SALE          : 1 race in top 10 (R9)
+  BROKEN HILL   : 1 race in top 10 (R6)
+  ROCKHAMPTON   : 1 race in top 10 (R8)
+
+================================================================================
+CONTEXT: SUNDAY PROVINCIAL CARD
+================================================================================
+  Sunday tracks are predominantly provincial/regional (not metro).
+  Provincial tracks produce LARGER gaps — model more confident.
+  This is the OPPOSITE of Saturday's metro card (Meadows/Cannington/WP).
+
+  Saturday 14/03 recap:
+    Median gap (top 10): ~8.4%   (compressed metro card)
+    Races >= 20% gap: 1/79 (1.3%)
+    Top 10 bets: 6/10 wins (60%), 9/10 placed (90%)
+
+  Sunday 15/03 today:
+    Races >= 20% gap: 1 (GAWLER R4)
+    Races >= 15% gap: 5 (ranks 1–5)
+    Races >= 10% gap: 10 (ranks 1–10)
+    Top 10 median gap: ~15.3%
+
+  CONCLUSION: Better gap conditions today vs Saturday metro card.
+  Optimal strategy: back top 5 bets (gap >= 14.7%) at win prices.
+
+================================================================================
+RECOMMENDED BET LIST (prioritised)
+================================================================================
+  TIER 1 — Strongest conviction (gap ≥ 15%):
+    ① GAWLER R4  — Box 4 Boots              (gap 23.4%, conf 39.1%)
+    ② GAWLER R7  — Box 1 Jukebox Duke       (gap 19.3%, conf 33.7%)
+    ③ HEALESVILLE R2 — Box 8 Mookaite       (gap 15.1%, conf 31.9%)
+    ④ BROKEN HILL R6 — Box 2 Sweet Pea      (gap 15.5%, conf 29.3%)
+    ⑤ GRAFTON R6  — Box 3 Backcreek Butch   (gap 15.3%, conf 26.0%)
+
+  TIER 2 — Strong bets (gap 10–14.7%):
+    ⑥ GAWLER R5  — Box 1 Make Some Noise    (gap 14.7%, conf 30.9%)
+    ⑦ SALE R9    — Box 7 Warrior Jack        (gap 12.2%, conf 31.4%)
+    ⑧ ROCKHAMPTON R8 — Box 2 Wyndra All Smoke (gap 11.6%, conf 27.3%)
+    ⑨ HEALESVILLE R4 — Box 3 Especial Hugo  (gap 11.4%, conf 25.9%)
+    ⑩ GRAFTON R7  — Box 2 Sandave Apache    (gap 11.3%, conf 23.9%)
+
+  TIER 3 — Moderate bets (gap 5–10%): ranks 11–40 in report
+  AVOID — Low confidence (gap < 5%): ranks 41–113 in report
+
+================================================================================
+COMPARISON WITH 14/03/2026 (Saturday)
+================================================================================
+  Saturday 14/03: 21/79 wins (26.6%), 58/79 placed (73.4%)
+  Top 10: 6/10 wins (60%), 9/10 placed (90%)
+  Model: Best on Q Lakeside (40% wins), Wentworth Park (40% wins)
+
+  Sunday results will be available after races — update results_2026-03-15.csv
+  and run PREDICTION_AUDIT_2026-03-15.txt to evaluate today's performance.
+
+================================================================================
+END OF DAILY ANALYSIS
+================================================================================
