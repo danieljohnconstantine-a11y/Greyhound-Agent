@@ -11,9 +11,9 @@ NOTE: Taree results provided but no PDF/model was run for Taree today.
 ================================================================================
 OVERALL SUMMARY
 ================================================================================
-  Total races predicted & matched : 78
-  WINS  (1st place)               : 21  (26.9%)
-  PLACED (1st-4th)                : 57  (73.1%)
+  Total races predicted & matched : 79
+  WINS  (1st place)               : 21  (26.6%)
+  PLACED (1st-4th)                : 58  (73.4%)
 
   TOP 10 BETS (ranked by gap):
     Wins  : 6/10  (60%)
@@ -27,7 +27,7 @@ OVERALL SUMMARY
     Placed: 8/9  (88.9%)
 
 ================================================================================
-RACE-BY-RACE RESULTS (79 predictions: 78 matched, 1 NO DATA — Cannington R13 results not provided)
+RACE-BY-RACE RESULTS (79 predictions: 79 matched, 0 NO DATA)
 ================================================================================
 Rank  Track              Race      Gap  Pred Box    Pred%  Result  Actual(1st-4th)
 ------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Rank  Track              Race      Gap  Pred Box    Pred%  Result  Actual(1st-4t
 34    Meadows            R1       2.72%  Box 2        12.66%  4TH     (7, 3, 6, 2)
 35    Meadows            R3       2.55%  Box 2        15.40%  2ND     (1, 2, 6, 4)
 36    DUBBO              R4       2.46%  Box 3        17.43%  MISS    (7, 2, 6, 4)
-37    Cannington         R13      2.46%  Box 4        18.72%  NO DATA (Cannington R13 result not in provided data)
+37    Cannington         R13      2.46%  Box 4        18.72%  2ND     (2, 4, 6, 8)
 38    BENDIGO            R10      2.43%  Box 2        13.23%  WIN     (2, 3, 6, 1)
 39    DUBBO              R1       2.41%  Box 2        35.32%  MISS    (4, 5, 7, 1)
 40    The Gardens        R7       2.37%  Box 4        20.09%  WIN     (4, 8, 3, 7)
@@ -118,7 +118,7 @@ BY TRACK
   WENTWORTH PARK         4/10  wins (  40%)    8/10  placed (  80%)
   The Gardens            3/10  wins (  30%)    8/10  placed (  80%)
   DUBBO                  3/12  wins (  25%)    9/12  placed (  75%)
-  Cannington             3/12  wins (  25%)    8/12  placed (  67%)
+  Cannington             3/13  wins (  23%)    9/13  placed (  69%)
   Meadows                2/12  wins (  17%)    8/12  placed (  67%)
   BENDIGO                2/12  wins (  17%)    7/12  placed (  58%)
 
@@ -128,7 +128,7 @@ BY PREDICTED BOX
   Box 1:   8/19  wins (  42%)   16/19  placed (  84%)
   Box 2:   1/14  wins (   7%)    9/14  placed (  64%)
   Box 3:   2/11  wins (  18%)    7/11  placed (  64%)
-  Box 4:   4/8   wins (  50%)    8/8   placed ( 100%)
+  Box 4:   4/9   wins (  44%)    9/9   placed ( 100%)
   Box 5:   3/8   wins (  38%)    6/8   placed (  75%)
   Box 6:   2/4   wins (  50%)    3/4   placed (  75%)
   Box 7:   0/6   wins (   0%)    5/6   placed (  83%)
@@ -141,7 +141,7 @@ BY GAP BUCKET (model confidence)
   Gap 15-20% :   0/1   wins (   0%)    1/1   placed ( 100%)
   Gap 10-15% :   4/7   wins (  57%)    6/7   placed (  86%)
   Gap 5-10%  :   6/13  wins (  46%)    9/13  placed (  69%)
-  Gap <5%    :  10/56  wins (  18%)   40/56  placed (  71%)
+  Gap <5%    :  10/57  wins (  18%)   41/57  placed (  72%)
 
 ================================================================================
 DETAIL: TOP 20 BETS
