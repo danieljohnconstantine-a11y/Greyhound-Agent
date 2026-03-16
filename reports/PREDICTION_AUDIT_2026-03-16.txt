@@ -1,0 +1,232 @@
+================================================================================
+PREDICTION AUDIT REPORT — 2026-03-16 (Monday)
+================================================================================
+
+OVERVIEW
+----------------------------------------
+Date                 : 2026-03-16 (Monday)
+Predictions total    : 122 (10 tracks)
+Results provided     : 113 races (10 tracks — Angle Park and extra races N/A)
+Predictions matched  : 102
+No result available  : 20 (Angle Park R1-R12, Ballarat R13-14, Q Straight R13-14, Shepparton R13-14, Geelong R13, Mandurah R13)
+
+NOTE: The #1 best bet was BALLARAT R14 Box1 Duke Caboom (gap 20.1%) — NO RESULT PROVIDED.
+NOTE: The #2 best bet was Q STRAIGHT R13 Box3 Milo Davis (gap 18.1%) — NO RESULT PROVIDED.
+
+HEADLINE STATS (matched races only)
+----------------------------------------
+Overall wins          : 21/102 = 20.6%
+Overall placed (top4) : 66/102 = 64.7%
+
+Top-8 matched bets (ranks 3-10, top2 had no results):
+  Wins   : 1/8 = 12.5%
+  Placed : 6/8 = 75.0%
+
+Gap >= 20% filter (0 matched races):
+  No matched races with gap >= 20% (top gap bet had no result)
+
+Gap >= 15% filter (1 matched races):
+  Wins   : 0/1 = 0.0%
+  Placed : 1/1 = 100.0%
+
+Gap >= 10% filter (11 matched races):
+  Wins   : 1/11 = 9.1%
+  Placed : 9/11 = 81.8%
+
+================================================================================
+TOP 10 MATCHED BETS DETAIL (ranks 3-10 since ranks 1-2 had no results):
+Rank  Track                      Race       Gap  Box Predicted Dog                Win?   Placed?  Actual 1-4
+------------------------------------------------------------------------------------------
+3     Nowra                      R7      17.49%  Box1    Market Maverick              ✗      ✓        7-1-3-6
+4     Nowra                      R2      14.33%  Box1    Stop And Stare               ✗      ✓        6-1-3-4
+5     Sandown                    R2      11.95%  Box4    Bernardo Split               ✗      ✗        1-3-8-2
+6     Nowra                      R8      11.89%  Box8    Towering Earl                ✓      ✓        8-1-2-3
+7     Shepparton                 R3      11.88%  Box1    Procyon                      ✗      ✓        7-1-3-5
+8     Maitland                   R6      11.71%  Box1    Exquisite Ethics             ✗      ✓        2-1-5-4
+9     Ballarat                   R10     11.59%  Box8    Remi Joy                     ✗      ✗        6-1-4-2
+10    Geelong                    R2      10.82%  Box1    Paw Melody                   ✗      ✓        5-1-3-8
+
+================================================================================
+ALL MATCHED RACES (sorted by rank):
+Rank  Track                      Race       Gap  Box Predicted Dog                Win?   Placed?  Actual 1-4
+------------------------------------------------------------------------------------------
+3     Nowra                      R7      17.49%  Box1    Market Maverick              ✗      ✓        7-1-3-6
+4     Nowra                      R2      14.33%  Box1    Stop And Stare               ✗      ✓        6-1-3-4
+5     Sandown                    R2      11.95%  Box4    Bernardo Split               ✗      ✗        1-3-8-2
+6     Nowra                      R8      11.89%  Box8    Towering Earl                ✓      ✓        8-1-2-3
+7     Shepparton                 R3      11.88%  Box1    Procyon                      ✗      ✓        7-1-3-5
+8     Maitland                   R6      11.71%  Box1    Exquisite Ethics             ✗      ✓        2-1-5-4
+9     Ballarat                   R10     11.59%  Box8    Remi Joy                     ✗      ✗        6-1-4-2
+10    Geelong                    R2      10.82%  Box1    Paw Melody                   ✗      ✓        5-1-3-8
+11    Sandown                    R4      10.71%  Box2    Jumbuk Sachin                ✗      ✓        8-2-1-7
+12    Ladbrokes Q Straight       R11     10.70%  Box4    Redeemer's Way               ✗      ✓        1-4-6-5
+13    Ladbrokes Q Straight       R12     10.08%  Box1    Weather Man Rick             ✗      ✓        5-8-3-1
+14    Nowra                      R6       9.94%  Box1    Gramercy Beat                ✗      ✗        2-3-4-8
+15    Shepparton                 R9       9.42%  Box8    Solicit                      ✗      ✓        5-2-8-4
+16    Dubbo                      R2       8.49%  Box2    Red Rock Cypress             ✗      ✓        6-7-5-2
+17    Nowra                      R10      8.40%  Box1    King Zeal                    ✓      ✓        1-2-7-3
+19    Ballarat                   R2       7.44%  Box1    Ava's Pride                  ✗      ✗        5-2-7-4
+20    Mandurah                   R4       7.44%  Box3    Eramosa                      ✗      ✗        6-8-2-5
+21    Sandown                    R12      6.64%  Box1    Darnum Diesel                ✗      ✗        4-8-5-2
+22    Ladbrokes Q Straight       R1       6.34%  Box1    Top Shelf Ted                ✗      ✗        3-2-8-4
+23    Nowra                      R4       6.34%  Box4    Kung Fu Bay                  ✓      ✓        4-1-2-8
+24    Sandown                    R3       6.27%  Box2    Rose Violet                  ✗      ✓        8-1-6-2
+27    Sandown                    R9       5.48%  Box9    Miss Karis                   ✗      ✗        1-2-3-8
+29    Mandurah                   R8       5.37%  Box1    West On Burnie               ✗      ✗        6-2-3-7
+30    Ladbrokes Q Straight       R8       5.23%  Box3    Solar Flare                  ✗      ✓        6-2-3-1
+31    Sandown                    R8       5.21%  Box2    Aston Guitar                 ✗      ✗        1-5-4-8
+32    Ballarat                   R4       5.21%  Box7    Paw Whisper                  ✗      ✓        5-8-2-7
+33    Ballarat                   R12      5.16%  Box7    Paw Cheyenne                 ✗      ✓        5-8-7-4
+34    Nowra                      R5       4.63%  Box4    Written In Gold              ✗      ✗        5-1-2-7
+35    Ladbrokes Q Straight       R9       4.53%  Box6    Little Rowdy                 ✗      ✓        2-6-4-7
+36    Shepparton                 R8       4.42%  Box2    Talcott Bale                 ✗      ✓        5-1-2-4
+37    Geelong                    R11      4.29%  Box7    Power Affect                 ✓      ✓        7-8-5-2
+38    Ladbrokes Q Straight       R10      4.19%  Box3    Sketchy Bloke                ✓      ✓        3-2-6-1
+39    Maitland                   R7       4.04%  Box2    Kunda                        ✗      ✓        1-3-2-4
+40    Ballarat                   R11      3.96%  Box7    Not Sorry                    ✗      ✓        8-7-4-5
+41    Geelong                    R4       3.93%  Box8    Jock's Legend                ✗      ✗        5-7-3-6
+43    Dubbo                      R8       3.50%  Box1    Mobile Lad                   ✗      ✗        4-8-2-6
+44    Dubbo                      R10      3.45%  Box2    Southbrook Merv              ✗      ✓        7-6-4-2
+45    Mandurah                   R6       3.37%  Box5    Night Lighter                ✓      ✓        5-6-2-1
+46    Nowra                      R9       3.08%  Box3    Donna Don't Stop             ✗      ✓        2-4-3-1
+48    Ladbrokes Q Straight       R3       2.94%  Box6    Carry Me Please              ✗      ✓        4-2-6-8
+49    Shepparton                 R5       2.82%  Box3    Slick Time                   ✓      ✓        3-7-8-6
+51    Shepparton                 R7       2.59%  Box2    Paw Waverly                  ✗      ✗        1-3-6-8
+53    Geelong                    R6       2.50%  Box5    Pygmy Puff                   ✗      ✓        8-6-5-1
+54    Dubbo                      R7       2.43%  Box2    Nates Fury                   ✓      ✓        2-7-8-1
+55    Ballarat                   R1       2.42%  Box1    Having A Look                ✗      ✗        8-3-6-7
+56    Geelong                    R1       2.37%  Box8    Aston Blitz                  ✗      ✓        1-8-5-2
+57    Sandown                    R5       2.36%  Box4    Slick Nitro                  ✓      ✓        4-1-5-8
+58    Dubbo                      R5       2.27%  Box5    Zippy Zenden                 ✓      ✓        5-4-1-2
+59    Sandown                    R11      2.17%  Box2    Gold Class Cool              ✗      ✓        8-2-7-5
+60    Sandown                    R6       2.14%  Box4    Come To Party                ✗      ✗        7-8-2-1
+61    Mandurah                   R9       2.13%  Box1    Elite Emu                    ✗      ✓        5-2-1-3
+62    Ballarat                   R3       2.08%  Box1    Kensington Girl              ✗      ✓        6-8-1-4
+63    Geelong                    R5       2.08%  Box1    Aston Bondi                  ✗      ✗        7-4-3-5
+64    Maitland                   R8       2.05%  Box8    Ultimate Ethics              ✓      ✓        8-7-2-1
+65    Geelong                    R9       2.02%  Box7    Tinker Drew                  ✗      ✗        2-6-1-3
+66    Dubbo                      R6       1.90%  Box2    Orana Jim                    ✗      ✓        4-7-1-2
+67    Ladbrokes Q Straight       R2       1.89%  Box1    Travelling Dean              ✓      ✓        1-3-8-5
+68    Ballarat                   R5       1.86%  Box8    Lady Natasha                 ✗      ✓        7-4-3-8
+69    Ballarat                   R8       1.80%  Box1    Aston Transcend              ✓      ✓        1-3-6-2
+70    Shepparton                 R12      1.79%  Box3    Paw Pascal                   ✗      ✗        8-7-1-6
+71    Ladbrokes Q Straight       R4       1.76%  Box2    Federal Joey                 ✗      ✗        1-6-5-8
+72    Sandown                    R7       1.75%  Box1    Tiger Rocks                  ✗      ✓        2-1-5-7
+73    Geelong                    R3       1.69%  Box6    Aston Ellie                  ✗      ✗        1-8-3-2
+74    Mandurah                   R3       1.62%  Box1    Son Of Manado                ✓      ✓        1-5-3-4
+76    Maitland                   R5       1.55%  Box1    Badger's Beast               ✓      ✓        1-5-4-7
+77    Ladbrokes Q Straight       R5       1.55%  Box4    Go Gracie Go                 ✗      ✓        5-8-7-4
+78    Mandurah                   R5       1.51%  Box7    Quest For Steps              ✗      ✗        1-4-2-10
+79    Shepparton                 R6       1.51%  Box2    Bebop Jazz                   ✗      ✗        4-7-1-6
+80    Geelong                    R12      1.49%  Box1    Johnny's Revenge             ✗      ✗        7-6-3-8
+82    Shepparton                 R11      1.48%  Box2    Scott Greyscale              ✗      ✗        1-4-8-7
+83    Shepparton                 R4       1.37%  Box4    Broken Halo                  ✗      ✗        7-1-8-6
+84    Mandurah                   R12      1.28%  Box5    Wisecracker                  ✗      ✓        3-6-4-5
+88    Geelong                    R8       1.20%  Box7    Aston Haruto                 ✓      ✓        7-3-8-4
+90    Nowra                      R3       1.12%  Box1    Barber Mike                  ✗      ✓        3-7-1-6
+91    Maitland                   R4       1.07%  Box4    Past Tense                   ✗      ✓        1-2-4-6
+92    Mandurah                   R2       1.02%  Box4    Charos Dream                 ✗      ✗        3-1-6-2
+93    Shepparton                 R1       0.92%  Box3    Scott Clarity                ✗      ✓        4-3-6-7
+94    Dubbo                      R4       0.91%  Box8    Cobra Beach                  ✗      ✗        4-5-2-6
+95    Shepparton                 R10      0.83%  Box3    Sunny Stride                 ✗      ✗        5-6-8-4
+96    Maitland                   R1       0.77%  Box2    Zipping Maudie               ✗      ✓        1-5-2-3
+97    Nowra                      R1       0.77%  Box4    Rock Roll Kerry              ✗      ✗        2-5-6-3
+98    Ballarat                   R7       0.76%  Box2    Yellow Ochre                 ✓      ✓        2-7-1-6
+100   Ladbrokes Q Straight       R7       0.73%  Box3    Barry The Boss               ✗      ✗        1-4-2-5
+102   Ballarat                   R6       0.69%  Box4    Step On Air                  ✗      ✓        3-7-4-2
+103   Maitland                   R2       0.67%  Box4    Red Opal                     ✗      ✓        5-2-4-1
+104   Geelong                    R10      0.59%  Box5    Volts                        ✗      ✓        4-1-5-7
+105   Dubbo                      R3       0.49%  Box1    Wong Glass                   ✗      ✓        6-1-2-3
+106   Mandurah                   R1       0.48%  Box2    Lift Me Up                   ✗      ✗        5-8-1-6
+107   Maitland                   R3       0.47%  Box6    Tornado Ethics               ✓      ✓        6-2-3-1
+108   Mandurah                   R10      0.45%  Box1    Epicentre                    ✓      ✓        1-7-8-6
+109   Maitland                   R9       0.44%  Box2    Great North                  ✗      ✓        1-3-7-2
+110   Ladbrokes Q Straight       R6       0.39%  Box1    Smooth Torque                ✗      ✗        4-3-7-9
+111   Shepparton                 R2       0.29%  Box7    Kraken Huggie                ✗      ✗        4-3-10-6
+112   Maitland                   R10      0.25%  Box4    Pure Mouse                   ✗      ✗        2-5-1-7
+115   Mandurah                   R11      0.18%  Box8    Orana Mia                    ✓      ✓        8-6-3-4
+116   Dubbo                      R9       0.14%  Box6    Slippery Bogan               ✗      ✓        7-8-6-5
+117   Ballarat                   R9       0.12%  Box1    Rumbling Rose                ✗      ✓        7-1-5-2
+118   Geelong                    R7       0.12%  Box1    Paw Lassie                   ✗      ✓        7-1-4-6
+119   Dubbo                      R1       0.11%  Box4    Poke The Glass               ✗      ✓        1-4-8-7
+120   Sandown                    R1       0.08%  Box1    Hand Print                   ✗      ✓        8-2-1-4
+121   Sandown                    R10      0.08%  Box2    Daintree Sniper              ✗      ✗        4-5-1-7
+122   Mandurah                   R7       0.05%  Box4    Tori Keeping                 ✓      ✓        4-7-2-3
+
+================================================================================
+RACES WITH NO RESULTS AVAILABLE:
+Rank  Track                      Race       Gap  Box Predicted Dog
+----------------------------------------------------------------------
+1     BALLARAT                   R14     20.10%  Box1    Duke Caboom
+2     Q STRAIGHT                 R13     18.06%  Box3    Milo Davis
+18    Angle Park                 R7       7.71%  Box8    Rippin' Pedro
+25    SHEPPARTON                 R14      6.16%  Box8    Hyland Azula
+26    Angle Park                 R10      5.81%  Box8    Canya Nameless
+28    BALLARAT                   R13      5.47%  Box4    Saint Xavier
+42    Angle Park                 R12      3.67%  Box2    Equivocal
+47    Mandurah                   R13      3.07%  Box2    All Grunt
+50    Angle Park                 R6       2.76%  Box1    Honey Zen
+52    Angle Park                 R11      2.51%  Box1    Dolly's My Mum
+75    Angle Park                 R8       1.58%  Box2    Compton Rocks
+81    Angle Park                 R2       1.49%  Box2    Springvale Margi
+85    Q STRAIGHT                 R14      1.25%  Box2    Shimmering Light
+86    Angle Park                 R3       1.22%  Box4    Nitrous
+87    Angle Park                 R1       1.20%  Box1    Rock It Kathy
+89    Angle Park                 R5       1.14%  Box2    Jetson
+99    Angle Park                 R9       0.76%  Box7    Kisauni
+101   GEELONG                    R13      0.69%  Box1    Juice
+113   SHEPPARTON                 R13      0.24%  Box6    Scott Charisma
+114   Angle Park                 R4       0.22%  Box8    Big Stretch
+
+================================================================================
+PERFORMANCE BY TRACK:
+Track                       Races   Wins    Win%  Placed  Placed%
+-----------------------------------------------------------------
+Mandurah                       12      5   41.7%       7    58.3%
+Nowra                          10      3   30.0%       7    70.0%
+Maitland                       10      3   30.0%       9    90.0%
+Dubbo                          10      2   20.0%       8    80.0%
+Ballarat                       12      2   16.7%       9    75.0%
+Geelong                        12      2   16.7%       7    58.3%
+Ladbrokes Q Straight           12      2   16.7%       8    66.7%
+Sandown                        12      1    8.3%       6    50.0%
+Shepparton                     12      1    8.3%       5    41.7%
+
+================================================================================
+PERFORMANCE BY BOX:
+Box     Races   Wins    Win%  Placed  Placed%
+------------------------------------------------
+Box 1       30      6   20.0%      20    66.7%
+Box 2       19      2   10.5%      12    63.2%
+Box 3        9      2   22.2%       5    55.6%
+Box 4       16      3   18.8%       9    56.2%
+Box 5        5      2   40.0%       5   100.0%
+Box 6        5      1   20.0%       4    80.0%
+Box 7        8      2   25.0%       5    62.5%
+Box 8        9      3   33.3%       6    66.7%
+Box 9        1      0    0.0%       0     0.0%
+
+================================================================================
+ALL CORRECT WINS:
+----------------------------------------------------------------------
+Rank   6: Nowra                      R8 Box8 Towering Earl                  (gap 11.89%)  actual: 8-1-2-3
+Rank  17: Nowra                      R10 Box1 King Zeal                      (gap 8.40%)  actual: 1-2-7-3
+Rank  23: Nowra                      R4 Box4 Kung Fu Bay                    (gap 6.34%)  actual: 4-1-2-8
+Rank  37: Geelong                    R11 Box7 Power Affect                   (gap 4.29%)  actual: 7-8-5-2
+Rank  38: Ladbrokes Q Straight       R10 Box3 Sketchy Bloke                  (gap 4.19%)  actual: 3-2-6-1
+Rank  45: Mandurah                   R6 Box5 Night Lighter                  (gap 3.37%)  actual: 5-6-2-1
+Rank  49: Shepparton                 R5 Box3 Slick Time                     (gap 2.82%)  actual: 3-7-8-6
+Rank  54: Dubbo                      R7 Box2 Nates Fury                     (gap 2.43%)  actual: 2-7-8-1
+Rank  57: Sandown                    R5 Box4 Slick Nitro                    (gap 2.36%)  actual: 4-1-5-8
+Rank  58: Dubbo                      R5 Box5 Zippy Zenden                   (gap 2.27%)  actual: 5-4-1-2
+Rank  64: Maitland                   R8 Box8 Ultimate Ethics                (gap 2.05%)  actual: 8-7-2-1
+Rank  67: Ladbrokes Q Straight       R2 Box1 Travelling Dean                (gap 1.89%)  actual: 1-3-8-5
+Rank  69: Ballarat                   R8 Box1 Aston Transcend                (gap 1.80%)  actual: 1-3-6-2
+Rank  74: Mandurah                   R3 Box1 Son Of Manado                  (gap 1.62%)  actual: 1-5-3-4
+Rank  76: Maitland                   R5 Box1 Badger's Beast                 (gap 1.55%)  actual: 1-5-4-7
+Rank  88: Geelong                    R8 Box7 Aston Haruto                   (gap 1.20%)  actual: 7-3-8-4
+Rank  98: Ballarat                   R7 Box2 Yellow Ochre                   (gap 0.76%)  actual: 2-7-1-6
+Rank 107: Maitland                   R3 Box6 Tornado Ethics                 (gap 0.47%)  actual: 6-2-3-1
+Rank 108: Mandurah                   R10 Box1 Epicentre                      (gap 0.45%)  actual: 1-7-8-6
+Rank 115: Mandurah                   R11 Box8 Orana Mia                      (gap 0.18%)  actual: 8-6-3-4
+Rank 122: Mandurah                   R7 Box4 Tori Keeping                   (gap 0.05%)  actual: 4-7-2-3

@@ -1,129 +1,84 @@
 ================================================================================
-DAILY ANALYSIS — 16/03/2026 (Monday)
-Generated: 2026-03-16
-Source: outputs/best_bets_report.txt (generated 2026-03-16 12:30:42)
+DAILY ANALYSIS — 2026-03-16 (Monday)
 ================================================================================
 
-RACE CARD OVERVIEW
-------------------
-Tracks today: 10
-  BALLARAT (14 races), Q STRAIGHT (14 races), SHEPPARTON (14 races),
-  GEELONG (13 races), SANDOWN (12 races), Angle Park (12 races),
-  Mandurah (13 races), NOWRA (10 races), Maitland (10 races), DUBBO (10 races)
+RACE CARD SUMMARY
+----------------------------------------
+  10 tracks predicted (Ballarat, Q Straight, Nowra, Sandown, Shepparton,
+                        Geelong, Maitland, Dubbo, Mandurah, Angle Park)
+  11 PDFs processed (includes Mowbray/Launceston not in predictions)
+  122 races predicted  |  113 races with results provided
+  102 races matched for audit
 
-Total races: 122
-Monday card — Provincial/country day. No major metro tracks (no Meadows/WP/Cannington).
-NOTE: Monday cards typically produce good gaps compared to Saturday metro nights.
+  ⚠️  METRO CONTEXT: 3 metro tracks today (Sandown, Geelong, Ballarat)
+     Metro cards produce compressed gaps — lower confidence scores expected
 
-GAP SUMMARY
------------
-  Best bet gap:  20.10%  (BALLARAT R14 — Box 1 Duke Caboom)
-  Top-10 median: ~12.9%
-  Races ≥ 20%:   1  (BALLARAT R14)
-  Races ≥ 15%:   3  (BALLARAT R14, Q STRAIGHT R13, NOWRA R7)
-  Races ≥ 10%:  13
-  Races ≥  5%:  ~32
-  Median gap all races: ~2.1%
+GAP DISTRIBUTION (predictions, all 122 races)
+----------------------------------------
+  Median gap     : 2.11%
+  Top-10 median  : 11.92%
+  Races >= 20%   : 1 (best bet was Ballarat R14, result not available)
+  Races >= 15%   : 3
+  Races >= 10%   : 13
 
-TOP 10 BEST BETS BY GAP
------------------------
-Rank  Track       Race   Gap     Box  Dog
-  1   BALLARAT    R14   20.10%  Box1  Duke Caboom
-  2   Q STRAIGHT  R13   18.06%  Box3  Milo Davis
-  3   NOWRA       R7    17.49%  Box1  Market Maverick
-  4   NOWRA       R2    14.33%  Box1  Stop And Stare
-  5   SANDOWN     R2    11.95%  Box4  Bernardo Split
-  6   NOWRA       R8    11.89%  Box8  Towering Earl
-  7   SHEPPARTON  R3    11.88%  Box1  Procyon
-  8   Maitland    R6    11.71%  Box1  Exquisite Ethics
-  9   BALLARAT    R10   11.59%  Box8  Remi Joy
- 10   GEELONG     R2    10.82%  Box1  Paw Melody
- 11   SANDOWN     R4    10.71%  Box2  Jumbuk Sachin
- 12   Q STRAIGHT  R11   10.70%  Box4  Redeemer's Way
- 13   Q STRAIGHT  R12   10.08%  Box1  Weather Man Rick
+PREDICTION ACCURACY SUMMARY
+----------------------------------------
+  Overall wins          : 21/102 = 20.6%
+  Overall placed (top4) : 66/102 = 64.7%
+  Top-8 matched bets    : 1/8 wins = 12.5%  |  6/8 placed = 75.0%
+  Gap >= 10% bets       : 1/11 wins = 9.1%  |  9/11 placed = 81.8%
 
-TIER 1 BETS (Gap ≥ 10%)
-------------------------
-13 races qualify as high-confidence selections.
-Based on pattern analysis from 13-15/03, these carry ~85-90% place rate historically.
+BEST BET OF THE DAY (available results)
+----------------------------------------
+  #1 Rank 1: BALLARAT R14 Box1 Duke Caboom (gap 20.1%) — NO RESULT PROVIDED
+  #2 Rank 2: Q STRAIGHT R13 Box3 Milo Davis (gap 18.1%) — NO RESULT PROVIDED
+  Best matched bet winner: Nowra R8 Box8 Towering Earl (rank 6, gap 11.9%) — WIN ✓
 
-BEST WIN BETS (Gap ≥ 15%) — 3 selections:
-  ★ BALLARAT R14  — Box 1 Duke Caboom    (gap 20.1%)  STRONG
-  ★ Q STRAIGHT R13 — Box 3 Milo Davis   (gap 18.1%)  STRONG
-  ★ NOWRA R7      — Box 1 Market Maverick (gap 17.5%) STRONG
+TRACK INSIGHTS
+----------------------------------------
+  Mandurah                   5/12 wins (41.7%)  7/12 placed (58.3%) 🏆 BEST
+  Nowra                      3/10 wins (30.0%)  7/10 placed (70.0%) 🏆 BEST
+  Maitland                   3/10 wins (30.0%)  9/10 placed (90.0%) 🏆 BEST
+  Dubbo                      2/10 wins (20.0%)  8/10 placed (80.0%) 
+  Ballarat                   2/12 wins (16.7%)  9/12 placed (75.0%) 
+  Geelong                    2/12 wins (16.7%)  7/12 placed (58.3%) 
+  Ladbrokes Q Straight       2/12 wins (16.7%)  8/12 placed (66.7%) 
+  Sandown                    1/12 wins (8.3%)  6/12 placed (50.0%) ⚠️ POOR
+  Shepparton                 1/12 wins (8.3%)  5/12 placed (41.7%) ⚠️ POOR
 
-BEST EACH-WAY BETS (Gap 10–15%) — 10 selections:
-  NOWRA R2     Box1 Stop And Stare     (14.3%)
-  SANDOWN R2   Box4 Bernardo Split     (11.9%)
-  NOWRA R8     Box8 Towering Earl      (11.9%)  ⚠️ Box8 — monitor
-  SHEPPARTON R3 Box1 Procyon           (11.9%)
-  Maitland R6  Box1 Exquisite Ethics   (11.7%)
-  BALLARAT R10 Box8 Remi Joy           (11.6%)  ⚠️ Box8 — monitor
-  GEELONG R2   Box1 Paw Melody         (10.8%)
-  SANDOWN R4   Box2 Jumbuk Sachin      (10.7%)
-  Q STRAIGHT R11 Box4 Redeemer's Way   (10.7%)
-  Q STRAIGHT R12 Box1 Weather Man Rick (10.1%)
+BOX INSIGHTS
+----------------------------------------
+  Box 1   6/30 wins (20.0%)  20/30 placed (66.7%) 
+  Box 2   2/19 wins (10.5%)  12/19 placed (63.2%) 
+  Box 3   2/9 wins (22.2%)  5/9 placed (55.6%) 
+  Box 4   3/16 wins (18.8%)  9/16 placed (56.2%) 
+  Box 5   2/5 wins (40.0%)  5/5 placed (100.0%) ⭐ BEST
+  Box 6   1/5 wins (20.0%)  4/5 placed (80.0%) 
+  Box 7   2/8 wins (25.0%)  5/8 placed (62.5%) 
+  Box 8   3/9 wins (33.3%)  6/9 placed (66.7%) ⭐ BEST
+  Box 9   0/1 wins (0.0%)  0/1 placed (0.0%) 
 
-TRACK NOTES (based on historical 13-15/03 patterns)
-----------------------------------------------------
-  NOWRA    — No prior history this run. 3 races in top 10. Strong confidence.
-  BALLARAT — 14 races. Best gap today. Provincial Victoria.
-  Q STRAIGHT — 14 races, 3 in top 13. Watch for emergency starters.
-  SANDOWN  — Not a peak Saturday night. Monday card likely lower competition.
-  GEELONG  — Historical note: Below average win rate on 13/03 (8.3%). Monitor.
-  SHEPPARTON — 14 races. 1 race in top 10. Good provincial track.
-  Maitland — 10 races. 1 race in top 10.
-  Angle Park — Adelaide track (SA). 12 races. No entries in top 10.
-  Mandurah — WA track. 13 races. 1 entry (R4, rank 20 at 7.4%).
-  DUBBO    — Regional NSW. 10 races. 1 entry (R2, rank 16 at 8.5%).
+NOTABLE OBSERVATIONS
+----------------------------------------
+  1. Top-2 predictions (Ballarat R14, Q Straight R13) had no results — cannot verify
+     the highest-confidence bets of the day.
+  2. Nowra was the standout track: 3 wins in ranks 6/17/23 (30% win rate, 70% placed).
+  3. Mandurah was the surprise: 5/12 wins (41.7%) — highest win rate of the day.
+  4. Box 5 standout: 40% wins, 100% placed (5/5 placed — small sample).
+  5. Sandown and Shepparton underperformed (8.3% wins each).
+  6. Box 1 dominant in model (30 of 102 predictions) but only 20% wins — slight over-reliance.
+  7. Maitland: 30% wins with 90% placed — excellent place betting track today.
+  8. Overall 20.6% win rate vs ~12.5% random chance = solid model signal.
+  9. High-gap predictions missed today — Sandown R2 (Box4, gap 11.9%) and
+     Ballarat R10 (Box8, gap 11.6%) both failed to win.
+ 10. Metro tracks (Sandown/Geelong/Ballarat) as expected had compressed gaps;
+     Ballarat 16.7% wins, Geelong 16.7%, Sandown 8.3%.
 
-BOX DISTRIBUTION — Top 15 selections:
-  Box 1: 7 times (dominant)
-  Box 3: 1 time
-  Box 4: 2 times
-  Box 8: 3 times (⚠️ Box 8 had 0 wins on 15/03 — elevated risk)
-  Box 2: 1 time
-  Box 7: 1 time
+HISTORICAL COMPARISON
+----------------------------------------
+  2026-03-13: 21.4% wins, 53.2% placed
+  2026-03-14: 26.6% wins, 73.4% placed
+  2026-03-15: 24.8% wins, 74.3% placed
+  2026-03-16: 20.6% wins, 64.7% placed
 
-⚠️ BOX 8 WARNING: Box 8 appears 3 times in top 15 (NOWRA R8, BALLARAT R10, SHEPPARTON R15).
-   On 15/03/2026, Box 8 had 0 wins across all tracks. Monitor — avoid Box 8 for win bets.
-
-================================================================================
-RECOMMENDED BETTING STRATEGY FOR 16/03/2026
-================================================================================
-
-WIN BETS (3 selections — gap ≥ 15%):
-  1. BALLARAT R14  — Box 1 Duke Caboom    (20.1% gap)
-  2. Q STRAIGHT R13 — Box 3 Milo Davis   (18.1% gap)
-  3. NOWRA R7      — Box 1 Market Maverick (17.5% gap)
-
-EACH-WAY BETS (avoiding Box 8 based on 15/03 pattern):
-  4. NOWRA R2      — Box 1 Stop And Stare    (14.3% gap)
-  5. SHEPPARTON R3 — Box 1 Procyon           (11.9% gap)
-  6. Maitland R6   — Box 1 Exquisite Ethics  (11.7% gap)
-  7. GEELONG R2    — Box 1 Paw Melody        (10.8% gap)
-  8. SANDOWN R4    — Box 2 Jumbuk Sachin     (10.7% gap)
-  9. Q STRAIGHT R11 — Box 4 Redeemer's Way  (10.7% gap)
- 10. Q STRAIGHT R12 — Box 1 Weather Man Rick (10.1% gap)
-
-MULTI/PARLAY SUGGESTION (high conviction legs):
-  BALLARAT R14 Box1 + NOWRA R7 Box1 + Q STRAIGHT R13 Box3
-  (All 3 at gap ≥ 17% — strongest signals of the day)
-
-EXPECTED OUTCOMES (based on 13-15/03 historical patterns):
-  Win rate:   ~25-30% (for gap ≥ 10% selections)
-  Place rate: ~85-90% (for gap ≥ 10% selections)
-  Best bet (gap ≥ 20%): 100% placed in last 3 days (GAWLER R4 15/03 placed 4th)
-
-================================================================================
-PATTERN NOTES (carried forward from 15/03 analysis)
-================================================================================
-  ✅ Gap ≥ 10%: Best filter — 84.6% placed on 15/03, 88.9% placed on 14/03
-  ✅ Gap ≥ 15%: 80% placed on 15/03 (very reliable)
-  ✅ Gap ≥ 20%: 100% placed all 3 days (placed not necessarily won)
-  ⚠️ Box 8: Underperformed severely on 15/03 (0 wins). Avoid as primary win bet today.
-  ⚠️ Emergency starters (box 9+): Upset Q STRAIGHT models before. Check fields.
-  ✅ Monday provincial cards: Better gaps vs Saturday metro (less competitive fields).
-================================================================================
-END OF DAILY ANALYSIS — 16/03/2026
 ================================================================================
