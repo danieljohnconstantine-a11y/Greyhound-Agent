@@ -54,7 +54,7 @@ Rank  Track           Race    Gap      Box  Dog                   Confidence
   7   HOBART          R2    13.09%  Box 2   Take His Cash         25.28%
       ► Hobart/Elwick, Box 2 at 25.3%.
   8   Q LAKESIDE      R3    12.35%  Box 4   Mr. Lasso             29.16%
-      ► Box 4 at Townsville Q Lakeside — note Q Lakeside had 2 races in top 10.
+      ► Box 4 at Q Lakeside — track has 2 races in top 10 (R1 and R3).
   9   Angle Park      R7    12.09%  Box 8   Rippin' Pedro         24.50%
       ► Metro track, but still 12% gap — solid for Angle Park.
  10   Mandurah        R7    11.55%  Box 2   Sunset Agrippina      28.55%
@@ -169,7 +169,7 @@ BOX ANALYSIS (Top 15 Bets)
     Box 1: Ranks 5, 11, 15          — 3 bets (20%)
     Box 2: Ranks 2, 7, 10, 14       — 4 bets (27%)
     Box 4: Ranks 8, 12              — 2 bets (13%)
-    Box 7: Ranks 4, 19(R8=box7)     — 1 bet (7%)
+    Box 7: Rank 4                        — 1 bet (7%)
     Box 8: Ranks 3, 6, 9, 13        — 4 bets (27%)
 
   Box 2 and Box 8 each appear 4 times in the top-15 — strong outer/rail split.
