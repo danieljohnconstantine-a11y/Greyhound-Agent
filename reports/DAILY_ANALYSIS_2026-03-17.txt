@@ -1,0 +1,229 @@
+================================================================================
+DAILY ANALYSIS — 2026-03-17 (Tuesday)
+================================================================================
+
+RACE CARD SUMMARY
+----------------------------------------
+  11 tracks predicted (Horsham, Geelong, Grafton, Q Lakeside, Hobart,
+                        Angle Park, Mandurah, Bulli, Gosford, Townsville, Warragul)
+  11 PDFs processed (ANGLG/BULIG/ELWKG/GEELG/GOSFG/GRAFG/HSHMG/MANDG/QLAKG/TOWNG/WARGG)
+  124 races predicted
+
+  ⚠️  METRO CONTEXT: 2 metro tracks today (Angle Park SA, Gosford NSW)
+     Metro cards produce compressed gaps — lower confidence scores expected for these tracks.
+     Non-metro majority keeps overall gaps healthy.
+
+GAP DISTRIBUTION (predictions, all 124 races)
+----------------------------------------
+  Median gap     : 2.51%
+  Top-10 median  : 13.98%
+  Races >= 20%   : 1
+  Races >= 15%   : 3
+  Races >= 10%   : 15
+
+  ⭐ STANDOUT: HORSHAM R11 gap 32.27% — extraordinary confidence,
+     more than double the 2nd-ranked bet (GEELONG R6 at 15.78%).
+     This is the strongest single-race signal recorded in recent sessions.
+
+================================================================================
+🏆 TOP BETTING SELECTIONS — 2026-03-17 (Tuesday)
+================================================================================
+
+TIER 1 — PREMIUM (Gap ≥ 20%) — STRONGEST BETS
+----------------------------------------------------------------------
+Rank  Track           Race    Gap      Box  Dog                   Confidence
+  1   HORSHAM         R11   32.27%  Box 5   Needful               45.08%
+      ► BOX 5 at 45.1% confidence with a 32.3% gap to 2nd — exceptional.
+        Gap this large is extremely rare. Strong WIN recommendation.
+        2nd dog: Box 1 Doongalla Rocket at 12.81%.
+
+TIER 2 — HIGH CONFIDENCE (Gap 10–20%)
+----------------------------------------------------------------------
+Rank  Track           Race    Gap      Box  Dog                   Confidence
+  2   GEELONG         R6    15.78%  Box 2   Happy And Numb        38.42%
+      ► Box 2 dominant at 38.4%. Geelong provincial VIC — good recent track performance.
+  3   GRAFTON         R6    15.14%  Box 8   Benny Trick           29.59%
+      ► Box 8 at 29.6%. Grafton form guide — note Box 8 outer box preference at Grafton.
+  4   Q LAKESIDE      R1    14.79%  Box 7   Sagacious Syd         24.66%
+      ► Opening race of the night at Q Lakeside. Box 7 at 24.7%.
+  5   HORSHAM         R6    14.12%  Box 1   Paw Clarissa          25.26%
+      ► Box 1 at 25.3% — same track as best bet. Horsham clearly the model's
+        strongest track today (2 races in top 5).
+  6   GRAFTON         R1    13.84%  Box 8   Robell Rumi           29.03%
+      ► Box 8 again at Grafton — opening race. 29% confidence.
+  7   HOBART          R2    13.09%  Box 2   Take His Cash         25.28%
+      ► Hobart/Elwick, Box 2 at 25.3%.
+  8   Q LAKESIDE      R3    12.35%  Box 4   Mr. Lasso             29.16%
+      ► Box 4 at Townsville Q Lakeside — note Q Lakeside had 2 races in top 10.
+  9   Angle Park      R7    12.09%  Box 8   Rippin' Pedro         24.50%
+      ► Metro track, but still 12% gap — solid for Angle Park.
+ 10   Mandurah        R7    11.55%  Box 2   Sunset Agrippina      28.55%
+      ► Box 2 at 28.6% at Mandurah — Mandurah was our BEST TRACK on 16/03 (41.7% wins).
+ 11   HOBART          R5    11.14%  Box 1   Deadly Grin           28.22%
+      ► Hobart has 2 bets in top 11. Box 1 at 28.2%.
+ 12   Bulli           R6    11.11%  Box 4   Winged Rupee          22.58%
+      ► Box 4 at 22.6% at Bulli.
+ 13   GEELONG         R10   10.99%  Box 8   Busting               21.73%
+      ► Geelong 2nd top-10 race. Box 8 at 21.7%.
+ 14   GOSFORD         R9    10.92%  Box 2   Trunkey Mink          28.86%
+      ► Metro NSW, but strong 28.9% confidence in Box 2.
+ 15   TOWNSVILLE      R5    10.77%  Box 1   Ascend Kalmia         22.55%
+      ► Box 1 at Townsville. 10.8% gap.
+
+TIER 3 — MODERATE CONFIDENCE (Gap 5–10%)
+----------------------------------------------------------------------
+  16  GRAFTON         R5     9.79%  Box 2   Nanny's Boy           23.57%
+  17  Q LAKESIDE      R12    9.74%  Box 3   Hennessy Gold         22.56%
+  18  Warragul        R1     8.76%  Box 8   Mistress Grace        22.88%
+  19  HOBART          R8     8.01%  Box 7   Ronny Rocket          29.67%
+      ► Note: HOBART R8 has 29.7% confidence despite only 8% gap — very bunched field.
+  20  GEELONG         R1     7.57%  Box 3   Aussie Mirage         23.29%
+  21  Bulli           R4     7.27%  Box 6   Don't Brew It         28.32%
+  22  GOSFORD         R4     6.97%  Box 7   Good Odds Keona       16.58%
+  23  Mandurah        R2     6.64%  Box 5   West On Ricky         22.25%
+  24  GOSFORD         R8     6.61%  Box 6   Weffalee Shield       16.43%
+  25  Angle Park      R10    6.50%  Box 8   Canya Nameless        28.52%
+  26  HORSHAM         R10    6.07%  Box 3   Paw Bastow            19.01%
+  27  Warragul        R9     5.82%  Box 8   Paw Hazelton          16.93%
+  28  TOWNSVILLE      R2     5.66%  Box 8   Ringwald              21.28%
+  29  GOSFORD         R7     5.50%  Box 5   My Irish              17.06%
+  30  HOBART          R1     5.44%  Box 8   Scarred               16.16%
+  31  Warragul        R4     5.37%  Box 8   Lamia Nonna Mim       19.80%
+  32  Warragul        R7     5.21%  Box 8   Regal Spencer         29.54%
+      ► Warragul R7: 29.5% confidence but low gap — very competitive race.
+  33  Q LAKESIDE      R4     5.15%  Box 1   Zorka                 19.28%
+  34  HORSHAM         R3     5.06%  Box 8   Relax Mate            18.75%
+  35  GEELONG         R12    5.02%  Box 1   Rushmore Red          15.42%
+
+================================================================================
+TRACK-BY-TRACK ANALYSIS
+================================================================================
+
+  HORSHAM (VIC provincial) — 13 races
+  ----------------------------------------
+  Races in top-5: R11 (rank 1, gap 32.27%), R6 (rank 5, gap 14.12%)
+  Also: R10 (rank 26, 6.07%), R3 (rank 34, 5.06%)
+  4 races with gap ≥ 5%, including the day's standout best bet.
+  ★ PRIORITY TRACK TODAY — model has strong conviction here.
+
+  GEELONG (VIC provincial) — 13 races
+  ----------------------------------------
+  Races in top-15: R6 (rank 2, gap 15.78%), R10 (rank 13, gap 10.99%)
+  Also: R1 (rank 20, 7.57%), R12 (rank 35, 5.02%)
+  Strong showing — 4 races with gap ≥ 5%.
+  ★ SECOND-PRIORITY TRACK — 2 high-confidence races.
+
+  GRAFTON (NSW provincial) — 11 races
+  ----------------------------------------
+  Top bets: R6 (rank 3, 15.14%), R1 (rank 6, 13.84%), R5 (rank 16, 9.79%)
+  3 races in top 16. Box 8 features twice (R1 and R6) — Grafton outer box bias.
+
+  Q LAKESIDE (QLD) — 12 races
+  ----------------------------------------
+  Top bets: R1 (rank 4, 14.79%), R3 (rank 8, 12.35%), R12 (rank 17, 9.74%)
+  3 races in top 17. Good spread across the card.
+
+  HOBART / ELWICK (TAS) — 10 races
+  ----------------------------------------
+  Top bets: R2 (rank 7, 13.09%), R5 (rank 11, 11.14%), R8 (rank 19, 8.01%)
+  3 races in top 20. Consistent confidence across Hobart races.
+
+  ANGLE PARK (SA metro) — 12 races
+  ----------------------------------------
+  Top bets: R7 (rank 9, 12.09%), R10 (rank 25, 6.50%)
+  Metro track — compressed gaps expected. R7 notable at 12% for a metro.
+
+  MANDURAH (WA regional) — 10 races
+  ----------------------------------------
+  Top bets: R7 (rank 10, 11.55%), R2 (rank 23, 6.64%)
+  ★ NOTE: Mandurah was #1 track on 16/03/2026 (41.7% win rate, 5/12 wins).
+  Follow Mandurah selections — R7 Box 2 Sunset Agrippina is a priority.
+
+  GOSFORD (NSW metro) — 11 races
+  ----------------------------------------
+  Top bets: R9 (rank 14, 10.92%), R4 (rank 22, 6.97%), R8 (rank 24, 6.61%)
+  Metro track. R9 Box 2 Trunkey Mink still solid at 10.9% for a metro.
+
+  BULLI (NSW regional) — 8 races
+  ----------------------------------------
+  Top bets: R6 (rank 12, 11.11%), R4 (rank 21, 7.27%)
+  Smaller card — 2 notable selections.
+
+  TOWNSVILLE (QLD provincial) — 12 races
+  ----------------------------------------
+  Top bets: R5 (rank 15, 10.77%), R2 (rank 28, 5.66%)
+  Solid mid-tier confidence.
+
+  WARRAGUL (VIC provincial) — 12 races
+  ----------------------------------------
+  Top bets: R1 (rank 18, 8.76%), R9 (rank 27, 5.82%), R7 (rank 32, 5.21%)
+  Lower overall confidence than other VIC tracks today.
+  NOTE: Warragul R7 Box 8 Regal Spencer has 29.5% confidence but only 5.2% gap
+  (very competitive field — avoid for WIN, consider PLACE).
+
+================================================================================
+BOX ANALYSIS (Top 15 Bets)
+================================================================================
+
+  Top-15 box distribution:
+    Box 1: Ranks 5, 11, 15          — 3 bets (20%)
+    Box 2: Ranks 2, 7, 10, 14       — 4 bets (27%)
+    Box 4: Ranks 8, 12              — 2 bets (13%)
+    Box 7: Ranks 4, 19(R8=box7)     — 1 bet (7%)
+    Box 8: Ranks 3, 6, 9, 13        — 4 bets (27%)
+
+  Box 2 and Box 8 each appear 4 times in the top-15 — strong outer/rail split.
+  Historical context (2026-03-16): Box 5 was 40% wins (best box), Box 8 was 33%.
+
+================================================================================
+BETTING RECOMMENDATIONS SUMMARY
+================================================================================
+
+  🥇 BEST BET (Single): HORSHAM R11 — Box 5 Needful (32.27% gap, 45.08% conf)
+     Strongest model signal in recent sessions. Near-certain model pick.
+
+  🥈 BANKER SELECTION: GEELONG R6 — Box 2 Happy And Numb (15.78% gap, 38.42% conf)
+     Strong gap, high confidence percentage, secondary Tier 1 bet.
+
+  📋 TOP 5 RECOMMENDED WIN BETS:
+     1. HORSHAM R11 — Box 5 Needful                [gap 32.27%]  *** BEST BET ***
+     2. GEELONG R6 — Box 2 Happy And Numb          [gap 15.78%]
+     3. GRAFTON R6 — Box 8 Benny Trick             [gap 15.14%]
+     4. Q LAKESIDE R1 — Box 7 Sagacious Syd        [gap 14.79%]
+     5. HORSHAM R6 — Box 1 Paw Clarissa            [gap 14.12%]
+
+  📋 MULTI / PARLAY LEGS (ordered by confidence):
+     Leg 1: HORSHAM R11 Box 5 Needful              [gap 32.27%]
+     Leg 2: GEELONG R6 Box 2 Happy And Numb        [gap 15.78%]
+     Leg 3: HOBART R2 Box 2 Take His Cash          [gap 13.09%]
+     Leg 4: Mandurah R7 Box 2 Sunset Agrippina     [gap 11.55%]
+
+  📋 EACH-WAY / PLACE SELECTIONS (high confidence, competitive fields):
+     - HOBART R8 Box 7 Ronny Rocket               (29.67% conf, 8.01% gap — bunched)
+     - Warragul R7 Box 8 Regal Spencer            (29.54% conf, 5.21% gap — bunched)
+     - Angle Park R10 Box 8 Canya Nameless        (28.52% conf, 6.50% gap)
+
+  📋 TRACK FOCUS ORDER:
+     1. HORSHAM  (2 top-5 bets — best track of the day)
+     2. GEELONG  (2 top-15 bets, strong provincial card)
+     3. GRAFTON  (3 top-16 bets, consistent confidence)
+     4. Q LAKESIDE (3 top-17 bets)
+     5. MANDURAH (Mandurah best track 16/03, R7 strong)
+
+  ⚠️  CAUTION: Angle Park and Gosford (metro tracks) — gaps are compressed.
+      Only bet Angle Park R7 and Gosford R9 with reduced stakes.
+
+================================================================================
+HISTORICAL COMPARISON
+================================================================================
+  2026-03-13 (Thu): 21.4% wins, 53.2% placed  [126 races]
+  2026-03-14 (Fri): 26.6% wins, 73.4% placed  [ 79 races matched]
+  2026-03-15 (Sun): 24.8% wins, 74.3% placed  [113 races]
+  2026-03-16 (Mon): 20.6% wins, 64.7% placed  [102 races matched]
+  2026-03-17 (Tue): [PREDICTIONS — awaiting results]
+
+  Average (Mon-Sun sample): ~23.4% wins, ~66.3% placed
+  Best-bet filter (≥10% gap) historical placed rate: ~82-85%
+  Today's best bet (32.27%) is strongest single-race gap in recent sessions.
+
+================================================================================
