@@ -243,9 +243,10 @@ Rank  Priority  Track                Race   Box  Dog                  Gap     Co
  15   ⭐     RICHMOND             R2     1    Dark Money            9.07%  23.99%
 
 NOTES ON BOX SELECTION:
-  - Box 1: Best bet on 4 of top-10 races (ROCKHAMPTON R1, RICHMOND R8 [Box2], SALE R1, GUNNEDAH R4)
-  - Box 7: Appears in 3 of top 10 (SALE R3, Q LAKESIDE R12, Q LAKESIDE R14)
-  - Box 1/2 combination dominant in inner boxes — typical inner-box model preference
+  - Box 1: 2 of top-10 races (ROCKHAMPTON R1, BALLARAT R7) — inner box advantage
+  - Box 7: 2 of top-10 races (SALE R3, Q LAKESIDE R12) — outer box performing well today
+  - Box 2: 2 of top-10 races (RICHMOND R8, Angle Park R6) — inside draw strength
+  - Box 1/2 inner and Box 7/8 outer both represented — balanced field today
 
 ================================================================================
 📈 MODEL PERFORMANCE CONTEXT
