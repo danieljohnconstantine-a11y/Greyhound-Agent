@@ -1,5 +1,16 @@
 # Greyhound Analytics Pipeline
 
+---
+
+## 📢 LATEST RESPONSE
+
+> **Today's full betting summary and prediction audit:**  
+> 👉 **[RESPONSE.md](RESPONSE.md)** — rendered (easiest to read)  
+> 👉 **[LAST_RESPONSE.txt](LAST_RESPONSE.txt)** — plain text  
+> *(updated each race day)*
+
+---
+
 Automated parsing and scoring of greyhound racing forms.
 
 ## Features
