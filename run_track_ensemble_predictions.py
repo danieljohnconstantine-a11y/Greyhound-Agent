@@ -746,7 +746,23 @@ def main():
                         f"(gap: {bet_rows[0]['gap']:.4f}%)\n")
 
         print(f"✅ Best bets report saved: {best_bets_path}")
-        
+
+        # Write LAST_RESPONSE.txt at the repo root so the latest response is
+        # always accessible in one place regardless of which report file was
+        # most recently viewed.
+        repo_root = os.path.dirname(os.path.abspath(__file__))
+        last_response_path = os.path.join(repo_root, "LAST_RESPONSE.txt")
+        _date_str = datetime.now().strftime('%Y-%m-%d')
+        _daily_analysis_path = os.path.join(repo_root, "reports", f"DAILY_ANALYSIS_{_date_str}.txt")
+        with open(last_response_path, 'w', encoding='utf-8') as _lr:
+            if os.path.exists(_daily_analysis_path):
+                with open(_daily_analysis_path, 'r', encoding='utf-8') as _da:
+                    _lr.write(_da.read())
+                _lr.write("\n")
+            with open(best_bets_path, 'r', encoding='utf-8') as _bb:
+                _lr.write(_bb.read())
+        print(f"✅ Last response saved: {last_response_path}")
+
         print("\n" + "=" * 80)
         print("✅ PREDICTIONS COMPLETE!")
         print("=" * 80)
@@ -758,6 +774,7 @@ def main():
         print(f"   {excel_path}")
         print(f"   {summary_path}")
         print(f"   {best_bets_path}")
+        print(f"   {last_response_path}")
         print("=" * 80)
     else:
         print("\n⚠️  No predictions generated")
