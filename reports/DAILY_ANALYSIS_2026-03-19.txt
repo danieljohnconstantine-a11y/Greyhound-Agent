@@ -1,0 +1,283 @@
+================================================================================
+DAILY ANALYSIS — 2026-03-19 (Thursday)
+================================================================================
+
+RACE CARD SUMMARY
+----------------------------------------
+  13 tracks predicted (Angle Park, Ballarat, Hobart, Mt Gambier, Mandurah,
+                        Nowra, Q Parklands, Q Straight, Sandown, Shepparton,
+                        The Gardens, Wentworth Park, Warragul)
+  14 PDFs uploaded to data_predictions/
+     (ANGLG/BRATG/ELWKG/GARDG/MANDG/MTGG/NOWRG/QPRKG/QSTRG/RISTG/SANDG/SHEPG/WARGG/WENPG)
+  146 races predicted across 13 tracks
+  NOTE: RISTG1903form.pdf uploaded but no matching track appeared in model output
+        — possible track not racing or data issue (not included in predictions).
+
+  METRO CONTEXT: 3 metro tracks today (Sandown VIC, Angle Park SA, Wentworth Park NSW)
+     Metro cards compress gaps — extra caution advised on low-confidence metro picks.
+     The Gardens (NSW) and Warragul (VIC) also notable mid-tier tracks.
+
+TRACK BREAKDOWN
+----------------------------------------
+  SHEPPARTON       14 races   (VIC country)
+  BALLARAT         14 races   (VIC country)
+  Q STRAIGHT       12 races   (QLD)
+  MT GAMBIER       12 races   (SA country)
+  Mandurah         12 races   (WA)
+  SANDOWN          12 races   (VIC metro)
+  Warragul         12 races   (VIC country)
+  The Gardens      11 races   (NSW)
+  NOWRA            11 races   (NSW country)
+  Angle Park       10 races   (SA metro)
+  Q PARKLANDS      10 races   (QLD)
+  WENTWORTH PARK    8 races   (NSW metro)
+  HOBART            8 races   (TAS)
+  -----------------------------------------------
+  TOTAL:          146 races across 13 tracks
+
+CONFIDENCE PROFILE
+----------------------------------------
+  Races with gap >= 20%:   0   (⚠ No high-confidence locks today)
+  Races with gap >= 15%:   4
+  Races with gap >= 10%:  11
+  Median gap (top 10):   12.65%
+  Overall character:     Moderate confidence day — thin margins in many races.
+                         Best opportunities in top 4 ranked bets.
+
+TOP 10 BEST BETS (by model confidence gap)
+----------------------------------------
+  Rank  Track             Race   Gap       1st Dog              1st%
+  ----  ----------------  -----  --------  -------------------  -----
+  #1    SHEPPARTON        R1     19.87%    Box 7 Paw Jadore     31.68%  ⭐ BEST BET
+  #2    SANDOWN           R3     19.77%    Box 2 Flying Dinar   37.55%  ⭐
+  #3    Q STRAIGHT        R6     16.69%    Box 8 Little House   29.10%
+  #4    The Gardens       R11    15.29%    Box 7 Savina         33.41%
+  #5    Q PARKLANDS       R4     12.77%    Box 8 Zipping Kravitz 23.37%
+  #6    SHEPPARTON        R9     12.53%    Box 8 Excellent Dash 23.72%
+  #7    NOWRA             R4     12.43%    Box 4 Cumbria Chrissy 28.27%
+  #8    WENTWORTH PARK    R6     11.78%    Box 2 Canya Handle It 25.57%
+  #9    Q PARKLANDS       R7     10.93%    Box 7 Daysea's Rory  29.77%
+  #10   BALLARAT          R6     10.42%    Box 1 Solar Spectrum 22.25%
+
+ALL PREDICTIONS BY TRACK (predicted winner, confidence%)
+----------------------------------------
+
+  SHEPPARTON (14 races) — VIC Country
+  R1:  Box7  Paw Jadore          31.7%  ★★ GAP 19.87%
+  R2:  Box4  Winter Runnings     11.3%
+  R3:  Box2  Scott Vicious       14.1%
+  R4:  Box3  Smiling Lily        16.0%
+  R5:  Box1  Mighty Star         15.3%  ★ GAP 4.1%
+  R6:  Box6  Aussie Raven        14.9%
+  R7:  Box8  Rowdy's Beast       13.1%  ★ GAP 3.9%
+  R8:  Box8  Universe            17.9%
+  R9:  Box8  Excellent Dash      23.7%  ★★ GAP 12.53%
+  R10: Box8  Canya Ignite        17.9%  ★ GAP 3.8%
+  R11: Box1  Kraken Paddy        11.9%
+  R12: Box1  Paw Vancouver        8.8%
+  R13: Box5  Paw Olive           18.5%  ★ GAP 5.0%
+  R14: Box2  Hectic Harry         9.0%
+
+  SANDOWN (12 races) — VIC Metro ⚠ Metro
+  R1:  Box2  Paw Otis            23.3%  ★ GAP 8.76%
+  R2:  Box8  Paw Carver          17.6%
+  R3:  Box2  Flying Dinar        37.5%  ★★ GAP 19.77%
+  R4:  Box1  Infra Rock          28.9%  ★ GAP 2.0%
+  R5:  Box1  Resisting           17.8%
+  R6:  Box1  Zambora Bliss       24.5%  ★ GAP 6.26%
+  R7:  Box4  Tripped Out         28.5%  ★ GAP 9.71%
+  R8:  Box1  Black Star Riot     31.6%  ★ GAP 9.30%
+  R9:  Box1  Cris Tessa          18.6%
+  R10: Box2  Select Airley       18.6%
+  R11: Box1  Warm Hugs           25.8%  ★ GAP 3.72%
+  R12: Box2  Like A Rock         17.9%
+
+  Q STRAIGHT (12 races) — QLD
+  R1:  Box3  Miss Mulgowie       11.8%
+  R2:  Box2  Iron Condor         16.8%  ★ GAP 4.9%
+  R3:  Box2  Gonzo               15.8%  ★ GAP 4.7%
+  R4:  Box6  Big Reveal          10.7%
+  R5:  Box7  Zipping Schrub      15.1%
+  R6:  Box8  Little House        29.1%  ★★ GAP 16.69%
+  R7:  Box6  Rannoch             22.8%  ★ GAP 4.2%
+  R8:  Box5  Hey Ernie           18.9%  ★ GAP 2.1%
+  R9:  Box7  No More Beer        26.0%  ★ GAP 4.9%
+  R10: Box4  Tuki Beach          12.8%
+  R11: Box4  Little Jack         10.3%
+  R12: Box2  Hayden's Gift       17.2%  ★ GAP 4.3%
+
+  The Gardens (11 races) — NSW
+  R1:  Box3  My Wee Lass         15.3%
+  R2:  Box2  Federal Senor       13.6%
+  R3:  Box7  Ferocious Outlaw    18.7%
+  R4:  Box1  Fear Not Frenzy     14.3%
+  R5:  Box2  Blazing Prince      15.7%
+  R6:  Box4  Jasper Darke        17.2%  ★ GAP 3.8%
+  R7:  Box4  Paper Shredder      12.8%
+  R8:  Box1  Fascinate Abby      14.1%
+  R9:  Box6  Hooked On Joy       11.3%
+  R10: Box1  Chief Enforcer      18.3%  ★ GAP 5.0%
+  R11: Box7  Savina              33.4%  ★★ GAP 15.29%
+
+  Q PARKLANDS (10 races) — QLD
+  R1:  Box1  Canya Detonator     14.4%  ★ GAP 4.4%
+  R2:  Box1  Moet Magic          22.3%
+  R3:  Box2  Bentley Olaf        17.3%  ★ GAP 4.1%
+  R4:  Box8  Zipping Kravitz     23.4%  ★★ GAP 12.77%
+  R5:  Box6  Sweetest Smile      11.9%
+  R6:  Box8  Strut               12.9%
+  R7:  Box7  Daysea's Rory       29.8%  ★★ GAP 10.93%
+  R8:  Box1  Sironen Tiger       20.5%  ★ GAP 6.46%
+  R9:  Box2  Billie Cash Kid     11.9%
+  R10: Box4  Daysea's Chief       9.7%
+
+  NOWRA (11 races) — NSW Country
+  R1:  Box4  Bow Meya            10.8%
+  R2:  Box5  Sabina Sparkles     18.4%  ★ GAP 4.9%
+  R3:  Box8  Harrita's Rebel     12.9%
+  R4:  Box4  Cumbria Chrissy     28.3%  ★★ GAP 12.43%
+  R5:  Box1  Elle's Moon         17.0%
+  R6:  Box4  Gypsy Grace         15.1%
+  R7:  Box3  Zipping Rapunzel    14.4%
+  R8:  Box8  Hurricane Haley     15.7%
+  R9:  Box5  Shanti Bay          21.9%  ★ GAP 9.80%
+  R10: Box5  Uncle Walter        11.9%
+  R11: Box4  Queen Charlm        15.9%
+
+  WENTWORTH PARK (8 races) — NSW Metro ⚠ Metro
+  R1:  Box1  I'll See            12.6%
+  R2:  Box7  Zipping Chicago     11.2%
+  R3:  Box1  Zipping Zeppelin    15.9%
+  R4:  Box3  Natisa's Secret     17.8%
+  R5:  Box8  Wonder I Do         19.4%  ★ GAP 1.99%
+  R6:  Box2  Canya Handle It     25.6%  ★★ GAP 11.78%
+  R7:  Box8  Taw Major           12.9%
+  R8:  Box8  Mrs. Buttons        16.4%
+
+  BALLARAT (14 races) — VIC Country
+  R1:  Box1  Hey Lacey           20.4%  ★ GAP 3.3%
+  R2:  Box5  Indian Chief        23.9%
+  R3:  Box5  Brittles            31.8%  ★ GAP 1.6%
+  R4:  Box5  Quantum Master      11.8%
+  R5:  Box4  Ruckman             11.1%
+  R6:  Box1  Solar Spectrum      22.2%  ★★ GAP 10.42%
+  R7:  Box8  Doongalla Adam      11.2%
+  R8:  Box4  How Amazing         13.5%
+  R9:  Box4  Mrs. Tiggywinkle    14.7%
+  R10: Box8  Paw Oakley          13.4%
+  R11: Box4  Gold Stripes        14.2%
+  R12: Box1  Paw Amalfi          14.8%
+  R13: Box5  Paw London          14.9%  ★ GAP 4.3%
+  R14: Box4  Bush Circus         13.8%
+
+  Mandurah (12 races) — WA
+  R1:  Box2  Patriot Lyndon      17.2%
+  R2:  Box6  Blue And Boujee     12.5%
+  R3:  Box3  Cootamundra Lad     15.3%  ★ GAP 4.5%
+  R4:  Box1  Pingelly Prince     20.2%  ★★ GAP 10.19%
+  R5:  Box5  Dancing Dennis      19.7%  ★ GAP 5.1%
+  R6:  Box1  Send It Kye         12.7%
+  R7:  Box2  Global Flash        15.8%
+  R8:  Box8  Cleary Keeping      17.8%
+  R9:  Box4  Spin King           15.6%
+  R10: Box2  Epic Marceline      14.0%
+  R11: Box1  Harper Smirch       15.0%
+  R12: Box1  Canya Bypass        20.8%  ★ GAP 4.3%
+
+  MT GAMBIER (12 races) — SA Country
+  R1:  Box1  Miss Bobbie         25.3%  ★ GAP 6.9%
+  R2:  Box2  Compton Tig         13.6%
+  R3:  Box8  Lektra Hank         21.6%  ★ GAP 5.6%
+  R4:  Box5  Rough Girl Ruby     12.9%
+  R5:  Box1  Rough Girl Mel      19.1%  ★ GAP 5.3%
+  R6:  Box2  Blue To Burn        12.8%
+  R7:  Box2  Western's Peach     14.8%
+  R8:  Box7  Shanny Rose         17.5%  ★ GAP 4.7%
+  R9:  Box4  Moonlight River     14.3%
+  R10: Box1  Sweet Secret        18.5%
+  R11: Box2  Weblec Paxton       18.2%  ★ GAP 4.0%
+  R12: Box2  Shoot The Breeze    21.9%  ★ GAP 5.4%
+
+  Warragul (12 races) — VIC Country
+  R1:  Box4  Bella Bluefin       27.4%  ★ GAP 2.5%
+  R2:  Box5  Whatever Thrill     14.6%
+  R3:  Box3  Minh Ardie          18.9%
+  R4:  Box2  Papa Who            13.9%
+  R5:  Box8  King Cherry         21.5%  ★ GAP 2.8%
+  R6:  Box8  Star Status         15.5%
+  R7:  Box4  Invictus Blue       24.6%  ★★ GAP 7.30%
+  R8:  Box1  Gusto               12.8%
+  R9:  Box7  Luca Skywalker      18.3%  ★ GAP 3.3%
+  R10: Box8  Fading Flame        23.8%  ★ GAP 1.1%
+  R11: Box1  Pay Up Sally        17.0%
+  R12: Box8  Herbie              13.5%
+
+  HOBART (8 races) — TAS
+  R1:  Box1  Scarred             19.8%  ★ GAP 3.9%
+  R2:  Box1  Timeless Gracie     14.6%
+  R3:  Box4  Pop's Girl          12.9%
+  R4:  Box1  Piece Of Me         19.9%  ★★ GAP 8.74%
+  R5:  Box3  Dilston Firebird    12.0%
+  R6:  Box2  Rojo Jojo           15.9%
+  R7:  Box8  Shima Time          15.0%
+  R8:  Box1  Volume Up           17.3%
+
+  Angle Park (10 races) — SA Metro ⚠ Metro
+  R1:  Box2  Just A Babe         17.4%
+  R2:  Box1  Watch And See       28.0%  ★★ GAP 7.79%
+  R3:  Box2  Fear The Dragon     22.7%  ★ GAP 5.8%
+  R4:  Box1  Boom Boom Jack      23.2%
+  R5:  Box2  Apilla              18.0%
+  R6:  Box1  Glasthule           15.7%
+  R7:  Box1  Woodside Johnny     33.3%  ★ GAP 0.88%
+  R8:  Box1  You Ain't It        17.5%
+  R9:  Box4  Adhana Annie        20.0%  ★ GAP 5.7%
+  R10: Box1  Zing Matilda        18.8%  ★ GAP 4.1%
+
+YESTERDAY'S PERFORMANCE RECAP (2026-03-18)
+----------------------------------------
+  Predictions: 133 races across 12 tracks
+  Results available: 120 races (8 abandoned — Murray Bridge Straight all ABD)
+  Wins:    24 / 120 = 20.0%
+  Placed:  64 / 120 = 53.3%
+  Gap ≥ 20%: 2/2 = 100% WIN RATE  ⭐ PERFECT
+  Gap ≥ 15%: 2/3 = 66.7% win rate
+  Gap ≥ 10%: 2/9 = 22.2% win rate, 8/9 = 88.9% placed rate
+  Top-2 bets: BOTH WON  ✅✅
+    Rank 1: Rockhampton R1 Box1 "It's Snowtime" (32.13%) → WIN
+    Rank 2: Ballarat R7 Box1 (23.58%) → WIN
+  Best tracks yesterday: Capalaba (37.5% wins), Bendigo (33.3%)
+
+BETTING STRATEGY NOTES
+----------------------------------------
+  Today's best opportunities are concentrated in the top 4 bets (all ≥15% gap).
+  Note: No race clears the 20% gap threshold that marked yesterday's locks.
+  The model's highest-confidence picks today hover just under 20% gap —
+  still strong signals with good place-rate backing.
+
+  ✅ BEST BET: SHEPPARTON R1 — Box 7 Paw Jadore (31.7% confidence, gap 19.87%)
+  ✅ VALUE BET: SANDOWN R3 — Box 2 Flying Dinar (37.5% confidence, gap 19.77%)
+     Note: Flying Dinar has the single highest raw confidence of any dog today at 37.5%.
+  ✅ EACH-WAY: Q STRAIGHT R6 — Box 8 Little House (29.1%, gap 16.69%)
+  ✅ EACH-WAY: The Gardens R11 — Box 7 Savina (33.4%, gap 15.29%)
+
+  ★ SECONDARY BETS (gap 10-13%, good confidence):
+     - NOWRA R4: Box 4 Cumbria Chrissy (28.3%, gap 12.43%)
+     - SHEPPARTON R9: Box 8 Excellent Dash (23.7%, gap 12.53%)
+     - Q PARKLANDS R4: Box 8 Zipping Kravitz (23.4%, gap 12.77%)
+     - WENTWORTH PARK R6: Box 2 Canya Handle It (25.6%, gap 11.78%)
+     - BALLARAT R6: Box 1 Solar Spectrum (22.2%, gap 10.42%)
+     - Mandurah R4: Box 1 Pingelly Prince (20.2%, gap 10.19%)
+
+  ⚠ CAUTION RACES (gap < 1% — avoid or use box/quinella):
+     - Angle Park R6: Box1 Glasthule vs Box5 Just A Nuisance (gap 0.01%)
+     - SHEPPARTON R12: Box1 Paw Vancouver (gap 0.05%)
+     - Q STRAIGHT R11: Box4 Little Jack (gap 0.08%)
+
+  BOX BIAS NOTES:
+     Today's picks: Box1 favoured in 7+ races; Box8 in several country tracks.
+     Sandown: Strong Box1/Box2 bias with multiple high-confidence box-inside picks.
+
+================================================================================
+END OF DAILY ANALYSIS — 2026-03-19
+================================================================================
