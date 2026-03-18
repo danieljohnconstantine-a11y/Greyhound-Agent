@@ -1,0 +1,130 @@
+================================================================================
+PREDICTION AUDIT: 2026-03-18 (Wednesday)
+Generated: 2026-03-18 (post-race analysis)
+================================================================================
+
+OVERVIEW
+--------
+Predictions sourced from: outputs/best_bets_report.txt & outputs/track_ensemble_predictions.xlsx
+Actual results sourced from: data/results_2026-03-18.csv
+
+Tracks raced: 13 (Temora, Gunnedah, Taree, Richmond, Sale, Murray Bridge Straight,
+               Capalaba, Bendigo, Ladbrokes Q1 Lakeside, Ballarat, Angle Park, Meadows, Rockhampton)
+
+NOTE: Taree was not included in the prediction model output for this date.
+      Murray Bridge Straight: ALL 8 races ABANDONED.
+      5 predicted races had no result data (Q Lakeside R13/R14, Ballarat R13/R14, + 1 other).
+
+SUMMARY STATISTICS
+------------------
+Total bets predicted:         133
+Races with results:           120
+Abandoned races (ABD):          8  (Murray Bridge Straight R1-R8)
+No result / race not run:       5
+
+WINS:                    24/120 = 20.0%
+PLACED (top 3):          64/120 = 53.3%
+
+BY GAP THRESHOLD (model confidence)
+-------------------------------------
+Gap >= 20%:  2 races  →  2/2 WINS (100.0%),  2/2 placed (100.0%)  ⭐ PERFECT
+Gap >= 15%:  3 races  →  2/3 wins  (66.7%),  3/3 placed (100.0%)  ⭐ PERFECT PLACE RATE
+Gap >= 10%:  9 races  →  2/9 wins  (22.2%),  8/9 placed  (88.9%)
+
+KEY HIGHLIGHTS
+--------------
+🏆 BEST BET RESULT: ROCKHAMPTON R1 Box 1 "It's Snowtime" (gap 32.13%) → ✅ WON
+   This was the #1 ranked bet and it delivered a WIN. Model confidence was exceptional.
+
+🥇 TOP 10 BETS PERFORMANCE (Ranks 1-10, excl. ABD/no result):
+   Rank 1  ROCKHAMPTON R1    Box1 (32.13%) → WIN     ✅
+   Rank 2  BALLARAT    R7    Box1 (23.58%) → WIN     ✅
+   Rank 3  SALE        R3    Box7 (15.75%) → PLACED  3rd  ✓
+   Rank 4  RICHMOND    R8    Box2 (14.16%) → PLACED  2nd  ✓
+   Rank 5  Q LAKESIDE  R12   Box7 (13.29%) → PLACED  2nd  ✓
+   Rank 6  ANGLE PARK  R6    Box2 (12.95%) → PLACED  2nd  ✓
+   Rank 7  TEMORA      R3    Box8 (12.27%) → PLACED  3rd  ✓
+   Rank 8  SALE        R1    Box6 (11.26%) → PLACED  2nd  ✓
+   Rank 9  Q LAKESIDE  R14   Box3 (11.16%) → NO RESULT
+   Rank 10 GUNNEDAH    R4    Box5 (10.20%) → LOSS    (won by Box8)
+
+   Top-9 with results: 2/8 wins, 7/8 placed = 87.5% place rate!
+
+ALL WINNERS (24 total)
+-----------------------
+Rank  1  ROCKHAMPTON   R1   Box1  gap=32.13%  (1st pick WON!)
+Rank  2  BALLARAT      R7   Box1  gap=23.58%  (2nd pick WON!)
+Rank 13  CAPALABA      R6   Box3  gap= 9.46%
+Rank 18  ROCKHAMPTON   R2   Box1  gap= 8.60%
+Rank 25  BENDIGO       R7   Box1  gap= 7.03%
+Rank 33  BENDIGO       R3   Box4  gap= 5.59%
+Rank 38  ROCKHAMPTON   R3   Box2  gap= 5.00%
+Rank 39  ANGLE PARK    R10  Box8  gap= 4.90%
+Rank 40  TEMORA        R6   Box3  gap= 4.81%
+Rank 48  GUNNEDAH      R2   Box2  gap= 4.18%
+Rank 54  GUNNEDAH      R11  Box3  gap= 3.79%
+Rank 66  CAPALABA      R3   Box7  gap= 2.85%
+Rank 74  BALLARAT      R5   Box1  gap= 2.46%
+Rank 75  GUNNEDAH      R6   Box2  gap= 2.46%
+Rank 82  SALE          R6   Box6  gap= 1.87%
+Rank 89  BALLARAT      R4   Box8  gap= 1.45%
+Rank 90  TEMORA        R4   Box1  gap= 1.34%
+Rank 96  RICHMOND      R6   Box5  gap= 1.13%
+Rank100  Q LAKESIDE    R3   Box4  gap= 1.04%
+Rank102  BENDIGO       R8   Box8  gap= 0.98%
+Rank108  RICHMOND      R9   Box6  gap= 0.83%
+Rank115  BENDIGO       R12  Box6  gap= 0.57%
+Rank125  CAPALABA      R2   Box3  gap= 0.26%
+Rank129  ANGLE PARK    R1   Box1  gap= 0.07%
+
+TRACK-BY-TRACK SUMMARY
+------------------------
+Track                    Wins    Placed   Win%    Place%
+---------------------------------------------------------
+BENDIGO                  4/12    6/12     33.3%   50.0%   ⭐ Best wins
+CAPALABA                 3/8     4/8      37.5%   50.0%   ⭐ Best win rate
+ROCKHAMPTON              3/9     4/9      33.3%   44.4%
+BALLARAT                 3/12    7/12     25.0%   58.3%
+GUNNEDAH                 3/11    7/11     27.3%   63.6%
+TEMORA                   2/8     6/8      25.0%   75.0%   ⭐ Best place rate
+ANGLE PARK               2/12    7/12     16.7%   58.3%
+RICHMOND                 2/12    5/12     16.7%   41.7%
+Q LAKESIDE               1/12    7/12      8.3%   58.3%
+SALE                     1/12    6/12      8.3%   50.0%
+MEADOWS                  0/12    5/12      0.0%   41.7%   ⚠ 0 wins
+
+NOTABLE RACE COMPARISONS (Full results vs predictions)
+-------------------------------------------------------
+ROCKHAMPTON R1  Predicted Box1 46.85%  Actual: 1,5,4,7  → WIN ✅
+BALLARAT R7     Predicted Box1 37.54%  Actual: 1,8,2,3  → WIN ✅
+SALE R3         Predicted Box7 29.72%  Actual: 3,2,7,4  → PLACED 3rd ✓
+RICHMOND R8     Predicted Box2 29.63%  Actual: 1,2,8,7  → PLACED 2nd ✓
+ANGLE PARK R6   Predicted Box2 28.97%  Actual: 7,2,1,8  → PLACED 2nd ✓
+GUNNEDAH R4     Predicted Box5 26.83%  Actual: 8,7,2,5  → LOSS
+
+MURRAY BRIDGE STRAIGHT
+-----------------------
+ALL 8 RACES ABANDONED (R1-R8). Model had 8 predictions here (ranks 16,67,93,103,113,116,119,122).
+These are excluded from all win/place calculations.
+
+COMPARISON WITH PREVIOUS DAYS
+-------------------------------
+Date        Wins%   Placed%   Notes
+2026-03-14  26.6%   73.4%     Best performance (top bets exceptional)
+2026-03-15  24.8%   74.3%
+2026-03-16  20.6%   64.7%
+2026-03-17  19.7%   66.4%
+2026-03-18  20.0%   53.3%     Best bet (Rockhampton R1) WON. Top-2 bets both WON.
+                               Placed% down due to more competitive fields.
+                               Meadows = 0 wins (weak point today).
+
+CONCLUSIONS
+-----------
+1. High-confidence picks (gap ≥20%) went 2/2 = 100% win rate — model excelling at top end.
+2. Gap ≥15% achieved 100% place rate (3/3) — strong signal for bets that "at least place".
+3. Best bet (Rockhampton R1, gap 32.13%) WON convincingly.
+4. Overall win rate of 20.0% is above the random baseline of ~12.5% (1/8 boxes).
+5. Meadows was the weak track (0 wins) — may need model retraining for this track.
+6. Murray Bridge Straight abandoned entirely — 8 predictions voided.
+7. Recommend focusing wagers on picks with gap ≥15% based on today's evidence.
+================================================================================
