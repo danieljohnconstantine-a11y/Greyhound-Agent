@@ -1,0 +1,340 @@
+================================================================================
+PREDICTION AUDIT REPORT — 2026-03-17 (Tuesday)
+================================================================================
+
+OVERVIEW
+----------------------------------------
+Date                 : 2026-03-17 (Tuesday)
+Predictions total    : 124 (11 tracks)
+Results provided     : 122 races (11 tracks — HORSHAM R13 and GEELONG R13 not provided)
+No result available  : 2 (HORSHAM R13, GEELONG R13 — near bottom of rankings, low confidence)
+
+SPECIAL NOTE: ANGLE PARK R1 had only 3 finishers recorded (582); R9 had only 2 (37).
+             ANGLE PARK R12 winner was Box 10 (large field). MANDURAH R4 had Box 9 placing.
+             These unusual results are recorded as-is in results_2026-03-17.csv.
+
+BEST BET RESULT:
+  #1 best bet was HORSHAM R11 Box 5 Needful (gap 32.27%) — PLACED 3RD (actual: 7-2-5-8).
+  Box 5 Needful ran 3rd. The race was won by Box 7.
+  ⚠️  The model's strongest single-race signal in recent sessions did NOT win
+      but the selection still placed (3rd of 4 ranked positions).
+
+SECONDARY TOP BETS:
+  #2 GEELONG R6 Box 2 Happy And Numb (15.78%) — ✅ WIN (actual: 2-6-7-3)
+  #8 Q LAKESIDE R3 Box 4 Mr. Lasso (12.35%) — ✅ WIN (actual: 4-8-1-5)
+  #11 HOBART R5 Box 1 Deadly Grin (11.14%) — ✅ WIN (actual: 1-4-7-6)
+
+HEADLINE STATS (122 matched races)
+----------------------------------------
+Overall wins          : 24/122 = 19.7%
+Overall placed (top4) : 81/122 = 66.4%
+
+Top-10 best bets (ranks 1-10, all with results):
+  Wins   : 2/10 = 20.0%   (Geelong R6, Q Lakeside R3)
+  Placed : 7/10 = 70.0%
+
+Gap >= 20% filter (1 race — HORSHAM R11):
+  Wins   : 0/1 = 0.0%
+  Placed : 1/1 = 100.0%  ← Box 5 ran 3rd
+
+Gap >= 15% filter (3 races):
+  Wins   : 1/3 = 33.3%   (GEELONG R6)
+  Placed : 2/3 = 66.7%
+
+Gap >= 10% filter (15 races):
+  Wins   : 3/15 = 20.0%  (GEELONG R6, Q LAKESIDE R3, HOBART R5)
+  Placed : 10/15 = 66.7%
+
+================================================================================
+TOP 15 BETS DETAIL:
+Rank  Track              Race       Gap  Box Predicted Dog             Win?   Placed?  Actual 1-4
+-----------------------------------------------------------------------------------------------
+1     HORSHAM            R11   32.2689%  Box5  Needful                  ✗      ✓        7-2-5-8
+2     GEELONG            R6    15.7835%  Box2  Happy And Numb           ✓      ✓        2-6-7-3
+3     GRAFTON            R6    15.1405%  Box8  Benny Trick              ✗      ✗        5-2-1-4
+4     Q LAKESIDE         R1    14.7866%  Box7  Sagacious Syd            ✗      ✓        1-3-2-7
+5     HORSHAM            R6    14.1159%  Box1  Paw Clarissa             ✗      ✓        5-1-8-7
+6     GRAFTON            R1    13.8441%  Box8  Robell Rumi              ✗      ✗        1-2-3-6
+7     HOBART             R2    13.0892%  Box2  Take His Cash            ✗      ✗        7-8-6-1
+8     Q LAKESIDE         R3    12.3546%  Box4  Mr. Lasso                ✓      ✓        4-8-1-5
+9     Angle Park         R7    12.0893%  Box8  Rippin' Pedro            ✗      ✓        3-1-5-8
+10    Mandurah           R7    11.5490%  Box2  Sunset Agrippina         ✗      ✓        5-7-2-4
+11    HOBART             R5    11.1417%  Box1  Deadly Grin              ✓      ✓        1-4-7-6
+12    Bulli              R6    11.1127%  Box4  Winged Rupee             ✗      ✗        2-6-1-7
+13    GEELONG            R10   10.9865%  Box8  Busting                  ✗      ✓        5-7-8-1
+14    GOSFORD            R9    10.9242%  Box2  Trunkey Mink             ✗      ✓        1-2-5-8
+15    TOWNSVILLE         R5    10.7716%  Box1  Ascend Kalmia            ✗      ✗        8-6-7-2
+-----------------------------------------------------------------------------------------------
+Top-15 summary: 3 wins (20.0%), 10 placed (66.7%)
+
+================================================================================
+TRACK-BY-TRACK SUMMARY
+================================================================================
+
+HOBART — 10 races  ★ BEST TRACK
+  Wins   : 5/10 = 50.0%  (R1, R5, R8, R9, R10)
+  Placed : 8/10 = 80.0%
+  R1:  Box8 Scarred         ✓ WIN    actual: 8-5-7-2
+  R2:  Box2 Take His Cash   ✗ LOSS   actual: 7-8-6-1
+  R3:  Box1 Rico Balboa     ✓ 4th    actual: 4-3-7-1
+  R4:  Box3 Why Sparky      ✓ 4th    actual: 2-8-6-3
+  R5:  Box1 Deadly Grin     ✓ WIN    actual: 1-4-7-6
+  R6:  Box1 Black Hoax      ✗ LOSS   actual: 2-4-5-6
+  R7:  Box1 Rapidly         ✓ 2nd    actual: 7-1-6-2
+  R8:  Box7 Ronny Rocket    ✓ WIN    actual: 7-6-4-3
+  R9:  Box1 Don't Tell Tommy✓ WIN    actual: 1-4-3-6
+  R10: Box2 If Ever         ✓ WIN    actual: 2-6-7-8
+
+LADBROKES Q1 LAKESIDE — 12 races  ★ EXCELLENT TRACK
+  Wins   : 5/12 = 41.7%  (R2, R3, R5, R6, R10)
+  Placed : 10/12 = 83.3%
+  R1:  Box7 Sagacious Syd   ✓ 4th    actual: 1-3-2-7
+  R2:  Box7 Kicker Wildcard ✓ WIN    actual: 7-4-2-3
+  R3:  Box4 Mr. Lasso       ✓ WIN    actual: 4-8-1-5
+  R4:  Box1 Zorka           ✗ LOSS   actual: 7-6-8-4
+  R5:  Box1 Canya Jelly Bean✓ WIN    actual: 1-3-2-7
+  R6:  Box5 Hara's Dolly    ✓ WIN    actual: 5-8-2-1
+  R7:  Box4 Smokin' Jill    ✓ 3rd    actual: 7-2-4-1
+  R8:  Box4 Art Of Deception✓ 3rd    actual: 2-5-4-3
+  R9:  Box1 Spring Grim     ✓ 2nd    actual: 7-1-6-5
+  R10: Box6 Canya Romance   ✓ WIN    actual: 6-5-7-1
+  R11: Box6 Give Me Bucks   ✗ LOSS   actual: 2-8-3-5
+  R12: Box3 Hennessy Gold   ✓ 3rd    actual: 4-2-3-8
+
+GOSFORD — 11 races  ★ HIGH PLACE RATE
+  Wins   : 1/11 = 9.1%   (R5)
+  Placed : 9/11 = 81.8%
+  R1:  Box4 Tennessee Flyer ✗ LOSS   actual: 6-8-3-1
+  R2:  Box6 Bigbad Franky   ✗ LOSS   actual: 7-1-3-8
+  R3:  Box7 Miss Bansky     ✓ 2nd    actual: 1-7-8-5
+  R4:  Box7 Good Odds Keona ✓ 3rd    actual: 2-1-7-3
+  R5:  Box3 Digger Sure Can ✓ WIN    actual: 3-7-5-6
+  R6:  Box6 Bees Hive       ✓ 2nd    actual: 2-6-4-5
+  R7:  Box5 My Irish        ✓ 3rd    actual: 3-4-5-6
+  R8:  Box6 Weffalee Shield ✓ 2nd    actual: 3-6-1-7
+  R9:  Box2 Trunkey Mink    ✓ 2nd    actual: 1-2-5-8
+  R10: Box2 Paw Berry       ✓ 4th    actual: 8-7-1-2
+  R11: Box6 Lazuline        ✓ 4th    actual: 2-7-4-6
+
+WARRAGUL — 12 races  ★ HIGH PLACE RATE
+  Wins   : 1/12 = 8.3%   (R9)
+  Placed : 9/12 = 75.0%
+  R1:  Box8 Mistress Grace  ✓ 4th    actual: 2-6-1-8
+  R2:  Box3 Runway Blue     ✓ 2nd    actual: 5-3-2-8
+  R3:  Box2 Porangi Moose   ✗ LOSS   actual: 3-5-6-8
+  R4:  Box8 Lamia Nonna Mim ✓ 3rd    actual: 3-5-8-1
+  R5:  Box3 Paw Quark       ✗ LOSS   actual: 2-1-8-6
+  R6:  Box1 Lassard         ✗ LOSS   actual: 3-7-4-6
+  R7:  Box8 Regal Spencer   ✓ 3rd    actual: 4-2-8-1
+  R8:  Box8 Ballantyne Star ✓ 2nd    actual: 2-8-1-4
+  R9:  Box8 Paw Hazelton    ✓ WIN    actual: 8-5-7-6
+  R10: Box6 Paw Gusto       ✓ 2nd    actual: 4-6-8-7
+  R11: Box2 Midnight In Sale✓ 3rd    actual: 3-4-2-6
+  R12: Box3 Bowie Sunny     ✓ 2nd    actual: 4-3-7-1
+
+HORSHAM — 12 races (R13 no result)
+  Wins   : 2/12 = 16.7%  (R7, R12)
+  Placed : 8/12 = 66.7%
+  R1:  Box2 Nikita Dash     ✗ LOSS   actual: 4-1-6-8
+  R2:  Box5 Paw Yatana      ✓ 2nd    actual: 1-5-2-4
+  R3:  Box8 Relax Mate      ✓ 4th    actual: 2-4-5-8
+  R4:  Box3 Pilot Prince    ✗ LOSS   actual: 1-5-2-8
+  R5:  Box4 Lorimer Street  ✓ 2nd    actual: 1-4-2-3
+  R6:  Box1 Paw Clarissa    ✓ 2nd    actual: 5-1-8-7
+  R7:  Box3 Biscottino      ✓ WIN    actual: 3-1-2-6
+  R8:  Box2 Hot Nanu        ✓ 3rd    actual: 6-3-2-1
+  R9:  Box8 Is He Happy     ✗ LOSS   actual: 6-1-7-4
+  R10: Box3 Paw Bastow      ✗ LOSS   actual: 6-2-4-5
+  R11: Box5 Needful         ✓ 3rd    actual: 7-2-5-8  ← BEST BET (did not win)
+  R12: Box1 Ready To Flip   ✓ WIN    actual: 1-8-6-5
+
+GEELONG — 12 races (R13 no result)
+  Wins   : 2/12 = 16.7%  (R2, R6)
+  Placed : 7/12 = 58.3%
+  R1:  Box3 Aussie Mirage   ✓ 3rd    actual: 1-8-3-2
+  R2:  Box8 Cream           ✓ WIN    actual: 8-4-6-7
+  R3:  Box2 Hartland Willow ✓ 4th    actual: 6-4-1-2
+  R4:  Box3 Reiko Zoom      ✗ LOSS   actual: 6-1-8-7
+  R5:  Box1 Tinker Rock     ✗ LOSS   actual: 8-4-2-6
+  R6:  Box2 Happy And Numb  ✓ WIN    actual: 2-6-7-3
+  R7:  Box5 Black Raider    ✗ LOSS   actual: 6-3-1-7
+  R8:  Box2 Little Flower   ✗ LOSS   actual: 6-1-8-7
+  R9:  Box4 Mischief Mate   ✓ 3rd    actual: 7-3-4-8
+  R10: Box8 Busting         ✓ 3rd    actual: 5-7-8-1
+  R11: Box5 Harvey Intention✗ LOSS   actual: 2-6-8-1
+  R12: Box1 Rushmore Red    ✓ 3rd    actual: 2-7-1-5
+
+TOWNSVILLE — 12 races
+  Wins   : 3/12 = 25.0%  (R9, R10, R12)
+  Placed : 7/12 = 58.3%
+  R1:  Box3 Dinosaur Bones  ✓ 2nd    actual: 4-3-8-5
+  R2:  Box8 Ringwald        ✓ 3rd    actual: 1-3-8-5
+  R3:  Box3 He's Peeking    ✗ LOSS   actual: 4-2-5-1
+  R4:  Box6 Federal Tommy   ✗ LOSS   actual: 7-1-2-5
+  R5:  Box1 Ascend Kalmia   ✗ LOSS   actual: 8-6-7-2
+  R6:  Box8 Slim Nikita     ✗ LOSS   actual: 2-4-5-1
+  R7:  Box8 Gengar Wave     ✓ 3rd    actual: 2-3-8-5
+  R8:  Box2 Southpaw Mcgraw ✓ 3rd    actual: 8-6-2-3
+  R9:  Box4 Moustache Mick  ✓ WIN    actual: 4-6-8-3
+  R10: Box1 Ordinary        ✓ WIN    actual: 1-2-8-7
+  R11: Box5 Barnsley        ✗ LOSS   actual: 1-2-8-4
+  R12: Box7 Villain Of Fire ✓ WIN    actual: 7-2-8-1
+
+MANDURAH — 10 races
+  Wins   : 1/10 = 10.0%  (R10)
+  Placed : 7/10 = 70.0%
+  R1:  Box4 Pop Diva        ✓ 2nd    actual: 7-4-1-5
+  R2:  Box5 West On Ricky   ✗ LOSS   actual: 7-4-8-1
+  R3:  Box4 Jesse Raider    ✓ 2nd    actual: 1-4-7-5
+  R4:  Box3 Chi Chi Doll    ✗ LOSS   actual: 1-9-2-4
+  R5:  Box1 Dodgy Shadow    ✓ 2nd    actual: 3-1-8-5
+  R6:  Box2 Monkey Magic    ✓ 3rd    actual: 1-7-2-8
+  R7:  Box2 Sunset Agrippina✓ 3rd    actual: 5-7-2-4
+  R8:  Box5 Blame Her       ✗ LOSS   actual: 2-1-8-4
+  R9:  Box8 Princess Mila   ✓ 2nd    actual: 3-8-2-4
+  R10: Box1 Invested        ✓ WIN    actual: 1-5-4-7
+
+ANGLE PARK — 12 races (SA metro)
+  Wins   : 0/12 = 0.0%
+  Placed : 7/12 = 58.3%
+  NOTE: R1 had 3 finishers, R9 had 2 finishers only; R12 winner was Box 10.
+  R1:  Box1 Rock It Kathy   ✗ LOSS   actual: 5-8-2 (3 starters)
+  R2:  Box2 Springvale Margi✓ 2nd    actual: 8-2-6-1
+  R3:  Box4 Nitrous         ✓ 4th    actual: 6-1-3-4
+  R4:  Box8 Big Stretch     ✓ 3rd    actual: 7-2-8-4
+  R5:  Box1 Wilma's Our Girl✓ 2nd    actual: 4-1-7-8
+  R6:  Box1 Honey Zen       ✗ LOSS   actual: 3-8-7-2
+  R7:  Box8 Rippin' Pedro   ✓ 4th    actual: 3-1-5-8
+  R8:  Box2 Compton Rocks   ✗ LOSS   actual: 1-3-6-4
+  R9:  Box7 Kisauni         ✓ 2nd    actual: 3-7 (2 starters)
+  R10: Box8 Canya Nameless  ✓ 4th    actual: 4-6-2-8
+  R11: Box1 Dolly's My Mum  ✗ LOSS   actual: 5-7-2-4
+  R12: Box2 Equivocal       ✗ LOSS   actual: 10-8-1-9 (Box 10 won)
+
+GRAFTON — 11 races
+  Wins   : 3/11 = 27.3%  (R4, R7, R11)
+  Placed : 5/11 = 45.5%
+  R1:  Box8 Robell Rumi     ✗ LOSS   actual: 1-2-3-6
+  R2:  Box4 Fran's Time     ✗ LOSS   actual: 7-8-5-2
+  R3:  Box1 Stylish Beast   ✓ 2nd    actual: 2-1-8-5
+  R4:  Box7 Fire And Gravy  ✓ WIN    actual: 7-1-2-8
+  R5:  Box2 Nanny's Boy     ✗ LOSS   actual: 7-6-4-8
+  R6:  Box8 Benny Trick     ✗ LOSS   actual: 5-2-1-4
+  R7:  Box7 Hootin' Angel   ✓ WIN    actual: 7-2-5-4
+  R8:  Box2 Robell Bobby    ✓ 3rd    actual: 3-8-2-5
+  R9:  Box7 She Said So     ✗ LOSS   actual: 1-5-4-2
+  R10: Box4 Aussie Storm    ✗ LOSS   actual: 3-5-1-2
+  R11: Box2 Bedale          ✓ WIN    actual: 2-8-7-1
+
+BULLI — 8 races
+  Wins   : 1/8 = 12.5%   (R2)
+  Placed : 4/8 = 50.0%
+  R1:  Box6 Jungle Princess ✗ LOSS   actual: 7-4-1-8
+  R2:  Box7 Sabini          ✓ WIN    actual: 7-2-8-6
+  R3:  Box1 Pay Pay Pay     ✓ 3rd    actual: 5-4-1-2
+  R4:  Box6 Don't Brew It   ✓ 3rd    actual: 7-8-6-4
+  R5:  Box8 Little Bit Super✓ 2nd    actual: 1-8-6-3
+  R6:  Box4 Winged Rupee    ✗ LOSS   actual: 2-6-1-7
+  R7:  Box2 Stormy Bella    ✗ LOSS   actual: 1-5-6-3
+  R8:  Box7 Fantanna's Dream✗ LOSS   actual: 1-2-8-4
+
+================================================================================
+OVERALL RESULTS SUMMARY
+================================================================================
+
+Track               Races  Wins  Win%    Placed  Place%
+------------------------------------------------------------
+Hobart              10     5     50.0%   8       80.0%   ★ BEST TRACK
+Ladbrokes Q1 Lakeside 12   5     41.7%   10      83.3%   ★ SECOND BEST
+Grafton             11     3     27.3%   5       45.5%
+Townsville          12     3     25.0%   7       58.3%
+Horsham             12     2     16.7%   8       66.7%
+Geelong             12     2     16.7%   7       58.3%
+Warragul            12     1     8.3%    9       75.0%   (high place rate)
+Gosford             11     1     9.1%    9       81.8%   (high place rate)
+Mandurah            10     1     10.0%   7       70.0%
+Bulli               8      1     12.5%   4       50.0%
+Angle Park          12     0     0.0%    7       58.3%
+------------------------------------------------------------
+TOTAL               122    24    19.7%   81      66.4%
+
+================================================================================
+NOTABLE OBSERVATIONS
+================================================================================
+
+1. HOBART EXCEPTIONAL: 5 wins from 10 races (50%) — best track performance this session.
+   Hobart models are in excellent form. R2 was the only miss.
+
+2. Q LAKESIDE EXCELLENT: 5/12 wins (41.7%) and 10/12 placed (83.3%) — stellar.
+   Model had strong conviction here and was rewarded. R4 and R11 the only misses.
+
+3. BEST BET DID NOT WIN: HORSHAM R11 Box 5 Needful (32.27% gap) ran 3rd.
+   Despite the extraordinary confidence gap, the race was won by Box 7.
+   This is a reminder that even very strong gaps don't guarantee wins — the model
+   correctly identified the horse as a strong contender (3rd of 8+).
+
+4. GOSFORD + WARRAGUL — HIGH PLACE RATES: Both tracks placed 9/11 or 9/12
+   despite low win rates. Model was consistently identifying competitive selections.
+
+5. GRAFTON R4 WINNER: Box 7 Fire And Gravy ✅ — the model correctly identified
+   the winner with 21.47% confidence against Box 2 at 16.84%.
+
+6. ANGLE PARK — 0 WINS: Metro track as expected. Still 7/12 placed (58.3%).
+   Box 10 winning R12 was an unusual large-field result the model could not anticipate.
+
+7. TOP 3 GAP RACES (≥15%):
+   - Horsham R11 (32.27%): PLACED 3rd — near miss
+   - Geelong R6 (15.78%): WIN ✅
+   - Grafton R6 (15.14%): LOSS — Box 8 Benny Trick did not feature
+
+8. MULTI/PARLAY LEGS AUDIT (from DAILY_ANALYSIS recommendations):
+   Leg 1: HORSHAM R11 Box 5 Needful — PLACED (3rd) ✗ would have lost multi
+   Leg 2: GEELONG R6 Box 2 Happy And Numb — WIN ✅
+   Leg 3: HOBART R2 Box 2 Take His Cash — LOSS ✗
+   Leg 4: Mandurah R7 Box 2 Sunset Agrippina — PLACED (3rd) ✗
+   Multi result: LOST (legs 1, 3, 4 did not win)
+
+9. BEST PERFORMING BOX: Box 7 — appeared in multiple wins today
+   (Grafton R4, Grafton R7, Q Lakeside R2, Townsville R12, Hobart R2 actual winner)
+
+10. HORSHAM R7 WINNER: Box 3 Biscottino ✅ — lower ranked bet (#117, gap 0.26%)
+    confirmed win. Even very low-confidence bets sometimes land.
+
+================================================================================
+COMPARISON TO RECENT SESSIONS
+================================================================================
+  2026-03-13 (Thu): 21.4% wins,  53.2% placed  [126 races]
+  2026-03-14 (Fri): 26.6% wins,  73.4% placed  [ 79 races matched]
+  2026-03-15 (Sun): 24.8% wins,  74.3% placed  [113 races]
+  2026-03-16 (Mon): 20.6% wins,  64.7% placed  [102 races matched]
+  2026-03-17 (Tue): 19.7% wins,  66.4% placed  [122 races] ← TODAY
+  -----------------------------------------------
+  5-session avg: ~22.6% wins, ~66.4% placed
+  Today's placed rate (66.4%) is in line with average.
+  Today's win rate (19.7%) slightly below recent average.
+
+HISTORICAL BEST-BET FILTER (≥10% gap):
+  2026-03-14: 55.6% wins, 88.9% placed (9 races)
+  2026-03-15: 23.1% wins, 84.6% placed (13 races)
+  2026-03-16: 9.1% wins,  81.8% placed (11 races)
+  2026-03-17: 20.0% wins, 66.7% placed (15 races) ← TODAY
+  Filter placed rate dipped slightly today vs recent highs.
+
+================================================================================
+FILES UPDATED THIS SESSION
+================================================================================
+  data/results_2026-03-17.csv         — 122 races, 11 tracks
+  data/ANGLG1703form.pdf              — moved from data_predictions/
+  data/BULIG1703form.pdf              — moved from data_predictions/
+  data/ELWKG1703form.pdf              — moved from data_predictions/ (Hobart/Elwick)
+  data/GEELG1703form.pdf              — moved from data_predictions/
+  data/GOSFG1703form.pdf              — moved from data_predictions/
+  data/GRAFG1703form.pdf              — moved from data_predictions/
+  data/HSHMG1703form.pdf              — moved from data_predictions/
+  data/MANDG1703form.pdf              — moved from data_predictions/
+  data/QLAKG1703form.pdf              — moved from data_predictions/
+  data/TOWNG1703form.pdf              — moved from data_predictions/
+  data/WARGG1703form.pdf              — moved from data_predictions/
+  reports/PREDICTION_AUDIT_2026-03-17.txt — this file
+
+================================================================================
