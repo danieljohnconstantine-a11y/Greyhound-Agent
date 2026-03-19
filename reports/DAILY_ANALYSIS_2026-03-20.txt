@@ -1,0 +1,206 @@
+================================================================================
+DAILY ANALYSIS REPORT — 2026-03-20 (Friday)
+Generated: 2026-03-20 (evening)
+================================================================================
+
+OVERVIEW
+--------
+Date      : Friday 20 March 2026
+Tracks    : 11 (Casino, Q Lakeside, Geelong, Mandurah, Townsville, Wagga,
+             Bendigo, Goulburn, Horsham, Richmond, Warragul)
+Total races predicted: 124
+Prediction file generated: 2026-03-20 09:50:12
+
+Source files:
+  outputs/best_bets_report.txt
+  outputs/track_ensemble_predictions.xlsx
+  data_predictions/: 11 × 2003form PDFs
+
+================================================================================
+CONFIDENCE DISTRIBUTION
+================================================================================
+
+Gap threshold breakdown (gap = difference between 1st and 2nd ranked dog):
+
+  ≥ 20% gap (very high confidence) :  0 races
+  ≥ 15% gap (high confidence)      :  5 races
+  ≥ 10% gap (moderate confidence)  : 12 races
+  < 10% gap (lower confidence)     : 112 races
+
+Top-10 gaps:  18.66%, 16.90%, 16.07%, 15.64%, 15.39%, 13.58%, 13.42%, 12.99%,
+              12.13%, 11.46%
+Top-10 median gap: ~15.39%
+
+Comparison to recent days:
+  2026-03-20 (today)  : best bet gap 18.66%, 5 races ≥15%, 12 races ≥10%
+  2026-03-19 (Thu)    : best bet gap 19.87%, 4 races ≥15%, 11 races ≥10%
+  2026-03-18 (Wed)    : best bet gap 32.13%, 2 races ≥20%, 3 races ≥15%
+  2026-03-17 (Tue)    : best bet gap 32.27%, 1 race  ≥20%, 3 races ≥15%
+
+Verdict: Slightly stronger confidence than yesterday (5 vs 4 high-conf races,
+         12 vs 11 moderate-conf races). However, no race exceeds 20% gap today —
+         moderate/good confidence overall but no 'banker' bets.
+
+================================================================================
+BEST BETS — TOP 12 (GAP ≥ 10%)
+================================================================================
+
+Rank  Track            Race  Box  Dog                         Win%   Gap
+─────────────────────────────────────────────────────────────────────────────
+  1   CASINO           R5    1    Make And Break             35.62%  18.66%  ★★★
+  2   Q LAKESIDE       R7    8    From A Distance            35.34%  16.90%  ★★★
+  3   GEELONG          R10   7    Paw Xantippe               34.27%  16.07%  ★★★
+  4   Mandurah         R9    3    My Paddy Boy               29.72%  15.64%  ★★★
+  5   GEELONG          R3    1    Big Boy Pants              30.75%  15.39%  ★★★
+  6   TOWNSVILLE       R9    1    Federal Blue Boy           28.35%  13.58%  ★★
+  7   WAGGA            R5    8    Tiggerlong Bingo           33.89%  13.42%  ★★
+  8   Q LAKESIDE       R12   7    He's Regal                 30.30%  12.99%  ★★
+  9   BENDIGO          R1    2    Just Imagine               24.08%  12.13%  ★★
+ 10   BENDIGO          R5    1    Nikita Bale                26.80%  11.46%  ★★
+ 11   GEELONG          R8    4    Baby Beets                 27.92%  11.40%  ★★
+ 12   BENDIGO          R9    8    Rock Eternal               25.84%  10.94%  ★★
+
+Legend: ★★★ = high confidence (gap ≥15%), ★★ = moderate confidence (gap ≥10%)
+
+================================================================================
+TRACK-BY-TRACK SUMMARY
+================================================================================
+
+CASINO (12 races — NSW)
+  Best race : R5  Box1 Make And Break   35.62% WIN% | gap 18.66%  ★★★ BEST BET
+  Watch also: R8  Box1 Tub Star         24.80% WIN% | gap 5.45%
+              R7  Box5 Integrity Lari   33.94% WIN% | gap 0.96%  (tight race)
+              R11 Box1 Watch The Diva   16.56% WIN% | gap 4.05%
+  Note: R7 is tightest race (0.96% gap) — model sees near-dead-heat.
+        R3 also close at 0.95% gap (Box1 Sweet Confetti 25.87%).
+
+Q LAKESIDE (12 races — QLD)
+  Best race : R7  Box8 From A Distance  35.34% WIN% | gap 16.90%  ★★★
+  Watch also: R12 Box7 He's Regal       30.30% WIN% | gap 12.99%  ★★
+              R1  Box4 Petite Rouge     29.37% WIN% | gap 9.21%
+              R6  Box4 Rinsed The Lot   22.54% WIN% | gap 8.05%
+  Note: Q Lakeside has 4 races with decent gaps — strongest track slate today.
+
+GEELONG (12 races — VIC)
+  Best race : R10 Box7 Paw Xantippe     34.27% WIN% | gap 16.07%  ★★★
+  Watch also: R3  Box1 Big Boy Pants    30.75% WIN% | gap 15.39%  ★★★
+              R8  Box4 Baby Beets       27.92% WIN% | gap 11.40%  ★★
+              R4  Box4 Dave             24.62% WIN% | gap 8.88%
+  Note: Geelong has 3 high/moderate confidence races — very good track slate.
+
+Mandurah (12 races — WA)
+  Best race : R9  Box3 My Paddy Boy     29.72% WIN% | gap 15.64%  ★★★
+  Watch also: R4  Box5 Sunset Goddess   26.85% WIN% | gap 8.78%
+              R5  Box8 Another Jimmy    17.53% WIN% | gap 5.83%
+              R11 Box6 Tattooed Beast   19.34% WIN% | gap 4.45%
+
+TOWNSVILLE (11 races — QLD)
+  Best race : R9  Box1 Federal Blue Boy 28.35% WIN% | gap 13.58%  ★★
+  Watch also: R11 Box4 Maisie Moo Moo   21.48% WIN% | gap 9.19%
+              R6  Box4 Federal Saki     19.97% WIN% | gap 8.41%
+              R2  Box7 Cheap Reality    28.99% WIN% | gap 6.83%
+
+WAGGA (10 races — NSW)
+  Best race : R5  Box8 Tiggerlong Bingo 33.89% WIN% | gap 13.42%  ★★
+  Watch also: R4  Box1 Elite Dom        16.24% WIN% | gap 5.05%
+              R8  Box1 Bruce The Shark  17.01% WIN% | gap 3.73%
+
+BENDIGO (12 races — VIC)
+  Best race : R1  Box2 Just Imagine     24.08% WIN% | gap 12.13%  ★★
+  Watch also: R5  Box1 Nikita Bale      26.80% WIN% | gap 11.46%  ★★
+              R9  Box8 Rock Eternal     25.84% WIN% | gap 10.94%  ★★
+  Note: Bendigo has 3 moderate-confidence races — solid overall slate.
+
+GOULBURN (10 races — NSW)
+  Best race : R10 Box1 Zipping Stitch   20.49% WIN% | gap 8.51%
+  Note: No race exceeds 10% gap. Lower confidence slate today.
+
+HORSHAM (9 races — VIC)
+  Best race : R4  Box4 Is He Happy      19.51% WIN% | gap 5.50%
+  Note: No race exceeds 10% gap. Lower confidence slate today.
+        R8 Box8 Super Symon 18.71% gap 2.21% worth watching.
+
+RICHMOND (12 races — NSW)
+  Best race : R10 Box2 Blue Rudd        21.98% WIN% | gap 7.59%
+  Note: No race exceeds 10% gap for Richmond today.
+        R8 Box2 Hovering 17.03% gap 4.84% worth monitoring.
+
+Warragul (12 races — VIC)
+  Best race : R11 Box4 Go Stevie        15.38% WIN% | gap 5.66%
+  Note: No race exceeds 10% gap for Warragul today.
+        Low confidence slate — model is uncertain across most Warragul races.
+
+================================================================================
+BETTING RECOMMENDATIONS
+================================================================================
+
+★★★ HIGH CONFIDENCE (Bet these as singles/multis):
+  1. CASINO R5    Box1 Make And Break     (35.62%, gap 18.66%)
+  2. Q LAKESIDE R7  Box8 From A Distance  (35.34%, gap 16.90%)
+  3. GEELONG R10  Box7 Paw Xantippe       (34.27%, gap 16.07%)
+  4. Mandurah R9  Box3 My Paddy Boy       (29.72%, gap 15.64%)
+  5. GEELONG R3   Box1 Big Boy Pants      (30.75%, gap 15.39%)
+
+★★ MODERATE CONFIDENCE (Good each-way or small singles):
+  6. TOWNSVILLE R9  Box1 Federal Blue Boy (28.35%, gap 13.58%)
+  7. WAGGA R5       Box8 Tiggerlong Bingo (33.89%, gap 13.42%)
+  8. Q LAKESIDE R12 Box7 He's Regal       (30.30%, gap 12.99%)
+  9. BENDIGO R1    Box2 Just Imagine      (24.08%, gap 12.13%)
+ 10. BENDIGO R5    Box1 Nikita Bale       (26.80%, gap 11.46%)
+ 11. GEELONG R8    Box4 Baby Beets        (27.92%, gap 11.40%)
+ 12. BENDIGO R9    Box8 Rock Eternal      (25.84%, gap 10.94%)
+
+MULTI SUGGESTIONS (combine 2–3 from ★★★ list):
+  Treble A: CASINO R5 Box1 + Q LAKESIDE R7 Box8 + GEELONG R10 Box7
+  Treble B: CASINO R5 Box1 + GEELONG R3 Box1 + Mandurah R9 Box3
+  Double A: CASINO R5 Box1 + Q LAKESIDE R7 Box8
+
+TRACKS TO AVOID TODAY (low model confidence):
+  • Goulburn  — no race above 10% gap; random-field-level confidence
+  • Horsham   — no race above 10% gap
+  • Richmond  — no race above 10% gap
+  • Warragul  — no race above 10% gap (model uncertain across all races)
+
+================================================================================
+CONTEXT: YESTERDAY'S PERFORMANCE (2026-03-19)
+================================================================================
+
+Yesterday (19 March 2026) was the BEST day this week:
+  Win rate  : 34/131 = 26.0%  (up from 20.0% Wed, 19.7% Tue)
+  Placed    : 97/131 = 74.0%  (up 20+ ppts from Wed)
+  Best bet  : SHEPPARTON R1 Box7 Paw Jadore — LOST (Box7 not in top 4)
+  Top-10 bets: 0 wins, 5 placed, 4 lost, 1 ABD
+
+Best performing tracks yesterday:
+  • Wentworth Park : 50.0% wins (4/8)
+  • Sandown        : 41.7% wins (5/12)
+  • Q Straight     : 41.7% wins (5/12)
+  • Angle Park     : 40.0% wins (4/10)
+  • Hobart         : 100% placed (8/8)
+
+Worst track yesterday: Nowra — 0/11 wins (72.7% placed)
+
+KEY INSIGHT from yesterday: Despite the top-10 high-confidence bets performing
+poorly (0 wins), the overall model accuracy was excellent (74% placed). This
+suggests the ensemble works better as a field-leveller than for individual
+high-gap selections on Thursdays. Today's confidence profile is slightly
+stronger — worth following the ★★★ bets.
+
+================================================================================
+SUMMARY
+================================================================================
+
+Date    : Friday 20 March 2026
+Tracks  : 11 (Casino, Q Lakeside, Geelong, Mandurah, Townsville, Wagga,
+           Bendigo, Goulburn, Horsham, Richmond, Warragul)
+Races   : 124
+Best Bet: CASINO R5 Box1 Make And Break (35.62%, gap 18.66%)
+
+Confidence profile:
+  0 races ≥20% | 5 races ≥15% | 12 races ≥10% | 112 races <10%
+
+Recommended tracks : Casino, Q Lakeside, Geelong, Mandurah, Townsville,
+                     Wagga, Bendigo
+Low-confidence tracks: Goulburn, Horsham, Richmond, Warragul
+
+================================================================================
