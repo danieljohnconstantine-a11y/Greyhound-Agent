@@ -1,0 +1,359 @@
+================================================================================
+PREDICTION AUDIT REPORT — 2026-03-19 (Thursday)
+Generated: 2026-03-19 23:26:35
+================================================================================
+
+DATA SOURCES
+  Predictions : outputs/best_bets_report.txt (generated 2026-03-19 09:03:46)
+  Results     : data/results_2026-03-19.csv
+  PDFs in data: ANGLG1903form.pdf, BRATG1903form.pdf, ELWKG1903form.pdf,
+                GARDG1903form.pdf, MANDG1903form.pdf, MTGG1903form.pdf,
+                NOWRG1903form.pdf, QPRKG1903form.pdf, QSTRG1903form.pdf,
+                RISTG1903form.pdf, SANDG1903form.pdf, SHEPG1903form.pdf,
+                WARGG1903form.pdf, WENPG1903form.pdf (14 PDFs)
+
+NOTE: The Gardens (Ladbrokes Gardens) — ALL 11 RACES ABANDONED.
+      Richmond Straight and Q Parklands (Ladbrokes Q2 Parklands) — results
+      recorded but NOT covered by predictions (no form PDFs for these tracks).
+
+================================================================================
+RACE-BY-RACE DETAIL (predicted tracks with results only)
+W=Win  P=Placed(2nd-4th)  L=Lost
+================================================================================
+
+--- SHEPPARTON (12 races) ---
+R1 : pred=Box7  actual=1,3,6,4   → L  (best bet #1 LOST — Box7 not in top4)
+R2 : pred=Box4  actual=3,2,6,7   → L
+R3 : pred=Box2  actual=6,2,8,7   → P  (2nd)
+R4 : pred=Box3  actual=3,2,1,4   → W
+R5 : pred=Box1  actual=2,1,5,3   → P  (2nd)
+R6 : pred=Box6  actual=4,8,5,1   → L
+R7 : pred=Box8  actual=8,2,7,6   → W
+R8 : pred=Box8  actual=6,2,8,5   → P  (3rd)
+R9 : pred=Box8  actual=5,6,2,1   → L
+R10: pred=Box8  actual=3,4,6,8   → P  (4th)
+R11: pred=Box1  actual=1,8,4,5   → W
+R12: pred=Box1  actual=8,5,1,3   → P  (3rd)
+  Wins: 3  Placed: 5  Lost: 4  | Win%: 25.0%  Top4%: 66.7%
+
+--- SANDOWN (12 races) ---
+R1 : pred=Box2  actual=2,1,6,8   → W
+R2 : pred=Box8  actual=8,7,3,6   → W
+R3 : pred=Box2  actual=1,8,2,4   → P  (3rd)
+R4 : pred=Box1  actual=5,8,6,7   → L
+R5 : pred=Box1  actual=5,8,4,3   → L
+R6 : pred=Box1  actual=1,7,3,8   → W
+R7 : pred=Box4  actual=8,1,5,6   → L
+R8 : pred=Box1  actual=1,7,2,3   → W
+R9 : pred=Box1  actual=7,2,5,3   → L
+R10: pred=Box2  actual=4,7,1,3   → L
+R11: pred=Box1  actual=8,1,5,3   → P  (2nd)
+R12: pred=Box2  actual=2,8,6,1   → W
+  Wins: 5  Placed: 2  Lost: 5  | Win%: 41.7%  Top4%: 58.3%
+
+--- LADBROKES Q STRAIGHT (12 races) ---
+R1 : pred=Box3  actual=1,7,4,2   → L
+R2 : pred=Box2  actual=2,7,3,1   → W
+R3 : pred=Box2  actual=5,2,1,4   → P  (2nd)
+R4 : pred=Box6  actual=6,8,7,1   → W
+R5 : pred=Box7  actual=7,5,1,8   → W
+R6 : pred=Box8  actual=4,1,7,6   → L
+R7 : pred=Box6  actual=4,6,8,3   → P  (2nd)
+R8 : pred=Box5  actual=1,5,3,2   → P  (2nd)
+R9 : pred=Box7  actual=7,8,2,1   → W
+R10: pred=Box4  actual=8,1,4,7   → P  (3rd)
+R11: pred=Box4  actual=1,3,8,2   → L
+R12: pred=Box2  actual=2,3,6,7   → W
+  Wins: 5  Placed: 4  Lost: 3  | Win%: 41.7%  Top4%: 75.0%
+
+--- THE GARDENS (11 races) — ALL ABANDONED ---
+  (Races R1-R11 all ABD — no results, predictions not verifiable)
+
+--- Q PARKLANDS (10 races) ---
+R1 : pred=Box1  actual=1,6,5,3   → W
+R2 : pred=Box1  actual=5,7,1,8   → P  (3rd)
+R3 : pred=Box2  actual=1,6,8,7   → L
+R4 : pred=Box8  actual=1,3,8,2   → P  (3rd)
+R5 : pred=Box6  actual=5,1,4,3   → L
+R6 : pred=Box8  actual=3,1,2,7   → L
+R7 : pred=Box7  actual=5,7,1,4   → P  (2nd)
+R8 : pred=Box1  actual=5,2,3,1   → P  (4th)
+R9 : pred=Box2  actual=7,1,2,6   → P  (3rd)
+R10: pred=Box4  actual=4,2,7,3   → W
+  Wins: 2  Placed: 5  Lost: 3  | Win%: 20.0%  Top4%: 70.0%
+
+--- NOWRA (11 races) ---
+R1 : pred=Box4  actual=2,5,8,4   → P  (4th)
+R2 : pred=Box5  actual=8,5,1,7   → P  (2nd)
+R3 : pred=Box8  actual=1,3,2,4   → L
+R4 : pred=Box4  actual=7,5,4,8   → P  (3rd)
+R5 : pred=Box1  actual=8,1,3,5   → P  (2nd)
+R6 : pred=Box4  actual=1,3,4,8   → P  (3rd)
+R7 : pred=Box3  actual=5,2,3,1   → P  (3rd)
+R8 : pred=Box8  actual=3,8,7,6   → P  (2nd)
+R9 : pred=Box5  actual=1,4,2,6   → L
+R10: pred=Box5  actual=2,3,7,6   → L
+R11: pred=Box4  actual=1,4,8,2   → P  (2nd)
+  Wins: 0  Placed: 8  Lost: 3  | Win%: 0.0%  Top4%: 72.7%
+
+--- WENTWORTH PARK (8 races) ---
+R1 : pred=Box1  actual=1,8,6,7   → W
+R2 : pred=Box7  actual=4,5,8,7   → P  (4th)
+R3 : pred=Box1  actual=1,3,2,7   → W
+R4 : pred=Box3  actual=3,6,1,7   → W
+R5 : pred=Box8  actual=3,1,6,2   → L
+R6 : pred=Box2  actual=6,7,4,2   → P  (4th)
+R7 : pred=Box8  actual=8,1,7,6   → W
+R8 : pred=Box8  actual=4,7,2,1   → L
+  Wins: 4  Placed: 2  Lost: 2  | Win%: 50.0%  Top4%: 75.0%
+
+--- BALLARAT (12 races) ---
+R1 : pred=Box1  actual=7,1,6,8   → P  (2nd)
+R2 : pred=Box5  actual=7,4,5,2   → P  (3rd)
+R3 : pred=Box5  actual=1,4,2,7   → L
+R4 : pred=Box5  actual=7,2,8,1   → L
+R5 : pred=Box4  actual=6,4,3,1   → P  (2nd)
+R6 : pred=Box1  actual=8,7,5,2   → L
+R7 : pred=Box8  actual=3,4,1,6   → L
+R8 : pred=Box4  actual=7,2,3,8   → L
+R9 : pred=Box4  actual=4,1,3,6   → W
+R10: pred=Box8  actual=4,8,6,1   → P  (2nd)
+R11: pred=Box4  actual=4,3,2,7   → W
+R12: pred=Box1  actual=1,6,2,8   → W
+  Wins: 3  Placed: 4  Lost: 5  | Win%: 25.0%  Top4%: 58.3%
+
+--- MANDURAH (12 races) ---
+R1 : pred=Box2  actual=8,3,2,6   → P  (3rd)
+R2 : pred=Box6  actual=8,7,4,3   → L
+R3 : pred=Box3  actual=8,6,3,5   → P  (3rd)
+R4 : pred=Box1  actual=9,1,3,6   → P  (2nd)
+R5 : pred=Box5  actual=8,2,6,5   → P  (4th)
+R6 : pred=Box1  actual=5,3,1,6   → P  (3rd)
+R7 : pred=Box2  actual=4,1,2,7   → P  (3rd)
+R8 : pred=Box8  actual=8,7,4,1   → W
+R9 : pred=Box4  actual=3,8,7,1   → L
+R10: pred=Box2  actual=5,7,1,3   → L
+R11: pred=Box1  actual=1,6,2,8   → W
+R12: pred=Box1  actual=2,3,6,8   → L
+  Wins: 2  Placed: 6  Lost: 4  | Win%: 16.7%  Top4%: 66.7%
+
+--- MOUNT GAMBIER (12 races) ---
+R1 : pred=Box1  actual=4,1,6,8   → P  (2nd)
+R2 : pred=Box2  actual=2,7,5,8   → W
+R3 : pred=Box8  actual=6,4,8,1   → P  (3rd)
+R4 : pred=Box5  actual=5,2,7,8   → W
+R5 : pred=Box1  actual=7,8,1,4   → P  (3rd)
+R6 : pred=Box2  actual=7,1,5,4   → L
+R7 : pred=Box2  actual=2,7,5,1   → W
+R8 : pred=Box7  actual=5,2,7,4   → P  (3rd)
+R9 : pred=Box4  actual=9,4,8,1   → P  (2nd)
+R10: pred=Box1  actual=2,8,4,6   → L
+R11: pred=Box2  actual=8,1,4,2   → P  (4th)
+R12: pred=Box2  actual=1,2,4,8   → P  (2nd)
+  Wins: 3  Placed: 7  Lost: 2  | Win%: 25.0%  Top4%: 83.3%
+
+--- WARRAGUL (12 races) ---
+R1 : pred=Box4  actual=6,2,1,4   → P  (4th)
+R2 : pred=Box5  actual=2,4,5,7   → P  (3rd)
+R3 : pred=Box3  actual=5,4,1,2   → L
+R4 : pred=Box2  actual=7,8,2,3   → P  (3rd)
+R5 : pred=Box8  actual=2,7,6,8   → P  (4th)
+R6 : pred=Box8  actual=2,4,3,6   → L
+R7 : pred=Box4  actual=6,1,4,3   → P  (3rd)
+R8 : pred=Box1  actual=8,3,1,7   → P  (3rd)
+R9 : pred=Box7  actual=5,7,8,2   → P  (2nd)
+R10: pred=Box8  actual=6,1,8,4   → P  (3rd)
+R11: pred=Box1  actual=7,6,8,1   → P  (4th)
+R12: pred=Box8  actual=8,5,4,6   → W
+  Wins: 1  Placed: 9  Lost: 2  | Win%: 8.3%  Top4%: 83.3%
+
+--- ANGLE PARK (10 races) ---
+R1 : pred=Box2  actual=4,2,1,6   → P  (2nd)
+R2 : pred=Box1  actual=5,1,3,7   → P  (2nd)
+R3 : pred=Box2  actual=2,1,4,8   → W
+R4 : pred=Box1  actual=1,5,7,3   → W
+R5 : pred=Box2  actual=2,8,4,6   → W
+R6 : pred=Box1  actual=5,8,4,7   → L
+R7 : pred=Box1  actual=5,1,3,7   → P  (2nd)
+R8 : pred=Box1  actual=7,4,1,2   → P  (3rd)
+R9 : pred=Box4  actual=6,4,8,1   → P  (2nd)
+R10: pred=Box1  actual=1,8,4,2   → W
+  Wins: 4  Placed: 5  Lost: 1  | Win%: 40.0%  Top4%: 90.0%
+
+--- HOBART (8 races) ---
+R1 : pred=Box1  actual=3,8,1,2   → P  (3rd)
+R2 : pred=Box1  actual=1,6,2,4   → W
+R3 : pred=Box4  actual=2,3,6,1   → P  (4th)
+R4 : pred=Box1  actual=3,1,7,6   → P  (2nd)
+R5 : pred=Box3  actual=1,5,3,8   → P  (3rd)
+R6 : pred=Box2  actual=5,4,2,6   → P  (3rd)
+R7 : pred=Box8  actual=8,6,2,4   → W
+R8 : pred=Box1  actual=7,8,1,2   → P  (3rd)
+  Wins: 2  Placed: 6  Lost: 0  | Win%: 25.0%  Top4%: 100.0%
+
+================================================================================
+OVERALL SUMMARY (predicted tracks with results — 131 races)
+================================================================================
+
+Track              Races   Wins  Placed  Lost   Win%   Top4%
+--------------------------------------------------------------
+Shepparton           12      3      5      4   25.0%   66.7%
+Sandown              12      5      2      5   41.7%   58.3%
+Ladbrokes Q Straight 12      5      4      3   41.7%   75.0%
+The Gardens          11      —      —      —     ABD   ABD
+Q Parklands          10      2      5      3   20.0%   70.0%
+Nowra                11      0      8      3    0.0%   72.7%
+Wentworth Park        8      4      2      2   50.0%   75.0%
+Ballarat             12      3      4      5   25.0%   58.3%
+Mandurah             12      2      6      4   16.7%   66.7%
+Mount Gambier        12      3      7      2   25.0%   83.3%
+Warragul             12      1      9      2    8.3%   83.3%
+Angle Park           10      4      5      1   40.0%   90.0%
+Hobart                8      2      6      0   25.0%  100.0%
+--------------------------------------------------------------
+TOTAL               131     34     63     34   26.0%   74.0%
+
+WIN COUNT BY TRACK (best → worst):
+  🥇 Wentworth Park  4/8   = 50.0%
+  🥈 Sandown         5/12  = 41.7%
+  🥈 Q Straight      5/12  = 41.7%
+  4. Angle Park      4/10  = 40.0%
+  5. Q Parklands     2/10  = 20.0%  (but Nowra had 0)
+  6. Shepparton      3/12  = 25.0%
+  6. Ballarat        3/12  = 25.0%
+  6. Mount Gambier   3/12  = 25.0%
+  6. Hobart          2/8   = 25.0%
+  7. Mandurah        2/12  = 16.7%
+  8. Warragul        1/12  =  8.3%
+  9. Nowra           0/11  =  0.0%
+
+================================================================================
+TOP-10 BEST BETS vs ACTUAL RESULTS
+================================================================================
+
+#1  SHEPPARTON R1  Box7 Paw Jadore      (gap 19.87%) → Actual 1st: Box1 → LOST ❌
+#2  SANDOWN R3     Box2 Flying Dinar    (gap 19.77%) → Actual 1st: Box1; Box2=3rd → PLACED 3rd
+#3  Q STRAIGHT R6  Box8 Little House    (gap 16.69%) → Actual 1st: Box4 → LOST ❌
+#4  THE GARDENS R11 Box7 Savina         (gap 15.29%) → ABANDONED
+#5  Q PARKLANDS R4  Box8 Zipping Kravitz(gap 12.77%) → Actual top4: 1,3,8,2; Box8=3rd → PLACED 3rd
+#6  SHEPPARTON R9  Box8 Excellent Dash  (gap 12.53%) → Actual 1st: Box5 → LOST ❌
+#7  NOWRA R4       Box4 Cumbria Chrissy (gap 12.43%) → Actual top4: 7,5,4,8; Box4=3rd → PLACED 3rd
+#8  WENTWORTH PARK R6 Box2 Canya Handle (gap 11.78%) → Actual top4: 6,7,4,2; Box2=4th → PLACED 4th
+#9  Q PARKLANDS R7  Box7 Daysea's Rory  (gap 10.93%) → Actual top4: 5,7,1,4; Box7=2nd → PLACED 2nd
+#10 BALLARAT R6    Box1 Solar Spectrum  (gap 10.42%) → Actual 1st: Box8 → LOST ❌
+
+Top-10 best bets (excl. ABD): 0 wins / 9 results → 0 WINS, 5 placed, 4 lost
+Win rate on top-10: 0.0%   Placed rate: 55.6%
+
+================================================================================
+HIGH-CONFIDENCE BETS (gap ≥ 10%) — DETAILED ANALYSIS
+================================================================================
+
+Rank  Track              Race  Pred  Gap      Actual    Result
+----  -----------------  ----  ----  -------  --------  ------
+1     SHEPPARTON         R1    Box7  19.87%   1,3,6,4   LOST
+2     SANDOWN            R3    Box2  19.77%   1,8,2,4   PLACED 3rd
+3     Q STRAIGHT         R6    Box8  16.69%   4,1,7,6   LOST
+4     THE GARDENS        R11   Box7  15.29%   ABD       —
+5     Q PARKLANDS        R4    Box8  12.77%   1,3,8,2   PLACED 3rd
+6     SHEPPARTON         R9    Box8  12.53%   5,6,2,1   LOST
+7     NOWRA              R4    Box4  12.43%   7,5,4,8   PLACED 3rd
+8     WENTWORTH PARK     R6    Box2  11.78%   6,7,4,2   PLACED 4th
+9     Q PARKLANDS        R7    Box7  10.93%   5,7,1,4   PLACED 2nd
+10    BALLARAT           R6    Box1  10.42%   8,7,5,2   LOST
+11    Mandurah           R4    Box1  10.19%   9,1,3,6   PLACED 2nd
+
+Gap ≥ 20%: 0 races
+Gap ≥ 15% (excl. ABD): 3 races → 0 wins, 1 placed (33.3%)
+Gap ≥ 10% (excl. ABD): 10 races → 0 wins, 6 placed (60.0%), 4 lost (40.0%)
+
+================================================================================
+NOTABLE WINS
+================================================================================
+
+Sandown claimed 5 wins in 12 races (best absolute count today).
+Q Straight also claimed 5 wins in 12 races.
+Wentworth Park best win rate at 50% (4/8).
+Hobart 100% placed — no losses — but only 2 actual wins (25%).
+Angle Park 90% placed rate, 4/10 wins.
+Mount Gambier 83.3% placed, 3/10 wins.
+
+Key individual wins:
+  - SANDOWN R1  pred=Box2 → actual 2,1,6,8  WIN  (rank15, gap 8.76%)
+  - SANDOWN R2  pred=Box8 → actual 8,7,3,6  WIN  (rank115, gap 0.81%)
+  - SANDOWN R6  pred=Box1 → actual 1,7,3,8  WIN  (rank21, gap 6.26%)
+  - SANDOWN R8  pred=Box1 → actual 1,7,2,3  WIN  (rank14, gap 9.30%)
+  - SANDOWN R12 pred=Box2 → actual 2,8,6,1  WIN  (rank50, gap 3.67%)
+  - Q STRAIGHT R2  pred=Box2 → actual 2,7,3,1  WIN
+  - Q STRAIGHT R4  pred=Box6 → actual 6,8,7,1  WIN
+  - Q STRAIGHT R5  pred=Box7 → actual 7,5,1,8  WIN
+  - Q STRAIGHT R9  pred=Box7 → actual 7,8,2,1  WIN
+  - Q STRAIGHT R12 pred=Box2 → actual 2,3,6,7  WIN
+  - WENTWORTH PARK R1 pred=Box1 → actual 1,8,6,7  WIN
+  - WENTWORTH PARK R3 pred=Box1 → actual 1,3,2,7  WIN
+  - WENTWORTH PARK R4 pred=Box3 → actual 3,6,1,7  WIN
+  - WENTWORTH PARK R7 pred=Box8 → actual 8,1,7,6  WIN
+  - ANGLE PARK R3  pred=Box2 → actual 2,1,4,8  WIN
+  - ANGLE PARK R4  pred=Box1 → actual 1,5,7,3  WIN
+  - ANGLE PARK R5  pred=Box2 → actual 2,8,4,6  WIN
+  - ANGLE PARK R10 pred=Box1 → actual 1,8,4,2  WIN
+  - BALLARAT R9    pred=Box4 → actual 4,1,3,6  WIN
+  - BALLARAT R11   pred=Box4 → actual 4,3,2,7  WIN
+  - BALLARAT R12   pred=Box1 → actual 1,6,2,8  WIN
+  - HOBART R2      pred=Box1 → actual 1,6,2,4  WIN
+  - HOBART R7      pred=Box8 → actual 8,6,2,4  WIN
+  - MOUNT GAMBIER R2 pred=Box2 → actual 2,7,5,8  WIN
+  - MOUNT GAMBIER R4 pred=Box5 → actual 5,2,7,8  WIN
+  - MOUNT GAMBIER R7 pred=Box2 → actual 2,7,5,1  WIN
+  - SHEPPARTON R4  pred=Box3 → actual 3,2,1,4  WIN
+  - SHEPPARTON R7  pred=Box8 → actual 8,2,7,6  WIN
+  - SHEPPARTON R11 pred=Box1 → actual 1,8,4,5  WIN
+  - MANDURAH R8    pred=Box8 → actual 8,7,4,1  WIN
+  - MANDURAH R11   pred=Box1 → actual 1,6,2,8  WIN
+  - Q PARKLANDS R1 pred=Box1 → actual 1,6,5,3  WIN
+  - Q PARKLANDS R10 pred=Box4 → actual 4,2,7,3  WIN
+  - WARRAGUL R12   pred=Box8 → actual 8,5,4,6  WIN
+
+================================================================================
+TRACKS NOT PREDICTED (results recorded only)
+================================================================================
+
+Richmond Straight (10 races): R1-R10 results recorded — no predictions made.
+Ladbrokes Q2 Parklands (10 races): Results recorded as "Q Parklands".
+  (Note: predictions used the label "Q PARKLANDS" which matches Q2 Parklands.)
+
+================================================================================
+COMPARISON TO RECENT DAYS
+================================================================================
+
+  2026-03-19 (today)  : 34/131 = 26.0% wins, 97/131 = 74.0% placed
+  2026-03-18 (Wed)    : 24/120 = 20.0% wins, 64/120 = 53.3% placed
+  2026-03-17 (Tue)    : 24/122 = 19.7% wins, 81/122 = 66.4% placed
+  2026-03-16 (Mon)    : 21/102 = 20.6% wins, 66/102 = 64.7% placed
+
+Today is significantly ABOVE recent averages:
+  Win rate: +6.0 pts above yesterday, best in past week
+  Placed rate: +20.7 pts above yesterday — substantial improvement
+
+================================================================================
+SUMMARY VERDICT
+================================================================================
+
+✅ OVERALL STRONG DAY — 26.0% wins, 74.0% placed (131 races across 12 tracks)
+
+✅ Best tracks: Wentworth Park (50% wins), Sandown (41.7%), Q Straight (41.7%),
+   Angle Park (40%), Hobart (100% placed)
+
+⚠️  The #1 best bet (SHEPPARTON R1 Box7 Paw Jadore, gap 19.87%) LOST —
+   Box7 was not in the top 4. Winner was Box1.
+
+⚠️  Top-10 bets produced 0 wins (5 placed, 4 lost, 1 ABD). The model's
+   highest-confidence picks did not translate to wins today.
+
+⚠️  Nowra: 0 wins from 11 races (72.7% placed — good placing but no wins).
+   Warragul: 1 win from 12 races (83.3% placed — model placed well, few wins).
+
+📊 The overall win rate of 26.0% is well above the expected random baseline of
+   ~14% (1/7 boxes) and is the best daily result this week.
+
+================================================================================
