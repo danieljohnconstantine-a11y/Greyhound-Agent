@@ -1,0 +1,95 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-03-21 09:55:44
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     Q LAKESIDE       R7    21.9595%  Box 2 Canya Nuclear          34.9293%  Box 5 Dreamer                12.9698%
+2     DUBBO            R9    21.3496%  Box 3 Triple Phantom         35.4634%  Box 6 Slippery Bogan         14.1138%
+3     SHEPPARTON       R7    19.0983%  Box 1 Bebop Jazz             29.8970%  Box 3 Blue Labubu            10.7987%
+4     SHEPPARTON       R9    17.7212%  Box 2 Dewana Star            31.4975%  Box 4 Off The Chart          13.7763%
+5     The Gardens      R10   15.6308%  Box 1 Flying Monkey's        28.9336%  Box 4 I'm Alright            13.3028%
+6     Q LAKESIDE       R4    15.0796%  Box 1 Massaro                32.8994%  Box 3 I'm A Dazzler          17.8198%
+7     Q LAKESIDE       R5    14.7962%  Box 7 Shout Out Shazam       28.8943%  Box 6 Man On Fire            14.0981%
+8     Cannington       R11   11.8010%  Box 1 Paid My Dues           33.5819%  Box 7 Reinvigorated          21.7809%
+9     WENTWORTH PARK   R5    11.1667%  Box 1 Brax Keeping           22.2494%  Box 4 Fascinate Samuel       11.0827%
+10    The Gardens      R6     9.7563%  Box 6 Skinny Marie           20.6198%  Box 7 Sunburnt Keeper        10.8635%
+11    SHEPPARTON       R6     9.5683%  Box 4 Mepunga Donna          36.0450%  Box 5 Leroy's Girl           26.4767%
+12    SHEPPARTON       R12    7.6655%  Box 4 Star Of Venus          20.5425%  Box 5 Little Minnie          12.8770%
+13    WENTWORTH PARK   R3     7.2274%  Box 1 Both Bowers Ace        22.6915%  Box 8 Blazin' Fire           15.4641%
+14    The Gardens      R11    6.5413%  Box 5 Suddenly I See         20.1220%  Box 1 Wonky Key Donkey       13.5807%
+15    Q LAKESIDE       R10    6.3385%  Box 7 Breakout Lad           23.5607%  Box 6 Brute Banner           17.2222%
+16    Cannington       R10    5.8122%  Box 2 Choosing Texas         19.9851%  Box 5 Agassi                 14.1729%
+17    DUBBO            R5     5.8100%  Box 4 Shorty                 17.1244%  Box 8 Zipper In              11.3144%
+18    Cannington       R4     5.5360%  Box 3 Miss Ronnie Mac        16.7845%  Box 1 Hudson                 11.2485%
+19    Meadows          R8     5.2636%  Box 2 Highly Connected       21.3434%  Box 1 Caly Jet               16.0798%
+20    WENTWORTH PARK   R4     5.1418%  Box 7 Derry                  27.8951%  Box 8 Glitzy Ethics          22.7533%
+21    SHEPPARTON       R10    4.9373%  Box 6 Aston Moreno           17.5372%  Box 7 Aston Haruto           12.5999%
+22    Meadows          R5     4.9184%  Box 4 Paw Fortress           15.5392%  Box 7 Weblec Pepper          10.6208%
+23    DUBBO            R7     4.8583%  Box 4 Without A Trace        17.8312%  Box 8 Vodka And Ice          12.9729%
+24    Meadows          R7     4.5517%  Box 7 Valenzuela             18.1960%  Box 4 Ross The Boss          13.6443%
+25    SHEPPARTON       R5     4.0430%  Box 1 Compute                18.0670%  Box 7 Slick Time             14.0240%
+26    Cannington       R6     3.8682%  Box 5 Strip Weathers         16.6745%  Box 2 Aston Ruler            12.8063%
+27    Cannington       R12    3.8536%  Box 8 West On Model          28.4675%  Box 1 Iron Works             24.6139%
+28    Meadows          R4     3.8466%  Box 2 No Do Day              16.1424%  Box 7 Keep Rolling           12.2958%
+29    The Gardens      R4     3.7995%  Box 4 George Judy            17.2144%  Box 1 Blue Chanelle          13.4149%
+30    SHEPPARTON       R8     3.7965%  Box 3 Giacomo                16.6415%  Box 2 Sharapova Star         12.8450%
+31    DUBBO            R10    3.7753%  Box 2 Kiando Estate          15.2422%  Box 7 Hot To Twist           11.4669%
+32    SHEPPARTON       R2     3.7213%  Box 7 Koda                   18.9746%  Box 6 Callahan               15.2533%
+33    Meadows          R1     3.4188%  Box 1 Paw Xerox              19.1440%  Box 2 Corban Yaxley          15.7252%
+34    DUBBO            R12    3.2716%  Box 5 Blaine Keeping         19.1785%  Box 1 Fusion Rose            15.9069%
+35    DUBBO            R3     3.1162%  Box 3 Armatree Asafa         18.6547%  Box 2 Armatree Judo          15.5385%
+36    The Gardens      R3     3.0265%  Box 7 Kalani Sea             14.7228%  Box 6 Kenny's Girl           11.6963%
+37    SHEPPARTON       R3     2.9213%  Box 5 Moraine Bella          13.7581%  Box 1 Paw Pascal             10.8368%
+38    Cannington       R2     2.5646%  Box 2 Hunter                 18.3450%  Box 5 West On Menace         15.7804%
+39    Cannington       R3     2.5219%  Box 2 Jai Bubba              10.6877%  Box 1 Sir Tommy               8.1658%
+40    Meadows          R11    2.3753%  Box 8 Lektra Solo            14.8077%  Box 1 Off The Beer           12.4324%
+41    The Gardens      R7     2.3388%  Box 4 Kenzie Robbo           20.0508%  Box 1 Weffalee Lee Lee       17.7120%
+42    Meadows          R2     2.3161%  Box 1 Magic Loki             15.2970%  Box 3 Whispered              12.9809%
+43    Meadows          R10    2.2389%  Box 1 Paw Lovisa             15.1837%  Box 4 Katie Bell             12.9448%
+44    The Gardens      R8     2.2037%  Box 1 Jet Fuel               12.7785%  Box 4 Reborn Scarlett        10.5748%
+45    SHEPPARTON       R11    2.1065%  Box 8 Valletta Pearl         12.0920%  Box 6 Alfredo                 9.9855%
+46    The Gardens      R12    1.8298%  Box 3 Speed Dial             11.8493%  Box 5 When I'm Ready         10.0195%
+47    Cannington       R1     1.8003%  Box 8 West On Torque         14.5245%  Box 2 Stratton Drive         12.7242%
+48    WENTWORTH PARK   R7     1.7666%  Box 1 Zipping Kayli          16.9269%  Box 5 Entertainer            15.1603%
+49    DUBBO            R2     1.7583%  Box 1 Roxy Keeping           14.7747%  Box 4 Poke The Glass         13.0164%
+50    SHEPPARTON       R4     1.7393%  Box 1 Paw Estrella           19.9728%  Box 8 Docherty               18.2335%
+51    WENTWORTH PARK   R2     1.7285%  Box 5 Sammy Ethan            17.9151%  Box 2 My Pharaoh             16.1866%
+52    Cannington       R9     1.6245%  Box 2 Clifton Kuna           11.3353%  Box 5 Hard To Forget          9.7108%
+53    WENTWORTH PARK   R10    1.6235%  Box 7 Simplicity Magic       12.0920%  Box 4 Tarawi Banjo           10.4685%
+54    Meadows          R12    1.5475%  Box 1 Rivers Meet            13.2978%  Box 4 Unacceptable Nik       11.7503%
+55    Meadows          R3     1.4796%  Box 4 Lakeview Lynette       14.8353%  Box 1 Paw Qwan               13.3557%
+56    Q LAKESIDE       R8     1.4166%  Box 3 Validate               23.7680%  Box 6 Shamrock Hayze         22.3514%
+57    Cannington       R13    1.3535%  Box 1 Hurry Up Eric          14.7199%  Box 5 Ferndale Flyer         13.3664%
+58    The Gardens      R5     1.3192%  Box 3 Sail Away Sam          13.7702%  Box 1 It's A Tease           12.4510%
+59    Q LAKESIDE       R6     1.2659%  Box 1 Backcreek Butch        17.7733%  Box 3 Give Me Bucks          16.5074%
+60    Q LAKESIDE       R1     1.1962%  Box 7 Utah Gunn              14.3327%  Box 4 Cornerstone            13.1365%
+61    Cannington       R8     1.1374%  Box 2 Capalla                11.9294%  Box 4 Tilly Rose             10.7920%
+62    WENTWORTH PARK   R9     1.0955%  Box 4 Take A Break           19.3457%  Box 7 Fascinate Suzie        18.2502%
+63    DUBBO            R11    1.0745%  Box 3 Hey Ella               11.3609%  Box 8 Triple Emu             10.2864%
+64    WENTWORTH PARK   R8     0.7629%  Box 4 Zipping Violet         12.4940%  Box 2 Showman Baz            11.7311%
+65    The Gardens      R1     0.7489%  Box 2 Project Nemesis        15.5136%  Box 8 Kalani Chris           14.7647%
+66    Q LAKESIDE       R9     0.7229%  Box 5 Bandit Chloe           13.7298%  Box 3 Miss Bear              13.0069%
+67    WENTWORTH PARK   R1     0.5613%  Box 6 Swift Wind              8.6857%  Box 1 Heated Rivalry          8.1244%
+68    Cannington       R7     0.5120%  Box 2 Our Ozzie Salute       18.1847%  Box 5 Iconic Guess           17.6727%
+69    DUBBO            R8     0.5077%  Box 4 Active Dreams          13.1312%  Box 7 Armatree Stripe        12.6235%
+70    WENTWORTH PARK   R6     0.4036%  Box 4 Eriza Sparkles         16.3330%  Box 7 Cumbria Benny          15.9294%
+71    The Gardens      R9     0.3022%  Box 6 Minecraft Fusion       11.4785%  Box 1 Hooked On Iraola       11.1763%
+72    Meadows          R9     0.2869%  Box 2 Paw Isla               12.3998%  Box 4 Zipping Columbus       12.1129%
+73    Cannington       R5     0.2856%  Box 8 Take My Advice         10.6038%  Box 2 Biscotti Blast         10.3182%
+74    Meadows          R6     0.2767%  Box 4 Gambella               12.4759%  Box 2 Paw Yochelle           12.1992%
+75    SHEPPARTON       R1     0.2650%  Box 6 Scott Quibble          12.9255%  Box 8 Quest For Junior       12.6605%
+76    Q LAKESIDE       R3     0.2325%  Box 5 Scenic Sundari         15.9686%  Box 1 Bundy Blue             15.7361%
+77    DUBBO            R6     0.2304%  Box 8 Motor City Sonny       18.1122%  Box 3 Dennis Keeping         17.8818%
+78    The Gardens      R2     0.1660%  Box 8 Whisky Bent            17.0919%  Box 5 Gary Indiana           16.9259%
+79    Q LAKESIDE       R2     0.1505%  Box 4 Quest For Pace         11.6226%  Box 8 Veracious Val          11.4721%
+80    DUBBO            R4     0.1120%  Box 4 Creeping Mylo          21.3925%  Box 5 Nangar Mcgraw          21.2805%
+81    DUBBO            R1     0.0238%  Box 1 Devon On Sauce         16.7103%  Box 5 Urban Cindy            16.6865%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 81
+
+🏆 BEST BET: Q LAKESIDE Race 7 - Box 2 Canya Nuclear (gap: 21.9595%)
