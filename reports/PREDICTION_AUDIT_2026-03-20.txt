@@ -1,0 +1,302 @@
+================================================================================
+PREDICTION AUDIT REPORT — 2026-03-20 (Friday)
+Generated: 2026-03-20 23:38:54
+================================================================================
+
+DATA SOURCES
+  Predictions : outputs/best_bets_report.txt (generated 2026-03-20 09:50:12)
+  Results     : data/results_2026-03-20.csv
+  PDFs in data: BDGOG2003form.pdf, CSNOG2003form.pdf, GEELG2003form.pdf,
+                GOULG2003form.pdf, HSHMG2003form.pdf, MANDG2003form.pdf,
+                MBRGG2003form.pdf, QLAKG2003form.pdf, RICHG2003form.pdf,
+                TOWNG2003form.pdf, WAGGG2003form.pdf, WARGG2003form.pdf (12 PDFs)
+
+NOTE: Murray Bridge Straight — results recorded but NOT covered by predictions
+      (no predictions generated for this track despite PDF present).
+
+================================================================================
+RACE-BY-RACE DETAIL (predicted tracks with results only)
+W=Win  P=Placed(2nd-4th)  L=Lost
+================================================================================
+
+--- CASINO (12 races) ---
+R1 : pred=Box2  actual=3,4,2,6   → P  (3rd)
+R2 : pred=Box1  actual=6,7,3,8   → L
+R3 : pred=Box1  actual=8,4,3,2   → L
+R4 : pred=Box8  actual=4,1,8,7   → P  (3rd)
+R5 : pred=Box1  actual=7,6,3,8   → L  (best bet #1 LOST — Box1 Make And Break not in top4)
+R6 : pred=Box2  actual=4,3,6,1   → L
+R7 : pred=Box5  actual=5,4,8,2   → W
+R8 : pred=Box1  actual=3,1,2,4   → P  (2nd)
+R9 : pred=Box7  actual=1,6,2,4   → L
+R10: pred=Box1  actual=4,9,2,8   → L
+R11: pred=Box1  actual=6,2,1,3   → P  (3rd)
+R12: pred=Box2  actual=1,6,3,2   → P  (4th)
+  Wins: 1  Placed: 4  Lost: 7  | Win%: 8.3%  Top4%: 41.7%
+
+--- LADBROKES Q1 LAKESIDE (12 races) ---
+R1 : pred=Box4  actual=7,1,4,2   → P  (3rd)
+R2 : pred=Box5  actual=7,5,4,1   → P  (2nd)
+R3 : pred=Box7  actual=7,8,3,6   → W
+R4 : pred=Box7  actual=6,1,7,4   → P  (3rd)
+R5 : pred=Box2  actual=5,4,2,6   → P  (3rd)
+R6 : pred=Box4  actual=4,8,2,5   → W
+R7 : pred=Box8  actual=7,8,2,1   → P  (2nd)  (best bet #2 PLACED)
+R8 : pred=Box4  actual=2,8,7,4   → P  (4th)
+R9 : pred=Box2  actual=6,1,5,2   → P  (4th)
+R10: pred=Box6  actual=3,2,5,9   → L
+R11: pred=Box6  actual=2,1,7,5   → L
+R12: pred=Box7  actual=7,8,1,5   → W  (best bet #8 WON)
+  Wins: 3  Placed: 7  Lost: 2  | Win%: 25.0%  Top4%: 83.3%
+
+--- GEELONG (12 races) ---
+R1 : pred=Box2  actual=3,6,7,8   → L
+R2 : pred=Box7  actual=1,5,2,4   → L
+R3 : pred=Box1  actual=8,1,2,7   → P  (2nd)  (best bet #5 PLACED)
+R4 : pred=Box4  actual=2,5,4,8   → P  (3rd)
+R5 : pred=Box8  actual=3,8,6,5   → P  (2nd)
+R6 : pred=Box5  actual=4,6,8,3   → L
+R7 : pred=Box3  actual=2,1,8,4   → L
+R8 : pred=Box4  actual=4,1,7,5   → W  (best bet #11 WON)
+R9 : pred=Box1  actual=2,1,3,6   → P  (2nd)
+R10: pred=Box7  actual=8,3,7,2   → P  (3rd)  (best bet #3 PLACED)
+R11: pred=Box3  actual=3,1,2,6   → W
+R12: pred=Box3  actual=8,3,7,4   → P  (2nd)
+  Wins: 2  Placed: 6  Lost: 4  | Win%: 16.7%  Top4%: 66.7%
+
+--- MANDURAH (12 races) ---
+R1 : pred=Box6  actual=7,2,8,6   → P  (4th)
+R2 : pred=Box2  actual=4,7,5,8   → L
+R3 : pred=Box6  actual=7,5,4,1   → L
+R4 : pred=Box5  actual=1,5,8,3   → P  (2nd)
+R5 : pred=Box8  actual=1,6,7,2   → L
+R6 : pred=Box2  actual=7,4,6,2   → P  (4th)
+R7 : pred=Box1  actual=6,1,3,7   → P  (2nd)
+R8 : pred=Box3  actual=5,1,7,6   → L
+R9 : pred=Box3  actual=1,2,8,6   → L  (best bet #4 LOST — Box3 My Paddy Boy not in top4)
+R10: pred=Box2  actual=7,1,2,4   → P  (3rd)
+R11: pred=Box6  actual=7,2,6,3   → P  (3rd)
+R12: pred=Box7  actual=3,4,10,5  → L
+  Wins: 0  Placed: 6  Lost: 6  | Win%: 0.0%  Top4%: 50.0%
+
+--- BET NATION TOWNSVILLE (11 races) ---
+R1 : pred=Box3  actual=3,1,2,8   → W
+R2 : pred=Box7  actual=8,7,9,1   → P  (2nd)
+R3 : pred=Box8  actual=6,9,1,5   → L
+R4 : pred=Box3  actual=3,1,2,8   → W
+R5 : pred=Box6  actual=1,3,6,2   → P  (3rd)
+R6 : pred=Box4  actual=1,2,7,6   → L
+R7 : pred=Box1  actual=4,1,6,7   → P  (2nd)
+R8 : pred=Box2  actual=8,2,6,3   → P  (2nd)
+R9 : pred=Box1  actual=2,7,1,8   → P  (3rd)  (best bet #6 PLACED)
+R10: pred=Box3  actual=3,6,1,7   → W
+R11: pred=Box4  actual=5,4,8,1   → P  (2nd)  (best bet #14 PLACED)
+  Wins: 3  Placed: 6  Lost: 2  | Win%: 27.3%  Top4%: 81.8%
+
+--- WAGGA (10 races) ---
+R1 : pred=Box1  actual=1,3,6,7   → W
+R2 : pred=Box2  actual=7,4,2,8   → P  (3rd)
+R3 : pred=Box1  actual=1,8,4,7   → W
+R4 : pred=Box1  actual=8,1,6,4   → P  (2nd)
+R5 : pred=Box8  actual=8,1,4,2   → W  (best bet #7 WON — Box8 Tiggerlong Bingo)
+R6 : pred=Box1  actual=6,7,2,3   → L
+R7 : pred=Box7  actual=3,5,2,7   → P  (4th)
+R8 : pred=Box1  actual=5,8,2,4   → L
+R9 : pred=Box4  actual=8,1,4,7   → P  (3rd)
+R10: pred=Box8  actual=8,1,6,5   → W
+  Wins: 4  Placed: 4  Lost: 2  | Win%: 40.0%  Top4%: 80.0%
+
+--- BENDIGO (12 races) ---
+R1 : pred=Box2  actual=5,8,2,1   → P  (3rd)  (best bet #9 PLACED)
+R2 : pred=Box1  actual=3,1,4,8   → P  (2nd)
+R3 : pred=Box1  actual=4,8,7,1   → P  (4th)
+R4 : pred=Box4  actual=8,5,1,4   → P  (4th)
+R5 : pred=Box1  actual=5,8,1,7   → P  (3rd)  (best bet #10 PLACED)
+R6 : pred=Box2  actual=1,5,4,2   → P  (4th)
+R7 : pred=Box6  actual=7,2,4,1   → L
+R8 : pred=Box2  actual=4,2,6,1   → P  (2nd)
+R9 : pred=Box8  actual=2,7,8,6   → P  (3rd)  (best bet #12 PLACED)
+R10: pred=Box4  actual=1,3,4,6   → P  (3rd)
+R11: pred=Box4  actual=1,4,2,7   → P  (2nd)
+R12: pred=Box4  actual=8,1,2,7   → L
+  Wins: 0  Placed: 10  Lost: 2  | Win%: 0.0%  Top4%: 83.3%
+
+--- GOULBURN (10 races) ---
+R1 : pred=Box6  actual=6,1,8,7   → W
+R2 : pred=Box3  actual=4,2,3,8   → P  (3rd)
+R3 : pred=Box4  actual=7,2,6,4   → P  (4th)
+R4 : pred=Box2  actual=6,1,3,8   → L
+R5 : pred=Box2  actual=2,3,5,8   → W
+R6 : pred=Box4  actual=5,6,1,8   → L
+R7 : pred=Box5  actual=8,7,1,5   → P  (4th)
+R8 : pred=Box8  actual=1,8,2,4   → P  (2nd)
+R9 : pred=Box1  actual=8,1,3,4   → P  (2nd)
+R10: pred=Box1  actual=1,3,8,7   → W  (rank 17 gap 8.51%)
+  Wins: 3  Placed: 5  Lost: 2  | Win%: 30.0%  Top4%: 80.0%
+
+--- HORSHAM (9 races) ---
+R1 : pred=Box1  actual=2,8,7,1   → P  (4th)
+R2 : pred=Box4  actual=8,2,1,4   → P  (4th)
+R3 : pred=Box6  actual=1,3,7,2   → L
+R4 : pred=Box4  actual=8,1,5,4   → P  (4th)  (best bet #24 PLACED)
+R5 : pred=Box3  actual=1,7,6,2   → L
+R6 : pred=Box1  actual=8,4,5,2   → L
+R7 : pred=Box1  actual=2,1,8,7   → P  (2nd)
+R8 : pred=Box8  actual=1,8,7,5   → P  (2nd)  (best bet #69 PLACED)
+R9 : pred=Box8  actual=1,8,2,5   → P  (2nd)
+  Wins: 0  Placed: 6  Lost: 3  | Win%: 0.0%  Top4%: 66.7%
+
+--- RICHMOND (12 races) ---
+R1 : pred=Box3  actual=8,4,2,1   → L
+R2 : pred=Box7  actual=5,1,8,2   → L
+R3 : pred=Box4  actual=1,8,4,3   → P  (3rd)
+R4 : pred=Box1  actual=2,1,5,6   → P  (2nd)
+R5 : pred=Box2  actual=8,1,3,7   → L
+R6 : pred=Box8  actual=7,3,1,4   → L
+R7 : pred=Box5  actual=5,6,8,4   → W
+R8 : pred=Box2  actual=4,7,8,5   → L
+R9 : pred=Box3  actual=3,6,7,1   → W
+R10: pred=Box2  actual=1,3,6,7   → L  (best bet #20 Richmond LOST)
+R11: pred=Box8  actual=3,2,7,1   → L
+R12: pred=Box2  actual=3,2,1,6   → P  (2nd)
+  Wins: 2  Placed: 3  Lost: 7  | Win%: 16.7%  Top4%: 41.7%
+
+--- WARRAGUL (12 races) ---
+R1 : pred=Box8  actual=2,4,1,6   → L
+R2 : pred=Box2  actual=2,8,7,1   → W
+R3 : pred=Box2  actual=8,5,1,4   → L
+R4 : pred=Box1  actual=1,8,2,3   → W  (best bet #41 WON)
+R5 : pred=Box6  actual=8,6,1,5   → P  (2nd)
+R6 : pred=Box8  actual=2,6,8,5   → P  (3rd)
+R7 : pred=Box3  actual=3,5,6,7   → W
+R8 : pred=Box4  actual=3,1,7,8   → L
+R9 : pred=Box1  actual=2,4,6,7   → L
+R10: pred=Box2  actual=3,2,4,6   → P  (2nd)
+R11: pred=Box4  actual=6,4,3,2   → P  (2nd)  (best bet #23 PLACED)
+R12: pred=Box1  actual=6,4,7,1   → P  (4th)  (best bet #46 PLACED)
+  Wins: 3  Placed: 4  Lost: 5  | Win%: 25.0%  Top4%: 58.3%
+
+================================================================================
+TRACKS NOT PREDICTED (results recorded only)
+================================================================================
+
+Murray Bridge Straight (10 races, R9 only 3 finishers): Results recorded in
+  data/results_2026-03-20.csv — no predictions made for this track.
+
+================================================================================
+TOP-12 BEST BETS PERFORMANCE (Gap ≥ 10%)
+================================================================================
+
+Rank  Track           Race  Pred    Dog Name              Gap      Result
+───────────────────────────────────────────────────────────────────────────────
+ #1   CASINO          R5    Box1    Make And Break        18.66%   LOST   ★★★
+ #2   Q LAKESIDE      R7    Box8    From A Distance       16.90%   PLACED ★★★
+ #3   GEELONG         R10   Box7    Paw Xantippe          16.07%   PLACED ★★★
+ #4   Mandurah        R9    Box3    My Paddy Boy          15.64%   LOST   ★★★
+ #5   GEELONG         R3    Box1    Big Boy Pants         15.39%   PLACED ★★★
+ #6   TOWNSVILLE      R9    Box1    Federal Blue Boy      13.58%   PLACED ★★
+ #7   WAGGA           R5    Box8    Tiggerlong Bingo      13.42%   WIN    ★★
+ #8   Q LAKESIDE      R12   Box7    He's Regal            12.99%   WIN    ★★
+ #9   BENDIGO         R1    Box2    Just Imagine          12.13%   PLACED ★★
+#10   BENDIGO         R5    Box1    Nikita Bale           11.46%   PLACED ★★
+#11   GEELONG         R8    Box4    Baby Beets            11.40%   WIN    ★★
+#12   BENDIGO         R9    Box8    Rock Eternal          10.94%   PLACED ★★
+
+Top-12 summary: 3 WINS, 7 PLACED, 2 LOST
+Top-12 Win%: 25.0%  |  Top-12 Top4%: 83.3%
+
+================================================================================
+OVERALL STATISTICS
+================================================================================
+
+Track             Races  Wins  Placed  Lost  Win%   Top4%
+──────────────────────────────────────────────────────────
+Casino              12     1     4      7    8.3%   41.7%
+Q Lakeside          12     3     7      2   25.0%   83.3%
+Geelong             12     2     6      4   16.7%   66.7%
+Mandurah            12     0     6      6    0.0%   50.0%
+Townsville          11     3     6      2   27.3%   81.8%
+Wagga               10     4     4      2   40.0%   80.0%
+Bendigo             12     0    10      2    0.0%   83.3%
+Goulburn            10     3     5      2   30.0%   80.0%
+Horsham              9     0     6      3    0.0%   66.7%
+Richmond            12     2     3      7   16.7%   41.7%
+Warragul            12     3     4      5   25.0%   58.3%
+──────────────────────────────────────────────────────────
+TOTAL              124    21    61     42   16.9%   66.1%
+
+================================================================================
+KEY INDIVIDUAL WINS
+================================================================================
+
+  - WAGGA R1    pred=Box1 → actual 1,3,6,7   WIN
+  - WAGGA R3    pred=Box1 → actual 1,8,4,7   WIN
+  - WAGGA R5    pred=Box8 → actual 8,1,4,2   WIN  (best bet #7 ★★)
+  - WAGGA R10   pred=Box8 → actual 8,1,6,5   WIN
+  - GOULBURN R1  pred=Box6 → actual 6,1,8,7  WIN
+  - GOULBURN R5  pred=Box2 → actual 2,3,5,8  WIN
+  - GOULBURN R10 pred=Box1 → actual 1,3,8,7  WIN
+  - TOWNSVILLE R1 pred=Box3 → actual 3,1,2,8 WIN
+  - TOWNSVILLE R4 pred=Box3 → actual 3,1,2,8 WIN
+  - TOWNSVILLE R10 pred=Box3 → actual 3,6,1,7 WIN
+  - Q LAKESIDE R3  pred=Box7 → actual 7,8,3,6 WIN
+  - Q LAKESIDE R6  pred=Box4 → actual 4,8,2,5 WIN
+  - Q LAKESIDE R12 pred=Box7 → actual 7,8,1,5 WIN  (best bet #8 ★★)
+  - GEELONG R8   pred=Box4 → actual 4,1,7,5  WIN  (best bet #11 ★★)
+  - GEELONG R11  pred=Box3 → actual 3,1,2,6  WIN
+  - RICHMOND R7  pred=Box5 → actual 5,6,8,4  WIN
+  - RICHMOND R9  pred=Box3 → actual 3,6,7,1  WIN
+  - CASINO R7    pred=Box5 → actual 5,4,8,2  WIN
+  - WARRAGUL R2  pred=Box2 → actual 2,8,7,1  WIN
+  - WARRAGUL R4  pred=Box1 → actual 1,8,2,3  WIN  (best bet #41 ★)
+  - WARRAGUL R7  pred=Box3 → actual 3,5,6,7  WIN
+
+================================================================================
+COMPARISON TO RECENT DAYS
+================================================================================
+
+  2026-03-20 (today)  : 21/124 = 16.9% wins, 82/124 = 66.1% placed
+  2026-03-19 (Thu)    : 34/131 = 26.0% wins, 97/131 = 74.0% placed
+  2026-03-18 (Wed)    : 24/120 = 20.0% wins, 64/120 = 53.3% placed
+  2026-03-17 (Tue)    : 24/122 = 19.7% wins, 81/122 = 66.4% placed
+  2026-03-16 (Mon)    : 21/102 = 20.6% wins, 66/102 = 64.7% placed
+
+Today is below recent averages:
+  Win rate: -9.1 pts below yesterday — weakest win rate this week
+  Placed rate: -7.9 pts below yesterday — still within normal range
+
+================================================================================
+SUMMARY VERDICT
+================================================================================
+
+⚠️  BELOW-AVERAGE DAY — 16.9% wins, 66.1% placed (124 races across 11 tracks)
+
+✅ Best tracks:
+   • Wagga        : 40.0% wins (4/10) — outstanding performance
+   • Goulburn     : 30.0% wins (3/10) — strong day
+   • Townsville   : 27.3% wins (3/11) — above average
+   • Q Lakeside   : 25.0% wins (3/12) — solid
+   • Warragul     : 25.0% wins (3/12) — solid
+
+⚠️  The #1 best bet (CASINO R5 Box1 Make And Break, gap 18.66%) LOST —
+   Winner was Box7 Western Lies. Third consecutive losing best bet.
+
+⚠️  Win rate of 16.9% is the LOWEST this week (vs 26% Thu, 20% Wed, 19.7% Tue).
+   Still above the random baseline of ~14% (1/7 available boxes).
+
+✅ Top-12 bets produced 3 wins (25.0% win rate) and 7 placed (83.3% top-4 rate)
+   — the high-confidence selections performed better than the overall field.
+
+❌ WORST TRACKS:
+   • Mandurah     : 0 wins from 12 races (50% placed — poor day)
+   • Bendigo      : 0 wins from 12 races (83.3% placed — great placing, no wins)
+   • Horsham      : 0 wins from 9 races  (66.7% placed)
+   • Casino       : 1 win from 12 races  (41.7% placed — very poor)
+
+⚠️  Richmond and Casino both 41.7% top-4 rate — model struggled at these tracks.
+
+📊 Bendigo was a curiosity — 0 wins but 10/12 placed (83.3%), one of the best
+   placing rates ever seen. The model consistently identified top-4 dogs but
+   could not identify the winner across 12 races.
+
+================================================================================
