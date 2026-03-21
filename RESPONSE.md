@@ -7,349 +7,469 @@
 
 ```
 ================================================================================
-DAILY BETTING SUMMARY — 2026-03-19 (Thursday)
-Generated: 2026-03-19 09:15 AEST
+DAILY ANALYSIS REPORT — 2026-03-21 (Saturday)
+Generated: 2026-03-21 (morning)
 ================================================================================
 
-TODAY'S RACE CARD OVERVIEW
----------------------------
-  Date:    Thursday 19 March 2026
-  Tracks:  13 (Shepparton, Sandown, Q Straight, The Gardens, Q Parklands,
-               Nowra, Wentworth Park, Ballarat, Mandurah, Mt Gambier,
-               Warragul, Hobart, Angle Park)
-  Races:   146 total
-  PDFs:    14 uploaded → moved to data/
-           (NOTE: RISTG1903form.pdf present but no matching model output —
-            possible track not racing or data error; not included in predictions)
-  Metro tracks today: Sandown (VIC), Angle Park (SA), Wentworth Park (NSW)
-  Mid-tier: The Gardens (NSW), Warragul (VIC)
+OVERVIEW
+--------
+Date      : Saturday 21 March 2026
+Tracks    : 7 (Cannington, DUBBO, Meadows, Q Lakeside, Shepparton,
+             The Gardens, Wentworth Park)
+Total races predicted: 81
+Form guides in data_predictions: 8 × 2103form PDFs
+  (Cannington, Dubbo, The Gardens, Meadows, Q Lakeside, Shepparton,
+   Tasmania, Wentworth Park)
+Note: Tasmania (TASTG2103form.pdf) present but NO predictions generated —
+      insufficient historical data for ensemble model at this track.
 
-CONFIDENCE PROFILE
-------------------
-  Races with gap ≥ 20%:    0   ⚠  No "lock" bets today
-  Races with gap ≥ 15%:    4
-  Races with gap ≥ 10%:   11   (solid secondary bets)
-  Median gap (top 10):   12.65%
-  Character:             Moderate confidence day — best value in top 4 bets.
+Source files:
+  outputs/best_bets_report.txt     (generated 2026-03-21 09:55:44)
+  outputs/track_ensemble_predictions.xlsx
+  data_predictions/: 8 × 2103form PDFs
 
 ================================================================================
-★★★ BEST BETS — PRIORITY ORDER ★★★
+CONFIDENCE DISTRIBUTION
 ================================================================================
 
-  #1  🏆 BEST BET — SHEPPARTON R1
-      Box 7  Paw Jadore           31.68%  (gap 19.87%)
-      Next:  Box 2  Indiana Icon  11.81%
-      → Strong VIC country race, clear leader. Best bet of the day.
+Gap threshold breakdown (gap = difference between 1st and 2nd ranked dog):
 
-  #2  ⭐ VALUE BET — SANDOWN R3
-      Box 2  Flying Dinar         37.55%  (gap 19.77%)
-      Next:  Box 1  Sparring      17.77%
-      → HIGHEST raw confidence of any dog today (37.5%)! Metro track —
-        compress caution applies but this gap is very compelling.
-        Flying Dinar is the single highest-confidence selection today.
+  ≥ 20% gap (very high confidence) :  2 races
+  ≥ 15% gap (high confidence)      :  7 races
+  ≥ 10% gap (moderate confidence)  : 12 races
+  < 10% gap (lower confidence)     : 69 races
 
-  #3  ✅ EACH-WAY — Q STRAIGHT R6
-      Box 8  Little House         29.10%  (gap 16.69%)
-      Next:  Box 6  Altona Beach  12.41%
-      → Strong QLD pick, Box 8 outside runner, good confidence lead.
+Top-10 gaps (ranked):
+  21.96%, 21.35%, 19.10%, 17.72%, 15.63%, 15.08%, 14.80%, 11.80%, 11.17%, 9.76%
+Top-10 median gap: ~15.44%
 
-  #4  ✅ EACH-WAY — The Gardens R11
-      Box 7  Savina               33.41%  (gap 15.29%)
-      Next:  Box 5  Midnight Mohawk 18.12%
-      → Good NSW confidence, strong raw % with meaningful gap.
+Comparison to recent days:
+  2026-03-21 (today)  : best gap 21.96%, 2 races ≥20%, 7 races ≥15%, 12 ≥10%
+  2026-03-20 (Fri)    : best gap 18.66%, 0 races ≥20%, 5 races ≥15%, 12 ≥10%
+  2026-03-19 (Thu)    : best gap 19.87%, 0 races ≥20%, 4 races ≥15%, 11 ≥10%
+  2026-03-18 (Wed)    : best gap 32.13%, 2 races ≥20%, 3 races ≥15%, 10 ≥10%
+  2026-03-17 (Tue)    : best gap 32.27%, 1 race  ≥20%, 3 races ≥15%, 15 ≥10%
 
-================================================================================
-★★ SECONDARY BETS (gap 10–13%) ★★
-================================================================================
-
-  #5   Q PARKLANDS R4     Box 8  Zipping Kravitz    23.37%  gap 12.77%
-  #6   SHEPPARTON  R9     Box 8  Excellent Dash     23.72%  gap 12.53%
-  #7   NOWRA       R4     Box 4  Cumbria Chrissy    28.27%  gap 12.43%
-  #8   WENTWORTH PARK R6  Box 2  Canya Handle It    25.57%  gap 11.78%
-  #9   Q PARKLANDS R7     Box 7  Daysea's Rory      29.77%  gap 10.93%
-  #10  BALLARAT    R6     Box 1  Solar Spectrum     22.25%  gap 10.42%
-  #11  Mandurah    R4     Box 1  Pingelly Prince    20.17%  gap 10.19%
+Verdict: STRONGEST confidence profile since Tuesday/Wednesday.
+  - First time in 2 days we have races ≥20% gap (2 today vs 0 Fri/Thu)
+  - Most high-confidence races (≥15%) this week (7 today)
+  - Saturday is typically a stronger card with higher-quality fields
+  - Conditions favour active betting on high-gap selections
 
 ================================================================================
-NOTABLE PICKS BY TRACK (gap ≥ 5%)
+BEST BETS — TOP 12 (by gap)
 ================================================================================
 
-  SHEPPARTON (VIC Country, 14 races)
-    R1:  Box7  Paw Jadore        31.7%  ★★★ GAP 19.87%   ← BEST BET
-    R9:  Box8  Excellent Dash    23.7%  ★★  GAP 12.53%
-    R13: Box5  Paw Olive         18.5%  ★   GAP 5.01%
-    R5:  Box1  Mighty Star       15.3%  ★   GAP 4.12%
-    R7:  Box8  Rowdy's Beast     13.1%  ★   GAP 3.89%
+Rank  Track            Race  Box  Dog                         Win%   Gap      Conf
+─────────────────────────────────────────────────────────────────────────────────
+  1   Q LAKESIDE       R7    2    Canya Nuclear              34.93%  21.96%  ★★★
+  2   DUBBO            R9    3    Triple Phantom             35.46%  21.35%  ★★★
+  3   SHEPPARTON       R7    1    Bebop Jazz                 29.90%  19.10%  ★★★
+  4   SHEPPARTON       R9    2    Dewana Star                31.50%  17.72%  ★★★
+  5   The Gardens      R10   1    Flying Monkey's            28.93%  15.63%  ★★★
+  6   Q LAKESIDE       R4    1    Massaro                    32.90%  15.08%  ★★★
+  7   Q LAKESIDE       R5    7    Shout Out Shazam           28.89%  14.80%  ★★
+  8   Cannington       R11   1    Paid My Dues               33.58%  11.80%  ★★
+  9   WENTWORTH PARK   R5    1    Brax Keeping               22.25%  11.17%  ★★
+ 10   The Gardens      R6    6    Skinny Marie               20.62%   9.76%
+ 11   SHEPPARTON       R6    4    Mepunga Donna              36.05%   9.57%  ★ WATCH
+ 12   SHEPPARTON       R11   8    Valletta Pearl             12.09%   2.11%
+     (ranks 11-12 shown for track context)
 
-  SANDOWN (VIC Metro ⚠, 12 races)
-    R3:  Box2  Flying Dinar      37.5%  ★★★ GAP 19.77%   ← TOP VALUE
-    R1:  Box2  Paw Otis          23.3%  ★   GAP 8.76%
-    R7:  Box4  Tripped Out       28.5%  ★   GAP 9.71%
-    R8:  Box1  Black Star Riot   31.6%  ★   GAP 9.30%
-    R6:  Box1  Zambora Bliss     24.5%  ★   GAP 6.26%
-    R11: Box1  Warm Hugs         25.8%  ★   GAP 3.72%
+Additional notable: SHEPPARTON R12 Box4 Star Of Venus 20.54%, gap 7.67%
 
-  Q STRAIGHT (QLD, 12 races)
-    R6:  Box8  Little House      29.1%  ★★★ GAP 16.69%
-    R9:  Box7  No More Beer      26.0%  ★   GAP 4.94%
-    R2:  Box2  Iron Condor       16.8%  ★   GAP 4.94%
-    R3:  Box2  Gonzo             15.8%  ★   GAP 4.73%
-    R12: Box2  Hayden's Gift     17.2%  ★   GAP 4.28%
-    R7:  Box6  Rannoch           22.8%  ★   GAP 4.25%
-
-  The Gardens (NSW, 11 races)
-    R11: Box7  Savina            33.4%  ★★  GAP 15.29%
-    R10: Box1  Chief Enforcer    18.3%  ★   GAP 4.99%
-    R6:  Box4  Jasper Darke      17.2%  ★   GAP 3.76%
-
-  Q PARKLANDS (QLD, 10 races)
-    R4:  Box8  Zipping Kravitz   23.4%  ★★  GAP 12.77%
-    R7:  Box7  Daysea's Rory     29.8%  ★★  GAP 10.93%
-    R8:  Box1  Sironen Tiger     20.5%  ★   GAP 6.46%
-    R1:  Box1  Canya Detonator   14.4%  ★   GAP 4.43%
-    R3:  Box2  Bentley Olaf      17.3%  ★   GAP 4.09%
-
-  NOWRA (NSW Country, 11 races)
-    R4:  Box4  Cumbria Chrissy   28.3%  ★★  GAP 12.43%
-    R9:  Box5  Shanti Bay        21.9%  ★   GAP 9.80%
-    R2:  Box5  Sabina Sparkles   18.4%  ★   GAP 4.85%
-
-  WENTWORTH PARK (NSW Metro ⚠, 8 races)
-    R6:  Box2  Canya Handle It   25.6%  ★★  GAP 11.78%
-    R8:  Box8  Mrs. Buttons      16.4%  ★   GAP 3.28%
-
-  BALLARAT (VIC Country, 14 races)
-    R6:  Box1  Solar Spectrum    22.2%  ★★  GAP 10.42%
-    R3:  Box5  Brittles          31.8%  ★   (note: only GAP 1.6%, very close race)
-    R13: Box5  Paw London        14.9%  ★   GAP 4.28%
-
-  Mandurah (WA, 12 races)
-    R4:  Box1  Pingelly Prince   20.2%  ★★  GAP 10.19%
-    R5:  Box5  Dancing Dennis    19.7%  ★   GAP 5.14%
-    R3:  Box3  Cootamundra Lad   15.3%  ★   GAP 4.46%
-    R12: Box1  Canya Bypass      20.8%  ★   GAP 4.29%
-
-  MT GAMBIER (SA Country, 12 races)
-    R1:  Box1  Miss Bobbie       25.3%  ★   GAP 6.90%
-    R3:  Box8  Lektra Hank       21.6%  ★   GAP 5.56%
-    R5:  Box1  Rough Girl Mel    19.1%  ★   GAP 5.29%
-    R12: Box2  Shoot The Breeze  21.9%  ★   GAP 5.42%
-    R8:  Box7  Shanny Rose       17.5%  ★   GAP 4.72%
-
-  Warragul (VIC Country, 12 races)
-    R7:  Box4  Invictus Blue     24.6%  ★★  GAP 7.30%
-    R9:  Box7  Luca Skywalker    18.3%  ★   GAP 3.28%
-
-  HOBART (TAS, 8 races)
-    R4:  Box1  Piece Of Me       19.9%  ★   GAP 8.74%
-    R1:  Box1  Scarred           19.8%  ★   GAP 3.91%
-
-  Angle Park (SA Metro ⚠, 10 races)
-    R2:  Box1  Watch And See     28.0%  ★   GAP 7.79%
-    R9:  Box4  Adhana Annie      20.0%  ★   GAP 5.74%
-    R3:  Box2  Fear The Dragon   22.7%  ★   GAP 5.82%
-    R10: Box1  Zing Matilda      18.8%  ★   GAP 4.15%
+Legend: ★★★ = very high confidence (gap ≥15%), ★★ = moderate (gap ≥10%),
+        ★ WATCH = very high absolute win% even if gap is moderate
 
 ================================================================================
-RACES TO AVOID (gap < 1% — coin flip territory)
-================================================================================
-  Angle Park R6:    Box1 Glasthule vs Box5 Just A Nuisance     (gap 0.01%)
-  SHEPPARTON R12:   Box1 Paw Vancouver                         (gap 0.05%)
-  Q STRAIGHT R11:   Box4 Little Jack                           (gap 0.08%)
-  BALLARAT R3:      Box5 Brittles  (high raw % but gap only 1.6%)
-  SHEPPARTON R14:   Box2 Hectic Harry                          (gap 0.35%)
-
-================================================================================
-QUICK REFERENCE BET SLIP
+TRACK-BY-TRACK SUMMARY
 ================================================================================
 
-  PRIORITY BETS (top 4, all ≥15% gap):
-  ┌─────────────────────────────────────────────────────────────┐
-  │  1. SHEPPARTON R1   — BOX 7  Paw Jadore       WIN/EW       │
-  │  2. SANDOWN    R3   — BOX 2  Flying Dinar      WIN/EW       │
-  │  3. Q STRAIGHT R6   — BOX 8  Little House      EW/PLACE     │
-  │  4. The Gardens R11 — BOX 7  Savina             EW/PLACE     │
-  └─────────────────────────────────────────────────────────────┘
+── CANNINGTON (13 races — WA/Perth, Sand track) ───────────────────────────────
+  Best race : R11  Box1 Paid My Dues       33.58% WIN% | gap 11.80%  ★★ BEST BET
+  Other notable:
+              R10  Box2 Choosing Texas     19.99% WIN% | gap  5.81%
+              R12  Box8 West On Model      28.47% WIN% | gap  3.85%  (high win%, tight field)
+              R4   Box3 Miss Ronnie Mac    16.78% WIN% | gap  5.54%
+              R7   Box2 Our Ozzie Salute   18.18% WIN% | gap  0.51%  (coin-flip race)
+  Analysis : 13-race card. Only R11 exceeds 10% gap. Box1 Paid My Dues at
+             33.58% is a strong individual win probability but faces a tough
+             R11 field. Most Cannington races are very competitive (tight gaps).
+             R5 is the tightest race (0.29% gap — pure toss-up).
+             West On Model (R12, 28.47%) worth E/W consideration despite small gap.
 
-  SECONDARY BETS (gap 10–13%):
-  ┌─────────────────────────────────────────────────────────────┐
-  │  5. Q PARKLANDS R4        — BOX 8  Zipping Kravitz          │
-  │  6. SHEPPARTON  R9        — BOX 8  Excellent Dash            │
-  │  7. NOWRA       R4        — BOX 4  Cumbria Chrissy           │
-  │  8. WENTWORTH PARK R6     — BOX 2  Canya Handle It           │
-  │  9. Q PARKLANDS R7        — BOX 7  Daysea's Rory             │
-  │ 10. BALLARAT    R6        — BOX 1  Solar Spectrum            │
-  │ 11. Mandurah    R4        — BOX 1  Pingelly Prince           │
-  └─────────────────────────────────────────────────────────────┘
+── DUBBO (12 races — NSW, Country) ─────────────────────────────────────────────
+  Best race : R9   Box3 Triple Phantom     35.46% WIN% | gap 21.35%  ★★★ STAND-OUT
+  Other notable:
+              R5   Box4 Shorty             17.12% WIN% | gap  5.81%
+              R7   Box4 Without A Trace    17.83% WIN% | gap  4.86%
+              R3   Box3 Armatree Asafa     18.65% WIN% | gap  3.12%
+              R12  Box5 Blaine Keeping     19.18% WIN% | gap  3.27%
+  Analysis : R9 is a stand-out bet — 35.46% win probability with a 21.35% gap
+             is one of the most dominant model outputs seen this week. Triple
+             Phantom is strongly favoured. R4 is near-deadheat (0.11% gap) and
+             R1 is also extremely tight (0.02% — do not bet R1).
+             Outside of R9, Dubbo is low-confidence. Focus all Dubbo budget on R9.
+
+── MEADOWS (12 races — VIC/Melbourne, Grass track) ─────────────────────────────
+  Best race : R8   Box2 Highly Connected   21.34% WIN% | gap  5.26%
+  Other notable:
+              R1   Box1 Paw Xerox          19.14% WIN% | gap  3.42%
+              R7   Box7 Valenzuela         18.20% WIN% | gap  4.55%
+              R5   Box4 Paw Fortress       15.54% WIN% | gap  4.92%
+              R4   Box2 No Do Day          16.14% WIN% | gap  3.85%
+  Analysis : No race exceeds 10% gap — Meadows is a LOW CONFIDENCE track today.
+             All 12 races are competitive and the model is uncertain. The highest
+             win% is Highly Connected at 21.34% but this is a grass track where
+             box draws matter significantly. Avoid Meadows multis today.
+
+── Q LAKESIDE (10 races — QLD/Brisbane, Sand) ──────────────────────────────────
+  Best race : R7   Box2 Canya Nuclear      34.93% WIN% | gap 21.96%  ★★★ #1 BEST BET
+  Other notable:
+              R4   Box1 Massaro            32.90% WIN% | gap 15.08%  ★★★
+              R5   Box7 Shout Out Shazam   28.89% WIN% | gap 14.80%  ★★
+              R10  Box7 Breakout Lad       23.56% WIN% | gap  6.34%
+              R8   Box3 Validate           23.77% WIN% | gap  1.42%  (close race)
+  Analysis : Q LAKESIDE is the STRONGEST TRACK today — 3 high-confidence bets
+             in R4, R5, and R7. Canya Nuclear at 34.93% with a 21.96% gap is
+             the TOP BET of the day. R4 (Massaro 32.90%) and R5 (Shout Out
+             Shazam 28.89%) are both excellent selections.
+             Combining R4+R5+R7 into a Trifecta Single is very tempting.
+             Note: R2 and R3 are extremely tight (0.15% and 0.23% gaps) — avoid.
+
+── SHEPPARTON (12 races — VIC, Country) ────────────────────────────────────────
+  Best race : R7   Box1 Bebop Jazz         29.90% WIN% | gap 19.10%  ★★★
+  Very strong: R9  Box2 Dewana Star        31.50% WIN% | gap 17.72%  ★★★
+  Near-miss:   R6  Box4 Mepunga Donna     36.05% WIN% | gap  9.57%  ★ WATCH
+  Other notable:
+              R4   Box1 Paw Estrella       19.97% WIN% | gap  1.74%  (tight)
+              R5   Box1 Compute            18.07% WIN% | gap  4.04%
+              R12  Box4 Star Of Venus      20.54% WIN% | gap  7.67%
+  Analysis : SHEPPARTON is the 2nd strongest track today.
+             - R6: Mepunga Donna has the HIGHEST SINGLE-DOG WIN% of the entire
+               card at 36.05% — the model is very high on this dog even though
+               the gap is "only" 9.57% (because the 2nd dog is also strong).
+               Recommend Box4 Mepunga Donna as a standalone single.
+             - R7: Bebop Jazz (29.90%) is the 3rd-best bet overall (gap 19.10%).
+             - R9: Dewana Star (31.50%) is the 4th-best bet (gap 17.72%).
+             Shepparton R6+R7+R9 as a treble is an excellent multi option.
+             Note: R1 is the tightest race of the day (0.26% gap) — avoid.
+
+── THE GARDENS (12 races — QLD/Brisbane, Sand) ──────────────────────────────────
+  Best race : R10  Box1 Flying Monkey's    28.93% WIN% | gap 15.63%  ★★★
+  Other notable:
+              R6   Box6 Skinny Marie       20.62% WIN% | gap  9.76%  (near ★★)
+              R11  Box5 Suddenly I See     20.12% WIN% | gap  6.54%
+              R7   Box4 Kenzie Robbo       20.05% WIN% | gap  2.34%
+              R4   Box4 George Judy        17.21% WIN% | gap  3.80%
+  Analysis : R10 is the standout with Flying Monkey's (28.93%, gap 15.63%).
+             R6 (Skinny Marie, 9.76% gap) is borderline — consider as an
+             each-way bet. Most other Gardens races are competitive.
+             R1, R2, R9 extremely tight (≤0.75% gap) — avoid these races.
+
+── WENTWORTH PARK (10 races — NSW/Sydney, Sand) ─────────────────────────────────
+  Best race : R5   Box1 Brax Keeping       22.25% WIN% | gap 11.17%  ★★
+  Other notable:
+              R4   Box7 Derry              27.90% WIN% | gap  5.14%  (high win%)
+              R3   Box1 Both Bowers Ace    22.69% WIN% | gap  7.23%
+              R9   Box4 Take A Break       19.35% WIN% | gap  1.10%  (tight)
+  Analysis : R5 (Brax Keeping, 11.17% gap) is the primary selection.
+             R4 (Derry, 27.90% win%) is worth an each-way bet despite the
+             modest 5.14% gap — field appears more competitive there.
+             R3 (Both Bowers Ace, 22.69%) is also watchable.
+             R1 is the lowest-confidence race of the entire day (0.56% gap,
+             only 8.69% win% for the leader — very wide-open field).
 
 ================================================================================
-YESTERDAY'S RECAP (2026-03-18 Wednesday) — Model Performance
-================================================================================
-  Total predictions:  133 across 12 tracks
-  Results available:  120 (Murray Bridge Straight all 8 abandoned)
-  WINS:         24 / 120 = 20.0%   (random baseline = 12.5%)
-  PLACED top3:  64 / 120 = 53.3%
-
-  High-confidence performance:
-    Gap ≥ 20%:  2/2 = 100% WIN RATE  🏆 PERFECT
-    Gap ≥ 15%:  2/3 = 66.7% wins, 3/3 = 100% placed
-    Gap ≥ 10%:  2/9 wins, 8/9 = 88.9% placed
-    Top-2 bets: BOTH WON ✅✅
-      #1 Rockhampton R1 Box1 It's Snowtime (gap 32.13%) → WIN
-      #2 Ballarat R7 Box1 He's Magic (gap 23.58%) → WIN
-
-  5-day model summary:
-    2026-03-14   26.6% wins   73.4% placed
-    2026-03-15   24.8% wins   74.3% placed
-    2026-03-16   20.6% wins   64.7% placed
-    2026-03-17   19.7% wins   66.4% placed
-    2026-03-18   20.0% wins   53.3% placed  (top-2 both won ⭐)
-
-================================================================================
-MODEL NOTES & STRATEGY
-================================================================================
-  • Today has NO 20%+ gap races — lower raw confidence across the board.
-  • The two near-20% picks (#1 and #2) are still strongly supported and
-    represent the best value today.
-  • Metro tracks (Sandown, Angle Park, Wentworth Park) compress gaps —
-    Flying Dinar at Sandown with 37.5% raw confidence is exceptional despite
-    the metro context; the model is unusually sure about this pick.
-  • Box 8 features prominently today across QLD and country tracks.
-  • Box 1 dominant at Sandown — 7+ races predicted Box 1/2 at this track.
-  • Recent form shows high-confidence picks (gap ≥10%) place at 66–89%;
-    today's top-11 all clear 10%+ gap, forming a strong betting slate.
-
-Full predictions: outputs/best_bets_report.txt
-Full analysis:    reports/DAILY_ANALYSIS_2026-03-19.txt
-
-================================================================================
-END OF SUMMARY — 2026-03-19 (Thursday)
+BETTING RECOMMENDATIONS
 ================================================================================
 
+★★★ BANKER BETS — HIGH CONFIDENCE SINGLES:
+─────────────────────────────────────────
+  1. Q LAKESIDE R7   Box2  Canya Nuclear        34.93%  gap 21.96%  ★★★ #1
+  2. DUBBO R9        Box3  Triple Phantom        35.46%  gap 21.35%  ★★★ #2
+  3. SHEPPARTON R7   Box1  Bebop Jazz            29.90%  gap 19.10%  ★★★ #3
+  4. SHEPPARTON R9   Box2  Dewana Star           31.50%  gap 17.72%  ★★★ #4
+  5. The Gardens R10 Box1  Flying Monkey's       28.93%  gap 15.63%  ★★★ #5
+  6. Q LAKESIDE R4   Box1  Massaro               32.90%  gap 15.08%  ★★★ #6
+
+  These 6 selections have ≥15% gap — the strongest confidence tier.
+  Recommended: Back each as individual win bets.
+
+★★ STRONG BETS — MODERATE CONFIDENCE:
+────────────────────────────────────
+  7. Q LAKESIDE R5   Box7  Shout Out Shazam      28.89%  gap 14.80%  ★★ #7
+  8. Cannington R11  Box1  Paid My Dues          33.58%  gap 11.80%  ★★ #8
+  9. WENTWORTH PARK R5 Box1 Brax Keeping         22.25%  gap 11.17%  ★★ #9
+
+★ SPECULATIVE PICKS — WATCH CLOSELY:
+─────────────────────────────────────
+  10. SHEPPARTON R6  Box4  Mepunga Donna         36.05%  gap  9.57%  ★ WATCH
+      ↑ Highest individual win% of the entire day — tight only because R6's 2nd
+        dog is also strong (Box5 Leroy's Girl 26.48%). Well worth a single.
+  11. The Gardens R6 Box6  Skinny Marie          20.62%  gap  9.76%  ★ WATCH
+  12. WENTWORTH PARK R3 Box1 Both Bowers Ace     22.69%  gap  7.23%
+  13. Q LAKESIDE R10 Box7  Breakout Lad          23.56%  gap  6.34%
+
+MULTI / PARLAY SUGGESTIONS:
+─────────────────────────────
+  ★★★ TREBLE A — Best-of-day (banker treble):
+      DUBBO R9 Box3 Triple Phantom
+      + Q LAKESIDE R7 Box2 Canya Nuclear
+      + SHEPPARTON R7 Box1 Bebop Jazz
+
+  ★★★ TREBLE B — Q LAKESIDE power treble:
+      Q LAKESIDE R4 Box1 Massaro
+      + Q LAKESIDE R5 Box7 Shout Out Shazam
+      + Q LAKESIDE R7 Box2 Canya Nuclear
+      (Same-track treble — high confidence chain at one venue)
+
+  ★★★ TREBLE C — Shepparton power treble:
+      SHEPPARTON R6 Box4 Mepunga Donna
+      + SHEPPARTON R7 Box1 Bebop Jazz
+      + SHEPPARTON R9 Box2 Dewana Star
+
+  ★★ DOUBLE A — Top 2 of the day:
+      DUBBO R9 Box3 Triple Phantom
+      + Q LAKESIDE R7 Box2 Canya Nuclear
+
+  ★★ DOUBLE B — Shepparton pairing:
+      SHEPPARTON R7 Box1 Bebop Jazz
+      + SHEPPARTON R9 Box2 Dewana Star
+
+  ★★ FOURFOLD — Premium selections:
+      DUBBO R9 Box3 Triple Phantom
+      + Q LAKESIDE R4 Box1 Massaro
+      + Q LAKESIDE R7 Box2 Canya Nuclear
+      + SHEPPARTON R9 Box2 Dewana Star
+
+TRACKS TO APPROACH WITH CAUTION TODAY:
+  • Meadows  — no race above 10% gap; random-field-level confidence
+  • Cannington (most races) — only R11 has meaningful gap; avoid singles R1-R10
+  • The Gardens (most races) — only R10 is a strong selection; avoid R1/R2/R9
+
+TRACKS TO AVOID FOR MULTIS:
+  • Meadows  — all 12 races are competitive, model uncertain throughout
+  • Wentworth Park (most races) — only R5 is above 10% gap
+
 ================================================================================
-PREDICTION AUDIT RESPONSE — 2026-03-18 (Wednesday)
-Generated: 2026-03-18 22:27 AEST
+RACE CONFIDENCE HEAT MAP (all 81 races)
 ================================================================================
 
-TASKS COMPLETED
----------------
-✅ 1. Created data/results_2026-03-18.csv  (140 rows: 13 tracks, 140 races incl. Taree)
-✅ 2. Moved all 13 × 1803form PDFs from data_predictions/ to data/
-        ANGLG1803form.pdf, BDGOG1803form.pdf, BRATG1803form.pdf, CAPAG1803form.pdf,
-        GUNNG1803form.pdf, MBRSG1803form.pdf, MEADG1803form.pdf, QLAKG1803form.pdf,
-        RICHG1803form.pdf, ROCKG1803form.pdf, SALEG1803form.pdf, TASTG1803form.pdf,
-        TEMOG1803form.pdf
-✅ 3. Audited outputs/best_bets_report.txt vs actual results
-✅ 4. Full audit saved to reports/PREDICTION_AUDIT_2026-03-18.txt
+Format: R## Box# [dog] Win% (gap%)   ★★★=≥15% ★★=≥10% ★=≥5%
+
+CANNINGTON:
+  R1  Box8 West On Torque           14.52%  gap 1.80%
+  R2  Box2 Hunter                   18.34%  gap 2.56%
+  R3  Box2 Jai Bubba                10.69%  gap 2.52%
+  R4  Box3 Miss Ronnie Mac          16.78%  gap 5.54%  ★
+  R5  Box8 Take My Advice           10.60%  gap 0.29%
+  R6  Box5 Strip Weathers           16.67%  gap 3.87%
+  R7  Box2 Our Ozzie Salute         18.18%  gap 0.51%
+  R8  Box2 Capalla                  11.93%  gap 1.14%
+  R9  Box2 Clifton Kuna             11.34%  gap 1.62%
+  R10 Box2 Choosing Texas           19.99%  gap 5.81%  ★
+  R11 Box1 Paid My Dues             33.58%  gap 11.80% ★★ BET
+  R12 Box8 West On Model            28.47%  gap 3.85%
+  R13 Box1 Hurry Up Eric            14.72%  gap 1.35%
+
+DUBBO:
+  R1  Box1 Devon On Sauce           16.71%  gap 0.02%  (dead heat)
+  R2  Box1 Roxy Keeping             14.77%  gap 1.76%
+  R3  Box3 Armatree Asafa           18.65%  gap 3.12%
+  R4  Box4 Creeping Mylo            21.39%  gap 0.11%  (dead heat)
+  R5  Box4 Shorty                   17.12%  gap 5.81%  ★
+  R6  Box8 Motor City Sonny         18.11%  gap 0.23%
+  R7  Box4 Without A Trace          17.83%  gap 4.86%
+  R8  Box4 Active Dreams            13.13%  gap 0.51%
+  R9  Box3 Triple Phantom           35.46%  gap 21.35% ★★★ BET #2
+  R10 Box2 Kiando Estate            15.24%  gap 3.78%
+  R11 Box3 Hey Ella                 11.36%  gap 1.07%
+  R12 Box5 Blaine Keeping           19.18%  gap 3.27%
+
+MEADOWS:
+  R1  Box1 Paw Xerox                19.14%  gap 3.42%
+  R2  Box1 Magic Loki               15.30%  gap 2.32%
+  R3  Box4 Lakeview Lynette         14.84%  gap 1.48%
+  R4  Box2 No Do Day                16.14%  gap 3.85%
+  R5  Box4 Paw Fortress             15.54%  gap 4.92%
+  R6  Box4 Gambella                 12.48%  gap 0.28%
+  R7  Box7 Valenzuela               18.20%  gap 4.55%
+  R8  Box2 Highly Connected         21.34%  gap 5.26%  ★
+  R9  Box2 Paw Isla                 12.40%  gap 0.29%
+  R10 Box1 Paw Lovisa               15.18%  gap 2.24%
+  R11 Box8 Lektra Solo              14.81%  gap 2.38%
+  R12 Box1 Rivers Meet              13.30%  gap 1.55%
+
+Q LAKESIDE:
+  R1  Box7 Utah Gunn                14.33%  gap 1.20%
+  R2  Box4 Quest For Pace           11.62%  gap 0.15%
+  R3  Box5 Scenic Sundari           15.97%  gap 0.23%
+  R4  Box1 Massaro                  32.90%  gap 15.08% ★★★ BET #6
+  R5  Box7 Shout Out Shazam         28.89%  gap 14.80% ★★  BET #7
+  R6  Box1 Backcreek Butch          17.77%  gap 1.27%
+  R7  Box2 Canya Nuclear            34.93%  gap 21.96% ★★★ BET #1
+  R8  Box3 Validate                 23.77%  gap 1.42%
+  R9  Box5 Bandit Chloe             13.73%  gap 0.72%
+  R10 Box7 Breakout Lad             23.56%  gap 6.34%  ★
+
+SHEPPARTON:
+  R1  Box6 Scott Quibble            12.93%  gap 0.26%
+  R2  Box7 Koda                     18.97%  gap 3.72%
+  R3  Box5 Moraine Bella            13.76%  gap 2.92%
+  R4  Box1 Paw Estrella             19.97%  gap 1.74%
+  R5  Box1 Compute                  18.07%  gap 4.04%
+  R6  Box4 Mepunga Donna            36.05%  gap 9.57%  ★ WATCH (highest win% day)
+  R7  Box1 Bebop Jazz               29.90%  gap 19.10% ★★★ BET #3
+  R8  Box3 Giacomo                  16.64%  gap 3.80%
+  R9  Box2 Dewana Star              31.50%  gap 17.72% ★★★ BET #4
+  R10 Box6 Aston Moreno             17.54%  gap 4.94%
+  R11 Box8 Valletta Pearl           12.09%  gap 2.11%
+  R12 Box4 Star Of Venus            20.54%  gap 7.67%  ★
+
+THE GARDENS:
+  R1  Box2 Project Nemesis          15.51%  gap 0.75%
+  R2  Box8 Whisky Bent              17.09%  gap 0.17%
+  R3  Box7 Kalani Sea               14.72%  gap 3.03%
+  R4  Box4 George Judy              17.21%  gap 3.80%
+  R5  Box3 Sail Away Sam            13.77%  gap 1.32%
+  R6  Box6 Skinny Marie             20.62%  gap 9.76%  ★ WATCH
+  R7  Box4 Kenzie Robbo             20.05%  gap 2.34%
+  R8  Box1 Jet Fuel                 12.78%  gap 2.20%
+  R9  Box6 Minecraft Fusion         11.48%  gap 0.30%
+  R10 Box1 Flying Monkey's          28.93%  gap 15.63% ★★★ BET #5
+  R11 Box5 Suddenly I See           20.12%  gap 6.54%  ★
+  R12 Box3 Speed Dial               11.85%  gap 1.83%
+
+WENTWORTH PARK:
+  R1  Box6 Swift Wind                8.69%  gap 0.56%
+  R2  Box5 Sammy Ethan              17.92%  gap 1.73%
+  R3  Box1 Both Bowers Ace          22.69%  gap 7.23%  ★
+  R4  Box7 Derry                    27.90%  gap 5.14%  ★
+  R5  Box1 Brax Keeping             22.25%  gap 11.17% ★★  BET #9
+  R6  Box4 Eriza Sparkles           16.33%  gap 0.40%
+  R7  Box1 Zipping Kayli            16.93%  gap 1.77%
+  R8  Box4 Zipping Violet           12.49%  gap 0.76%
+  R9  Box4 Take A Break             19.35%  gap 1.10%
+  R10 Box7 Simplicity Magic         12.09%  gap 1.62%
 
 ================================================================================
-2026-03-18 PREDICTION AUDIT — RESULTS vs PREDICTIONS
+CONTEXT: YESTERDAY'S PERFORMANCE (2026-03-20 Friday)
 ================================================================================
 
-TRACKS RACED:
-  Temora (R1-R8), Gunnedah (R1-R11), Taree (R1-R12, not predicted),
-  Richmond (R1-R12), Sale (R1-R12), Murray Bridge Straight (ALL ABD),
-  Capalaba (R1-R8), Bendigo (R1-R12), Ladbrokes Q1 Lakeside (R1-R12),
-  Ballarat (R1-R12), Angle Park (R1-R12), Meadows (R1-R12), Rockhampton (R1-R9)
+Yesterday (20 March 2026, Friday):
+  Total races   : 124  (11 tracks)
+  Win rate      : 21/124 = 16.9%  (below average — lowest this week)
+  Placed rate   : 82/124 = 66.1%
+  Best bet      : CASINO R5 Box1 Make And Break (18.66% gap) — LOST
 
-OVERALL STATS
--------------
-Predictions:  133 total
-With result:  120 (8 abandoned Murray Bdge Straight, 5 no result)
-WINS:         24/120 = 20.0%   (random baseline = 12.5%)
-PLACED top3:  64/120 = 53.3%
+TOP BEST BETS (≥10% gap) yesterday — 3 wins, 7 placed, 2 lost (83.3% top-4):
+  ★ WAGGA R5 Box8 Tiggerlong Bingo  — WON  (gap 13.42%)
+  ★ Q LAKESIDE R12 Box7 He's Regal  — WON  (gap 12.99%)
+  ★ GEELONG R8 Box4 Baby Beets      — WON  (gap 11.40%)
+  ✓ Q LAKESIDE R7 Box8 From A Distance — PLACED (gap 16.90%)
+  ✓ GEELONG R10 Box7 Paw Xantippe   — PLACED (gap 16.07%)
+  ✓ GEELONG R3 Box1 Big Boy Pants   — PLACED (gap 15.39%)
+  ✓ TOWNSVILLE R9 Box1 Federal Blue Boy — PLACED (gap 13.58%)
+  ✓ BENDIGO R1 Box2 Just Imagine    — PLACED (gap 12.13%)
+  ✓ BENDIGO R5 Box1 Nikita Bale     — PLACED (gap 11.46%)
+  ✓ BENDIGO R9 Box8 Rock Eternal    — PLACED (gap 10.94%)
+  ✗ CASINO R5 Box1 Make And Break   — LOST (gap 18.66%) ← #1 best bet
+  ✗ Mandurah R9 Box3 My Paddy Boy   — LOST (gap 15.64%)
 
-BY CONFIDENCE (GAP)
--------------------
-Gap ≥ 20%:  2 races →  2 WINS (100%)  🏆 PERFECT
-Gap ≥ 15%:  3 races →  2 wins, 3 placed (100% place rate) ⭐
-Gap ≥ 10%:  9 races →  2 wins, 8 placed (88.9% place rate) 💪
+Best tracks Friday: Wagga (40% wins), Goulburn (30%), Townsville (27.3%)
+Worst tracks: Mandurah 0%, Bendigo 0%, Horsham 0%
 
-TOP BETS SCORECARD (Best 10 by model confidence)
--------------------------------------------------
-#1  ROCKHAMPTON R1   Box 1 "It's Snowtime"  gap=32.13%  →  ✅ WON!  (result: 1,5,4,7)
-#2  BALLARAT    R7   Box 1 "He's Magic"     gap=23.58%  →  ✅ WON!  (result: 1,8,2,3)
-#3  SALE        R3   Box 7 "Call Me Hero"   gap=15.75%  →  🥉 PLACED 3rd  (result: 3,2,7,4)
-#4  RICHMOND    R8   Box 2 "Maybe Next Week"gap=14.16%  →  🥈 PLACED 2nd  (result: 1,2,8,7)
-#5  Q LAKESIDE  R12  Box 7 "Unique Ability" gap=13.29%  →  🥈 PLACED 2nd  (result: 1,7,8,2)
-#6  ANGLE PARK  R6   Box 2 "Sokai"          gap=12.95%  →  🥈 PLACED 2nd  (result: 7,2,1,8)
-#7  TEMORA      R3   Box 8 "Maximum Damage" gap=12.27%  →  🥉 PLACED 3rd  (result: 7,1,8,2)
-#8  SALE        R1   Box 6 "Dr. Aurora"     gap=11.26%  →  🥈 PLACED 2nd  (result: 1,6,4,2)
-#9  Q LAKESIDE  R14  Box 3 "Nina Siyan"     gap=11.16%  →  ❓ NO RESULT (race not run)
-#10 GUNNEDAH    R4   Box 5 "Impress Spieth" gap=10.20%  →  ❌ LOSS       (result: 8,7,2,5)
+KEY INSIGHT: Despite a below-average win day (16.9%), the high-confidence
+selections (gap ≥10%) delivered 83.3% place rate. This week's pattern shows:
+  - High-gap bets: consistently 75-90% placed even when win rate dips
+  - The model's "banker" tier has been reliable for each-way wagering
 
-Top 8 with results: 2 WINS + 6 PLACED = 100% place rate from top-8 picks! 🎉
+Recent week performance:
+  Fri 20/3 : 16.9% win, 66.1% placed  (below avg win rate)
+  Thu 19/3 : 26.0% win, 74.0% placed  (best this week)
+  Wed 18/3 : 20.0% win, 53.3% placed
+  Tue 17/3 : 19.7% win, 66.4% placed
+  Mon 16/3 : 20.6% win, 64.7% placed
+  Week avg : ~20.7% win, ~65% placed
 
-FULL LIST OF WINNERS
---------------------
-Rank  1  ROCKHAMPTON   R1   Box1  gap=32.13%  ✅ WON (best bet!)
-Rank  2  BALLARAT      R7   Box1  gap=23.58%  ✅ WON
-Rank 13  CAPALABA      R6   Box3  gap= 9.46%  ✅ WON
-Rank 18  ROCKHAMPTON   R2   Box1  gap= 8.60%  ✅ WON
-Rank 25  BENDIGO       R7   Box1  gap= 7.03%  ✅ WON
-Rank 33  BENDIGO       R3   Box4  gap= 5.59%  ✅ WON
-Rank 38  ROCKHAMPTON   R3   Box2  gap= 5.00%  ✅ WON
-Rank 39  ANGLE PARK    R10  Box8  gap= 4.90%  ✅ WON
-Rank 40  TEMORA        R6   Box3  gap= 4.81%  ✅ WON
-Rank 48  GUNNEDAH      R2   Box2  gap= 4.18%  ✅ WON
-Rank 54  GUNNEDAH      R11  Box3  gap= 3.79%  ✅ WON
-Rank 66  CAPALABA      R3   Box7  gap= 2.85%  ✅ WON
-Rank 74  BALLARAT      R5   Box1  gap= 2.46%  ✅ WON
-Rank 75  GUNNEDAH      R6   Box2  gap= 2.46%  ✅ WON
-Rank 82  SALE          R6   Box6  gap= 1.87%  ✅ WON
-Rank 89  BALLARAT      R4   Box8  gap= 1.45%  ✅ WON
-Rank 90  TEMORA        R4   Box1  gap= 1.34%  ✅ WON
-Rank 96  RICHMOND      R6   Box5  gap= 1.13%  ✅ WON
-Rank100  Q LAKESIDE    R3   Box4  gap= 1.04%  ✅ WON
-Rank102  BENDIGO       R8   Box8  gap= 0.98%  ✅ WON
-Rank108  RICHMOND      R9   Box6  gap= 0.83%  ✅ WON
-Rank115  BENDIGO       R12  Box6  gap= 0.57%  ✅ WON
-Rank125  CAPALABA      R2   Box3  gap= 0.26%  ✅ WON
-Rank129  ANGLE PARK    R1   Box1  gap= 0.07%  ✅ WON
+================================================================================
+FULL BET LIST — RECOMMENDED WAGERS FOR 21/03/2026
+================================================================================
 
-TRACK-BY-TRACK BREAKDOWN
--------------------------
-Track                    Wins    Placed   Win%    Place%
----------------------------------------------------------
-CAPALABA                 3/8     4/8      37.5%   50.0%  ⭐ Top win rate
-BENDIGO                  4/12    6/12     33.3%   50.0%  ⭐ Most wins
-ROCKHAMPTON              3/9     4/9      33.3%   44.4%  (best bet won here)
-GUNNEDAH                 3/11    7/11     27.3%   63.6%
-BALLARAT                 3/12    7/12     25.0%   58.3%
-TEMORA                   2/8     6/8      25.0%   75.0%  ⭐ Best place rate
-ANGLE PARK               2/12    7/12     16.7%   58.3%
-RICHMOND                 2/12    5/12     16.7%   41.7%
-Q LAKESIDE               1/12    7/12      8.3%   58.3%
-SALE                     1/12    6/12      8.3%   50.0%
-MEADOWS                  0/12    5/12      0.0%   41.7%  ⚠️  0 wins today
+SINGLES (WIN):
+─────────────
+ 1. DUBBO R9          Box3  Triple Phantom    ← 35.46% win prob, gap 21.35%
+ 2. Q LAKESIDE R7     Box2  Canya Nuclear     ← 34.93% win prob, gap 21.96%
+ 3. Cannington R11    Box1  Paid My Dues      ← 33.58% win prob, gap 11.80%
+ 4. Q LAKESIDE R4     Box1  Massaro           ← 32.90% win prob, gap 15.08%
+ 5. SHEPPARTON R9     Box2  Dewana Star       ← 31.50% win prob, gap 17.72%
+ 6. SHEPPARTON R7     Box1  Bebop Jazz        ← 29.90% win prob, gap 19.10%
+ 7. The Gardens R10   Box1  Flying Monkey's   ← 28.93% win prob, gap 15.63%
+ 8. Q LAKESIDE R5     Box7  Shout Out Shazam  ← 28.89% win prob, gap 14.80%
+ 9. WENTWORTH PARK R5 Box1  Brax Keeping      ← 22.25% win prob, gap 11.17%
 
-MURRAY BRIDGE STRAIGHT: ALL 8 RACES ABANDONED — no results, predictions voided.
+EACH-WAY (WIN+PLACE):
+─────────────────────
+ 10. SHEPPARTON R6    Box4  Mepunga Donna     ← 36.05% win prob (highest today!)
+ 11. The Gardens R6   Box6  Skinny Marie      ← 20.62% win prob, gap  9.76%
+ 12. Q LAKESIDE R10   Box7  Breakout Lad      ← 23.56% win prob, gap  6.34%
+ 13. WENTWORTH PARK R4 Box7 Derry             ← 27.90% win prob, gap  5.14%
 
-SPECIAL NOTES
--------------
-• Murray Bridge Straight abandoned entirely (weather/track).
-• Taree ran 12 races but was NOT in the prediction model — no predictions generated.
-• Q Lakeside only ran 12 races; predictions for R13 and R14 had no results.
-• Ballarat R13/R14 also had no results (only 12 races run).
-• Model predicted Box 1 correctly in multiple races (Rockhampton R1, R2; Ballarat R5, R7;
-  Bendigo R7; Temora R4, etc.) — Box 1 had a strong day.
+MULTIS/PARLAYS (suggested combinations):
+─────────────────────────────────────────
+  Multi 1 — Banker Double:
+    DUBBO R9 Box3 + Q LAKESIDE R7 Box2
 
-COMPARISON TO RECENT DAYS
---------------------------
-Date        Wins%   Placed%   Notes
-2026-03-14  26.6%   73.4%     Best overall
-2026-03-15  24.8%   74.3%
-2026-03-16  20.6%   64.7%
-2026-03-17  19.7%   66.4%
-2026-03-18  20.0%   53.3%     Top-2 bets both WON. High confidence picks excellent.
-                               Overall placed% lower than typical.
+  Multi 2 — Shepparton Power Treble:
+    SHEP R6 Box4 + SHEP R7 Box1 + SHEP R9 Box2
 
-RECOMMENDATION
---------------
-The model's high-confidence picks (gap ≥15%) performed perfectly today (100% place rate).
-Betting strategy: Focus on the top-5 to top-8 ranked bets by confidence gap.
-Today that approach would have yielded: 2 WINS + 6 PLACED from 8 bets = 100% ROI positive.
+  Multi 3 — Q Lakeside Triple:
+    QLAK R4 Box1 + QLAK R5 Box7 + QLAK R7 Box2
 
-Full audit: reports/PREDICTION_AUDIT_2026-03-18.txt
+  Multi 4 — Saturday Super Multi (4-leg):
+    DUBBO R9 Box3 + QLAK R7 Box2 + SHEP R7 Box1 + SHEP R9 Box2
+
+  Multi 5 — Best Value Double:
+    Q LAKESIDE R4 Box1 + SHEPPARTON R9 Box2
+
+STAKING NOTE: Given today's confidence profile (2 × ≥20% gap races, 6 × ≥15%),
+  this is a MEDIUM-HIGH confidence card. Suggested unit allocation:
+  - ★★★ singles: 2-3 units each
+  - ★★ singles: 1-2 units each
+  - Each-way specials: 1 unit each-way
+  - Multi combos: 0.5-1 unit each
+  Do not overexpose on Meadows or Cannington (outside R11).
+
+================================================================================
+SUMMARY
+================================================================================
+
+Date    : Saturday 21 March 2026
+Tracks  : 7 (Cannington, Dubbo, Meadows, Q Lakeside, Shepparton,
+           The Gardens, Wentworth Park)
+Races   : 81 (+ Tasmania not predicted)
+Best Bet: Q LAKESIDE R7 Box2 Canya Nuclear (34.93%, gap 21.96%)
+
+Confidence profile:
+  2 races ≥20% | 7 races ≥15% | 12 races ≥10% | 69 races <10%
+  → STRONGEST Saturday card in 5 days
+
+Top 3 tracks today:
+  1. Q Lakeside    — 3 high-confidence bets (R4, R5, R7)
+  2. Shepparton    — 3 strong bets (R6 special, R7, R9)
+  3. Dubbo         — 1 dominant bet (R9 Triple Phantom)
+
+Standout dogs today:
+  ★ Mepunga Donna (Shep R6)    : HIGHEST win% of day at 36.05%
+  ★ Triple Phantom (Dubbo R9)  : 35.46% win, 21.35% gap
+  ★ Canya Nuclear (Q Lak R7)   : 34.93% win, 21.96% gap — #1 BEST BET
+  ★ Paid My Dues (Cann R11)    : 33.58% win, 11.80% gap
+  ★ Massaro (Q Lak R4)         : 32.90% win, 15.08% gap
+
+Recommended approach: Back singles 1-6 (★★★ tier), speculate on R6 Shepparton
+(Mepunga Donna). Use Shepparton R6-R7-R9 and Q Lakeside R4-R5-R7 trebles as
+primary multi options. Avoid Meadows multis (low confidence throughout).
+
 ================================================================================
 ```
