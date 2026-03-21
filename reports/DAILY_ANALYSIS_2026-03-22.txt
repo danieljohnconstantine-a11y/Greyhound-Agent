@@ -1,0 +1,320 @@
+================================================================================
+GREYHOUND RACING — DAILY ANALYSIS & BETTING GUIDE
+Date: Sunday 22 March 2026
+Generated: 2026-03-22 (from best_bets_report.txt + track_ensemble_predictions.xlsx)
+================================================================================
+TRACKS: 11  |  RACES: 111  |  PREDICTION METHOD: ML Ensemble (RF + GB + XGB)
+TRACKS: Broken Hill | Capalaba | Darwin | Gawler | Grafton | Healesville
+        Mt Gambier | Q Parklands | Richmond | Rockhampton | Sale
+================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏆 THE SINGLE BEST BET OF THE DAY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  GRAFTON Race 12 — Box 2 PACKHAM PUNCH (Trainer: Dave Irwin)
+  Time: 09:53PM  |  Distance: 450m
+  ML Confidence: 42.92%  |  Gap to 2nd: 32.82% (EXCEPTIONAL)
+  Career: 3W / 6S = 50% win rate  |  DLR=7  DLW=7 (fresh, won last start)
+  2nd: Box 8 Rebel Roxi @ 10.1%   3rd: Box 7 Zabdon No Doubt @ 9.6%
+
+  ⭐ This is one of the highest-confidence model outputs we have seen.
+     A 32.82% gap is extraordinary — the model sees this as a near-dominant
+     performance. Packham Punch won its last start (DLW=7) and the trainer
+     Dave Irwin has an active stable. 50% career win rate in only 6 starts
+     (very recent/progressive dog). Box 2 at Grafton 450m is a neutral draw.
+     BACK CONFIDENTLY for WIN. Also consider Box 2 boxed with 7/8 for trifecta.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔥 TOP 12 BETS RANKED BY MODEL CONFIDENCE GAP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Rank  Race                   Dog              Box  ML%     Gap      Notes
+----  ---------------------  ---------------  ---  ------  -------  -------------------
+  1   GRAFTON R12 9:53pm     Packham Punch      2  42.9%  +32.82%  ⭐ BEST BET. DLW=7
+  2   HEALESVILLE R2 11:37am Made Up Stories    2  31.9%  +19.59%  Consistent. 17% WR
+  3   GRAFTON R1 5:54pm      Rapid Lulu         2  26.8%  +16.39%  26% WR, DLW=14
+  4   HEALESVILLE R3 11:53am Got Flair          2  27.2%  +15.44%  22% WR, 78 starts
+  5   HEALESVILLE R1 11:22am Mookaite           3  31.7%  +13.66%  Early; Box 3 Healesville
+  6   DARWIN R3 7:18pm       Chronic            1  29.6%  +13.54%  312m sprint; Box 1
+  7   RICHMOND R10 9:23pm    Brett Keeping      1  30.0%  +13.04%  44% WR, 9 starts
+  8   HEALESVILLE R4 12:14pm Daintree Dazzler   2  24.5%  +12.84%  22% WR, 82 starts
+  9   DARWIN R7 8:39pm       Mum Knows Best     8  25.8%  +12.78%  19% WR, 48 starts
+ 10   Capalaba R10 2:33pm    Zipping Schrub     3  29.2%  +11.72%  46% WR! DLR=3 DLW=3
+ 11   GAWLER R11 8:26pm      Make Some Noise    6  28.4%  +11.44%  37% WR, 400m
+ 12   SALE R3 6:47pm         Paw Uma            8  24.1%  +11.22%  20% WR, 435m
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💎 HIGH-CONFIDENCE STANDOUTS (ML ≥ 25%) — DETAILED ANALYSIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+─── HEALESVILLE (11:22am–4:32pm, 12 races, 300–520m) ───────────────────────
+  Healesville has 4 races in the top-8 confidence list — the MODEL IS VERY
+  BULLISH ON THIS TRACK TODAY.
+
+  R1  11:22am 350m ★★★
+      Box 3 MOOKAITE (31.7%)  vs Box 7 Opalina (18.1%)  vs Box 4 Linden Boots (17.4%)
+      Gap: 13.66%. Despite 0 career wins from 3 starts, Mookaite places strongly.
+      Competitive opener — BOX QUINELLA 3/7 recommended.
+
+  R2  11:37am 300m ★★★★
+      Box 2 MADE UP STORIES (31.9%)  vs Box 1 Thai Butterfly (12.3%)
+      Gap: 19.59%. 8 career wins from 46 starts. DLR=7, last win 84 days ago.
+      Strong model signal across all 3 algorithms. WIN BET Box 2.
+
+  R3  11:53am 300m ★★★
+      Box 2 GOT FLAIR (27.2%)  vs Box 3 Why Not Ava (11.8%)
+      Gap: 15.44%. Experienced — 17W/78S. Well-placed sprinter.
+      WIN BET Box 2. Double with R2 Box 2.
+
+  R4  12:14pm 350m ★★★
+      Box 2 DAINTREE DAZZLER (24.5%)  vs Box 6 Lose My Mind (11.7%)
+      Gap: 12.84%. Solid 18W/82S career. Very experienced dog.
+      WIN BET Box 2. Healesville R1-R2-R3-R4 4-race double/multi opportunity.
+
+  R7  1:39pm  350m ★★
+      Box 6 PAW SAKAKIBURA (26.9%)  vs Box 5 Crackerjack Matt (21.1%)
+      Gap: 5.86%. Good confidence but smaller gap. Box 6 each-way.
+
+  R9  2:34pm 350m ★★★
+      Box 1 DRAGON TRAIN (30.2%)  vs Box 2 Runway Blue (27.5%)
+      Gap: 2.75% ONLY — tight race, flip a coin between Box 1 and Box 2.
+      AVOID WIN BET. Quinella 1/2 for safety.
+
+─── GRAFTON (5:54pm–9:53pm, 12 races, 350–450m) ───────────────────────────
+  The track with the strongest single signal (R12) and solid early opener (R1).
+
+  R1  5:54pm  350m ★★★
+      Box 2 RAPID LULU (26.8%)  vs Box 1 Kingsbrae Emma (10.4%)
+      Gap: 16.39%. 8W/31S (26% WR). DLR=7 DLW=14. WIN BET Box 2.
+
+  R6  7:49pm  350m ★★
+      Box 7 CALL TO ARMS (24.6%)  vs Box 2 Bilambil Beach (14.8%)
+      Gap: 9.77%. 32% career WR (6W/19S). DLR=7 DLW=7 (fresh win).
+
+  R12 9:53pm  450m ★★★★★  ← BEST BET OF THE DAY
+      Box 2 PACKHAM PUNCH (42.9%)  vs Box 8 Rebel Roxi (10.1%)
+      Gap: 32.82%. 50% WR. Won last start. Exceptional.
+
+─── DARWIN (6:35pm–9:41pm, 8 races, 312–383m) ──────────────────────────────
+  Darwin shows strong signals across the card with 4 high-confidence races.
+
+  R1  6:35pm  312m ★★
+      Box 2 LITTLE RILEY (28.0%)  vs Box 7 Border Brawler (19.4%)
+      Gap: 8.64%. 0W/5S but 3 places — still learning. Box 2 each-way.
+
+  R3  7:18pm  312m ★★★
+      Box 1 CHRONIC (29.6%)  vs Box 7 Bing Bing Secret (16.1%)
+      Gap: 13.54%. 3W/19S. DLW=77 (hasn't won in a while, but model is strong).
+      WIN BET Box 1. 312m sprint from the inside box.
+
+  R4  7:37pm  383m ★★★★
+      Box 8 STAN'S DREAM (30.3%)  vs Box 2 Ritza Duane (21.0%)
+      Gap: 9.27%. ELITE dog — 22W/45S = 49% win rate! DLW=7 (fresh win).
+      This dog is a BANKER. WIN BET Box 8. Career almost 50% wins is exceptional.
+
+  R7  8:39pm  312m ★★★
+      Box 8 MUM KNOWS BEST (25.8%)  vs Box 5 Willow's Witch (13.0%)
+      Gap: 12.78%. 9W/48S (19% WR). Harrison Brown stable again (also R1).
+      WIN BET Box 8.
+
+─── RICHMOND (7:00pm–10:04pm, 11 races, 401m) ──────────────────────────────
+
+  R10 9:23pm 401m ★★★★
+      Box 1 BRETT KEEPING (30.0%)  vs Box 8 Star Pedro (17.0%)
+      Gap: 13.04%. 4W/9S = 44% win rate. Very progressive young dog.
+      Christopher Green stable — consistent trainer. WIN BET Box 1.
+
+─── SALE (5:57pm–10:38pm, 12 races, 435–510m) ──────────────────────────────
+
+  R1  5:57pm  510m ★★★
+      Box 6 QUEEN FLOW (34.8%)  vs Box 2 Hurry Dusty (25.2%)
+      Gap: 9.62%. 0W/5S but 3 places — maiden looking for breakthrough.
+      Strong model signal at 34.8% — competitive race (Hurry Dusty 25.2% also strong).
+      BOX QUINELLA 6/2 recommended. Exacta Box 6→2.
+
+  R3  6:47pm  435m ★★★
+      Box 8 PAW UMA (24.1%)  vs Box 6 Dr. Cougar (12.9%)
+      Gap: 11.22%. 9W/46S (20% WR). DLR=5 DLW=5 (won recently). WIN BET Box 8.
+
+  R6  8:06pm  395m ★★★
+      Box 4 FAST FREDDY (27.7%)  vs Box 3 Baywara (23.1%)
+      Gap: 4.54%. Good confidence but narrow gap. BOX QUINELLA 4/3.
+
+─── GAWLER (4:23pm–8:52pm, 11 races, 400–531m) ─────────────────────────────
+
+  R4  6:05pm  531m ★★★
+      Box 1 UTTER MADNESS (27.1%)  vs Box 8 Zipping Rove (16.6%)
+      Gap: 10.47%. EXCELLENT — 19W/45S = 42% win rate. DLW=7 (fresh win).
+      Long trip 531m from Box 1. WIN BET Box 1.
+
+  R9  7:35pm  400m ★★★★
+      Box 6 OUR BEAVER (35.2%)  vs Box 1 Algorithm (27.7%)  vs Box 8 Urana Space (25.0%)
+      Gap (1st vs 2nd): 7.49%. THREE dogs bunched at 25-35% — wide open race.
+      BOX TRIFECTA 6/1/8 strongly recommended. Our Beaver leads but it's competitive.
+
+  R11 8:26pm  400m ★★★
+      Box 6 MAKE SOME NOISE (28.4%)  vs Box 2 Elegant Ember (17.0%)
+      Gap: 11.44%. 7W/19S = 37% win rate. DLW=12. WIN BET Box 6.
+
+─── MT GAMBIER (12:01pm–3:44pm, 8 races, 400m) ────────────────────────────
+
+  R3  12:42pm 400m ★★★
+      Box 2 LIE TO ME (27.3%)  vs Box 4 Rocklea Earle (18.1%)
+      Gap: 9.13%. 16W/51S = 31% WR. Experienced dog. WIN BET Box 2.
+
+  R4  1:08pm  400m ★★★
+      Box 4 ENERGY TO BURN (31.8%)  vs Box 1 Gus Limes (29.1%)
+      Gap: 2.78% ONLY. Very tight race between Box 4 and Box 1.
+      BOX QUINELLA 4/1. Do NOT back win only — too close.
+
+  R7  2:25pm  400m ★★
+      Box 2 COMPTON GYPSY (22.8%)  vs Box 4 Galento (14.5%)
+      Gap: 8.36%. Moderate confidence. Box 2 each-way.
+
+─── Q PARKLANDS (4:29pm–8:17pm, 10 races, 366–520m) ──────────────────────
+
+  R9  7:14pm  520m ★★★
+      Box 7 COOL HAND DON (25.5%)  vs Box 2 Rockabye Baby (15.2%)
+      Gap: 10.26%. Trainer Sergio Livotto. DLW=94 — hasn't won in AGES.
+      Model still confident despite long winless streak. Monitor.
+
+─── Capalaba (11:42am–2:33pm, 10 races, 366m) ──────────────────────────────
+
+  R10 2:33pm  366m ★★★★
+      Box 3 ZIPPING SCHRUB (29.2%)  vs Box 4 Free Settler (17.5%)
+      Gap: 11.72%. 6W/13S = 46% WIN RATE! Only 3 days since last race, 3 days since last WIN.
+      Tom Tzouvelis stable. Very fresh, dominant recent form. WIN BET Box 3. Strong play.
+
+  R5  12:43pm 366m ★★
+      Box 2 APPEAL (25.8%)  vs Box 8 Bonnie Is Boujee (18.1%)
+      Gap: 7.72%. DLR=19 DLW=35. Decent gap. Box 2 win.
+
+  R7  1:26pm  366m ★★
+      Box 2 TAKE OVER HAZE (21.7%)  vs Box 7 Armarta (19.1%)
+      Gap: 2.56%. Too tight. AVOID.
+
+  R8  1:58pm  366m ★★
+      Box 4 SIR BAREFOOT (23.9%)  vs Box 6 Blue Art (23.8%)
+      Gap: 0.12%. Essentially a coinflip. AVOID WIN. Quinella 4/6.
+
+─── BROKEN HILL (8:02pm–11:12pm, 8 races, 375m) ──────────────────────────
+
+  R4  8:59pm  375m ★★★
+      Box 8 SWEET PEA (23.6%)  vs Box 5 Uncontested (13.7%)
+      Gap: 9.90%. 15W/78S (19% WR). WIN BET Box 8. Night card, sand track.
+
+  R7  9:59pm  375m ★★
+      Box 2 DEL MAR SAL (15.7%)  vs Box 8 Simpkin (10.1%)
+      Gap: 5.64%. Lower confidence (15.7%) and smaller gap. Box 2 each-way.
+
+─── ROCKHAMPTON (6:06pm–8:52pm, 9 races, 400–520m) ──────────────────────
+
+  R5  7:14pm  520m ★★
+      Box 2 TUSKEN WIND (22.8%)  vs Box 3 Ranger Beach (16.3%)
+      Gap: 6.45%. Moderate signal. Box 2 each-way.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💰 BETTING ACTION PLAN — TIERED RECOMMENDATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+★★★★★ LEVEL 5 — MAXIMUM CONFIDENCE (Back to WIN, larger stake)
+  1. GRAFTON R12   9:53pm  Box 2  PACKHAM PUNCH       42.9% | Gap 32.82%
+  2. DARWIN R4     7:37pm  Box 8  STAN'S DREAM        30.3% | Gap  9.27% (49% career WR!)
+  3. Capalaba R10  2:33pm  Box 3  ZIPPING SCHRUB      29.2% | Gap 11.72% (46% career WR!)
+
+★★★★  LEVEL 4 — HIGH CONFIDENCE (Back to WIN, standard stake)
+  4. HEALESVILLE R2  11:37am  Box 2  MADE UP STORIES  31.9% | Gap 19.59%
+  5. RICHMOND R10     9:23pm  Box 1  BRETT KEEPING    30.0% | Gap 13.04% (44% career WR)
+  6. GRAFTON R1        5:54pm  Box 2  RAPID LULU      26.8% | Gap 16.39%
+  7. HEALESVILLE R3  11:53am  Box 2  GOT FLAIR        27.2% | Gap 15.44%
+  8. GAWLER R4         6:05pm  Box 1  UTTER MADNESS   27.1% | Gap 10.47% (42% career WR)
+  9. GAWLER R11        8:26pm  Box 6  MAKE SOME NOISE 28.4% | Gap 11.44%
+ 10. DARWIN R3         7:18pm  Box 1  CHRONIC         29.6% | Gap 13.54%
+
+★★★   LEVEL 3 — SOLID CONFIDENCE (Win or each-way)
+ 11. HEALESVILLE R4  12:14pm  Box 2  DAINTREE DAZZLER  24.5% | Gap 12.84%
+ 12. DARWIN R7        8:39pm  Box 8  MUM KNOWS BEST    25.8% | Gap 12.78%
+ 13. SALE R3          6:47pm  Box 8  PAW UMA           24.1% | Gap 11.22%
+ 14. MT GAMBIER R3  12:42pm  Box 2  LIE TO ME          27.3% | Gap  9.13%
+ 15. GRAFTON R6       7:49pm  Box 7  CALL TO ARMS      24.6% | Gap  9.77%
+ 16. BROKEN HILL R4   8:59pm  Box 8  SWEET PEA         23.6% | Gap  9.90%
+
+★★    LEVEL 2 — MODERATE (Each-way or quinella)
+ 17. GAWLER R9  7:35pm  BOXED TRIFECTA 6/1/8  (Our Beaver 35.2% but bunched field)
+ 18. SALE R1    5:57pm  QUINELLA Box 6/2  (Queen Flow 34.8% but Hurry Dusty 25.2%)
+ 19. MT GAMBIER R4  1:08pm  QUINELLA Box 4/1  (extremely tight, 2.78% gap)
+ 20. Capalaba R5  12:43pm  Box 2 APPEAL  each-way
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️  RACES TO AVOID (gap < 2% — coin-flip territory)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  • RICHMOND R2    (gap 0.01%) — dead heat likely
+  • GRAFTON R2     (gap 0.08%) — model unsure
+  • DARWIN R2      (gap 0.06%) — coin flip
+  • GAWLER R3      (gap 0.05%) — skip
+  • RICHMOND R4    (gap 0.16%) — skip
+  • Capalaba R8    (gap 0.12%) — Sir Barefoot vs Blue Art — skip
+  • MT GAMBIER R4  (gap 2.78%) — back quinella only
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 MULTI/PARLAY SUGGESTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  SAFE 3-LEG MULTI (all high gap, strong WR):
+    GRAFTON R12 Box 2 Packham Punch   +
+    DARWIN R4   Box 8 Stan's Dream    +
+    RICHMOND R10 Box 1 Brett Keeping
+    → All three have 30%+ ML and 40%+ career WR
+
+  HEALESVILLE DOUBLE (early card):
+    HEALESVILLE R2 Box 2 Made Up Stories  +
+    HEALESVILLE R3 Box 2 Got Flair
+    → Both Box 2 at same track, 300m races, 1 race apart
+
+  GRAFTON RUNNING DOUBLE:
+    GRAFTON R1  Box 2 Rapid Lulu  +
+    GRAFTON R12 Box 2 Packham Punch
+    → Opener and closer at Grafton, both Box 2
+
+  AGGRESSIVE 4-LEG MULTI:
+    HEALESVILLE R2  Box 2 Made Up Stories   (31.9%)
+    DARWIN R4       Box 8 Stan's Dream      (30.3%)
+    RICHMOND R10    Box 1 Brett Keeping     (30.0%)
+    GRAFTON R12     Box 2 Packham Punch     (42.9%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 TRACK SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Track          Races  Best Pick                  ML%    Gap      Rating
+-----------    -----  -------------------------  -----  -------  --------
+GRAFTON          12   R12 Packham Punch (Bx2)   42.9%  +32.82%  ★★★★★
+HEALESVILLE      12   R2 Made Up Stories (Bx2)  31.9%  +19.59%  ★★★★
+DARWIN            8   R4 Stan's Dream (Bx8)     30.3%   +9.27%  ★★★★
+RICHMOND         11   R10 Brett Keeping (Bx1)   30.0%  +13.04%  ★★★★
+GAWLER           11   R9 Our Beaver (Bx6)       35.2%   +7.49%  ★★★
+SALE             12   R1 Queen Flow (Bx6)       34.8%   +9.62%  ★★★
+Capalaba         10   R10 Zipping Schrub (Bx3)  29.2%  +11.72%  ★★★★
+MT GAMBIER        8   R3 Lie To Me (Bx2)        27.3%   +9.13%  ★★★
+Q PARKLANDS      10   R9 Cool Hand Don (Bx7)    25.5%  +10.26%  ★★★
+BROKEN HILL       8   R4 Sweet Pea (Bx8)        23.6%   +9.90%  ★★★
+ROCKHAMPTON       9   R5 Tusken Wind (Bx2)      22.8%   +6.45%  ★★
+
+TOTAL RACES WITH ML ≥ 25% TOP PICK: 23/111 (20.7%)
+TOTAL RACES WITH GAP ≥ 10%:         17/111 (15.3%)
+TOTAL RACES WITH GAP ≥ 15%:          6/111  (5.4%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 NOTES / DISCLAIMERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  • Based on historical audit: ~23% win rate, ~69% top-4 rate on recent Saturdays.
+  • High-gap races (≥10%) have historically shown improved win rates.
+  • Darwin is a sand track — factor in track condition on the day.
+  • DLW = Days since last win; DLR = Days since last race.
+  • Dogs with DLW > 60 days may need closer inspection.
+  • Packham Punch (DLW=7) = won last week — that's recency you want.
+  • Stan's Dream (DLW=7) = same. Both fresh off wins.
+  • Always gamble responsibly. This is ML model output, not guaranteed.
+================================================================================
+END OF DAILY ANALYSIS — 22 MARCH 2026
+================================================================================
