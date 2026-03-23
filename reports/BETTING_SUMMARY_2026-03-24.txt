@@ -1,0 +1,402 @@
+================================================================================
+GREYHOUND BETTING SUMMARY — Tuesday 24 March 2026
+Generated: 2026-03-24
+Source: track_ensemble_predictions.xlsx + best_bets_report.txt
+================================================================================
+
+OVERVIEW
+--------
+  Date:          Tuesday 24 March 2026
+  Tracks:        11
+  Total Races:   123
+  Predictions:   All 123 races covered (100%)
+
+  TRACKS RACING TODAY:
+  ┌─────────────────────────────────┐
+  │ Angle Park (SA)     12 races   │
+  │ Bulli (NSW)          8 races   │
+  │ Casino (NSW)        11 races   │
+  │ Geelong (VIC)       12 races   │
+  │ Gosford (NSW)       12 races   │
+  │ Hobart / Elwick (TAS) 10 races │
+  │ Horsham (VIC)       11 races   │
+  │ Mandurah (WA)       10 races   │
+  │ Q Lakeside (QLD)    14 races   │
+  │ Townsville (QLD)    11 races   │
+  │ Warragul (VIC)      12 races   │
+  └─────────────────────────────────┘
+
+================================================================================
+TOP 5 ML SCORES (Highest Model Confidence — Predicted Winner per Race)
+================================================================================
+
+  #1  Warragul R10 — Box 1 SOLAR SPECTRUM        ML: 45.94%  Gap: 32.66%  ⬆⬆⬆ BEST BET
+  #2  Casino R2   — Box 2 COOL MIST              ML: 34.53%  Gap:  8.05%  ★★
+  #3  Angle Park R9 — Box 1 KILCOY MISSIE        ML: 33.85%  Gap: 14.13%  ★★
+  #4  Townsville R4 — Box 8 CAWBOURNE SLICK      ML: 31.87%  Gap:  7.49%  ★
+  #5  Q Lakeside R9 — Box 6 ON THE WHISPER       ML: 31.65%  Gap: 10.36%  ★
+
+  NOTE:
+  • ML% = ensemble model probability for that dog winning
+  • Gap = difference between 1st and 2nd ranked dog (higher = more confident)
+  • Solar Spectrum at 45.94% is exceptional — nearly half the model's probability
+    mass on one dog. Warragul R10 is by far the strongest signal of the day.
+
+================================================================================
+CONFIDENCE DISTRIBUTION
+================================================================================
+
+  Races ≥20% gap (HIGH CONFIDENCE):    1   →  Warragul R10 (32.66%)
+  Races ≥15% gap (STRONG):             8
+  Races ≥10% gap (GOOD):              15
+  Races ≥ 5% gap (MODERATE):          50
+  Races < 5% gap (WEAK / OPEN):       73
+
+================================================================================
+★★★ BEST BET OF THE DAY
+================================================================================
+
+  WARRAGUL RACE 10
+  Box 1 — SOLAR SPECTRUM
+  ML Confidence:  45.94%
+  Gap to 2nd dog: 32.66%  (Box 2 Why Not Seb at 13.28%)
+  Final Score:    34.28
+  Ensemble Score: 0.4594
+
+  Assessment: Nearly half the model's total probability on a single dog.
+  Solar Spectrum has a massive 32.66 percentage-point gap over the field.
+  This is the highest-confidence bet seen in recent weeks.
+  STRONG SINGLE BET recommendation.
+
+================================================================================
+★★ STRONG BETS (Gap ≥14%) — 8 races
+================================================================================
+
+  Rank  Track          Race  Box  Dog                    ML%    Gap%
+  -----------------------------------------------------------------------
+    2   Horsham        R3    Box8 Doongalla Jessie       28.72  16.73
+    3   Gosford        R5    Box7 Trunkey Mink           29.29  16.18
+    4   Casino         R5    Box1 Kingsbrae Rex          25.15  15.75
+    5   Hobart         R7    Box3 Ronny Rocket           25.95  15.25
+    6   Horsham        R2    Box6 White Shamrock         23.33  14.42
+    7   Angle Park     R2    Box2 Lefevre Gold           30.58  14.38
+    8   Angle Park     R9    Box1 Kilcoy Missie          33.85  14.13
+
+  Notes:
+  • Horsham R3 (Doongalla Jessie, Box 8) and R2 (White Shamrock, Box 6) —
+    double on Horsham provides two strong bets at the same meeting.
+  • Gosford R5 (Trunkey Mink, Box 7) — ML 29.29% is well above field average.
+  • Angle Park R9 (Kilcoy Missie, Box 1) — #3 highest ML score overall.
+    Box 1 box bias at Angle Park (sand track) is historically strong.
+  • Angle Park R2 (Lefevre Gold, Box 2) — ML 30.58%, #7 overall ML score.
+
+================================================================================
+★ GOOD BETS (Gap 10–14%) — 7 races
+================================================================================
+
+  Rank  Track          Race  Box  Dog                    ML%    Gap%
+  -----------------------------------------------------------------------
+    9   Q Lakeside     R1    Box4 Sagacious Syd          21.90  12.17
+   10   Townsville     R10   Box6 Ordinary               30.60  11.78
+   11   Gosford        R11   Box8 Starry Ethics          22.87  11.21
+   12   Horsham        R4    Box4 Sumo Smash             22.29  10.90
+   13   Q Lakeside     R9    Box6 On The Whisper         31.65  10.36
+   14   Casino         R9    Box2 Grandpa Joe            22.69  10.31
+   15   Angle Park     R11   Box2 Ouzo And Coke          26.85  10.11
+
+  Notes:
+  • Q Lakeside R9 (On The Whisper, Box 6) — #5 highest ML score. Very strong
+    win probability but gap compressed to 10.36% — still a solid play.
+  • Townsville R10 (Ordinary, Box 6) — high ML 30.60%, good confidence.
+  • Horsham R4 (Sumo Smash, Box 4) follows R2 and R3 — three Horsham bets
+    in a row if backing the strong bets at that meeting.
+
+================================================================================
+NOTABLE WATCH LIST — High ML but Competitive Gap (Speculative)
+================================================================================
+
+  Track          Race  Box  Dog                 ML%    Gap%   Note
+  -----------------------------------------------------------------------
+  Casino         R2    Box2 Cool Mist           34.53   8.05  #2 ML but open race
+  Townsville     R4    Box8 Cawbourne Slick     31.87   7.49  #4 ML, decent gap
+  Q Lakeside     R8    Box3 Mr. Lasso           29.86   0.20  High ML — dead heat likely
+  Warragul       R9    Box2 Mabel Lee Rose      25.20   9.11  Strong ML before the best bet
+
+  Notes:
+  • Casino R2: Box 2 Cool Mist has the 2nd highest ML (34.53%) but the gap
+    to Box 1 Make A Mile (26.49%) is only 8.05% — still a decent bet.
+  • Q Lakeside R8: Mr. Lasso has ML 29.86% but Box 6 Canya Romance right
+    behind at 29.66%. Effectively a coin flip — AVOID or small each-way.
+  • Warragul R9 (Mabel Lee Rose) immediately precedes the best bet R10 —
+    a Warragul R9+R10 double could be considered.
+
+================================================================================
+SECONDARY SELECTIONS (Gap 8–10%) — 4 races
+================================================================================
+
+  Rank  Track          Race  Box  Dog                    ML%    Gap%
+  -----------------------------------------------------------------------
+   16   Bulli          R3    Box2 Kooringa Express       22.77   9.90
+   17   Warragul       R9    Box2 Mabel Lee Rose         25.20   9.11
+   18   Horsham        R10   Box4 Needful                22.91   9.10
+   19   Horsham        R5    Box3 Kaelix Storm           20.16   9.01
+
+================================================================================
+TRACK-BY-TRACK RACE CARD — COMPLETE PREDICTIONS
+================================================================================
+
+--- ANGLE PARK (SA) — 12 races ---
+R1   Box2  Lulu Doll           ML:16.28%  gap: 0.06%
+R2   Box2  Lefevre Gold        ML:30.58%  gap:14.38%  ★★
+R3   Box2  Ultimate            ML:26.32%  gap: 0.72%
+R4   Box1  Black Wanda         ML:16.21%  gap: 0.87%
+R5   Box1  Fancy In Design     ML:24.26%  gap: 6.24%
+R6   Box1  Crying Tiger        ML:18.31%  gap: 4.31%
+R7   Box5  Thundering Lady     ML:21.97%  gap: 3.42%
+R8   Box1  Aston Biden         ML:22.56%  gap: 3.93%
+R9   Box1  Kilcoy Missie       ML:33.85%  gap:14.13%  ★★
+R10  Box1  Red Said So         ML:20.86%  gap: 3.84%
+R11  Box2  Ouzo And Coke       ML:26.85%  gap:10.11%  ★
+R12  Box8  Searing Lass        ML:14.46%  gap: 0.16%
+
+Best bets at Angle Park: R2, R9 (★★ each), R11 (★)
+Note: Box 1 and Box 2 dominant today at Angle Park (sand track).
+
+--- BULLI (NSW) — 8 races ---
+R1   Box3  Black Deuce         ML:11.45%  gap: 0.42%
+R2   Box7  She's Our Pal       ML:13.14%  gap: 1.03%
+R3   Box2  Kooringa Express    ML:22.77%  gap: 9.90%  ◆
+R4   Box4  Sloy Wave           ML:23.78%  gap: 2.63%
+R5   Box1  Canya Supersonic    ML:22.92%  gap: 5.04%
+R6   Box4  Woolgoolga Lass     ML:15.31%  gap: 3.39%
+R7   Box3  Real Express        ML:17.22%  gap: 4.21%
+R8   Box3  Chinese Chariot     ML:10.37%  gap: 0.47%
+
+Best bet at Bulli: R3 Kooringa Express (just under 10% gap).
+
+--- CASINO (NSW) — 11 races ---
+R1   Box7  Robell Zoe          ML:20.87%  gap: 5.42%
+R2   Box2  Cool Mist           ML:34.53%  gap: 8.05%  ★ (high ML)
+R3   Box4  Flat Chat Jack      ML:16.90%  gap: 5.39%
+R4   Box6  Burnside Bambi      ML:20.08%  gap: 0.30%
+R5   Box1  Kingsbrae Rex       ML:25.15%  gap:15.75%  ★★
+R6   Box1  Sweet Confetti      ML:23.79%  gap: 7.02%
+R7   Box2  Charlie Dutton      ML:22.89%  gap: 5.01%
+R8   Box5  Summer Bay          ML:15.37%  gap: 0.46%
+R9   Box2  Grandpa Joe         ML:22.69%  gap:10.31%  ★
+R10  Box5  Kingsbrae Ebanee    ML:13.92%  gap: 2.38%
+R11  Box1  Midnight Bullet     ML:10.90%  gap: 0.41%
+
+Best bets at Casino: R5 Kingsbrae Rex (★★), R9 Grandpa Joe (★), R2 Cool Mist (high ML).
+Note: Previous best bet at Casino was "Make And Break" (20/03) which LOST.
+      Casino R5 Box1 pattern recurring — Kingsbrae Rex well worth backing.
+
+--- GEELONG (VIC) — 12 races ---
+R1   Box5  Reiko Zoom          ML:13.79%  gap: 3.55%
+R2   Box4  Rothwell Jack       ML:15.13%  gap: 1.40%
+R3   Box2  Rushmore Red        ML:12.98%  gap: 0.97%
+R4   Box7  Instant Action      ML:26.68%  gap: 7.30%
+R5   Box3  Paw Norbert         ML:14.15%  gap: 2.55%
+R6   Box8  Maddie Odd Sock     ML:12.61%  gap: 0.67%
+R7   Box1  Magizoologist       ML:16.99%  gap: 3.48%
+R8   Box1  Did She             ML:21.27%  gap: 3.61%
+R9   Box1  Bend Your Ear       ML:16.56%  gap: 7.70%
+R10  Box2  Busting             ML:17.58%  gap: 2.28%
+R11  Box8  Berringa Paddy      ML:16.54%  gap: 5.86%
+R12  Box6  Call It Fate        ML: 9.46%  gap: 0.03%
+
+No high-confidence bets at Geelong today. R4 Instant Action (ML 26.68%, gap 7.30%)
+is best selection but below 10% threshold. Proceed with caution.
+
+--- GOSFORD (NSW) — 12 races ---
+R1   Box3  Poppy's Fox         ML:15.85%  gap: 4.29%
+R2   Box6  Bigbad Franky       ML:21.14%  gap: 2.08%
+R3   Box4  Super Quality       ML: 8.81%  gap: 0.41%
+R4   Box4  Bees Hive           ML:18.26%  gap: 5.21%
+R5   Box7  Trunkey Mink        ML:29.29%  gap:16.18%  ★★
+R6   Box8  Nova Reign          ML:12.12%  gap: 2.25%
+R7   Box8  My Irish            ML:15.65%  gap: 3.23%
+R8   Box5  Red Aura            ML:10.89%  gap: 0.16%
+R9   Box6  Simply Juan         ML:16.31%  gap: 3.69%
+R10  Box2  Hey Mac             ML:18.09%  gap: 1.69%
+R11  Box8  Starry Ethics       ML:22.87%  gap:11.21%  ★
+R12  Box2  Jeanna              ML:14.60%  gap: 2.92%
+
+Best bets at Gosford: R5 Trunkey Mink (★★), R11 Starry Ethics (★).
+Note: Box 8 features prominently at Gosford today (R3 was poor, but R11 strong).
+
+--- HOBART / ELWICK (TAS) — 10 races ---
+R1   Box8  Ruxley              ML:21.79%  gap: 2.24%
+R2   Box8  Blackbrush Rose     ML:12.15%  gap: 2.35%
+R3   Box8  She's Seeking       ML:21.25%  gap: 7.05%
+R4   Box4  Take His Cash       ML:21.55%  gap: 3.82%
+R5   Box3  Sea Sick            ML:14.61%  gap: 0.09%
+R6   Box1  Molly Potion        ML:14.78%  gap: 1.83%
+R7   Box3  Ronny Rocket        ML:25.95%  gap:15.25%  ★★
+R8   Box3  Rapidly             ML:20.62%  gap: 1.15%
+R9   Box1  Wynburn Primus      ML:13.90%  gap: 3.61%
+R10  Box6  Towelled Up         ML:19.00%  gap: 6.82%
+
+Best bet at Hobart: R7 Ronny Rocket (★★). High Final Score: 91.73.
+
+--- HORSHAM (VIC) — 11 races ---
+R1   Box1  Paw Yatana          ML:11.28%  gap: 0.29%
+R2   Box6  White Shamrock      ML:23.33%  gap:14.42%  ★★
+R3   Box8  Doongalla Jessie    ML:28.72%  gap:16.73%  ★★
+R4   Box4  Sumo Smash          ML:22.29%  gap:10.90%  ★
+R5   Box3  Kaelix Storm        ML:20.16%  gap: 9.01%  ◆
+R6   Box4  Fleetwood Eros      ML:12.22%  gap: 0.33%
+R7   Box3  Paw Olson           ML:10.79%  gap: 0.79%
+R8   Box1  Paw Cornelius       ML:10.41%  gap: 0.08%
+R9   Box5  Piebald             ML:14.33%  gap: 0.84%
+R10  Box4  Needful             ML:22.91%  gap: 9.10%  ◆
+R11  Box8  Is He Lucky         ML:13.66%  gap: 0.28%
+
+Best bets at Horsham: R3 Doongalla Jessie (★★), R2 White Shamrock (★★), R4 Sumo Smash (★).
+Horsham R2/R3/R4 is an EXCELLENT treble opportunity — three consecutive strong bets.
+Final Scores: Doongalla Jessie 49.02, Sumo Smash 47.85.
+
+--- MANDURAH (WA) — 10 races ---
+R1   Box1  Yunderup Tammy      ML:15.23%  gap: 5.26%
+R2   Box2  Another Plan        ML:12.88%  gap: 1.38%
+R3   Box4  Lansley Whisper     ML:15.64%  gap: 3.69%
+R4   Box1  Freckles Monelli    ML:19.79%  gap: 7.75%
+R5   Box1  Smell Like Rose     ML:12.49%  gap: 1.28%
+R6   Box1  Monkey Magic        ML:17.27%  gap: 3.01%
+R7   Box2  Sunset Agrippina    ML:23.59%  gap: 3.66%
+R8   Box5  Sunset Diablo       ML:16.51%  gap: 2.62%
+R9   Box5  All Grunt           ML:21.21%  gap: 2.42%
+R10  Box7  Impress Rocks       ML:24.19%  gap: 4.44%
+
+No high-confidence bets at Mandurah today (max gap 7.75%). Watch R4 Freckles Monelli.
+Historical note: Mandurah had 0 wins on 20/03 and 16.7% on 23/03 — proceed cautiously.
+
+--- Q LAKESIDE (QLD) — 14 races ---
+R1   Box4  Sagacious Syd       ML:21.90%  gap:12.17%  ★
+R2   Box7  Go Wild Gypsy       ML:12.67%  gap: 0.17%
+R3   Box1  Goldstar Foster     ML:13.28%  gap: 3.37%
+R4   Box1  Mercedes Belle      ML:22.57%  gap: 8.36%
+R5   Box1  Fortune Hearts      ML:22.74%  gap: 8.85%
+R6   Box1  Power Of Shazam     ML:14.55%  gap: 1.22%
+R7   Box7  Huff And Puff       ML:14.68%  gap: 1.33%
+R8   Box3  Mr. Lasso           ML:29.86%  gap: 0.20%  (OPEN RACE — AVOID)
+R9   Box6  On The Whisper      ML:31.65%  gap:10.36%  ★
+R10  Box6  Spring Flick        ML:12.39%  gap: 0.35%
+R11  Box2  Canya Detonator     ML:24.78%  gap: 4.91%
+R12  Box4  Dawn Sure Can       ML:19.25%  gap: 5.61%
+R13  Box1  Sweet Ladette       ML:17.13%  gap: 4.57%
+R14  Box2  Brother Ronny       ML:18.42%  gap: 4.77%
+
+Best bets at Q Lakeside: R9 On The Whisper (★, #5 ML), R1 Sagacious Syd (★).
+AVOID R8 — Mr. Lasso 29.86% ML but only 0.20% gap (dead heat territory).
+
+--- TOWNSVILLE (QLD) — 11 races ---
+R1   Box2  Gengar Wave         ML:14.52%  gap: 0.57%
+R2   Box2  Moustache Mick      ML:13.07%  gap: 0.23%
+R3   Box4  Organised Kaos      ML:12.07%  gap: 3.91%
+R4   Box8  Cawbourne Slick     ML:31.87%  gap: 7.49%  ★ (high ML, #4 overall)
+R5   Box1  Ben Tango           ML:11.62%  gap: 0.07%
+R6   Box6  He's Peeking        ML:15.50%  gap: 4.07%
+R7   Box8  Tipsy Tess          ML:21.73%  gap: 3.73%
+R8   Box3  Shian Peaches       ML:15.41%  gap: 0.76%
+R9   Box1  Good Odds Raven     ML:12.01%  gap: 2.48%
+R10  Box6  Ordinary            ML:30.60%  gap:11.78%  ★
+R11  Box6  Federal Saki        ML:14.54%  gap: 1.90%
+
+Best bets at Townsville: R10 Ordinary (★, #6 ML), R4 Cawbourne Slick (high ML).
+Note: Historical audit shows Townsville at 27.3% win rate on 20/03.
+
+--- WARRAGUL (VIC) — 12 races ---
+R1   Box7  West End Boy        ML:17.73%  gap: 1.48%
+R2   Box1  Procyon             ML:21.46%  gap: 5.19%
+R3   Box2  Paw Sapphire        ML:14.28%  gap: 2.37%
+R4   Box5  Champagne Cuddle    ML:15.32%  gap: 0.89%
+R5   Box2  Mighty Star         ML:23.55%  gap: 6.01%
+R6   Box8  Lakeview Liam       ML:18.00%  gap: 3.55%
+R7   Box2  Mugshot             ML:17.41%  gap: 5.23%
+R8   Box3  Regal Spencer       ML:15.55%  gap: 0.46%
+R9   Box2  Mabel Lee Rose      ML:25.20%  gap: 9.11%  ◆
+R10  Box1  Solar Spectrum      ML:45.94%  gap:32.66%  ★★★ BEST BET
+R11  Box1  Jumbuk Wang Wang    ML:20.48%  gap: 4.08%
+R12  Box8  Nikita Bale         ML:15.38%  gap: 3.09%
+
+Best bet at Warragul: R10 Solar Spectrum (★★★, #1 ML by a huge margin).
+Consider R9→R10 quinella/double: Mabel Lee Rose (R9) + Solar Spectrum (R10).
+
+================================================================================
+SUMMARY BETTING GUIDE
+================================================================================
+
+TIER 1 — HIGHEST PRIORITY (back with confidence)
+  Warragul R10   Box1 SOLAR SPECTRUM      (ML 45.94%, gap 32.66%)  ← #1 OVERALL
+  Horsham  R3    Box8 DOONGALLA JESSIE    (ML 28.72%, gap 16.73%)
+  Gosford  R5    Box7 TRUNKEY MINK        (ML 29.29%, gap 16.18%)
+  Casino   R5    Box1 KINGSBRAE REX       (ML 25.15%, gap 15.75%)
+  Hobart   R7    Box3 RONNY ROCKET        (ML 25.95%, gap 15.25%)
+
+TIER 2 — STRONG (solid single bets)
+  Horsham  R2    Box6 WHITE SHAMROCK      (ML 23.33%, gap 14.42%)
+  Angle Pk R2    Box2 LEFEVRE GOLD        (ML 30.58%, gap 14.38%)
+  Angle Pk R9    Box1 KILCOY MISSIE       (ML 33.85%, gap 14.13%)
+
+TIER 3 — GOOD (worth backing)
+  Q Lake   R1    Box4 SAGACIOUS SYD       (ML 21.90%, gap 12.17%)
+  Townsvl  R10   Box6 ORDINARY            (ML 30.60%, gap 11.78%)
+  Gosford  R11   Box8 STARRY ETHICS       (ML 22.87%, gap 11.21%)
+  Horsham  R4    Box4 SUMO SMASH          (ML 22.29%, gap 10.90%)
+  Q Lake   R9    Box6 ON THE WHISPER      (ML 31.65%, gap 10.36%)
+  Casino   R9    Box2 GRANDPA JOE         (ML 22.69%, gap 10.31%)
+  Angle Pk R11   Box2 OUZO AND COKE       (ML 26.85%, gap 10.11%)
+
+MULTI / TREBLE SUGGESTIONS:
+  → Horsham Treble: R2 White Shamrock / R3 Doongalla Jessie / R4 Sumo Smash
+  → Gosford Double: R5 Trunkey Mink / R11 Starry Ethics
+  → Angle Park Double: R2 Lefevre Gold / R9 Kilcoy Missie
+  → Warragul Double: R9 Mabel Lee Rose / R10 Solar Spectrum
+  → Super Single: Warragul R10 Solar Spectrum ONLY
+
+================================================================================
+YESTERDAY'S AUDIT (23/03/2026) — Context
+================================================================================
+
+  Overall:   25/102 wins (24.5%)  |  73/102 placed (71.6%)
+  Top bets:  3 wins / 5 placed / 3 losses (top-11 bets ≥10% gap)
+  Best bet:  Shepparton R5 Box1 Paw Roxy (gap 22.35%) — LOST (winner Box6)
+
+  Best performing tracks yesterday:
+    Angle Park: 54.5% wins   ← strongest yesterday
+    Warrnambool: 50.0% wins
+    Shepparton: 33.3% wins
+    Maitland: 9.1% wins      ← worst
+
+  Model 5-day trend:
+    22/03: 27.0% wins, best bet WON (Grafton R12 Packham Punch, gap 32.82%)
+    23/03: 24.5% wins, best bet LOST (Shepparton R5 Paw Roxy, gap 22.35%)
+    → Today's best bet Solar Spectrum has a HIGHER gap (32.66%) than 22/03
+      when the best bet WON.
+
+================================================================================
+MODEL NOTES
+================================================================================
+
+  Ensemble model scores ≥1.10 indicate strong multi-factor alignment.
+  Today's high-alignment races:
+    Horsham R2, R3, R4, R5, R10  |  Casino R5, R9  |  Gosford R5, R11
+    Hobart R7  |  Q Lakeside R1, R9  |  Townsville R10  |  Warragul R10
+
+  The model ensemble includes:
+    RF_Score (Random Forest), GB_Score (Gradient Boosting), XGB_Score (XGBoost)
+  Plus track/box bias factors, form momentum, speed indices, and race context.
+
+  Historical win rates (last 5 days):
+    Overall: ~20–27% (baseline 12.5% for 8-dog fields)
+    Placed:  ~65–75%
+    Bets ≥10% gap: historically ~27–37% win rate
+
+  ⚠ DISCLAIMER: These are statistical model predictions only.
+    Greyhound racing involves many variables not captured by historical data.
+    Always bet responsibly and within your means.
+
+================================================================================
+END OF BETTING SUMMARY — 2026-03-24
+================================================================================
