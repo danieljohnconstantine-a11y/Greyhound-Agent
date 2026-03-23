@@ -1,0 +1,299 @@
+================================================================================
+DAILY ANALYSIS REPORT — 2026-03-24 (Tuesday)
+Generated: 2026-03-24 08:00:00
+================================================================================
+
+TRACKS TODAY (11 tracks, 123 races):
+  Angle Park (SA)         — 12 races
+  Bulli (NSW)             —  8 races
+  Casino (NSW)            — 11 races
+  Geelong (VIC)           — 12 races
+  Gosford (NSW)           — 12 races
+  Hobart/Elwick (TAS)     — 10 races
+  Horsham (VIC)           — 11 races
+  Mandurah (WA)           — 10 races
+  Q Lakeside (QLD)        — 14 races
+  Townsville (QLD)        — 11 races
+  Warragul (VIC)          — 12 races
+
+PDFs processed:
+  ANGLG2403form.pdf  BULIG2403form.pdf  CSNOG2403form.pdf  ELWKG2403form.pdf
+  GEELG2403form.pdf  GOSFG2403form.pdf  HSHMG2403form.pdf  MANDG2403form.pdf
+  QLAKG2403form.pdf  TOWNG2403form.pdf  WARGG2403form.pdf
+
+================================================================================
+PREDICTION CONFIDENCE SUMMARY:
+================================================================================
+
+  Races ≥ 20% gap (high confidence):   1  (Warragul R10 — 32.66%)
+  Races ≥ 15% gap:                     8
+  Races ≥ 10% gap:                    15
+  Races ≥  5% gap:                    50
+  Total races ranked:                123
+
+================================================================================
+🏆  TOP BETS — RANKED BY GAP (HIGHEST CONFIDENCE FIRST)
+================================================================================
+
+Rank  Track           Race  Gap       Box  Dog                   ML Conf
+----------------------------------------------------------------------
+   1  Warragul        R10   32.66%    Box1 Solar Spectrum        45.94%
+   2  Horsham         R3    16.73%    Box8 Doongalla Jessie      28.72%
+   3  Gosford         R5    16.18%    Box7 Trunkey Mink          29.29%
+   4  Casino          R5    15.75%    Box1 Kingsbrae Rex         25.15%
+   5  Hobart          R7    15.25%    Box3 Ronny Rocket          25.95%
+   6  Horsham         R2    14.42%    Box6 White Shamrock        23.33%
+   7  Angle Park      R2    14.38%    Box2 Lefevre Gold          30.58%
+   8  Angle Park      R9    14.13%    Box1 Kilcoy Missie         33.85%
+   9  Q Lakeside      R1    12.17%    Box4 Sagacious Syd         21.90%
+  10  Townsville      R10   11.78%    Box6 Ordinary              30.60%
+  11  Gosford         R11   11.21%    Box8 Starry Ethics         22.87%
+  12  Horsham         R4    10.90%    Box4 Sumo Smash            22.29%
+  13  Q Lakeside      R9    10.36%    Box6 On The Whisper        31.65%
+  14  Casino          R9    10.31%    Box2 Grandpa Joe           22.69%
+  15  Angle Park      R11   10.11%    Box2 Ouzo And Coke         26.85%
+
+================================================================================
+FULL RACE-BY-RACE PREDICTIONS
+================================================================================
+
+--- ANGLE PARK (12 races) ---
+  R1   Box2  Lulu Doll          ML:16.28%  gap: 0.06%
+  R2   Box2  Lefevre Gold       ML:30.58%  gap:14.38%  ★★
+  R3   Box2  Ultimate           ML:26.32%  gap: 0.72%
+  R4   Box1  Black Wanda        ML:16.21%  gap: 0.87%
+  R5   Box1  Fancy In Design    ML:24.26%  gap: 6.24%
+  R6   Box1  Crying Tiger       ML:18.31%  gap: 4.31%
+  R7   Box5  Thundering Lady    ML:21.97%  gap: 3.42%
+  R8   Box1  Aston Biden        ML:22.56%  gap: 3.93%
+  R9   Box1  Kilcoy Missie      ML:33.85%  gap:14.13%  ★★
+  R10  Box1  Red Said So        ML:20.86%  gap: 3.84%
+  R11  Box2  Ouzo And Coke      ML:26.85%  gap:10.11%  ★
+  R12  Box8  Searing Lass       ML:14.46%  gap: 0.16%
+
+--- BULLI (8 races) ---
+  R1   Box3  Black Deuce        ML:11.45%  gap: 0.42%
+  R2   Box7  She's Our Pal      ML:13.14%  gap: 1.03%
+  R3   Box2  Kooringa Express   ML:22.77%  gap: 9.90%
+  R4   Box4  Sloy Wave          ML:23.78%  gap: 2.63%
+  R5   Box1  Canya Supersonic   ML:22.92%  gap: 5.04%
+  R6   Box4  Woolgoolga Lass    ML:15.31%  gap: 3.39%
+  R7   Box3  Real Express       ML:17.22%  gap: 4.21%
+  R8   Box3  Chinese Chariot    ML:10.37%  gap: 0.47%
+
+--- CASINO (11 races) ---
+  R1   Box7  Robell Zoe         ML:20.87%  gap: 5.42%
+  R2   Box2  Cool Mist          ML:34.53%  gap: 8.05%
+  R3   Box4  Flat Chat Jack     ML:16.90%  gap: 5.39%
+  R4   Box6  Burnside Bambi     ML:20.08%  gap: 0.30%
+  R5   Box1  Kingsbrae Rex      ML:25.15%  gap:15.75%  ★★
+  R6   Box1  Sweet Confetti     ML:23.79%  gap: 7.02%
+  R7   Box2  Charlie Dutton     ML:22.89%  gap: 5.01%
+  R8   Box5  Summer Bay         ML:15.37%  gap: 0.46%
+  R9   Box2  Grandpa Joe        ML:22.69%  gap:10.31%  ★
+  R10  Box5  Kingsbrae Ebanee   ML:13.92%  gap: 2.38%
+  R11  Box1  Midnight Bullet    ML:10.90%  gap: 0.41%
+
+--- GEELONG (12 races) ---
+  R1   Box5  Reiko Zoom         ML:13.79%  gap: 3.55%
+  R2   Box4  Rothwell Jack      ML:15.13%  gap: 1.40%
+  R3   Box2  Rushmore Red       ML:12.98%  gap: 0.97%
+  R4   Box7  Instant Action     ML:26.68%  gap: 7.30%
+  R5   Box3  Paw Norbert        ML:14.15%  gap: 2.55%
+  R6   Box8  Maddie Odd Sock    ML:12.61%  gap: 0.67%
+  R7   Box1  Magizoologist      ML:16.99%  gap: 3.48%
+  R8   Box1  Did She            ML:21.27%  gap: 3.61%
+  R9   Box1  Bend Your Ear      ML:16.56%  gap: 7.70%
+  R10  Box2  Busting            ML:17.58%  gap: 2.28%
+  R11  Box8  Berringa Paddy     ML:16.54%  gap: 5.86%
+  R12  Box6  Call It Fate       ML: 9.46%  gap: 0.03%
+
+--- GOSFORD (12 races) ---
+  R1   Box3  Poppy's Fox        ML:15.85%  gap: 4.29%
+  R2   Box6  Bigbad Franky      ML:21.14%  gap: 2.08%
+  R3   Box4  Super Quality      ML: 8.81%  gap: 0.41%
+  R4   Box4  Bees Hive          ML:18.26%  gap: 5.21%
+  R5   Box7  Trunkey Mink       ML:29.29%  gap:16.18%  ★★
+  R6   Box8  Nova Reign         ML:12.12%  gap: 2.25%
+  R7   Box8  My Irish           ML:15.65%  gap: 3.23%
+  R8   Box5  Red Aura           ML:10.89%  gap: 0.16%
+  R9   Box6  Simply Juan        ML:16.31%  gap: 3.69%
+  R10  Box2  Hey Mac            ML:18.09%  gap: 1.69%
+  R11  Box8  Starry Ethics      ML:22.87%  gap:11.21%  ★
+  R12  Box2  Jeanna             ML:14.60%  gap: 2.92%
+
+--- HOBART (10 races) ---
+  R1   Box8  Ruxley             ML:21.79%  gap: 2.24%
+  R2   Box8  Blackbrush Rose    ML:12.15%  gap: 2.35%
+  R3   Box8  She's Seeking      ML:21.25%  gap: 7.05%
+  R4   Box4  Take His Cash      ML:21.55%  gap: 3.82%
+  R5   Box3  Sea Sick           ML:14.61%  gap: 0.09%
+  R6   Box1  Molly Potion       ML:14.78%  gap: 1.83%
+  R7   Box3  Ronny Rocket       ML:25.95%  gap:15.25%  ★★
+  R8   Box3  Rapidly            ML:20.62%  gap: 1.15%
+  R9   Box1  Wynburn Primus     ML:13.90%  gap: 3.61%
+  R10  Box6  Towelled Up        ML:19.00%  gap: 6.82%
+
+--- HORSHAM (11 races) ---
+  R1   Box1  Paw Yatana         ML:11.28%  gap: 0.29%
+  R2   Box6  White Shamrock     ML:23.33%  gap:14.42%  ★★
+  R3   Box8  Doongalla Jessie   ML:28.72%  gap:16.73%  ★★
+  R4   Box4  Sumo Smash         ML:22.29%  gap:10.90%  ★
+  R5   Box3  Kaelix Storm       ML:20.16%  gap: 9.01%
+  R6   Box4  Fleetwood Eros     ML:12.22%  gap: 0.33%
+  R7   Box3  Paw Olson          ML:10.79%  gap: 0.79%
+  R8   Box1  Paw Cornelius      ML:10.41%  gap: 0.08%
+  R9   Box5  Piebald            ML:14.33%  gap: 0.84%
+  R10  Box4  Needful            ML:22.91%  gap: 9.10%
+  R11  Box8  Is He Lucky        ML:13.66%  gap: 0.28%
+
+--- MANDURAH (10 races) ---
+  R1   Box1  Yunderup Tammy     ML:15.23%  gap: 5.26%
+  R2   Box2  Another Plan       ML:12.88%  gap: 1.38%
+  R3   Box4  Lansley Whisper    ML:15.64%  gap: 3.69%
+  R4   Box1  Freckles Monelli   ML:19.79%  gap: 7.75%
+  R5   Box1  Smell Like Rose    ML:12.49%  gap: 1.28%
+  R6   Box1  Monkey Magic       ML:17.27%  gap: 3.01%
+  R7   Box2  Sunset Agrippina   ML:23.59%  gap: 3.66%
+  R8   Box5  Sunset Diablo      ML:16.51%  gap: 2.62%
+  R9   Box5  All Grunt          ML:21.21%  gap: 2.42%
+  R10  Box7  Impress Rocks      ML:24.19%  gap: 4.44%
+
+--- Q LAKESIDE (14 races) ---
+  R1   Box4  Sagacious Syd      ML:21.90%  gap:12.17%  ★
+  R2   Box7  Go Wild Gypsy      ML:12.67%  gap: 0.17%
+  R3   Box1  Goldstar Foster    ML:13.28%  gap: 3.37%
+  R4   Box1  Mercedes Belle     ML:22.57%  gap: 8.36%
+  R5   Box1  Fortune Hearts     ML:22.74%  gap: 8.85%
+  R6   Box1  Power Of Shazam    ML:14.55%  gap: 1.22%
+  R7   Box7  Huff And Puff      ML:14.68%  gap: 1.33%
+  R8   Box3  Mr. Lasso          ML:29.86%  gap: 0.20%
+  R9   Box6  On The Whisper     ML:31.65%  gap:10.36%  ★
+  R10  Box6  Spring Flick       ML:12.39%  gap: 0.35%
+  R11  Box2  Canya Detonator    ML:24.78%  gap: 4.91%
+  R12  Box4  Dawn Sure Can      ML:19.25%  gap: 5.61%
+  R13  Box1  Sweet Ladette      ML:17.13%  gap: 4.57%
+  R14  Box2  Brother Ronny      ML:18.42%  gap: 4.77%
+
+--- TOWNSVILLE (11 races) ---
+  R1   Box2  Gengar Wave        ML:14.52%  gap: 0.57%
+  R2   Box2  Moustache Mick     ML:13.07%  gap: 0.23%
+  R3   Box4  Organised Kaos     ML:12.07%  gap: 3.91%
+  R4   Box8  Cawbourne Slick    ML:31.87%  gap: 7.49%
+  R5   Box1  Ben Tango          ML:11.62%  gap: 0.07%
+  R6   Box6  He's Peeking       ML:15.50%  gap: 4.07%
+  R7   Box8  Tipsy Tess         ML:21.73%  gap: 3.73%
+  R8   Box3  Shian Peaches      ML:15.41%  gap: 0.76%
+  R9   Box1  Good Odds Raven    ML:12.01%  gap: 2.48%
+  R10  Box6  Ordinary           ML:30.60%  gap:11.78%  ★
+  R11  Box6  Federal Saki       ML:14.54%  gap: 1.90%
+
+--- WARRAGUL (12 races) ---
+  R1   Box7  West End Boy       ML:17.73%  gap: 1.48%
+  R2   Box1  Procyon            ML:21.46%  gap: 5.19%
+  R3   Box2  Paw Sapphire       ML:14.28%  gap: 2.37%
+  R4   Box5  Champagne Cuddle   ML:15.32%  gap: 0.89%
+  R5   Box2  Mighty Star        ML:23.55%  gap: 6.01%
+  R6   Box8  Lakeview Liam      ML:18.00%  gap: 3.55%
+  R7   Box2  Mugshot            ML:17.41%  gap: 5.23%
+  R8   Box3  Regal Spencer      ML:15.55%  gap: 0.46%
+  R9   Box2  Mabel Lee Rose     ML:25.20%  gap: 9.11%
+  R10  Box1  Solar Spectrum     ML:45.94%  gap:32.66%  ★★★ BEST BET
+  R11  Box1  Jumbuk Wang Wang   ML:20.48%  gap: 4.08%
+  R12  Box8  Nikita Bale        ML:15.38%  gap: 3.09%
+
+================================================================================
+YESTERDAY'S PERFORMANCE REVIEW (2026-03-23)
+================================================================================
+
+Date:   Monday 23/03/2026
+Tracks: 9 tracks with predictions (+ Launceston/Mowbray — no predictions)
+Races:  102 races with predictions (10 tracks ran, 112 total incl Launceston)
+
+OVERALL: 25/102 wins (24.5%) | 73/102 placed (71.6%) | 29 losses
+
+TOP BETS PERFORMANCE (gap ≥10%):
+  11 races ≥10% gap → 3 wins, 5 placed, 3 losses
+
+  WIN   Angle Park R7    Box1  Big Diesel         (gap 14.65%)
+  WIN   Shepparton R7    Box1  Mystifying Lomar   (gap 10.55%)
+  WIN   Warrnambool R1   Box6  Mr. Bluey Lee      (gap 10.37%)
+  LOSS  Shepparton R5    Box1  Paw Roxy           (gap 22.35% — BEST BET, winner Box6)
+  LOSS  Q Straight R6    Box7  Beer Battered      (gap 14.13%, winner Box3)
+  LOSS  Mandurah R2      Box2  Patch Of Blue      (gap 12.33%, winner Box5)
+  PLCD  Maitland R9      Box2  Jilliby Scotty     (gap 14.03%, winner Box1 — 2nd)
+  PLCD  Maitland R8      Box8  Bear's Head        (gap 13.35%, winner Box2 — 2nd)
+  PLCD  Sandown R8       Box8  Unworldly          (gap 12.11%, winner Box7 — 2nd)
+  PLCD  Shepparton R10   Box8  Paw Kramer         (gap 11.83%, winner Box2 — 2nd)
+  PLCD  Sandown R1       Box1  Aston Machine      (gap 11.02%, winner Box7 — 2nd)
+
+PER-TRACK WIN RATES (23/03/2026):
+  Angle Park    11 races   6 wins   54.5%  ★ Best track
+  Warrnambool   12 races   6 wins   50.0%  ★
+  Shepparton    12 races   4 wins   33.3%
+  Q Straight    12 races   2 wins   16.7%
+  Mandurah      12 races   2 wins   16.7%
+  Ballarat      12 races   2 wins   16.7%
+  Sandown       10 races   1 win    10.0%
+  Nowra         10 races   1 win    10.0%
+  Maitland      11 races   1 win     9.1%  ✗ Worst track
+
+================================================================================
+MODEL CONFIDENCE CALIBRATION NOTE
+================================================================================
+
+The model has been performing at approximately:
+  20-25% win rate overall (random baseline ~12.5% for 8-dog fields)
+  65-75% placed rate (top-4 finish)
+  Best bets (gap ≥10%) have historically won ~27-37% of the time
+
+Ensemble scores ≥1.10 indicate strong track+box bias alignment.
+Today's races with highest ensemble alignment (≥1.10):
+  Horsham R2, R3, R5, R9, R10 (ensemble 1.12)
+  Casino R3, R4, R5, R9 (ensemble 1.12)
+  Gosford R5, R8, R11 (ensemble 1.12)
+  Hobart R1, R3, R4, R7, R10 (ensemble 1.12)
+  Q Lakeside R5, R7, R11 (ensemble 1.12)
+  Townsville R1, R2, R3, R6, R7, R8, R9, R10 (ensemble 1.12)
+  Warragul R1, R2, R3, R5, R6, R11 (ensemble 1.12)
+  Angle Park R2, R3, R10, R12 (ensemble 1.12)
+
+================================================================================
+BETTING RECOMMENDATIONS SUMMARY
+================================================================================
+
+★★★ BEST BET (HIGHEST CONFIDENCE):
+  Warragul R10 — Box1 Solar Spectrum
+  Gap: 32.66% | ML Confidence: 45.94%
+  Nearly half the model's probability mass on a single dog — exceptional signal.
+
+★★ STRONG BETS (gap ≥14%):
+  Horsham R3     — Box8 Doongalla Jessie   (gap 16.73%, ML 28.72%)
+  Gosford R5     — Box7 Trunkey Mink       (gap 16.18%, ML 29.29%)
+  Casino R5      — Box1 Kingsbrae Rex      (gap 15.75%, ML 25.15%)
+  Hobart R7      — Box3 Ronny Rocket       (gap 15.25%, ML 25.95%)
+  Horsham R2     — Box6 White Shamrock     (gap 14.42%, ML 23.33%)
+  Angle Park R2  — Box2 Lefevre Gold       (gap 14.38%, ML 30.58%)
+  Angle Park R9  — Box1 Kilcoy Missie      (gap 14.13%, ML 33.85%)
+
+★ GOOD BETS (gap 10–14%):
+  Q Lakeside R1  — Box4 Sagacious Syd      (gap 12.17%, ML 21.90%)
+  Townsville R10 — Box6 Ordinary           (gap 11.78%, ML 30.60%)
+  Gosford R11    — Box8 Starry Ethics      (gap 11.21%, ML 22.87%)
+  Horsham R4     — Box4 Sumo Smash         (gap 10.90%, ML 22.29%)
+  Q Lakeside R9  — Box6 On The Whisper     (gap 10.36%, ML 31.65%)
+  Casino R9      — Box2 Grandpa Joe        (gap 10.31%, ML 22.69%)
+  Angle Park R11 — Box2 Ouzo And Coke      (gap 10.11%, ML 26.85%)
+
+NOTABLE SECONDARY SELECTIONS (gap 8–10%):
+  Casino R2      — Box2 Cool Mist          (gap 8.05%, ML 34.53% — very high ML)
+  Horsham R10    — Box4 Needful            (gap 9.10%, ML 22.91%)
+  Warragul R9    — Box2 Mabel Lee Rose     (gap 9.11%, ML 25.20%)
+  Bulli R3       — Box2 Kooringa Express   (gap 9.90%, ML 22.77%)
+
+WATCH LIST — High ML but low gap (competitive races):
+  Q Lakeside R8  — Box3 Mr. Lasso          (ML 29.86% but gap only 0.20% — very open)
+  Townsville R4  — Box8 Cawbourne Slick    (ML 31.87%, gap 7.49%)
+  Casino R2      — Box2 Cool Mist          (ML 34.53%, gap 8.05%)
+
+================================================================================
