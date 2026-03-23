@@ -1,0 +1,37 @@
+================================================================================
+TOP 5 ML SCORES — Tuesday 24 March 2026
+Generated: 2026-03-24
+Source: outputs/best_bets_report.txt
+Ranked by: Highest ML model probability for predicted winner (1st-place dog)
+================================================================================
+
+The ML score is the ensemble model's probability that a given dog wins its race.
+A higher ML score = greater model confidence in that selection.
+
+  #1  Warragul     R10   Box 1  SOLAR SPECTRUM      ML: 45.94%   Gap: 32.66%  ⬆⬆⬆ BEST BET
+  #2  Casino       R2    Box 2  COOL MIST           ML: 34.53%   Gap:  8.05%  ★★
+  #3  Angle Park   R9    Box 1  KILCOY MISSIE       ML: 33.85%   Gap: 14.13%  ★★
+  #4  Townsville   R4    Box 8  CAWBOURNE SLICK     ML: 31.87%   Gap:  7.49%  ★
+  #5  Q Lakeside   R9    Box 6  ON THE WHISPER      ML: 31.65%   Gap: 10.36%  ★
+
+--------------------------------------------------------------------------------
+NOTES:
+  • ML%  = ensemble model probability assigned to the predicted winning dog
+  • Gap% = percentage-point difference between 1st and 2nd ranked dog
+           (higher gap = stronger model conviction, less likely to be wrong)
+
+  Solar Spectrum (45.94%) is an exceptional score — the model assigns nearly
+  half its total probability mass to a single dog in an 8-dog field (expected
+  baseline ~12.5%). This is the highest ML score seen in recent weeks.
+
+  Cool Mist (34.53%) and Kilcoy Missie (33.85%) also score well above average
+  but have lower gap scores, meaning the field behind them is closer.
+
+  Cawbourne Slick (31.87%) and On The Whisper (31.65%) round out the top 5 with
+  solid ML scores but moderate gap values — still value bets, use caution.
+
+--------------------------------------------------------------------------------
+For full race-by-race rankings see: outputs/best_bets_report.txt
+For full daily analysis see:        reports/DAILY_ANALYSIS_2026-03-24.txt
+For full betting summary see:       reports/BETTING_SUMMARY_2026-03-24.txt
+================================================================================
