@@ -1,0 +1,183 @@
+================================================================================
+PREDICTION AUDIT REPORT — 2026-03-23
+================================================================================
+
+OVERALL SUMMARY (102 races with predictions):
+  Wins:   25/102  (24.5%)
+  Placed: 73/102  (71.6%)   [Win or 2nd/3rd/4th]
+  Losses: 29/102
+
+────────────────────────────────────────────────────────────────────────────────
+TOP BETS (≥10% GAP) PERFORMANCE:
+  11 races with gap ≥10%:  3 wins, 5 placed, 3 losses
+  Rank   1  SHEPPARTON            R5    gap= 22.35%  Pred:Box1 (Paw Roxy)  Actual winner: Box6  → LOSS
+  Rank   2  ANGLE PARK            R7    gap= 14.65%  Pred:Box1 (Big Diesel)  Actual winner: Box1  → WIN
+  Rank   3  Q STRAIGHT            R6    gap= 14.13%  Pred:Box7 (Beer Battered)  Actual winner: Box3  → LOSS
+  Rank   4  MAITLAND              R9    gap= 14.03%  Pred:Box2 (Jilliby Scotty)  Actual winner: Box1  → PLACED
+  Rank   5  MAITLAND              R8    gap= 13.35%  Pred:Box8 (Bear's Head)  Actual winner: Box2  → PLACED
+  Rank   6  MANDURAH              R2    gap= 12.33%  Pred:Box2 (Patch Of Blue)  Actual winner: Box5  → LOSS
+  Rank   7  SANDOWN               R8    gap= 12.11%  Pred:Box8 (Unworldly)  Actual winner: Box7  → PLACED
+  Rank   8  SHEPPARTON            R10   gap= 11.83%  Pred:Box8 (Paw Kramer)  Actual winner: Box2  → PLACED
+  Rank   9  SANDOWN               R1    gap= 11.02%  Pred:Box1 (Aston Machine)  Actual winner: Box7  → PLACED
+  Rank  10  SHEPPARTON            R7    gap= 10.55%  Pred:Box1 (Mystifying Lomar)  Actual winner: Box1  → WIN
+  Rank  11  WARRNAMBOOL           R1    gap= 10.37%  Pred:Box6 (Mr. Bluey Lee)  Actual winner: Box6  → WIN
+
+────────────────────────────────────────────────────────────────────────────────
+ALL PREDICTIONS (sorted by rank):
+Rank  Track                     R       Gap   Pred  Dog Name                      Actual W  Status
+----------------------------------------------------------------------------------------------------
+   1  SHEPPARTON              R5      22.35%  Box 1  Paw Roxy                      Box 6      LOSS
+   2  ANGLE PARK              R7      14.65%  Box 1  Big Diesel                    Box 1      WIN
+   3  Q STRAIGHT              R6      14.13%  Box 7  Beer Battered                 Box 3      LOSS
+   4  MAITLAND                R9      14.03%  Box 2  Jilliby Scotty                Box 1      PLACED
+   5  MAITLAND                R8      13.35%  Box 8  Bear's Head                   Box 2      PLACED
+   6  MANDURAH                R2      12.33%  Box 2  Patch Of Blue                 Box 5      LOSS
+   7  SANDOWN                 R8      12.11%  Box 8  Unworldly                     Box 7      PLACED
+   8  SHEPPARTON              R10     11.83%  Box 8  Paw Kramer                    Box 2      PLACED
+   9  SANDOWN                 R1      11.02%  Box 1  Aston Machine                 Box 7      PLACED
+  10  SHEPPARTON              R7      10.55%  Box 1  Mystifying Lomar              Box 1      WIN
+  11  WARRNAMBOOL             R1      10.37%  Box 6  Mr. Bluey Lee                 Box 6      WIN
+  12  Q STRAIGHT              R3       9.89%  Box 1  Carly Boy Molloy              Box 8      PLACED
+  13  BALLARAT                R3       9.75%  Box 2  Mr. Billy Lee                 Box 5      LOSS
+  14  Q STRAIGHT              R11      9.49%  Box 2  Daytona Beach                 Box 4      PLACED
+  15  NOWRA                   R6       8.91%  Box 1  King Zeal                     Box 2      PLACED
+  16  BALLARAT                R4       8.10%  Box 2  Amazon Prince                 Box 8      LOSS
+  17  BALLARAT                R2       7.54%  Box 8  Aston Astaire                 Box 1      PLACED
+  18  MAITLAND                R3       7.33%  Box 6  Mojave                        Box 3      LOSS
+  19  MAITLAND                R5       6.89%  Box 2  Furious                       Box 5      PLACED
+  20  Q STRAIGHT              R4       6.71%  Box 1  Mccluggage                    Box 1      WIN
+  21  Q STRAIGHT              R10      6.43%  Box 1  Zara's Comet                  Box 4      PLACED
+  22  BALLARAT                R10      6.40%  Box 2  Paw Harry                     Box 5      LOSS
+  23  WARRNAMBOOL             R6       6.26%  Box 1  Paw Lassie                    Box 1      WIN
+  24  MANDURAH                R11      5.89%  Box 2  Speedy Deville                Box 2      WIN
+  25  SHEPPARTON              R4       5.72%  Box 8  Compare Bubble                Box 4      LOSS
+  26  WARRNAMBOOL             R3       5.29%  Box 2  Aston Blitz                   Box 2      WIN
+  27  ANGLE PARK              R8       5.16%  Box 2  Victa Wally                   Box 1      LOSS
+  28  MANDURAH                R9       5.14%  Box 1  Aeroplane Penny               Box 4      PLACED
+  29  ANGLE PARK              R10      4.50%  Box 4  Nova's Fern                   Box 4      WIN
+  30  SHEPPARTON              R2       4.42%  Box 4  Scott Clarity                 Box 6      PLACED
+  31  SHEPPARTON              R11      4.41%  Box 1  Paw Elodee                    Box 1      WIN
+  32  NOWRA                   R8       4.36%  Box 5  Sketchy Story                 Box 1      LOSS
+  33  WARRNAMBOOL             R4       4.20%  Box 3  Mr. Boot Boot                 Box 2      LOSS
+  34  MANDURAH                R6       3.86%  Box 3  Night Lighter                 Box 5      LOSS
+  35  ANGLE PARK              R3       3.85%  Box 8  Specked                       Box 8      WIN
+  36  BALLARAT                R12      3.56%  Box 2  Forbes Lightning              Box 5      PLACED
+  37  WARRNAMBOOL             R2       3.50%  Box 1  Doongalla Glory               Box 7      PLACED
+  38  ANGLE PARK              R1       3.39%  Box 8  Diogo Keeping                 Box 8      WIN
+  39  NOWRA                   R5       3.32%  Box 4  Zipping Smee                  Box 4      WIN
+  40  Q STRAIGHT              R9       3.18%  Box 6  Miss Momentum                 Box 5      LOSS
+  41  MAITLAND                R1       3.16%  Box 5  Kung Fu Ethics                Box 7      LOSS
+  42  Q STRAIGHT              R7       3.06%  Box 4  Sketchy Bloke                 Box 7      PLACED
+  43  WARRNAMBOOL             R5       3.06%  Box 6  Belair Blue                   Box 8      PLACED
+  44  NOWRA                   R3       3.03%  Box 1  Mount Fuji                    Box 8      PLACED
+  45  Q STRAIGHT              R5       2.97%  Box 4  Raya's Romance                Box 2      PLACED
+  46  ANGLE PARK              R4       2.89%  Box 2  Secrets We Keep               Box 1      LOSS
+  47  NOWRA                   R7       2.89%  Box 8  It's All Bad                  Box 7      PLACED
+  48  Q STRAIGHT              R2       2.78%  Box 1  Lakoda Skylah                 Box 2      PLACED
+  49  BALLARAT                R9       2.74%  Box 1  Consuming Fire                Box 2      PLACED
+  50  MAITLAND                R2       2.71%  Box 4  Stereophonic                  Box 4      WIN
+  51  SHEPPARTON              R3       2.71%  Box 3  Paw Queston                   Box 4      PLACED
+  52  MANDURAH                R7       2.67%  Box 8  Sensational Star              Box 5      PLACED
+  53  WARRNAMBOOL             R12      2.62%  Box 3  Saint Mick                    Box 8      PLACED
+  54  BALLARAT                R6       2.59%  Box 1  Aston Poseidon                Box 1      WIN
+  55  SHEPPARTON              R13      2.39%  Box 3  Ready To Flip                 Box ?      NO_RESULT
+  56  ANGLE PARK              R2       2.37%  Box 8  Sharpen Up                    Box 6      PLACED
+  57  SHEPPARTON              R8       2.28%  Box 2  She Likes Beer                Box 8      PLACED
+  58  Q STRAIGHT              R8       2.28%  Box 2  She's Bubbles                 Box 6      PLACED
+  59  ANGLE PARK              R11      2.24%  Box 1  Fantastic Spike               Box 1      WIN
+  60  SHEPPARTON              R9       2.10%  Box 7  Thermal Heat                  Box 7      WIN
+  61  WARRNAMBOOL             R8       2.08%  Box 6  Gold Stripes                  Box 6      WIN
+  62  BALLARAT                R1       2.03%  Box 4  Paw Melody                    Box 2      LOSS
+  63  Q STRAIGHT              R12      2.02%  Box 5  Van Nostrand                  Box 1      LOSS
+  64  SANDOWN                 R9       1.95%  Box 8  Zipping Una                   Box 1      PLACED
+  65  SANDOWN                 R6       1.91%  Box 1  Flash Of Genius               Box 1      WIN
+  66  SANDOWN                 R2       1.88%  Box 2  Dazzling Dynamo               Box 1      PLACED
+  67  BALLARAT                R8       1.88%  Box 4  Kaia Got Square               Box 4      WIN
+  68  SHEPPARTON              R14      1.84%  Box 8  River King                    Box ?      NO_RESULT
+  69  ANGLE PARK              R5       1.73%  Box 2  Flying Artie                  Box 2      WIN
+  70  MAITLAND                R6       1.73%  Box 2  Snoopy's Ethics               Box 3      PLACED
+  71  BALLARAT                R13      1.69%  Box 7  Hartland Prince               Box ?      NO_RESULT
+  72  NOWRA                   R2       1.60%  Box 2  Towering Luke                 Box 5      PLACED
+  73  MANDURAH                R8       1.51%  Box 5  Lochinvar Lord                Box 1      PLACED
+  74  NOWRA                   R10      1.51%  Box 4  Global Tracker                Box 2      LOSS
+  75  SHEPPARTON              R6       1.50%  Box 1  Doongalla Ghost               Box 4      LOSS
+  76  NOWRA                   R4       1.41%  Box 2  Major Ted                     Box 6      PLACED
+  77  BALLARAT                R11      1.38%  Box 1  Argyle Emma                   Box 6      PLACED
+  78  Q STRAIGHT              R13      1.25%  Box 3  Whiskey Cartel                Box ?      NO_RESULT
+  79  WARRNAMBOOL             R13      1.13%  Box 3  Aston Telmont                 Box ?      NO_RESULT
+  80  SANDOWN                 R10      1.13%  Box 5  Found Treasure                Box 1      PLACED
+  81  MAITLAND                R7       1.10%  Box 4  Whitey                        Box 7      LOSS
+  82  SANDOWN                 R3       1.07%  Box 2  Lady Natasha                  Box 1      PLACED
+  83  BALLARAT                R5       1.07%  Box 7  Chalky                        Box 2      PLACED
+  84  SHEPPARTON              R1       1.06%  Box 4  Grapefruit Yaeko              Box 4      WIN
+  85  MANDURAH                R10      1.05%  Box 3  Cool Ash                      Box 7      PLACED
+  86  MANDURAH                R5       1.04%  Box 1  Kratos Missile                Box 1      WIN
+  87  WARRNAMBOOL             R11      0.99%  Box 2  I'm To Blame                  Box 6      LOSS
+  88  MANDURAH                R3       0.89%  Box 1  Nitro's Izzy                  Box 5      PLACED
+  89  WARRNAMBOOL             R7       0.88%  Box 1  Saint Tay                     Box 1      WIN
+  90  SANDOWN                 R7       0.85%  Box 2  Canya Terry                   Box 3      LOSS
+  91  BALLARAT                R14      0.85%  Box 3  Super Sealant                 Box ?      NO_RESULT
+  92  ANGLE PARK              R9       0.85%  Box 3  Ritza Wotton                  Box 7      PLACED
+  93  MAITLAND                R10      0.84%  Box 6  Aussie Rattler                Box 7      PLACED
+  94  BALLARAT                R7       0.82%  Box 5  Kiani Star                    Box 1      LOSS
+  95  MANDURAH                R12      0.80%  Box 1  Incredible Glory              Box 9      PLACED
+  96  SANDOWN                 R4       0.79%  Box 6  Axel's Radar                  Box 1      PLACED
+  97  SHEPPARTON              R12      0.68%  Box 1  Spring Laver                  Box 2      PLACED
+  98  MAITLAND                R4       0.62%  Box 1  Despicable Kyro               Box 7      PLACED
+  99  NOWRA                   R1       0.57%  Box 1  Corless The King              Box 9      LOSS
+ 100  WARRNAMBOOL             R10      0.45%  Box 7  Shade Of Pale                 Box 7      WIN
+ 101  MAITLAND                R11      0.37%  Box 1  Zipper Train                  Box 6      LOSS
+ 102  SANDOWN                 R5       0.36%  Box 2  Zipping Windsor               Box 1      LOSS
+ 103  MANDURAH                R1       0.35%  Box 2  Keep Watching                 Box 4      PLACED
+ 104  Q STRAIGHT              R1       0.30%  Box 2  Polly's Vibe                  Box 2      WIN
+ 105  ANGLE PARK              R6       0.29%  Box 5  Town Stranger                 Box 4      LOSS
+ 106  WARRNAMBOOL             R9       0.28%  Box 1  Thrill Seeker                 Box 4      LOSS
+ 107  MANDURAH                R4       0.27%  Box 5  Avatar Of Fun                 Box 8      PLACED
+ 108  NOWRA                   R9       0.20%  Box 4  Paw Ultron                    Box 6      LOSS
+
+────────────────────────────────────────────────────────────────────────────────
+PER-TRACK SUMMARY:
+Track                      Races   Wins    Win%   Placed   Place%
+-----------------------------------------------------------------
+ANGLE PARK                    11      6   54.5%        8    72.7%
+WARRNAMBOOL                   12      6   50.0%        9    75.0%
+SHEPPARTON                    12      4   33.3%        9    75.0%
+Q STRAIGHT                    12      2   16.7%        9    75.0%
+MANDURAH                      12      2   16.7%       10    83.3%
+BALLARAT                      12      2   16.7%        7    58.3%
+SANDOWN                       10      1   10.0%        8    80.0%
+NOWRA                         10      1   10.0%        6    60.0%
+MAITLAND                      11      1    9.1%        7    63.6%
+
+────────────────────────────────────────────────────────────────────────────────
+BEST BET: SHEPPARTON R5 Box1 Paw Roxy (gap 22.35%)
+  Actual result: Winner=Box6, 2nd=Box8, 3rd=Box4, 4th=Box5
+  Outcome: LOSS
+
+────────────────────────────────────────────────────────────────────────────────
+ALL WINS (25 total):
+  ANGLE PARK R7 Box1 Big Diesel  gap=14.65%  rank=2
+  SHEPPARTON R7 Box1 Mystifying Lomar  gap=10.55%  rank=10
+  WARRNAMBOOL R1 Box6 Mr. Bluey Lee  gap=10.37%  rank=11
+  Q STRAIGHT R4 Box1 Mccluggage  gap=6.71%  rank=20
+  WARRNAMBOOL R6 Box1 Paw Lassie  gap=6.26%  rank=23
+  MANDURAH R11 Box2 Speedy Deville  gap=5.89%  rank=24
+  WARRNAMBOOL R3 Box2 Aston Blitz  gap=5.29%  rank=26
+  ANGLE PARK R10 Box4 Nova's Fern  gap=4.50%  rank=29
+  SHEPPARTON R11 Box1 Paw Elodee  gap=4.41%  rank=31
+  ANGLE PARK R3 Box8 Specked  gap=3.85%  rank=35
+  ANGLE PARK R1 Box8 Diogo Keeping  gap=3.39%  rank=38
+  NOWRA R5 Box4 Zipping Smee  gap=3.32%  rank=39
+  MAITLAND R2 Box4 Stereophonic  gap=2.71%  rank=50
+  BALLARAT R6 Box1 Aston Poseidon  gap=2.59%  rank=54
+  ANGLE PARK R11 Box1 Fantastic Spike  gap=2.24%  rank=59
+  SHEPPARTON R9 Box7 Thermal Heat  gap=2.10%  rank=60
+  WARRNAMBOOL R8 Box6 Gold Stripes  gap=2.08%  rank=61
+  SANDOWN R6 Box1 Flash Of Genius  gap=1.91%  rank=65
+  BALLARAT R8 Box4 Kaia Got Square  gap=1.88%  rank=67
+  ANGLE PARK R5 Box2 Flying Artie  gap=1.73%  rank=69
+  SHEPPARTON R1 Box4 Grapefruit Yaeko  gap=1.06%  rank=84
+  MANDURAH R5 Box1 Kratos Missile  gap=1.04%  rank=86
+  WARRNAMBOOL R7 Box1 Saint Tay  gap=0.88%  rank=89
+  WARRNAMBOOL R10 Box7 Shade Of Pale  gap=0.45%  rank=100
+  Q STRAIGHT R1 Box2 Polly's Vibe  gap=0.30%  rank=104
