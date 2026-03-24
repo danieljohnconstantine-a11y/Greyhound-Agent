@@ -1,0 +1,107 @@
+TO:      Ryan Conneely — Barking Mad Betting (YouTube)
+SUBJECT: Daily Greyhound AI Predictions by Email — Less Than $1 a Month — Would Your Audience Value This?
+
+Hi Ryan,
+
+I hope this message finds you well. I'm a big fan of Barking Mad Betting — your honest, data-driven approach
+to greyhound racing is exactly the kind of content that inspired me to build the project I'm writing to you
+about today.
+
+─────────────────────────────────────────────────────────────────────────────
+WHAT IS GREYHOUND-AGENT?
+─────────────────────────────────────────────────────────────────────────────
+
+Greyhound-Agent is an open-source Python pipeline that:
+
+  1. Reads the official Australian greyhound form guides (PDF) from Greyhound Racing Victoria,
+     Greyhound Racing NSW, Greyhound Racing SA, RWWA (WA), and Tasracing each morning.
+
+  2. Extracts ~75 features per dog from those form guides — including recent race times,
+     box draws, track history, trainer performance, margins, and more.
+
+  3. Runs those features through a three-model ML ensemble trained on historical race results:
+       • Random Forest (RF)
+       • Gradient Boosting (GB)
+       • XGBoost (XGB)
+     All three models use sigmoid probability calibration so the win-probability outputs are
+     accurate and consistent across tracks.
+
+  4. Averages the three probability estimates and ranks every dog in every race.
+
+  5. Produces two daily output files:
+       • best_bets_report.txt  — every race ranked by "score gap" between the #1 and #2 dog.
+         The larger the gap, the more confident the model is. The single best bet of the day
+         is highlighted at the top.
+       • track_ensemble_predictions.xlsx  — the full probability breakdown for every dog in
+         every race, across all tracks, in a clean Excel spreadsheet.
+
+─────────────────────────────────────────────────────────────────────────────
+SAMPLE RESULTS (last few days)
+─────────────────────────────────────────────────────────────────────────────
+
+  Mon 24 Mar 2026 — 11 tracks, 123 races
+    Best bet: Warragul R10 Box 1 Solar Spectrum (model gap: 32.67%, win prob: 45.94%)
+    8 races with a gap ≥ 15% | 15 races ≥ 10%
+
+  Sun 23 Mar 2026 — 9 tracks, 102 races
+    Audit: 25 wins (24.5%), 73 placed (71.6%)
+    Best tracks: Angle Park (54.5% wins), Warrnambool (50%)
+
+  Sat 22 Mar 2026 — 11 tracks, 111 races
+    Audit: 30 wins (27.0%), 82 placed (73.9%)
+    Best bet WON: Grafton R12 Box 2 Packham Punch (gap: 32.82%)
+    Top-12 bets (gap ≥ 10%): 8 wins, 4 placed, 0 losses
+
+─────────────────────────────────────────────────────────────────────────────
+THE SERVICE IDEA — DAILY EMAIL FOR LESS THAN $1 A MONTH
+─────────────────────────────────────────────────────────────────────────────
+
+I'm exploring whether there is enough interest to offer a simple daily email subscription:
+
+  • Each morning (before races begin) subscribers receive:
+      – best_bets_report.txt   (plain text, easy to read on any device)
+      – track_ensemble_predictions.xlsx  (Excel — all tracks, all races, all probabilities)
+
+  • Pricing: AU$0.03 per email (i.e. per race day).
+    In any calendar month with 31 race days the total cost is $0.93 — always under $1.00.
+    That works out to roughly $0.60–$0.90/month depending on how many days racing runs.
+
+To my knowledge, there is currently no service that delivers Australian greyhound form data
+in Excel format on a daily basis at this price point. Most form services charge $10–$50/month
+or lock predictions behind expensive subscription tiers.
+
+─────────────────────────────────────────────────────────────────────────────
+WHY I'M REACHING OUT TO YOU
+─────────────────────────────────────────────────────────────────────────────
+
+Your channel has one of the most engaged and analytically minded greyhound audiences in
+Australia. Before I invest time building out the subscription infrastructure, I'd genuinely
+value your opinion on:
+
+  1. Do you think your audience would find a daily AI predictions email at < $1/month useful?
+  2. Is there anything missing from the current output that would make it more valuable
+     (e.g. sectional times, track bias notes, speed ratings)?
+  3. Would you be interested in trialling the service yourself for a week — completely free —
+     and sharing your honest feedback?
+
+I'm not asking you to endorse or promote anything. I just respect your judgement on what
+greyhound punters actually find useful, and I'd love to hear your thoughts.
+
+─────────────────────────────────────────────────────────────────────────────
+THE PROJECT IS OPEN-SOURCE
+─────────────────────────────────────────────────────────────────────────────
+
+The full code is available on GitHub if you'd like to dig into the methodology:
+  https://github.com/danieljohnconstantine-a11y/Greyhound-Agent
+
+You can run it yourself locally at no cost — training takes ~20 minutes on a standard laptop.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Thanks for taking the time to read this, Ryan. Whatever you decide, keep up the great work
+on Barking Mad Betting — it's a fantastic resource for the greyhound racing community.
+
+Kind regards,
+Daniel Constantine
+Greyhound-Agent project
+GitHub: https://github.com/danieljohnconstantine-a11y/Greyhound-Agent
