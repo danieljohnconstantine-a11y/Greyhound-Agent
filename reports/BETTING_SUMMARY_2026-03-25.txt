@@ -1,0 +1,171 @@
+================================================================================
+GREYHOUND BETTING SUMMARY — Wednesday 25 March 2026
+Generated: 2026-03-25
+Source: track_ensemble_predictions.xlsx + best_bets_report.txt
+================================================================================
+
+OVERVIEW
+--------
+  Date:          Wednesday 25 March 2026
+  Tracks:        12 (+ Tasmania PDF present, no predictions)
+  Total Races:   131
+  Predictions:   131 races covered (100%)
+
+  TRACKS RACING TODAY:
+  ┌──────────────────────────────────────┐
+  │ BENDIGO (VIC)              13 races  │
+  │ BetDeluxe Capalaba (QLD)   11 races  │
+  │ DARWIN (NT)                 5 races  │
+  │ GUNNEDAH (NSW)             12 races  │
+  │ HEALESVILLE (VIC)          12 races  │
+  │ Murray Bridge Straight (SA) 8 races  │
+  │ The Meadows (VIC)          11 races  │
+  │ Q Lakeside (QLD)           13 races  │
+  │ RICHMOND (NSW)             12 races  │
+  │ ROCKHAMPTON (QLD)          10 races  │
+  │ SALE (VIC)                 12 races  │
+  │ Temora (NSW)               12 races  │
+  └──────────────────────────────────────┘
+
+================================================================================
+TOP 5 ML SCORES (Highest Model Confidence — Predicted Winner per Race)
+================================================================================
+
+  #1  Paw Luanne       — BENDIGO R1      Box 4  ML: 37.29%  gap: 25.46%  ★★★ BEST BET
+  #2  Bandit Chloe     — ROCKHAMPTON R3  Box 4  ML: 32.29%  gap: 13.72%
+  #3  What A Wrought   — SALE R9         Box 4  ML: 32.14%  gap: 16.21%
+  #4  Flashback Jim    — Temora R12      Box 1  ML: 30.94%  gap: 18.59%
+  #5  Hayden's Gift    — Q LAKESIDE R11  Box 7  ML: 29.92%  gap: 12.88%
+
+================================================================================
+🏆  TOP BETS BY CONFIDENCE GAP
+================================================================================
+
+  ★★★ ELITE CONFIDENCE (gap ≥ 20%)
+  ─────────────────────────────────
+  #1  BENDIGO R1 — Box 4 Paw Luanne
+      ML Score: 37.29%  |  2nd dog: Box 3 Patty Bouvier (11.84%)
+      Gap: 25.46%  ← STRONGEST BET OF THE DAY
+      Confidence level: VERY HIGH
+
+  ★★ HIGH CONFIDENCE (gap ≥ 15%)
+  ───────────────────────────────
+  #2  Temora R12 — Box 1 Flashback Jim
+      ML Score: 30.94%  |  2nd dog: Box 3 Ray Of Eve (12.34%)
+      Gap: 18.59%
+
+  #3  SALE R9 — Box 4 What A Wrought
+      ML Score: 32.14%  |  2nd dog: Box 6 Nicked Again (15.92%)
+      Gap: 16.21%
+
+  ★ GOOD CONFIDENCE (gap 10–14.99%)
+  ───────────────────────────────────
+  #4  ROCKHAMPTON R3 — Box 4 Bandit Chloe
+      ML Score: 32.29%  |  2nd dog: Box 1 Sunburnt Dawn (18.57%)
+      Gap: 13.72%
+
+  #5  Meadows R9 — Box 1 My Mate Leo
+      ML Score: 27.49%  |  2nd dog: Box 5 Lady Tsunade (13.94%)
+      Gap: 13.55%
+
+  #6  HEALESVILLE R12 — Box 1 Sailaway Gin
+      ML Score: 24.90%  |  2nd dog: Box 2 New Arrangement (11.96%)
+      Gap: 12.94%
+
+  #7  DARWIN R4 — Box 8 So Naive
+      ML Score: 26.88%  |  2nd dog: Box 4 Honest Jan (13.96%)
+      Gap: 12.92%
+
+  #8  Q LAKESIDE R11 — Box 7 Hayden's Gift
+      ML Score: 29.92%  |  2nd dog: Box 2 Melissa's Flying (17.04%)
+      Gap: 12.88%
+
+  #9  BENDIGO R12 — Box 4 Quantum Master
+      ML Score: 22.42%  |  2nd dog: Box 5 Dernancourt (11.82%)
+      Gap: 10.60%
+
+  #10 BENDIGO R8 — Box 1 Berserker Viking
+      ML Score: 23.62%  |  2nd dog: Box 5 High Cotton (13.04%)
+      Gap: 10.58%
+
+================================================================================
+RECOMMENDED BET STRATEGY
+================================================================================
+
+  BEST BET (Single):
+  ─────────────────
+  → BENDIGO R1 — Box 4 Paw Luanne
+    Gap 25.46% is the highest confidence prediction today.
+    Model gives 37.29% win probability vs 11.84% for next best dog.
+    Strong single bet recommendation.
+
+  TOP 3 PICKS FOR TREBLE/MULTI:
+  ─────────────────────────────
+  Leg 1: BENDIGO R1     — Box 4 Paw Luanne        (gap 25.46%)
+  Leg 2: Temora R12     — Box 1 Flashback Jim      (gap 18.59%)
+  Leg 3: SALE R9        — Box 4 What A Wrought     (gap 16.21%)
+
+  TOP 5 FOR QUINELLA/BOXED BETS:
+  ───────────────────────────────
+  1. BENDIGO R1     Box 4 Paw Luanne         — 37.29% ML (gap 25.46%)
+  2. Temora R12     Box 1 Flashback Jim      — 30.94% ML (gap 18.59%)
+  3. SALE R9        Box 4 What A Wrought     — 32.14% ML (gap 16.21%)
+  4. ROCKHAMPTON R3 Box 4 Bandit Chloe       — 32.29% ML (gap 13.72%)
+  5. Meadows R9     Box 1 My Mate Leo        — 27.49% ML (gap 13.55%)
+
+  DARWIN NOTE: Only 5 races today, but DARWIN R4 Box 8 So Naive (gap 12.92%)
+  shows strong model confidence — worth including in a multi.
+
+================================================================================
+TRACK-BY-TRACK BEST BETS
+================================================================================
+
+  BENDIGO (VIC)     → R1  Box 4 Paw Luanne       (25.46%) ★★★
+                    → R12 Box 4 Quantum Master    (10.60%) ★
+                    → R8  Box 1 Berserker Viking  (10.58%) ★
+  Temora (NSW)      → R12 Box 1 Flashback Jim     (18.59%) ★★
+  SALE (VIC)        → R9  Box 4 What A Wrought    (16.21%) ★★
+  ROCKHAMPTON (QLD) → R3  Box 4 Bandit Chloe      (13.72%) ★★
+  Meadows (VIC)     → R9  Box 1 My Mate Leo       (13.55%) ★★
+  HEALESVILLE (VIC) → R12 Box 1 Sailaway Gin      (12.94%) ★★
+  DARWIN (NT)       → R4  Box 8 So Naive          (12.92%) ★★
+  Q LAKESIDE (QLD)  → R11 Box 7 Hayden's Gift     (12.88%) ★★
+  SALE (VIC)        → R1  Box 8 Dr. Tanya          (9.85%)
+  Temora (NSW)      → R2  Box 7 Nates Fury          (9.68%)
+  HEALESVILLE (VIC) → R1  Box 8 Spanish Fawn        (9.60%)
+
+================================================================================
+COMPARISON WITH YESTERDAY (24/03/2026)
+================================================================================
+
+  Yesterday's results:  19/121 wins (15.7%), 85/121 placed (70.2%)
+  Best bet yesterday: Warragul R10 Box1 Solar Spectrum — PLACED 2nd (LOST)
+
+  Key lessons from yesterday:
+  • High gap predictions are not infallible (Solar Spectrum 32.66% gap — lost)
+  • Placed rate remains strong at 70.2% — box betting on top selections viable
+  • 4/15 (27%) wins on gap≥10% selections — above average hit rate for high-conf bets
+  • Best performing tracks yesterday: Gosford (83% win+place), Townsville (73%)
+
+  Today's confidence levels:
+  • 1 race ≥20% gap (vs 1 yesterday)
+  • 3 races ≥15% gap (vs 3 yesterday)
+  • 10 races ≥10% gap (vs 15 yesterday)
+  → Slightly fewer high-confidence selections today
+
+================================================================================
+PATTERN NOTES
+================================================================================
+
+  • BENDIGO R1 has the standout gap (25.46%) — biggest confidence gap today
+  • SALE has two good picks (R1 and R9) - both in top 11
+  • BENDIGO appears 3 times in top 10 (R1, R8, R12) — track worth focusing on
+  • HEALESVILLE appears multiple times with consistent moderate confidence
+  • DARWIN only 5 races today — but R4 So Naive shows strong model confidence
+  • Tasmania PDF uploaded but no predictions generated (insufficient data)
+  • GUNNEDAH predictions are all low gap (<3.2%) — avoid single bets here
+  • RICHMOND predictions all low gap (<4.5%) — low confidence day for this track
+
+================================================================================
+END OF BETTING SUMMARY — 2026-03-25
+================================================================================

@@ -1,0 +1,225 @@
+================================================================================
+DAILY ANALYSIS REPORT — 2026-03-25 (Wednesday)
+Generated: 2026-03-25 22:32:00
+================================================================================
+
+TRACKS TODAY (12 tracks, 131 races):
+  BENDIGO (VIC)                   — 13 races
+  BetDeluxe Capalaba (QLD)        — 11 races
+  DARWIN (NT)                     —  5 races
+  GUNNEDAH (NSW)                  — 12 races
+  HEALESVILLE (VIC)               — 12 races
+  MURRAY BRIDGE STRAIGHT (SA)     —  8 races
+  The Meadows (VIC)               — 11 races
+  Ladbrokes Q1 Lakeside (QLD)     — 13 races
+  RICHMOND (NSW)                  — 12 races
+  ROCKHAMPTON (QLD)               — 10 races
+  SALE (VIC)                      — 12 races
+  Temora (NSW)                    — 12 races
+  Tasmania (TAS)                  —  PDF present, no predictions generated
+
+PDFs in data_predictions/:
+  BDGOG2503form.pdf  CAPAG2503form.pdf  DRWNG2503form.pdf  GUNNG2503form.pdf
+  HEALG2503form.pdf  MBRSG2503form.pdf  MEADG2503form.pdf  QLAKG2503form.pdf
+  RICHG2503form.pdf  ROCKG2503form.pdf  SALEG2503form.pdf  TEMOG2503form.pdf
+  TASTG2503form.pdf
+
+================================================================================
+PREDICTION CONFIDENCE SUMMARY:
+================================================================================
+
+  Races ≥ 20% gap (high confidence):   1  (Bendigo R1 — 25.46%)
+  Races ≥ 15% gap:                     3
+  Races ≥ 10% gap:                    10
+  Races ≥  5% gap:                    34
+  Total races ranked:                131
+
+================================================================================
+🏆  TOP BETS — RANKED BY GAP (HIGHEST CONFIDENCE FIRST)
+================================================================================
+
+Rank  Track                  Race  Gap       Box  Dog                         ML Conf
+--------------------------------------------------------------------------------------
+   1  BENDIGO                R1    25.46%    Box4 Paw Luanne                  37.29%
+   2  Temora                 R12   18.59%    Box1 Flashback Jim               30.94%
+   3  SALE                   R9    16.21%    Box4 What A Wrought              32.14%
+   4  ROCKHAMPTON            R3    13.72%    Box4 Bandit Chloe                32.29%
+   5  Meadows                R9    13.55%    Box1 My Mate Leo                 27.49%
+   6  HEALESVILLE            R12   12.94%    Box1 Sailaway Gin                24.90%
+   7  DARWIN                 R4    12.92%    Box8 So Naive                    26.88%
+   8  Q LAKESIDE             R11   12.88%    Box7 Hayden's Gift               29.92%
+   9  BENDIGO                R12   10.60%    Box4 Quantum Master              22.42%
+  10  BENDIGO                R8    10.58%    Box1 Berserker Viking            23.62%
+  11  SALE                   R1     9.85%    Box8 Dr. Tanya                   28.13%
+  12  Temora                 R2     9.68%    Box7 Nates Fury                  22.86%
+  13  HEALESVILLE            R1     9.60%    Box8 Spanish Fawn                19.99%
+  14  HEALESVILLE            R6     9.07%    Box2 Daintree Dazzler            26.68%
+  15  Meadows                R11    8.57%    Box1 Go Go Evie                  24.27%
+  16  ROCKHAMPTON            R5     8.47%    Box1 Astro Lee                   24.86%
+  17  SALE                   R8     8.24%    Box7 Dr. Xanthic                 23.65%
+  18  DARWIN                 R5     8.15%    Box1 Blue Marguerite             21.59%
+  19  HEALESVILLE            R7     7.96%    Box1 Elsie Dreaming              18.90%
+  20  Meadows                R4     7.90%    Box4 Starborn                    29.01%
+
+================================================================================
+FULL RACE-BY-RACE PREDICTIONS
+================================================================================
+
+--- BENDIGO (13 races) ---
+  R1   Box4  Paw Luanne         ML:37.29%  gap:25.46%  ★★★ BEST BET
+  R2   Box1  Aston Major        ML:11.34%  gap: 1.41%
+  R3   Box8  Paw Wylder         ML:14.88%  gap: 1.09%
+  R4   Box1  Prawn And Order    ML:17.50%  gap: 2.91%
+  R5   Box8  Sandy Cheek        ML:15.89%  gap: 0.83%
+  R6   Box2  Tiger Shark        ML:27.00%  gap: 7.43%
+  R7   Box7  Canya Ignite       ML:15.73%  gap: 2.90%
+  R8   Box1  Berserker Viking   ML:23.62%  gap:10.58%  ★
+  R9   Box2  Huntly Miss        ML:16.29%  gap: 3.18%
+  R10  Box1  Where's Huntly     ML:15.91%  gap: 2.25%
+  R11  Box4  Reality Pie        ML:19.49%  gap: 3.76%
+  R12  Box4  Quantum Master     ML:22.42%  gap:10.60%  ★
+  R13  Box7  Small Mercies      ML:10.30%  gap: 1.18%
+
+--- BetDeluxe CAPALABA (11 races) ---
+  R1   Box5  Velvet Dash        ML:15.08%  gap: 3.03%
+  R2   Box1  Serena Beach       ML:12.10%  gap: 1.23%
+  R3   Box4  Psionic Prowess    ML:13.80%  gap: 2.66%
+  R4   Box1  Free Settler       ML:14.29%  gap: 2.00%
+  R5   Box3  Blizzard           ML:24.46%  gap: 6.23%
+  R6   Box3  Bye Bye Taipan     ML:12.26%  gap: 0.02%
+  R7   Box4  Give Me Bucks      ML:20.30%  gap: 1.85%
+  R8   Box1  Tweed Dream        ML:22.72%  gap: 6.17%
+  R9   Box8  From A Distance    ML:14.59%  gap: 0.82%
+  R10  Box4  Black Raspberry    ML:14.95%  gap: 1.18%
+  R11  Box1  I'm The Problem    ML:19.80%  gap: 1.73%
+
+--- DARWIN (5 races) ---
+  R1   Box1  Territory Girl     ML:18.60%  gap: 5.55%
+  R2   Box8  Infrared Power     ML:15.83%  gap: 4.50%
+  R3   Box2  Brittain On Fire   ML:13.37%  gap: 1.04%
+  R4   Box8  So Naive           ML:26.88%  gap:12.92%  ★★
+  R5   Box1  Blue Marguerite    ML:21.59%  gap: 8.15%
+
+--- GUNNEDAH (12 races) ---
+  R1   Box8  Blocker's Mate     ML:11.42%  gap: 0.37%
+  R2   Box8  Valentino Beach    ML:13.58%  gap: 0.15%
+  R3   Box2  Impress Spieth     ML:15.45%  gap: 2.15%
+  R4   Box6  Walter Wanted      ML:19.30%  gap: 0.21%
+  R5   Box3  Jock               ML:15.84%  gap: 1.28%
+  R6   Box4  Kiando Estate      ML:14.67%  gap: 1.88%
+  R7   Box7  Casual Escape      ML:13.50%  gap: 3.12%
+  R8   Box8  Bear Man           ML:10.29%  gap: 0.54%
+  R9   Box1  Lektra Bert        ML:10.55%  gap: 0.82%
+  R10  Box7  Lumeah Matilda     ML:10.18%  gap: 1.17%
+  R11  Box7  Urban Boy          ML:12.32%  gap: 0.51%
+  R12  Box6  Orana Josie        ML:13.24%  gap: 1.70%
+
+--- HEALESVILLE (12 races) ---
+  R1   Box8  Spanish Fawn       ML:19.99%  gap: 9.60%
+  R2   Box4  Classy Dancer      ML:11.36%  gap: 0.84%
+  R3   Box1  Little Master      ML:17.82%  gap: 7.53%
+  R4   Box5  Highgate Franky    ML:16.81%  gap: 4.74%
+  R5   Box1  Angry Franky       ML:17.32%  gap: 1.93%
+  R6   Box2  Daintree Dazzler   ML:26.68%  gap: 9.07%
+  R7   Box1  Elsie Dreaming     ML:18.90%  gap: 7.96%
+  R8   Box2  Aston Lyon         ML:13.25%  gap: 1.05%
+  R9   Box7  Paw Bautista       ML:14.46%  gap: 1.90%
+  R10  Box8  Rumour I'm Broke   ML:18.80%  gap: 7.47%
+  R11  Box4  Ella Audacious     ML:16.07%  gap: 3.10%
+  R12  Box1  Sailaway Gin       ML:24.90%  gap:12.94%  ★★
+
+--- MURRAY BRIDGE STRAIGHT (8 races) ---
+  R1   Box4  Stifler            ML:12.58%  gap: 0.56%
+  R2   Box2  Dayne's Calais     ML:18.48%  gap: 5.31%
+  R3   Box7  Cash Paid          ML:19.37%  gap: 0.85%
+  R4   Box7  Crazed             ML:17.79%  gap: 1.97%
+  R5   Box2  National Grid      ML:17.04%  gap: 4.52%
+  R6   Box8  Currency Lad       ML:11.68%  gap: 0.11%
+  R7   Box9  Love Shine         ML:15.67%  gap: 3.32%
+  R8   Box8  Bookaloo           ML:21.12%  gap: 5.42%
+
+--- THE MEADOWS (11 races) ---
+  R1   Box7  Indian Chief       ML:11.27%  gap: 0.83%
+  R2   Box1  Indy Alex          ML:21.34%  gap: 7.69%
+  R3   Box2  Sweet Jordie       ML:22.22%  gap: 2.29%
+  R4   Box4  Starborn           ML:29.01%  gap: 7.90%
+  R5   Box1  Norton Bale        ML:19.20%  gap: 4.99%
+  R6   Box3  Ulenta Bale        ML:17.02%  gap: 1.34%
+  R7   Box4  Fast Reply         ML:15.05%  gap: 1.82%
+  R8   Box3  Cruzado            ML:15.55%  gap: 0.63%
+  R9   Box1  My Mate Leo        ML:27.49%  gap:13.55%  ★★
+  R10  Box4  Paw Christie       ML:22.65%  gap: 2.19%
+  R11  Box1  Go Go Evie         ML:24.27%  gap: 8.57%
+
+--- LADBROKES Q1 LAKESIDE (13 races) ---
+  R1   Box7  Hara's Rocky       ML:18.71%  gap: 6.18%
+  R2   Box5  Poppy Day          ML:15.12%  gap: 2.18%
+  R3   Box8  Lone Pilot         ML:14.79%  gap: 2.98%
+  R4   Box2  Goldstar Mila      ML:10.10%  gap: 0.30%
+  R5   Box1  Disco Ethics       ML:15.90%  gap: 3.91%
+  R6   Box5  Expelled           ML:13.96%  gap: 0.36%
+  R7   Box6  Amren              ML:20.87%  gap: 0.80%
+  R8   Box5  Nina Siyan         ML:19.98%  gap: 0.87%
+  R9   Box2  Unique Ability     ML:27.10%  gap: 7.67%
+  R10  Box4  Untamed Velocity   ML:18.69%  gap: 6.02%
+  R11  Box7  Hayden's Gift      ML:29.92%  gap:12.88%  ★★
+  R12  Box1  Federal Joker      ML:14.07%  gap: 2.28%
+  R13  Box6  Goldstar Hector    ML:17.95%  gap: 2.81%
+
+--- RICHMOND (12 races) ---
+  R1   Box8  Hope For Molly     ML:13.44%  gap: 0.51%
+  R2   Box1  Spring Jim         ML:18.10%  gap: 1.28%
+  R3   Box6  Zipping Strop      ML:16.66%  gap: 2.17%
+  R4   Box8  Great Chat         ML:17.00%  gap: 1.81%
+  R5   Box4  Zipping Zeppelin   ML:16.63%  gap: 1.79%
+  R6   Box2  Midnight Arrow     ML:20.04%  gap: 4.49%
+  R7   Box7  Spring Rota        ML:14.79%  gap: 1.25%
+  R8   Box1  Rainy Dream        ML:16.57%  gap: 4.01%
+  R9   Box3  Big Red Tequila    ML:18.75%  gap: 3.87%
+  R10  Box8  Winged Rupee       ML:18.46%  gap: 1.88%
+  R11  Box1  Infrared Violet    ML:17.08%  gap: 1.68%
+  R12  Box2  Federal Notice     ML:23.37%  gap: 1.72%
+
+--- ROCKHAMPTON (10 races) ---
+  R1   Box1  Son Of Minya       ML:22.51%  gap: 3.82%
+  R2   Box4  Emergency Man      ML:31.45%  gap: 2.10%
+  R3   Box4  Bandit Chloe       ML:32.29%  gap:13.72%  ★★
+  R4   Box1  Hara's Pest        ML:16.01%  gap: 4.06%
+  R5   Box1  Astro Lee          ML:24.86%  gap: 8.47%
+  R6   Box6  Ranger Beach       ML:17.58%  gap: 3.56%
+  R7   Box1  Riding Solo        ML:15.43%  gap: 0.27%
+  R8   Box1  Peaky Warlock      ML:14.19%  gap: 1.58%
+  R9   Box8  Hudson Riverline   ML:17.04%  gap: 4.26%
+  R10  Box6  Clear Blue Sky     ML:16.11%  gap: 3.76%
+
+--- SALE (12 races) ---
+  R1   Box8  Dr. Tanya          ML:28.13%  gap: 9.85%
+  R2   Box5  Dr. Aurora         ML:15.07%  gap: 4.44%
+  R3   Box8  Alone              ML:14.15%  gap: 0.57%
+  R4   Box2  Dr. Exclaim        ML:15.52%  gap: 1.34%
+  R5   Box1  Roslyn Hook        ML:15.35%  gap: 1.63%
+  R6   Box1  Tucker's Boy       ML:16.69%  gap: 2.17%
+  R7   Box4  Are You Okay       ML:14.51%  gap: 2.35%
+  R8   Box7  Dr. Xanthic        ML:23.65%  gap: 8.24%
+  R9   Box4  What A Wrought     ML:32.14%  gap:16.21%  ★★
+  R10  Box8  Jovial Gem         ML:15.05%  gap: 1.63%
+  R11  Box7  Miss Money         ML:13.71%  gap: 0.66%
+  R12  Box1  Jams Donuts        ML:15.74%  gap: 0.46%
+
+--- TEMORA (12 races) ---
+  R1   Box2  Poke The Glass     ML:15.63%  gap: 2.31%
+  R2   Box7  Nates Fury         ML:22.86%  gap: 9.68%
+  R3   Box3  Paw Iron           ML:11.47%  gap: 0.56%
+  R4   Box8  Orson Jimmy        ML:12.85%  gap: 0.20%
+  R5   Box1  Ratbag Load        ML:17.97%  gap: 5.89%
+  R6   Box1  Master Mcgraw      ML:26.48%  gap: 6.81%
+  R7   Box6  My Three Boys      ML:11.06%  gap: 0.28%
+  R8   Box2  Sonali             ML:14.21%  gap: 4.04%
+  R9   Box5  Slick Chance       ML:10.12%  gap: 0.50%
+  R10  Box1  Mako Merv          ML:30.59%  gap: 4.07%
+  R11  Box1  Missed Call        ML:13.87%  gap: 2.41%
+  R12  Box1  Flashback Jim      ML:30.94%  gap:18.59%  ★★★
+
+================================================================================
+END OF DAILY ANALYSIS — 2026-03-25
+================================================================================

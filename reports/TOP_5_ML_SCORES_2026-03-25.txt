@@ -1,0 +1,36 @@
+================================================================================
+TOP 5 ML SCORES — Wednesday 25 March 2026
+Generated: 2026-03-25
+Source: outputs/best_bets_report.txt (Generated: 2026-03-25 08:26:06)
+================================================================================
+
+METHODOLOGY:
+  ML Score = Model's predicted win probability for the top-ranked dog per race.
+  Gap = Difference between 1st and 2nd highest ML scores in that race.
+  Higher gap = model is more confident in the top dog vs the field.
+
+TOP 5 BY ML SCORE:
+──────────────────
+  #1  Paw Luanne        BENDIGO R1       Box 4  ML: 37.29%  gap: 25.46%
+  #2  Bandit Chloe      ROCKHAMPTON R3   Box 4  ML: 32.29%  gap: 13.72%
+  #3  What A Wrought    SALE R9          Box 4  ML: 32.14%  gap: 16.21%
+  #4  Flashback Jim     Temora R12       Box 1  ML: 30.94%  gap: 18.59%
+  #5  Hayden's Gift     Q LAKESIDE R11   Box 7  ML: 29.92%  gap: 12.88%
+
+TOP 5 BY GAP:
+─────────────
+  #1  Paw Luanne       BENDIGO R1       Box 4  gap: 25.46%  ML: 37.29%
+  #2  Flashback Jim    Temora R12       Box 1  gap: 18.59%  ML: 30.94%
+  #3  What A Wrought   SALE R9          Box 4  gap: 16.21%  ML: 32.14%
+  #4  Bandit Chloe     ROCKHAMPTON R3   Box 4  gap: 13.72%  ML: 32.29%
+  #5  My Mate Leo      Meadows R9       Box 1  gap: 13.55%  ML: 27.49%
+
+NOTES:
+  - Bendigo R1 leads both ML score (37.29%) and gap (25.46%) — unanimous #1 bet
+  - Temora R12 and Sale R9 are both in top 4 by both measures
+  - Rockhampton R3 Bandit Chloe has 2nd highest ML score (32.29%) but lower gap
+  - Q Lakeside R11 Hayden's Gift features in top 5 ML but not top 5 gap
+
+================================================================================
+END — TOP_5_ML_SCORES_2026-03-25
+================================================================================
