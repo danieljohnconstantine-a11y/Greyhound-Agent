@@ -2,6 +2,13 @@
 
 ---
 
+## 📬 OUTREACH LETTER
+
+> **Draft message to Ryan Conneely (Barking Mad Betting):**  
+> 👉 **[outreach/email_ryan_conneely_barking_mad_betting.txt](outreach/email_ryan_conneely_barking_mad_betting.txt)**
+
+---
+
 ## 📢 LATEST RESPONSE
 
 > **Today's full betting summary and prediction audit:**  

@@ -1,37 +1,36 @@
 TO:      Ryan Conneely — Barking Mad Betting (YouTube)
 SUBJECT: A greyhound fan built a free AI form tool — thought you might find it interesting
 
-Hi Ryan,
+Hey Ryan,
 
-Just wanted to say I genuinely enjoy watching your channel — the energy you bring to greyhound
-content is great and I always get a kick out of it.
+Just a quick one — I love your channel mate. The energy you bring to greyhounds is great fun
+and I always enjoy watching. Keep it up!
 
-I'm not a developer by any stretch — just a greyhound fan who got a bit obsessed with the idea
-of using AI to predict race outcomes. I've been building something called Greyhound-Agent using
-AI tools to help me along the way, and I thought it might be worth sharing.
+So I'm not a developer at all — I'm just a regular guy who loves the odds on greyhounds and
+got a bit carried away with an idea. I've been using AI tools to help me build a little
+prediction system called Greyhound-Agent. 100% amateur, no professional background in coding
+or data science — just me and a lot of trial and error.
 
-Every morning it reads the official Australian form guide PDFs and uses machine learning to come
-up with win probabilities for every dog in every race. To be honest, the prediction side of
-things has had mixed results — I'm definitely not claiming this is a money-making system! But
-what I think is actually pretty useful is the Excel output. It converts the form data into a
-spreadsheet with percentages for every dog across every track each day, which makes it really
-easy for people to apply their own filters and build their own systems from scratch.
+Honestly, the predictions themselves have had pretty mixed results — I'm not here claiming I've
+cracked the code! But the thing I think is genuinely useful is the Excel output. Every morning
+it reads the official Australian form guide PDFs and spits out a spreadsheet with win
+probabilities for every dog at every track. The idea is that people can take that data and build
+their own filters and systems in a format they're actually comfortable with — Excel is something
+most people already know how to use.
 
-The code is free on GitHub if anyone wants to have a look:
+It's all free on GitHub if anyone wants to have a poke around:
 https://github.com/danieljohnconstantine-a11y/Greyhound-Agent
 
-I'm testing a simple daily email subscription that sends out the Excel file each morning before
-the races — all for under $1 a month ($0.03 per race day). The idea is more about giving punters
-a head start with data in a usable format rather than telling them who to back.
+I'm also testing a simple daily email that sends out the Excel file each morning before the
+races — works out to about $0.03 a race day. Less about telling people who to back, more about
+giving punters a handy head start with the form data.
 
-I'd genuinely love your thoughts if you ever get a chance:
+No pressure at all — just thought it was worth reaching out to someone who actually loves
+greyhounds and knows the sport. Would love to hear what you reckon if you ever get a minute:
 
-  • Do you think your viewers would find something like that handy?
-  • Is there anything obvious you'd want to see in it?
-  • Happy to send you a free week's worth if you want to take a look.
-
-Totally no pressure — just thought it was worth reaching out to someone who actually knows and
-loves greyhounds. Keep up the great work!
+  • Would your viewers get any use out of something like that?
+  • Anything you'd want to see added to it?
+  • Happy to send over a free week's worth of files if you want to have a look.
 
 Cheers,
 Daniel Constantine
