@@ -1,0 +1,251 @@
+================================================================================
+PREDICTION AUDIT — 2026-03-24 (Tuesday)
+Generated: 2026-03-24 22:11:45
+================================================================================
+
+TRACKS: Casino / Bulli / Gosford / Angle Park / Hobart / Horsham / Geelong /
+        Ladbrokes Q1 Lakeside / Warragul / Townsville / Mandurah
+TOTAL RACES WITH RESULTS: 121 (of 123 predicted; 2 Q Lakeside races had no results)
+
+────────────────────────────────────────────────────────────────────────────────
+OVERALL SUMMARY
+────────────────────────────────────────────────────────────────────────────────
+  Wins:            19  (15.7%)
+  Placed (2-4th):  66  (54.5%)
+  Losses:          36  (29.8%)
+  Win+Place rate: 70.2%
+
+────────────────────────────────────────────────────────────────────────────────
+TOP BETS PERFORMANCE (gap ≥ 10%)
+────────────────────────────────────────────────────────────────────────────────
+  15 races with gap ≥ 10%:  4 wins, 8 placed, 3 losses
+
+  Rank  Track              Race   Gap%       Pred Box   Actual   Outcome
+  ------------------------------------------------------------------------
+  1     WARRAGUL           R10    32.66      Box 1      Box 6    PLACED (2nd)
+  2     HORSHAM            R3     16.73      Box 8      Box 1    PLACED (2nd)
+  3     GOSFORD            R5     16.18      Box 7      Box 6    PLACED (2nd)
+  4     CASINO             R5     15.75      Box 1      Box 1    WIN
+  5     HOBART             R7     15.25      Box 3      Box 3    WIN
+  6     HORSHAM            R2     14.42      Box 6      Box 2    LOSS
+  7     ANGLE PARK         R2     14.38      Box 2      Box 1    PLACED (3rd)
+  8     ANGLE PARK         R9     14.13      Box 1      Box 6    PLACED (3rd)
+  9     Q LAKESIDE         R1     12.17      Box 4      Box 4    WIN
+  10    TOWNSVILLE         R10    11.78      Box 6      Box 6    WIN
+  11    GOSFORD            R11    11.21      Box 8      Box 3    PLACED (2nd)
+  12    HORSHAM            R4     10.90      Box 4      Box 6    PLACED (4th)
+  13    Q LAKESIDE         R9     10.36      Box 6      Box 4    LOSS
+  14    CASINO             R9     10.31      Box 2      Box 4    PLACED (2nd)
+  15    ANGLE PARK         R11    10.11      Box 2      Box 6    LOSS
+
+────────────────────────────────────────────────────────────────────────────────
+BEST BET RESULT
+────────────────────────────────────────────────────────────────────────────────
+  🏆 Warragul R10 — Box 1 Solar Spectrum (ML: 45.94%, gap: 32.66%)
+  Actual Result: Winner Box 6, Top 4: [6, 1, 2, 3]
+  Outcome: PLACED (2nd) — Box 1 finished 2nd
+
+────────────────────────────────────────────────────────────────────────────────
+TOP 5 ML SCORES vs ACTUALS
+────────────────────────────────────────────────────────────────────────────────
+  #1 Solar Spectrum (Warragul R10, Box 1, ML=45.94%, gap=32.66%)
+     Actual: winner Box 6, top4=[6, 1, 2, 3] → PLACED 2nd
+  #2 Cool Mist (Casino R2, Box 2, ML=34.53%, gap=8.05%)
+     Actual: winner Box 1, top4=[1, 8, 3, 7] → LOSS ✗
+  #3 Kilcoy Missie (Angle Park R9, Box 1, ML=33.85%, gap=14.13%)
+     Actual: winner Box 6, top4=[6, 4, 1, 8] → PLACED 3rd
+  #4 Cawbourne Slick (Townsville R4, Box 8, ML=31.87%, gap=7.49%)
+     Actual: winner Box 4, top4=[4, 8, 7, 2] → PLACED 2nd
+  #5 On The Whisper (Q Lakeside R9, Box 6, ML=31.65%, gap=10.36%)
+     Actual: winner Box 4, top4=[4, 2, 3, 8] → LOSS ✗
+
+────────────────────────────────────────────────────────────────────────────────
+PER-TRACK BREAKDOWN
+────────────────────────────────────────────────────────────────────────────────
+  CASINO            : 1/11 wins (9%), 5 placed, 5 losses  (win+place: 55%)
+    ✓ R5 Box 1 Kingsbrae Rex (gap 15.75%)
+    ✗ R2 Box 2 Cool Mist (gap 8.05%) — actual winner Box 1
+    ✗ R6 Box 1 Sweet Confetti (gap 7.02%) — actual winner Box 8
+    ✗ R3 Box 4 Flat Chat Jack (gap 5.39%) — actual winner Box 1
+
+  BULLI             : 0/8 wins (0%), 5 placed, 3 losses  (win+place: 62%)
+    ✗ R3 Box 2 Kooringa Express (gap 9.90%) — actual winner Box 4
+
+  GOSFORD           : 2/12 wins (17%), 8 placed, 2 losses  (win+place: 83%)
+    ✓ R6 Box 8 Nova Reign (gap 2.25%)
+    ✓ R10 Box 2 Hey Mac (gap 1.69%)
+
+  ANGLE PARK        : 3/12 wins (25%), 5 placed, 4 losses  (win+place: 67%)
+    ✓ R5 Box 1 Fancy In Design (gap 6.24%)
+    ✓ R6 Box 1 Crying Tiger (gap 4.31%)
+    ✓ R4 Box 1 Black Wanda (gap 0.87%)
+    ✗ R11 Box 2 Ouzo And Coke (gap 10.11%) — actual winner Box 6
+
+  HOBART            : 1/10 wins (10%), 4 placed, 5 losses  (win+place: 50%)
+    ✓ R7 Box 3 Ronny Rocket (gap 15.25%)
+    ✗ R3 Box 8 She's Seeking (gap 7.05%) — actual winner Box 5
+
+  HORSHAM           : 1/11 wins (9%), 7 placed, 3 losses  (win+place: 73%)
+    ✓ R5 Box 3 Kaelix Storm (gap 9.01%)
+    ✗ R2 Box 6 White Shamrock (gap 14.42%) — actual winner Box 2
+    ✗ R10 Box 4 Needful (gap 9.10%) — actual winner Box 1
+
+  GEELONG           : 0/12 wins (0%), 10 placed, 2 losses  (win+place: 83%)
+
+  Q LAKESIDE        : 2/12 wins (17%), 7 placed, 3 losses  (win+place: 75%)
+    ✓ R1 Box 4 Sagacious Syd (gap 12.17%)
+    ✓ R2 Box 7 Go Wild Gypsy (gap 0.17%)
+    ✗ R9 Box 6 On The Whisper (gap 10.36%) — actual winner Box 4
+    ✗ R4 Box 1 Mercedes Belle (gap 8.36%) — actual winner Box 2
+
+  WARRAGUL          : 1/12 wins (8%), 6 placed, 5 losses  (win+place: 58%)
+    ✓ R3 Box 2 Paw Sapphire (gap 2.37%)
+    ✗ R5 Box 2 Mighty Star (gap 6.01%) — actual winner Box 3
+
+  TOWNSVILLE        : 4/11 wins (36%), 4 placed, 3 losses  (win+place: 73%)
+    ✓ R10 Box 6 Ordinary (gap 11.78%)
+    ✓ R3 Box 4 Organised Kaos (gap 3.91%)
+    ✓ R7 Box 8 Tipsy Tess (gap 3.73%)
+    ✓ R11 Box 6 Federal Saki (gap 1.90%)
+
+  MANDURAH          : 4/10 wins (40%), 5 placed, 1 losses  (win+place: 90%)
+    ✓ R3 Box 4 Lansley Whisper (gap 3.69%)
+    ✓ R7 Box 2 Sunset Agrippina (gap 3.66%)
+    ✓ R6 Box 1 Monkey Magic (gap 3.01%)
+    ✓ R5 Box 1 Smell Like Rose (gap 1.28%)
+
+────────────────────────────────────────────────────────────────────────────────
+DETAILED RACE-BY-RACE COMPARISON
+────────────────────────────────────────────────────────────────────────────────
+  Rank  Track              Race   Gap%      Predicted Box  Actual 1st   Outcome
+  ------------------------------------------------------------------------------
+  122   ANGLE PARK         R1     0.06      Box 2          Box 7        LOSS
+  7     ANGLE PARK         R2     14.38     Box 2          Box 1        PLACED (3rd)
+  100   ANGLE PARK         R3     0.72      Box 2          Box 1        PLACED (4th)
+  96    ANGLE PARK         R4     0.87      Box 1          Box 1        WIN
+  30    ANGLE PARK         R5     6.24      Box 1          Box 1        WIN
+  46    ANGLE PARK         R6     4.31      Box 1          Box 1        WIN
+  64    ANGLE PARK         R7     3.42      Box 5          Box 7        LOSS
+  51    ANGLE PARK         R8     3.93      Box 1          Box 7        PLACED (2nd)
+  8     ANGLE PARK         R9     14.13     Box 1          Box 6        PLACED (3rd)
+  53    ANGLE PARK         R10    3.84      Box 1          Box 6        PLACED (2nd)
+  15    ANGLE PARK         R11    10.11     Box 2          Box 6        LOSS
+  118   ANGLE PARK         R12    0.16      Box 8          Box 2        LOSS
+  106   BULLI              R1     0.42      Box 3          Box 4        LOSS
+  93    BULLI              R2     1.03      Box 7          Box 3        LOSS
+  16    BULLI              R3     9.90      Box 2          Box 4        LOSS
+  71    BULLI              R4     2.63      Box 4          Box 5        PLACED (4th)
+  40    BULLI              R5     5.04      Box 1          Box 4        PLACED (3rd)
+  65    BULLI              R6     3.39      Box 4          Box 7        PLACED (3rd)
+  48    BULLI              R7     4.21      Box 3          Box 8        PLACED (3rd)
+  103   BULLI              R8     0.47      Box 3          Box 7        PLACED (2nd)
+  34    CASINO             R1     5.42      Box 7          Box 8        PLACED (3rd)
+  22    CASINO             R2     8.05      Box 2          Box 1        LOSS
+  35    CASINO             R3     5.39      Box 4          Box 1        LOSS
+  111   CASINO             R4     0.30      Box 6          Box 1        PLACED (3rd)
+  4     CASINO             R5     15.75     Box 1          Box 1        WIN
+  28    CASINO             R6     7.02      Box 1          Box 8        LOSS
+  41    CASINO             R7     5.01      Box 2          Box 4        PLACED (2nd)
+  105   CASINO             R8     0.46      Box 5          Box 8        LOSS
+  14    CASINO             R9     10.31     Box 2          Box 4        PLACED (2nd)
+  76    CASINO             R10    2.38      Box 5          Box 6        LOSS
+  108   CASINO             R11    0.41      Box 1          Box 8        PLACED (4th)
+  62    GEELONG            R1     3.55      Box 5          Box 3        LOSS
+  87    GEELONG            R2     1.40      Box 4          Box 3        PLACED (2nd)
+  94    GEELONG            R3     0.97      Box 2          Box 1        PLACED (4th)
+  26    GEELONG            R4     7.30      Box 7          Box 1        PLACED (3rd)
+  73    GEELONG            R5     2.55      Box 3          Box 7        PLACED (2nd)
+  101   GEELONG            R6     0.67      Box 8          Box 4        PLACED (3rd)
+  63    GEELONG            R7     3.48      Box 1          Box 2        PLACED (4th)
+  59    GEELONG            R8     3.61      Box 1          Box 4        LOSS
+  24    GEELONG            R9     7.70      Box 1          Box 7        PLACED (2nd)
+  79    GEELONG            R10    2.28      Box 2          Box 3        PLACED (2nd)
+  32    GEELONG            R11    5.86      Box 8          Box 6        PLACED (4th)
+  123   GEELONG            R12    0.03      Box 6          Box 2        PLACED (2nd)
+  47    GOSFORD            R1     4.29      Box 3          Box 2        LOSS
+  82    GOSFORD            R2     2.08      Box 6          Box 1        PLACED (2nd)
+  107   GOSFORD            R3     0.41      Box 4          Box 1        PLACED (2nd)
+  38    GOSFORD            R4     5.21      Box 4          Box 2        PLACED (2nd)
+  3     GOSFORD            R5     16.18     Box 7          Box 6        PLACED (2nd)
+  80    GOSFORD            R6     2.25      Box 8          Box 8        WIN
+  67    GOSFORD            R7     3.23      Box 8          Box 4        PLACED (3rd)
+  117   GOSFORD            R8     0.16      Box 5          Box 3        PLACED (2nd)
+  57    GOSFORD            R9     3.69      Box 6          Box 4        LOSS
+  85    GOSFORD            R10    1.69      Box 2          Box 2        WIN
+  11    GOSFORD            R11    11.21     Box 8          Box 3        PLACED (2nd)
+  70    GOSFORD            R12    2.92      Box 2          Box 5        PLACED (2nd)
+  81    HOBART             R1     2.24      Box 8          Box 4        PLACED (2nd)
+  78    HOBART             R2     2.35      Box 8          Box 4        LOSS
+  27    HOBART             R3     7.05      Box 8          Box 5        LOSS
+  54    HOBART             R4     3.82      Box 4          Box 5        LOSS
+  119   HOBART             R5     0.09      Box 3          Box 5        LOSS
+  84    HOBART             R6     1.83      Box 1          Box 2        PLACED (2nd)
+  5     HOBART             R7     15.25     Box 3          Box 3        WIN
+  92    HOBART             R8     1.15      Box 3          Box 8        PLACED (4th)
+  60    HOBART             R9     3.61      Box 1          Box 6        LOSS
+  29    HOBART             R10    6.82      Box 6          Box 7        PLACED (2nd)
+  112   HORSHAM            R1     0.29      Box 1          Box 4        PLACED (2nd)
+  6     HORSHAM            R2     14.42     Box 6          Box 2        LOSS
+  2     HORSHAM            R3     16.73     Box 8          Box 1        PLACED (2nd)
+  12    HORSHAM            R4     10.90     Box 4          Box 6        PLACED (4th)
+  19    HORSHAM            R5     9.01      Box 3          Box 3        WIN
+  110   HORSHAM            R6     0.33      Box 4          Box 8        PLACED (2nd)
+  98    HORSHAM            R7     0.79      Box 3          Box 1        LOSS
+  120   HORSHAM            R8     0.08      Box 1          Box 3        PLACED (2nd)
+  97    HORSHAM            R9     0.84      Box 5          Box 2        PLACED (3rd)
+  18    HORSHAM            R10    9.10      Box 4          Box 1        LOSS
+  113   HORSHAM            R11    0.28      Box 8          Box 2        PLACED (2nd)
+  36    MANDURAH           R1     5.26      Box 1          Box 3        PLACED (4th)
+  88    MANDURAH           R2     1.38      Box 2          Box 1        LOSS
+  56    MANDURAH           R3     3.69      Box 4          Box 4        WIN
+  23    MANDURAH           R4     7.75      Box 1          Box 7        PLACED (3rd)
+  90    MANDURAH           R5     1.28      Box 1          Box 1        WIN
+  69    MANDURAH           R6     3.01      Box 1          Box 1        WIN
+  58    MANDURAH           R7     3.66      Box 2          Box 2        WIN
+  72    MANDURAH           R8     2.62      Box 5          Box 1        PLACED (4th)
+  75    MANDURAH           R9     2.42      Box 5          Box 1        PLACED (4th)
+  45    MANDURAH           R10    4.44      Box 7          Box 5        PLACED (2nd)
+  9     Q LAKESIDE         R1     12.17     Box 4          Box 4        WIN
+  116   Q LAKESIDE         R2     0.17      Box 7          Box 7        WIN
+  66    Q LAKESIDE         R3     3.37      Box 1          Box 3        PLACED (2nd)
+  21    Q LAKESIDE         R4     8.36      Box 1          Box 2        LOSS
+  20    Q LAKESIDE         R5     8.85      Box 1          Box 4        PLACED (4th)
+  91    Q LAKESIDE         R6     1.22      Box 1          Box 3        LOSS
+  89    Q LAKESIDE         R7     1.33      Box 7          Box 8        PLACED (4th)
+  115   Q LAKESIDE         R8     0.20      Box 3          Box 7        PLACED (4th)
+  13    Q LAKESIDE         R9     10.36     Box 6          Box 4        LOSS
+  109   Q LAKESIDE         R10    0.35      Box 6          Box 8        PLACED (3rd)
+  42    Q LAKESIDE         R11    4.91      Box 2          Box 8        PLACED (4th)
+  33    Q LAKESIDE         R12    5.61      Box 4          Box 1        PLACED (3rd)
+  102   TOWNSVILLE         R1     0.57      Box 2          Box 8        PLACED (2nd)
+  114   TOWNSVILLE         R2     0.23      Box 2          Box 8        LOSS
+  52    TOWNSVILLE         R3     3.91      Box 4          Box 4        WIN
+  25    TOWNSVILLE         R4     7.49      Box 8          Box 4        PLACED (2nd)
+  121   TOWNSVILLE         R5     0.07      Box 1          Box 4        PLACED (4th)
+  50    TOWNSVILLE         R6     4.07      Box 6          Box 2        LOSS
+  55    TOWNSVILLE         R7     3.73      Box 8          Box 8        WIN
+  99    TOWNSVILLE         R8     0.76      Box 3          Box 6        PLACED (3rd)
+  74    TOWNSVILLE         R9     2.48      Box 1          Box 5        LOSS
+  10    TOWNSVILLE         R10    11.78     Box 6          Box 6        WIN
+  83    TOWNSVILLE         R11    1.90      Box 6          Box 6        WIN
+  86    WARRAGUL           R1     1.48      Box 7          Box 8        LOSS
+  39    WARRAGUL           R2     5.19      Box 1          Box 7        PLACED (3rd)
+  77    WARRAGUL           R3     2.37      Box 2          Box 2        WIN
+  95    WARRAGUL           R4     0.89      Box 5          Box 8        PLACED (4th)
+  31    WARRAGUL           R5     6.01      Box 2          Box 3        LOSS
+  61    WARRAGUL           R6     3.55      Box 8          Box 6        LOSS
+  37    WARRAGUL           R7     5.23      Box 2          Box 1        PLACED (4th)
+  104   WARRAGUL           R8     0.46      Box 3          Box 8        LOSS
+  17    WARRAGUL           R9     9.11      Box 2          Box 1        PLACED (2nd)
+  1     WARRAGUL           R10    32.66     Box 1          Box 6        PLACED (2nd)
+  49    WARRAGUL           R11    4.08      Box 1          Box 3        LOSS
+  68    WARRAGUL           R12    3.09      Box 8          Box 7        PLACED (4th)
+
+────────────────────────────────────────────────────────────────────────────────
+AUDIT NOTES
+────────────────────────────────────────────────────────────────────────────────
+  • Q Lakeside R13 and R14 were in predictions but had no actual results provided.
+  • Gosford R4 result was partial (only 2 positions provided: 2nd, 4th).
+  • "Placed" = predicted box finished 2nd, 3rd, or 4th (box bet placed).
+
+================================================================================
