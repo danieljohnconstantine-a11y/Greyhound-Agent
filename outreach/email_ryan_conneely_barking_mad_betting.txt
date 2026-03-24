@@ -1,47 +1,37 @@
 TO:      Ryan Conneely — Barking Mad Betting (YouTube)
-SUBJECT: AI greyhound picks by email — under $1 a month — would your viewers find this useful?
+SUBJECT: A greyhound fan built a free AI form tool — thought you might find it interesting
 
 Hi Ryan,
 
-Love the channel — Barking Mad Betting is exactly the kind of honest, no-BS greyhound content
-that inspired me to build what I'm about to describe.
+Just wanted to say I genuinely enjoy watching your channel — the energy you bring to greyhound
+content is great and I always get a kick out of it.
 
-I'm a developer and greyhound punter and I've built an open-source AI tool called
-Greyhound-Agent. Every morning it reads the official Australian form guide PDFs, pulls out
-around 75 features per dog (times, box draws, track history, trainer stats, margins, etc.),
-then runs them through a machine-learning ensemble of three models — Random Forest, Gradient
-Boosting, and XGBoost — to produce win probabilities for every dog in every race.
+I'm not a developer by any stretch — just a greyhound fan who got a bit obsessed with the idea
+of using AI to predict race outcomes. I've been building something called Greyhound-Agent using
+AI tools to help me along the way, and I thought it might be worth sharing.
 
-The whole thing takes about 20 minutes to train on a standard laptop and the code is free on
-GitHub: https://github.com/danieljohnconstantine-a11y/Greyhound-Agent
+Every morning it reads the official Australian form guide PDFs and uses machine learning to come
+up with win probabilities for every dog in every race. To be honest, the prediction side of
+things has had mixed results — I'm definitely not claiming this is a money-making system! But
+what I think is actually pretty useful is the Excel output. It converts the form data into a
+spreadsheet with percentages for every dog across every track each day, which makes it really
+easy for people to apply their own filters and build their own systems from scratch.
 
-It spits out two files each morning:
-  • best_bets_report.txt — every race ranked by how confident the model is, with the top pick
-    of the day highlighted up front.
-  • track_ensemble_predictions.xlsx — a full Excel sheet with win percentages for every dog
-    across every track running that day.
+The code is free on GitHub if anyone wants to have a look:
+https://github.com/danieljohnconstantine-a11y/Greyhound-Agent
 
-A few recent results to give you a feel for it:
-  • Mon 24 Mar — 11 tracks, 123 races. Top pick: Warragul R10 Box 1 Solar Spectrum (46% win
-    probability, 33-point gap to the second dog).
-  • Sat 22 Mar — 11 tracks, 111 races. 30 wins from 111 (27%), 82 placed (74%). Top pick WON:
-    Grafton R12 Box 2 Packham Punch. Top-12 confident bets: 8 wins, 4 placed, 0 losses.
-  • Sun 23 Mar — 9 tracks, 102 races. 25 wins (24.5%), 73 placed (71.6%). Best tracks:
-    Angle Park 54.5% wins, Warrnambool 50%.
+I'm testing a simple daily email subscription that sends out the Excel file each morning before
+the races — all for under $1 a month ($0.03 per race day). The idea is more about giving punters
+a head start with data in a usable format rather than telling them who to back.
 
-The idea I'm testing is a simple daily email subscription — both files land in your inbox each
-morning before the races. The price would be $0.03 per email (per race day), so a full month
-always comes to under $1.00 AUD. As far as I can tell there's nothing else out there delivering
-Australian greyhound form in Excel format every day at this kind of price.
+I'd genuinely love your thoughts if you ever get a chance:
 
-Before I build out the subscription side of things I'd genuinely love to know what you think:
+  • Do you think your viewers would find something like that handy?
+  • Is there anything obvious you'd want to see in it?
+  • Happy to send you a free week's worth if you want to take a look.
 
-  • Would your viewers get value from something like this?
-  • Is there anything obvious missing that would make it more useful?
-  • Would you be up for a free trial for a week and letting me know what you honestly think?
-
-No pressure at all — I'm just a fan who respects your opinion on what greyhound punters
-actually want. Either way, keep up the great work on the channel.
+Totally no pressure — just thought it was worth reaching out to someone who actually knows and
+loves greyhounds. Keep up the great work!
 
 Cheers,
 Daniel Constantine
