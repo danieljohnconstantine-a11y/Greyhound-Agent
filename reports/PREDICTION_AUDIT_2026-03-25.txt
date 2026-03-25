@@ -1,0 +1,284 @@
+================================================================================
+PREDICTION AUDIT — 2026-03-25 (Wednesday)
+Generated: 2026-03-25 22:12:00
+================================================================================
+
+TRACKS: Bendigo / BetDeluxe Capalaba / Darwin / Gunnedah / Healesville /
+        Murray Bridge Straight / Meadows / Ladbrokes Q1 Lakeside / Richmond /
+        BetDeluxe Rockhampton / Sale / Temora
+TOTAL RACES WITH RESULTS: 129 (of 131 predicted; Bendigo R13 & Q Lakeside R13 had no results)
+NOTE: Taree had 12 races but no predictions (no Taree PDF in data_predictions)
+NOTE: Tasmania had a PDF but no predictions generated
+
+────────────────────────────────────────────────────────────────────────────────
+OVERALL SUMMARY
+────────────────────────────────────────────────────────────────────────────────
+  Wins:            37  (28.7%)
+  Placed (2-4th):  43  (33.3%)
+  Losses:          49  (38.0%)
+  Win+Place rate: 62.0%
+
+────────────────────────────────────────────────────────────────────────────────
+TOP BETS PERFORMANCE (gap ≥ 10%)
+────────────────────────────────────────────────────────────────────────────────
+  10 races with gap ≥ 10%:  2 wins, 4 placed, 4 losses
+
+  Rank  Track                     Race  Gap%      Pred Box  Actual   Outcome
+  ---------------------------------------------------------------------------
+  1     Bendigo                   R1    25.46      Box 4     Box 1   PLACED (2nd)
+  2     Temora                    R12   18.59      Box 1     Box 2   LOSS
+  3     Sale                      R9    16.21      Box 4     Box 2   PLACED (3rd)
+  4     BetDeluxe Rockhampton     R3    13.72      Box 4     Box 2   PLACED (2nd)
+  5     Meadows                   R9    13.55      Box 1     Box 1   WIN
+  6     Healesville               R12   12.94      Box 1     Box 5   PLACED (4th)
+  7     Darwin                    R4    12.92      Box 8     Box 4   LOSS
+  8     Ladbrokes Q1 Lakeside     R11   12.88      Box 7     Box 7   WIN
+  9     Bendigo                   R12   10.60      Box 4     Box 7   LOSS
+  10    Bendigo                   R8    10.58      Box 1     Box 2   LOSS
+
+────────────────────────────────────────────────────────────────────────────────
+BEST BET RESULT
+────────────────────────────────────────────────────────────────────────────────
+  🏆 Bendigo R1 — Box 4 Paw Luanne (ML: 37.29%, gap: 25.46%)
+  Actual Result: Winner Box 1, Top 4: [1, 4, 2, 6]
+  Outcome: PLACED (2nd) — Predicted box finished 2nd (box bet placed)
+
+────────────────────────────────────────────────────────────────────────────────
+TOP 5 ML SCORES vs ACTUALS
+────────────────────────────────────────────────────────────────────────────────
+  #1 Paw Luanne (Bendigo R1, Box 4, ML=37.29%, gap=25.46%)
+     Actual: winner Box 1, top4=[1, 4, 2, 6] → PLACED (2nd)
+  #2 Bandit Chloe (BetDeluxe Rockhampton R3, Box 4, ML=32.29%, gap=13.72%)
+     Actual: winner Box 2, top4=[2, 4, 8, 5] → PLACED (2nd)
+  #3 What A Wrought (Sale R9, Box 4, ML=32.14%, gap=16.21%)
+     Actual: winner Box 2, top4=[2, 8, 4, 1] → PLACED (3rd)
+  #4 Flashback Jim (Temora R12, Box 1, ML=30.94%, gap=18.59%)
+     Actual: winner Box 2, top4=[2, 8, 5, 4] → LOSS
+  #5 Hayden's Gift (Ladbrokes Q1 Lakeside R11, Box 7, ML=29.92%, gap=12.88%)
+     Actual: winner Box 7, top4=[7, 1, 3, 8] → WIN
+
+────────────────────────────────────────────────────────────────────────────────
+PER-TRACK BREAKDOWN
+────────────────────────────────────────────────────────────────────────────────
+  Bendigo                       : 1/12 wins (8%), 1 placed, 10 losses  (win+place: 17%)
+    ✓ R5 Box 8 (gap 0.83%)
+    ✗ R6 Box 2 (gap 7.43%) — actual winner Box 7
+    ✗ R8 Box 1 (gap 10.58%) — actual winner Box 2
+    ✗ R12 Box 4 (gap 10.60%) — actual winner Box 7
+
+  BetDeluxe Capalaba            : 3/11 wins (27%), 5 placed, 3 losses  (win+place: 73%)
+    ✓ R1 Box 5 (gap 3.03%)
+    ✓ R9 Box 8 (gap 0.82%)
+    ✓ R10 Box 4 (gap 1.18%)
+    ✗ R5 Box 3 (gap 6.23%) — actual winner Box 2
+    ✗ R8 Box 1 (gap 6.17%) — actual winner Box 3
+
+  Darwin                        : 2/5 wins (40%), 1 placed, 2 losses  (win+place: 60%)
+    ✓ R3 Box 2 (gap 1.04%)
+    ✓ R5 Box 1 (gap 8.15%)
+    ✗ R4 Box 8 (gap 12.92%) — actual winner Box 4
+
+  Gunnedah                      : 2/12 wins (17%), 5 placed, 5 losses  (win+place: 58%)
+    ✓ R3 Box 2 (gap 2.15%)
+    ✓ R11 Box 7 (gap 0.51%)
+
+  Healesville                   : 5/12 wins (42%), 3 placed, 4 losses  (win+place: 67%)
+    ✓ R1 Box 8 (gap 9.60%)
+    ✓ R3 Box 1 (gap 7.53%)
+    ✓ R5 Box 1 (gap 1.93%)
+    ✓ R8 Box 2 (gap 1.05%)
+    ✓ R11 Box 4 (gap 3.10%)
+    ✗ R6 Box 2 (gap 9.07%) — actual winner Box 8
+    ✗ R7 Box 1 (gap 7.96%) — actual winner Box 2
+    ✗ R10 Box 8 (gap 7.47%) — actual winner Box 3
+
+  Murray Bridge Straight        : 4/8 wins (50%), 2 placed, 2 losses  (win+place: 75%)
+    ✓ R1 Box 4 (gap 0.56%)
+    ✓ R2 Box 2 (gap 5.31%)
+    ✓ R3 Box 7 (gap 0.85%)
+    ✓ R4 Box 7 (gap 1.97%)
+
+  Meadows                       : 2/11 wins (18%), 2 placed, 7 losses  (win+place: 36%)
+    ✓ R6 Box 3 (gap 1.34%)
+    ✓ R9 Box 1 (gap 13.55%)
+    ✗ R2 Box 1 (gap 7.69%) — actual winner Box 7
+    ✗ R4 Box 4 (gap 7.90%) — actual winner Box 8
+
+  Ladbrokes Q1 Lakeside         : 2/12 wins (17%), 4 placed, 6 losses  (win+place: 50%)
+    ✓ R7 Box 6 (gap 0.80%)
+    ✓ R11 Box 7 (gap 12.88%)
+    ✗ R10 Box 4 (gap 6.02%) — actual winner Box 5
+
+  Richmond                      : 3/12 wins (25%), 3 placed, 6 losses  (win+place: 50%)
+    ✓ R4 Box 8 (gap 1.81%)
+    ✓ R5 Box 4 (gap 1.79%)
+    ✓ R12 Box 2 (gap 1.72%)
+
+  BetDeluxe Rockhampton         : 2/10 wins (20%), 7 placed, 1 losses  (win+place: 90%)
+    ✓ R6 Box 6 (gap 3.56%)
+    ✓ R10 Box 6 (gap 3.76%)
+
+  Sale                          : 4/12 wins (33%), 7 placed, 1 losses  (win+place: 92%)
+    ✓ R2 Box 5 (gap 4.44%)
+    ✓ R4 Box 2 (gap 1.34%)
+    ✓ R6 Box 1 (gap 2.17%)
+    ✓ R10 Box 8 (gap 1.63%)
+
+  Temora                        : 7/12 wins (58%), 3 placed, 2 losses  (win+place: 83%)
+    ✓ R1 Box 2 (gap 2.31%)
+    ✓ R3 Box 3 (gap 0.56%)
+    ✓ R4 Box 8 (gap 0.20%)
+    ✓ R6 Box 1 (gap 6.81%)
+    ✓ R7 Box 6 (gap 0.28%)
+    ✓ R9 Box 5 (gap 0.50%)
+    ✓ R11 Box 1 (gap 2.41%)
+    ✗ R5 Box 1 (gap 5.89%) — actual winner Box 8
+    ✗ R12 Box 1 (gap 18.59%) — actual winner Box 2
+
+────────────────────────────────────────────────────────────────────────────────
+DETAILED RACE-BY-RACE COMPARISON (sorted by gap desc)
+────────────────────────────────────────────────────────────────────────────────
+  Rank  Track                        Race  Gap%     PredBox  Actual 1st   Outcome
+  --------------------------------------------------------------------------------
+  1     Bendigo                      R1    25.46     Box 4    Box 1       PLACED (2nd)
+  2     Temora                       R12   18.59     Box 1    Box 2       LOSS
+  3     Sale                         R9    16.21     Box 4    Box 2       PLACED (3rd)
+  4     BetDeluxe Rockhampton        R3    13.72     Box 4    Box 2       PLACED (2nd)
+  5     Meadows                      R9    13.55     Box 1    Box 1       WIN
+  6     Healesville                  R12   12.94     Box 1    Box 5       PLACED (4th)
+  7     Darwin                       R4    12.92     Box 8    Box 4       LOSS
+  8     Ladbrokes Q1 Lakeside        R11   12.88     Box 7    Box 7       WIN
+  9     Bendigo                      R12   10.60     Box 4    Box 7       LOSS
+  10    Bendigo                      R8    10.58     Box 1    Box 2       LOSS
+  11    Sale                         R1    9.85     Box 8    Box 6       PLACED (4th)
+  12    Temora                       R2    9.68     Box 7    Box 1       PLACED (4th)
+  13    Healesville                  R1    9.60     Box 8    Box 8       WIN
+  14    Healesville                  R6    9.07     Box 2    Box 8       LOSS
+  15    Meadows                      R11   8.57     Box 1    Box 2       PLACED (3rd)
+  16    BetDeluxe Rockhampton        R5    8.47     Box 1    Box 6       PLACED (3rd)
+  17    Sale                         R8    8.24     Box 7    Box 4       PLACED (2nd)
+  18    Darwin                       R5    8.15     Box 1    Box 1       WIN
+  19    Healesville                  R7    7.96     Box 1    Box 2       LOSS
+  20    Meadows                      R4    7.90     Box 4    Box 8       LOSS
+  21    Meadows                      R2    7.69     Box 1    Box 7       LOSS
+  22    Ladbrokes Q1 Lakeside        R9    7.67     Box 2    Box 4       PLACED (2nd)
+  23    Healesville                  R3    7.53     Box 1    Box 1       WIN
+  24    Healesville                  R10   7.47     Box 8    Box 3       LOSS
+  25    Bendigo                      R6    7.43     Box 2    Box 7       LOSS
+  26    Temora                       R6    6.81     Box 1    Box 1       WIN
+  27    BetDeluxe Capalaba           R5    6.23     Box 3    Box 2       LOSS
+  28    Ladbrokes Q1 Lakeside        R1    6.18     Box 7    Box 3       PLACED (3rd)
+  29    BetDeluxe Capalaba           R8    6.17     Box 1    Box 3       LOSS
+  30    Ladbrokes Q1 Lakeside        R10   6.02     Box 4    Box 5       LOSS
+  31    Temora                       R5    5.89     Box 1    Box 8       LOSS
+  32    Darwin                       R1    5.55     Box 1    Box 4       PLACED (2nd)
+  33    Murray Bridge Straight       R8    5.42     Box 8    Box 7       PLACED (2nd)
+  34    Murray Bridge Straight       R2    5.31     Box 2    Box 2       WIN
+  35    Meadows                      R5    4.99     Box 1    Box 2       PLACED (2nd)
+  36    Healesville                  R4    4.74     Box 5    Box 4       PLACED (2nd)
+  37    Murray Bridge Straight       R5    4.52     Box 2    Box 4       PLACED (4th)
+  38    Darwin                       R2    4.50     Box 8    Box 4       LOSS
+  39    Richmond                     R6    4.49     Box 2    Box 6       LOSS
+  40    Sale                         R2    4.44     Box 5    Box 5       WIN
+  41    BetDeluxe Rockhampton        R9    4.26     Box 8    Box 4       LOSS
+  42    Temora                       R10   4.07     Box 1    Box 3       PLACED (3rd)
+  43    BetDeluxe Rockhampton        R4    4.06     Box 1    Box 3       PLACED (2nd)
+  44    Temora                       R8    4.04     Box 2    Box 1       PLACED (4th)
+  45    Richmond                     R8    4.01     Box 1    Box 4       PLACED (2nd)
+  46    Ladbrokes Q1 Lakeside        R5    3.91     Box 1    Box 7       LOSS
+  47    Richmond                     R9    3.87     Box 3    Box 6       PLACED (3rd)
+  48    BetDeluxe Rockhampton        R1    3.82     Box 1    Box 3       PLACED (2nd)
+  49    Bendigo                      R11   3.76     Box 4    Box 3       LOSS
+  50    BetDeluxe Rockhampton        R10   3.76     Box 6    Box 6       WIN
+  51    BetDeluxe Rockhampton        R6    3.56     Box 6    Box 6       WIN
+  52    Murray Bridge Straight       R7    3.32     Box 9    Box 5       LOSS
+  53    Bendigo                      R9    3.18     Box 2    Box 8       LOSS
+  54    Gunnedah                     R7    3.12     Box 7    Box 3       PLACED (3rd)
+  55    Healesville                  R11   3.10     Box 4    Box 4       WIN
+  56    BetDeluxe Capalaba           R1    3.03     Box 5    Box 5       WIN
+  57    Ladbrokes Q1 Lakeside        R3    2.98     Box 8    Box 3       LOSS
+  58    Bendigo                      R4    2.91     Box 1    Box 4       LOSS
+  59    Bendigo                      R7    2.90     Box 7    Box 3       LOSS
+  60    BetDeluxe Capalaba           R3    2.66     Box 4    Box 1       LOSS
+  61    Temora                       R11   2.41     Box 1    Box 1       WIN
+  62    Sale                         R7    2.35     Box 4    Box 8       PLACED (3rd)
+  63    Temora                       R1    2.31     Box 2    Box 2       WIN
+  64    Meadows                      R3    2.29     Box 2    Box 7       LOSS
+  65    Ladbrokes Q1 Lakeside        R12   2.28     Box 1    Box 7       PLACED (2nd)
+  66    Bendigo                      R10   2.25     Box 1    Box 3       LOSS
+  67    Meadows                      R10   2.19     Box 4    Box 2       LOSS
+  68    Ladbrokes Q1 Lakeside        R2    2.18     Box 5    Box 8       LOSS
+  69    Richmond                     R3    2.17     Box 6    Box 3       LOSS
+  70    Sale                         R6    2.17     Box 1    Box 1       WIN
+  71    Gunnedah                     R3    2.15     Box 2    Box 2       WIN
+  72    BetDeluxe Rockhampton        R2    2.10     Box 4    Box 8       PLACED (4th)
+  73    BetDeluxe Capalaba           R4    2.00     Box 1    Box 7       PLACED (4th)
+  74    Murray Bridge Straight       R4    1.97     Box 7    Box 7       WIN
+  75    Healesville                  R5    1.93     Box 1    Box 1       WIN
+  76    Healesville                  R9    1.90     Box 7    Box 4       LOSS
+  77    Gunnedah                     R6    1.88     Box 4    Box 8       PLACED (4th)
+  78    Richmond                     R10   1.88     Box 8    Box 6       LOSS
+  79    BetDeluxe Capalaba           R7    1.85     Box 4    Box 5       PLACED (4th)
+  80    Meadows                      R7    1.82     Box 4    Box 8       LOSS
+  81    Richmond                     R4    1.81     Box 8    Box 8       WIN
+  82    Richmond                     R5    1.79     Box 4    Box 4       WIN
+  83    BetDeluxe Capalaba           R11   1.73     Box 1    Box 8       PLACED (2nd)
+  84    Richmond                     R12   1.72     Box 2    Box 2       WIN
+  85    Gunnedah                     R12   1.70     Box 6    Box 5       LOSS
+  86    Richmond                     R11   1.68     Box 1    Box 3       PLACED (3rd)
+  87    Sale                         R5    1.63     Box 1    Box 8       PLACED (2nd)
+  88    Sale                         R10   1.63     Box 8    Box 8       WIN
+  89    BetDeluxe Rockhampton        R8    1.58     Box 1    Box 6       PLACED (4th)
+  90    Bendigo                      R2    1.41     Box 1    Box 5       LOSS
+  91    Meadows                      R6    1.34     Box 3    Box 3       WIN
+  92    Sale                         R4    1.34     Box 2    Box 2       WIN
+  93    Gunnedah                     R5    1.28     Box 3    Box 7       LOSS
+  94    Richmond                     R2    1.28     Box 1    Box 2       LOSS
+  95    Richmond                     R7    1.25     Box 7    Box 1       LOSS
+  96    BetDeluxe Capalaba           R2    1.23     Box 1    Box 2       PLACED (4th)
+  97    BetDeluxe Capalaba           R10   1.18     Box 4    Box 4       WIN
+  98    Gunnedah                     R10   1.17     Box 7    Box 5       PLACED (4th)
+  99    Bendigo                      R3    1.09     Box 8    Box 2       LOSS
+  100   Healesville                  R8    1.05     Box 2    Box 2       WIN
+  101   Darwin                       R3    1.04     Box 2    Box 2       WIN
+  102   Ladbrokes Q1 Lakeside        R8    0.87     Box 5    Box 8       LOSS
+  103   Murray Bridge Straight       R3    0.85     Box 7    Box 7       WIN
+  104   Healesville                  R2    0.84     Box 4    Box 1       PLACED (2nd)
+  105   Bendigo                      R5    0.83     Box 8    Box 8       WIN
+  106   Meadows                      R1    0.83     Box 7    Box 4       LOSS
+  107   BetDeluxe Capalaba           R9    0.82     Box 8    Box 8       WIN
+  108   Gunnedah                     R9    0.82     Box 1    Box 3       PLACED (2nd)
+  109   Ladbrokes Q1 Lakeside        R7    0.80     Box 6    Box 6       WIN
+  110   Sale                         R11   0.66     Box 7    Box 8       PLACED (3rd)
+  111   Meadows                      R8    0.63     Box 3    Box 7       LOSS
+  112   Sale                         R3    0.57     Box 8    Box 2       LOSS
+  113   Murray Bridge Straight       R1    0.56     Box 4    Box 4       WIN
+  114   Temora                       R3    0.56     Box 3    Box 3       WIN
+  115   Gunnedah                     R8    0.54     Box 8    Box 3       LOSS
+  116   Gunnedah                     R11   0.51     Box 7    Box 7       WIN
+  117   Richmond                     R1    0.51     Box 8    Box 1       LOSS
+  118   Temora                       R9    0.50     Box 5    Box 5       WIN
+  119   Sale                         R12   0.46     Box 1    Box 8       PLACED (4th)
+  120   Gunnedah                     R1    0.37     Box 8    Box 4       LOSS
+  121   Ladbrokes Q1 Lakeside        R6    0.36     Box 5    Box 4       LOSS
+  122   Ladbrokes Q1 Lakeside        R4    0.30     Box 2    Box 8       PLACED (2nd)
+  123   Temora                       R7    0.28     Box 6    Box 6       WIN
+  124   BetDeluxe Rockhampton        R7    0.27     Box 1    Box 6       PLACED (2nd)
+  125   Gunnedah                     R4    0.21     Box 6    Box 4       LOSS
+  126   Temora                       R4    0.20     Box 8    Box 8       WIN
+  127   Gunnedah                     R2    0.15     Box 8    Box 5       PLACED (3rd)
+  128   Murray Bridge Straight       R6    0.11     Box 8    Box 9       LOSS
+  129   BetDeluxe Capalaba           R6    0.02     Box 3    Box 1       PLACED (3rd)
+
+────────────────────────────────────────────────────────────────────────────────
+AUDIT NOTES
+────────────────────────────────────────────────────────────────────────────────
+  • Bendigo R13 and Q Lakeside R13 were in predictions but had no results provided.
+  • Taree raced today (12 races) but no Taree PDF was in data_predictions — no predictions made.
+  • Tasmania PDF uploaded but no predictions generated (insufficient data).
+  • Richmond R3 result was '31054' — interpreted as boxes 3,10,5,4.
+  • 'Placed' = predicted box finished 2nd, 3rd, or 4th (qualifying for box bets).
+
+================================================================================
+END OF PREDICTION AUDIT — 2026-03-25
+================================================================================
