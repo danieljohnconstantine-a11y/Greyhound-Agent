@@ -1,0 +1,89 @@
+================================================================================
+DAILY RACE ANALYSIS — 2026-03-26 (Thursday)
+Generated: 2026-03-26 00:48:37
+================================================================================
+
+TRACKS (13):
+  Angle Park / CASINO / HOBART / MT GAMBIER / Mandurah / NOWRA /
+  Q PARKLANDS / Q STRAIGHT / SANDOWN / SHEPPARTON / WARRNAMBOOL /
+  WENTWORTH PARK / Warragul
+
+TOTAL RACES: 148  |  TOTAL DOGS: 1,126
+
+────────────────────────────────────────────────────────────────────────────────
+RACE COUNT PER TRACK
+────────────────────────────────────────────────────────────────────────────────
+  Angle Park          :  12 races
+  CASINO              :  10 races
+  HOBART              :  10 races
+  MT GAMBIER          :  11 races
+  Mandurah            :  12 races
+  NOWRA               :  11 races
+  Q PARKLANDS         :  10 races
+  Q STRAIGHT          :  11 races
+  SANDOWN             :  12 races
+  SHEPPARTON          :  14 races
+  WARRNAMBOOL         :  13 races
+  WENTWORTH PARK      :  10 races
+  Warragul            :  12 races
+
+NOTE: data_predictions/ includes RISTG2603form.pdf (additional track PDF) which
+      had no predictions generated — excluded from analysis.
+
+────────────────────────────────────────────────────────────────────────────────
+MODEL CONFIDENCE SUMMARY
+────────────────────────────────────────────────────────────────────────────────
+  Races with gap ≥ 20%  (VERY HIGH confidence) :   5 races
+  Races with gap ≥ 15%  (HIGH confidence)       :   9 races
+  Races with gap ≥ 10%  (MODERATE confidence)   :  19 races
+  Races with gap < 10%  (LOW confidence)         : 129 races
+
+────────────────────────────────────────────────────────────────────────────────
+TOP PREDICTIONS BY GAP (gap = difference between 1st and 2nd ML score)
+────────────────────────────────────────────────────────────────────────────────
+
+★★★ VERY HIGH CONFIDENCE (gap ≥ 20%) ★★★
+
+  #1   Q STRAIGHT       R6   Box 5  Zipping Urban         ML=41.54%  gap=23.84%
+  #2   Warragul         R3   Box 2  Estrada               ML=43.26%  gap=23.03%
+  #3   Mandurah         R9   Box 3  Sunset Clarice        ML=39.57%  gap=22.09%
+  #4   CASINO           R6   Box 1  Little Girl Gone      ML=33.52%  gap=21.98%
+  #5   CASINO           R5   Box 4  Dashing Dennis        ML=39.67%  gap=20.12%
+
+★★  HIGH CONFIDENCE (gap 15-20%) ★★
+
+  #6   Warragul         R1   Box 2  Paw Alicia            ML=42.40%  gap=19.53%
+  #7   Warragul         R9   Box 2  Waltzing Blaster      ML=36.26%  gap=19.45%
+  #8   SANDOWN          R6   Box 2  Joni Black            ML=29.66%  gap=17.26%
+  #9   SANDOWN          R7   Box 1  Blue Storm            ML=34.07%  gap=15.81%
+
+★   MODERATE CONFIDENCE (gap 10-15%) ★
+
+  #10  Q PARKLANDS      R10  Box 2  Neame                 ML=36.52%  gap=14.36%
+  #11  WARRNAMBOOL      R10  Box 1  Paw Clarissa          ML=36.98%  gap=13.20%
+  #12  SANDOWN          R2   Box 2  Tripped Out           ML=28.95%  gap=13.08%
+  #13  Mandurah         R7   Box 3  Red Hot Bernie        ML=27.88%  gap=12.48%
+  #14  WARRNAMBOOL      R6   Box 1  Lektra Isa            ML=25.25%  gap=11.99%
+  #15  WARRNAMBOOL      R11  Box 8  Slick Ivan            ML=26.36%  gap=11.84%
+  #16  Q STRAIGHT       R7   Box 8  No More Beer          ML=27.61%  gap=11.50%
+  #17  Angle Park       R3   Box 1  Adhana Snappy         ML=29.68%  gap=11.32%
+  #18  HOBART           R3   Box 1  Beast Royale          ML=22.77%  gap=11.04%
+  #19  Q STRAIGHT       R8   Box 4  Secret Story          ML=44.95%  gap=10.66%
+
+────────────────────────────────────────────────────────────────────────────────
+🏆 BEST BET OF THE DAY
+────────────────────────────────────────────────────────────────────────────────
+  Q STRAIGHT Race 6 — Box 5 Zipping Urban
+  ML Confidence: 41.54%  |  Gap to 2nd (Hey Ernie Box4): 23.84%
+  Highest confidence gap of the card. Strong model consensus.
+
+────────────────────────────────────────────────────────────────────────────────
+TOP 5 BY ML SCORE (highest raw probability)
+────────────────────────────────────────────────────────────────────────────────
+  #1  Secret Story        Q STRAIGHT R8   Box 4   ML=44.95%  gap=10.66%
+  #2  Estrada             Warragul R3     Box 2   ML=43.26%  gap=23.03%
+  #3  Paw Alicia          Warragul R1     Box 2   ML=42.40%  gap=19.53%
+  #4  Zipping Urban       Q STRAIGHT R6   Box 5   ML=41.54%  gap=23.84%
+  #5  Dashing Dennis      CASINO R5       Box 4   ML=39.67%  gap=20.12%
+
+================================================================================

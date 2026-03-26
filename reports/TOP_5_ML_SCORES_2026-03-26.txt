@@ -1,0 +1,41 @@
+================================================================================
+TOP 5 ML SCORES — 2026-03-26 (Thursday)
+Generated: 2026-03-26 00:48:37
+================================================================================
+
+Ranked by highest raw ML_Confidence score (strongest model prediction).
+
+#1  Secret Story
+    Track: Q STRAIGHT  |  Race: R8  |  Box: 4
+    ML Score: 44.95%  |  Gap to 2nd (Cousin Henry Box8): 10.66%
+    Note: Highest ML score on the card. Moderate gap — competitive race.
+
+#2  Estrada
+    Track: Warragul  |  Race: R3  |  Box: 2
+    ML Score: 43.26%  |  Gap to 2nd (Cheer Down Box5): 23.03%
+    Note: Very high ML + very high gap — strong double confidence signal.
+
+#3  Paw Alicia
+    Track: Warragul  |  Race: R1  |  Box: 2
+    ML Score: 42.40%  |  Gap to 2nd (Woody Grey Box4): 19.53%
+    Note: Warragul R1 opener — strong confidence.
+
+#4  Zipping Urban
+    Track: Q STRAIGHT  |  Race: R6  |  Box: 5
+    ML Score: 41.54%  |  Gap to 2nd (Hey Ernie Box4): 23.84%
+    Note: 🏆 BEST BET — highest gap on the card. Prioritise this race.
+
+#5  Dashing Dennis
+    Track: CASINO  |  Race: R5  |  Box: 4
+    ML Score: 39.67%  |  Gap to 2nd (Chad's Girl Box1): 20.12%
+    Note: Strong confidence, consecutive with Casino R6 Little Girl Gone.
+
+================================================================================
+BETTING STRATEGY NOTES:
+  • Estrada (Warragul R3) and Zipping Urban (Q STRAIGHT R6) have BOTH high ML
+    AND high gap — the ideal combination for a strong win bet.
+  • Secret Story has the highest ML but a smaller gap (10.66%) indicating a
+    competitive race — consider each-way rather than straight win.
+  • Warragul dominates today's top picks with R1, R3, and R9 all in the top
+    recommendations.
+================================================================================

@@ -1,0 +1,50 @@
+================================================================================
+BETTING SUMMARY — 2026-03-26 (Thursday)
+Generated: 2026-03-26 00:48:37
+Tracks: 13  |  Races: 148  |  Best Bet: Q STRAIGHT R6 Box5 Zipping Urban
+================================================================================
+
+RECOMMENDED BETS — ORDERED BY CONFIDENCE (gap ≥ 10%)
+Strategy: Win bet on Box listed. Consider each-way for gaps 10–15%.
+================================================================================
+
+TIER 1 — STRONG WIN BETS (gap ≥ 20%)
+-------------------------------------------------------------------------------
+  Q STRAIGHT     R6   Box 5  Zipping Urban       ML=41.54%  gap=23.84%  ★ BEST BET
+  Warragul       R3   Box 2  Estrada             ML=43.26%  gap=23.03%
+  Mandurah       R9   Box 3  Sunset Clarice      ML=39.57%  gap=22.09%
+  CASINO         R6   Box 1  Little Girl Gone    ML=33.52%  gap=21.98%
+  CASINO         R5   Box 4  Dashing Dennis      ML=39.67%  gap=20.12%
+
+TIER 2 — WIN BETS (gap 15–20%)
+-------------------------------------------------------------------------------
+  Warragul       R1   Box 2  Paw Alicia          ML=42.40%  gap=19.53%
+  Warragul       R9   Box 2  Waltzing Blaster    ML=36.26%  gap=19.45%
+  SANDOWN        R6   Box 2  Joni Black          ML=29.66%  gap=17.26%
+  SANDOWN        R7   Box 1  Blue Storm          ML=34.07%  gap=15.81%
+
+TIER 3 — EACH-WAY BETS (gap 10–15%)
+-------------------------------------------------------------------------------
+  Q PARKLANDS    R10  Box 2  Neame               ML=36.52%  gap=14.36%
+  WARRNAMBOOL    R10  Box 1  Paw Clarissa        ML=36.98%  gap=13.20%
+  SANDOWN        R2   Box 2  Tripped Out         ML=28.95%  gap=13.08%
+  Mandurah       R7   Box 3  Red Hot Bernie      ML=27.88%  gap=12.48%
+  WARRNAMBOOL    R6   Box 1  Lektra Isa          ML=25.25%  gap=11.99%
+  WARRNAMBOOL    R11  Box 8  Slick Ivan          ML=26.36%  gap=11.84%
+  Q STRAIGHT     R7   Box 8  No More Beer        ML=27.61%  gap=11.50%
+  Angle Park     R3   Box 1  Adhana Snappy       ML=29.68%  gap=11.32%
+  HOBART         R3   Box 1  Beast Royale        ML=22.77%  gap=11.04%
+  Q STRAIGHT     R8   Box 4  Secret Story        ML=44.95%  gap=10.66%
+
+================================================================================
+SUMMARY COUNTS
+  Tier 1 (≥20% gap):  5 bets
+  Tier 2 (15-20%):    4 bets
+  Tier 3 (10-15%):   10 bets
+  Total recommended:  19 bets
+
+NOTABLE: Warragul has 3 strong bets today (R1/R3/R9) — track showing high
+         model confidence across the card.
+         CASINO has 2 strong bets in consecutive races (R5/R6).
+         Q STRAIGHT has 3 bets across R6/R7/R8 including the best bet.
+================================================================================
