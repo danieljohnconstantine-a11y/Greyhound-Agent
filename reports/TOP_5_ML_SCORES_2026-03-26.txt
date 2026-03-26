@@ -1,41 +1,24 @@
 ================================================================================
-TOP 5 ML SCORES — 2026-03-26 (Thursday)
-Generated: 2026-03-26 00:48:37
+TOP 5 ML SCORES — 2026-03-26 (Thursday) — WITH AUDIT RESULTS
+Generated: 2026-03-26 23:35:50
 ================================================================================
 
-Ranked by highest raw ML_Confidence score (strongest model prediction).
+  #1  Secret Story        Q STRAIGHT R8   Box 4   ML=44.95%  gap=10.66%
+      ACTUAL: winner Box 4, top4=[4, 8, 2, 6] → WIN ✓
 
-#1  Secret Story
-    Track: Q STRAIGHT  |  Race: R8  |  Box: 4
-    ML Score: 44.95%  |  Gap to 2nd (Cousin Henry Box8): 10.66%
-    Note: Highest ML score on the card. Moderate gap — competitive race.
+  #2  Estrada             Warragul R3     Box 2   ML=43.26%  gap=23.03%
+      ACTUAL: winner Box 2, top4=[2, 5, 4, 7] → WIN ✓
 
-#2  Estrada
-    Track: Warragul  |  Race: R3  |  Box: 2
-    ML Score: 43.26%  |  Gap to 2nd (Cheer Down Box5): 23.03%
-    Note: Very high ML + very high gap — strong double confidence signal.
+  #3  Paw Alicia          Warragul R1     Box 2   ML=42.40%  gap=19.53%
+      ACTUAL: winner Box 4, top4=[4, 2, 6, 8] → PLACED (2nd)
 
-#3  Paw Alicia
-    Track: Warragul  |  Race: R1  |  Box: 2
-    ML Score: 42.40%  |  Gap to 2nd (Woody Grey Box4): 19.53%
-    Note: Warragul R1 opener — strong confidence.
+  #4  Zipping Urban       Q STRAIGHT R6   Box 5   ML=41.54%  gap=23.84%
+      ACTUAL: winner Box 5, top4=[5, 4, 6, 8] → WIN ✓
 
-#4  Zipping Urban
-    Track: Q STRAIGHT  |  Race: R6  |  Box: 5
-    ML Score: 41.54%  |  Gap to 2nd (Hey Ernie Box4): 23.84%
-    Note: 🏆 BEST BET — highest gap on the card. Prioritise this race.
+  #5  Dashing Dennis      CASINO R5       Box 4   ML=39.67%  gap=20.12%
+      ACTUAL: winner Box 2, top4=[2, 1, 4, 8] → PLACED (3rd)
 
-#5  Dashing Dennis
-    Track: CASINO  |  Race: R5  |  Box: 4
-    ML Score: 39.67%  |  Gap to 2nd (Chad's Girl Box1): 20.12%
-    Note: Strong confidence, consecutive with Casino R6 Little Girl Gone.
+TOP 5 RESULT: 3 WINS, 2 PLACED, 0 LOSSES (100% win+place rate)
 
-================================================================================
-BETTING STRATEGY NOTES:
-  • Estrada (Warragul R3) and Zipping Urban (Q STRAIGHT R6) have BOTH high ML
-    AND high gap — the ideal combination for a strong win bet.
-  • Secret Story has the highest ML but a smaller gap (10.66%) indicating a
-    competitive race — consider each-way rather than straight win.
-  • Warragul dominates today's top picks with R1, R3, and R9 all in the top
-    recommendations.
+🏆 BEST BET: Q STRAIGHT Race 6 — Box 5 Zipping Urban — WIN ✓
 ================================================================================

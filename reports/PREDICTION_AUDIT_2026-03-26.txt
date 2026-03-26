@@ -1,0 +1,376 @@
+================================================================================
+PREDICTION AUDIT — 2026-03-26 (Thursday)
+Generated: 2026-03-26 23:35:50
+================================================================================
+
+TRACKS WITH PREDICTIONS: Angle Park / Casino / Hobart / MT Gambier / Mandurah /
+        Nowra / Q Parklands / Q Straight / Sandown / Shepparton / Warrnambool /
+        Wentworth Park / Warragul
+NOTE: RISTG2603form.pdf (Richmond Straight) was in data_predictions but had no
+      predictions generated — excluded from prediction comparison.
+NOTE: Q Parklands — ALL 10 races ABANDONED (ABD) — no results to compare.
+NOTE: Nowra R7-R11 abandoned (Thu) — only R1-R6 have results.
+NOTE: Shepparton R13-R14 predicted but only R1-R12 ran.
+NOTE: Warrnambool R13 predicted but only R1-R12 ran.
+
+TOTAL RACES WITH PREDICTIONS AND RESULTS: 130
+  (148 predicted - 10 Q Parklands ABD - 5 Nowra ABD - 2 Shepparton no result - 1 Warrnambool no result)
+
+────────────────────────────────────────────────────────────────────────────────
+OVERALL SUMMARY
+────────────────────────────────────────────────────────────────────────────────
+  Wins:            35  (26.9%)
+  Placed (2-4th):  59  (45.4%)
+  Losses:          36  (27.7%)
+  Win+Place rate: 72.3%
+
+────────────────────────────────────────────────────────────────────────────────
+TOP BETS PERFORMANCE (gap ≥ 10%) — 19 races, excluding 1 abandoned (Q Parklands R10)
+────────────────────────────────────────────────────────────────────────────────
+  18 races with predictions and results (gap ≥ 10%):  11 wins, 5 placed, 2 losses
+
+  Rank  Track                  Race  Gap%      Pred Box  Actual 1st  Top4        Outcome
+  -----------------------------------------------------------------------------------------
+  1     Q STRAIGHT             R6    23.84      Box 5     Box 5       5,4,6,8    WIN ✓
+  2     Warragul               R3    23.03      Box 2     Box 2       2,5,4,7    WIN ✓
+  3     Mandurah               R9    22.09      Box 3     Box 3       3,2,1,6    WIN ✓
+  4     CASINO                 R6    21.98      Box 1     Box 3       3,6,5,1    PLACED (4th)
+  5     CASINO                 R5    20.12      Box 4     Box 2       2,1,4,8    PLACED (3rd)
+  6     Warragul               R1    19.53      Box 2     Box 4       4,2,6,8    PLACED (2nd)
+  7     Warragul               R9    19.45      Box 2     Box 4       4,7,1,8    LOSS
+  8     SANDOWN                R6    17.26      Box 2     Box 3       3,7,8,1    LOSS
+  9     SANDOWN                R7    15.81      Box 1     Box 1       1,7,3,5    WIN ✓
+  10    Q PARKLANDS            R10   14.36      Box 2     —           ABANDONED  N/A
+  11    WARRNAMBOOL            R10   13.20      Box 1     Box 1       1,2,7,3    WIN ✓
+  12    SANDOWN                R2    13.08      Box 2     Box 2       2,1,4,5    WIN ✓
+  13    Mandurah               R7    12.48      Box 3     Box 3       3,4,6,5    WIN ✓
+  14    WARRNAMBOOL            R6    11.99      Box 1     Box 5       5,3,1,4    PLACED (3rd)
+  15    WARRNAMBOOL            R11   11.84      Box 8     Box 8       8,4,3,1    WIN ✓
+  16    Q STRAIGHT             R7    11.50      Box 8     Box 8       8,2,1,7    WIN ✓
+  17    Angle Park             R3    11.32      Box 1     Box 6       6,1,4,8    PLACED (2nd)
+  18    HOBART                 R3    11.04      Box 1     Box 1       1,6,4,2    WIN ✓
+  19    Q STRAIGHT             R8    10.66      Box 4     Box 4       4,8,2,6    WIN ✓
+
+────────────────────────────────────────────────────────────────────────────────
+BEST BET RESULT
+────────────────────────────────────────────────────────────────────────────────
+  🏆 Q STRAIGHT Race 6 — Box 5 Zipping Urban (ML: 41.54%, gap: 23.84%)
+  Actual Result: Winner Box 5, Top 4: [5, 4, 6, 8]
+  Outcome: WIN ✓ — Best bet WON!
+
+────────────────────────────────────────────────────────────────────────────────
+TOP 5 ML SCORES vs ACTUALS
+────────────────────────────────────────────────────────────────────────────────
+  #1 Secret Story (Q STRAIGHT R8, Box 4, ML=44.95%, gap=10.66%)
+     Actual: winner Box 4, top4=[4, 8, 2, 6] → WIN ✓
+  #2 Estrada (Warragul R3, Box 2, ML=43.26%, gap=23.03%)
+     Actual: winner Box 2, top4=[2, 5, 4, 7] → WIN ✓
+  #3 Paw Alicia (Warragul R1, Box 2, ML=42.40%, gap=19.53%)
+     Actual: winner Box 4, top4=[4, 2, 6, 8] → PLACED (2nd)
+  #4 Zipping Urban (Q STRAIGHT R6, Box 5, ML=41.54%, gap=23.84%)
+     Actual: winner Box 5, top4=[5, 4, 6, 8] → WIN ✓
+  #5 Dashing Dennis (CASINO R5, Box 4, ML=39.67%, gap=20.12%)
+     Actual: winner Box 2, top4=[2, 1, 4, 8] → PLACED (3rd)
+
+  TOP 5 ML SCORE RESULTS: 3 wins, 2 placed, 0 losses (100% win+place rate)
+
+────────────────────────────────────────────────────────────────────────────────
+PER-TRACK BREAKDOWN
+────────────────────────────────────────────────────────────────────────────────
+  Ladbrokes Q Straight          : 7/11 wins (63.6%), 2 placed, 2 losses  (win+place: 81.8%)
+    ✓ R3 Box 3 (gap 0.34%) — actual 3,8,1,6
+    ✓ R4 Box 8 (gap 3.12%) — actual 8,3,6,1
+    ✓ R6 Box 5 (gap 23.84%) — actual 5,4,6,8  ← BEST BET WIN
+    ✓ R7 Box 8 (gap 11.50%) — actual 8,2,1,7
+    ✓ R8 Box 4 (gap 10.66%) — actual 4,8,2,6
+    ✓ R9 Box 6 (gap 4.80%) — actual 6,1,7,3
+    ✓ R11 Box 1 (gap 1.88%) — actual 1,3,2,6
+    ~ R2 Box 1 (gap 0.82%) — actual 4,2,7,1 → PLACED (4th)
+    ~ R5 Box 1 (gap 1.70%) — actual 5,2,6,1 → PLACED (4th)
+    ✗ R1 Box 2 (gap 5.25%) — actual winner Box 7
+    ✗ R10 Box 1 (gap 7.04%) — actual winner Box 7
+
+  Warrnambool                   : 4/12 wins (33.3%), 6 placed, 2 losses  (win+place: 83.3%)
+    ✓ R4 Box 2 (gap 5.67%) — actual 2,1,4,5
+    ✓ R7 Box 8 (gap 1.03%) — actual 8,2,1,7
+    ✓ R10 Box 1 (gap 13.20%) — actual 1,2,7,3
+    ✓ R11 Box 8 (gap 11.84%) — actual 8,4,3,1
+    ~ R1 Box 3 (gap 4.65%) — actual 5,3,6,1 → PLACED (2nd)
+    ~ R3 Box 1 (gap 3.31%) — actual 5,1,8,7 → PLACED (2nd)
+    ~ R6 Box 1 (gap 11.99%) — actual 5,3,1,4 → PLACED (3rd)
+    ~ R8 Box 5 (gap 0.40%) — actual 1,5,7,8 → PLACED (2nd)
+    ~ R9 Box 6 (gap 0.34%) — actual 5,2,6,1 → PLACED (3rd)
+    ~ R12 Box 1 (gap 4.04%) — actual 3,1,8,2 → PLACED (2nd)
+    ✗ R2 Box 5 (gap 0.08%) — actual winner Box 3
+    ✗ R5 Box 1 (gap 3.22%) — actual winner Box 4
+
+  Wentworth Park                : 3/10 wins (30.0%), 6 placed, 1 loss  (win+place: 90.0%)
+    ✓ R1 Box 1 (gap 7.29%) — actual 1,7,5,4
+    ✓ R6 Box 5 (gap 1.52%) — actual 5,8,7,4
+    ✓ R9 Box 5 (gap 1.50%) — actual 5,7,8,1
+    ~ R2 Box 5 (gap 2.61%) — actual 3,5,7,4 → PLACED (2nd)
+    ~ R3 Box 3 (gap 3.56%) — actual 1,7,6,3 → PLACED (4th)
+    ~ R5 Box 4 (gap 0.22%) — actual 5,7,1,4 → PLACED (4th)
+    ~ R7 Box 2 (gap 1.79%) — actual 8,2,7,1 → PLACED (2nd)
+    ~ R8 Box 8 (gap 5.84%) — actual 2,7,4,8 → PLACED (4th)
+    ~ R10 Box 5 (gap 2.15%) — actual 2,7,5,8 → PLACED (3rd)
+    ✗ R4 Box 1 (gap 3.35%) — actual winner Box 6
+
+  Hobart                        : 3/10 wins (30.0%), 6 placed, 1 loss  (win+place: 90.0%)
+    ✓ R3 Box 1 (gap 11.04%) — actual 1,6,4,2
+    ✓ R5 Box 2 (gap 6.21%) — actual 2,3,4,7
+    ✓ R9 Box 1 (gap 9.26%) — actual 1,6,3,8
+    ~ R1 Box 2 (gap 3.03%) — actual 8,2,3,5 → PLACED (2nd)
+    ~ R2 Box 1 (gap 7.15%) — actual 2,5,8,1 → PLACED (4th)
+    ~ R4 Box 1 (gap 3.44%) — actual 8,1,5,2 → PLACED (2nd)
+    ~ R6 Box 4 (gap 4.90%) — actual 2,3,7,4 → PLACED (4th)
+    ~ R7 Box 4 (gap 1.09%) — actual 1,2,4,7 → PLACED (3rd)
+    ~ R8 Box 3 (gap 0.29%) — actual 2,3,5,7 → PLACED (2nd)
+    ✗ R10 Box 2 (gap 2.21%) — actual winner Box 8
+
+  Mount Gambier                 : 3/11 wins (27.3%), 6 placed, 2 losses  (win+place: 81.8%)
+    ✓ R4 Box 6 (gap 5.83%) — actual 6,1,2,4
+    ✓ R5 Box 5 (gap 1.00%) — actual 5,1,2,7
+    ✓ R9 Box 2 (gap 7.22%) — actual 2,6,1,4
+    ~ R3 Box 4 (gap 0.56%) — actual 7,9,4,1 → PLACED (3rd)
+    ~ R6 Box 1 (gap 2.46%) — actual 4,1,2,8 → PLACED (2nd)
+    ~ R7 Box 2 (gap 2.85%) — actual 5,4,7,2 → PLACED (4th)
+    ~ R8 Box 2 (gap 4.24%) — actual 5,7,4,2 → PLACED (4th)
+    ~ R10 Box 4 (gap 3.50%) — actual 1,4,6,8 → PLACED (2nd)
+    ~ R11 Box 2 (gap 3.91%) — actual 4,8,6,2 → PLACED (4th)
+    ✗ R1 Box 7 (gap 5.45%) — actual winner Box 8
+    ✗ R2 Box 8 (gap 2.86%) — actual winner Box 1
+
+  Mandurah                      : 4/12 wins (33.3%), 4 placed, 4 losses  (win+place: 66.7%)
+    ✓ R5 Box 8 (gap 5.44%) — actual 8,1,9,5
+    ✓ R7 Box 3 (gap 12.48%) — actual 3,4,6,5
+    ✓ R9 Box 3 (gap 22.09%) — actual 3,2,1,6
+    ✓ R12 Box 8 (gap 2.03%) — actual 8,7,1,5
+    ~ R4 Box 2 (gap 2.41%) — actual 3,8,2,1 → PLACED (3rd)
+    ~ R6 Box 7 (gap 0.53%) — actual 4,5,7,3 → PLACED (3rd)
+    ~ R8 Box 3 (gap 0.95%) — actual 9,5,8,3 → PLACED (4th)
+    ~ R10 Box 1 (gap 4.18%) — actual 2,1,5,6 → PLACED (2nd)
+    ✗ R1 Box 2 (gap 5.91%) — actual winner Box 1
+    ✗ R2 Box 2 (gap 0.51%) — actual winner Box 8
+    ✗ R3 Box 7 (gap 3.85%) — actual winner Box 2
+    ✗ R11 Box 5 (gap 0.37%) — actual winner Box 3
+
+  Warragul                      : 3/12 wins (25.0%), 6 placed, 3 losses  (win+place: 75.0%)
+    ✓ R3 Box 2 (gap 23.03%) — actual 2,5,4,7
+    ✓ R5 Box 2 (gap 2.54%) — actual 2,3,6,7
+    ✓ R8 Box 1 (gap 2.07%) — actual 1,5,2,4
+    ~ R1 Box 2 (gap 19.53%) — actual 4,2,6,8 → PLACED (2nd)
+    ~ R2 Box 8 (gap 7.68%) — actual 5,4,2,8 → PLACED (4th)
+    ~ R4 Box 1 (gap 2.12%) — actual 5,1,7,2 → PLACED (2nd)
+    ~ R6 Box 2 (gap 3.16%) — actual 6,2,3,1 → PLACED (2nd)
+    ~ R7 Box 1 (gap 2.08%) — actual 7,1,4,8 → PLACED (2nd)
+    ~ R10 Box 8 (gap 4.46%) — actual 3,2,6,8 → PLACED (4th)
+    ✗ R9 Box 2 (gap 19.45%) — actual winner Box 4
+    ✗ R11 Box 6 (gap 0.02%) — actual winner Box 1
+    ✗ R12 Box 2 (gap 0.31%) — actual winner Box 5
+
+  Angle Park                    : 3/12 wins (25.0%), 4 placed, 5 losses  (win+place: 58.3%)
+    ✓ R9 Box 3 (gap 6.39%) — actual 3,1,7,5
+    ✓ R10 Box 4 (gap 0.28%) — actual 4,1,2,6
+    ✓ R11 Box 2 (gap 0.35%) — actual 2,5,7,8
+    ~ R3 Box 1 (gap 11.32%) — actual 6,1,4,8 → PLACED (2nd)
+    ~ R4 Box 8 (gap 0.57%) — actual 4,1,8,2 → PLACED (3rd)
+    ~ R8 Box 1 (gap 3.58%) — actual 8,1,4,7 → PLACED (2nd)
+    ~ R12 Box 7 (gap 2.80%) — actual 5,4,7,8 → PLACED (3rd)
+    ✗ R1 Box 2 (gap 8.74%) — actual winner Box 8
+    ✗ R2 Box 2 (gap 0.02%) — actual winner Box 6
+    ✗ R5 Box 8 (gap 3.30%) — actual winner Box 3
+    ✗ R6 Box 7 (gap 0.52%) — actual winner Box 4
+    ✗ R7 Box 2 (gap 2.92%) — actual winner Box 1
+
+  Sandown                       : 3/12 wins (25.0%), 5 placed, 4 losses  (win+place: 66.7%)
+    ✓ R2 Box 2 (gap 13.08%) — actual 2,1,4,5
+    ✓ R7 Box 1 (gap 15.81%) — actual 1,7,3,5
+    ✓ R8 Box 2 (gap 9.35%) — actual 2,4,1,8
+    ~ R1 Box 3 (gap 4.15%) — actual 1,5,8,3 → PLACED (4th)
+    ~ R4 Box 2 (gap 4.81%) — actual 8,4,2,6 → PLACED (3rd)
+    ~ R10 Box 1 (gap 9.01%) — actual 3,1,2,6 → PLACED (2nd)
+    ~ R11 Box 2 (gap 9.63%) — actual 1,7,3,2 → PLACED (4th)
+    ~ R12 Box 1 (gap 2.96%) — actual 4,5,3,1 → PLACED (4th)
+    ✗ R3 Box 2 (gap 6.95%) — actual winner Box 4
+    ✗ R5 Box 8 (gap 8.64%) — actual winner Box 2
+    ✗ R6 Box 2 (gap 17.26%) — actual winner Box 3
+    ✗ R9 Box 2 (gap 7.76%) — actual winner Box 4
+
+  Casino                        : 1/10 wins (10.0%), 5 placed, 4 losses  (win+place: 60.0%)
+    ✓ R9 Box 6 (gap 2.15%) — actual 6,3,9,10
+    ~ R3 Box 4 (gap 1.53%) — actual 2,4,8,5 → PLACED (2nd)
+    ~ R5 Box 4 (gap 20.12%) — actual 2,1,4,8 → PLACED (3rd)
+    ~ R6 Box 1 (gap 21.98%) — actual 3,6,5,1 → PLACED (4th)
+    ~ R7 Box 2 (gap 1.34%) — actual 1,2,5,6 → PLACED (2nd)
+    ~ R8 Box 4 (gap 0.29%) — actual 1,5,4,7 → PLACED (3rd)
+    ✗ R1 Box 4 (gap 1.67%) — actual winner Box 2
+    ✗ R2 Box 2 (gap 0.20%) — actual winner Box 8
+    ✗ R4 Box 2 (gap 1.95%) — actual winner Box 4
+    ✗ R10 Box 1 (gap 1.88%) — actual winner Box 3
+
+  Shepparton                    : 1/12 wins (8.3%), 7 placed, 4 losses  (win+place: 66.7%)
+    ✓ R2 Box 3 (gap 5.34%) — actual 3,7,2,5
+    ~ R1 Box 6 (gap 2.90%) — actual 4,7,6,8 → PLACED (3rd)
+    ~ R6 Box 8 (gap 6.12%) — actual 1,3,7,8 → PLACED (4th)
+    ~ R8 Box 1 (gap 4.54%) — actual 8,1,4,3 → PLACED (2nd)
+    ~ R9 Box 3 (gap 3.30%) — actual 1,4,2,3 → PLACED (4th)
+    ~ R10 Box 1 (gap 0.13%) — actual 3,5,1,6 → PLACED (3rd)
+    ~ R11 Box 2 (gap 0.73%) — actual 4,1,6,2 → PLACED (4th)
+    ~ R12 Box 1 (gap 1.33%) — actual 6,2,1,8 → PLACED (3rd)
+    ✗ R3 Box 6 (gap 7.22%) — actual winner Box 4
+    ✗ R4 Box 2 (gap 0.20%) — actual winner Box 8
+    ✗ R5 Box 8 (gap 1.61%) — actual winner Box 6
+    ✗ R7 Box 8 (gap 0.16%) — actual winner Box 2
+
+  Nowra (R1-R6 only; R7-R11 abandoned)
+                                : 0/6 wins (0.0%), 2 placed, 4 losses  (win+place: 33.3%)
+    ~ R4 Box 5 (gap 0.07%) — actual 7,2,4,5 → PLACED (4th)
+    ~ R5 Box 8 (gap 1.91%) — actual 2,7,6,8 → PLACED (4th)
+    ✗ R1 Box 3 (gap 1.41%) — actual winner Box 2
+    ✗ R2 Box 4 (gap 0.76%) — actual winner Box 5
+    ✗ R3 Box 2 (gap 3.53%) — actual winner Box 6
+    ✗ R6 Box 2 (gap 1.57%) — actual winner Box 5
+
+────────────────────────────────────────────────────────────────────────────────
+TRACK PERFORMANCE SUMMARY (sorted by win rate)
+────────────────────────────────────────────────────────────────────────────────
+  Track                    Races  Wins  Win%   Win+Place%
+  --------------------------------------------------------
+  Ladbrokes Q Straight     11     7     63.6%  81.8%
+  Wentworth Park           10     3     30.0%  90.0%
+  Hobart                   10     3     30.0%  90.0%
+  Warrnambool              12     4     33.3%  83.3%
+  Mount Gambier            11     3     27.3%  81.8%
+  Warragul                 12     3     25.0%  75.0%
+  Mandurah                 12     4     33.3%  66.7%
+  Sandown                  12     3     25.0%  66.7%
+  Shepparton               12     1     8.3%   66.7%
+  Casino                   10     1     10.0%  60.0%
+  Angle Park               12     3     25.0%  58.3%
+  Nowra                    6      0     0.0%   33.3%
+  Q Parklands              0      —     ABD    ABD
+
+────────────────────────────────────────────────────────────────────────────────
+DETAILED RACE-BY-RACE COMPARISON — ALL TRACKED PREDICTIONS (sorted by gap desc)
+────────────────────────────────────────────────────────────────────────────────
+  Rank  Track                     Race  Gap%    PredBox  Actual 1st  Top4        Outcome
+  --------------------------------------------------------------------------------------
+  1     Q STRAIGHT                R6    23.84   Box 5    Box 5       5,4,6,8    WIN ✓
+  2     Warragul                  R3    23.03   Box 2    Box 2       2,5,4,7    WIN ✓
+  3     Mandurah                  R9    22.09   Box 3    Box 3       3,2,1,6    WIN ✓
+  4     CASINO                    R6    21.98   Box 1    Box 3       3,6,5,1    PLACED (4th)
+  5     CASINO                    R5    20.12   Box 4    Box 2       2,1,4,8    PLACED (3rd)
+  6     Warragul                  R1    19.53   Box 2    Box 4       4,2,6,8    PLACED (2nd)
+  7     Warragul                  R9    19.45   Box 2    Box 4       4,7,1,8    LOSS
+  8     SANDOWN                   R6    17.26   Box 2    Box 3       3,7,8,1    LOSS
+  9     SANDOWN                   R7    15.81   Box 1    Box 1       1,7,3,5    WIN ✓
+  10    WARRNAMBOOL               R10   13.20   Box 1    Box 1       1,2,7,3    WIN ✓
+  11    SANDOWN                   R2    13.08   Box 2    Box 2       2,1,4,5    WIN ✓
+  12    Mandurah                  R7    12.48   Box 3    Box 3       3,4,6,5    WIN ✓
+  13    WARRNAMBOOL               R6    11.99   Box 1    Box 5       5,3,1,4    PLACED (3rd)
+  14    WARRNAMBOOL               R11   11.84   Box 8    Box 8       8,4,3,1    WIN ✓
+  15    Q STRAIGHT                R7    11.50   Box 8    Box 8       8,2,1,7    WIN ✓
+  16    Angle Park                R3    11.32   Box 1    Box 6       6,1,4,8    PLACED (2nd)
+  17    HOBART                    R3    11.04   Box 1    Box 1       1,6,4,2    WIN ✓
+  18    Q STRAIGHT                R8    10.66   Box 4    Box 4       4,8,2,6    WIN ✓
+  19    Angle Park                R1     8.74   Box 2    Box 8       8,4,1,5    LOSS
+  20    SANDOWN                   R9     7.76   Box 2    Box 4       4,3,5,8    LOSS
+  21    Q STRAIGHT                R1     5.25   Box 2    Box 7       7,4,8,1    LOSS
+  22    HOBART                    R2     7.15   Box 1    Box 2       2,5,8,1    PLACED (4th)
+  23    Q STRAIGHT                R10    7.04   Box 1    Box 7       7,4,6,8    LOSS
+  24    SANDOWN                   R3     6.95   Box 2    Box 4       4,1,5,8    LOSS
+  25    Warragul                  R2     7.68   Box 8    Box 5       5,4,2,8    PLACED (4th)
+  26    SHEPPARTON                R3     7.22   Box 6    Box 4       4,2,1,3    LOSS
+  27    MT GAMBIER                R9     7.22   Box 2    Box 2       2,6,1,4    WIN ✓
+  28    SANDOWN                   R11    9.63   Box 2    Box 1       1,7,3,2    PLACED (4th)
+  29    SANDOWN                   R10    9.01   Box 1    Box 3       3,1,2,6    PLACED (2nd)
+  30    HOBART                    R9     9.26   Box 1    Box 1       1,6,3,8    WIN ✓
+  31    SANDOWN                   R8     9.35   Box 2    Box 2       2,4,1,8    WIN ✓
+  32    SANDOWN                   R5     8.64   Box 8    Box 2       2,5,1,3    LOSS
+  33    SHEPPARTON                R2     5.34   Box 3    Box 3       3,7,2,5    WIN ✓
+  34    MT GAMBIER                R1     5.45   Box 7    Box 8       8,2,1,5    LOSS
+  35    Mandurah                  R1     5.91   Box 2    Box 1       1,3,7,4    LOSS
+  36    Warragul                  R10    4.46   Box 8    Box 3       3,2,6,8    PLACED (4th)
+  37    WARRNAMBOOL               R1     4.65   Box 3    Box 5       5,3,6,1    PLACED (2nd)
+  38    Angle Park                R9     6.39   Box 3    Box 3       3,1,7,5    WIN ✓
+  39    MT GAMBIER                R8     4.24   Box 2    Box 5       5,7,4,2    PLACED (4th)
+  40    SANDOWN                   R4     4.81   Box 2    Box 8       8,4,2,6    PLACED (3rd)
+  41    HOBART                    R6     4.90   Box 4    Box 2       2,3,7,4    PLACED (4th)
+  42    SANDOWN                   R1     4.15   Box 3    Box 1       1,5,8,3    PLACED (4th)
+  43    WARRNAMBOOL               R12    4.04   Box 1    Box 3       3,1,8,2    PLACED (2nd)
+  44    NOWRA                     R3     3.53   Box 2    Box 6       6,8,4,1    LOSS
+  45    MT GAMBIER                R11    3.91   Box 2    Box 4       4,8,6,2    PLACED (4th)
+  46    HOBART                    R4     3.44   Box 1    Box 8       8,1,5,2    PLACED (2nd)
+  47    WARRNAMBOOL               R3     3.31   Box 1    Box 5       5,1,8,7    PLACED (2nd)
+  48    Warragul                  R4     2.12   Box 1    Box 5       5,1,7,2    PLACED (2nd)
+  49    Angle Park                R8     3.58   Box 1    Box 8       8,1,4,7    PLACED (2nd)
+  50    MT GAMBIER                R10    3.50   Box 4    Box 1       1,4,6,8    PLACED (2nd)
+  51    Wentworth Park            R8     5.84   Box 8    Box 2       2,7,4,8    PLACED (4th)
+  52    MT GAMBIER                R4     5.83   Box 6    Box 6       6,1,2,4    WIN ✓
+  53    MT GAMBIER                R5     1.00   Box 5    Box 5       5,1,2,7    WIN ✓
+  54    Mandurah                  R5     5.44   Box 8    Box 8       8,1,9,5    WIN ✓
+  55    Angle Park                R12    2.80   Box 7    Box 5       5,4,7,8    PLACED (3rd)
+  56    MT GAMBIER                R7     2.85   Box 2    Box 5       5,4,7,2    PLACED (4th)
+  57    Wentworth Park            R3     3.56   Box 3    Box 1       1,7,6,3    PLACED (4th)
+  58    Wentworth Park            R1     7.29   Box 1    Box 1       1,7,5,4    WIN ✓
+  59    HOBART                    R5     6.21   Box 2    Box 2       2,3,4,7    WIN ✓
+  60    MT GAMBIER                R2     2.86   Box 8    Box 1       1,9,5,7    LOSS
+  61    MT GAMBIER                R6     2.46   Box 1    Box 4       4,1,2,8    PLACED (2nd)
+  62    Warragul                  R7     2.08   Box 1    Box 7       7,1,4,8    PLACED (2nd)
+  63    Warragul                  R6     3.16   Box 2    Box 6       6,2,3,1    PLACED (2nd)
+  64    Warragul                  R8     2.07   Box 1    Box 1       1,5,2,4    WIN ✓
+  65    NOWRA                     R5     1.91   Box 8    Box 2       2,7,6,8    PLACED (4th)
+  66    WARRNAMBOOL               R7     1.03   Box 8    Box 8       8,2,1,7    WIN ✓
+  67    NOWRA                     R6     1.57   Box 2    Box 5       5,9,3,8    LOSS
+  68    Wentworth Park            R7     1.79   Box 2    Box 8       8,2,7,1    PLACED (2nd)
+  69    CASINO                    R9     2.15   Box 6    Box 6       6,3,9,10   WIN ✓
+  70    Warragul                  R5     2.54   Box 2    Box 2       2,3,6,7    WIN ✓
+  71    Wentworth Park            R2     2.61   Box 5    Box 3       3,5,7,4    PLACED (2nd)
+  72    HOBART                    R7     1.09   Box 4    Box 1       1,2,4,7    PLACED (3rd)
+  73    Wentworth Park            R9     1.50   Box 5    Box 5       5,7,8,1    WIN ✓
+  74    CASINO                    R7     1.34   Box 2    Box 1       1,2,5,6    PLACED (2nd)
+  75    Mandurah                  R10    4.18   Box 1    Box 2       2,1,5,6    PLACED (2nd)
+  76    SHEPPARTON                R8     4.54   Box 1    Box 8       8,1,4,3    PLACED (2nd)
+  77    SHEPPARTON                R6     6.12   Box 8    Box 1       1,3,7,8    PLACED (4th)
+  78    Mandurah                  R12    2.03   Box 8    Box 8       8,7,1,5    WIN ✓
+  79    Wentworth Park            R6     1.52   Box 5    Box 5       5,8,7,4    WIN ✓
+  80    Mandurah                  R4     2.41   Box 2    Box 3       3,8,2,1    PLACED (3rd)
+  81    WARRNAMBOOL               R4     5.67   Box 2    Box 2       2,1,4,5    WIN ✓
+  82    CASINO                    R8     0.29   Box 4    Box 1       1,5,4,7    PLACED (3rd)
+  83    HOBART                    R1     3.03   Box 2    Box 8       8,2,3,5    PLACED (2nd)
+  84    Warragul                  R1    19.53   Box 2    Box 4       4,2,6,8    PLACED (2nd)
+  85    HOBART                    R8     0.29   Box 3    Box 2       2,3,5,7    PLACED (2nd)
+  86    NOWRA                     R4     0.07   Box 5    Box 7       7,2,4,5    PLACED (4th)
+  87    WARRNAMBOOL               R9     0.34   Box 6    Box 5       5,2,6,1    PLACED (3rd)
+  88    Mandurah                  R6     0.53   Box 7    Box 4       4,5,7,3    PLACED (3rd)
+  89    Mandurah                  R7    12.48   Box 3    Box 3       3,4,6,5    WIN ✓
+  90    Mandurah                  R8     0.95   Box 3    Box 9       9,5,8,3    PLACED (4th)
+  91    WARRNAMBOOL               R8     0.40   Box 5    Box 1       1,5,7,8    PLACED (2nd)
+  92    CASINO                    R3     1.53   Box 4    Box 2       2,4,8,5    PLACED (2nd)
+  93    Mandurah                  R2     0.51   Box 2    Box 8       8,1,4,3    LOSS
+  94    Mandurah                  R3     3.85   Box 7    Box 2       2,4,6,1    LOSS
+  95    Mandurah                  R11    0.37   Box 5    Box 3       3,1,2,8    LOSS
+  96    WARRNAMBOOL               R2     0.08   Box 5    Box 3       3,1,7,6    LOSS
+  97    WARRNAMBOOL               R5     3.22   Box 1    Box 4       4,7,3,8    LOSS
+  98    CASINO                    R4     1.95   Box 2    Box 4       4,7,8,5    LOSS
+  99    CASINO                    R1     1.67   Box 4    Box 2       2,5,6,3    LOSS
+  100   CASINO                    R10    1.88   Box 1    Box 3       3,6,4,5    LOSS
+  101   Warragul                  R12    0.31   Box 2    Box 5       5,3,1,8    LOSS
+  102   Warragul                  R9    19.45   Box 2    Box 4       4,7,1,8    LOSS
+  103   Warragul                  R11    0.02   Box 6    Box 1       1,5,4,2    LOSS
+  104   Angle Park                R5     3.30   Box 8    Box 3       3,6,1,7    LOSS
+  105   Angle Park                R1     8.74   Box 2    Box 8       8,4,1,5    LOSS
+  106   Angle Park                R2     0.02   Box 2    Box 6       6,8,1,4    LOSS
+  107   Angle Park                R6     0.52   Box 7    Box 4       4,2,3,1    LOSS
+  108   Angle Park                R7     2.92   Box 2    Box 1       1,8,7,5    LOSS
+  109   NOWRA                     R1     1.41   Box 3    Box 2       2,4,7,6    LOSS
+  110   NOWRA                     R2     0.76   Box 4    Box 5       5,8,1,7    LOSS
+  111   SANDOWN                   R6    17.26   Box 2    Box 3       3,7,8,1    LOSS
+  112   Q STRAIGHT                R1     5.25   Box 2    Box 7       7,4,8,1    LOSS
+  113   Q STRAIGHT                R10    7.04   Box 1    Box 7       7,4,6,8    LOSS
+  114   SHEPPARTON                R4     0.20   Box 2    Box 8       8,1,4,6    LOSS
+  115   SHEPPARTON                R5     1.61   Box 8    Box 6       6,3,7,4    LOSS
+  116   SHEPPARTON                R7     0.16   Box 8    Box 2       2,7,4,3    LOSS
+
+================================================================================
