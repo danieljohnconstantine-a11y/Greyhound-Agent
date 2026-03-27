@@ -1,0 +1,47 @@
+================================================================================
+DAILY ANALYSIS - 2026-03-28 (Saturday)
+================================================================================
+
+TRACKS (7): Cannington, DUBBO, GEELONG, Meadows, Q LAKESIDE, The Gardens, WENTWORTH PARK
+NOTE: Tasmania PDF present but unmatched.
+
+RACE SUMMARY:
+  Total races: 81
+  Total dogs:  696
+
+  Races with gap ≥20%: 1
+  Races with gap ≥15%: 2
+  Races with gap ≥10%: 6
+
+TRACK BREAKDOWN:
+  Cannington             12 races (R1-R12)
+  DUBBO                  12 races (R1-R12)
+  GEELONG                12 races (R1-R12)
+  Meadows                12 races (R1-R12)
+  Q LAKESIDE             11 races (R1-R11)
+  The Gardens            12 races (R1-R12)
+  WENTWORTH PARK         10 races (R1-R10)
+
+BEST BET: Q LAKESIDE R3 Box4 Sironen Tiger
+  ML Confidence: 37.97%  |  Gap: 23.1909%
+
+TOP 10 BEST BETS (by gap):
+   1. Q LAKESIDE             R3   Box4 Sironen Tiger                ML=37.97%  gap=23.1909%
+   2. GEELONG                R12  Box4 Snowball One                 ML=27.03%  gap=15.5278%
+   3. The Gardens            R1   Box8 Feed The Meter               ML=24.60%  gap=14.8799%
+   4. Meadows                R6   Box5 Aston Bugsy                  ML=24.42%  gap=11.4234%
+   5. Q LAKESIDE             R4   Box6 Hara's Neo                   ML=30.79%  gap=11.3584%
+   6. Q LAKESIDE             R5   Box1 Scrub's Blue                 ML=25.08%  gap=10.4146%
+   7. GEELONG                R10  Box2 Alborz Girl                  ML=24.61%  gap=9.6140%
+   8. Cannington             R3   Box6 Paid My Dues                 ML=23.88%  gap=8.1281%
+   9. WENTWORTH PARK         R1   Box3 Power Squeeze                ML=26.42%  gap=7.9088%
+  10. The Gardens            R8   Box5 Road To Jerry's              ML=19.55%  gap=6.9468%
+
+TOP 5 BY ML CONFIDENCE:
+  1. Ash Intention                40.09% (Meadows R1 Box4)
+  2. Sironen Tiger                37.97% (Q LAKESIDE R3 Box4)
+  3. Alfredo                      37.08% (Meadows R1 Box6)
+  4. Canya Romance                32.89% (Q LAKESIDE R8 Box8)
+  5. Hara's Neo                   30.79% (Q LAKESIDE R4 Box6)
+
+================================================================================
