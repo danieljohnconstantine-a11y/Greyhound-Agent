@@ -1,0 +1,97 @@
+================================================================================
+DAILY ANALYSIS — 2026-03-27 (Friday)
+Generated: 2026-03-27 00:30:39
+================================================================================
+
+TRACKS WITH PREDICTIONS (12):
+  Bendigo / Broken Hill / Geelong / Goulburn / Healesville /
+  Mandurah / Ladbrokes Q Lakeside / Richmond / Townsville /
+  The Gardens / Wagga / Warragul
+
+TOTAL RACES PREDICTED: 137
+
+PDF SOURCE FILES (data_predictions/):
+  BDGOG2703form.pdf   (Bendigo)
+  BRHG2703form.pdf    (Broken Hill)
+  GARDG2703form.pdf   (The Gardens)
+  GEELG2703form.pdf   (Geelong)
+  GOULG2703form.pdf   (Goulburn)
+  HEALG2703form.pdf   (Healesville)
+  MANDG2703form.pdf   (Mandurah)
+  MBRGG2703form.pdf   (Murray Bridge — unmatched / no predictions generated)
+  QLAKG2703form.pdf   (Ladbrokes Q Lakeside)
+  RICHG2703form.pdf   (Richmond)
+  TOWNG2703form.pdf   (Townsville)
+  WAGGG2703form.pdf   (Wagga)
+  WARGG2703form.pdf   (Warragul)
+
+RACES PER TRACK:
+  Bendigo       : 12 races
+  Broken Hill   : 8 races
+  Geelong       : 12 races
+  Goulburn      : 10 races
+  Healesville   : 12 races
+  Mandurah      : 12 races
+  Q Lakeside    : 12 races
+  Richmond      : 12 races
+  Townsville    : 12 races
+  The Gardens   : 12 races
+  Wagga         : 11 races
+  Warragul      : 12 races
+
+================================================================================
+MODEL CONFIDENCE DISTRIBUTION
+================================================================================
+
+  Gap >= 20%  :  4 races  (highest conviction bets)
+  Gap >= 15%  :  5 races
+  Gap >= 10%  : 13 races  (strong model confidence)
+  Gap < 10%   : 124 races (lower confidence / competitive races)
+
+================================================================================
+TOP 5 ML CONFIDENCE SCORES
+================================================================================
+
+  #1  Aston Summit      43.38%  (Bendigo R8   Box1  gap 28.80%)  ★★★ BEST BET
+  #2  Boracay Storm     40.23%  (Bendigo R10  Box4  gap 17.89%)  ★★
+  #3  Santana Boy       39.54%  (Healesville R9  Box6  gap 6.70%)
+  #4  Ice Candy         36.15%  (Bendigo R1   Box4  gap 14.66%)  ★★
+  #5  It's Noon         35.76%  (Richmond R12 Box2  gap 22.78%)  ★★★
+
+================================================================================
+BEST BET SUMMARY
+================================================================================
+
+  🏆 BEST BET: BENDIGO Race 8 — Box 1 Aston Summit
+     ML Confidence: 43.38%
+     Gap to 2nd (It's Mikado Time Box6): 28.80%
+     Highest gap of the day — strongest model conviction
+
+================================================================================
+RACES >= 10% GAP (TOP BETTING OPPORTUNITIES)
+================================================================================
+
+  Rank  Track            Race  Gap      Dog               ML%
+  1     BENDIGO          R8    28.80%   Box1 Aston Summit          43.38%
+  2     RICHMOND         R12   22.78%   Box2 It's Noon             35.76%
+  3     Q LAKESIDE       R12   21.73%   Box7 He's Regal            34.99%
+  4     TOWNSVILLE       R1    21.42%   Box3 Striker Star          31.51%
+  5     BENDIGO          R10   17.89%   Box4 Boracay Storm         40.23%
+  6     BENDIGO          R1    14.66%   Box4 Ice Candy             36.15%
+  7     Q LAKESIDE       R9    12.43%   Box2 Extra Voltage         26.80%
+  8     Warragul         R1    11.53%   Box6 Flying Skipper        32.47%
+  9     HEALESVILLE      R3    11.42%   Box3 Runway Blue           30.56%
+  10    The Gardens      R1    11.27%   Box4 Hey Mac               27.25%
+  11    BENDIGO          R3    11.26%   Box4 Cheeky Meeki          26.48%
+  12    GEELONG          R9    10.61%   Box5 Did Not               25.05%
+  13    BENDIGO          R4    10.16%   Box1 Chevron Stroll        21.65%
+
+================================================================================
+CONTEXT — PREVIOUS DAY (2026-03-26) PERFORMANCE
+================================================================================
+
+  Wins:            35 / 130 = 26.9%
+  Placed (2-4th):  59 / 130 = 45.4%
+  Win+Place rate:  72.3%
+  Top Bets (≥10% gap): 11 wins, 5 placed, 2 losses (88.9% W+P rate)
+  BEST BET result: Q STRAIGHT R6 Box5 Zipping Urban — WIN ✓

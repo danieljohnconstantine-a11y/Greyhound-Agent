@@ -1,0 +1,101 @@
+================================================================================
+BETTING SUMMARY — 2026-03-27 (Friday)
+Generated: 2026-03-27 00:30:39
+================================================================================
+
+🏆 BEST BET OF THE DAY
+   BENDIGO R8 — Box 1 Aston Summit
+   ML: 43.38%  |  Gap: 28.80%  |  2nd: Box6 It's Mikado Time (14.58%)
+
+================================================================================
+HIGH CONFIDENCE BETS (Gap ≥ 15%)
+================================================================================
+
+  1. BENDIGO R8        Box1  Aston Summit     ML 43.38%  Gap 28.80%  ★★★ BEST BET
+  2. RICHMOND R12      Box2  It's Noon        ML 35.76%  Gap 22.78%  ★★★
+  3. Q LAKESIDE R12    Box7  He's Regal       ML 34.99%  Gap 21.73%  ★★★
+  4. TOWNSVILLE R1     Box3  Striker Star     ML 31.51%  Gap 21.42%  ★★★
+  5. BENDIGO R10       Box4  Boracay Storm    ML 40.23%  Gap 17.89%  ★★
+
+================================================================================
+MEDIUM CONFIDENCE BETS (Gap 10–15%)
+================================================================================
+
+  6. BENDIGO R1        Box4  Ice Candy        ML 36.15%  Gap 14.66%  ★★
+  7. Q LAKESIDE R9     Box2  Extra Voltage    ML 26.80%  Gap 12.43%  ★
+  8. Warragul R1       Box6  Flying Skipper   ML 32.47%  Gap 11.53%  ★
+  9. HEALESVILLE R3    Box3  Runway Blue      ML 30.56%  Gap 11.42%  ★
+  10. The Gardens R1   Box4  Hey Mac          ML 27.25%  Gap 11.27%  ★
+  11. BENDIGO R3       Box4  Cheeky Meeki     ML 26.48%  Gap 11.26%  ★
+  12. GEELONG R9       Box5  Did Not          ML 25.05%  Gap 10.61%  ★
+  13. BENDIGO R4       Box1  Chevron Stroll   ML 21.65%  Gap 10.16%  ★
+
+================================================================================
+NOTABLE PICKS (Gap 7–10%)
+================================================================================
+
+  14. Warragul R12     Box1  Pay Up Sally     ML 22.77%  Gap  9.98%
+  15. WAGGA R10        Box7  Marg             ML 25.09%  Gap  9.42%
+  16. BENDIGO R11      Box8  Rock Eternal     ML 23.25%  Gap  9.40%
+  17. Mandurah R5      Box3  Tattooed Beast   ML 24.08%  Gap  9.32%
+  18. The Gardens R11  Box2  Homer Mulwee     ML 23.41%  Gap  9.11%
+  19. The Gardens R10  Box3  Flying Monkey's  ML 17.24%  Gap  9.06%
+  20. GEELONG R7       Box6  Lightning Range  ML 34.19%  Gap  9.02%
+
+================================================================================
+TRACK HIGHLIGHTS
+================================================================================
+
+  BENDIGO (12 races):
+    → 5 races in the top 13 bets — strongest track for model confidence
+    → BEST BET of day: R8 Box1 Aston Summit (gap 28.80%)
+    → Other standouts: R10 Box4 Boracay Storm (gap 17.89%), R1 Box4 Ice Candy (gap 14.66%)
+
+  RICHMOND (12 races):
+    → R12 Box2 It's Noon (gap 22.78%) — 2nd best bet of the day
+    → Strong confidence signal at ML 35.76%
+
+  Q LAKESIDE (12 races):
+    → R12 Box7 He's Regal (gap 21.73%)
+    → R9 Box2 Extra Voltage (gap 12.43%)
+    → Two top-10 bets this track
+
+  TOWNSVILLE (12 races):
+    → R1 Box3 Striker Star (gap 21.42%) — solid opening race conviction
+
+  Warragul (12 races):
+    → R1 Box6 Flying Skipper (gap 11.53%)
+    → R12 Box1 Pay Up Sally (gap 9.98%)
+
+  HEALESVILLE (12 races):
+    → R3 Box3 Runway Blue (gap 11.42%)
+    → R9 Box6 Santana Boy (ML 39.54%, gap 6.70%) — very high ML but close race
+
+  GEELONG (12 races):
+    → R9 Box5 Did Not (gap 10.61%)
+    → R7 Box6 Lightning Range (ML 34.19%, gap 9.02%)
+
+  The Gardens (12 races):
+    → R1 Box4 Hey Mac (gap 11.27%)
+    → R11 Box2 Homer Mulwee (gap 9.11%)
+
+================================================================================
+SUMMARY STATISTICS
+================================================================================
+
+  Total races predicted  : 137
+  Tracks                 : 12
+  Races gap ≥ 20%        : 4   (highest conviction)
+  Races gap ≥ 15%        : 5
+  Races gap ≥ 10%        : 13
+  Races gap < 10%        : 124
+
+================================================================================
+RECENT MODEL PERFORMANCE CONTEXT
+================================================================================
+
+  Date        Wins    W+P%    Best Bet Result
+  2026-03-26  26.9%   72.3%   Q STRAIGHT R6 Zipping Urban — WIN ✓
+  2026-03-25  28.7%   62.0%   Bendigo R1 Paw Luanne — PLACED 2nd
+  2026-03-24  15.7%   70.2%   Warragul R10 Solar Spectrum — PLACED 2nd
+  2026-03-23  24.5%   71.6%   Shepparton R5 Paw Roxy — LOSS
