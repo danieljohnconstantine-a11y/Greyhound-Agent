@@ -1,0 +1,160 @@
+================================================================================
+TOP 3 TRIFECTA BETS — 2026-03-27 (Friday)
+Generated: 2026-03-27 00:57:32
+================================================================================
+
+Methodology: Trifectas are selected using a composite scoring system that
+considers: (1) gap between 1st and 2nd ML-ranked dog, (2) gap between 2nd
+and 3rd, (3) combined top-3 probability mass (top3_sum), and (4) separation
+between 3rd and 4th place. Small fields increase trifecta value.
+
+================================================================================
+🥇 TRIFECTA BET #1 — BENDIGO Race 10  ★★★ TOP PICK
+================================================================================
+
+  Field size     : 7 runners (small field = great trifecta value)
+  Combined score : 24.42%  |  Top-3 sum: 78.38%
+
+  SELECTION:
+    1st: Box 4  BORACAY STORM      ML 40.23%  ← strong favourite
+    2nd: Box 6  JETSTREAM ICON     ML 22.34%
+    3rd: Box 8  HEAVY HAULAGE      ML 15.81%
+
+  Gap 1st→2nd : 17.89%  (strong model conviction on favourite)
+  Gap 2nd→3rd : 6.54%   (clear separation to 3rd)
+  Gap 3rd→4th : 3.30%   (4th = Box2 Flaming Smooth 12.51%, safely below)
+
+  Full field (ML order):
+    Box 4  Boracay Storm      40.23%  ★
+    Box 6  Jetstream Icon     22.34%  ★
+    Box 8  Heavy Haulage      15.81%  ★
+    Box 2  Flaming Smooth     12.51%
+    Box 1  Heathcote Rupee     9.69%
+    Box 7  Hard Style Robbo    9.53%
+    Box 3  Moraine Piper       7.61%
+
+  BET TYPE: BOX TRIFECTA — Boxes 4, 6, 8
+    6 combinations covering all finishing orders of the 3 selections.
+    If budget allows: include Box 2 Flaming Smooth as a 4th leg for insurance
+    (Box trifecta 4,6,8,2 = 24 combinations — covers if Box2 sneaks into 3rd).
+
+  WHY THIS RACE:
+    • Boracay Storm is the #2 ML scorer of the day (40.23%) with a 17.89% gap
+    • The top-3 command 78.38% of the probability in a 7-dog field
+    • Even the "danger" Box2 Flaming Smooth at 12.51% is well below the top-3
+    • This is the most mathematically clean trifecta on the card
+
+================================================================================
+🥈 TRIFECTA BET #2 — HEALESVILLE Race 9  ★★★ HIGH CONFIDENCE
+================================================================================
+
+  Field size     : 8 runners
+  Combined score : 21.39%  |  Top-3 sum: 90.53% ← HIGHEST OF THE DAY
+
+  SELECTION:
+    1st: Box 6  SANTANA BOY        ML 39.54%  ← joint-top ML scorer today
+    2nd: Box 1  CANYA ULTIMATE     ML 32.84%
+    3rd: Box 8  KNEE DEEP          ML 18.15%
+
+  Gap 1st→2nd : 6.70%   (competitive 1-2 but both clearly above field)
+  Gap 2nd→3rd : 14.70%  (2nd vs 3rd is very clear)
+  Gap 3rd→4th : 2.95%   (4th = Box5 Frozen Winter 15.20%, modest risk)
+
+  Full field (ML order):
+    Box 6  Santana Boy        39.54%  ★
+    Box 1  Canya Ultimate     32.84%  ★
+    Box 8  Knee Deep          18.15%  ★
+    Box 5  Frozen Winter      15.20%
+    Box 7  Especial Kai       11.27%
+    Box 2  Cheetah Moon       10.50%
+    Box 4  Furioso Rick       10.41%
+    Box 3  High End Cash       8.03%
+
+  BET TYPE: BOX TRIFECTA — Boxes 6, 1, 8  (6 combinations)
+    IMPORTANT NOTE: Santana Boy and Canya Ultimate could finish either way —
+    the model gives them 39.54% vs 32.84%, so a box is essential.
+    Extended option: Box 6/1/8/5 (24 combinations) to cover Frozen Winter.
+
+  WHY THIS RACE:
+    • 90.53% top-3 probability is the HIGHEST combined value in the entire card
+    • The top 3 dogs are genuinely dominant — rest of field averages ~10%
+    • Canya Ultimate at 32.84% as the "2nd" pick is still very high quality
+    • Gap 2nd→3rd of 14.70% gives strong separation for the 3rd place position
+    • Only real risk: Santana Boy and Canya Ultimate order is uncertain (use box)
+
+================================================================================
+🥉 TRIFECTA BET #3 — BENDIGO Race 1  ★★ OPENING RACE SPECIAL
+================================================================================
+
+  Field size     : 7 runners
+  Combined score : 18.53%  |  Top-3 sum: 75.24%
+
+  SELECTION:
+    1st: Box 4  ICE CANDY          ML 36.15%  ← top 5 ML scorer today
+    2nd: Box 3  ASTON COSMIC       ML 21.49%
+    3rd: Box 1  LAND OF ANGER      ML 17.61%
+
+  Gap 1st→2nd : 14.66%  (strong favourite)
+  Gap 2nd→3rd : 3.87%   (some separation to 3rd)
+  Gap 3rd→4th : 2.15%   (4th = Box2 Stacey Devere 15.47% — moderate risk)
+
+  Full field (ML order):
+    Box 4  Ice Candy          36.15%  ★
+    Box 3  Aston Cosmic       21.49%  ★
+    Box 1  Land Of Anger      17.61%  ★
+    Box 2  Stacey Devere      15.47%  (danger — close to 3rd!)
+    Box 6  Bundy Boy          11.79%
+    Box 7  Pats For Ruby      11.37%
+    Box 8  All Net             7.91%
+
+  BET TYPE: BOX TRIFECTA — Boxes 4, 3, 1  (6 combinations)
+    ⚠ Include Box 2 Stacey Devere (15.47%) as insurance for 3rd place:
+    Box trifecta 4, 3, 1, 2 = 24 combinations. Box2 is only 2.15% below Box1
+    for 3rd place, so the extended box is recommended for safety.
+
+  WHY THIS RACE:
+    • Ice Candy is #4 overall ML scorer (36.15%) with a 14.66% gap — solid start
+    • This is Bendigo's opening race — good to get on the board early
+    • Small 7-dog field maximises trifecta return
+    • The top-3 control 75.24% of the probability pool
+    • CAUTION: Box2 Stacey Devere (15.47%) is only 2.15% behind Box1 for 3rd —
+      use the extended box to be safe
+
+================================================================================
+TRIFECTA SUMMARY TABLE
+================================================================================
+
+  #  Track         Race  Dogs (Box Order)      Top3Sum  Gap1-2  Gap2-3  FieldSz
+  1  BENDIGO       R10   4 (Storm) / 6 / 8     78.38%   17.89%   6.54%     7
+  2  HEALESVILLE   R9    6 (Santana) / 1 / 8   90.53%    6.70%  14.70%     8
+  3  BENDIGO       R1    4 (Ice) / 3 / 1       75.24%   14.66%   3.87%     7
+
+================================================================================
+DAILY BETTING CONTEXT — 2026-03-27 (Friday)
+================================================================================
+
+  BEST WIN BET of the day:
+    BENDIGO R8 — Box 1 Aston Summit (ML 43.38%, gap 28.80%) ★★★
+
+  ALL HIGH-CONFIDENCE WIN BETS (gap ≥ 15%):
+    1. BENDIGO R8      Box1  Aston Summit     43.38%  gap 28.80%  ★★★
+    2. RICHMOND R12    Box2  It's Noon        35.76%  gap 22.78%  ★★★
+    3. Q LAKESIDE R12  Box7  He's Regal       34.99%  gap 21.73%  ★★★
+    4. TOWNSVILLE R1   Box3  Striker Star     31.51%  gap 21.42%  ★★★
+    5. BENDIGO R10     Box4  Boracay Storm    40.23%  gap 17.89%  ★★
+
+  Tracks running today (12):
+    Bendigo / Broken Hill / Geelong / Goulburn / Healesville /
+    Mandurah / Q Lakeside / Richmond / Townsville / The Gardens / Wagga / Warragul
+
+  Total races: 137
+  Races with gap ≥ 20%: 4
+  Races with gap ≥ 10%: 13
+
+================================================================================
+DISCLAIMER
+================================================================================
+  ML predictions are based on form analysis and historical track data.
+  Always bet responsibly. Past model performance does not guarantee future results.
+  Recent performance: 26.9% wins, 72.3% win+place rate (2026-03-26).
+================================================================================
