@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
 
+# Speed constants for estimating timing data when not available in PDF
+AVERAGE_GREYHOUND_SPEED_MS = 16.67  # meters per second (~60 km/h)
+EARLY_SECTION_SPEED_DIVISOR = 53.0  # divisor for estimating sectional times
+
 def compute_features(df):
     df = df.copy()
 
@@ -9,11 +13,29 @@ def compute_features(df):
     df["CareerStarts"] = pd.to_numeric(df["CareerStarts"], errors="coerce")
     df["Distance"] = pd.to_numeric(df["Distance"], errors="coerce")
 
-    # Placeholder values — replace with parsed metrics later
-    df["BestTimeSec"] = 22.5
-    df["SectionalSec"] = 8.5
-    df["Last3TimesSec"] = [[22.65, 22.52, 22.77]] * len(df)
-    df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+    # Check if timing fields exist from parsing (not added by us)
+    has_timing_data = "BestTimeSec" in df.columns and df["BestTimeSec"].notna().any()
+    
+    if not has_timing_data:
+        # Estimate BestTimeSec based on distance if not available
+        # BestTime (sec) = Distance (m) / speed (m/s)
+        df["BestTimeSec"] = df["Distance"] / AVERAGE_GREYHOUND_SPEED_MS
+        sectional_estimate = df["Distance"] / EARLY_SECTION_SPEED_DIVISOR
+        df["SectionalSec"] = sectional_estimate
+        df["Last3TimesSec"] = df["BestTimeSec"].apply(lambda x: [x, x * 1.01, x * 1.02])
+        df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+        df["TimingDataSource"] = "Estimated"
+    else:
+        # Use actual parsed timing data
+        df["BestTimeSec"] = df["BestTimeSec"].fillna(df["Distance"] / AVERAGE_GREYHOUND_SPEED_MS)
+        sectional_fallback = df["Distance"] / EARLY_SECTION_SPEED_DIVISOR
+        df["SectionalSec"] = df.get("SectionalSec", sectional_fallback).fillna(sectional_fallback)
+        if "Last3TimesSec" not in df.columns:
+            df["Last3TimesSec"] = df["BestTimeSec"].apply(lambda x: [x, x * 1.01, x * 1.02])
+        if "Margins" not in df.columns:
+            df["Margins"] = [[5.0, 6.3, 10.3]] * len(df)
+        df["TimingDataSource"] = "Parsed"
+    
     df["BoxBiasFactor"] = 0.1
     df["TrackConditionAdj"] = 1.0
 
