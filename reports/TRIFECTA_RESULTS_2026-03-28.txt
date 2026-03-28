@@ -1,0 +1,55 @@
+================================================================================
+TRIFECTA RESULTS - 2026-03-28 (Saturday)
+================================================================================
+
+Reviewing the 3 recommended trifecta bets from TRIFECTA_BETS_2026-03-28.txt
+against actual race results.
+
+────────────────────────────────────────────────────────────────────────────────
+TRIFECTA BET #1: Q LAKESIDE Race 3
+  Predicted: Box 4/2/8 (Sironen Tiger / Terra Bella / Hara's Oden)
+  Top3Sum: 65.17% | Gap: 23.19%
+
+  Actual result: 8 - 4 - 2 - 1
+  ✓ BOXED TRIFECTA LANDED!
+  All 3 predicted boxes (4, 2, 8) finished in the top 3 (in order 8-4-2).
+  Boxed trifecta 4/2/8 = WINNER
+  Exacta/Reverse Forecast: Box8-Box4 or Box4-Box8 also landed.
+
+────────────────────────────────────────────────────────────────────────────────
+TRIFECTA BET #2: GEELONG Race 12
+  Predicted: Box 4/8/5 (Snowball One / Did She / Sailor Song)
+  Top3Sum: 48.41% | Gap: 15.53%
+
+  Actual result: 10 - 4 - 8 - 6
+  ✗ BOXED TRIFECTA MISSED
+  Box10 (rank outsider) won the race - not in any prediction.
+  Box4 came 2nd ✓, Box8 came 3rd ✓, but Box5 was not placed.
+  Partial consolations: Quinella 4/8 landed. Reverse Forecast 4-8 or 8-4 landed.
+  Note: Box10 winning is a significant upset.
+
+────────────────────────────────────────────────────────────────────────────────
+TRIFECTA BET #3: THE GARDENS Race 1
+  Predicted: Box 8/1/4 (Feed The Meter / Blue Wiggle / Spitfire George)
+  Top3Sum: 43.96% | Gap: 14.88%
+
+  Actual result: 8 - 6 - 1 - 2
+  ✗ BOXED TRIFECTA MISSED
+  Box8 (Feed The Meter) won ✓ as predicted!
+  Box1 (Blue Wiggle) came 3rd ✓, but Box4 (Spitfire George) did not place.
+  Box6 finished 2nd (unexpected).
+  Partial consolations: Box8 WIN bet landed. Exacta 8-6 landed.
+  Reverse Forecast including Box8 and Box1 (8-1 or 1-8) missed (Box6 2nd).
+
+────────────────────────────────────────────────────────────────────────────────
+TRIFECTA SUMMARY: 1/3 landed (33%)
+
+  ✓ Q LAKESIDE R3:     BOXED TRIFECTA LANDED (8-4-2)
+  ✗ GEELONG R12:       Missed (Box10 upset, 2/3 boxes correct)
+  ✗ THE GARDENS R1:    Missed (Feed The Meter won, 2/3 boxes correct)
+
+Overall: 2 of 3 trifectas had 2/3 correct boxes in top 3.
+         The full boxed trifecta that landed (Q Lakeside R3) was also the
+         highest-confidence prediction (gap 23.19%, top3sum 65.17%).
+
+================================================================================
