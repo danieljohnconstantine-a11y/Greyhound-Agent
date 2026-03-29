@@ -24,90 +24,64 @@ def compute_features(df):
     df["MarginAvg"] = df["Margins"].apply(lambda x: np.mean(x))
     df["FormMomentum"] = df["Margins"].apply(lambda x: np.mean(np.diff(x)) if len(x) >= 2 else 0)
 
-    # Consistency Index
-    df["ConsistencyIndex"] = df.apply(
-        lambda row: row["CareerWins"] / row["CareerStarts"] if row["CareerStarts"] > 0 else 0,
-        axis=1
+    # Consistency Index — vectorized (avoids slow axis=1 apply)
+    df["ConsistencyIndex"] = np.where(
+        df["CareerStarts"] > 0,
+        df["CareerWins"] / df["CareerStarts"],
+        0.0
     )
 
-    # Recent Form Boost
-    df["RecentFormBoost"] = df.apply(
-        lambda row: 1.0 if row["DLR"] <= 5 and row["CareerWins"] > 0 else 0.5 if row["DLR"] <= 10 else 0,
-        axis=1
+    # Recent Form Boost — vectorized (avoids slow axis=1 apply)
+    df["RecentFormBoost"] = np.select(
+        [
+            (df["DLR"] <= 5) & (df["CareerWins"] > 0),
+            df["DLR"] <= 10,
+        ],
+        [1.0, 0.5],
+        default=0.0
     )
 
-    # Distance Suitability
-    df["DistanceSuit"] = df["Distance"].apply(lambda x: 1.0 if x in [515, 595] else 0.7)
+    # Distance Suitability — vectorized (avoids slow element-wise apply)
+    df["DistanceSuit"] = np.where(df["Distance"].isin([515, 595]), 1.0, 0.7)
 
     # Fallbacks
     df["TrainerStrikeRate"] = df.get("TrainerStrikeRate", pd.Series([0.15] * len(df)))
     df["RestFactor"] = df.get("RestFactor", pd.Series([0.8] * len(df)))
 
-    # Overexposure Penalty
-    df["OverexposedPenalty"] = df["CareerStarts"].apply(lambda x: -0.1 if x > 80 else 0)
+    # Overexposure Penalty — vectorized (avoids slow element-wise apply)
+    df["OverexposedPenalty"] = np.where(df["CareerStarts"] > 80, -0.1, 0.0)
 
-    # Race-type adaptive weighting
-    def get_weights(distance):
-        if distance < 400:  # Sprint
-            return {
-                "EarlySpeedIndex": 0.30,
-                "Speed_kmh": 0.20,
-                "ConsistencyIndex": 0.10,
-                "FinishConsistency": 0.05,
-                "PrizeMoney": 0.10,
-                "RecentFormBoost": 0.10,
-                "BoxBiasFactor": 0.10,
-                "TrainerStrikeRate": 0.05,
-                "DistanceSuit": 0.05,
-                "TrackConditionAdj": 0.05
-            }
-        elif distance <= 500:  # Middle
-            return {
-                "EarlySpeedIndex": 0.25,
-                "Speed_kmh": 0.20,
-                "ConsistencyIndex": 0.15,
-                "FinishConsistency": 0.05,
-                "PrizeMoney": 0.10,
-                "RecentFormBoost": 0.10,
-                "BoxBiasFactor": 0.05,
-                "TrainerStrikeRate": 0.05,
-                "DistanceSuit": 0.05,
-                "TrackConditionAdj": 0.05
-            }
-        else:  # Long
-            return {
-                "EarlySpeedIndex": 0.20,
-                "Speed_kmh": 0.15,
-                "ConsistencyIndex": 0.20,
-                "FinishConsistency": 0.10,
-                "PrizeMoney": 0.10,
-                "RecentFormBoost": 0.10,
-                "BoxBiasFactor": 0.05,
-                "TrainerStrikeRate": 0.05,
-                "DistanceSuit": 0.05,
-                "TrackConditionAdj": 0.05
-            }
+    # Race-type adaptive weights — computed once per distance band, not per row.
+    # Three bands: Sprint (<400m), Middle (400–500m), Long (>500m).
+    # The Long band is handled by the `default` parameter in each np.select() call below.
+    is_sprint = df["Distance"] < 400
+    is_middle = (df["Distance"] >= 400) & (df["Distance"] <= 500)
 
-    # FinalScore calculation
-    final_scores = []
-    for _, row in df.iterrows():
-        w = get_weights(row["Distance"])
-        score = (
-            row["EarlySpeedIndex"] * w["EarlySpeedIndex"] +
-            row["Speed_kmh"] * w["Speed_kmh"] +
-            row["ConsistencyIndex"] * w["ConsistencyIndex"] +
-            row["FinishConsistency"] * w["FinishConsistency"] +
-            (row["PrizeMoney"] / 1000) * w["PrizeMoney"] +
-            row["RecentFormBoost"] * w["RecentFormBoost"] +
-            row["BoxBiasFactor"] * w["BoxBiasFactor"] +
-            row["TrainerStrikeRate"] * w["TrainerStrikeRate"] +
-            row["DistanceSuit"] * w["DistanceSuit"] +
-            row["TrackConditionAdj"] * w["TrackConditionAdj"] +
-            row["OverexposedPenalty"]
-        )
-        final_scores.append(score)
+    w_early  = np.select([is_sprint, is_middle], [0.30, 0.25], default=0.20)
+    w_speed  = np.select([is_sprint, is_middle], [0.20, 0.20], default=0.15)
+    w_cons   = np.select([is_sprint, is_middle], [0.10, 0.15], default=0.20)
+    w_fin    = np.select([is_sprint, is_middle], [0.05, 0.05], default=0.10)
+    w_prize  = 0.10  # identical across all bands
+    w_recent = 0.10  # identical across all bands
+    w_box    = np.select([is_sprint, is_middle], [0.10, 0.05], default=0.05)
+    w_trn    = 0.05  # identical across all bands
+    w_dist   = 0.05  # identical across all bands
+    w_track  = 0.05  # identical across all bands
 
-    df["FinalScore"] = final_scores
+    # FinalScore — fully vectorized (replaces the previous iterrows() loop)
+    df["FinalScore"] = (
+        df["EarlySpeedIndex"]  * w_early  +
+        df["Speed_kmh"]        * w_speed  +
+        df["ConsistencyIndex"] * w_cons   +
+        df["FinishConsistency"] * w_fin   +
+        (df["PrizeMoney"] / 1000) * w_prize +
+        df["RecentFormBoost"]  * w_recent +
+        df["BoxBiasFactor"]    * w_box    +
+        df["TrainerStrikeRate"] * w_trn   +
+        df["DistanceSuit"]     * w_dist   +
+        df["TrackConditionAdj"] * w_track +
+        df["OverexposedPenalty"]
+    )
     return df
 
 def generate_trifecta_table(df):

@@ -6,11 +6,13 @@ from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
 
 def extract_text_from_pdf(pdf_path):
-    text = ""
+    pages = []
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
-            text += page.extract_text() + "\n"
-    return text
+            page_text = page.extract_text()
+            if page_text:
+                pages.append(page_text)
+    return "\n".join(pages)
 
 # 🚀 Start pipeline
 print("🚀 Starting Greyhound Analytics")
