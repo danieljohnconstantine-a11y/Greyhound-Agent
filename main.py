@@ -2,8 +2,16 @@ import pandas as pd
 import numpy as np
 import pdfplumber
 import os
+import logging
 from src.parser import parse_race_form
 from src.features import compute_features  # ✅ Enhanced scoring logic
+
+# Configure logging once for the entire application
+logging.basicConfig(
+    level=logging.INFO, 
+    format='%(levelname)s: %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 def extract_text_from_pdf(pdf_path):
     text = ""
@@ -32,6 +40,21 @@ for pdf_file in pdf_files:
     print(f"📄 Processing: {pdf_path}")
     raw_text = extract_text_from_pdf(pdf_path)
     df = parse_race_form(raw_text)
+
+    # ✅ Debug logging: Print all columns before feature computation
+    logger.info(f"\n{'='*60}")
+    logger.info(f"📊 DataFrame shape before feature computation: {df.shape}")
+    logger.info(f"📊 All columns in parsed DataFrame:")
+    for col in df.columns:
+        logger.info(f"   - {col}")
+    logger.info(f"{'='*60}\n")
+    
+    # Verify Distance column exists
+    if 'Distance' not in df.columns:
+        logger.error(f"❌ CRITICAL: 'Distance' column missing in {pdf_file}!")
+        logger.error(f"   Available columns: {df.columns.tolist()}")
+        logger.error("   Skipping this file to prevent crashes.")
+        continue
 
     # ✅ Convert DLR to numeric to avoid type errors
     df["DLR"] = pd.to_numeric(df["DLR"], errors="coerce")
