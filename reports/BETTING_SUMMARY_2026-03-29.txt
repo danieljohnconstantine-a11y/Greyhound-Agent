@@ -1,0 +1,86 @@
+================================================================================
+BETTING SUMMARY - 2026-03-29 (Sunday)
+================================================================================
+Generated from: outputs/best_bets_report.txt + outputs/track_ensemble_predictions.xlsx
+
+Total Tracks:   10
+Total Races:   109
+
+================================================================================
+TIER 1 BETS — GAP ≥ 15% (3 races — HIGHEST CONFIDENCE)
+================================================================================
+
+  ★★★  GRAFTON R1   Box1  Doogie Mcgraw    33.53%  gap 21.41%  ← BEST BET
+  ★★★  Q PARKLANDS R4  Box2  Red Dirt Road  31.34%  gap 18.86%
+  ★★★  ROCKHAMPTON R8  Box1  Cody's Star    34.31%  gap 16.94%
+
+================================================================================
+TIER 2 BETS — GAP ≥ 10% (6 additional races)
+================================================================================
+
+  ★★   BENDIGO R4    Box6  Taltarni Blue    29.32%  gap 14.68%
+  ★★   BENDIGO R10   Box1  Sir Silvertree   37.63%  gap 13.58%  (top ML score)
+  ★★   DARWIN R6     Box4  Ontario          25.30%  gap 12.80%
+  ★★   MT GAMBIER R1 Box7  Crikey Mate      23.77%  gap 12.24%
+  ★★   ROCKHAMPTON R9  Box3  Colonel's Dream  26.95%  gap 11.21%
+  ★★   SALE R11      Box6  Hay Riley        24.71%  gap 10.53%
+
+================================================================================
+TIER 3 BETS — GAP ≥ 5% (selected notable races)
+================================================================================
+
+  ★    RICHMOND R11   Box2  Reborn Spark    25.89%  gap 9.92%
+  ★    Capalaba R5    Box6  Zipping Mehary  27.48%  gap 9.45%
+  ★    GRAFTON R2     Box4  Charged         19.10%  gap 9.09%
+  ★    GRAFTON R3     Box8  Wagtail Whisper 36.48%  gap 8.91%  (ultra-high ML)
+  ★    DARWIN R5      Box2  Territory Man   40.01%  gap 8.50%  (ultra-high ML)
+  ★    DARWIN R4      Box2  Stan's Dream    29.90%  gap 7.55%
+  ★    ROCKHAMPTON R1 Box3  Fiery Words     22.72%  gap 7.40%
+  ★    ROCKHAMPTON R2 Box1  Blazing Early   18.72%  gap 7.30%
+  ★    SALE R8        Box7  Lakeview Liam   22.02%  gap 6.72%
+  ★    RICHMOND R5    Box1  Brett Keeping   23.97%  gap 6.43%
+
+================================================================================
+TRACK-BY-TRACK BEST BET SUMMARY
+================================================================================
+
+  Track          Best Race  Box  Dog                  ML%    Gap%
+  ───────────────────────────────────────────────────────────────
+  BENDIGO        R10        Box1 Sir Silvertree       37.63%  13.58%
+  Capalaba       R5         Box6 Zipping Mehary       27.48%   9.45%
+  DARWIN         R6         Box4 Ontario              25.30%  12.80%
+  GAWLER         R1         Box6 Dreamtime Master     22.02%   5.23%
+  GRAFTON        R1         Box1 Doogie Mcgraw        33.53%  21.41%  ← BEST
+  MT GAMBIER     R1         Box7 Crikey Mate          23.77%  12.24%
+  Q PARKLANDS    R4         Box2 Red Dirt Road        31.34%  18.86%
+  RICHMOND       R11        Box2 Reborn Spark         25.89%   9.92%
+  ROCKHAMPTON    R8         Box1 Cody's Star          34.31%  16.94%
+  SALE           R11        Box6 Hay Riley            24.71%  10.53%
+
+================================================================================
+KEY STATISTICS
+================================================================================
+
+  Races with gap ≥20%:   1   ( 0.9% of all races)
+  Races with gap ≥15%:   3   ( 2.8% of all races)
+  Races with gap ≥10%:   9   ( 8.3% of all races)
+  Races with gap ≥5%:   ~29  (26.6% of all races)
+
+  Highest raw ML score:   Territory Man 40.01% (Darwin R5, gap 8.50%)
+  Best gap race:          Doogie Mcgraw 21.41% (Grafton R1)
+  Best dual metric:       Doogie Mcgraw 33.53% × 21.41 gap = 717.9
+
+================================================================================
+HISTORICAL CONTEXT (recent Saturdays)
+================================================================================
+  2026-03-28: 22/81 wins (27.2%), 44/81 W+P (54.3%) - 6/6 top bets W+P (100%)
+  2026-03-27: 41/133 wins (30.8%), 85/133 W+P (63.9%)
+  2026-03-26: 35/130 wins (26.9%), 59/130 W+P (45.4%)
+
+  Top confidence bets (gap≥10%) historically achieve ~80-100% W+P.
+  Best single bet on 28/03 (Sironen Tiger, 23.19% gap): PLACED ✓
+  Best single bet on 27/03 (Aston Summit, 28.80% gap): WIN ✓
+
+================================================================================
+END OF BETTING SUMMARY
+================================================================================

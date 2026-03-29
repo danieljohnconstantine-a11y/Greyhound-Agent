@@ -1,0 +1,58 @@
+================================================================================
+TOP 3 TRIFECTA BETS - 2026-03-29 (Sunday)
+================================================================================
+Generated from: outputs/track_ensemble_predictions.xlsx + best_bets_report.txt
+
+Trifecta bets selected by combining:
+  - High gap (confidence the winner is clear)
+  - High top-3-sum (all 3 modelled dogs concentrated / likely trifecta)
+
+Bet type: BOXED TRIFECTA (covers all 6 box combinations)
+
+================================================================================
+
+#1  BENDIGO  Race 10  — Box1 / Box2 / Box8
+    Dog 1: Box1  Sir Silvertree     ML 37.63%   (1st)
+    Dog 2: Box2  Docherty           ML 24.04%   (2nd)
+    Dog 3: Box8  Zero Killer        ML 15.91%   (3rd)
+    Gap:      13.58%
+    Top3Sum:  77.58%
+    Rationale: Highest top3sum of all ≥10% gap races. Sir Silvertree is a
+               dominant ML favourite. Docherty is clear 2nd. Strong trifecta.
+
+#2  ROCKHAMPTON  Race 8  — Box1 / Box4 / Box7
+    Dog 1: Box1  Cody's Star         ML 34.31%  (1st)
+    Dog 2: Box4  Cappuccina          ML 17.37%  (2nd)
+    Dog 3: Box7  Diamantina Pearl    ML 12.81%  (3rd)
+    Gap:      16.94%
+    Top3Sum:  64.49%
+    Rationale: Second-best top3sum among top-gap races. High gap means
+               strong single-dog confidence. Good trifecta structure.
+
+#3  GRAFTON  Race 1  — Box1 / Box2 / Box4
+    Dog 1: Box1  Doogie Mcgraw       ML 33.53%  (1st)
+    Dog 2: Box2  Kewpie Doll         ML 12.12%  (2nd)
+    Dog 3: Box4  Vermentino          ML 11.27%  (3rd)
+    Gap:      21.41%
+    Top3Sum:  56.92%
+    Rationale: BEST BET GAP of the day (21.41%). Doogie Mcgraw dominates.
+               Lower top3sum but highest single-dog confidence gap.
+
+================================================================================
+BONUS — HIGH-VALUE TRIFECTA (High top3sum, lower gap but worth boxing):
+
+  DARWIN R5 — Box2 / Box8 / Box1
+    Territory Man 40.01% / So Naive 31.51% / Little Diva 14.23%
+    Top3Sum: 85.75% | Gap: 8.50%
+    Very high top3sum — the model is highly certain these 3 dogs finish
+    in the top 3. Low gap means a competitive race but strong trifecta value.
+
+  GRAFTON R3 — Box8 / Box7 / Box1
+    Wagtail Whisper 36.48% / Disorderly 27.57% / Kooringa Rafael 19.26%
+    Top3Sum: 83.31% | Gap: 8.91%
+    Exceptional top3sum — all 3 dogs are high confidence. May offer
+    good payout as the gap is low (competitive race on paper).
+
+================================================================================
+END OF TRIFECTA BETS REPORT
+================================================================================

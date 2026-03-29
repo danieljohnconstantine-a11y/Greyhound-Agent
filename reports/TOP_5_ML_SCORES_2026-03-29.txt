@@ -1,0 +1,50 @@
+================================================================================
+TOP 5 ML CONFIDENCE SCORES - 2026-03-29 (Sunday)
+================================================================================
+Generated from: outputs/best_bets_report.txt + outputs/track_ensemble_predictions.xlsx
+
+Rankings are by raw ML confidence score (highest %).
+Gap = difference between 1st and 2nd dog ML scores.
+
+================================================================================
+
+#1  Territory Man       40.01%  — Darwin R5  Box2  (gap  8.50%)
+    2nd: Box8 So Naive        31.51%
+    3rd: Box1 Little Diva     14.23%
+    Note: Very high ML score but low gap (8.50%) - competitive race.
+          Strong favourite but So Naive (31.51%) is a serious threat.
+
+#2  Sir Silvertree      37.63%  — Bendigo R10  Box1  (gap 13.58%)  ★ HIGH GAP
+    2nd: Box2 Docherty        24.04%
+    3rd: Box8 Zero Killer     15.91%
+    Note: DUAL STANDOUT - high raw score AND strong gap. Tier 1 confidence.
+
+#3  Wagtail Whisper     36.48%  — Grafton R3  Box8  (gap  8.91%)
+    2nd: Box7 Disorderly      27.57%
+    3rd: Box1 Kooringa Rafael 19.26%
+    Note: Very high raw score, low gap. Strong race with 3 competitive dogs.
+          Top 3 sum = 83.31% — excellent trifecta potential.
+
+#4  Cody's Star         34.31%  — Rockhampton R8  Box1  (gap 16.94%)  ★ HIGH GAP
+    2nd: Box4 Cappuccina      17.37%
+    3rd: Box7 Diamantina Pearl 12.81%
+    Note: DUAL STANDOUT - high raw score AND strong gap. Tier 1 confidence.
+          Top 3 sum = 64.49%
+
+#5  Doogie Mcgraw       33.53%  — Grafton R1  Box1  (gap 21.41%)  ★ BEST GAP
+    2nd: Box2 Kewpie Doll    12.12%
+    3rd: Box4 Vermentino     11.27%
+    Note: BEST BET OF THE DAY by gap. Strong winner signal.
+          Top 3 sum = 56.92%
+
+================================================================================
+COMBINED SCORE RATINGS (raw ML score × gap):
+  #1 Grafton R1 - Doogie Mcgraw:    33.53 × 21.41 = 717.9  ← BEST COMBINED
+  #2 Rockhampton R8 - Cody's Star:  34.31 × 16.94 = 581.2
+  #3 Bendigo R10 - Sir Silvertree:  37.63 × 13.58 = 511.0
+  #4 Q Parklands R4 - Red Dirt Road: 31.34 × 18.86 = 591.1
+  #5 Darwin R5 - Territory Man:      40.01 ×  8.50 = 340.1
+
+================================================================================
+END OF TOP 5 ML SCORES REPORT
+================================================================================

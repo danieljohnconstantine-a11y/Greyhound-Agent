@@ -1,0 +1,68 @@
+================================================================================
+DAILY ANALYSIS REPORT - 2026-03-29 (Sunday)
+================================================================================
+Generated: 2026-03-29 (based on track_ensemble_predictions.xlsx + best_bets_report.txt)
+
+TRACKS COVERED (10 tracks, 109 races):
+  1. Bendigo          (12 races) - VIC
+  2. Capalaba         (10 races) - QLD
+  3. Darwin           ( 8 races) - NT
+  4. Gawler           (10 races) - SA
+  5. Grafton          (12 races) - NSW
+  6. Mt Gambier       (12 races) - SA
+  7. Q Parklands      (10 races) - QLD
+  8. Richmond         (12 races) - NSW
+  9. Rockhampton      (11 races) - QLD
+ 10. Sale             (12 races) - VIC
+
+CONFIDENCE TIERS (by score gap):
+  Gap ≥20%  :  1 race  (GRAFTON R1 - 21.41%)
+  Gap ≥15%  :  3 races (+ Q PARKLANDS R4, ROCKHAMPTON R8)
+  Gap ≥10%  :  9 races (+ BENDIGO R4, R10; DARWIN R6; MT GAMBIER R1; ROCKHAMPTON R9; SALE R11)
+  Gap  ≥5%  : ~29 races
+
+BEST BET OF THE DAY:
+  🏆 GRAFTON R1 - Box 1 Doogie Mcgraw (gap: 21.41%, ML: 33.53%)
+     2nd: Box2 Kewpie Doll 12.12%
+
+TOP 10 BETS (Ranked by confidence gap):
+  Rank  Track            Race   Box  Dog                       Gap%      ML%
+  ─────────────────────────────────────────────────────────────────────────
+  1     GRAFTON          R1     Box1 Doogie Mcgraw             21.41%  33.53%
+  2     Q PARKLANDS      R4     Box2 Red Dirt Road             18.86%  31.34%
+  3     ROCKHAMPTON      R8     Box1 Cody's Star               16.94%  34.31%
+  4     BENDIGO          R4     Box6 Taltarni Blue             14.68%  29.32%
+  5     BENDIGO          R10    Box1 Sir Silvertree            13.58%  37.63%
+  6     DARWIN           R6     Box4 Ontario                   12.80%  25.30%
+  7     MT GAMBIER       R1     Box7 Crikey Mate               12.24%  23.77%
+  8     ROCKHAMPTON      R9     Box3 Colonel's Dream           11.21%  26.95%
+  9     SALE             R11    Box6 Hay Riley                 10.53%  24.71%
+  10    RICHMOND         R11    Box2 Reborn Spark               9.92%  25.89%
+
+TOP 5 ML CONFIDENCE SCORES (highest raw ML%):
+  Rank  Track       Race   Box  Dog                ML%     Gap%
+  ─────────────────────────────────────────────────────────────
+  1     DARWIN      R5     Box2 Territory Man      40.01%   8.50%
+  2     BENDIGO     R10    Box1 Sir Silvertree      37.63%  13.58%  ★ HIGH GAP
+  3     GRAFTON     R3     Box8 Wagtail Whisper    36.48%   8.91%
+  4     ROCKHAMPTON R8     Box1 Cody's Star         34.31%  16.94%  ★ HIGH GAP
+  5     GRAFTON     R1     Box1 Doogie Mcgraw       33.53%  21.41%  ★ BEST GAP
+
+NOTE: Bendigo R10 (37.63% ML + 13.58% gap) and Rockhampton R8 (34.31% + 16.94% gap)
+      are dual standouts combining both high raw confidence AND high gap.
+
+PDF FILES PROCESSED (10 tracks for 29/03/2026):
+  BDGOG2903form.pdf  (Bendigo)
+  CAPAG2903form.pdf  (Capalaba)
+  DRWNG2903form.pdf  (Darwin)
+  GAWLG2903form.pdf  (Gawler)
+  GRAFG2903form.pdf  (Grafton)
+  MTGG2903form.pdf   (Mt Gambier)
+  QPRKG2903form.pdf  (Q Parklands)
+  RICHG2903form.pdf  (Richmond)
+  ROCKG2903form.pdf  (Rockhampton)
+  SALEG2903form.pdf  (Sale)
+
+================================================================================
+END OF DAILY ANALYSIS
+================================================================================
