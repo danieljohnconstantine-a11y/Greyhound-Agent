@@ -1,0 +1,80 @@
+{
+  "analysis_date": "2025-11-26T01:41:34.049507",
+  "race_date": "2024-11-25",
+  "total_races": 137,
+  "total_runners": 1043,
+  "total_winners": 137,
+  "prediction_accuracy": {
+    "old_speed_matrix": {
+      "winners_picked": 40,
+      "total_races": 137,
+      "accuracy_percentage": 29.2
+    },
+    "new_speed_matrix": {
+      "winners_picked": 19,
+      "total_races": 137,
+      "accuracy_percentage": 13.87
+    },
+    "improvement": {
+      "additional_winners": -21,
+      "percentage_point_change": -15.33
+    }
+  },
+  "top_10_variables": [
+    {
+      "Variable": "RestFactor",
+      "Weight_Percentage": 50.50486109293797,
+      "Separation_Score": 1.4090427459286021
+    },
+    {
+      "Variable": "FinishConsistency",
+      "Weight_Percentage": 8.314472852338929,
+      "Separation_Score": 0.23196673360312672
+    },
+    {
+      "Variable": "DrawFactor",
+      "Weight_Percentage": 6.071809914139743,
+      "Separation_Score": 0.16939834164541973
+    },
+    {
+      "Variable": "EarlySpeedIndex",
+      "Weight_Percentage": 5.49677863657095,
+      "Separation_Score": 0.15335545720209118
+    },
+    {
+      "Variable": "BoxPositionBias",
+      "Weight_Percentage": 4.948285000393143,
+      "Separation_Score": 0.13805295042314653
+    },
+    {
+      "Variable": "DLW",
+      "Weight_Percentage": 4.444867660552489,
+      "Separation_Score": 0.12400803404228883
+    },
+    {
+      "Variable": "DLWFactor",
+      "Weight_Percentage": 2.463453048468316,
+      "Separation_Score": 0.06872824858368619
+    },
+    {
+      "Variable": "PlaceRate",
+      "Weight_Percentage": 2.3437032643306632,
+      "Separation_Score": 0.06538733127366374
+    },
+    {
+      "Variable": "CareerWins",
+      "Weight_Percentage": 2.1556173995555192,
+      "Separation_Score": 0.060139895331102915
+    },
+    {
+      "Variable": "RecentFormBoost",
+      "Weight_Percentage": 2.0713785793685395,
+      "Separation_Score": 0.05778970376653995
+    }
+  ],
+  "statistics_summary": {
+    "variables_analyzed": 26,
+    "highest_separation_variable": "RestFactor",
+    "highest_cohens_d": 1.409
+  }
+}
