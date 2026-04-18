@@ -1,0 +1,95 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-04-18 16:06:54
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     GUNNEDAH         R10   21.5659%  Box 1 Tracey Taro            38.7591%  Box 7 Robin Cargo            17.1932%
+2     Cannington       R2    19.0216%  Box 5 Clifton Jasper         32.2429%  Box 2 West On Tapper         13.2213%
+3     Cannington       R5    18.2691%  Box 1 Another James          31.2127%  Box 3 King Kuna              12.9436%
+4     The Gardens      R7    17.8142%  Box 7 Zipping Vivid          33.4037%  Box 2 Vintage Racer          15.5895%
+5     GUNNEDAH         R5    17.7626%  Box 1 My Bread Roll          31.0018%  Box 6 From The Disco         13.2392%
+6     The Gardens      R4    15.7798%  Box 1 Just Us Boys           28.1882%  Box 4 Major Forte            12.4084%
+7     Cannington       R7    12.9664%  Box 7 Hunter                 26.1128%  Box 6 Impress Kuta           13.1464%
+8     BENDIGO          R11   11.8965%  Box 4 Blame Karissa          24.2256%  Box 6 Miss Sooky             12.3291%
+9     BENDIGO          R9    11.7527%  Box 4 Peaky Collinda         27.7686%  Box 7 Doongalla Adam         16.0159%
+10    Meadows          R4    11.4132%  Box 1 Regal Jyle             31.6430%  Box 2 Nigel Devere           20.2298%
+11    Meadows          R11   10.8771%  Box 5 Make Them Cry          28.4796%  Box 8 Ripped Paige           17.6025%
+12    Q LAKESIDE       R8     9.9304%  Box 1 Shout Out Shazam       36.9116%  Box 2 Fire Me Up             26.9812%
+13    The Gardens      R2     9.9240%  Box 6 Ruby Tanuki            23.9802%  Box 1 Princess Energy        14.0562%
+14    Q LAKESIDE       R11    8.9579%  Box 5 Scenic Sundari         20.4222%  Box 8 Loco Ryder             11.4643%
+15    GUNNEDAH         R8     8.6254%  Box 8 Zipping Berkeley       23.8583%  Box 4 Imperial Audrey        15.2329%
+16    WENTWORTH PARK   R8     8.6152%  Box 4 Both Bowers Ace        25.9713%  Box 8 Ritza Tears            17.3561%
+17    WENTWORTH PARK   R5     8.1349%  Box 4 Blazin' Fire           21.3286%  Box 3 Sammy Ethan            13.1937%
+18    Cannington       R6     7.3004%  Box 1 West On Cole           18.1197%  Box 7 Dancing Dawn           10.8193%
+19    Q LAKESIDE       R7     7.0182%  Box 8 Oxidisation            23.8519%  Box 1 Sweetest Smile         16.8337%
+20    WENTWORTH PARK   R2     6.5009%  Box 4 Ascend Fern            18.1780%  Box 1 Spin Around Blue       11.6771%
+21    Meadows          R5     5.8306%  Box 8 Ulenta Bale            24.1900%  Box 4 Pass Mark              18.3594%
+22    BENDIGO          R8     5.1653%  Box 3 Doongalla Serena       18.0910%  Box 2 Les Norton             12.9257%
+23    BENDIGO          R5     5.0840%  Box 2 Prawn And Order        19.9282%  Box 1 Cards Night            14.8442%
+24    Cannington       R1     4.8588%  Box 1 Zero Surf              19.0684%  Box 5 Gone Pub               14.2096%
+25    Meadows          R12    4.4168%  Box 2 Dash Intention         15.6051%  Box 1 Doongalla Ghost        11.1883%
+26    Meadows          R10    4.3716%  Box 1 Hoppy                  19.7066%  Box 6 She's Saintly          15.3350%
+27    GUNNEDAH         R4     4.3285%  Box 3 Nicmac Star            18.1548%  Box 8 Maybe Yes              13.8263%
+28    WENTWORTH PARK   R3     4.2797%  Box 1 Magic Linkin           16.0445%  Box 4 Magic Fletch           11.7648%
+29    The Gardens      R3     3.9518%  Box 7 Drink Twisties         14.6747%  Box 5 Kalani Chris           10.7229%
+30    GUNNEDAH         R1     3.9433%  Box 7 Ava's Carlilah         21.1001%  Box 5 Red Rock Banksia       17.1568%
+31    Q LAKESIDE       R4     3.8441%  Box 6 Razor Hayze            20.0813%  Box 7 Wizard Said            16.2372%
+32    Meadows          R2     3.6642%  Box 7 Koda                   16.0333%  Box 5 Juneau Pete            12.3691%
+33    Cannington       R3     3.5446%  Box 5 Take My Advice         20.6767%  Box 1 Reinvigorated          17.1321%
+34    GUNNEDAH         R3     3.3896%  Box 8 Gold Miner             17.4014%  Box 1 Walter Wanted          14.0118%
+35    GUNNEDAH         R2     3.2500%  Box 7 Fancy Chick            13.4869%  Box 4 Mr. Munro              10.2369%
+36    The Gardens      R9     2.9565%  Box 2 Runaway Sam            14.6892%  Box 4 Dollar Rolex           11.7327%
+37    Cannington       R10    2.9509%  Box 1 Rawson Time            13.8325%  Box 6 Road Rage Gundi        10.8816%
+38    BENDIGO          R4     2.8988%  Box 2 Everglow               19.1703%  Box 4 Bronelly Timmy         16.2715%
+39    Q LAKESIDE       R9     2.8821%  Box 2 Nangar Nugget          19.0052%  Box 5 Cash Cruise            16.1231%
+40    GUNNEDAH         R7     2.8114%  Box 6 Not My Style           14.9885%  Box 8 Zipping Emily          12.1771%
+41    WENTWORTH PARK   R7     2.7859%  Box 2 Ritza Ringer           17.0137%  Box 7 Wyndra All Heart       14.2278%
+42    Meadows          R1     2.7392%  Box 1 Aston Machine          17.5808%  Box 2 Paw Brutus             14.8416%
+43    GUNNEDAH         R9     2.7173%  Box 8 Mick The Master        18.5320%  Box 7 Hot Hailey             15.8147%
+44    GUNNEDAH         R12    2.4210%  Box 5 Junior Creek           13.3780%  Box 8 Swift Eli              10.9570%
+45    GUNNEDAH         R11    2.2026%  Box 6 Victor Cargo           13.3040%  Box 4 Sky Keeping            11.1014%
+46    Q LAKESIDE       R12    2.1364%  Box 2 Do Run Bandi           12.7830%  Box 7 Zephyr                 10.6466%
+47    BENDIGO          R12    1.9839%  Box 8 Nicky's Secret         14.6621%  Box 4 Charge On              12.6782%
+48    Q LAKESIDE       R3     1.7171%  Box 3 Cyclone Mick           13.5636%  Box 4 Tommy Knuckles         11.8465%
+49    Meadows          R9     1.6634%  Box 5 Key Philosophy         15.9376%  Box 4 Paw Tarkov             14.2742%
+50    Cannington       R9     1.5481%  Box 1 Impress Dory           18.1072%  Box 5 Dinoco King            16.5591%
+51    Cannington       R8     1.5437%  Box 2 Frantic Phyllis        11.2076%  Box 1 Crenshaw King           9.6639%
+52    WENTWORTH PARK   R9     1.5332%  Box 6 President Rolex        13.9726%  Box 8 Aunty Meeka            12.4394%
+53    BENDIGO          R10    1.5083%  Box 8 Sonia's Beauty         16.6799%  Box 7 Rolling Express        15.1716%
+54    WENTWORTH PARK   R4     1.5036%  Box 2 Fabricator             14.2559%  Box 1 Simplicity Magic       12.7523%
+55    BENDIGO          R3     1.4785%  Box 2 Slow Range             13.6353%  Box 1 Scott Suspicious       12.1568%
+56    The Gardens      R12    1.4441%  Box 1 Hi Lo Rain             16.8398%  Box 8 Kawasaki Girl          15.3957%
+57    WENTWORTH PARK   R10    1.4189%  Box 7 Cha Cha Ethics         10.6713%  Box 3 Kung Fu Ethics          9.2524%
+58    Q LAKESIDE       R2     1.3654%  Box 1 Typhoon Pablo          14.6969%  Box 3 Salsa                  13.3315%
+59    Meadows          R3     1.2984%  Box 8 He's Magic             13.6450%  Box 6 Paw Qwan               12.3466%
+60    Cannington       R4     1.2776%  Box 1 Our Girl Jess          14.2388%  Box 8 Destiny Lane           12.9612%
+61    Q LAKESIDE       R5     1.1055%  Box 2 Daysea's Max           12.9098%  Box 7 Moonshine Mirage       11.8043%
+62    The Gardens      R11    0.8740%  Box 6 My Wee Lass            11.8586%  Box 5 Hot To Twist           10.9846%
+63    BENDIGO          R7     0.8495%  Box 6 Doongalla I Am         16.0477%  Box 8 Ask Nicely             15.1982%
+64    WENTWORTH PARK   R11    0.5887%  Box 1 Foxy Barbella          10.1433%  Box 6 Foxtrot Ethics          9.5546%
+65    Meadows          R6     0.5721%  Box 5 Point Break            13.2197%  Box 4 Fast Reply             12.6476%
+66    Meadows          R8     0.4954%  Box 3 Irish Millie           11.8834%  Box 4 Baffert                11.3880%
+67    WENTWORTH PARK   R6     0.4684%  Box 6 Fear To Excel          10.1169%  Box 1 Valley Cash             9.6485%
+68    Q LAKESIDE       R6     0.4281%  Box 3 Built Right            16.2178%  Box 6 Summer's Dunay         15.7897%
+69    WENTWORTH PARK   R1     0.4147%  Box 5 Forty's Boy            11.1854%  Box 7 Sovereign Reign        10.7707%
+70    BENDIGO          R1     0.3917%  Box 8 Blame Margaret          9.7406%  Box 2 Rebel Sal               9.3489%
+71    GUNNEDAH         R6     0.3022%  Box 2 Hand Me Down           22.6521%  Box 5 Zipping Percat         22.3499%
+72    The Gardens      R8     0.2964%  Box 2 Titan's Ocean          12.4056%  Box 7 Ella Knows             12.1092%
+73    The Gardens      R10    0.2730%  Box 3 Mr. Speckle             9.9497%  Box 7 Poppy's Darlin'         9.6767%
+74    The Gardens      R6     0.2339%  Box 3 Ayden's Warrior        16.4635%  Box 2 Soiree                 16.2296%
+75    Q LAKESIDE       R1     0.2126%  Box 1 Our Girl Stella        14.3547%  Box 3 Not Half Bad           14.1421%
+76    BENDIGO          R6     0.2100%  Box 3 Stella Rose            10.6662%  Box 1 Sweet Begonia          10.4562%
+77    Meadows          R7     0.1818%  Box 8 Dash Parr              19.9706%  Box 2 Paw Damon              19.7888%
+78    The Gardens      R5     0.1617%  Box 2 Rattlin' Bye            9.0168%  Box 5 Cessnock Curtain        8.8551%
+79    The Gardens      R1     0.1092%  Box 5 Barkley Lane           10.4844%  Box 3 Candy Powered          10.3752%
+80    Q LAKESIDE       R10    0.0654%  Box 3 Brooklyn Bandit        12.9728%  Box 7 Mr. O'malley           12.9074%
+81    BENDIGO          R2     0.0198%  Box 4 Callahan               18.6510%  Box 7 Excitable Dash         18.6312%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 81
+
+🏆 BEST BET: GUNNEDAH Race 10 - Box 1 Tracey Taro (gap: 21.5659%)
