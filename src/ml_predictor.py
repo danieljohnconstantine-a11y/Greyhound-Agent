@@ -635,8 +635,8 @@ def load_historical_data_hybrid(data_dir='data'):
                 'file': row.get('_source_file', '')
             })
     
-    print(f"[INFO] Loaded {len(all_results)} race results from CSV files")
-    logger.info(f"Loaded {len(all_results)} race results from CSV files")
+    print(f"[INFO] Loaded {len(all_results)} race results from result files")
+    logger.info(f"Loaded {len(all_results)} race results from result files")
     
     # Step 3: Parse all PDFs to extract dog data
     pdf_races = {}  # key: "date_track_racenum" -> DataFrame of dogs
@@ -901,8 +901,8 @@ def load_historical_data(data_dir='data'):
             if track != track_upper:
                 all_results[f"{row_date}_{track}_R{race_num}"] = winner_box
     
-    print(f"[INFO] Loaded {len(all_results)} race results from CSV files")
-    logger.info(f"Loaded {len(all_results)} race results from CSV files")
+    print(f"[INFO] Loaded {len(all_results)} race results from result files")
+    logger.info(f"Loaded {len(all_results)} race results from result files")
     
     # Parse PDFs and match with results
     race_data = []
