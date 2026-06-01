@@ -82,6 +82,7 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from src.results_loader import find_result_files, load_results_dataframe
 
 HAS_XGBOOST = False
 try:
@@ -298,26 +299,23 @@ def train_track(df, track_name, verbose=True):
 # ── load + merge all training CSVs ───────────────────────────────────────────
 
 def load_training_data():
-    """Load all results CSV files from data/ and return a combined DataFrame."""
-    import glob
-    csv_files = sorted(glob.glob(os.path.join(DATA_DIR, 'results_*.csv')))
-    if not csv_files:
+    """Load all supported result files from data/ and return a combined DataFrame."""
+    result_files = find_result_files(DATA_DIR)
+    if not result_files:
         raise FileNotFoundError(
-            f"No results_*.csv files found in {DATA_DIR}.\n"
+            f"No supported results files found in {DATA_DIR}.\n"
             "Expected columns: Track, Date, Race, Winner, 2nd, 3rd, 4th\n"
             "See train_ml_track_ensemble.py for the full data preparation pipeline."
         )
 
-    dfs = []
-    for f in csv_files:
-        try:
-            df = pd.read_csv(f)
-            dfs.append(df)
-            print(f"  Loaded {os.path.basename(f)}: {len(df)} rows")
-        except Exception as e:
-            print(f"  WARNING: could not load {os.path.basename(f)}: {e}")
+    df = load_results_dataframe(DATA_DIR)
+    if df.empty:
+        return pd.DataFrame()
 
-    return pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
+    for source_file, source_rows in df.groupby('_source_file'):
+        print(f"  Loaded {os.path.basename(source_file)}: {len(source_rows)} rows")
+
+    return df.drop(columns=['_source_file', '_source_format'], errors='ignore')
 
 
 # ── normalise track names to match config.pkl keys ───────────────────────────

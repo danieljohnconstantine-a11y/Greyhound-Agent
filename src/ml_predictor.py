@@ -15,6 +15,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import pickle
 import os
 from datetime import datetime
+from src.results_loader import find_result_files, load_results_dataframe
 
 class GreyhoundMLPredictor:
     """
@@ -362,30 +363,33 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
     logger = logging.getLogger(__name__)
     
     try:
-        results_files = sorted(glob.glob(f"{data_dir}/results_*.csv"))
-        logger.info(f"Searching for CSV files in: {data_dir}/results_*.csv")
-        logger.info(f"Found {len(results_files)} results CSV files")
+        results_files = find_result_files(data_dir=data_dir)
+        logger.info(f"Searching for result files in: {data_dir}")
+        logger.info(f"Found {len(results_files)} results files")
     except Exception as glob_error:
-        print(f"[ERROR] ERROR searching for CSV files: {glob_error}")
+        print(f"[ERROR] ERROR searching for result files: {glob_error}")
         logger.error(f"Error during glob search: {glob_error}")
         raise
     
-    print(f"[INFO] Found {len(results_files)} results CSV files in {data_dir}/")
+    print(f"[INFO] Found {len(results_files)} results files in {data_dir}/")
     
     if len(results_files) == 0:
         print(f"[ERROR] No results files found in {data_dir}/")
-        print(f"   Looking for files matching: {data_dir}/results_*.csv")
-        logger.error(f"No results files found matching: {data_dir}/results_*.csv")
+        print(f"   Looking for files matching: {data_dir}/results_*.csv, {data_dir}/*RESULTS.docx")
+        logger.error(f"No supported results files found in: {data_dir}")
         
         # Additional diagnostic info
         try:
             if os.path.exists(data_dir):
                 all_files = os.listdir(data_dir)
-                csv_files = [f for f in all_files if f.endswith('.csv')]
-                print(f"   Files in {data_dir}: {len(all_files)} total, {len(csv_files)} CSV files")
-                if csv_files:
-                    print(f"   CSV files found: {csv_files[:5]}")
-                logger.info(f"Directory contents: {len(all_files)} files, {len(csv_files)} CSVs")
+                supported_files = [
+                    f for f in all_files
+                    if f.lower().endswith('.csv') or f.lower().endswith('.docx')
+                ]
+                print(f"   Files in {data_dir}: {len(all_files)} total, {len(supported_files)} CSV/DOCX files")
+                if supported_files:
+                    print(f"   CSV/DOCX files found: {supported_files[:5]}")
+                logger.info(f"Directory contents: {len(all_files)} files, {len(supported_files)} CSV/DOCX files")
             else:
                 print(f"   ERROR: Directory {data_dir} does not exist!")
                 logger.error(f"Directory {data_dir} does not exist")
@@ -400,112 +404,51 @@ def load_historical_data_from_csvs(data_dir='data', use_all_csvs=True):
     winners = []
     total_races_in_csvs = 0
     
-    logger.info(f"Processing {len(results_files)} CSV files...")
-    
-    for idx, results_file in enumerate(results_files, 1):
+    logger.info(f"Processing {len(results_files)} results files...")
+
+    try:
+        df_results_all = load_results_dataframe(data_dir=data_dir, logger=logger)
+    except Exception as e:
+        print(f"[WARNING] Error loading result files: {e}")
+        logger.warning(f"Error loading result files: {e}")
+        return [], []
+
+    total_races_in_csvs = len(df_results_all)
+    logger.debug(f"Loaded {total_races_in_csvs} normalized race entries from result files")
+
+    if df_results_all.empty:
+        print(f"[ERROR] CRITICAL: No races could be loaded from {len(results_files)} result files")
+        logger.error("CRITICAL: No races loaded from normalized result files")
+        return [], []
+
+    for (_, track, race_num), race_rows in df_results_all.groupby(['Date', 'Track', 'RaceNumber']):
         try:
-            logger.debug(f"Loading file {idx}/{len(results_files)}: {results_file}")
-            df_results = pd.read_csv(results_file)
-            total_races_in_csvs += len(df_results)
-            logger.debug(f"  Loaded {len(df_results)} race entries from {os.path.basename(results_file)}")
-            
-            # Normalize column names - handle variations in CSV format
-            # Some CSVs use 'Race', 'RaceNum', or 'RaceNumber'
-            if 'RaceNumber' not in df_results.columns:
-                if 'Race' in df_results.columns:
-                    df_results['RaceNumber'] = df_results['Race']
-                elif 'RaceNum' in df_results.columns:
-                    df_results['RaceNumber'] = df_results['RaceNum']
-            
-            # Group by race (Track + RaceNumber)
-            if 'Track' not in df_results.columns or 'RaceNumber' not in df_results.columns:
-                print(f"[WARNING] Skipping {results_file}: Missing Track or RaceNumber columns")
-                logger.warning(f"Skipping {results_file}: columns are {list(df_results.columns)}")
+            df_race = race_rows.copy()
+            winner_box = df_race['Winner'].iloc[0]
+
+            if isinstance(winner_box, str) and winner_box.strip().upper() == 'ABD':
                 continue
-            
-            for (track, race_num), race_rows in df_results.groupby(['Track', 'RaceNumber']):
+            if pd.isna(winner_box):
+                continue
+
+            try:
+                winner_box = int(winner_box)
+            except Exception:
+                continue
+
+            feature_cols = ['CareerStarts', 'WinPercentage', 'Speed_kmh']
+            has_features = all(col in df_race.columns for col in feature_cols)
+
+            if not has_features:
                 try:
-                    # Create DataFrame for this race
-                    df_race = race_rows.copy()
-                    
-                    # Extract winner box from various CSV formats
-                    winner_box = None
-                    
-                    # Format 1: WinnerBox column (Track,RaceNumber,WinnerBox)
-                    if 'WinnerBox' in df_race.columns:
-                        try:
-                            winner_box = int(df_race['WinnerBox'].iloc[0])
-                        except:
-                            continue
-                    
-                    # Format 2: Winner column with box number (Date,Track,RaceNumber,Winner)
-                    elif 'Winner' in df_race.columns:
-                        try:
-                            winner_value = df_race['Winner'].iloc[0]
-                            if isinstance(winner_value, (int, float)) and not pd.isna(winner_value):
-                                winner_box = int(winner_value)
-                            elif isinstance(winner_value, str) and winner_value:
-                                # Try to extract first digit
-                                winner_box = int(str(winner_value)[0])
-                            else:
-                                continue
-                        except:
-                            continue
-                    
-                    # Format 3: Position1,Position2,... columns (Date,Track,RaceNumber,Position1,...)
-                    elif 'Position1' in df_race.columns:
-                        try:
-                            # Winner is in Position1 column
-                            winner_box = int(df_race['Position1'].iloc[0])
-                        except:
-                            continue
-                    
-                    # Format 4: Box and Winner columns (legacy format)
-                    elif 'Box' in df_race.columns and 'Winner' in df_race.columns:
-                        try:
-                            winner_row = df_race[df_race['Winner'] == 1]
-                            if len(winner_row) > 0:
-                                winner_box = int(winner_row['Box'].iloc[0])
-                            else:
-                                continue
-                        except:
-                            continue
-                    
-                    else:
-                        # No recognizable winner format
-                        continue
-                    
-                    if winner_box is None:
-                        continue
-                    
-                    # Add Date if not present (use filename)
-                    if 'Date' not in df_race.columns:
-                        import re
-                        date_match = re.search(r'(\d{4}-\d{2}-\d{2})', results_file)
-                        if date_match:
-                            df_race['Date'] = date_match.group(1)
-                    
-                    # Compute features if not already present
-                    # Check if features are already computed
-                    feature_cols = ['CareerStarts', 'WinPercentage', 'Speed_kmh']
-                    has_features = all(col in df_race.columns for col in feature_cols)
-                    
-                    if not has_features:
-                        try:
-                            df_race = compute_features(df_race)
-                        except Exception as e:
-                            # If feature computation fails, skip this race
-                            continue
-                    
-                    race_data.append(df_race)
-                    winners.append(winner_box)
-                    
-                except Exception as e:
-                    # Skip races with errors
+                    df_race = compute_features(df_race)
+                except Exception:
                     continue
-        
-        except Exception as e:
-            print(f"[WARNING] Error processing {results_file}: {e}")
+
+            race_data.append(df_race)
+            winners.append(winner_box)
+
+        except Exception:
             continue
     
     print(f"[INFO] Total races in CSV files: {total_races_in_csvs}")
@@ -657,77 +600,40 @@ def load_historical_data_hybrid(data_dir='data'):
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
     results_files = glob.glob(f"{data_dir}/results_*.csv")
     
-    print(f"[INFO] Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
-    logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
+    results_files = find_result_files(data_dir=data_dir)
+    print(f"[INFO] Found {len(pdf_files)} PDFs and {len(results_files)} results files")
+    logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results files")
     
     # Step 2: Parse all results from CSV files
     all_results = []  # List of (date, track, race, winner, 2nd, 3rd, 4th)
-    
-    for results_file in sorted(results_files):
-        try:
-            # Extract date from filename: results_YYYY-MM-DD.csv
-            filename = os.path.basename(results_file)
-            date_match = re.search(r'results_(\d{4}-\d{2}-\d{2})\.csv', filename)
-            file_date = date_match.group(1) if date_match else ''
-            
-            df_results = pd.read_csv(results_file)
-            for _, row in df_results.iterrows():
-                track = str(row.get('Track', ''))
-                # Use date from filename if not in CSV
-                date = str(row.get('Date', file_date))
-                # Handle both "R1" format and plain "1" format
-                race_str = str(row.get('Race', row.get('RaceNumber', '0')))
-                race_num = int(race_str.replace('R', '').replace('r', ''))
-                
-                # Extract winner from multiple possible formats
-                # Handle abandoned races (ABD) - skip them
-                winner = 0
-                if 'Winner' in row and pd.notna(row['Winner']):
-                    winner_str = str(row['Winner']).strip().upper()
-                    if winner_str == 'ABD':
-                        logger.debug(f"Skipping abandoned race: {track} {date} R{race_num}")
-                        continue
-                    winner = int(row['Winner'])
-                elif 'Position1' in row and pd.notna(row['Position1']):
-                    pos1_str = str(row['Position1']).strip().upper()
-                    if pos1_str == 'ABD':
-                        logger.debug(f"Skipping abandoned race: {track} {date} R{race_num}")
-                        continue
-                    winner = int(row['Position1'])
-                
-                second = 0
-                if '2nd' in row and pd.notna(row['2nd']):
-                    second = int(row['2nd']) if str(row['2nd']).strip().upper() != 'ABD' else 0
-                elif 'Position2' in row and pd.notna(row['Position2']):
-                    second = int(row['Position2']) if str(row['Position2']).strip().upper() != 'ABD' else 0
-                    
-                third = 0
-                if '3rd' in row and pd.notna(row['3rd']):
-                    third = int(row['3rd']) if str(row['3rd']).strip().upper() != 'ABD' else 0
-                elif 'Position3' in row and pd.notna(row['Position3']):
-                    third = int(row['Position3']) if str(row['Position3']).strip().upper() != 'ABD' else 0
-                    
-                fourth = 0
-                if '4th' in row and pd.notna(row['4th']):
-                    fourth = int(row['4th'])
-                elif 'Position4' in row and pd.notna(row['Position4']):
-                    fourth = int(row['Position4'])
-                
-                if track and race_num and winner and date:
-                    all_results.append({
-                        'date': date,
-                        'track': track,
-                        'race': race_num,
-                        'winner': winner,
-                        '2nd': second,
-                        '3rd': third,
-                        '4th': fourth,
-                        'file': results_file
-                    })
-        except Exception as e:
-            print(f"[WARNING]  Error reading {results_file}: {e}")
-            logger.error(f"Error reading {results_file}: {e}")
+
+    df_results = load_results_dataframe(data_dir=data_dir, logger=logger)
+    for _, row in df_results.iterrows():
+        track = str(row.get('Track', ''))
+        date = str(row.get('Date', ''))
+        race_num = int(row.get('Race', row.get('RaceNumber', '0')))
+
+        winner_str = str(row.get('Winner', '')).strip().upper()
+        if winner_str == 'ABD':
+            logger.debug(f"Skipping abandoned race: {track} {date} R{race_num}")
             continue
+
+        winner = int(row['Winner']) if pd.notna(row.get('Winner')) else 0
+        second = int(row['2nd']) if pd.notna(row.get('2nd')) and str(row['2nd']).strip().upper() != 'ABD' else 0
+        third = int(row['3rd']) if pd.notna(row.get('3rd')) and str(row['3rd']).strip().upper() != 'ABD' else 0
+        fourth = int(row['4th']) if pd.notna(row.get('4th')) and str(row['4th']).strip().upper() != 'ABD' else 0
+
+        if track and race_num and winner and date:
+            all_results.append({
+                'date': date,
+                'track': track,
+                'race': race_num,
+                'winner': winner,
+                '2nd': second,
+                '3rd': third,
+                '4th': fourth,
+                'file': row.get('_source_file', '')
+            })
     
     print(f"[INFO] Loaded {len(all_results)} race results from CSV files")
     logger.info(f"Loaded {len(all_results)} race results from CSV files")
@@ -967,60 +873,33 @@ def load_historical_data(data_dir='data'):
     
     # Find all PDFs and results
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
-    results_files = glob.glob(f"{data_dir}/results_*.csv")
+    results_files = find_result_files(data_dir=data_dir)
     
-    print(f"[INFO] Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
-    logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results CSV files")
+    print(f"[INFO] Found {len(pdf_files)} PDFs and {len(results_files)} results files")
+    logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results files")
     
     # Parse all race results from CSV files
     # Key format: "Date_Track_RaceNumber" (e.g., "2025-11-27_Casino_R1")
     all_results = {}
-    for results_file in sorted(results_files):
-        try:
-            # Extract date from filename (e.g., results_2025-11-27.csv -> 2025-11-27)
-            import os
-            filename = os.path.basename(results_file)
-            date_match = filename.replace('results_', '').replace('.csv', '')
-            csv_date = date_match if date_match else 'unknown'
-            
-            df_results = pd.read_csv(results_file)
-            for _, row in df_results.iterrows():
-                track = str(row.get('Track', ''))
-                # Handle both "R1" format and plain "1" format
-                race_str = str(row.get('Race', row.get('RaceNumber', '0')))
-                race_num = int(race_str.replace('R', '').replace('r', ''))
-                winner_str = str(row.get('Winner', row.get('WinnerBox', '0')))
-                
-                # Handle abandoned races (ABD) - skip them
-                if winner_str.strip().upper() == 'ABD':
-                    logger.debug(f"Skipping abandoned race: {track} R{race_num}")
-                    continue
-                
-                # Extract first digit as winner box
-                winner_box = int(winner_str[0]) if winner_str and winner_str[0].isdigit() else 0
-                
-                # Use Date column if present, otherwise use date from filename
-                row_date = str(row.get('Date', csv_date))
-                # Normalize date format if needed (e.g., "2025-12-14" or "14/12/2025")
-                if '/' in row_date:
-                    # Convert DD/MM/YYYY to YYYY-MM-DD
-                    parts = row_date.split('/')
-                    if len(parts) == 3:
-                        row_date = f"{parts[2]}-{parts[1].zfill(2)}-{parts[0].zfill(2)}"
-                
-                if track and race_num and winner_box:
-                    # Normalize track name to uppercase for consistent matching
-                    track_upper = track.upper()
-                    # Create key with date for more accurate matching
-                    key = f"{row_date}_{track_upper}_R{race_num}"
-                    all_results[key] = winner_box
-                    # Also store by normalized name if different
-                    if track != track_upper:
-                        all_results[f"{row_date}_{track}_R{race_num}"] = winner_box
-        except Exception as e:
-            print(f"[WARNING]  Error reading {results_file}: {e}")
-            logger.warning(f"Error reading {results_file}: {e}")
+    df_results = load_results_dataframe(data_dir=data_dir, logger=logger)
+    for _, row in df_results.iterrows():
+        track = str(row.get('Track', ''))
+        race_num = int(row.get('Race', row.get('RaceNumber', '0')))
+        winner_str = str(row.get('Winner', '0'))
+
+        if winner_str.strip().upper() == 'ABD':
+            logger.debug(f"Skipping abandoned race: {track} R{race_num}")
             continue
+
+        winner_box = int(winner_str[0]) if winner_str and winner_str[0].isdigit() else 0
+        row_date = str(row.get('Date', ''))
+
+        if track and race_num and winner_box and row_date:
+            track_upper = track.upper()
+            key = f"{row_date}_{track_upper}_R{race_num}"
+            all_results[key] = winner_box
+            if track != track_upper:
+                all_results[f"{row_date}_{track}_R{race_num}"] = winner_box
     
     print(f"[INFO] Loaded {len(all_results)} race results from CSV files")
     logger.info(f"Loaded {len(all_results)} race results from CSV files")

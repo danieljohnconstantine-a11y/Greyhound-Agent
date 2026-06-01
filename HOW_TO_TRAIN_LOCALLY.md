@@ -251,7 +251,7 @@ git push
 >
 > | Step | What to do | Bat file to double-click |
 > |---|---|---|
-> | **1 — First-time only: train all models** | Run after adding new results CSVs | **`retrain_all_tracks_sigmoid.bat`** |
+> | **1 — First-time only: train all models** | Run after adding new results CSVs or Word results docs | **`retrain_all_tracks_sigmoid.bat`** |
 > | **2 — Check models are healthy** | Run after training | **`check_system_ready.bat`** |
 > | **3 — Validate pipeline** | Confirms every model loads OK | **`validate_pipeline.bat`** |
 > | **4 — Daily: run predictions** | Put today's PDFs in `data_predictions/` first | **`run_track_ensemble_predictions.bat`** |
@@ -266,7 +266,7 @@ git push
 - Python 3.10+ — download from https://www.python.org/downloads/ (tick **"Add to PATH"**)
 - Git
 - ~4 GB free RAM
-- The PDF form guides and results CSVs are already in `data/` — you don't need to download them separately.
+- The PDF form guides and results files are already in `data/` — CSV (`results_*.csv`) and Word (`*RESULTS.docx`) are both supported.
 
 ---
 
@@ -373,7 +373,7 @@ python retrain_all_tracks_sigmoid.py
 ```
 
 **What this does:**
-- Reads all results CSVs in `data/` and matches them to PDF form guides
+- Reads all results files in `data/` (CSV and `*RESULTS.docx`) and matches them to PDF form guides
 - Trains RF + GB + XGB with **sigmoid calibration** for every track with ≥50 races
 - Saves per-track `.pkl` files: `models/BENDIGO_rf.pkl`, `_gb.pkl`, `_xgb.pkl`, `_scaler.pkl`
 - Writes `reports/RETRAIN_REPORT_<date>.txt`
@@ -472,7 +472,7 @@ If prompted for a password, use a [Personal Access Token](https://github.com/set
 
 | Bat file | Script it runs | When to use | Duration |
 |---|---|---|---|
-| **`retrain_all_tracks_sigmoid.bat`** | `retrain_all_tracks_sigmoid.py` | After adding new results CSVs — full retrain | ~20 min |
+| **`retrain_all_tracks_sigmoid.bat`** | `retrain_all_tracks_sigmoid.py` | After adding new results CSVs or Word results docs — full retrain | ~20 min |
 | **`check_system_ready.bat`** ✨ NEW | `check_system_ready.py` | After training, or any time you want a GO/NO-GO | ~30 sec |
 | **`validate_pipeline.bat`** ✨ NEW | `validate_pipeline.py` | After training, confirm all models load correctly | ~60 sec |
 | **`run_track_ensemble_predictions.bat`** | `run_track_ensemble_predictions.py` | Daily — predictions from PDFs in `data_predictions/` | ~2 min |
