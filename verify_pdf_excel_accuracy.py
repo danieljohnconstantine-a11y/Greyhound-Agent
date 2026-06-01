@@ -108,7 +108,7 @@ for fname in pdf_files:
     try:
         with pdfplumber.open(fpath) as pdf:
             text = '\n'.join(page.extract_text() or '' for page in pdf.pages)
-        df = race_parser.parse_race_form(text)
+        df = race_parser.parse_race_form(text, pdf_file=fname)
         # Suppress parser logger noise already captured above
         df['_src_pdf'] = fname
         pdf_df_list.append(df)

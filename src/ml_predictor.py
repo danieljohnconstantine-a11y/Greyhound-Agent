@@ -765,7 +765,7 @@ def load_historical_data_hybrid(data_dir='data'):
                 for page in pdf.pages:
                     text += page.extract_text() + "\n"
             
-            df_all_dogs = parse_race_form(text)
+            df_all_dogs = parse_race_form(text, pdf_file=pdf_file)
             if df_all_dogs is None or df_all_dogs.empty:
                 processed_pdfs += 1
                 continue
@@ -1045,7 +1045,7 @@ def load_historical_data(data_dir='data'):
                     text += page.extract_text() + "\n"
             
             # Parse the extracted text
-            df_all_dogs = parse_race_form(text)
+            df_all_dogs = parse_race_form(text, pdf_file=pdf_file)
             if df_all_dogs is None or df_all_dogs.empty:
                 continue
             

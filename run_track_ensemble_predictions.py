@@ -451,7 +451,7 @@ def main():
             
             # Parse PDF text
             print(f"   🔍 Parsing race form...")
-            race_df = parse_race_form(pdf_text)
+            race_df = parse_race_form(pdf_text, pdf_file=pdf_file)
             
             if race_df is None or len(race_df) == 0:
                 print(f"   ⚠️  No data extracted from PDF")

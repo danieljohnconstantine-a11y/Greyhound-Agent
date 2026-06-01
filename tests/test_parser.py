@@ -1,6 +1,11 @@
 import os
 import re
 import pdfplumber
+import sys
+from datetime import datetime, date, timedelta
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from src.parser import parse_race_form
 
 def extract_text_from_latest_pdf(folder):
     if not os.path.exists(folder):
@@ -77,10 +82,58 @@ def test_dog_name_with_period():
         )
 
 
+def _expected_filename_date(day: int, month: int):
+    today = datetime.now().date()
+    year = today.year
+    candidate = date(year, month, day)
+    if candidate > (today + timedelta(days=45)):
+        year -= 1
+    elif candidate < (today - timedelta(days=320)):
+        year += 1
+    return date(year, month, day).isoformat()
+
+
+def test_parse_race_header_old_and_new_layout():
+    old_layout = "\n".join([
+        "Race No 28 May 26 06:37pm Angle Park 342m",
+        "1. 6x613Zali Keeping 3b 0.0kg 1 Tamica Dunn 12 - 19 - 60 $47,530 4 3 8",
+    ])
+    new_layout = "\n".join([
+        "Race No 01 June 26 06:02pm Angle Park 342m",
+        "1. 6Regal Mack 1d 0.0kg 1 Alan Randall 0 - 0 - 1 $0 SU 7 Mdn",
+    ])
+
+    old_df = parse_race_form(old_layout, pdf_file="ANGLG2805form.pdf")
+    new_df = parse_race_form(new_layout, pdf_file="ANGLG0106form.pdf")
+
+    assert len(old_df) == 1
+    assert len(new_df) == 1
+    assert old_df.iloc[0]["Track"] == "Angle Park"
+    assert new_df.iloc[0]["Track"] == "Angle Park"
+    assert int(old_df.iloc[0]["RaceNumber"]) == 1
+    assert int(new_df.iloc[0]["RaceNumber"]) == 1
+    assert old_df.iloc[0]["RaceDate"] == "2026-05-28"
+    assert new_df.iloc[0]["RaceDate"] == "2026-06-01"
+
+
+def test_parse_race_date_fallback_from_filename():
+    text = "\n".join([
+        "Race 1",
+        "1. 6Regal Mack 1d 0.0kg 1 Alan Randall 0 - 0 - 1 $0 SU 7 Mdn",
+    ])
+
+    df = parse_race_form(text, pdf_file="ANGLG0106form.pdf")
+    assert len(df) == 1
+    assert int(df.iloc[0]["RaceNumber"]) == 1
+    assert df.iloc[0]["RaceDate"] == _expected_filename_date(1, 6)
+
+
 if __name__ == "__main__":
     try:
         test_dog_name_with_period()
-        print(f"✅ Passed {len(_HONORIFIC_TEST_CASES)}/{len(_HONORIFIC_TEST_CASES)} honorific-name parse tests")
+        test_parse_race_header_old_and_new_layout()
+        test_parse_race_date_fallback_from_filename()
+        print("✅ Passed parser regression tests")
     except AssertionError as e:
         print(f"❌ {e}")
         raise SystemExit(1)

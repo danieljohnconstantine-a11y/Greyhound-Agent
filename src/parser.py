@@ -1,7 +1,8 @@
 import pandas as pd
 import re
 import logging
-from datetime import datetime
+import os
+from datetime import datetime, date, timedelta
 
 # Get logger for this module (logging is configured in main.py if needed)
 logger = logging.getLogger(__name__)
@@ -58,7 +59,61 @@ MONTH_MAP = {
 # Assumes all greyhound racing data is from 2000-2099 (current era)
 BASE_YEAR = 2000
 
-def parse_race_form(text):
+def _month_to_number(month_token):
+    """Convert month token (short or long) to two-digit month string."""
+    if not month_token:
+        return None
+    token = str(month_token).strip()
+    if not token:
+        return None
+
+    token_title = token.title()
+    # Accept long month names like "June"
+    if token_title.startswith("Sept"):
+        token_title = "Sep"
+    month_num = MONTH_MAP.get(token_title[:3], None)
+    return month_num
+
+
+def _extract_date_from_pdf_filename(pdf_file):
+    """
+    Extract race date from filename pattern TRACKDDMMform.pdf with safe year rollover.
+
+    Example: ANGLG0106form.pdf -> YYYY-06-01
+    """
+    if not pdf_file:
+        return None
+
+    filename = os.path.basename(str(pdf_file))
+    match = re.search(r'(\d{2})(\d{2})form\.pdf$', filename, re.IGNORECASE)
+    if not match:
+        return None
+
+    day = int(match.group(1))
+    month = int(match.group(2))
+    today = datetime.now().date()
+
+    # Start with current year, then adjust around year boundaries.
+    year = today.year
+    try:
+        candidate = date(year, month, day)
+    except ValueError:
+        return None
+
+    if candidate > (today + timedelta(days=45)):
+        year -= 1
+    elif candidate < (today - timedelta(days=320)):
+        year += 1
+
+    try:
+        resolved = date(year, month, day)
+    except ValueError:
+        return None
+
+    return resolved.isoformat()
+
+
+def parse_race_form(text, pdf_file=None):
     """
     Enhanced parser that extracts timing data from race history.
     
@@ -180,10 +235,21 @@ def parse_race_form(text):
         # Example: "Race No 110 Jan 26 07:27pm DUBBO 400m"
         # Captures: "110", "Jan", "26", "07:27pm", "DUBBO", "400"
         # We'll parse race_num and day from the combined string
-        header_match = re.match(r"Race No\s*(\d+)\s+([A-Za-z]{3})\s+(\d{2})\s+(\d{2}:\d{2}[APap][Mm])\s+([A-Za-z ]+?)\s+(\d+)m", line)
+        # Primary: Race No <race/day> <Mon|Month> <YY|YYYY> <time> <track> <distance>m
+        header_match = re.match(
+            r"Race No\s*(\d+)\s+([A-Za-z]{3,9})\s+(\d{2,4})\s+(\d{1,2}:\d{2}[APap][Mm])\s+([A-Za-z ]+?)\s+(\d+)m",
+            line
+        )
+        header_match_alt = None
+        if not header_match:
+            # Alternate: Race No <race/day> <DD> <Mon|Month> <YY|YYYY> <time> <track> <distance>m
+            header_match_alt = re.match(
+                r"Race No\s*(\d+)\s+(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{2,4})\s+(\d{1,2}:\d{2}[APap][Mm])\s+([A-Za-z ]+?)\s+(\d+)m",
+                line
+            )
         
         # Fallback: Try simpler race header patterns if main pattern doesn't match
-        if not header_match:
+        if not header_match and not header_match_alt:
             # Pattern 1: "Race 1" or "R1" followed by optional info
             simple_race_match = re.match(r"(?:Race|R)\s*(\d{1,2})\s*[:>\-]?\s*(.*)$", line, re.IGNORECASE)
             if simple_race_match and len(line) < 100:  # Avoid false matches on long lines
@@ -193,7 +259,7 @@ def parse_race_form(text):
                     # Use current date as fallback with proper defaults
                     current_race = {
                         "RaceNumber": race_number,
-                        "RaceDate": datetime.now().strftime("%Y-%m-%d"),
+                        "RaceDate": None,
                         "RaceTime": "TBD",
                         "Track": "Unknown",
                         "Distance": 500  # Default distance
@@ -204,8 +270,12 @@ def parse_race_form(text):
                 except:
                     pass
         
-        if header_match:
-            race_day_combined, month_abbr, year_2digit, time, track, distance = header_match.groups()
+        if header_match or header_match_alt:
+            if header_match:
+                race_day_combined, month_token, year_token, time, track, distance = header_match.groups()
+                explicit_day = None
+            else:
+                race_day_combined, explicit_day, month_token, year_token, time, track, distance = header_match_alt.groups()
             
             # Increment race number each time we detect a new race header
             # This ensures proper race numbering even when PDFs use same number for all races
@@ -214,7 +284,9 @@ def parse_race_form(text):
             # Parse day from the number in header
             # Modern PDFs: "10" = day 10, Old PDFs: "110" = might be race+day or just day
             # We parse as day only since we auto-increment race_number above
-            if len(race_day_combined) >= 2:
+            if explicit_day is not None:
+                day_of_race = explicit_day
+            elif len(race_day_combined) >= 2:
                 # Try to extract day - could be last 2 digits or entire number
                 try:
                     day_of_race = race_day_combined[-2:]  # Last 2 digits as day
@@ -226,17 +298,19 @@ def parse_race_form(text):
                 day_of_race = race_day_combined
             
             # Convert 2-digit year to 4-digit year (e.g., '25' -> 2025, '26' -> 2026)
-            year = BASE_YEAR + int(year_2digit)
+            year = int(year_token)
+            if len(str(year_token)) == 2:
+                year = BASE_YEAR + year
             
             # Normalize time to uppercase
             time = time.upper()
             
-            # Convert month abbreviation to numeric format using MONTH_MAP
-            month_num = MONTH_MAP.get(month_abbr, None)
+            # Convert month abbreviation/full month to numeric format
+            month_num = _month_to_number(month_token)
             if month_num is None:
                 # Month abbreviation not recognized, use default and log error
                 logger.error(
-                    f"[ERROR] Unrecognized month abbreviation '{month_abbr}' in race header. "
+                    f"[ERROR] Unrecognized month token '{month_token}' in race header. "
                     f"Using '01' (January) as fallback. Please update MONTH_MAP if this is a valid month."
                 )
                 month_num = '01'  # Default to January to maintain valid ISO date format
@@ -830,26 +904,25 @@ def parse_race_form(text):
     # CRITICAL FIX #1: Extract date from PDF filename if not in header
     # Format: TRACKDDMM (e.g., ANGLG0212 → Dec 02, 2025)
     # This enables Phase 1 features that require dates
-    race_date = current_race.get('date') if current_race else None
-    if not race_date and current_race and 'Track' in current_race:
-        # Try to extract from typical filename pattern
-        # Filenames like: ANGLG0212form.pdf → track=ANGLG, day=02, month=12
-        track_code = current_race.get('Track', '').upper()
-        # Look for pattern: 4-letter track code + 4 digits (DDMM)
-        if len(track_code) >= 8 and track_code[:4].isalpha() and track_code[4:8].isdigit():
-            day = track_code[4:6]
-            month = track_code[6:8]
-            # Assume year 2025 from CSV context
-            race_date = f"2025-{month}-{day}"
+    race_date = current_race.get('RaceDate') if current_race else None
+    if not race_date:
+        race_date = _extract_date_from_pdf_filename(pdf_file)
+        if race_date:
             logger.info(f"Extracted date from filename: {race_date}")
     
     # Add RaceDate column to DataFrame for temporal features
-    if race_date and len(df) > 0:
-        df['RaceDate'] = race_date
-        logger.info(f"Added RaceDate column: {race_date}")
-    elif len(df) > 0:
-        df['RaceDate'] = None  # Will be filled by CSV matching
-        logger.warning("No race date extracted - will rely on CSV matching")
+    if len(df) > 0:
+        if 'RaceDate' not in df.columns:
+            df['RaceDate'] = None
+
+        # Fill only missing/blank dates, do not overwrite valid header dates.
+        if race_date:
+            df['RaceDate'] = df['RaceDate'].replace('', None)
+            df['RaceDate'] = df['RaceDate'].fillna(race_date)
+            logger.info(f"Filled missing RaceDate values with: {race_date}")
+
+        if df['RaceDate'].isna().all():
+            logger.warning("No race date extracted - will rely on CSV matching")
     
     # Log parsing results
     logger.info(f"[SUCCESS] Parsed {len(df)} dogs across {race_number} races")
