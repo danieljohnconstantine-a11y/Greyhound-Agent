@@ -8387,3 +8387,104 @@
 2026-06-01 09:11:09,633 - INFO - [SUCCESS] Parsed 83 dogs across 11 races
 2026-06-01 09:11:09,634 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'TimeConverted', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'Age', 'Sex', 'TimeEstimated']
 2026-06-01 09:11:09,634 - INFO - [INFO] Distance values (sample): [400, 516, 318]
+2026-06-01 09:11:20,696 - INFO - [FIX] Reconstructed split career record: (career: 11-45-116, RTC=117, DLR=7, DLW=47)
+2026-06-01 09:11:20,697 - INFO - [FIX] Reconstructed split career record: (career: 20-37-116, RTC=28, DLR=12, DLW=12)
+2026-06-01 09:11:20,697 - INFO - [FIX] Reconstructed split career record: (career: 14-32-105, RTC=106, DLR=7, DLW=35)
+2026-06-01 09:11:20,697 - INFO - [FIX] Reconstructed split career record: (career: 22-37-127, RTC=128, DLR=14, DLW=28)
+2026-06-01 09:11:20,697 - INFO - [FIX] Reconstructed split career record: (career: 23-41-106, RTC=63, DLR=13, DLW=84)
+2026-06-01 09:11:20,697 - INFO - [FIX] Reconstructed split career record: (career: 18-35-109, RTC=7, DLR=14, DLW=14)
+2026-06-01 09:11:20,697 - INFO - [INFO] Detected race header: Race 1, DUBBO, 318m on 2025-12-13 at 05:59PM
+2026-06-01 09:11:20,699 - INFO - [INFO] Detected race header: Race 2, DUBBO, 318m on 2025-12-13 at 06:16PM
+2026-06-01 09:11:20,701 - INFO - [INFO] Detected race header: Race 3, DUBBO, 516m on 2025-12-13 at 06:33PM
+2026-06-01 09:11:20,702 - INFO - [INFO] Detected race header: Race 4, DUBBO, 318m on 2025-12-13 at 06:49PM
+2026-06-01 09:11:20,705 - INFO - [INFO] Detected race header: Race 5, DUBBO, 318m on 2025-12-13 at 07:13PM
+2026-06-01 09:11:20,708 - INFO - [INFO] Detected race header: Race 6, DUBBO, 318m on 2025-12-13 at 07:34PM
+2026-06-01 09:11:20,711 - INFO - [INFO] Detected race header: Race 7, DUBBO, 318m on 2025-12-13 at 07:52PM
+2026-06-01 09:11:20,714 - INFO - [INFO] Detected race header: Race 8, DUBBO, 400m on 2025-12-13 at 08:08PM
+2026-06-01 09:11:20,716 - INFO - [INFO] Detected race header: Race 9, DUBBO, 400m on 2025-12-13 at 08:36PM
+2026-06-01 09:11:20,718 - INFO - [INFO] Detected race header: Race 10, DUBBO, 400m on 2025-12-13 at 08:51PM
+2026-06-01 09:11:20,721 - INFO - [INFO] Detected race header: Race 11, DUBBO, 400m on 2025-12-13 at 09:08PM
+2026-06-01 09:11:20,723 - INFO - [INFO] Detected race header: Race 12, DUBBO, 318m on 2025-12-13 at 09:31PM
+2026-06-01 09:11:20,726 - INFO - Converted timing for Diogo Keeping: 1 times from other distances -> 29.53s at 516m
+2026-06-01 09:11:20,726 - INFO - Converted timing for Terry Keeping: 2 times from other distances -> 18.12s at 318m
+2026-06-01 09:11:20,726 - INFO - Converted timing for Caddie's Girl: 1 times from other distances -> 18.10s at 318m
+2026-06-01 09:11:20,726 - INFO - Converted timing for Swift Bonnie: 3 times from other distances -> 22.71s at 400m
+2026-06-01 09:11:20,726 - INFO - Converted timing for Blue Symbol: 1 times from other distances -> 23.15s at 400m
+2026-06-01 09:11:20,726 - INFO - Converted timing for Zipping Webb: 3 times from other distances -> 22.18s at 400m
+2026-06-01 09:11:20,726 - INFO - Converted timing for Tommy Taro: 3 times from other distances -> 22.81s at 400m
+2026-06-01 09:11:20,726 - INFO - Converted timing for Hand Me Down: 1 times from other distances -> 23.01s at 400m
+2026-06-01 09:11:20,726 - INFO - Converted timing for Tralee Digby: 1 times from other distances -> 23.51s at 400m
+2026-06-01 09:11:20,727 - INFO - Converted timing for Jacobite Rebel: 3 times from other distances -> 22.92s at 400m
+2026-06-01 09:11:20,727 - INFO - Converted timing for Bogan Sway: 2 times from other distances -> 22.87s at 400m
+2026-06-01 09:11:20,729 - INFO - Filled missing RaceDate values with: 2025-12-13
+2026-06-01 09:11:20,730 - INFO - [SUCCESS] Parsed 97 dogs across 12 races
+2026-06-01 09:11:20,730 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BestTimeSec', 'Last3TimesSec', 'SectionalSec', 'BoxBiasFactor', 'TimeConverted', 'Age', 'Sex', 'TimeEstimated']
+2026-06-01 09:11:20,730 - INFO - [INFO] Distance values (sample): [318, 516, 400]
+2026-06-01 09:11:29,747 - INFO - [INFO] Detected race header: Race 1, DUBBO, 516m on 2026-03-14 at 05:58PM
+2026-06-01 09:11:29,749 - INFO - [INFO] Detected race header: Race 2, DUBBO, 318m on 2026-03-14 at 06:13PM
+2026-06-01 09:11:29,751 - INFO - [INFO] Detected race header: Race 3, DUBBO, 400m on 2026-03-14 at 06:38PM
+2026-06-01 09:11:29,754 - INFO - [INFO] Detected race header: Race 4, DUBBO, 516m on 2026-03-14 at 07:03PM
+2026-06-01 09:11:29,758 - INFO - [INFO] Detected race header: Race 5, DUBBO, 516m on 2026-03-14 at 07:23PM
+2026-06-01 09:11:29,762 - INFO - [INFO] Detected race header: Race 6, DUBBO, 516m on 2026-03-14 at 07:44PM
+2026-06-01 09:11:29,767 - INFO - [INFO] Detected race header: Race 7, DUBBO, 605m on 2026-03-14 at 08:04PM
+2026-06-01 09:11:29,772 - INFO - [INFO] Detected race header: Race 8, DUBBO, 605m on 2026-03-14 at 08:24PM
+2026-06-01 09:11:29,774 - INFO - [INFO] Detected race header: Race 9, DUBBO, 605m on 2026-03-14 at 08:43PM
+2026-06-01 09:11:29,777 - INFO - [INFO] Detected race header: Race 10, DUBBO, 318m on 2026-03-14 at 09:02PM
+2026-06-01 09:11:29,781 - INFO - [INFO] Detected race header: Race 11, DUBBO, 318m on 2026-03-14 at 09:28PM
+2026-06-01 09:11:29,784 - INFO - [INFO] Detected race header: Race 12, DUBBO, 400m on 2026-03-14 at 09:51PM
+2026-06-01 09:11:29,787 - INFO - Converted timing for High Current: 2 times from other distances -> 28.52s at 516m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Hot To Test: 1 times from other distances -> 18.60s at 318m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Total Treasure: 2 times from other distances -> 22.91s at 400m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Blazing Blue Ice: 2 times from other distances -> 23.13s at 400m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Shorty: 3 times from other distances -> 29.54s at 516m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Roma Keeping: 1 times from other distances -> 29.66s at 516m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Melting Moments: 3 times from other distances -> 29.60s at 516m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Swift Bree: 2 times from other distances -> 29.59s at 516m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Book Of Feuds: 4 times from other distances -> 29.58s at 516m
+2026-06-01 09:11:29,788 - INFO - Converted timing for From The Disco: 4 times from other distances -> 29.54s at 516m
+2026-06-01 09:11:29,788 - INFO - Converted timing for Nangar Polly: 3 times from other distances -> 34.21s at 605m
+2026-06-01 09:11:29,789 - INFO - Converted timing for Vodka And Ice: 3 times from other distances -> 35.01s at 605m
+2026-06-01 09:11:29,789 - INFO - Converted timing for Tank Keeping: 1 times from other distances -> 34.18s at 605m
+2026-06-01 09:11:29,789 - INFO - Converted timing for Canya Ponga: 1 times from other distances -> 34.40s at 605m
+2026-06-01 09:11:29,789 - INFO - Converted timing for Magpie Hector: 2 times from other distances -> 35.01s at 605m
+2026-06-01 09:11:29,789 - INFO - Converted timing for Sammy's Beach: 1 times from other distances -> 35.22s at 605m
+2026-06-01 09:11:29,789 - INFO - Converted timing for Late Night News: 4 times from other distances -> 35.01s at 605m
+2026-06-01 09:11:29,789 - INFO - Converted timing for Ada Taro: 4 times from other distances -> 18.09s at 318m
+2026-06-01 09:11:29,789 - INFO - Converted timing for Motor City Chief: 3 times from other distances -> 23.02s at 400m
+2026-06-01 09:11:29,792 - INFO - Filled missing RaceDate values with: 2026-03-14
+2026-06-01 09:11:29,792 - INFO - [SUCCESS] Parsed 94 dogs across 12 races
+2026-06-01 09:11:29,792 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-06-01 09:11:29,793 - INFO - [INFO] Distance values (sample): [516, 318, 400, 605]
+2026-06-01 09:11:38,216 - INFO - [FIX] Reconstructed split career record: (career: 24-42-142, RTC=143, DLR=5, DLW=26)
+2026-06-01 09:11:38,216 - INFO - [INFO] Detected race header: Race 1, DUBBO, 318m on 2026-03-16 at 03:39PM
+2026-06-01 09:11:38,218 - INFO - [INFO] Detected race header: Race 2, DUBBO, 318m on 2026-03-16 at 03:59PM
+2026-06-01 09:11:38,220 - INFO - [INFO] Detected race header: Race 3, DUBBO, 318m on 2026-03-16 at 04:14PM
+2026-06-01 09:11:38,222 - INFO - [INFO] Detected race header: Race 4, DUBBO, 318m on 2026-03-16 at 04:34PM
+2026-06-01 09:11:38,223 - INFO - [INFO] Detected race header: Race 5, DUBBO, 400m on 2026-03-16 at 04:54PM
+2026-06-01 09:11:38,225 - INFO - [INFO] Detected race header: Race 6, DUBBO, 400m on 2026-03-16 at 05:14PM
+2026-06-01 09:11:38,227 - INFO - [INFO] Detected race header: Race 7, DUBBO, 318m on 2026-03-16 at 05:34PM
+2026-06-01 09:11:38,228 - INFO - [OK] Parsed dog (multi-line format): Box 1 - George Taro (Race 7)
+2026-06-01 09:11:38,230 - INFO - [INFO] Detected race header: Race 8, DUBBO, 318m on 2026-03-16 at 05:54PM
+2026-06-01 09:11:38,232 - INFO - [INFO] Detected race header: Race 9, DUBBO, 318m on 2026-03-16 at 06:13PM
+2026-06-01 09:11:38,235 - INFO - [INFO] Detected race header: Race 10, DUBBO, 318m on 2026-03-16 at 06:38PM
+2026-06-01 09:11:38,239 - INFO - Converted timing for Jilly Hill: 4 times from other distances -> 18.29s at 318m
+2026-06-01 09:11:38,239 - INFO - Converted timing for Gertie Gout: 1 times from other distances -> 23.26s at 400m
+2026-06-01 09:11:38,239 - INFO - Converted timing for Wongaboori Belle: 1 times from other distances -> 23.04s at 400m
+2026-06-01 09:11:38,239 - INFO - Converted timing for Zippy Zenden: 3 times from other distances -> 22.73s at 400m
+2026-06-01 09:11:38,239 - INFO - Converted timing for Danny Keeping: 3 times from other distances -> 23.35s at 400m
+2026-06-01 09:11:38,239 - INFO - Converted timing for Aston Joe: 1 times from other distances -> 23.13s at 400m
+2026-06-01 09:11:38,239 - INFO - Converted timing for Go Forward Blaze: 4 times from other distances -> 22.80s at 400m
+2026-06-01 09:11:38,239 - INFO - Converted timing for Bogan Whiskey: 2 times from other distances -> 23.25s at 400m
+2026-06-01 09:11:38,239 - INFO - Converted timing for Magic Breakout: 2 times from other distances -> 23.17s at 400m
+2026-06-01 09:11:38,240 - INFO - Converted timing for Last Straw: 3 times from other distances -> 23.13s at 400m
+2026-06-01 09:11:38,240 - INFO - Converted timing for George Taro: 4 times from other distances -> 17.67s at 318m
+2026-06-01 09:11:38,240 - INFO - Converted timing for Mobile Lad: 2 times from other distances -> 18.17s at 318m
+2026-06-01 09:11:38,240 - INFO - Converted timing for King's Beach: 4 times from other distances -> 18.49s at 318m
+2026-06-01 09:11:38,240 - INFO - Converted timing for Jacobite Rebel: 1 times from other distances -> 18.29s at 318m
+2026-06-01 09:11:38,240 - INFO - Converted timing for Arctic Image: 2 times from other distances -> 18.10s at 318m
+2026-06-01 09:11:38,240 - INFO - Converted timing for Angel Meg: 2 times from other distances -> 18.22s at 318m
+2026-06-01 09:11:38,240 - INFO - Converted timing for Stand Guard: 3 times from other distances -> 18.17s at 318m
+2026-06-01 09:11:38,243 - INFO - Filled missing RaceDate values with: 2026-03-16
+2026-06-01 09:11:38,243 - INFO - [SUCCESS] Parsed 83 dogs across 10 races
+2026-06-01 09:11:38,243 - INFO - [INFO] Columns in parsed DataFrame: ['Box', 'DogName', 'FormNumber', 'Trainer', 'SexAge', 'Weight', 'Draw', 'CareerWins', 'CareerPlaces', 'CareerStarts', 'PrizeMoney', 'RTC', 'DLR', 'DLW', 'RaceNumber', 'RaceDate', 'RaceTime', 'Track', 'Distance', 'BoxBiasFactor', 'BestTimeSec', 'TimeEstimated', 'SectionalSec', 'Last3TimesSec', 'TimeConverted', 'Age', 'Sex']
+2026-06-01 09:11:38,244 - INFO - [INFO] Distance values (sample): [318, 400]
