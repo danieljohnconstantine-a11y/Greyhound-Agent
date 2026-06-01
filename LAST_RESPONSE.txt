@@ -1,6 +1,6 @@
 ================================================================================
 BEST BETS RANKING REPORT
-Generated: 2026-06-01 08:24:31 (Monday)
+Generated: 2026-06-01 09:57:09 (Monday)
 Races ranked by score gap between 1st and 2nd place dogs.
 Largest gap = strongest model confidence / best bet.
 ================================================================================
