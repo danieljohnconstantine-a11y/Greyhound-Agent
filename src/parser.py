@@ -79,7 +79,7 @@ def _extract_date_from_pdf_filename(pdf_file):
     """
     Extract race date from filename pattern TRACKDDMMform.pdf with safe year rollover.
 
-    Example: ANGLG0106form.pdf -> YYYY-06-01
+    Example (DDMM): ANGLG0106form.pdf -> YYYY-06-01 (01 June)
     """
     if not pdf_file:
         return None
@@ -236,6 +236,7 @@ def parse_race_form(text, pdf_file=None):
         # Captures: "110", "Jan", "26", "07:27pm", "DUBBO", "400"
         # We'll parse race_num and day from the combined string
         # Primary: Race No <race/day> <Mon|Month> <YY|YYYY> <time> <track> <distance>m
+        # Month token allows long names (e.g., "June"); parser normalizes via first 3 letters.
         header_match = re.match(
             r"Race No\s*(\d+)\s+([A-Za-z]{3,9})\s+(\d{2,4})\s+(\d{1,2}:\d{2}[APap][Mm])\s+([A-Za-z ]+?)\s+(\d+)m",
             line
