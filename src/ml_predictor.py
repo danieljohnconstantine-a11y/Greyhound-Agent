@@ -564,7 +564,7 @@ def normalize_track_name(track_name):
     return track_name[:4].upper()
 
 
-def load_historical_data_hybrid(data_dir='data'):
+def load_historical_data_hybrid(data_dir='data', extra_results_dir=None):
     """
     HYBRID data loader: Uses both PDFs and CSVs to load training data.
     
@@ -577,7 +577,12 @@ def load_historical_data_hybrid(data_dir='data'):
     Only races that have BOTH PDF dog data AND CSV winners are used for training.
     
     Args:
-        data_dir: Directory containing PDFs and results CSVs
+        data_dir: Directory containing PDFs and results CSVs.
+        extra_results_dir: Optional extra directory (or list of directories)
+            containing additional results CSVs (e.g. 'data2').  Results from
+            this directory are merged with those from ``data_dir`` before PDF
+            matching.  Duplicates (same Date/Track/Race) are dropped, keeping
+            the entry from the primary ``data_dir`` first.
         
     Returns:
         tuple: (list of race DataFrames, list of winning boxes)
@@ -591,23 +596,33 @@ def load_historical_data_hybrid(data_dir='data'):
     import re
     
     logger = logging.getLogger(__name__)
-    
+
+    # Normalise extra_results_dir to a list (may be str, list, or None)
+    if isinstance(extra_results_dir, str):
+        extra_dirs = [extra_results_dir]
+    elif extra_results_dir:
+        extra_dirs = list(extra_results_dir)
+    else:
+        extra_dirs = []
+
     print("[INFO] Loading data using HYBRID method (PDFs + CSV results)...")
     print("   [SUCCESS] FACTUAL DATA ONLY - Using real PDF form guides matched to CSV winners")
     print("   [INFO] FACTUAL DATA ONLY — races without PDF form guides are skipped")
+    if extra_dirs:
+        print(f"   [INFO] Extra results directories: {extra_dirs}")
     
     # Step 1: Find all files
     pdf_files = glob.glob(f"{data_dir}/*form.pdf")
     results_files = glob.glob(f"{data_dir}/results_*.csv")
     
-    results_files = find_result_files(data_dir=data_dir)
+    results_files = find_result_files(data_dir=data_dir, extra_dirs=extra_dirs if extra_dirs else None)
     print(f"[INFO] Found {len(pdf_files)} PDFs and {len(results_files)} results files")
     logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results files")
     
-    # Step 2: Parse all results from CSV files
+    # Step 2: Parse all results from CSV files (primary dir + any extra dirs)
     all_results = []  # List of (date, track, race, winner, 2nd, 3rd, 4th)
 
-    df_results = load_results_dataframe(data_dir=data_dir, logger=logger)
+    df_results = load_results_dataframe(data_dir=data_dir, logger=logger, extra_dirs=extra_dirs if extra_dirs else None)
     for _, row in df_results.iterrows():
         track = str(row.get('Track', ''))
         date = str(row.get('Date', ''))

@@ -635,7 +635,7 @@ def main():
     print("-" * 80)
     
     try:
-        race_data_list, winners_list = load_historical_data_hybrid()
+        race_data_list, winners_list = load_historical_data_hybrid(extra_results_dir='data2')
         print(f"✅ Loaded {len(race_data_list)} races")
         
         total_dogs = sum(len(race_df) if race_df is not None else 0 for race_df in race_data_list)

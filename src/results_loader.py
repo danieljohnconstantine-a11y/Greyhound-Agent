@@ -75,7 +75,7 @@ def _source_priority(path):
     return 9
 
 
-def find_result_files(data_dir='data', include_output_docx=True):
+def find_result_files(data_dir='data', include_output_docx=True, extra_dirs=None):
     """
     Return all supported result files for training.
 
@@ -85,6 +85,13 @@ def find_result_files(data_dir='data', include_output_docx=True):
       - data/*RESULTS.docx
       - outputs/results_*.docx
       - outputs/*RESULTS.docx
+
+    Args:
+        data_dir: Primary directory to search for result files.
+        include_output_docx: Also search the sibling ``outputs/`` directory.
+        extra_dirs: Optional list of additional directories to include
+            (e.g. ``['data2']``).  Files in these directories are merged and
+            deduplicated with those from ``data_dir``.
     """
     data_dir = os.path.abspath(data_dir)
     search_dirs = [data_dir]
@@ -93,6 +100,12 @@ def find_result_files(data_dir='data', include_output_docx=True):
         outputs_dir = os.path.join(os.path.dirname(data_dir), 'outputs')
         if os.path.isdir(outputs_dir) and outputs_dir not in search_dirs:
             search_dirs.append(outputs_dir)
+
+    if extra_dirs:
+        for extra in extra_dirs:
+            extra_abs = os.path.abspath(extra)
+            if extra_abs not in search_dirs:
+                search_dirs.append(extra_abs)
 
     result_files = []
     for directory in search_dirs:
@@ -116,12 +129,19 @@ def find_result_files(data_dir='data', include_output_docx=True):
     return sorted(set(result_files), key=lambda path: (_source_priority(path), path.lower()))
 
 
-def load_results_dataframe(data_dir='data', include_output_docx=True, logger=None):
+def load_results_dataframe(data_dir='data', include_output_docx=True, logger=None, extra_dirs=None):
     """
     Load results from CSV and DOCX files and normalize them to a shared schema.
+
+    Args:
+        data_dir: Primary directory containing result files.
+        include_output_docx: Also search the sibling ``outputs/`` directory.
+        logger: Optional logger instance.
+        extra_dirs: Optional list of additional directories to include
+            (e.g. ``['data2']``).
     """
     logger = logger or logging.getLogger(__name__)
-    result_files = find_result_files(data_dir=data_dir, include_output_docx=include_output_docx)
+    result_files = find_result_files(data_dir=data_dir, include_output_docx=include_output_docx, extra_dirs=extra_dirs)
 
     dataframes = []
     for result_file in result_files:
