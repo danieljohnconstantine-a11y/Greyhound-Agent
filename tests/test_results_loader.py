@@ -6,7 +6,7 @@ from xml.sax.saxutils import escape
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.results_loader import find_result_files, load_results_dataframe
+from src.results_loader import discover_additional_data_dirs, find_result_files, load_results_dataframe
 
 
 def _write_minimal_docx(path, table_rows=None, paragraphs=None):
@@ -139,6 +139,38 @@ def test_malformed_docx_is_skipped():
         assert df.iloc[0]['Track'] == 'Richmond'
 
 
+def test_discover_additional_data_dirs_orders_numeric_suffix():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        data_dir = os.path.join(temp_dir, 'data')
+        os.makedirs(data_dir)
+        os.makedirs(os.path.join(temp_dir, 'data2'))
+        os.makedirs(os.path.join(temp_dir, 'data10'))
+        os.makedirs(os.path.join(temp_dir, 'data4'))
+        os.makedirs(os.path.join(temp_dir, 'data_predictions'))
+
+        discovered = discover_additional_data_dirs(data_dir)
+        assert discovered == [
+            os.path.join(temp_dir, 'data2'),
+            os.path.join(temp_dir, 'data4'),
+            os.path.join(temp_dir, 'data10'),
+        ]
+
+
+def test_find_result_files_auto_includes_data_directories():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        data_dir = os.path.join(temp_dir, 'data')
+        data4_dir = os.path.join(temp_dir, 'data4')
+        os.makedirs(data_dir)
+        os.makedirs(data4_dir)
+
+        with open(os.path.join(data4_dir, 'results_2026-06-30.csv'), 'w', encoding='utf-8') as handle:
+            handle.write("Track,Date,Race,Winner,2nd,3rd,4th\n")
+            handle.write("Richmond,2026-06-30,1,2,1,3,4\n")
+
+        result_files = find_result_files(data_dir)
+        assert os.path.join(data4_dir, 'results_2026-06-30.csv') in result_files
+
+
 if __name__ == "__main__":
     test_csv_results_load()
     print("✅ test_csv_results_load passed")
@@ -148,3 +180,7 @@ if __name__ == "__main__":
     print("✅ test_mixed_results_deduplicate_csv_over_docx passed")
     test_malformed_docx_is_skipped()
     print("✅ test_malformed_docx_is_skipped passed")
+    test_discover_additional_data_dirs_orders_numeric_suffix()
+    print("✅ test_discover_additional_data_dirs_orders_numeric_suffix passed")
+    test_find_result_files_auto_includes_data_directories()
+    print("✅ test_find_result_files_auto_includes_data_directories passed")

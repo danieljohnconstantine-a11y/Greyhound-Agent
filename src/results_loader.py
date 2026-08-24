@@ -64,6 +64,7 @@ _TRACK_DATE_PREFIX_RE = re.compile(r'^(?P<track>.+?)(?P<date>\d{1,2}/\d{1,2}/\d{
 _RACE_TOKEN_RE = re.compile(r'R(?P<race>\d+)(?P<tail>\d{4}|ABD)', re.IGNORECASE)
 _RESULT_DATE_RE = re.compile(r'results_(\d{4}-\d{2}-\d{2})\.csv$', re.IGNORECASE)
 _DOCX_DATE_RE = re.compile(r'(\d{2})(\d{2})(\d{4})results\.docx$', re.IGNORECASE)
+_EXTRA_DATA_DIR_RE = re.compile(r'^data(?P<index>\d+)$', re.IGNORECASE)
 
 
 def _source_priority(path):
@@ -73,6 +74,37 @@ def _source_priority(path):
     if lower.endswith('.docx'):
         return 1
     return 9
+
+
+def discover_additional_data_dirs(data_dir='data'):
+    """
+    Discover sibling directories named ``data2``, ``data3``, ``data4`` ...
+    and return them in numeric order.
+    """
+    base_dir = os.path.abspath(data_dir)
+    parent_dir = os.path.dirname(base_dir)
+    primary_name = os.path.basename(base_dir).lower()
+
+    discovered = []
+    if not os.path.isdir(parent_dir):
+        return discovered
+
+    for name in os.listdir(parent_dir):
+        directory = os.path.join(parent_dir, name)
+        if not os.path.isdir(directory):
+            continue
+
+        if name.lower() == primary_name:
+            continue
+
+        match = _EXTRA_DATA_DIR_RE.fullmatch(name)
+        if not match:
+            continue
+
+        discovered.append((int(match.group('index')), directory))
+
+    discovered.sort(key=lambda item: item[0])
+    return [directory for _, directory in discovered]
 
 
 def find_result_files(data_dir='data', include_output_docx=True, extra_dirs=None):
@@ -106,6 +138,11 @@ def find_result_files(data_dir='data', include_output_docx=True, extra_dirs=None
             extra_abs = os.path.abspath(extra)
             if extra_abs not in search_dirs:
                 search_dirs.append(extra_abs)
+
+    auto_extra_dirs = discover_additional_data_dirs(data_dir)
+    for auto_extra in auto_extra_dirs:
+        if auto_extra not in search_dirs:
+            search_dirs.append(auto_extra)
 
     result_files = []
     for directory in search_dirs:

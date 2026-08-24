@@ -15,7 +15,11 @@ from sklearn.metrics import classification_report, confusion_matrix
 import pickle
 import os
 from datetime import datetime
-from src.results_loader import find_result_files, load_results_dataframe
+from src.results_loader import (
+    discover_additional_data_dirs,
+    find_result_files,
+    load_results_dataframe,
+)
 
 class GreyhoundMLPredictor:
     """
@@ -604,6 +608,10 @@ def load_historical_data_hybrid(data_dir='data', extra_results_dir=None):
         extra_dirs = list(extra_results_dir)
     else:
         extra_dirs = []
+
+    for auto_extra in discover_additional_data_dirs(data_dir):
+        if auto_extra not in extra_dirs:
+            extra_dirs.append(auto_extra)
 
     print("[INFO] Loading data using HYBRID method (PDFs + CSV results)...")
     print("   [SUCCESS] FACTUAL DATA ONLY - Using real PDF form guides matched to CSV winners")
