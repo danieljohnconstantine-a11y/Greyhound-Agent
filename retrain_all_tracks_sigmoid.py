@@ -82,7 +82,7 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-from src.results_loader import discover_additional_data_dirs, find_result_files, load_results_dataframe
+from src.results_loader import find_result_files, load_results_dataframe
 
 HAS_XGBOOST = False
 try:
@@ -300,10 +300,7 @@ def train_track(df, track_name, verbose=True):
 
 def load_training_data():
     """Load all supported result files from data/ and sibling dataN/ directories."""
-    # Collect result files from the primary data dir; also include discovered
-    # data2/, data3/, data4/ ... directories if they exist.
-    extra_dirs = discover_additional_data_dirs(DATA_DIR)
-    result_files = find_result_files(DATA_DIR, extra_dirs=extra_dirs if extra_dirs else None)
+    result_files = find_result_files(DATA_DIR)
     if not result_files:
         raise FileNotFoundError(
             f"No supported results files found in {DATA_DIR}.\n"
@@ -311,7 +308,7 @@ def load_training_data():
             "See train_ml_track_ensemble.py for the full data preparation pipeline."
         )
 
-    df = load_results_dataframe(DATA_DIR, extra_dirs=extra_dirs if extra_dirs else None)
+    df = load_results_dataframe(DATA_DIR)
     if df.empty:
         return pd.DataFrame()
 
