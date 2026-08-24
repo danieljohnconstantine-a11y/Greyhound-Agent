@@ -66,6 +66,7 @@ REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 MODELS_DIR = os.path.join(REPO_ROOT, 'models')
 DATA_DIR = os.path.join(REPO_ROOT, 'data')
 DATA2_DIR = os.path.join(REPO_ROOT, 'data2')
+DATA3_DIR = os.path.join(REPO_ROOT, 'data3')
 REPORTS_DIR = os.path.join(REPO_ROOT, 'reports')
 SRC_DIR = os.path.join(REPO_ROOT, 'src')
 
@@ -300,9 +301,9 @@ def train_track(df, track_name, verbose=True):
 # ── load + merge all training CSVs ───────────────────────────────────────────
 
 def load_training_data():
-    """Load all supported result files from data/ and data2/ and return a combined DataFrame."""
-    # Collect result files from the primary data dir; also include data2/ if it exists
-    extra_dirs = [DATA2_DIR] if os.path.isdir(DATA2_DIR) else []
+    """Load all supported result files from data/, data2/ and data3/ and return a combined DataFrame."""
+    # Collect result files from the primary data dir; also include data2/ and data3/ if they exist
+    extra_dirs = [d for d in [DATA2_DIR, DATA3_DIR] if os.path.isdir(d)]
     result_files = find_result_files(DATA_DIR, extra_dirs=extra_dirs if extra_dirs else None)
     if not result_files:
         raise FileNotFoundError(
