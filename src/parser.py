@@ -2,7 +2,7 @@ import pandas as pd
 import re
 import logging
 import os
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 
 # Get logger for this module (logging is configured in main.py if needed)
 logger = logging.getLogger(__name__)
@@ -77,40 +77,41 @@ def _month_to_number(month_token):
 
 def _extract_date_from_pdf_filename(pdf_file):
     """
-    Extract race date from filename pattern TRACKDDMMform.pdf with safe year rollover.
+    Extract race date from filename pattern TRACKDDMMYYform.pdf.
 
-    Example (DDMM): ANGLG0106form.pdf -> YYYY-06-01 (01 June)
+    Example (DDMMYY): ANGLG010625form.pdf -> 2025-06-01 (01 June 2025)
+    Falls back to legacy DDMM (4-digit) pattern using proximity heuristic for
+    any files that have not yet been renamed.
     """
     if not pdf_file:
         return None
 
     filename = os.path.basename(str(pdf_file))
+
+    # New format: DDMMYY (6 digits before "form.pdf")
+    match = re.search(r'(\d{2})(\d{2})(\d{2})form\.pdf$', filename, re.IGNORECASE)
+    if match:
+        day = int(match.group(1))
+        month = int(match.group(2))
+        year = 2000 + int(match.group(3))
+        try:
+            return date(year, month, day).isoformat()
+        except ValueError:
+            return None
+
+    # Legacy fallback: DDMM (4 digits) — year inferred from month
+    # All data belongs to 2025 or 2026; Oct–Dec → 2025, Jan–Sep → 2026.
     match = re.search(r'(\d{2})(\d{2})form\.pdf$', filename, re.IGNORECASE)
     if not match:
         return None
 
     day = int(match.group(1))
     month = int(match.group(2))
-    today = datetime.now().date()
-
-    # Start with current year, then adjust around year boundaries.
-    year = today.year
+    year = 2025 if month >= 10 else 2026
     try:
-        candidate = date(year, month, day)
+        return date(year, month, day).isoformat()
     except ValueError:
         return None
-
-    if candidate > (today + timedelta(days=45)):
-        year -= 1
-    elif candidate < (today - timedelta(days=320)):
-        year += 1
-
-    try:
-        resolved = date(year, month, day)
-    except ValueError:
-        return None
-
-    return resolved.isoformat()
 
 
 def parse_race_form(text, pdf_file=None):

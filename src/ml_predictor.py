@@ -667,19 +667,27 @@ def load_historical_data_hybrid(data_dir='data', extra_results_dir=None):
     
     for pdf_file in sorted(pdf_files):
         try:
-            # Extract date from PDF filename: TRACKGDDMM (e.g., RICHG2812form.pdf)
+            # Extract date from PDF filename: TRACKGDDMMYYform.pdf (e.g., RICHG281225form.pdf)
             filename = os.path.basename(pdf_file)
-            match = re.match(r'([A-Z]+)G(\d{2})(\d{2})form\.pdf', filename)
+            match = re.match(r'([A-Z]+)G(\d{2})(\d{2})(\d{2})form\.pdf', filename, re.IGNORECASE)
             pdf_date = None
             pdf_track_code = None
-            
+
             if match:
                 pdf_track_code = match.group(1)
                 day = match.group(2)
                 month = match.group(3)
-                # Determine year: months 01-06 belong to 2026, months 07-12 belong to 2025
-                year = "2026" if month in ("01", "02", "03", "04", "05", "06") else "2025"
+                year = f"20{match.group(4)}"
                 pdf_date = f"{year}-{month}-{day}"
+            else:
+                # Legacy fallback: DDMM only — infer year from month
+                match_legacy = re.match(r'([A-Z]+)G(\d{2})(\d{2})form\.pdf', filename, re.IGNORECASE)
+                if match_legacy:
+                    pdf_track_code = match_legacy.group(1)
+                    day = match_legacy.group(2)
+                    month = match_legacy.group(3)
+                    year = "2025" if int(month) >= 10 else "2026"
+                    pdf_date = f"{year}-{month}-{day}"
             
             with pdfplumber.open(pdf_file) as pdf:
                 text = ""
@@ -946,20 +954,27 @@ def load_historical_data(data_dir='data'):
             pdfs_parsed += 1
             
             # If RaceDate is missing, try to extract from PDF filename
-            # Filename format: TRACKDDMMYYYY form.pdf (e.g., ANGLG0212form.pdf = 02 Dec)
+            # New format: TRACKDDMMYYform.pdf (e.g., ANGLG021225form.pdf = 02 Dec 2025)
+            # Legacy format: TRACKDDMMform.pdf (e.g., ANGLG0212form.pdf = 02 Dec, year inferred)
             if 'RaceDate' not in df_all_dogs.columns or df_all_dogs['RaceDate'].isna().all():
                 import os
                 filename = os.path.basename(pdf_file)
-                # Try to extract DDMM from filename (e.g., ANGLG0212form.pdf -> 0212)
-                date_match = re.search(r'(\d{4})form\.pdf$', filename)
+                # New DDMMYY (6-digit) format
+                date_match = re.search(r'(\d{2})(\d{2})(\d{2})form\.pdf$', filename, re.IGNORECASE)
                 if date_match:
-                    ddmm = date_match.group(1)
-                    day = ddmm[:2]
-                    month = ddmm[2:4]
-                    # Assume year 2025 based on CSV dates
-                    pdf_date = f"2025-{month}-{day}"
+                    day, month, yy = date_match.group(1), date_match.group(2), date_match.group(3)
+                    pdf_date = f"20{yy}-{month}-{day}"
                     df_all_dogs['RaceDate'] = pdf_date
                     logger.info(f"Extracted date {pdf_date} from PDF filename: {filename}")
+                else:
+                    # Legacy DDMM (4-digit) fallback — infer year from month
+                    date_match = re.search(r'(\d{2})(\d{2})form\.pdf$', filename, re.IGNORECASE)
+                    if date_match:
+                        day, month = date_match.group(1), date_match.group(2)
+                        year = "2025" if int(month) >= 10 else "2026"
+                        pdf_date = f"{year}-{month}-{day}"
+                        df_all_dogs['RaceDate'] = pdf_date
+                        logger.info(f"Extracted date {pdf_date} (legacy) from PDF filename: {filename}")
                 
             # Compute features for all dogs
             df_all_dogs = compute_features(df_all_dogs)
