@@ -112,6 +112,7 @@ TRACK_ALIASES: Dict[str, str] = {
 CANONICAL_TRACKS: Dict[str, str] = {name.upper(): name for name in sorted(set(TRACK_CODE_MAP.values()))}
 for _alias_target in TRACK_ALIASES.values():
     CANONICAL_TRACKS.setdefault(_alias_target.upper(), _alias_target)
+# Values are stored uppercase because checks use track.upper().
 INVALID_TRACK_NAMES: Set[str] = {"ABD", "TASMANIA"}
 
 
@@ -373,30 +374,30 @@ def main() -> int:
     stamp = generated_at.strftime("%Y-%m-%d_%H%M%S")
     forms_without_results_csv = REPORTS_DIR / f"FORMS_WITHOUT_RESULTS_{stamp}.csv"
     results_without_forms_csv = REPORTS_DIR / f"RESULTS_WITHOUT_FORMS_{stamp}.csv"
-    wrote_results_csv = False
-    wrote_forms_csv = False
+    wrote_forms_without_results_csv = False
+    wrote_results_without_forms_csv = False
     # missing_results_rows = forms exist but results are missing
     if missing_results_rows:
         with forms_without_results_csv.open("w", newline="", encoding="utf-8") as f:
             w = csv.writer(f)
             w.writerow(["Date", "Track"])
             w.writerows(sorted(missing_results_rows))
-        wrote_results_csv = True
+        wrote_forms_without_results_csv = True
     # missing_forms_rows = results exist but forms are missing
     if missing_forms_rows:
         with results_without_forms_csv.open("w", newline="", encoding="utf-8") as f:
             w = csv.writer(f)
             w.writerow(["Date", "Track"])
             w.writerows(sorted(missing_forms_rows))
-        wrote_forms_csv = True
+        wrote_results_without_forms_csv = True
 
     report = write_report(issues_by_dir, generated_at=generated_at)
     print(f"Report written: {report}")
-    if wrote_results_csv:
+    if wrote_forms_without_results_csv:
         print(f"Forms-without-results list: {forms_without_results_csv}")
     else:
         print("Forms-without-results list: none")
-    if wrote_forms_csv:
+    if wrote_results_without_forms_csv:
         print(f"Results-without-forms list: {results_without_forms_csv}")
     else:
         print("Results-without-forms list: none")
