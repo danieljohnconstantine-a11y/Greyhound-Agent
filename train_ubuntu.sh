@@ -84,6 +84,11 @@ from src.results_loader import find_result_files
 print(len(find_result_files('data')))
 PY
 )
+if ! [[ "${RESULT_FILES_COUNT}" =~ ^[0-9]+$ ]]; then
+    echo -e "${RED}✗${NC}  Failed to detect results files (unexpected output: ${RESULT_FILES_COUNT})"
+    echo "   Ensure dependencies are installed and run from repository root."
+    exit 1
+fi
 if [ "${RESULT_FILES_COUNT}" -eq 0 ]; then
     echo -e "${RED}✗${NC}  No supported results files found in data/data2/data3/data4."
     echo "   Add results CSV/DOCX files with Track,Date,Race,Winner,2nd,3rd,4th."
