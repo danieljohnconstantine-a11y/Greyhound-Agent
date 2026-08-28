@@ -26,6 +26,7 @@ REPO_ROOT = Path(__file__).resolve().parent
 REPORTS_DIR = REPO_ROOT / "reports"
 DATA_DIRS = [REPO_ROOT / "data", REPO_ROOT / "data2", REPO_ROOT / "data3", REPO_ROOT / "data4"]
 REQUIRED_COLUMNS = ["Track", "Date", "Race", "Winner", "2nd", "3rd", "4th"]
+ALT_REQUIRED_COLUMNS = ["Track", "RaceDate", "RaceNumber", "WinnerBox"]
 
 FORM_RE_6 = re.compile(r"^(?P<prefix>[A-Z]+)(?P<dd>\d{2})(?P<mm>\d{2})(?P<yy>\d{2})form\.pdf$")
 FORM_RE_4 = re.compile(r"^(?P<prefix>[A-Z]+)(?P<dd>\d{2})(?P<mm>\d{2})form\.pdf$")
@@ -191,9 +192,18 @@ def validate_results_file(path: Path, issues: List[AuditIssue]) -> Dict[str, Set
             return tracks_by_date
         header_set = set(reader.fieldnames)
         required_set = set(REQUIRED_COLUMNS)
-        missing = sorted(required_set - header_set)
-        if missing:
-            issues.append(AuditIssue("ERROR", f"{path}: missing required column(s): {missing}"))
+        alt_required_set = set(ALT_REQUIRED_COLUMNS)
+        is_standard_schema = required_set.issubset(header_set)
+        is_alt_schema = alt_required_set.issubset(header_set)
+        if not is_standard_schema and not is_alt_schema:
+            missing = sorted(required_set - header_set)
+            alt_missing = sorted(alt_required_set - header_set)
+            issues.append(
+                AuditIssue(
+                    "ERROR",
+                    f"{path}: unsupported results schema, missing standard={missing}, missing alt={alt_missing}",
+                )
+            )
             return tracks_by_date
 
         for line_num, row in enumerate(reader, start=2):
@@ -202,8 +212,14 @@ def validate_results_file(path: Path, issues: List[AuditIssue]) -> Dict[str, Set
                 continue
 
             track = normalize_track((row.get("Track") or "").strip())
-            date_str = (row.get("Date") or "").strip()
-            race = (row.get("Race") or "").strip()
+            if is_standard_schema:
+                date_str = (row.get("Date") or "").strip()
+                race = (row.get("Race") or "").strip()
+                winner_col, second_col, third_col, fourth_col = "Winner", "2nd", "3rd", "4th"
+            else:
+                date_str = (row.get("RaceDate") or "").strip()
+                race = (row.get("RaceNumber") or "").strip()
+                winner_col, second_col, third_col, fourth_col = "WinnerBox", "SecondBox", "ThirdBox", "FourthBox"
 
             if not track:
                 issues.append(AuditIssue("ERROR", f"{path}: empty Track at line {line_num}"))
@@ -226,11 +242,11 @@ def validate_results_file(path: Path, issues: List[AuditIssue]) -> Dict[str, Set
                 duplicate_count += 1
             seen_keys.add(key)
 
-            for col in ["Winner", "2nd", "3rd", "4th"]:
+            for col in [winner_col, second_col, third_col, fourth_col]:
                 val = (row.get(col) or "").strip()
                 if not val:
                     continue
-                if col == "Winner" and val.upper() == "ABD":
+                if col == winner_col and val.upper() == "ABD":
                     continue
                 if not val.isdigit():
                     non_numeric_count += 1
@@ -268,9 +284,9 @@ def audit_data_dir(data_dir: Path) -> Tuple[List[AuditIssue], Dict[str, Set[str]
         except Exception:
             issues.append(AuditIssue("ERROR", f"{pdf}: malformed form filename"))
 
-    result_files = sorted(data_dir.glob("results_*.csv"))
+    result_files = sorted(set(data_dir.glob("results_*.csv")) | set(data_dir.glob("race_results*.csv")))
     if not result_files:
-        issues.append(AuditIssue("INFO", f"{data_dir}: no results_*.csv files found"))
+        issues.append(AuditIssue("INFO", f"{data_dir}: no results_*.csv or race_results*.csv files found"))
 
     for csv_file in result_files:
         tracks = validate_results_file(csv_file, issues)
