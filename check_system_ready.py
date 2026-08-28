@@ -24,6 +24,9 @@ REQUIRED_COLUMNS = ["Track", "Date", "Race", "Winner", "2nd", "3rd", "4th"]
 
 FORM_RE_6 = re.compile(r"^(?P<prefix>[A-Z]+)(?P<dd>\d{2})(?P<mm>\d{2})(?P<yy>\d{2})form\.pdf$")
 FORM_RE_4 = re.compile(r"^(?P<prefix>[A-Z]+)(?P<dd>\d{2})(?P<mm>\d{2})form\.pdf$")
+# Keep this in sync with src/parser.py legacy fallback:
+# month >= 10 -> 2025, otherwise 2026.
+LEGACY_YEAR_SWITCH_MONTH = 10
 
 TRACK_CODE_MAP: Dict[str, str] = {
     "ANGLG": "Angle Park",
@@ -116,8 +119,8 @@ def parse_form_filename(filename: str) -> Tuple[str, str, bool]:
     m4 = FORM_RE_4.match(filename)
     if m4:
         dd, mm = int(m4.group("dd")), int(m4.group("mm"))
-        # Legacy inference used by parser.py
-        yyyy = 2025 if mm >= 10 else 2026
+        # Legacy inference used by parser.py (_extract_date_from_pdf_filename).
+        yyyy = 2025 if mm >= LEGACY_YEAR_SWITCH_MONTH else 2026
         d = date(yyyy, mm, dd).isoformat()
         prefix = m4.group("prefix")
         return prefix, d, True
@@ -136,8 +139,11 @@ def validate_results_file(path: Path, issues: List[AuditIssue]) -> Dict[str, Set
         if reader.fieldnames is None:
             issues.append(AuditIssue("ERROR", f"{path}: empty CSV (no header row)"))
             return tracks_by_date
-        if reader.fieldnames != REQUIRED_COLUMNS:
-            issues.append(AuditIssue("ERROR", f"{path}: invalid header {reader.fieldnames}, expected {REQUIRED_COLUMNS}"))
+        header_set = set(reader.fieldnames)
+        required_set = set(REQUIRED_COLUMNS)
+        missing = sorted(required_set - header_set)
+        if missing:
+            issues.append(AuditIssue("ERROR", f"{path}: missing required column(s): {missing}"))
             return tracks_by_date
 
         for line_num, row in enumerate(reader, start=2):
