@@ -1,0 +1,289 @@
+{
+  "generated_at": "2026-08-28T10:56:45",
+  "config_path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/config.pkl",
+  "tracks_in_config": 40,
+  "tracks_validated": 0,
+  "failures": [
+    {
+      "track": "Angle Park",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Angle Park_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "BALLARAT",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/BALLARAT_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "BENDIGO",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/BENDIGO_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "BROKEN HILL",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/BROKEN HILL_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Bulli",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Bulli_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "CASINO",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/CASINO_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Cannington",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Cannington_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Capalaba",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Capalaba_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "DARWIN",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/DARWIN_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "DUBBO",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/DUBBO_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "GAWLER",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/GAWLER_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "GEELONG",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/GEELONG_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "GOSFORD",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/GOSFORD_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "GOULBURN",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/GOULBURN_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "GRAFTON",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/GRAFTON_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "GUNNEDAH",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/GUNNEDAH_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "HEALESVILLE",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/HEALESVILLE_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "HOBART",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/HOBART_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "HORSHAM",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/HORSHAM_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "MT GAMBIER",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/MT GAMBIER_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "MURRAY BDGE STRAIGHT",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/MURRAY BDGE STRAIGHT_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Maitland",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Maitland_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Mandurah",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Mandurah_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Meadows",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Meadows_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "NOWRA",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/NOWRA_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Q LAKESIDE",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Q LAKESIDE_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Q PARKLANDS",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Q PARKLANDS_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Q STRAIGHT",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Q STRAIGHT_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "RICHMOND",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/RICHMOND_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "ROCKHAMPTON",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/ROCKHAMPTON_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "SALE",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/SALE_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "SANDOWN",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/SANDOWN_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "SHEPPARTON",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/SHEPPARTON_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "TOWNSVILLE",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/TOWNSVILLE_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Temora",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Temora_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "The Gardens",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/The Gardens_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "WAGGA",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/WAGGA_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "WARRNAMBOOL",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/WARRNAMBOOL_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "WENTWORTH PARK",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/WENTWORTH PARK_gb.pkl",
+      "error": "No module named '_loss'"
+    },
+    {
+      "track": "Warragul",
+      "type": "model_inference_failed",
+      "algorithm": "gb",
+      "path": "/home/runner/work/Greyhound-Agent/Greyhound-Agent/models/Warragul_gb.pkl",
+      "error": "No module named '_loss'"
+    }
+  ],
+  "status": "FAIL"
+}
