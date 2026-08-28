@@ -677,6 +677,8 @@ def load_historical_data_hybrid(data_dir='data', extra_results_dir=None):
         try:
             # Extract race date from filename with parser-compatible logic.
             pdf_date = _extract_date_from_pdf_filename(pdf_file)
+            if not pdf_date:
+                logger.debug(f"Could not infer race date from filename, using date-less key fallback: {pdf_file}")
             
             with pdfplumber.open(pdf_file) as pdf:
                 text = ""

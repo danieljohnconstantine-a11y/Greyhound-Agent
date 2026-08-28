@@ -145,6 +145,7 @@ def infer_track_from_pdf_header(pdf_path: Path, fallback_track: str) -> str:
     """
     For ambiguous legacy codes, read the first-page header and extract track name.
     Falls back to the provided mapped track if extraction fails.
+    Uses the first matching "Race No ... <track> ... <distance>m" line.
     """
     if pdfplumber is None:
         return fallback_track
@@ -356,8 +357,10 @@ def main() -> int:
 
     # Write full missing-pair exports for remediation planning.
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    miss_results_csv = REPORTS_DIR / "MISSING_RESULTS_FOR_FORMS.csv"
-    miss_forms_csv = REPORTS_DIR / "MISSING_FORMS_FOR_RESULTS.csv"
+    generated_at = datetime.now()
+    stamp = generated_at.strftime("%Y-%m-%d_%H%M%S")
+    miss_results_csv = REPORTS_DIR / f"MISSING_RESULTS_FOR_FORMS_{stamp}.csv"
+    miss_forms_csv = REPORTS_DIR / f"MISSING_FORMS_FOR_RESULTS_{stamp}.csv"
     with miss_results_csv.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["Date", "Track"])
@@ -367,7 +370,6 @@ def main() -> int:
         w.writerow(["Date", "Track"])
         w.writerows(sorted(missing_forms_rows))
 
-    generated_at = datetime.now()
     report = write_report(issues_by_dir, generated_at=generated_at)
     print(f"Report written: {report}")
     print(f"Missing-results list: {miss_results_csv}")
