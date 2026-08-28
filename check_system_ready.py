@@ -361,19 +361,33 @@ def main() -> int:
     stamp = generated_at.strftime("%Y-%m-%d_%H%M%S")
     miss_results_csv = REPORTS_DIR / f"MISSING_RESULTS_FOR_FORMS_{stamp}.csv"
     miss_forms_csv = REPORTS_DIR / f"MISSING_FORMS_FOR_RESULTS_{stamp}.csv"
-    with miss_results_csv.open("w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
-        w.writerow(["Date", "Track"])
-        w.writerows(sorted(missing_results_rows))
-    with miss_forms_csv.open("w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
-        w.writerow(["Date", "Track"])
-        w.writerows(sorted(missing_forms_rows))
+    wrote_results_csv = False
+    wrote_forms_csv = False
+    # missing_results_rows = forms exist but results are missing
+    if missing_results_rows:
+        with miss_results_csv.open("w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["Date", "Track"])
+            w.writerows(sorted(missing_results_rows))
+        wrote_results_csv = True
+    # missing_forms_rows = results exist but forms are missing
+    if missing_forms_rows:
+        with miss_forms_csv.open("w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["Date", "Track"])
+            w.writerows(sorted(missing_forms_rows))
+        wrote_forms_csv = True
 
     report = write_report(issues_by_dir, generated_at=generated_at)
     print(f"Report written: {report}")
-    print(f"Missing-results list: {miss_results_csv}")
-    print(f"Missing-forms list  : {miss_forms_csv}")
+    if wrote_results_csv:
+        print(f"Missing-results list: {miss_results_csv}")
+    else:
+        print("Missing-results list: none")
+    if wrote_forms_csv:
+        print(f"Missing-forms list  : {miss_forms_csv}")
+    else:
+        print("Missing-forms list  : none")
 
     errors = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "ERROR")
     warnings = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "WARN")
