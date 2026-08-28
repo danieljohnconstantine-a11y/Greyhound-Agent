@@ -109,10 +109,10 @@ TRACK_ALIASES: Dict[str, str] = {
     "THE MEADOWS": "Meadows",
 }
 
-CANONICAL_TRACKS: Dict[str, str] = {
-    name.upper(): name for name in sorted(set(TRACK_CODE_MAP.values()) | set(TRACK_ALIASES.values()))
-}
-INVALID_TRACK_NAMES = {"ABD", "TASMANIA"}
+CANONICAL_TRACKS: Dict[str, str] = {name.upper(): name for name in sorted(set(TRACK_CODE_MAP.values()))}
+for _alias_target in TRACK_ALIASES.values():
+    CANONICAL_TRACKS.setdefault(_alias_target.upper(), _alias_target)
+INVALID_TRACK_NAMES: Set[str] = {"ABD", "TASMANIA"}
 
 
 @dataclass
