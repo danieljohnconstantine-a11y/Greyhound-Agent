@@ -107,8 +107,9 @@ def main() -> int:
                 if not hasattr(model, "predict_proba"):
                     raise AttributeError("model has no predict_proba")
                 probs = model.predict_proba(X_scaled)
-                if getattr(probs, "shape", None) != (1, 2):
-                    raise ValueError(f"unexpected predict_proba shape: {getattr(probs, 'shape', None)}")
+                shape = getattr(probs, "shape", None)
+                if not (shape and len(shape) == 2 and shape[0] == 1 and shape[1] >= 2):
+                    raise ValueError(f"unexpected predict_proba shape: {shape}")
             except Exception as exc:
                 track_ok = False
                 failures.append(

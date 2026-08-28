@@ -215,12 +215,12 @@ def audit_data_dir(data_dir: Path) -> Tuple[List[AuditIssue], Dict[str, Set[str]
     return issues, forms_by_date, results_by_date
 
 
-def write_report(issues_by_dir: Dict[str, List[AuditIssue]]) -> Path:
+def write_report(issues_by_dir: Dict[str, List[AuditIssue]], generated_at: datetime) -> Path:
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    report_path = REPORTS_DIR / f"SYSTEM_READY_CHECK_{datetime.now().strftime('%Y-%m-%d_%H%M%S')}.txt"
+    report_path = REPORTS_DIR / f"SYSTEM_READY_CHECK_{generated_at.strftime('%Y-%m-%d_%H%M%S')}.txt"
     lines: List[str] = []
     lines.append("SYSTEM READY CHECK")
-    lines.append(f"Generated: {datetime.now().isoformat(timespec='seconds')}")
+    lines.append(f"Generated: {generated_at.isoformat(timespec='seconds')}")
     lines.append("")
     total_errors = total_warnings = 0
     for dir_name, issues in issues_by_dir.items():
@@ -297,11 +297,12 @@ def main() -> int:
             pairing_issues.append(AuditIssue("WARN", f"Example {dt} results-without-forms: {tracks}"))
     issues_by_dir["global_pairing"] = pairing_issues
 
-    report = write_report(issues_by_dir)
+    generated_at = datetime.now()
+    report = write_report(issues_by_dir, generated_at=generated_at)
     print(f"Report written: {report}")
 
-    errors = sum(1 for issues in issues_by_dir.values() for i in issues if i.level == "ERROR")
-    warnings = sum(1 for issues in issues_by_dir.values() for i in issues if i.level == "WARN")
+    errors = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "ERROR")
+    warnings = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "WARN")
     print(f"Errors: {errors}  Warnings: {warnings}")
     print("GO" if errors == 0 and warnings == 0 else "NO-GO")
     return 0 if (errors == 0 and warnings == 0) else 1
