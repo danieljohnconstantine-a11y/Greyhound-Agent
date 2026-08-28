@@ -45,7 +45,8 @@ TRACK_CODE_MAP: Dict[str, str] = {
     "CSNOG": "Casino",
     "DRWNG": "Darwin",
     "DUBBG": "Dubbo",
-    "ELWKG": "Healesville",
+    # ELWKG files are Elwick (Hobart) meetings in this dataset.
+    "ELWKG": "Hobart",
     "GARDG": "Gardens",
     "GAWLG": "Gawler",
     "GEELG": "Geelong",
@@ -60,7 +61,8 @@ TRACK_CODE_MAP: Dict[str, str] = {
     "MBRGG": "Murray Bridge",
     "MBRSG": "Murray Bridge Straight",
     "MEADG": "Meadows",
-    "MOWBG": "Wentworth Park",
+    # MOWBG files correspond to Mowbray (Launceston) meetings.
+    "MOWBG": "Launceston",
     "MTGG": "Mount Gambier",
     "NOWRG": "Nowra",
     "NTHMG": "Northam",
@@ -107,6 +109,11 @@ TRACK_ALIASES: Dict[str, str] = {
     "THE MEADOWS": "Meadows",
 }
 
+CANONICAL_TRACKS: Dict[str, str] = {
+    name.upper(): name for name in sorted(set(TRACK_CODE_MAP.values()) | set(TRACK_ALIASES.values()))
+}
+INVALID_TRACK_NAMES = {"ABD", "TASMANIA"}
+
 
 @dataclass
 class AuditIssue:
@@ -118,7 +125,8 @@ def normalize_track(name: str) -> str:
     cleaned = re.sub(r"\s+", " ", (name or "").strip())
     if not cleaned:
         return ""
-    return TRACK_ALIASES.get(cleaned.upper(), cleaned)
+    aliased = TRACK_ALIASES.get(cleaned.upper(), cleaned)
+    return CANONICAL_TRACKS.get(aliased.upper(), aliased)
 
 
 def parse_form_filename(filename: str) -> Tuple[str, str, bool]:
@@ -149,6 +157,7 @@ def infer_track_from_pdf_header(pdf_path: Path, fallback_track: str) -> str:
     """
     if pdfplumber is None:
         return fallback_track
+    text = ""
     try:
         with pdfplumber.open(str(pdf_path)) as pdf:
             if not pdf.pages:
@@ -197,6 +206,9 @@ def validate_results_file(path: Path, issues: List[AuditIssue]) -> Dict[str, Set
 
             if not track:
                 issues.append(AuditIssue("ERROR", f"{path}: empty Track at line {line_num}"))
+                continue
+            if track.upper() in INVALID_TRACK_NAMES:
+                issues.append(AuditIssue("WARN", f"{path}: ignored invalid Track '{track}' at line {line_num}"))
                 continue
             try:
                 datetime.strptime(date_str, "%Y-%m-%d")
@@ -359,20 +371,20 @@ def main() -> int:
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     generated_at = datetime.now()
     stamp = generated_at.strftime("%Y-%m-%d_%H%M%S")
-    miss_results_for_forms_csv = REPORTS_DIR / f"MISSING_RESULTS_FOR_FORMS_{stamp}.csv"
-    miss_forms_for_results_csv = REPORTS_DIR / f"MISSING_FORMS_FOR_RESULTS_{stamp}.csv"
+    forms_without_results_csv = REPORTS_DIR / f"FORMS_WITHOUT_RESULTS_{stamp}.csv"
+    results_without_forms_csv = REPORTS_DIR / f"RESULTS_WITHOUT_FORMS_{stamp}.csv"
     wrote_results_csv = False
     wrote_forms_csv = False
     # missing_results_rows = forms exist but results are missing
     if missing_results_rows:
-        with miss_results_for_forms_csv.open("w", newline="", encoding="utf-8") as f:
+        with forms_without_results_csv.open("w", newline="", encoding="utf-8") as f:
             w = csv.writer(f)
             w.writerow(["Date", "Track"])
             w.writerows(sorted(missing_results_rows))
         wrote_results_csv = True
     # missing_forms_rows = results exist but forms are missing
     if missing_forms_rows:
-        with miss_forms_for_results_csv.open("w", newline="", encoding="utf-8") as f:
+        with results_without_forms_csv.open("w", newline="", encoding="utf-8") as f:
             w = csv.writer(f)
             w.writerow(["Date", "Track"])
             w.writerows(sorted(missing_forms_rows))
@@ -381,13 +393,13 @@ def main() -> int:
     report = write_report(issues_by_dir, generated_at=generated_at)
     print(f"Report written: {report}")
     if wrote_results_csv:
-        print(f"Missing-results list: {miss_results_for_forms_csv}")
+        print(f"Forms-without-results list: {forms_without_results_csv}")
     else:
-        print("Missing-results list: none")
+        print("Forms-without-results list: none")
     if wrote_forms_csv:
-        print(f"Missing-forms list  : {miss_forms_for_results_csv}")
+        print(f"Results-without-forms list: {results_without_forms_csv}")
     else:
-        print("Missing-forms list  : none")
+        print("Results-without-forms list: none")
 
     errors = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "ERROR")
     warnings = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "WARN")
