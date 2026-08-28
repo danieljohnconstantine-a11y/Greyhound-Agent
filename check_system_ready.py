@@ -26,7 +26,7 @@ REPO_ROOT = Path(__file__).resolve().parent
 REPORTS_DIR = REPO_ROOT / "reports"
 DATA_DIRS = [REPO_ROOT / "data", REPO_ROOT / "data2", REPO_ROOT / "data3", REPO_ROOT / "data4"]
 REQUIRED_COLUMNS = ["Track", "Date", "Race", "Winner", "2nd", "3rd", "4th"]
-ALT_REQUIRED_COLUMNS = ["Track", "RaceDate", "RaceNumber", "WinnerBox"]
+ALT_REQUIRED_COLUMNS = ["Track", "RaceDate", "RaceNumber", "WinnerBox", "SecondBox", "ThirdBox", "FourthBox"]
 
 FORM_RE_6 = re.compile(r"^(?P<prefix>[A-Z]+)(?P<dd>\d{2})(?P<mm>\d{2})(?P<yy>\d{2})form\.pdf$")
 FORM_RE_4 = re.compile(r"^(?P<prefix>[A-Z]+)(?P<dd>\d{2})(?P<mm>\d{2})form\.pdf$")

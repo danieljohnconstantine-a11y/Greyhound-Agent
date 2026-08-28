@@ -1,0 +1,101 @@
+SYSTEM READY CHECK
+Generated: 2026-08-28T11:48:01
+
+[data]
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data: no results_*.csv or race_results*.csv files found
+
+[data2]
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/race_results_complete.csv: 12 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/race_results_nov_2025.csv: 36 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-01.csv: 1 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 127
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 128
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 129
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 2
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 3
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 4
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 5
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 6
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 7
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 8
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 9
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 10
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 11
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 12
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 13
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-01-19.csv: 118 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-01-20.csv: 129 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-01-21.csv: 30 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-01-28.csv: 152 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-03-10.csv: 11 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-03-18.csv: 24 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-03-19.csv: 33 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-03-21.csv: 21 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-05-04.csv: 3 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-05-27.csv: 12 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-05-28.csv: 63 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-06-21.csv: 3 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-06-22.csv: 3 non-numeric placing value(s)
+
+[data3]
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/race_results_complete.csv: 12 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/race_results_nov_2025.csv: 36 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-01.csv: 1 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 127
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 128
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 129
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 2
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 3
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 4
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 5
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 6
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 7
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 8
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 9
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 10
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 11
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 12
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-27.csv: ignored invalid Track 'Tasmania' at line 13
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-01-19.csv: 118 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-01-20.csv: 129 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-01-21.csv: 30 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-01-28.csv: 152 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-03-10.csv: 11 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-03-18.csv: 24 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-03-19.csv: 33 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-03-21.csv: 21 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-05-04.csv: 3 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-05-27.csv: 12 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-05-28.csv: 63 non-numeric placing value(s)
+
+[data4]
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data4/results_2026-07-11.csv: 27 non-numeric placing value(s)
+
+[global_pairing]
+  WARN: Global pairing: 221 form track/date entries missing results across 208 dates
+  WARN: Example 2025-10-19 forms-without-results: ['Broken Hill']
+  WARN: Example 2025-11-12 forms-without-results: ['Cannington']
+  WARN: Example 2025-11-23 forms-without-results: ['Darwin']
+  WARN: Example 2025-11-26 forms-without-results: ['Hobart']
+  WARN: Example 2025-11-29 forms-without-results: ['Hobart']
+  WARN: Example 2025-12-03 forms-without-results: ['Hobart']
+  WARN: Example 2025-12-10 forms-without-results: ['Hobart']
+  WARN: Example 2025-12-12 forms-without-results: ['Bendigo', 'Gardens', 'Geelong', 'Goulburn', 'Healesville', 'Horsham', 'Mandurah', 'Murray Bridge', 'Q Lakeside', 'Richmond', 'Townsville', 'Wagga']
+  WARN: Example 2025-12-13 forms-without-results: ['Hobart']
+  WARN: Example 2025-12-17 forms-without-results: ['Hobart']
+  WARN: Global pairing: 185 result track/date entries missing forms across 208 dates
+  WARN: Example 2025-09-07 results-without-forms: ['Darwin', 'Q Straight', 'Sale']
+  WARN: Example 2025-11-18 results-without-forms: ['Angle Park', 'Horsham', 'Launceston', 'Warragul']
+  WARN: Example 2025-11-22 results-without-forms: ['Angle Park', 'Bendigo', 'Cannington', 'Q Lakeside', 'Sandown']
+  WARN: Example 2025-11-26 results-without-forms: ['Taree']
+  WARN: Example 2025-11-27 results-without-forms: ['Mount Gambier']
+  WARN: Example 2025-11-29 results-without-forms: ['Taree']
+  WARN: Example 2025-12-03 results-without-forms: ['Taree']
+  WARN: Example 2025-12-10 results-without-forms: ['Taree']
+  WARN: Example 2025-12-13 results-without-forms: ['Taree']
+  WARN: Example 2025-12-17 results-without-forms: ['Taree']
+
+SUMMARY
+  Errors  : 0
+  Warnings: 83
+  Status  : NO-GO
