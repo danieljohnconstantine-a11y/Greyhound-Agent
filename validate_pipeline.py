@@ -44,6 +44,9 @@ def _find_scaler_path(track: str) -> Path | None:
 
 
 def main() -> int:
+    # Security note: pickle is intentionally used here because existing model
+    # artifacts are serialized as .pkl. Only run this script against trusted
+    # repository-managed model files.
     config_path = MODELS_DIR / "config.pkl"
     if not config_path.exists():
         print(f"ERROR: Missing {config_path}")

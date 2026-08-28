@@ -133,6 +133,9 @@ def validate_results_file(path: Path, issues: List[AuditIssue]) -> Dict[str, Set
     blank_row_count = 0
     with path.open(newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
+        if reader.fieldnames is None:
+            issues.append(AuditIssue("ERROR", f"{path}: empty CSV (no header row)"))
+            return tracks_by_date
         if reader.fieldnames != REQUIRED_COLUMNS:
             issues.append(AuditIssue("ERROR", f"{path}: invalid header {reader.fieldnames}, expected {REQUIRED_COLUMNS}"))
             return tracks_by_date
