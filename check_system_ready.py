@@ -68,6 +68,8 @@ TRACK_CODE_MAP: Dict[str, str] = {
     "QPRKG": "Q Parklands",
     "QSTRG": "Q Straight",
     "RICHG": "Richmond",
+    # Keep consistent with src/results_loader._TRACK_ALIASES where
+    # "RICHMOND STRAIGHT" normalizes to "Richmond" for training merges.
     "RISTG": "Richmond",
     "ROCKG": "Rockhampton",
     "SALEG": "Sale",
@@ -94,6 +96,7 @@ TRACK_ALIASES: Dict[str, str] = {
     "LADBROKES Q STRAIGHT": "Q Straight",
     "MOUNT GAMBIER": "Mount Gambier",
     "MT GAMBIER": "Mount Gambier",
+    # Keep consistent with src/results_loader normalization.
     "RICHMOND STRAIGHT": "Richmond",
     "SANDOWN PARK": "Sandown",
     "THE GARDENS": "Gardens",
