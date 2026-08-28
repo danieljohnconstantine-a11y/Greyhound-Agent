@@ -509,7 +509,7 @@ If prompted for a password, use a [Personal Access Token](https://github.com/set
 | Nothing printed for 2–3 min after starting training | **Normal** — PDF parsing is silent at startup; first line appears after ~30–60 s |
 | `ModuleNotFoundError: pdfplumber` | `pip install pdfplumber` |
 | `ModuleNotFoundError: xgboost` | `pip install xgboost` |
-| `0 tracks trained` | Make sure you are in the repo root and `data/*.csv` results files exist |
+| `0 tracks trained` | Make sure you are in the repo root and results files exist in `data/` and/or `data2`/`data3`/`data4` |
 | Git push rejected (file too large) | Re-check you used `retrain_all_tracks_sigmoid.py`, not `train_ml_track_ensemble.py`; each `.pkl` must be < 100 MB |
 | Training takes > 40 min | Normal on older hardware — PDF parsing is CPU-bound |
 | PowerShell says `running scripts is disabled` | Run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` once, then retry |

@@ -16,6 +16,11 @@ from datetime import datetime, date
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
+try:
+    import pdfplumber  # type: ignore
+except Exception:  # pragma: no cover - optional dependency at runtime
+    pdfplumber = None
+
 
 REPO_ROOT = Path(__file__).resolve().parent
 REPORTS_DIR = REPO_ROOT / "reports"
@@ -63,7 +68,7 @@ TRACK_CODE_MAP: Dict[str, str] = {
     "QPRKG": "Q Parklands",
     "QSTRG": "Q Straight",
     "RICHG": "Richmond",
-    "RISTG": "Richmond Straight",
+    "RISTG": "Richmond",
     "ROCKG": "Rockhampton",
     "SALEG": "Sale",
     "SANDG": "Sandown",
@@ -89,8 +94,13 @@ TRACK_ALIASES: Dict[str, str] = {
     "LADBROKES Q STRAIGHT": "Q Straight",
     "MOUNT GAMBIER": "Mount Gambier",
     "MT GAMBIER": "Mount Gambier",
-    "RICHMOND STRAIGHT": "Richmond Straight",
+    "RICHMOND STRAIGHT": "Richmond",
     "SANDOWN PARK": "Sandown",
+    "THE GARDENS": "Gardens",
+    "LAKESIDE": "Q Lakeside",
+    "Q1 LAKESIDE": "Q Lakeside",
+    "Q2 PARKLANDS": "Q Parklands",
+    "TAREE SUPER TRACK": "Taree",
     "THE MEADOWS": "Meadows",
 }
 
@@ -126,6 +136,32 @@ def parse_form_filename(filename: str) -> Tuple[str, str, bool]:
         return prefix, d, True
 
     raise ValueError(f"Unrecognized form filename: {filename}")
+
+
+def infer_track_from_pdf_header(pdf_path: Path, fallback_track: str) -> str:
+    """
+    For ambiguous legacy codes, read the first-page header and extract track name.
+    Falls back to the provided mapped track if extraction fails.
+    """
+    if pdfplumber is None:
+        return fallback_track
+    try:
+        with pdfplumber.open(str(pdf_path)) as pdf:
+            if not pdf.pages:
+                return fallback_track
+            text = pdf.pages[0].extract_text() or ""
+    except Exception:
+        return fallback_track
+
+    for line in text.splitlines():
+        if "Race No" not in line:
+            continue
+        m = re.search(r"\d{1,2}:\d{2}[ap]m\s+(.+?)\s+\d{3,4}m\b", line, flags=re.IGNORECASE)
+        if not m:
+            continue
+        extracted = normalize_track(m.group(1))
+        return extracted or fallback_track
+    return fallback_track
 
 
 def validate_results_file(path: Path, issues: List[AuditIssue]) -> Dict[str, Set[str]]:
@@ -206,6 +242,9 @@ def audit_data_dir(data_dir: Path) -> Tuple[List[AuditIssue], Dict[str, Set[str]
         try:
             prefix, date_str, is_legacy = parse_form_filename(pdf.name)
             track = TRACK_CODE_MAP.get(prefix, prefix)
+            # TASTG files in the dataset can refer to different TAS/NSW meetings.
+            if prefix == "TASTG":
+                track = infer_track_from_pdf_header(pdf, fallback_track=track)
             forms_by_date[date_str].add(normalize_track(track))
             if is_legacy:
                 issues.append(AuditIssue("WARN", f"{pdf}: legacy DDMM filename missing yy"))
@@ -268,6 +307,8 @@ def main() -> int:
     # Global track/date pairing audit across all data folders.
     missing_forms_examples = []
     missing_results_examples = []
+    missing_forms_rows: List[Tuple[str, str]] = []
+    missing_results_rows: List[Tuple[str, str]] = []
     total_missing_forms = 0
     total_missing_results = 0
     all_dates = sorted(set(global_forms) | set(global_results))
@@ -278,10 +319,14 @@ def main() -> int:
         missing_forms = sorted(result_tracks - form_tracks)
         if missing_results:
             total_missing_results += len(missing_results)
+            for track in missing_results:
+                missing_results_rows.append((dt, track))
             if len(missing_results_examples) < 10:
                 missing_results_examples.append((dt, missing_results))
         if missing_forms:
             total_missing_forms += len(missing_forms)
+            for track in missing_forms:
+                missing_forms_rows.append((dt, track))
             if len(missing_forms_examples) < 10:
                 missing_forms_examples.append((dt, missing_forms))
 
@@ -306,9 +351,24 @@ def main() -> int:
             pairing_issues.append(AuditIssue("WARN", f"Example {dt} results-without-forms: {tracks}"))
     issues_by_dir["global_pairing"] = pairing_issues
 
+    # Write full missing-pair exports for remediation planning.
+    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    miss_results_csv = REPORTS_DIR / "MISSING_RESULTS_FOR_FORMS.csv"
+    miss_forms_csv = REPORTS_DIR / "MISSING_FORMS_FOR_RESULTS.csv"
+    with miss_results_csv.open("w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["Date", "Track"])
+        w.writerows(sorted(missing_results_rows))
+    with miss_forms_csv.open("w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["Date", "Track"])
+        w.writerows(sorted(missing_forms_rows))
+
     generated_at = datetime.now()
     report = write_report(issues_by_dir, generated_at=generated_at)
     print(f"Report written: {report}")
+    print(f"Missing-results list: {miss_results_csv}")
+    print(f"Missing-forms list  : {miss_forms_csv}")
 
     errors = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "ERROR")
     warnings = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "WARN")

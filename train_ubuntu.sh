@@ -78,12 +78,18 @@ if ! $PYTHON -c "import pandas, numpy, sklearn, xgboost, pdfplumber, openpyxl" 2
 fi
 echo -e "${GREEN}✓${NC}  All packages present"
 
-# ── Check data directory ────────────────────────────────────
-if [ ! -d "data" ] || [ -z "$(ls data/*.csv 2>/dev/null)" ]; then
-    echo -e "${RED}✗${NC}  No CSV files found in data/. Cannot train without results data."
-    echo "   Add results CSVs (Track,Date,Race,Winner,2nd,3rd,4th) to data/"
+# ── Check results availability across data + dataN dirs ─────
+RESULT_FILES_COUNT=$($PYTHON - <<'PY'
+from src.results_loader import find_result_files
+print(len(find_result_files('data')))
+PY
+)
+if [ "${RESULT_FILES_COUNT}" -eq 0 ]; then
+    echo -e "${RED}✗${NC}  No supported results files found in data/data2/data3/data4."
+    echo "   Add results CSV/DOCX files with Track,Date,Race,Winner,2nd,3rd,4th."
     exit 1
 fi
+echo -e "${GREEN}✓${NC}  Found ${RESULT_FILES_COUNT} results file(s) across data directories"
 
 # ── Remove stale models so we start clean ──────────────────
 echo ""
@@ -127,7 +133,7 @@ else
     echo "============================================================"
     echo ""
     echo " Common fixes:"
-    echo "   - '0 tracks trained': make sure data/*.csv results files exist"
+    echo "   - '0 tracks trained': make sure results files exist in data/ and/or data2+/"
     echo "   - ModuleNotFoundError: run  pip install pdfplumber xgboost"
     echo "   - 'Can't pickle': update to latest code (nthread=1 fix applied)"
     echo ""

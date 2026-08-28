@@ -15,7 +15,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import pickle
 import os
 from datetime import datetime
-from src.results_loader import find_result_files, load_results_dataframe
+from src.results_loader import find_result_files, load_results_dataframe, discover_additional_data_dirs
 
 class GreyhoundMLPredictor:
     """
@@ -588,7 +588,7 @@ def load_historical_data_hybrid(data_dir='data', extra_results_dir=None):
         tuple: (list of race DataFrames, list of winning boxes)
     """
     import pdfplumber
-    from src.parser import parse_race_form
+    from src.parser import parse_race_form, _extract_date_from_pdf_filename
     from src.features import compute_features
     import glob
     import logging
@@ -611,10 +611,18 @@ def load_historical_data_hybrid(data_dir='data', extra_results_dir=None):
     if extra_dirs:
         print(f"   [INFO] Extra results directories: {extra_dirs}")
     
-    # Step 1: Find all files
-    pdf_files = glob.glob(f"{data_dir}/*form.pdf")
-    results_files = glob.glob(f"{data_dir}/results_*.csv")
-    
+    # Step 1: Find all files (source-of-truth merge across data + dataN dirs)
+    data_dir_abs = os.path.abspath(data_dir)
+    pdf_dirs = [data_dir_abs] + discover_additional_data_dirs(data_dir_abs)
+    if extra_dirs:
+        pdf_dirs.extend([os.path.abspath(d) for d in extra_dirs])
+    # preserve order, remove duplicates
+    pdf_dirs = list(dict.fromkeys(pdf_dirs))
+
+    pdf_files = []
+    for d in pdf_dirs:
+        pdf_files.extend(glob.glob(os.path.join(d, "*form.pdf")))
+
     results_files = find_result_files(data_dir=data_dir, extra_dirs=extra_dirs if extra_dirs else None)
     print(f"[INFO] Found {len(pdf_files)} PDFs and {len(results_files)} results files")
     logger.info(f"Found {len(pdf_files)} PDFs and {len(results_files)} results files")
@@ -667,27 +675,8 @@ def load_historical_data_hybrid(data_dir='data', extra_results_dir=None):
     
     for pdf_file in sorted(pdf_files):
         try:
-            # Extract date from PDF filename: TRACKGDDMMYYform.pdf (e.g., RICHG281225form.pdf)
-            filename = os.path.basename(pdf_file)
-            match = re.match(r'([A-Z]+)G(\d{2})(\d{2})(\d{2})form\.pdf', filename, re.IGNORECASE)
-            pdf_date = None
-            pdf_track_code = None
-
-            if match:
-                pdf_track_code = match.group(1)
-                day = match.group(2)
-                month = match.group(3)
-                year = f"20{match.group(4)}"
-                pdf_date = f"{year}-{month}-{day}"
-            else:
-                # Legacy fallback: DDMM only — infer year from month
-                match_legacy = re.match(r'([A-Z]+)G(\d{2})(\d{2})form\.pdf', filename, re.IGNORECASE)
-                if match_legacy:
-                    pdf_track_code = match_legacy.group(1)
-                    day = match_legacy.group(2)
-                    month = match_legacy.group(3)
-                    year = "2025" if int(month) >= 10 else "2026"
-                    pdf_date = f"{year}-{month}-{day}"
+            # Extract race date from filename with parser-compatible logic.
+            pdf_date = _extract_date_from_pdf_filename(pdf_file)
             
             with pdfplumber.open(pdf_file) as pdf:
                 text = ""
@@ -707,11 +696,13 @@ def load_historical_data_hybrid(data_dir='data', extra_results_dir=None):
             
             if 'Track' in df_all_dogs.columns and 'RaceNumber' in df_all_dogs.columns:
                 for (track, race_num), df_race in df_all_dogs.groupby(['Track', 'RaceNumber']):
-                    # Store with date if available
-                    if pdf_date and pdf_track_code:
-                        key = f"{pdf_date}_{pdf_track_code}_R{race_num}"
+                    # Store with date when available. Track component uses
+                    # normalize_track_name() so it aligns with CSV-side keys.
+                    track_code = normalize_track_name(track)
+                    if pdf_date:
+                        key = f"{pdf_date}_{track_code}_R{race_num}"
                     else:
-                        key = f"{track}_R{race_num}"
+                        key = f"{track_code}_R{race_num}"
                     # Convert to float32 for each race DataFrame
                     for col in df_race.select_dtypes(include=['float64']).columns:
                         df_race[col] = df_race[col].astype('float32')
