@@ -79,8 +79,8 @@ TRACK_CODE_MAP: Dict[str, str] = {
     "SANDG": "Sandown",
     "SHEP": "Shepparton",
     "SHEPG": "Shepparton",
-    # TASTG files map to Tasmania/Hobart meetings.
-    "TASTG": "Hobart",
+    # TASTG files default to Taree when PDF header extraction is unavailable.
+    "TASTG": "Taree",
     "TEMOG": "Temora",
     "TOWNG": "Townsville",
     "TRARG": "Traralgon",
@@ -100,6 +100,7 @@ TRACK_ALIASES: Dict[str, str] = {
     "LADBROKES Q2 PARKLANDS": "Q Parklands",
     "LADBROKES Q STRAIGHT": "Q Straight",
     "MOUNT GAMBIER": "Mount Gambier",
+    "MURRAY BDGE STRAIGHT": "Murray Bridge Straight",
     "MT GAMBIER": "Mount Gambier",
     # Keep consistent with src/results_loader normalization.
     "RICHMOND STRAIGHT": "Richmond",
@@ -389,11 +390,17 @@ def main() -> int:
     # Auto-reconcile well-known same-day alias mismatches.
     alias_pair_rules = [
         ("Murray Bridge Straight", "Murray Bridge"),
+        ("Taree", "Temora"),
     ]
     for dt in all_dates:
         for forms_track, results_track in alias_pair_rules:
             forms_set = forms_without_results_by_date.get(dt, set())
             results_set = results_without_forms_by_date.get(dt, set())
+            if forms_track == "Taree" and results_track == "Temora":
+                # Only apply when there is no competing unmatched Taree result
+                # and no competing unmatched Temora form on the same date.
+                if "Taree" in results_set or "Temora" in forms_set:
+                    continue
             if forms_track in forms_set and results_track in results_set:
                 forms_set.remove(forms_track)
                 results_set.remove(results_track)
