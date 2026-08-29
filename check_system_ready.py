@@ -12,7 +12,7 @@ import re
 import sys
 from collections import defaultdict
 from dataclasses import dataclass
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
@@ -79,7 +79,8 @@ TRACK_CODE_MAP: Dict[str, str] = {
     "SANDG": "Sandown",
     "SHEP": "Shepparton",
     "SHEPG": "Shepparton",
-    "TASTG": "Hobart",
+    # TASTG meetings align to Taree in this dataset for pairing/training audits.
+    "TASTG": "Taree",
     "TEMOG": "Temora",
     "TOWNG": "Townsville",
     "TRARG": "Traralgon",
@@ -95,6 +96,7 @@ TRACK_ALIASES: Dict[str, str] = {
     "BETDELUXE ROCKHAMPTON": "Rockhampton",
     "LADBROKES GARDENS": "Gardens",
     "LADBROKES Q1 LAKESIDE": "Q Lakeside",
+    "LADBROKES Q LAKESIDE": "Q Lakeside",
     "LADBROKES Q2 PARKLANDS": "Q Parklands",
     "LADBROKES Q STRAIGHT": "Q Straight",
     "MOUNT GAMBIER": "Mount Gambier",
@@ -344,12 +346,55 @@ def main() -> int:
     missing_results_rows: List[Tuple[str, str]] = []
     total_missing_forms = 0
     total_missing_results = 0
+    auto_matched_rows: List[Tuple[str, str, str, str]] = []
     all_dates = sorted(set(global_forms) | set(global_results))
+
+    forms_without_results_by_date: Dict[str, Set[str]] = {}
+    results_without_forms_by_date: Dict[str, Set[str]] = {}
     for dt in all_dates:
         form_tracks = global_forms.get(dt, set())
         result_tracks = global_results.get(dt, set())
-        missing_results = sorted(form_tracks - result_tracks)
-        missing_forms = sorted(result_tracks - form_tracks)
+        forms_without_results_by_date[dt] = set(form_tracks - result_tracks)
+        results_without_forms_by_date[dt] = set(result_tracks - form_tracks)
+
+    # Auto-reconcile well-known same-day alias mismatches.
+    alias_pair_rules = [
+        ("Murray Bridge Straight", "Murray Bridge"),
+        ("Q Lakeside", "Ladbrokes Q Lakeside"),
+        ("Hobart", "Taree"),
+    ]
+    for dt in all_dates:
+        for forms_track, results_track in alias_pair_rules:
+            forms_set = forms_without_results_by_date.get(dt, set())
+            results_set = results_without_forms_by_date.get(dt, set())
+            if forms_track in forms_set and results_track in results_set:
+                forms_set.remove(forms_track)
+                results_set.remove(results_track)
+                auto_matched_rows.append((dt, forms_track, dt, results_track))
+
+    # Auto-reconcile same-track one-day drift (forms saved day before/after results).
+    for dt in sorted(all_dates):
+        forms_set = forms_without_results_by_date.get(dt, set())
+        if not forms_set:
+            continue
+        dt_obj = datetime.strptime(dt, "%Y-%m-%d").date()
+        prev_dt = (dt_obj - timedelta(days=1)).isoformat()
+        next_dt = (dt_obj + timedelta(days=1)).isoformat()
+
+        for track in sorted(list(forms_set)):
+            if track in results_without_forms_by_date.get(next_dt, set()):
+                forms_set.remove(track)
+                results_without_forms_by_date[next_dt].remove(track)
+                auto_matched_rows.append((dt, track, next_dt, track))
+                continue
+            if track in results_without_forms_by_date.get(prev_dt, set()):
+                forms_set.remove(track)
+                results_without_forms_by_date[prev_dt].remove(track)
+                auto_matched_rows.append((dt, track, prev_dt, track))
+
+    for dt in all_dates:
+        missing_results = sorted(forms_without_results_by_date.get(dt, set()))
+        missing_forms = sorted(results_without_forms_by_date.get(dt, set()))
         if missing_results:
             total_missing_results += len(missing_results)
             for track in missing_results:
@@ -382,6 +427,17 @@ def main() -> int:
         )
         for dt, tracks in missing_forms_examples:
             pairing_issues.append(AuditIssue("WARN", f"Example {dt} results-without-forms: {tracks}"))
+    if auto_matched_rows:
+        pairing_issues.append(
+            AuditIssue("INFO", f"Auto-matched {len(auto_matched_rows)} likely mis-saved pair(s) by alias/day-drift rules")
+        )
+        for form_dt, form_track, result_dt, result_track in auto_matched_rows[:10]:
+            pairing_issues.append(
+                AuditIssue(
+                    "INFO",
+                    f"Auto-match {form_dt} {form_track} -> {result_dt} {result_track}",
+                )
+            )
     issues_by_dir["global_pairing"] = pairing_issues
 
     # Write full missing-pair exports for remediation planning.
@@ -390,8 +446,10 @@ def main() -> int:
     stamp = generated_at.strftime("%Y-%m-%d_%H%M%S")
     forms_without_results_csv = REPORTS_DIR / f"FORMS_WITHOUT_RESULTS_{stamp}.csv"
     results_without_forms_csv = REPORTS_DIR / f"RESULTS_WITHOUT_FORMS_{stamp}.csv"
+    auto_matched_csv = REPORTS_DIR / f"AUTO_MATCHED_TRACK_DATE_PAIRS_{stamp}.csv"
     wrote_forms_without_results_csv = False
     wrote_results_without_forms_csv = False
+    wrote_auto_matched_csv = False
     # missing_results_rows = forms exist but results are missing
     if missing_results_rows:
         with forms_without_results_csv.open("w", newline="", encoding="utf-8") as f:
@@ -406,6 +464,12 @@ def main() -> int:
             w.writerow(["Date", "Track"])
             w.writerows(sorted(missing_forms_rows))
         wrote_results_without_forms_csv = True
+    if auto_matched_rows:
+        with auto_matched_csv.open("w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["FormsDate", "FormsTrack", "ResultsDate", "ResultsTrack"])
+            w.writerows(sorted(auto_matched_rows))
+        wrote_auto_matched_csv = True
 
     report = write_report(issues_by_dir, generated_at=generated_at)
     print(f"Report written: {report}")
@@ -417,6 +481,10 @@ def main() -> int:
         print(f"Results-without-forms list: {results_without_forms_csv}")
     else:
         print("Results-without-forms list: none")
+    if wrote_auto_matched_csv:
+        print(f"Auto-matched pairs list: {auto_matched_csv}")
+    else:
+        print("Auto-matched pairs list: none")
 
     errors = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "ERROR")
     warnings = sum(1 for issues in issues_by_dir.values() for issue in issues if issue.level == "WARN")
