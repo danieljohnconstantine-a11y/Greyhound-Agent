@@ -126,6 +126,7 @@ KNOWN_CANCELLED_FORM_MEETINGS: Set[Tuple[str, str]] = {
     ("2026-08-06", "Q Lakeside"),
     ("2026-08-10", "Warragul"),
     ("2026-08-27", "Launceston"),
+    ("2026-05-30", "Taree"),
 }
 KNOWN_UNAVAILABLE_FORM_MEETINGS: Set[Tuple[str, str]] = {
     # User-confirmed meetings where forms cannot be downloaded or referenced.
@@ -197,7 +198,7 @@ FORM_METADATA_OVERRIDES: Dict[str, Tuple[str, str]] = {
     "ELWKG150626form.pdf": ("Launceston", "2026-06-15"),
     "MANDG2820526form.pdf": ("Mandurah", "2026-05-28"),
     "MANDG2620526form.pdf": ("Mandurah", "2026-05-26"),
-    "MBRGG200326form.pdf": ("Murray Bridge Straight", "2026-03-20"),
+    "MBRGG200326form.pdf": ("Murray Bridge", "2026-03-20"),
 }
 TRACK_DRIFT_DAY_WINDOW: Dict[str, int] = {
     "Hobart": 3,
