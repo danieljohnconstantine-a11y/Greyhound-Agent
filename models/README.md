@@ -46,13 +46,16 @@ See `reports/MODEL_AUDIT_2026-03-10.txt` for the full audit report.
 
 ## Training New Models
 
-Run `train_ml_track_ensemble.py` to retrain models on new historical data:
+Use the sigmoid retraining flow:
 
-```
-python train_ml_track_ensemble.py
+```bash
+python retrain_all_tracks_sigmoid.py
 ```
 
-Or use the batch file on Windows:
+Or on Ubuntu:
+
+```bash
+bash train_ubuntu.sh
 ```
-train_ml_track_ensemble.bat
-```
+
+Do **not** use `train_ml_track_ensemble.py` / `train_ml_track_ensemble.bat` (obsolete isotonic flow).

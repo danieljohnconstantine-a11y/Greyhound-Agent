@@ -1,4 +1,41 @@
-# How to Train and Run Predictions Locally (Updated March 2026)
+# How to Train and Run Predictions Locally (Updated Aug 2026)
+
+---
+
+## ✅ Ubuntu-only simple retrain (recommended)
+
+Use this if Windows times out.
+
+### First-time setup + retrain
+
+```bash
+cd ~
+rm -rf Greyhound-Agent
+git clone -b copilot/copy-ml-training-prediction-files-again https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+cd Greyhound-Agent
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install pandas numpy scikit-learn xgboost pdfplumber openpyxl
+python check_system_ready.py
+python retrain_all_tracks_sigmoid.py
+ls -lh models/*.pkl | head
+```
+
+### Next retrains (same machine)
+
+```bash
+cd ~/Greyhound-Agent
+source venv/bin/activate
+git pull
+python check_system_ready.py
+python retrain_all_tracks_sigmoid.py
+```
+
+### Important
+
+- Do **not** run: `train_ml_track_ensemble.py`
+- Use: `retrain_all_tracks_sigmoid.py` (or `bash train_ubuntu.sh`)
 
 ---
 

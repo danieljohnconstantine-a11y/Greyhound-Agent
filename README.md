@@ -29,7 +29,20 @@ Automated parsing and scoring of greyhound racing forms.
 
 ## 🟢 Quick Setup
 
-> **New here?** See [`HOW_TO_TRAIN_LOCALLY.md`](HOW_TO_TRAIN_LOCALLY.md) for a **basic step-by-step guide** — every command on its own numbered line, for both Ubuntu and Windows.
+> **New here?** See [`HOW_TO_TRAIN_LOCALLY.md`](HOW_TO_TRAIN_LOCALLY.md) for the full guide.  
+> **If Windows times out, use Ubuntu with these exact commands:**
+> ```bash
+> cd ~
+> rm -rf Greyhound-Agent
+> git clone -b copilot/copy-ml-training-prediction-files-again https://github.com/danieljohnconstantine-a11y/Greyhound-Agent.git
+> cd Greyhound-Agent
+> python3 -m venv venv
+> source venv/bin/activate
+> pip install --upgrade pip
+> pip install pandas numpy scikit-learn xgboost pdfplumber openpyxl
+> python check_system_ready.py
+> python retrain_all_tracks_sigmoid.py
+> ```
 
 ### 1 — Clone the repo
 
