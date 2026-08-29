@@ -104,6 +104,7 @@ TRACK_ALIASES: Dict[str, str] = {
     # Keep consistent with src/results_loader normalization.
     "RICHMOND STRAIGHT": "Richmond",
     "SANDOWN PARK": "Sandown",
+    "TASMANIA": "Hobart",
     "THE GARDENS": "Gardens",
     "LAKESIDE": "Q Lakeside",
     "Q1 LAKESIDE": "Q Lakeside",
@@ -116,7 +117,16 @@ CANONICAL_TRACKS: Dict[str, str] = {name.upper(): name for name in sorted(set(TR
 for _alias_target in TRACK_ALIASES.values():
     CANONICAL_TRACKS.setdefault(_alias_target.upper(), _alias_target)
 # Values are stored uppercase because checks use track.upper().
-INVALID_TRACK_NAMES: Set[str] = {"ABD", "TASMANIA"}
+INVALID_TRACK_NAMES: Set[str] = {"ABD"}
+KNOWN_CANCELLED_FORM_MEETINGS: Set[Tuple[str, str]] = {
+    ("2025-11-23", "Darwin"),
+}
+TRACK_DRIFT_DAY_WINDOW: Dict[str, int] = {
+    "Hobart": 3,
+}
+TRACK_NEARBY_RESULTS_WINDOW: Dict[str, int] = {
+    "Hobart": 5,
+}
 
 
 @dataclass
@@ -131,6 +141,13 @@ def normalize_track(name: str) -> str:
         return ""
     aliased = TRACK_ALIASES.get(cleaned.upper(), cleaned)
     return CANONICAL_TRACKS.get(aliased.upper(), aliased)
+
+
+def _build_day_offsets(window: int) -> List[int]:
+    offsets: List[int] = []
+    for day in range(1, window + 1):
+        offsets.extend([day, -day])
+    return offsets
 
 
 def parse_form_filename(filename: str) -> Tuple[str, str, bool]:
@@ -357,6 +374,13 @@ def main() -> int:
         forms_without_results_by_date[dt] = set(form_tracks - result_tracks)
         results_without_forms_by_date[dt] = set(result_tracks - form_tracks)
 
+    # Explicitly suppress known cancelled meetings with no official results.
+    for dt, track in KNOWN_CANCELLED_FORM_MEETINGS:
+        forms_set = forms_without_results_by_date.get(dt)
+        if forms_set and track in forms_set:
+            forms_set.remove(track)
+            auto_matched_rows.append((dt, track, dt, "CANCELLED"))
+
     # Auto-reconcile well-known same-day alias mismatches.
     alias_pair_rules = [
         ("Murray Bridge Straight", "Murray Bridge"),
@@ -370,30 +394,47 @@ def main() -> int:
                 results_set.remove(results_track)
                 auto_matched_rows.append((dt, forms_track, dt, results_track))
 
-    # Auto-reconcile same-track one-day drift (forms saved day before/after results).
+    # Auto-reconcile same-track date drift (track-specific day windows).
     consumed_result_pairs: Set[Tuple[str, str]] = set()
     for dt in sorted(all_dates):
         forms_set = forms_without_results_by_date.get(dt, set())
         if not forms_set:
             continue
         dt_obj = datetime.strptime(dt, "%Y-%m-%d").date()
-        prev_dt = (dt_obj - timedelta(days=1)).isoformat()
-        next_dt = (dt_obj + timedelta(days=1)).isoformat()
 
         for track in sorted(list(forms_set)):
-            next_key = (next_dt, track)
-            if next_key not in consumed_result_pairs and track in results_without_forms_by_date.get(next_dt, set()):
+            window = TRACK_DRIFT_DAY_WINDOW.get(track, 1)
+            for offset in _build_day_offsets(window):
+                candidate_dt = (dt_obj + timedelta(days=offset)).isoformat()
+                candidate_key = (candidate_dt, track)
+                if candidate_key in consumed_result_pairs:
+                    continue
+                if track not in results_without_forms_by_date.get(candidate_dt, set()):
+                    continue
                 forms_set.remove(track)
-                results_without_forms_by_date[next_dt].remove(track)
-                consumed_result_pairs.add(next_key)
-                auto_matched_rows.append((dt, track, next_dt, track))
+                results_without_forms_by_date[candidate_dt].remove(track)
+                consumed_result_pairs.add(candidate_key)
+                auto_matched_rows.append((dt, track, candidate_dt, track))
+                break
+
+    # If configured, allow forms dates to reconcile to nearby results dates
+    # even when the nearby results date also has forms (no surplus row to consume).
+    for dt in sorted(all_dates):
+        forms_set = forms_without_results_by_date.get(dt, set())
+        if not forms_set:
+            continue
+        dt_obj = datetime.strptime(dt, "%Y-%m-%d").date()
+        for track in sorted(list(forms_set)):
+            window = TRACK_NEARBY_RESULTS_WINDOW.get(track, 0)
+            if window <= 0:
                 continue
-            prev_key = (prev_dt, track)
-            if prev_key not in consumed_result_pairs and track in results_without_forms_by_date.get(prev_dt, set()):
+            for offset in _build_day_offsets(window):
+                candidate_dt = (dt_obj + timedelta(days=offset)).isoformat()
+                if track not in global_results.get(candidate_dt, set()):
+                    continue
                 forms_set.remove(track)
-                results_without_forms_by_date[prev_dt].remove(track)
-                consumed_result_pairs.add(prev_key)
-                auto_matched_rows.append((dt, track, prev_dt, track))
+                auto_matched_rows.append((dt, track, candidate_dt, f"{track} (nearby)"))
+                break
 
     for dt in all_dates:
         missing_results = sorted(forms_without_results_by_date.get(dt, set()))
