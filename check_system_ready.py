@@ -190,6 +190,15 @@ KNOWN_UNAVAILABLE_FORM_MEETINGS: Set[Tuple[str, str]] = {
     ("2026-08-20", "Northam"),
     ("2026-08-20", "Nowra"),
 }
+FORM_METADATA_OVERRIDES: Dict[str, Tuple[str, str]] = {
+    # User-confirmed mis-coded or malformed filenames.
+    "MOWBG270826form.pdf": ("Hobart", "2026-08-27"),
+    "ELWKG220626form.pdf": ("Launceston", "2026-06-22"),
+    "ELWKG150626form.pdf": ("Launceston", "2026-06-15"),
+    "MANDG2820526form.pdf": ("Mandurah", "2026-05-28"),
+    "MANDG2620526form.pdf": ("Mandurah", "2026-05-26"),
+    "MBRGG200326form.pdf": ("Murray Bridge Straight", "2026-03-20"),
+}
 TRACK_DRIFT_DAY_WINDOW: Dict[str, int] = {
     "Hobart": 3,
 }
@@ -360,11 +369,17 @@ def audit_data_dir(data_dir: Path) -> Tuple[List[AuditIssue], Dict[str, Set[str]
         return issues, forms_by_date, results_by_date
 
     for pdf in sorted(data_dir.glob("*form.pdf")):
+        override = FORM_METADATA_OVERRIDES.get(pdf.name)
+        if override:
+            track, date_str = override
+            forms_by_date[date_str].add(normalize_track(track))
+            issues.append(AuditIssue("INFO", f"{pdf}: using manual track/date override ({track}, {date_str})"))
+            continue
         try:
             prefix, date_str, is_legacy = parse_form_filename(pdf.name)
             track = TRACK_CODE_MAP.get(prefix, prefix)
-            # TASTG files in the dataset can refer to different TAS/NSW meetings.
-            if prefix == "TASTG":
+            # Some prefixes can be ambiguous/misused in historical files.
+            if prefix in {"TASTG", "MOWBG", "ELWKG", "MBRGG"}:
                 track = infer_track_from_pdf_header(pdf, fallback_track=track)
             forms_by_date[date_str].add(normalize_track(track))
             if is_legacy:
@@ -460,6 +475,7 @@ def main() -> int:
     # Auto-reconcile well-known same-day alias mismatches.
     alias_pair_rules = [
         ("Murray Bridge Straight", "Murray Bridge"),
+        ("Murray Bridge", "Murray Bridge Straight"),
         ("Taree", "Temora"),
     ]
     for dt in all_dates:
