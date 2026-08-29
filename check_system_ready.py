@@ -127,6 +127,69 @@ KNOWN_CANCELLED_FORM_MEETINGS: Set[Tuple[str, str]] = {
     ("2026-08-10", "Warragul"),
     ("2026-08-27", "Launceston"),
 }
+KNOWN_UNAVAILABLE_FORM_MEETINGS: Set[Tuple[str, str]] = {
+    # User-confirmed meetings where forms cannot be downloaded or referenced.
+    ("2025-09-07", "Darwin"),
+    ("2025-09-07", "Q Straight"),
+    ("2025-09-07", "Sale"),
+    ("2025-11-18", "Angle Park"),
+    ("2025-11-18", "Horsham"),
+    ("2025-11-18", "Launceston"),
+    ("2025-11-18", "Warragul"),
+    ("2025-11-22", "Angle Park"),
+    ("2025-11-22", "Bendigo"),
+    ("2025-11-22", "Cannington"),
+    ("2025-11-22", "Q Lakeside"),
+    ("2025-11-22", "Sandown"),
+    ("2025-11-27", "Mount Gambier"),
+    ("2025-12-27", "Hobart"),
+    ("2026-01-06", "Launceston"),
+    ("2026-01-06", "Q Straight"),
+    ("2026-01-06", "Warrnambool"),
+    ("2026-01-22", "Q Lakeside"),
+    ("2026-01-29", "Warrnambool"),
+    ("2026-03-10", "Q Parklands"),
+    ("2026-04-18", "Ballarat"),
+    ("2026-04-18", "Capalaba"),
+    ("2026-04-18", "Mandurah"),
+    ("2026-04-18", "Murray Bridge"),
+    ("2026-04-18", "Richmond"),
+    ("2026-04-18", "Rockhampton"),
+    ("2026-04-18", "Sale"),
+    ("2026-04-18", "Temora"),
+    ("2026-04-28", "Ballarat"),
+    ("2026-04-28", "Launceston"),
+    ("2026-04-28", "Maitland"),
+    ("2026-04-28", "Northam"),
+    ("2026-04-28", "Q Straight"),
+    ("2026-04-28", "Sandown"),
+    ("2026-04-28", "Shepparton"),
+    ("2026-04-28", "Wagga"),
+    ("2026-04-28", "Warrnambool"),
+    ("2026-05-28", "Hobart"),
+    ("2026-05-28", "Warrnambool"),
+    ("2026-05-30", "Ballarat"),
+    ("2026-06-02", "Hobart"),
+    ("2026-06-02", "Maitland"),
+    ("2026-06-02", "Northam"),
+    ("2026-06-02", "Nowra"),
+    ("2026-06-02", "Q Straight"),
+    ("2026-06-02", "Sandown"),
+    ("2026-06-02", "Shepparton"),
+    ("2026-06-02", "Traralgon"),
+    ("2026-06-02", "Warrnambool"),
+    ("2026-06-11", "Shepparton"),
+    ("2026-06-12", "Townsville"),
+    ("2026-08-07", "Healesville"),
+    ("2026-08-07", "Murray Bridge"),
+    ("2026-08-20", "Ballarat"),
+    ("2026-08-20", "Gawler"),
+    ("2026-08-20", "Healesville"),
+    ("2026-08-20", "Launceston"),
+    ("2026-08-20", "Maitland"),
+    ("2026-08-20", "Northam"),
+    ("2026-08-20", "Nowra"),
+}
 TRACK_DRIFT_DAY_WINDOW: Dict[str, int] = {
     "Hobart": 3,
 }
@@ -386,6 +449,13 @@ def main() -> int:
         if forms_set and track in forms_set:
             forms_set.remove(track)
             auto_matched_rows.append((dt, track, dt, "CANCELLED"))
+
+    # Explicitly suppress known unavailable/missing form meetings.
+    for dt, track in KNOWN_UNAVAILABLE_FORM_MEETINGS:
+        results_set = results_without_forms_by_date.get(dt)
+        if results_set and track in results_set:
+            results_set.remove(track)
+            auto_matched_rows.append((dt, track, dt, "FORM_UNAVAILABLE"))
 
     # Auto-reconcile well-known same-day alias mismatches.
     alias_pair_rules = [
