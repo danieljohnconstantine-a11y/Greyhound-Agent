@@ -79,8 +79,8 @@ TRACK_CODE_MAP: Dict[str, str] = {
     "SANDG": "Sandown",
     "SHEP": "Shepparton",
     "SHEPG": "Shepparton",
-    # TASTG meetings align to Taree in this dataset for pairing/training audits.
-    "TASTG": "Taree",
+    # TASTG files map to Tasmania/Hobart meetings.
+    "TASTG": "Hobart",
     "TEMOG": "Temora",
     "TOWNG": "Townsville",
     "TRARG": "Traralgon",
@@ -360,8 +360,6 @@ def main() -> int:
     # Auto-reconcile well-known same-day alias mismatches.
     alias_pair_rules = [
         ("Murray Bridge Straight", "Murray Bridge"),
-        ("Q Lakeside", "Ladbrokes Q Lakeside"),
-        ("Hobart", "Taree"),
     ]
     for dt in all_dates:
         for forms_track, results_track in alias_pair_rules:
@@ -373,6 +371,7 @@ def main() -> int:
                 auto_matched_rows.append((dt, forms_track, dt, results_track))
 
     # Auto-reconcile same-track one-day drift (forms saved day before/after results).
+    consumed_result_pairs: Set[Tuple[str, str]] = set()
     for dt in sorted(all_dates):
         forms_set = forms_without_results_by_date.get(dt, set())
         if not forms_set:
@@ -382,14 +381,18 @@ def main() -> int:
         next_dt = (dt_obj + timedelta(days=1)).isoformat()
 
         for track in sorted(list(forms_set)):
-            if track in results_without_forms_by_date.get(next_dt, set()):
+            next_key = (next_dt, track)
+            if next_key not in consumed_result_pairs and track in results_without_forms_by_date.get(next_dt, set()):
                 forms_set.remove(track)
                 results_without_forms_by_date[next_dt].remove(track)
+                consumed_result_pairs.add(next_key)
                 auto_matched_rows.append((dt, track, next_dt, track))
                 continue
-            if track in results_without_forms_by_date.get(prev_dt, set()):
+            prev_key = (prev_dt, track)
+            if prev_key not in consumed_result_pairs and track in results_without_forms_by_date.get(prev_dt, set()):
                 forms_set.remove(track)
                 results_without_forms_by_date[prev_dt].remove(track)
+                consumed_result_pairs.add(prev_key)
                 auto_matched_rows.append((dt, track, prev_dt, track))
 
     for dt in all_dates:
@@ -431,13 +434,15 @@ def main() -> int:
         pairing_issues.append(
             AuditIssue("INFO", f"Auto-matched {len(auto_matched_rows)} likely mis-saved pair(s) by alias/day-drift rules")
         )
-        for form_dt, form_track, result_dt, result_track in auto_matched_rows[:10]:
+        for form_dt, form_track, result_dt, result_track in sorted(auto_matched_rows)[:10]:
             pairing_issues.append(
                 AuditIssue(
                     "INFO",
                     f"Auto-match {form_dt} {form_track} -> {result_dt} {result_track}",
                 )
             )
+        if len(auto_matched_rows) > 10:
+            pairing_issues.append(AuditIssue("INFO", "Auto-match details truncated to 10 rows in this text report; see CSV for full list"))
     issues_by_dir["global_pairing"] = pairing_issues
 
     # Write full missing-pair exports for remediation planning.
