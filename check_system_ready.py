@@ -120,6 +120,11 @@ for _alias_target in TRACK_ALIASES.values():
 INVALID_TRACK_NAMES: Set[str] = {"ABD"}
 KNOWN_CANCELLED_FORM_MEETINGS: Set[Tuple[str, str]] = {
     ("2025-11-23", "Darwin"),
+    ("2026-03-16", "Angle Park"),
+    ("2026-07-23", "Q Lakeside"),
+    ("2026-08-06", "Q Lakeside"),
+    ("2026-08-10", "Warragul"),
+    ("2026-08-27", "Launceston"),
 }
 TRACK_DRIFT_DAY_WINDOW: Dict[str, int] = {
     "Hobart": 3,
