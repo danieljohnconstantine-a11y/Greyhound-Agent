@@ -17,12 +17,12 @@ Dubbo,2026-03-21,3,4,2,3,8
 Dubbo,2026-03-21,4,5,4,6,3
 Dubbo,2026-03-21,5,8,2,6,4
 Dubbo,2026-03-21,6,5,8,2,1
-Dubbo,2026-03-21,7,ABD,ABD,ABD,ABD
-Dubbo,2026-03-21,8,ABD,ABD,ABD,ABD
-Dubbo,2026-03-21,9,ABD,ABD,ABD,ABD
-Dubbo,2026-03-21,10,ABD,ABD,ABD,ABD
-Dubbo,2026-03-21,11,ABD,ABD,ABD,ABD
-Dubbo,2026-03-21,12,ABD,ABD,ABD,ABD
+Dubbo,2026-03-21,7,ABD,,,
+Dubbo,2026-03-21,8,ABD,,,
+Dubbo,2026-03-21,9,ABD,,,
+Dubbo,2026-03-21,10,ABD,,,
+Dubbo,2026-03-21,11,ABD,,,
+Dubbo,2026-03-21,12,ABD,,,
 The Gardens,2026-03-21,1,8,7,1,6
 The Gardens,2026-03-21,2,8,4,5,1
 The Gardens,2026-03-21,3,7,4,5,2
@@ -57,7 +57,7 @@ Ladbrokes Q1 Lakeside,2026-03-21,9,3,8,4,5
 Ladbrokes Q1 Lakeside,2026-03-21,10,7,3,6,2
 Shepparton,2026-03-21,1,2,7,9,4
 Shepparton,2026-03-21,2,3,4,8,7
-Shepparton,2026-03-21,3,ABD,ABD,ABD,ABD
+Shepparton,2026-03-21,3,ABD,,,
 Shepparton,2026-03-21,4,8,1,7,6
 Shepparton,2026-03-21,5,8,1,2,5
 Shepparton,2026-03-21,6,2,4,1,7

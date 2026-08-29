@@ -1,0 +1,40 @@
+SYSTEM READY CHECK
+Generated: 2026-08-29T10:16:57
+
+[data]
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data/MBRGG200326form.pdf: using manual track/date override (Murray Bridge, 2026-03-20)
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data: no results_*.csv or race_results*.csv files found
+
+[data2]
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/ELWKG150626form.pdf: using manual track/date override (Launceston, 2026-06-15)
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/ELWKG220626form.pdf: using manual track/date override (Launceston, 2026-06-22)
+
+[data3]
+  ✅ No issues found
+
+[data4]
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data4/ELWKG150626form.pdf: using manual track/date override (Launceston, 2026-06-15)
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data4/ELWKG220626form.pdf: using manual track/date override (Launceston, 2026-06-22)
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data4/MANDG2620526form.pdf: using manual track/date override (Mandurah, 2026-05-26)
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data4/MANDG2820526form.pdf: using manual track/date override (Mandurah, 2026-05-28)
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data4/MBRGG200326form.pdf: using manual track/date override (Murray Bridge, 2026-03-20)
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data4/MOWBG270826form.pdf: using manual track/date override (Hobart, 2026-08-27)
+
+[global_pairing]
+  INFO: Auto-matched 90 likely mis-saved pair(s) by alias/day-drift rules
+  INFO: Auto-match 2025-09-07 Darwin -> 2025-09-07 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-09-07 Q Straight -> 2025-09-07 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-09-07 Sale -> 2025-09-07 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-11-18 Angle Park -> 2025-11-18 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-11-18 Horsham -> 2025-11-18 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-11-18 Launceston -> 2025-11-18 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-11-18 Warragul -> 2025-11-18 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-11-22 Angle Park -> 2025-11-22 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-11-22 Bendigo -> 2025-11-22 FORM_UNAVAILABLE
+  INFO: Auto-match 2025-11-22 Cannington -> 2025-11-22 FORM_UNAVAILABLE
+  INFO: Auto-match details truncated to 10 rows in this text report; see CSV for full list
+
+SUMMARY
+  Errors  : 0
+  Warnings: 0
+  Status  : GO
