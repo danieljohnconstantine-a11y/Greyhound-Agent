@@ -1,0 +1,85 @@
+SYSTEM READY CHECK
+Generated: 2026-08-29T04:36:54
+
+[data]
+  INFO: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data: no results_*.csv or race_results*.csv files found
+
+[data2]
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/race_results_complete.csv: 12 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/race_results_nov_2025.csv: 36 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-01.csv: 1 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 127
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 128
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 129
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-01-19.csv: 118 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-01-20.csv: 129 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-01-21.csv: 30 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-01-28.csv: 152 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-03-10.csv: 11 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-03-18.csv: 24 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-03-19.csv: 33 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-03-21.csv: 21 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-05-04.csv: 3 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-05-27.csv: 12 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-05-28.csv: 63 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-06-21.csv: 3 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data2/results_2026-06-22.csv: 3 non-numeric placing value(s)
+
+[data3]
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/race_results_complete.csv: 12 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/race_results_nov_2025.csv: 36 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-01.csv: 1 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 127
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 128
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2025-12-18.csv: ignored invalid Track 'ABD' at line 129
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-01-19.csv: 118 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-01-20.csv: 129 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-01-21.csv: 30 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-01-28.csv: 152 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-03-10.csv: 11 duplicate Date+Track+Race row(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-03-18.csv: 24 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-03-19.csv: 33 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-03-21.csv: 21 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-05-04.csv: 3 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-05-27.csv: 12 non-numeric placing value(s)
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data3/results_2026-05-28.csv: 63 non-numeric placing value(s)
+
+[data4]
+  WARN: /home/runner/work/Greyhound-Agent/Greyhound-Agent/data4/results_2026-07-11.csv: 27 non-numeric placing value(s)
+
+[global_pairing]
+  WARN: Global pairing: 6 form track/date entries missing results across 208 dates
+  WARN: Example 2026-03-16 forms-without-results: ['Angle Park']
+  WARN: Example 2026-04-18 forms-without-results: ['Cannington']
+  WARN: Example 2026-07-23 forms-without-results: ['Q Lakeside']
+  WARN: Example 2026-08-06 forms-without-results: ['Q Lakeside']
+  WARN: Example 2026-08-10 forms-without-results: ['Warragul']
+  WARN: Example 2026-08-27 forms-without-results: ['Launceston']
+  WARN: Global pairing: 153 result track/date entries missing forms across 208 dates
+  WARN: Example 2025-09-07 results-without-forms: ['Darwin', 'Q Straight', 'Sale']
+  WARN: Example 2025-11-18 results-without-forms: ['Angle Park', 'Horsham', 'Launceston', 'Warragul']
+  WARN: Example 2025-11-22 results-without-forms: ['Angle Park', 'Bendigo', 'Cannington', 'Q Lakeside', 'Sandown']
+  WARN: Example 2025-11-26 results-without-forms: ['Taree']
+  WARN: Example 2025-11-27 results-without-forms: ['Mount Gambier']
+  WARN: Example 2025-11-29 results-without-forms: ['Taree']
+  WARN: Example 2025-12-03 results-without-forms: ['Taree']
+  WARN: Example 2025-12-10 results-without-forms: ['Taree']
+  WARN: Example 2025-12-13 results-without-forms: ['Taree']
+  WARN: Example 2025-12-17 results-without-forms: ['Taree']
+  INFO: Auto-matched 83 likely mis-saved pair(s) by alias/day-drift rules
+  INFO: Auto-match 2025-11-23 Darwin -> 2025-11-23 CANCELLED
+  INFO: Auto-match 2025-11-26 Hobart -> 2025-11-27 Hobart (nearby)
+  INFO: Auto-match 2025-11-29 Hobart -> 2025-11-27 Hobart (nearby)
+  INFO: Auto-match 2025-12-03 Hobart -> 2025-12-04 Hobart (nearby)
+  INFO: Auto-match 2025-12-10 Hobart -> 2025-12-11 Hobart (nearby)
+  INFO: Auto-match 2025-12-13 Hobart -> 2025-12-11 Hobart (nearby)
+  INFO: Auto-match 2025-12-17 Hobart -> 2025-12-18 Hobart (nearby)
+  INFO: Auto-match 2025-12-20 Hobart -> 2025-12-18 Hobart (nearby)
+  INFO: Auto-match 2025-12-31 Hobart -> 2026-01-01 Hobart (nearby)
+  INFO: Auto-match 2026-01-03 Hobart -> 2026-01-01 Hobart (nearby)
+  INFO: Auto-match details truncated to 10 rows in this text report; see CSV for full list
+
+SUMMARY
+  Errors  : 0
+  Warnings: 55
+  Status  : NO-GO
