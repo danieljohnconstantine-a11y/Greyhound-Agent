@@ -43,6 +43,9 @@ Automated parsing and scoring of greyhound racing forms.
 > python check_system_ready.py
 > python retrain_all_tracks_sigmoid.py
 > ```
+>
+> **If you want to train in Ubuntu and use daily in Windows:**  
+> Use the `Train in Ubuntu, use daily in Windows` section in `HOW_TO_TRAIN_LOCALLY.md` (includes Python 3.11 Windows setup and model-copy step).
 
 ### 1 — Clone the repo
 

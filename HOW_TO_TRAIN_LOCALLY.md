@@ -39,6 +39,62 @@ python retrain_all_tracks_sigmoid.py
 
 ---
 
+## ✅ Train in Ubuntu, use daily in Windows (recommended workflow)
+
+This is the best setup if training is heavy but daily use is easier in Windows.
+
+### 1) One-time Windows setup (Python 3.11+)
+
+In **Windows PowerShell**:
+
+```powershell
+cd $env:USERPROFILE\OneDrive\Desktop\Greyhound-Agent
+py -3.11 -m venv venv311
+venv311\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install pandas numpy scikit-learn xgboost pdfplumber openpyxl
+python -c "import sklearn; print(sklearn.__version__)"
+```
+
+> Use Python 3.11+ on Windows so model files trained in Ubuntu load correctly.
+
+### 2) Train in Ubuntu
+
+```bash
+cd ~/Greyhound-Agent
+source venv/bin/activate
+python check_system_ready.py
+python retrain_all_tracks_sigmoid.py
+```
+
+### 3) Copy trained models from Ubuntu to Windows
+
+```bash
+cp ~/Greyhound-Agent/models/*.pkl /mnt/c/Users/danie/OneDrive/Desktop/Greyhound-Agent/models/
+```
+
+### 4) Daily predictions in Windows
+
+In **Windows PowerShell**:
+
+```powershell
+cd $env:USERPROFILE\OneDrive\Desktop\Greyhound-Agent
+venv311\Scripts\Activate.ps1
+python run_track_ensemble_predictions.py
+```
+
+Or double-click:
+
+`run_track_ensemble_predictions.bat`
+
+### 5) Each time you retrain
+
+1. Retrain in Ubuntu  
+2. Re-copy `models/*.pkl` to Windows `models\`  
+3. Run daily predictions in Windows
+
+---
+
 ## 🟢 BASIC STEP-BY-STEP — copy and paste ONE line at a time
 
 > **Wait for each command to finish before typing the next one.**  
