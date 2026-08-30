@@ -70,7 +70,7 @@ python retrain_all_tracks_sigmoid.py
 ### 3) Copy trained models from Ubuntu to Windows
 
 ```bash
-cp ~/Greyhound-Agent/models/*.pkl /mnt/c/Users/danie/OneDrive/Desktop/Greyhound-Agent/models/
+cp ~/Greyhound-Agent/models/*.pkl /mnt/c/Users/<your-windows-username>/OneDrive/Desktop/Greyhound-Agent/models/
 ```
 
 ### 4) Daily predictions in Windows
