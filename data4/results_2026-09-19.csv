@@ -1,0 +1,91 @@
+Track,Date,Race,Winner,2nd,3rd,4th
+Taree,2026-09-19,1,1,2,3,5
+Taree,2026-09-19,2,2,5,8,1
+Taree,2026-09-19,3,1,7,3,2
+Taree,2026-09-19,4,6,1,5,8
+Taree,2026-09-19,5,2,8,4,1
+Taree,2026-09-19,6,7,6,4,8
+Taree,2026-09-19,7,8,7,6,5
+Taree,2026-09-19,8,8,4,5,2
+Taree,2026-09-19,9,1,7,3,2
+Taree,2026-09-19,10,7,3,1,2
+Taree,2026-09-19,11,8,7,4,6
+Taree,2026-09-19,12,2,4,1,8
+Dubbo,2026-09-19,1,2,8,1,4
+Dubbo,2026-09-19,2,2,1,7,8
+Dubbo,2026-09-19,3,2,8,1,4
+Dubbo,2026-09-19,4,1,3,4,2
+Dubbo,2026-09-19,5,2,5,7,6
+Dubbo,2026-09-19,6,8,7,5,2
+Dubbo,2026-09-19,7,2,4,5,7
+Dubbo,2026-09-19,8,2,4,7,5
+Dubbo,2026-09-19,9,3,1,4,5
+Dubbo,2026-09-19,10,1,6,7,8
+Dubbo,2026-09-19,11,8,4,3,1
+Dubbo,2026-09-19,12,1,8,5,7
+Wentworth Park,2026-09-19,1,4,8,2,9
+Wentworth Park,2026-09-19,2,1,4,8,7
+Wentworth Park,2026-09-19,3,4,7,9,5
+Wentworth Park,2026-09-19,4,2,7,1,3
+Wentworth Park,2026-09-19,5,2,4,5,6
+Wentworth Park,2026-09-19,6,8,2,9,4
+Wentworth Park,2026-09-19,7,4,1,5,8
+Wentworth Park,2026-09-19,8,1,3,2,7
+Wentworth Park,2026-09-19,9,1,3,8,7
+Wentworth Park,2026-09-19,10,3,5,8,4
+Wentworth Park,2026-09-19,11,1,8,4,6
+Wentworth Park,2026-09-19,12,1,5,6,4
+Ladbrokes Gardens,2026-09-19,1,4,3,5,2
+Ladbrokes Gardens,2026-09-19,2,7,3,8,2
+Ladbrokes Gardens,2026-09-19,3,4,8,3,6
+Ladbrokes Gardens,2026-09-19,4,4,8,3,6
+Ladbrokes Gardens,2026-09-19,5,1,3,8,6
+Ladbrokes Gardens,2026-09-19,6,6,1,3,7
+Ladbrokes Gardens,2026-09-19,7,7,3,6,5
+Ladbrokes Gardens,2026-09-19,8,2,5,4,1
+Ladbrokes Gardens,2026-09-19,9,1,2,3,5
+Ladbrokes Gardens,2026-09-19,10,5,8,4,6
+Ladbrokes Gardens,2026-09-19,11,2,8,1,6
+Ladbrokes Gardens,2026-09-19,12,2,3,4,6
+Horsham,2026-09-19,1,1,4,8,6
+Horsham,2026-09-19,2,5,6,2,1
+Horsham,2026-09-19,3,8,2,4,6
+Horsham,2026-09-19,4,2,6,4,8
+Horsham,2026-09-19,5,7,6,1,3
+Horsham,2026-09-19,6,2,4,8,1
+Horsham,2026-09-19,7,8,4,7,2
+Horsham,2026-09-19,8,4,2,1,3
+Horsham,2026-09-19,9,8,1,4,2
+Ladbrokes Q1 Lakeside,2026-09-19,1,5,7,8,6
+Ladbrokes Q1 Lakeside,2026-09-19,2,7,1,3,5
+Ladbrokes Q1 Lakeside,2026-09-19,3,7,5,8,3
+Ladbrokes Q1 Lakeside,2026-09-19,4,6,8,7,1
+Ladbrokes Q1 Lakeside,2026-09-19,5,2,5,6,4
+Ladbrokes Q1 Lakeside,2026-09-19,6,2,6,4,7
+Ladbrokes Q1 Lakeside,2026-09-19,7,2,1,6,4
+Ladbrokes Q1 Lakeside,2026-09-19,8,3,5,7,4
+Ladbrokes Q1 Lakeside,2026-09-19,9,7,1,8,2
+Ladbrokes Q1 Lakeside,2026-09-19,10,8,1,2,3
+Ladbrokes Q1 Lakeside,2026-09-19,11,6,3,1,4
+Ladbrokes Q1 Lakeside,2026-09-19,12,2,1,6,3
+Meadows,2026-09-19,1,8,2,6,5
+Meadows,2026-09-19,2,1,7,3,2
+Meadows,2026-09-19,3,4,1,3,8
+Meadows,2026-09-19,4,4,5,2,1
+Meadows,2026-09-19,5,7,2,5,8
+Meadows,2026-09-19,6,5,4,6,3
+Meadows,2026-09-19,7,1,2,3,4
+Meadows,2026-09-19,8,2,3,6,4
+Meadows,2026-09-19,9,3,1,4,8
+Meadows,2026-09-19,10,3,4,8,7
+Meadows,2026-09-19,11,6,1,3,4
+Meadows,2026-09-19,12,5,3,1,8
+Cannington,2026-09-19,1,6,7,3,4
+Cannington,2026-09-19,2,1,2,3,5
+Cannington,2026-09-19,3,7,8,4,5
+Cannington,2026-09-19,4,8,4,1,2
+Cannington,2026-09-19,5,9,8,4,6
+Cannington,2026-09-19,6,1,5,7,4
+Cannington,2026-09-19,7,6,1,4,
+Cannington,2026-09-19,8,7,8,5,4
+Cannington,2026-09-19,9,7,1,4,2
