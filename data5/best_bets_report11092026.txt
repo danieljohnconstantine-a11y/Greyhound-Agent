@@ -1,0 +1,133 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-09-11 10:07:58 (Friday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 3.40%  |  ≥20%: 3 race(s)  |  ≥10%: 21 race(s)  |  Total: 117 races
+================================================================================
+
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     Q LAKESIDE       R6    24.9673%  Box 1 Bentley Kristoff       44.6125%  Box 6 Grace Ile              19.6452%
+2     Q LAKESIDE       R9    23.9203%  Box 4 Mr. Lasso              38.3127%  Box 1 Barefoot Rascal        14.3924%
+3     The Gardens      R12   20.7583%  Box 6 Jamati Girl            37.5560%  Box 1 Canya Scandal          16.7977%
+4     TOWNSVILLE       R4    19.5163%  Box 3 Pilton View            28.7801%  Box 1 Federal Rocket          9.2638%
+5     GEELONG          R5    18.4936%  Box 3 Above Them All         35.3820%  Box 6 Just Believe           16.8884%
+6     BENDIGO          R5    17.6048%  Box 4 Doongalla Ghost        33.6222%  Box 5 Geraldton Crew         16.0174%
+7     GRAFTON          R5    16.6914%  Box 8 Too Much Whisky        42.3746%  Box 1 Holly Dutton           25.6832%
+8     The Gardens      R11   16.5527%  Box 1 Hot To Rule            32.2712%  Box 2 Swift Eddy             15.7185%
+9     BENDIGO          R1    16.2871%  Box 2 Complete               29.4829%  Box 7 Bash Boy Giblet        13.1958%
+10    BENDIGO          R9    15.8257%  Box 3 Sweet Love             30.7796%  Box 4 Happy And Numb         14.9539%
+11    Q LAKESIDE       R10   14.3974%  Box 6 Mr. O'malley           30.4637%  Box 2 Bionic Lana            16.0663%
+12    HEALESVILLE      R1    14.3479%  Box 5 Zane's Train           25.9097%  Box 8 Sacrum                 11.5618%
+13    GRAFTON          R7    14.0332%  Box 8 Wagtail Whisper        40.2409%  Box 2 My Warrior             26.2077%
+14    BENDIGO          R7    13.9998%  Box 1 Here Comes Billy       29.1486%  Box 3 Patriot Cilla          15.1488%
+15    GRAFTON          R10   13.0251%  Box 8 Whisky Addiction       36.1081%  Box 2 Bailey Dutton          23.0830%
+16    The Gardens      R6    11.6974%  Box 4 Jackpot Chevy          29.3278%  Box 3 Fascinate Josie        17.6304%
+17    GRAFTON          R1    11.6626%  Box 8 Model Gambler          23.9742%  Box 2 Orara Bob              12.3116%
+18    RICHMOND         R9    11.0886%  Box 1 Rare Earth             26.2019%  Box 2 Charlotte's Rosie      15.1133%
+19    Mandurah         R3    10.9588%  Box 8 Exile Fury             33.3293%  Box 5 Akermanis              22.3705%
+20    The Gardens      R3    10.6304%  Box 1 Roman Fly              25.7542%  Box 7 Shining Reign          15.1238%
+21    GRAFTON          R2    10.0138%  Box 2 Orara Ruby             19.8011%  Box 7 Close Talker            9.7873%
+22    Q LAKESIDE       R11    9.3753%  Box 7 Hara's Jackson         28.8476%  Box 8 Cambla Diva            19.4723%
+23    GOULBURN         R9     8.9729%  Box 1 Aussie Blend           21.2084%  Box 8 Salsa Ethics           12.2355%
+24    TOWNSVILLE       R10    8.3767%  Box 6 Slim Nikita            28.2961%  Box 7 Canya Hellfire         19.9194%
+25    GRAFTON          R6     7.9182%  Box 8 Living Legend          29.2356%  Box 2 Steve Dutton           21.3174%
+26    BENDIGO          R2     7.9148%  Box 2 Brindle Mosaic         22.6977%  Box 4 Finesse                14.7829%
+27    The Gardens      R1     7.9046%  Box 4 Reborn Pulse           20.3005%  Box 1 Kilkenny Boy           12.3959%
+28    RICHMOND         R8     7.7148%  Box 1 Zipping Evania         19.9787%  Box 5 Raymar Shame           12.2639%
+29    RICHMOND         R5     7.5638%  Box 1 Pound Keeping          23.9282%  Box 7 Psycho Circus          16.3644%
+30    Mandurah         R12    7.5027%  Box 8 Sunset Agrippina       20.1268%  Box 4 West On Pash           12.6241%
+31    Q LAKESIDE       R7     7.3602%  Box 4 Top The Lot            25.4934%  Box 3 Roxy Cambla            18.1332%
+32    GOULBURN         R7     7.2226%  Box 8 Jayla Magic            19.4915%  Box 7 Pure Blue              12.2689%
+33    Q LAKESIDE       R4     7.0725%  Box 6 Nangar Nugget          18.5642%  Box 1 Paw Bennett            11.4917%
+34    GEELONG          R12    6.3237%  Box 6 Paw Nevada             17.2096%  Box 3 Clyde Bale             10.8859%
+35    GEELONG          R7     6.2250%  Box 8 Paw Kabuto             19.5730%  Box 4 Aptitude               13.3480%
+36    HEALESVILLE      R10    6.2234%  Box 5 Yeah You               16.5089%  Box 8 Follow That Tune       10.2855%
+37    BENDIGO          R4     5.8561%  Box 8 Zipping Arvada         32.2201%  Box 1 Flying Intention       26.3640%
+38    HEALESVILLE      R6     5.5169%  Box 8 Princess Lass          17.8809%  Box 7 Rolling Express        12.3640%
+39    GEELONG          R9     5.5079%  Box 3 Spanish Fawn           19.9087%  Box 8 Solid Groove           14.4008%
+40    HEALESVILLE      R8     5.1175%  Box 8 Shima Lite             21.2433%  Box 2 Lakers Legend          16.1258%
+41    The Gardens      R8     5.0610%  Box 1 Real Bonnie            15.0637%  Box 5 Reborn Mystique        10.0027%
+42    GEELONG          R1     4.9984%  Box 2 Party At Noon          29.4188%  Box 3 Golden Monelli         24.4204%
+43    GOULBURN         R5     4.8415%  Box 2 Air Dancer             19.3643%  Box 8 Secret Edition         14.5228%
+44    Q LAKESIDE       R8     4.6837%  Box 4 Summer's Scrub         30.8419%  Box 3 Boom Two Down          26.1582%
+45    GEELONG          R10    4.6285%  Box 4 No Bad Deed            18.2482%  Box 1 Highway Hooligan       13.6197%
+46    BENDIGO          R8     4.6155%  Box 5 My Name's Eden         32.5389%  Box 8 Sky Wolf               27.9234%
+47    GRAFTON          R4     4.4763%  Box 8 Canya Wild             19.5149%  Box 2 Shot Of Whisky         15.0386%
+48    HEALESVILLE      R5     4.4452%  Box 7 Path To Nirvana        16.0503%  Box 5 Simply Petite          11.6051%
+49    GEELONG          R4     4.3762%  Box 2 Lanky Larry            19.0283%  Box 4 Special Teams          14.6521%
+50    RICHMOND         R4     4.2084%  Box 1 Pearl Of Maui          17.8463%  Box 7 Red Rock Along         13.6379%
+51    The Gardens      R2     3.9790%  Box 2 My Moon Shadow         20.1895%  Box 1 Paper Shredder         16.2105%
+52    GEELONG          R8     3.8958%  Box 2 Lush Hour              27.6220%  Box 3 Little Flower          23.7262%
+53    HEALESVILLE      R4     3.8838%  Box 2 Head Hunter            17.6987%  Box 6 Take A Jaguar          13.8149%
+54    GOULBURN         R1     3.8387%  Box 8 Sienna's Song          17.4495%  Box 5 Captain Corey          13.6108%
+55    The Gardens      R5     3.7136%  Box 7 Zipping Osaka          15.1160%  Box 1 What's The Story       11.4024%
+56    BENDIGO          R3     3.6801%  Box 4 Southern Style         21.8619%  Box 2 Canya Kick It          18.1818%
+57    Mandurah         R7     3.4938%  Box 4 Thumani                15.1197%  Box 3 Rusty Rocket           11.6259%
+58    BENDIGO          R6     3.3960%  Box 1 Black Marvel           27.8736%  Box 5 Kopacki Rit            24.4776%
+59    Mandurah         R4     3.3951%  Box 1 Gravity Monelli        22.9790%  Box 2 Just A Lad             19.5839%
+60    TOWNSVILLE       R8     3.3468%  Box 3 Rio Ragnar             24.8484%  Box 6 Tempting Dash          21.5016%
+61    Mandurah         R10    3.1714%  Box 1 Cerulean Poppy         16.6872%  Box 6 Mabel Monelli          13.5158%
+62    BENDIGO          R10    3.0985%  Box 2 Compare Joe            13.5066%  Box 3 Not Sorry              10.4081%
+63    GOULBURN         R8     2.9616%  Box 8 Optimizing             11.0635%  Box 6 Osti In Fashion         8.1019%
+64    RICHMOND         R7     2.7747%  Box 1 Euro Keeping           22.9119%  Box 2 West Rock Casey        20.1372%
+65    TOWNSVILLE       R6     2.7722%  Box 4 Penny Calido           14.5522%  Box 2 Smooth Blast           11.7800%
+66    The Gardens      R9     2.7381%  Box 5 Camaro Rose            14.6164%  Box 6 Barramundi Lou         11.8783%
+67    Q LAKESIDE       R5     2.6858%  Box 6 Doogie Mcgraw          15.0283%  Box 7 Front Man              12.3425%
+68    TOWNSVILLE       R9     2.6813%  Box 3 Pika Wave              14.7581%  Box 7 Advika                 12.0768%
+69    TOWNSVILLE       R5     2.6060%  Box 8 Sand Express           20.8077%  Box 4 Go Gem Go              18.2017%
+70    The Gardens      R10    2.6035%  Box 7 Tommy's Hitman         19.6414%  Box 1 Maeve Baby             17.0379%
+71    TOWNSVILLE       R7     2.5036%  Box 3 One Last Beer          19.3594%  Box 5 Swift Cannon           16.8558%
+72    GEELONG          R11    2.4668%  Box 8 Mepunga Brockie        16.7292%  Box 3 Monique Giblet         14.2624%
+73    GRAFTON          R11    2.4097%  Box 7 Spitfire Reign         12.5508%  Box 2 Wagyu Boy              10.1411%
+74    HEALESVILLE      R11    2.2592%  Box 3 Goof Ball              14.8569%  Box 8 Gumtree Hill           12.5977%
+75    HEALESVILLE      R2     2.1805%  Box 2 Nikita Dash            14.6516%  Box 8 Having A Look          12.4711%
+76    GRAFTON          R3     2.1542%  Box 5 Blue Bullet            14.6497%  Box 2 Nangar County          12.4955%
+77    BENDIGO          R11    2.0061%  Box 8 Smart As Rose          17.5960%  Box 6 Mr. Jones              15.5899%
+78    GEELONG          R3     1.9940%  Box 4 Aston Moss             12.8091%  Box 3 Twice The Impact       10.8151%
+79    Mandurah         R9     1.9852%  Box 3 Hunter                 16.0429%  Box 5 Geordie Lad            14.0577%
+80    RICHMOND         R1     1.9508%  Box 8 Big Town Amelia        13.9362%  Box 3 Utah Jan               11.9854%
+81    RICHMOND         R3     1.9258%  Box 7 My Gain                13.6754%  Box 2 Silvertree Pop         11.7496%
+82    GOULBURN         R10    1.7662%  Box 8 Grasscutter Moe        17.8131%  Box 4 Gus And Dodo           16.0469%
+83    RICHMOND         R6     1.7332%  Box 5 Winsome Josie          17.5163%  Box 2 Cash Keeping           15.7831%
+84    Q LAKESIDE       R2     1.6694%  Box 2 Should You             14.1393%  Box 8 Shortbread Cindy       12.4699%
+85    GOULBURN         R2     1.6243%  Box 6 Penitani Diva          14.1974%  Box 7 King's Gambit          12.5731%
+86    Mandurah         R5     1.5998%  Box 3 Penny Pincher          14.1519%  Box 1 Rockin' Kinloch        12.5521%
+87    GRAFTON          R8     1.3765%  Box 1 Timeless Miss          10.8994%  Box 3 What's The Price        9.5229%
+88    GRAFTON          R12    1.3543%  Box 6 Rushforth Baz          13.9907%  Box 2 Talk Too Much          12.6364%
+89    HEALESVILLE      R3     1.3328%  Box 3 Lacrimal               21.5575%  Box 1 Two Star Mikado        20.2247%
+90    RICHMOND         R10    1.3206%  Box 2 Adamant Andy           14.7999%  Box 3 Hard Right             13.4793%
+91    RICHMOND         R2     1.2863%  Box 4 Akii Royale            17.2367%  Box 2 Freddy Wick            15.9504%
+92    GOULBURN         R3     1.2420%  Box 2 Blackwood Ranch        11.4216%  Box 7 Velocity Diva          10.1796%
+93    GEELONG          R2     1.1982%  Box 8 Paw Waldorf            21.6204%  Box 1 Pulling Drag           20.4222%
+94    GOULBURN         R4     1.1417%  Box 7 Baggy Trousers         10.9694%  Box 2 Lumeah Storm            9.8277%
+95    RICHMOND         R11    1.0868%  Box 6 Moses Magic            12.6027%  Box 4 Gravel Dust            11.5159%
+96    TOWNSVILLE       R2     1.0060%  Box 1 Canya Break Even       16.1685%  Box 6 Hara's Lolly           15.1625%
+97    GRAFTON          R9     0.9446%  Box 5 Buddy Bonus            11.1074%  Box 3 Calla Naughty          10.1628%
+98    Mandurah         R8     0.8401%  Box 4 Elite Deluxe           21.3459%  Box 7 Aussie Gem             20.5058%
+99    Mandurah         R2     0.8389%  Box 8 Regards Sent Max       13.0415%  Box 4 Fly With Blaze         12.2026%
+100   Mandurah         R11    0.7161%  Box 8 Athenian Blade         14.5559%  Box 5 Barium                 13.8398%
+101   Q LAKESIDE       R3     0.7094%  Box 1 Strikes Twice          10.5890%  Box 4 Art Of Deception        9.8796%
+102   HEALESVILLE      R12    0.6859%  Box 1 Hyland Azula           15.1745%  Box 8 Game Of Phones         14.4886%
+103   HEALESVILLE      R9     0.6847%  Box 3 Nightmare Gavin        10.7226%  Box 2 Mccreery               10.0379%
+104   GEELONG          R6     0.6065%  Box 5 Springer's Boy         20.0383%  Box 3 Star Rebel             19.4318%
+105   Mandurah         R1     0.5231%  Box 8 Covered Call           11.2074%  Box 3 Canya Believe It       10.6843%
+106   The Gardens      R7     0.4276%  Box 3 Gangster Gort          10.1722%  Box 6 Canya Tango             9.7446%
+107   TOWNSVILLE       R3     0.3247%  Box 6 Two Cent Tilly         13.7292%  Box 9 Holly Magic            13.4045%
+108   HEALESVILLE      R7     0.3218%  Box 8 Highgate Franky        18.8521%  Box 3 Sultans Of Win         18.5303%
+109   Q LAKESIDE       R1     0.3018%  Box 4 Midnight Monica        10.6442%  Box 6 Gilt Halcyon           10.3424%
+110   TOWNSVILLE       R1     0.2546%  Box 8 Bodhi Buzz             14.4483%  Box 3 Federal Voodoo         14.1937%
+111   RICHMOND         R12    0.2206%  Box 2 Well Kept Secret       11.0641%  Box 7 Stumpy Jones           10.8435%
+112   The Gardens      R4     0.2109%  Box 3 Zipping Vivid          14.0919%  Box 8 Creeping Tiger         13.8810%
+113   Mandurah         R6     0.1529%  Box 1 Rigatoni Monelli       11.2737%  Box 8 Intimidation           11.1208%
+114   TOWNSVILLE       R12    0.1243%  Box 4 Holly Magic            15.2598%  Box 7 Smooth Panther         15.1355%
+115   TOWNSVILLE       R11    0.0804%  Box 4 Sampson                13.5705%  Box 3 Villain Of Magic       13.4901%
+116   BENDIGO          R12    0.0713%  Box 8 Trissa Bale            11.1631%  Box 2 Franky's Lass          11.0918%
+117   GOULBURN         R6     0.0199%  Box 2 Precursor              10.7019%  Box 7 I'm Motivational       10.6820%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 117
+
+🏆 BEST BET: Q LAKESIDE Race 6 - Box 1 Bentley Kristoff (gap: 24.9673%)
