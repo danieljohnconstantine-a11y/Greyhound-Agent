@@ -1,0 +1,95 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-10-24 07:35:17 (Saturday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+⚠️  DAY CONTEXT (Saturday): 2 major metro meeting(s) in card (Meadows/Cannington/WP). Metro Saturday fields are highly competitive — smaller gaps than provincial days are normal and expected.
+📊 GAP SUMMARY: median 4.12%  |  ≥20%: 2 race(s)  |  ≥10%: 9 race(s)  |  Total: 78 races
+================================================================================
+
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     Cannington       R10   23.2285%  Box 2 Silent Assassin        33.5457%  Box 4 Cerulean Poppy         10.3172%
+2     DUBBO            R12   21.5681%  Box 3 Spring Fred            37.7721%  Box 2 Southbrook Merv        16.2040%
+3     Q PARKLANDS      R7    17.3662%  Box 1 Another Idea           33.9043%  Box 5 Bentley Kristoff       16.5381%
+4     DUBBO            R11   16.1925%  Box 2 Classic Lass           28.3991%  Box 8 Ada Taro               12.2066%
+5     BALLARAT         R4    15.4846%  Box 8 Paw Larry              31.1316%  Box 2 Swanky Chic            15.6470%
+6     The Gardens      R7    14.2522%  Box 8 Just Kidding           27.7850%  Box 7 Alfie's Girl           13.5328%
+7     The Gardens      R3    12.5177%  Box 6 Zipping Alberta        25.1779%  Box 2 Lux Queen Lily         12.6602%
+8     Meadows          R8    11.5329%  Box 8 Paw Gordy              25.1879%  Box 1 Paw Orenthal           13.6550%
+9     BALLARAT         R6    11.1305%  Box 1 Mandolin Storm         22.1560%  Box 7 Quick Aussie           11.0255%
+10    DUBBO            R7     9.9479%  Box 4 Tommy Blue             23.6409%  Box 3 Nangar Rookie          13.6930%
+11    GOSFORD          R12    9.8906%  Box 2 Shadow Assassin        21.2044%  Box 1 Gypsy Ibrox            11.3138%
+12    GOSFORD          R8     9.7428%  Box 1 Hello Peck             22.0065%  Box 8 Take A Break           12.2637%
+13    DUBBO            R10    9.3549%  Box 5 Payne Cargo            23.7999%  Box 1 Red Rock Rattler       14.4450%
+14    Meadows          R9     9.2457%  Box 1 Croydon                21.8158%  Box 3 Hey Presto             12.5701%
+15    DUBBO            R1     8.9394%  Box 1 Count Your Chips       25.2430%  Box 3 Jacobite Poison        16.3036%
+16    Cannington       R1     8.3971%  Box 6 Urban Surf             20.8559%  Box 3 Ohtani Magic           12.4588%
+17    Cannington       R3     7.9046%  Box 2 King Nangar            22.4187%  Box 8 West On Menace         14.5141%
+18    DUBBO            R8     7.8551%  Box 1 Hot To Test            24.9248%  Box 4 Southbrook Lady        17.0697%
+19    Cannington       R2     7.3833%  Box 2 Iconic Jet             25.3529%  Box 4 Strip Weathers         17.9696%
+20    GOSFORD          R3     7.1805%  Box 2 Beaver Menzies         20.2359%  Box 3 Zipping Oshawa         13.0554%
+21    GOSFORD          R9     7.1418%  Box 8 Kung Fu Ethics         17.5399%  Box 7 Calypso Ethics         10.3981%
+22    BALLARAT         R1     6.9883%  Box 4 Karen's Witch          20.8230%  Box 8 Claretown Darcy        13.8347%
+23    The Gardens      R4     6.8837%  Box 2 Raven Fly              25.1853%  Box 1 Drink To That          18.3016%
+24    BALLARAT         R5     6.4073%  Box 6 Paw Judd               16.7599%  Box 2 Spring Quiz            10.3526%
+25    BALLARAT         R11    6.3845%  Box 8 Paw Linden             17.9334%  Box 5 Tricky Disco           11.5489%
+26    DUBBO            R6     5.9467%  Box 4 Red Rock Bloom         23.9463%  Box 3 Pencil Keeping         17.9996%
+27    The Gardens      R10    5.7223%  Box 7 Lakota Courtney        18.7064%  Box 8 Miss Bansky            12.9841%
+28    BALLARAT         R10    5.6113%  Box 2 Accounts Manager       19.5129%  Box 4 Extremity              13.9016%
+29    Meadows          R2     5.3617%  Box 8 Yale Dean              19.3200%  Box 3 Godzilla               13.9583%
+30    GOSFORD          R6     5.3341%  Box 8 Not Our Fault          21.9772%  Box 6 King Kermaro           16.6431%
+31    DUBBO            R3     5.1798%  Box 4 Just Rolling           16.6201%  Box 8 Orana Gemma            11.4403%
+32    The Gardens      R11    5.1023%  Box 4 Zipping Deloris        20.2808%  Box 1 Knight's Castle        15.1785%
+33    Cannington       R6     5.0246%  Box 3 Wild Rampage           24.5894%  Box 4 Aston Louise           19.5648%
+34    Cannington       R5     4.6362%  Box 1 Starlight Snowy        14.5241%  Box 3 Starlight Tory          9.8879%
+35    Q PARKLANDS      R6     4.6339%  Box 1 Gonzo                  15.9705%  Box 7 Gypsy Girl Pearl       11.3366%
+36    BALLARAT         R8     4.5589%  Box 2 Kensington Flyer       18.5415%  Box 8 Paw Gregson            13.9826%
+37    Meadows          R6     4.3743%  Box 2 Weblec Memphis         27.3054%  Box 4 Keep Rolling           22.9311%
+38    The Gardens      R6     4.2776%  Box 1 Goodwin Ronnie         18.6084%  Box 5 Just Go Girl           14.3308%
+39    DUBBO            R4     4.2013%  Box 5 Karinya Shall Be       15.7456%  Box 8 Itchy's Flyer          11.5443%
+40    Q PARKLANDS      R4     4.0452%  Box 7 Bionic Lana            15.7872%  Box 1 Idea's Man             11.7420%
+41    GOSFORD          R7     3.7431%  Box 2 Zipping Sako           28.7054%  Box 6 Ritza Sophie           24.9623%
+42    Meadows          R11    3.2505%  Box 4 Paw Varna              15.4022%  Box 7 Paw Lapras             12.1517%
+43    The Gardens      R2     2.9714%  Box 6 Nicmac Storm           14.8227%  Box 4 Big Red Aces           11.8513%
+44    BALLARAT         R2     2.9374%  Box 3 Paw Jadore             18.1893%  Box 4 Rakaia                 15.2519%
+45    BALLARAT         R9     2.8725%  Box 7 Paw Unity              12.7741%  Box 1 Bambi's Pride           9.9016%
+46    GOSFORD          R2     2.6964%  Box 1 Zipping Stitch         22.5539%  Box 7 Optimism               19.8575%
+47    The Gardens      R1     2.6251%  Box 1 Mulwee Bruce           14.8877%  Box 2 Ripper Mulwee          12.2626%
+48    DUBBO            R5     2.5944%  Box 2 Abe Keeping            15.0005%  Box 3 Another Lehigh         12.4061%
+49    Cannington       R9     2.5754%  Box 7 Darby Time             16.9442%  Box 1 Perfect Summer         14.3688%
+50    GOSFORD          R11    2.5431%  Box 5 Major Impact           14.7871%  Box 6 Cawbourne Zara         12.2440%
+51    Meadows          R3     2.5346%  Box 1 Rattle And Hum         20.5964%  Box 6 Galleywood             18.0618%
+52    BALLARAT         R12    2.4678%  Box 7 Paw Jelani             13.2086%  Box 1 Aston Flamenco         10.7408%
+53    DUBBO            R9     2.3248%  Box 2 Jacobite Battle        14.7413%  Box 6 Danny Whizz Bang       12.4165%
+54    Meadows          R4     2.2543%  Box 7 Magic Loki             26.7265%  Box 1 Elite One              24.4722%
+55    Q PARKLANDS      R3     2.2268%  Box 3 Paid In Glory          14.9791%  Box 6 Cool Hand Don          12.7523%
+56    The Gardens      R9     2.2235%  Box 6 Ebony Eyes             13.1617%  Box 3 Princess Energy        10.9382%
+57    DUBBO            R2     1.9538%  Box 6 Wake Up Shadow         11.4397%  Box 1 Orana Autumn            9.4859%
+58    GOSFORD          R1     1.8953%  Box 3 Zipping Tray           12.4393%  Box 7 No Peas Please         10.5440%
+59    The Gardens      R8     1.7787%  Box 1 Daphne Zacapa          27.4755%  Box 2 Hard Style Girl        25.6968%
+60    Cannington       R7     1.4316%  Box 1 Aston Rochelle         24.5245%  Box 4 Mabel Monelli          23.0929%
+61    Q PARKLANDS      R5     1.4090%  Box 2 Fox On Fire            10.9820%  Box 8 Rom Baro                9.5730%
+62    Meadows          R12    1.3740%  Box 1 Melvin Bale            10.8376%  Box 7 Zipping Mehary          9.4636%
+63    GOSFORD          R4     1.2718%  Box 1 Confusion Reigns       11.8566%  Box 4 Why Me                 10.5848%
+64    Meadows          R5     0.9789%  Box 8 Runway Blue            11.9119%  Box 4 Doongalla Parody       10.9330%
+65    Meadows          R10    0.9663%  Box 2 Par Excellence         14.1182%  Box 1 Goblin                 13.1519%
+66    GOSFORD          R10    0.9542%  Box 4 Zipping Joliette       15.8662%  Box 7 Zipping Ruger          14.9120%
+67    The Gardens      R12    0.8708%  Box 6 Kunda                  11.6533%  Box 4 Runaway Sam            10.7825%
+68    BALLARAT         R3     0.7360%  Box 7 Heavenly Stun On       11.2652%  Box 1 Provisional            10.5292%
+69    Q PARKLANDS      R1     0.5698%  Box 7 Ruby Mac               11.9916%  Box 6 Annie Sure Can         11.4218%
+70    The Gardens      R5     0.5101%  Box 7 Monstrance Clock       10.3256%  Box 8 Life Dream              9.8155%
+71    Meadows          R1     0.4282%  Box 7 Pale Tracer            10.3135%  Box 6 Lies You Sold           9.8853%
+72    Q PARKLANDS      R8     0.4060%  Box 1 Howdy Hope              9.8468%  Box 3 Mustang Hayze           9.4408%
+73    Cannington       R8     0.3763%  Box 4 Touriga                18.1680%  Box 2 Heartbreak Honey       17.7917%
+74    BALLARAT         R7     0.2974%  Box 2 Let's Go Thomas        15.2483%  Box 1 Will Jenkins           14.9509%
+75    Meadows          R7     0.1701%  Box 8 Opawa Fannin           13.8652%  Box 3 Highly Connected       13.6951%
+76    Q PARKLANDS      R2     0.1647%  Box 8 Backcreek Benny        29.6451%  Box 1 Zipping Lee            29.4804%
+77    Cannington       R4     0.1025%  Box 5 Paid My Dues           12.1512%  Box 2 Naughty Evie           12.0487%
+78    GOSFORD          R5     0.0244%  Box 2 Hurry Tuncurry          9.5546%  Box 8 Jet Boots Tommy         9.5302%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 78
+
+🏆 BEST BET: Cannington Race 10 - Box 2 Silent Assassin (gap: 23.2285%)
