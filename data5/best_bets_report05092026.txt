@@ -1,0 +1,93 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-09-05 13:53:23 (Saturday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+⚠️  DAY CONTEXT (Saturday): 3 major metro meeting(s) in card (Meadows/Cannington/WP). Metro Saturday fields are highly competitive — smaller gaps than provincial days are normal and expected.
+📊 GAP SUMMARY: median 3.60%  |  ≥20%: 2 race(s)  |  ≥10%: 14 race(s)  |  Total: 76 races
+================================================================================
+
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     DUBBO            R12   30.8945%  Box 5 Itchy's Flyer          40.4408%  Box 3 Raven Fire              9.5463%
+2     DUBBO            R5    20.3787%  Box 4 Tommy Blue             32.3690%  Box 1 Total Thunder          11.9903%
+3     Warragul         R8    17.9289%  Box 6 Room To Breathe        33.5605%  Box 1 Monument               15.6316%
+4     Warragul         R4    17.2520%  Box 8 Minter Boost           28.1567%  Box 1 Popper                 10.9047%
+5     The Gardens      R9    16.1940%  Box 2 Rattlin' Bye           26.4351%  Box 8 Sparkling Wheels       10.2411%
+6     Q LAKESIDE       R4    15.6011%  Box 8 Shout Out Shazam       35.9961%  Box 7 Surrealist             20.3950%
+7     Meadows          R3    14.4947%  Box 4 Miss Envy              31.1753%  Box 1 Shade Of Pale          16.6806%
+8     The Gardens      R5    14.2576%  Box 4 Speedy Zipper          24.5461%  Box 1 Simplicity Magic       10.2885%
+9     Warragul         R2    13.4898%  Box 1 She's No Secret        26.0664%  Box 5 Regards Nelly          12.5766%
+10    The Gardens      R8    13.4726%  Box 5 Pay Me                 26.3184%  Box 1 Sentosa                12.8458%
+11    Cannington       R1    13.3396%  Box 1 Iron Works             31.3430%  Box 2 Aston Ruler            18.0034%
+12    WENTWORTH PARK   R4    11.9698%  Box 5 Federal Sniper         24.1893%  Box 4 Bandit Alex            12.2195%
+13    Warragul         R5    11.1009%  Box 8 Go Barbara             30.7089%  Box 4 Minter Promise         19.6080%
+14    Meadows          R10   10.3103%  Box 1 Aston Machine          22.5196%  Box 6 Paw Brutus             12.2093%
+15    DUBBO            R8     9.7714%  Box 2 Armoured Glass         22.8188%  Box 1 Rosacky Rayo           13.0474%
+16    Q LAKESIDE       R8     9.0514%  Box 4 Zipping Urban          28.2495%  Box 5 From A Distance        19.1981%
+17    WENTWORTH PARK   R2     7.8323%  Box 1 Jock From Ibrox        20.1837%  Box 8 Iceberg Ahead          12.3514%
+18    Meadows          R7     7.8107%  Box 8 House Of Sins          20.4621%  Box 3 Urana Orbit            12.6514%
+19    Warragul         R10    7.8097%  Box 2 Jumping Oreo           19.5664%  Box 1 Lektra Aela            11.7567%
+20    DUBBO            R2     7.5741%  Box 1 Cry To Me              30.9616%  Box 3 Devon On Sauce         23.3875%
+21    Q LAKESIDE       R9     7.0873%  Box 1 Koby Keeping           21.6995%  Box 3 Unworldly              14.6122%
+22    Cannington       R8     7.0051%  Box 2 Touriga                25.0533%  Box 1 Canya Redline          18.0482%
+23    Warragul         R6     6.9516%  Box 1 Jumbuk Funi            17.1453%  Box 2 Sicily                 10.1937%
+24    Meadows          R4     6.5728%  Box 1 Aston Aquitaine        25.5565%  Box 2 Urana Storm            18.9837%
+25    Meadows          R9     6.4377%  Box 3 Corban Yaxley          18.5024%  Box 1 Urana Xavier           12.0647%
+26    The Gardens      R1     6.3463%  Box 2 Little Snitch          19.8587%  Box 1 Tralee Maverick        13.5124%
+27    Meadows          R12    6.1540%  Box 8 Perfect Picture        18.9109%  Box 1 Spring Victoria        12.7569%
+28    WENTWORTH PARK   R9     6.1486%  Box 5 Elite Dom              24.6890%  Box 4 Unleash In Miami       18.5404%
+29    Cannington       R9     6.0247%  Box 1 Blame Her              25.0739%  Box 4 Wyong Irving           19.0492%
+30    Meadows          R2     5.2470%  Box 4 Derry                  20.3661%  Box 2 Vodka And Ice          15.1191%
+31    Q LAKESIDE       R5     5.2021%  Box 6 Phoenix Amelia         15.7161%  Box 8 Akela Judo             10.5140%
+32    The Gardens      R11    5.1772%  Box 1 Daniel Keeping         15.7523%  Box 7 Run Rolex              10.5751%
+33    Cannington       R7     5.1121%  Box 2 Page One News          16.4917%  Box 1 Cyclone Calypso        11.3796%
+34    Warragul         R1     5.0646%  Box 2 Going Nuclear          18.8929%  Box 3 Tiger's Charm          13.8283%
+35    DUBBO            R9     4.5922%  Box 8 Red Rock Lotus         16.0136%  Box 3 Sekola Blue            11.4214%
+36    Cannington       R3     4.4943%  Box 2 Nera Carney            17.1666%  Box 6 Career Highlight       12.6723%
+37    Meadows          R5     3.9837%  Box 1 Gorringe               16.4033%  Box 7 Divine Feelings        12.4196%
+38    The Gardens      R10    3.9752%  Box 6 Fascinate George       16.6230%  Box 1 My Wee Lass            12.6478%
+39    Q LAKESIDE       R1     3.2186%  Box 8 Canya Invincible       17.3777%  Box 2 Jane's Fury            14.1591%
+40    Warragul         R11    3.2060%  Box 2 Zipping Darla          16.8019%  Box 1 Indy Grant             13.5959%
+41    Cannington       R4     3.0079%  Box 2 Strip Weathers         20.9749%  Box 1 King Nangar            17.9670%
+42    WENTWORTH PARK   R8     3.0040%  Box 7 My Pharaoh             15.1654%  Box 6 Hotshot Lily           12.1614%
+43    DUBBO            R10    2.7954%  Box 6 Zoe's Secret           15.3008%  Box 2 Gladstone Bag          12.5054%
+44    Warragul         R12    2.6720%  Box 2 Jayville Zoe           15.1584%  Box 1 Bengal Bullet          12.4864%
+45    DUBBO            R6     2.6149%  Box 5 Hey Lacey              16.2282%  Box 4 Cobra Beach            13.6133%
+46    WENTWORTH PARK   R7     2.4631%  Box 5 Joanne                 13.7795%  Box 7 Billy Ray's Girl       11.3164%
+47    Meadows          R1     2.3482%  Box 6 Saffron Monsoon        15.8722%  Box 1 Saint Fishy            13.5240%
+48    DUBBO            R3     2.3129%  Box 1 Bell Mac Magic         13.3141%  Box 4 Total Treasure         11.0012%
+49    Q LAKESIDE       R7     2.3056%  Box 1 Regal Gypsy            19.2682%  Box 4 Red Hot Penny          16.9626%
+50    The Gardens      R6     2.0713%  Box 1 Smart Comet            18.4492%  Box 7 Zipping Vivid          16.3779%
+51    Warragul         R3     1.9716%  Box 3 Black Atmos            19.4561%  Box 4 Patsy Stone            17.4845%
+52    Q LAKESIDE       R6     1.9665%  Box 7 Brunswick Rocket       12.9512%  Box 4 Expelled               10.9847%
+53    The Gardens      R4     1.7736%  Box 5 Drink To That          16.4562%  Box 7 Fascinate Josie        14.6826%
+54    DUBBO            R11    1.6988%  Box 3 Karinya Shall Be       14.0325%  Box 2 Ada Taro               12.3337%
+55    The Gardens      R12    1.6494%  Box 1 Don't Do It            12.6167%  Box 6 Lipschitz              10.9673%
+56    DUBBO            R1     1.6028%  Box 4 Hot To Show            12.2233%  Box 3 Lots Of Fun            10.6205%
+57    Cannington       R6     1.6004%  Box 2 Take My Advice         14.7884%  Box 8 Capalla                13.1880%
+58    The Gardens      R7     1.5925%  Box 7 Sue's Memory           11.9822%  Box 6 Federal Exit           10.3897%
+59    The Gardens      R2     1.4144%  Box 5 Reborn Pulse           21.3213%  Box 7 Sketchy But Not        19.9069%
+60    Q LAKESIDE       R3     1.2243%  Box 4 Mccluggage             21.5684%  Box 7 Tusken Warrior         20.3441%
+61    WENTWORTH PARK   R10    1.1693%  Box 1 Angry Friendship       11.3413%  Box 4 Celestial Moon         10.1720%
+62    Meadows          R11    1.0904%  Box 5 Ivory Inzai            13.4311%  Box 2 Full Bore Bobby        12.3407%
+63    The Gardens      R3     0.7422%  Box 3 Cerulean Moon           8.2832%  Box 4 Froggy Did It           7.5410%
+64    WENTWORTH PARK   R1     0.7325%  Box 2 Fancy Pay Cheque       12.1416%  Box 1 Still Shady            11.4091%
+65    DUBBO            R7     0.6242%  Box 1 Triple Phantom         13.7597%  Box 3 Let's Go Jude          13.1355%
+66    WENTWORTH PARK   R5     0.5620%  Box 2 Zipping Lambert        10.5655%  Box 1 Trunkey Mick           10.0035%
+67    Warragul         R9     0.5366%  Box 3 Mini Easy              14.5506%  Box 2 Essendon Flyer         14.0140%
+68    Meadows          R8     0.4087%  Box 1 Weblec Joel            13.8056%  Box 2 Paw Hades              13.3969%
+69    Cannington       R2     0.3761%  Box 4 Panadero Diva          12.4170%  Box 2 Margi Jean             12.0409%
+70    Cannington       R5     0.3403%  Box 4 Stratton Drive         19.1367%  Box 3 Mailata                18.7964%
+71    WENTWORTH PARK   R6     0.2281%  Box 4 Vintage Glow           13.5648%  Box 1 Condo Bandit           13.3367%
+72    Warragul         R7     0.0856%  Box 1 Universe               13.9932%  Box 3 Wilkie Twycross        13.9076%
+73    WENTWORTH PARK   R3     0.0759%  Box 7 Wildfire Panda         13.6276%  Box 8 Cash And Coins         13.5517%
+74    DUBBO            R4     0.0429%  Box 5 Red Rock Bloom          9.3432%  Box 1 Red Rock Reactor        9.3003%
+75    Q LAKESIDE       R2     0.0301%  Box 7 Ohtani Magic           19.9374%  Box 4 Golden Drummer         19.9073%
+76    Meadows          R6     0.0072%  Box 1 Flying Rogue           11.8187%  Box 2 Boracay Bella          11.8115%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 76
+
+🏆 BEST BET: DUBBO Race 12 - Box 5 Itchy's Flyer (gap: 30.8945%)

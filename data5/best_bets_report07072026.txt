@@ -1,0 +1,133 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-07-07 09:20:44 (Tuesday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 2.70%  |  ≥20%: 3 race(s)  |  ≥10%: 15 race(s)  |  Total: 117 races
+================================================================================
+
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     Angle Park       R3    25.1116%  Box 1 Our Bella Rose         37.1368%  Box 5 My Mum's Value         12.0252%
+2     Warragul         R1    20.9651%  Box 3 Biollante              31.2326%  Box 6 Perfect Picture        10.2675%
+3     HOBART           R6    20.0479%  Box 1 Seaton                 34.8108%  Box 3 Denton                 14.7629%
+4     Angle Park       R1    18.4375%  Box 1 Baluarte               33.3558%  Box 2 Redeemer Lee           14.9183%
+5     Angle Park       R9    15.3817%  Box 4 Kilcoy Missie          34.2281%  Box 6 Fine View              18.8464%
+6     HOBART           R4    15.2018%  Box 2 Lean Brick             26.5982%  Box 3 Remember Des           11.3964%
+7     Q LAKESIDE       R14   14.8186%  Box 4 Tusken Wind            36.6076%  Box 5 Unstable Mable         21.7890%
+8     Angle Park       R11   13.1194%  Box 2 Johnny Sprockets       30.0354%  Box 8 Rock On Bub            16.9160%
+9     GOSFORD          R6    12.6837%  Box 1 King Kermaro           29.1245%  Box 6 Status Jewel           16.4408%
+10    GOSFORD          R4    12.3704%  Box 1 Hi Lo Rain             23.8618%  Box 5 Sentosa                11.4914%
+11    GEELONG          R11   12.0200%  Box 1 Paw Nascent            23.1779%  Box 3 Paw Ballista           11.1579%
+12    Mandurah         R2    11.5826%  Box 2 Trunkey Miss           27.3372%  Box 6 Mr Flame               15.7546%
+13    Warragul         R5    11.4592%  Box 8 Ring                   32.6924%  Box 3 Space Invader          21.2332%
+14    Q LAKESIDE       R13   10.5446%  Box 4 Grace Ile              25.2616%  Box 2 Hara's Otis            14.7170%
+15    Bulli            R10   10.2756%  Box 2 Mighty Trojan          22.3279%  Box 7 Woolgoolga Lass        12.0523%
+16    Warragul         R10    9.6746%  Box 3 Aston Lyon             29.9994%  Box 2 Baywara                20.3248%
+17    Angle Park       R6     9.6652%  Box 2 Rio Hope               25.2475%  Box 7 On The Strip           15.5823%
+18    Mandurah         R4     9.5285%  Box 1 Tide Is High           31.6259%  Box 8 West On Torque         22.0974%
+19    GEELONG          R7     9.5132%  Box 1 Doongalla Ziggy        22.1895%  Box 3 Magizoologist          12.6763%
+20    GOSFORD          R10    9.0613%  Box 1 Kalimera               19.6721%  Box 2 Hands On Tina          10.6108%
+21    HORSHAM          R10    8.9291%  Box 1 Paw Olympus            21.8132%  Box 5 Doongalla Rocket       12.8841%
+22    Warragul         R2     8.5091%  Box 4 Lakeview Chaser        22.9873%  Box 1 Speedie Sadie          14.4782%
+23    Mandurah         R11    8.3925%  Box 1 Impress Rocks          22.9765%  Box 7 Send It Kye            14.5840%
+24    HOBART           R11    8.1169%  Box 4 Mini Mara              35.1142%  Box 1 Shima Sand             26.9973%
+25    Bulli            R8     8.0387%  Box 7 Queen Era              23.6039%  Box 3 Where's Fernando       15.5652%
+26    HOBART           R7     7.5892%  Box 1 Fire Water Burn        30.0065%  Box 4 Crystal                22.4173%
+27    Angle Park       R12    7.5407%  Box 1 Let's Enjoy This       23.3156%  Box 2 Tatamagouche           15.7749%
+28    HOBART           R5     7.5195%  Box 1 Detriment              19.3293%  Box 5 Set The Tone           11.8098%
+29    HOBART           R3     7.4491%  Box 1 Pinaroo Flyer          19.6982%  Box 5 Sweet Sundown          12.2491%
+30    GEELONG          R10    7.0422%  Box 2 Canya Guru             17.9189%  Box 1 Petey Bale             10.8767%
+31    Warragul         R8     7.0270%  Box 2 Paw Gregson            23.3624%  Box 4 Paw Hades              16.3354%
+32    Q LAKESIDE       R9     6.6681%  Box 8 Shout Out Shazam       21.1985%  Box 1 Redman Johnny          14.5304%
+33    WAGGA            R8     6.4799%  Box 1 Got A Note             18.2147%  Box 8 Dana Curly             11.7348%
+34    WAGGA            R2     6.3865%  Box 3 Got A Formula          19.0082%  Box 1 Cawbourne Mia          12.6217%
+35    WAGGA            R1     6.1053%  Box 8 Got A Chip             18.1622%  Box 6 Brutal Edge            12.0569%
+36    Bulli            R4     5.9877%  Box 4 Narrow Arrow           17.3582%  Box 7 Corless The King       11.3705%
+37    WAGGA            R3     5.8161%  Box 3 Paw Kitty              19.4721%  Box 4 Got A Sport            13.6560%
+38    Warragul         R6     5.5597%  Box 2 Ellis Unit One         17.2043%  Box 8 Essendon Girl          11.6446%
+39    Mandurah         R6     5.4375%  Box 2 Mr. Mysterio           18.3073%  Box 5 West On Mirra          12.8698%
+40    GEELONG          R2     5.3302%  Box 2 Star Of Roxy           18.0375%  Box 7 Just Telling           12.7073%
+41    HORSHAM          R9     5.1554%  Box 1 Paw Imperial           13.2720%  Box 7 Deep Thinker            8.1166%
+42    WAGGA            R4     5.0687%  Box 4 Prancing Pat           18.6378%  Box 8 Cawbourne Jemma        13.5691%
+43    Angle Park       R10    4.5454%  Box 4 Tough Cookie           29.0141%  Box 5 Kim Got Game           24.4687%
+44    GEELONG          R4     4.4512%  Box 4 Dynamite Doug          16.0411%  Box 7 Rampage Rocky          11.5899%
+45    GOSFORD          R2     4.3252%  Box 3 Trunkey Chief          12.7472%  Box 2 Dinali Keroma           8.4220%
+46    GOSFORD          R7     4.2031%  Box 6 Red Hot Tina           22.4015%  Box 1 Blue Franky            18.1984%
+47    GEELONG          R5     4.0511%  Box 6 Aston Chant            20.8079%  Box 8 Did So                 16.7568%
+48    Mandurah         R5     3.8526%  Box 6 Global Force           20.4417%  Box 1 Jindong Express        16.5891%
+49    WAGGA            R10    3.7503%  Box 3 Flashback Jim          15.9707%  Box 7 Got A Setting          12.2204%
+50    HORSHAM          R1     3.7328%  Box 2 Dollar Science         18.5681%  Box 7 Pyrenees Whisky        14.8353%
+51    HORSHAM          R11    3.5022%  Box 1 Lektra Jimmy           15.7027%  Box 5 Paw Quanda             12.2005%
+52    Q LAKESIDE       R3     3.3759%  Box 8 Sing My Song           21.0272%  Box 1 Regal Saint            17.6513%
+53    Bulli            R6     3.3360%  Box 6 Lady Luella            12.6367%  Box 2 Calla Muffin            9.3007%
+54    WAGGA            R5     3.1472%  Box 1 Phoenix Violet         15.8259%  Box 5 Cawbourne Sassy        12.6787%
+55    GEELONG          R1     2.9377%  Box 2 My Peppa               14.6247%  Box 8 Trenton's Ace          11.6870%
+56    Q LAKESIDE       R6     2.8890%  Box 8 Zabdon Blondie         13.9260%  Box 4 Lakoda Jill            11.0370%
+57    WAGGA            R7     2.7874%  Box 1 Elle's Moon            15.8996%  Box 5 Cawbourne Lady         13.1122%
+58    Q LAKESIDE       R10    2.7423%  Box 1 I'm No Mirage          17.9811%  Box 8 Hara's Jackson         15.2388%
+59    GOSFORD          R8     2.6965%  Box 1 Trunkey Moth           14.8242%  Box 4 Real Bonnie            12.1277%
+60    Bulli            R3     2.6521%  Box 1 Lord Eddie             12.9459%  Box 2 Ace Is Fire            10.2938%
+61    Warragul         R4     2.5074%  Box 4 My Names Rocky         30.4725%  Box 8 Runway Blue            27.9651%
+62    Bulli            R9     2.4281%  Box 6 Roscoe Conklin         13.6213%  Box 1 Terry's Girl           11.1932%
+63    WAGGA            R6     2.4214%  Box 1 Grapefruit Zippy       14.7002%  Box 7 Fly High Henry         12.2788%
+64    HOBART           R2     2.3074%  Box 2 Socially Sleek         12.0968%  Box 1 Zeus Danger             9.7894%
+65    WAGGA            R9     2.3073%  Box 5 Cawbourne Gigi         12.9513%  Box 4 Tiggerlong Socks       10.6440%
+66    GEELONG          R6     2.0249%  Box 1 Ticket Confetti        19.6359%  Box 6 Goof Ball              17.6110%
+67    HORSHAM          R8     1.9965%  Box 2 Paw Sherman            11.5285%  Box 7 Paw Xyla                9.5320%
+68    GOSFORD          R1     1.9858%  Box 4 Winter Lane            24.5932%  Box 5 Hulk                   22.6074%
+69    GEELONG          R13    1.8502%  Box 8 Dragon Black           10.6795%  Box 3 Rooster Legs            8.8293%
+70    Angle Park       R7     1.8242%  Box 4 Binnaway Sands         17.9222%  Box 5 Thundering Lady        16.0980%
+71    HORSHAM          R2     1.7987%  Box 8 Diligence              17.0622%  Box 7 Starlord Bale          15.2635%
+72    Q LAKESIDE       R12    1.7801%  Box 3 Arcane                 17.2644%  Box 8 Jack's Doubled         15.4843%
+73    GOSFORD          R9     1.6681%  Box 5 Bigbad Esme            18.2427%  Box 4 On A Dime              16.5746%
+74    GEELONG          R8     1.6138%  Box 8 Doongalla Parody       14.5206%  Box 7 Boracay Bella          12.9068%
+75    Mandurah         R10    1.6043%  Box 1 Chi Chi Doll           12.3920%  Box 3 Maximum Hughes         10.7877%
+76    Q LAKESIDE       R4     1.6024%  Box 3 Unique Ability         19.9743%  Box 2 Cheap Perfume          18.3719%
+77    Warragul         R9     1.5830%  Box 1 Paw Danger             17.3999%  Box 8 Bernardo Blue          15.8169%
+78    Mandurah         R3     1.4333%  Box 2 Brax The Beast         24.9734%  Box 8 Off To School          23.5401%
+79    Q LAKESIDE       R8     1.4285%  Box 2 Spring Maisie          13.5958%  Box 5 Hara's Gregor          12.1673%
+80    Bulli            R7     1.3986%  Box 2 Major Ted              19.3008%  Box 3 Puffin Punta           17.9022%
+81    Q LAKESIDE       R5     1.3740%  Box 1 Foxton Loch            18.2293%  Box 5 Canya Fake It          16.8553%
+82    HORSHAM          R6     1.3384%  Box 1 Crackerjack Greg       10.4182%  Box 10 Kiptum                  9.0798%
+83    HORSHAM          R4     1.3018%  Box 1 Westar Leo             12.4340%  Box 2 Dynamite Eric          11.1322%
+84    Q LAKESIDE       R2     1.1462%  Box 3 Whizz Bang             10.0808%  Box 1 Goldstar Shaun          8.9346%
+85    Angle Park       R2     1.0555%  Box 2 Antecedent             11.4442%  Box 4 Wirrulla Harry         10.3887%
+86    Angle Park       R4     0.9845%  Box 2 King Fearless          13.2351%  Box 1 Dame Truculent         12.2506%
+87    Q LAKESIDE       R1     0.9774%  Box 2 Squirrel Thief          9.7284%  Box 1 Moose                   8.7510%
+88    GOSFORD          R5     0.9282%  Box 1 Speedy Zipper          15.7738%  Box 7 Done Dealing           14.8456%
+89    HOBART           R8     0.8199%  Box 3 Zari Exact             14.2597%  Box 2 Hyper Force            13.4398%
+90    GOSFORD          R12    0.8012%  Box 2 Ruby Tanuki            11.6073%  Box 6 Global Ace             10.8061%
+91    WAGGA            R11    0.8007%  Box 5 Roses Ring             11.5933%  Box 6 Let's Go Legend        10.7926%
+92    HORSHAM          R5     0.7590%  Box 4 Paw Harkonnen          14.2974%  Box 6 Hooked And Happy       13.5384%
+93    GEELONG          R3     0.7217%  Box 2 Aston Hamilton         16.0203%  Box 7 Did She                15.2986%
+94    Bulli            R5     0.6271%  Box 2 Cheeky Cheese          10.6706%  Box 4 Miss Chit Chat         10.0435%
+95    Warragul         R7     0.5877%  Box 4 Paw Tarkov             13.2385%  Box 6 Here Comes Jojo        12.6508%
+96    Q LAKESIDE       R7     0.5819%  Box 3 Ripple Rose            14.8382%  Box 2 Goldstar Sutton        14.2563%
+97    HOBART           R10    0.5751%  Box 1 Deadly Breeze          13.0173%  Box 4 Throw Hands            12.4422%
+98    HOBART           R9     0.5193%  Box 7 Rojo Jojo              15.4567%  Box 2 Darling Danger         14.9374%
+99    HORSHAM          R3     0.4946%  Box 6 Mug Science            16.9664%  Box 2 Groot Bale             16.4718%
+100   GOSFORD          R11    0.3842%  Box 7 Rupee's Galore         13.1078%  Box 8 Vinnie Zacapa          12.7236%
+101   Mandurah         R9     0.3577%  Box 6 Wedge Run              15.4263%  Box 1 Forever Fun            15.0686%
+102   GEELONG          R12    0.3292%  Box 8 Dollar Bucks           15.3226%  Box 5 Little Flower          14.9934%
+103   GOSFORD          R3     0.3223%  Box 2 Proud Choice           14.4715%  Box 1 Nova Reign             14.1492%
+104   Q LAKESIDE       R11    0.3065%  Box 5 Cashed Up Haven        17.6873%  Box 4 Hello Elsa             17.3808%
+105   Warragul         R3     0.2989%  Box 4 Sheikh Of Tweak        15.0066%  Box 7 Mistress Grace         14.7077%
+106   GEELONG          R9     0.2861%  Box 2 Dewana Half Tail       23.9224%  Box 8 Twice The Impact       23.6363%
+107   Mandurah         R8     0.1545%  Box 7 Aussie Brook           11.6210%  Box 5 Canya Celeste          11.4665%
+108   Mandurah         R7     0.1430%  Box 2 Wave Of Fun            12.1053%  Box 6 Kabuki Warriors        11.9623%
+109   Warragul         R11    0.1238%  Box 1 Frog March             11.0084%  Box 6 Paw Rex                10.8846%
+110   Bulli            R1     0.0990%  Box 7 Optimizing             17.6909%  Box 1 Midnight Aztec         17.5919%
+111   Bulli            R2     0.0766%  Box 1 Taylor Made Blue       17.2775%  Box 2 Written In Gold        17.2009%
+112   HOBART           R1     0.0632%  Box 1 Rio Blue               10.1991%  Box 2 Blackpool Henry        10.1359%
+113   Mandurah         R1     0.0292%  Box 2 Aussie Collins         13.8589%  Box 1 Keep Watching          13.8297%
+114   Angle Park       R8     0.0251%  Box 2 Red Said So            18.2519%  Box 1 Time Of Design         18.2268%
+115   HORSHAM          R12    0.0045%  Box 5 Where's The Gold        9.5813%  Box 4 Paw Lassie              9.5768%
+116   Angle Park       R5     0.0045%  Box 4 Spare                  15.3014%  Box 8 Fancy In Design        15.2969%
+117   HORSHAM          R7     0.0038%  Box 8 Xisan Bale             13.8346%  Box 7 Nosey Parker           13.8308%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 117
+
+🏆 BEST BET: Angle Park Race 3 - Box 1 Our Bella Rose (gap: 25.1116%)
