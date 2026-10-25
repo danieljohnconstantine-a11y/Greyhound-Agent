@@ -1,0 +1,94 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-05-02 10:11:02
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     BALLARAT         R8    24.5258%  Box 1 Sir Dodge              34.7386%  Box 6 Bit Of Potash          10.2128%
+2     Cannington       R8    18.7621%  Box 1 West On Mirra          39.2013%  Box 2 Ramirez Monelli        20.4392%
+3     The Gardens      R1    18.2823%  Box 7 Rhyno's Girl           27.3301%  Box 1 Barkley Lane            9.0478%
+4     Meadows          R12   15.5067%  Box 2 Hartland Willow        35.1538%  Box 1 Repellent              19.6471%
+5     Cannington       R2    15.2171%  Box 5 Aston Ruler            30.3261%  Box 2 Flaws And Sins         15.1090%
+6     Meadows          R2    14.0754%  Box 8 Paw Queston            23.8143%  Box 7 Reality Queen           9.7389%
+7     WENTWORTH PARK   R7    13.7104%  Box 7 Extreme Machine        25.6128%  Box 1 Drink To That          11.9024%
+8     Q LAKESIDE       R6    11.2841%  Box 2 Malawi Rebel           28.3855%  Box 5 Appeal                 17.1014%
+9     Meadows          R9     9.0801%  Box 8 Fabrication            24.6287%  Box 4 Barooga Jim            15.5486%
+10    WENTWORTH PARK   R2     6.9898%  Box 1 Sydneysider            16.8675%  Box 3 Boppin' Ethics          9.8777%
+11    Meadows          R7     6.7481%  Box 5 Fast Reply             18.1201%  Box 8 Urana Parallax         11.3720%
+12    Cannington       R5     6.6904%  Box 5 Canya Celeste          19.1675%  Box 2 West On Cole           12.4771%
+13    Meadows          R10    6.4843%  Box 2 Nova Owen              18.5006%  Box 3 Elusive Curl           12.0163%
+14    GUNNEDAH         R4     5.7646%  Box 2 Mully The Master       18.5148%  Box 1 Prince Rolex           12.7502%
+15    Q LAKESIDE       R8     5.5795%  Box 5 Blue Blend             22.9567%  Box 2 Penny Calido           17.3772%
+16    The Gardens      R7     5.4913%  Box 1 Key Aurora             15.8912%  Box 4 Sea Surge              10.3999%
+17    GUNNEDAH         R5     4.8962%  Box 7 Sweet Bevely Ann       15.5378%  Box 8 Cheryl Blue            10.6416%
+18    The Gardens      R2     4.5521%  Box 2 Scott Wednesday        17.8728%  Box 7 At The Gate            13.3207%
+19    GUNNEDAH         R7     4.5241%  Box 8 Shorty Boy             18.9401%  Box 2 Jock                   14.4160%
+20    Q LAKESIDE       R4     4.4851%  Box 1 Scrub's Blue           35.6380%  Box 7 Sironen Tiger          31.1529%
+21    The Gardens      R9     4.3386%  Box 4 Minter Mulwee          13.0633%  Box 6 Kalani Miss             8.7247%
+22    GUNNEDAH         R2     4.1162%  Box 3 Give A Little          15.0653%  Box 2 Cowboy Carter          10.9491%
+23    BALLARAT         R11    3.9712%  Box 1 Ripper Riley           15.0275%  Box 2 Hollywood Franky       11.0563%
+24    Cannington       R3     3.7327%  Box 1 Mailata                14.6091%  Box 6 Timmy Tesla            10.8764%
+25    BALLARAT         R10    3.7081%  Box 1 Polo Polo              15.2130%  Box 3 Unleashing             11.5049%
+26    Meadows          R11    3.6550%  Box 2 Cash In View           16.2123%  Box 4 Unique Star            12.5573%
+27    Cannington       R9     3.6035%  Box 4 Canya Redline          20.2774%  Box 6 Impress Kuta           16.6739%
+28    Meadows          R4     3.5347%  Box 2 Paw Brutus             19.6584%  Box 5 Little Bont            16.1237%
+29    BALLARAT         R2     3.3645%  Box 8 Mystic Contessa        15.3363%  Box 1 Cornhill Scout         11.9718%
+30    Cannington       R4     3.3302%  Box 1 Cleary Magic           14.7336%  Box 6 Destiny Lane           11.4034%
+31    The Gardens      R10    3.2280%  Box 7 Hot To Rule            16.7514%  Box 1 Titan's Ocean          13.5234%
+32    WENTWORTH PARK   R11    2.9944%  Box 1 Fine Shine             15.3786%  Box 8 Fascinate Suzie        12.3842%
+33    WENTWORTH PARK   R3     2.8996%  Box 2 Blue Franky            13.1786%  Box 3 Wild Angela            10.2790%
+34    Meadows          R6     2.8363%  Box 1 Valenzuela             23.5665%  Box 2 Espoir                 20.7302%
+35    GUNNEDAH         R9     2.7523%  Box 2 Zipping Kirk           14.2350%  Box 7 Fancy Chick            11.4827%
+36    The Gardens      R5     2.6503%  Box 1 Reborn Destiny         14.2747%  Box 7 Ruby Tanuki            11.6244%
+37    Q LAKESIDE       R3     2.6411%  Box 4 Producer               22.0563%  Box 1 Wizard Said            19.4152%
+38    BALLARAT         R4     2.5290%  Box 8 Roscoe Bale            11.6957%  Box 1 Notorious Blaze         9.1667%
+39    The Gardens      R8     2.4100%  Box 3 Chutzpah               13.3168%  Box 6 Blurry                 10.9068%
+40    WENTWORTH PARK   R1     2.3483%  Box 6 Stomp Shuffle          12.0490%  Box 5 Call Your Bluff         9.7007%
+41    The Gardens      R12    2.2560%  Box 7 Daphne Zacapa          23.7742%  Box 1 Fascinate George       21.5182%
+42    GUNNEDAH         R12    2.1236%  Box 7 Victor Cargo           15.3822%  Box 3 Danny Keeping          13.2586%
+43    Meadows          R5     2.0828%  Box 8 Alfredo                19.7155%  Box 5 Paw Tarkov             17.6327%
+44    BALLARAT         R3     2.0451%  Box 6 Aston Author           12.8168%  Box 1 Vinnie Black           10.7717%
+45    Q LAKESIDE       R10    2.0103%  Box 1 Ninetymile Wow         12.1491%  Box 3 Cheers For Bella       10.1388%
+46    GUNNEDAH         R3     1.9817%  Box 4 Armatree Stripe        13.9774%  Box 8 From The Disco         11.9957%
+47    WENTWORTH PARK   R8     1.9165%  Box 8 My Monroe              14.9682%  Box 1 Reborn Hostility       13.0517%
+48    GUNNEDAH         R1     1.9028%  Box 3 Ash Mara               10.2484%  Box 2 Faith In Nanny          8.3456%
+49    Cannington       R1     1.8907%  Box 2 Cabin Crew             14.2306%  Box 4 Frogs Monelli          12.3399%
+50    The Gardens      R4     1.8230%  Box 2 Zipping Viper          14.2263%  Box 8 Samson's Riot          12.4033%
+51    BALLARAT         R7     1.6401%  Box 7 Doongalla Glory        16.0287%  Box 1 Zawadi                 14.3886%
+52    GUNNEDAH         R11    1.6211%  Box 6 Genuine Article        13.3210%  Box 1 Mortar                 11.6999%
+53    WENTWORTH PARK   R4     1.5461%  Box 1 See This               11.7599%  Box 8 Zipping Zodiac         10.2138%
+54    GUNNEDAH         R6     1.4087%  Box 2 His Fernando           14.0863%  Box 8 Salamat                12.6776%
+55    BALLARAT         R1     1.3487%  Box 8 Doongalla Ziggy        21.0319%  Box 3 Mr. Graceland          19.6832%
+56    BALLARAT         R12    1.2488%  Box 5 Squeegee's Ride        10.4228%  Box 6 Wall House              9.1740%
+57    Cannington       R7     1.1531%  Box 4 Oscar Eighty One       13.7063%  Box 2 Erin Go Bragh          12.5532%
+58    WENTWORTH PARK   R10    1.1466%  Box 2 President Rolex        11.1321%  Box 6 Ritza Ringer            9.9855%
+59    WENTWORTH PARK   R6     1.1315%  Box 1 Fear To Excel          11.4852%  Box 7 Cumbria Laura          10.3537%
+60    The Gardens      R6     0.9034%  Box 4 Mighty Henry           14.8721%  Box 1 Maximum Gayle          13.9687%
+61    BALLARAT         R6     0.8895%  Box 7 She's Nowhere          12.3119%  Box 2 Regal Ally             11.4224%
+62    BALLARAT         R9     0.7552%  Box 8 Invictus Blue          10.5947%  Box 3 Moraine Joker           9.8395%
+63    Cannington       R6     0.7439%  Box 5 Just A Bindi           16.1775%  Box 8 Sunset Caligula        15.4336%
+64    Q LAKESIDE       R7     0.7174%  Box 5 Infra Terra            19.7625%  Box 1 Cody's Star            19.0451%
+65    Q LAKESIDE       R5     0.5556%  Box 6 Backcreek Butch        23.4329%  Box 5 Shout Out Shazam       22.8773%
+66    WENTWORTH PARK   R5     0.5502%  Box 4 Angelo                 13.4938%  Box 2 Flash Ethics           12.9436%
+67    The Gardens      R3     0.4893%  Box 5 Quest For Pace         14.7244%  Box 1 Stylish Eyes           14.2351%
+68    The Gardens      R11    0.4141%  Box 1 Homer Mulwee           12.6490%  Box 3 Spencer Fury           12.2349%
+69    BALLARAT         R5     0.3673%  Box 4 Kensington Flyer       13.2276%  Box 1 Heart                  12.8603%
+70    Q LAKESIDE       R9     0.3428%  Box 7 Cash On Demand         10.9988%  Box 2 Hey Ernie              10.6560%
+71    Q LAKESIDE       R11    0.2446%  Box 1 He's Something         10.4640%  Box 4 Royal Voltage          10.2194%
+72    Q LAKESIDE       R2     0.2124%  Box 2 Arthur Star            17.5171%  Box 1 Hara's Tank            17.3047%
+73    WENTWORTH PARK   R9     0.2005%  Box 6 Late In Winter         13.8267%  Box 9 Both Bowers Ace        13.6262%
+74    Meadows          R3     0.1906%  Box 2 Indy Alex              18.0286%  Box 1 Victory Exam           17.8380%
+75    WENTWORTH PARK   R12    0.1582%  Box 1 Sammy Ethan            17.9825%  Box 2 Both Bowers Ace        17.8243%
+76    GUNNEDAH         R10    0.1452%  Box 6 Tralee Vixen            8.6168%  Box 4 Tralee Willy            8.4716%
+77    Meadows          R8     0.1404%  Box 1 Paw Zuri               20.3262%  Box 7 Consigliere            20.1858%
+78    GUNNEDAH         R8     0.1398%  Box 3 Scootin' Scooby        16.8720%  Box 4 Nicmac Star            16.7322%
+79    Q LAKESIDE       R1     0.0749%  Box 2 Summer's Dunay         15.8622%  Box 3 Hara's Nero            15.7873%
+80    Meadows          R1     0.0452%  Box 7 Somebody Told Me       11.4304%  Box 5 Absolute Rupee         11.3852%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 80
+
+🏆 BEST BET: BALLARAT Race 8 - Box 1 Sir Dodge (gap: 24.5258%)
