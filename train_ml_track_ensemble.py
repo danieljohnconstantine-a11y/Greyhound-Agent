@@ -51,6 +51,7 @@ from joblib import parallel_backend
 import pickle
 import logging
 import traceback
+from pathlib import Path
 
 try:
     import xgboost as xgb
@@ -116,6 +117,22 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
+MODEL_TUNING_OVERRIDES = {}
+
+
+def load_best_bets_tuning_overrides(path="best_bets_reports/model_tuning_overrides.json"):
+    """Load optional RF/GB/XGB overrides generated from best-bets reports."""
+    p = Path(path)
+    if not p.exists():
+        return {}
+    try:
+        with p.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        print(f"✅ Loaded best-bets tuning overrides from {p}")
+        return data if isinstance(data, dict) else {}
+    except Exception as e:
+        print(f"⚠️  Failed to load tuning overrides from {p}: {e}")
+        return {}
 
 def extract_features_and_labels(race_data_list, winners_list, output_dir="models/track_ensemble"):
     """
@@ -447,6 +464,25 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         scaler: Fitted StandardScaler
         metrics: Dict with performance metrics
     """
+    # Optional best-bets-driven overrides (falls back to current defaults)
+    rf_cfg = MODEL_TUNING_OVERRIDES.get('rf', {}) if isinstance(MODEL_TUNING_OVERRIDES, dict) else {}
+    gb_cfg = MODEL_TUNING_OVERRIDES.get('gb', {}) if isinstance(MODEL_TUNING_OVERRIDES, dict) else {}
+    xgb_cfg = MODEL_TUNING_OVERRIDES.get('xgb', {}) if isinstance(MODEL_TUNING_OVERRIDES, dict) else {}
+
+    rf_base_estimators = int(rf_cfg.get('n_estimators', 100))
+    rf_base_depth = int(rf_cfg.get('max_depth', 10))
+    rf_base_min_split = int(rf_cfg.get('min_samples_split', 5))
+
+    gb_base_lr = float(gb_cfg.get('learning_rate', 0.10))
+    gb_base_min_leaf = int(gb_cfg.get('min_samples_leaf', 3))
+    gb_base_subsample = float(gb_cfg.get('subsample', 0.8))
+
+    xgb_base_estimators = int(xgb_cfg.get('n_estimators', 150))
+    xgb_base_lr = float(xgb_cfg.get('learning_rate', 0.10))
+    xgb_base_depth = int(xgb_cfg.get('max_depth', 4))
+    xgb_base_subsample = float(xgb_cfg.get('subsample', 0.8))
+    xgb_base_colsample = float(xgb_cfg.get('colsample_bytree', 0.8))
+
     # Adaptive complexity based on dataset size (prevent OOM for large tracks)
     # RF max_depth capped at 10 across all tiers — deeper trees produce very large .pkl
     # files (24 MB+) that exceed GitHub's 100 MB limit when many features are present.
@@ -454,20 +490,20 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     n_samples = len(df)
     if n_samples > 600:
         # Very large track - reduce n_estimators to save memory
-        n_estimators = 100
-        max_depth_rf = 10
+        n_estimators = min(rf_base_estimators, 100)
+        max_depth_rf = min(rf_base_depth, 10)
         max_depth_gb = 4
         print(f"      📊 Large dataset ({n_samples} samples) - using reduced complexity")
     elif n_samples > 400:
         # Large track
-        n_estimators = 100
-        max_depth_rf = 10
+        n_estimators = min(rf_base_estimators, 100)
+        max_depth_rf = min(rf_base_depth, 10)
         max_depth_gb = 4
         print(f"      📊 Medium-large dataset ({n_samples} samples) - using moderate complexity")
     else:
         # Normal track
-        n_estimators = 100
-        max_depth_rf = 10
+        n_estimators = min(rf_base_estimators, 120)
+        max_depth_rf = min(rf_base_depth, 10)
         max_depth_gb = 5
     
     # Prepare data with sample weights
@@ -498,7 +534,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     rf = RandomForestClassifier(
         n_estimators=n_estimators,
         max_depth=max_depth_rf,
-        min_samples_split=5,
+        min_samples_split=rf_base_min_split,
         random_state=42,
         n_jobs=-1
     )
@@ -529,10 +565,10 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     print(f"      Training GradientBoosting (native proba, no extra cal)...")
     gb = GradientBoostingClassifier(
         n_estimators=n_estimators,
-        learning_rate=0.10,
+        learning_rate=gb_base_lr,
         max_depth=max_depth_gb,
-        min_samples_leaf=3,
-        subsample=0.8,
+        min_samples_leaf=gb_base_min_leaf,
+        subsample=gb_base_subsample,
         random_state=42
     )
     gb.fit(X_train_scaled, y_train)  # GB does not support sample_weight
@@ -544,11 +580,11 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     if HAS_XGBOOST:
         print(f"      Training XGBoost with weighted samples...")
         xgb_model = xgb.XGBClassifier(
-            n_estimators=n_estimators,
-            learning_rate=0.10,
-            max_depth=max_depth_gb,
-            subsample=0.8,
-            colsample_bytree=0.8,
+            n_estimators=xgb_base_estimators,
+            learning_rate=xgb_base_lr,
+            max_depth=min(xgb_base_depth, max_depth_gb),
+            subsample=xgb_base_subsample,
+            colsample_bytree=xgb_base_colsample,
             random_state=42,
             eval_metric='logloss',
             n_jobs=1,  # Fix "Can't pickle" on Linux: single-threaded avoids OpenMP thread-local state
@@ -607,13 +643,14 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     return models, scaler, metrics
 
 def main():
+    global MODEL_TUNING_OVERRIDES
     print("=" * 80)
     print("🎯 TRACK-SPECIFIC ENSEMBLE MODEL TRAINING - TOP 4 WEIGHTED + CALIBRATION")
     print("=" * 80)
     print("\nImplementing Priority 1, 2, 3 & 4 improvements:")
     print("  ✅ Track-specific models (separate model per venue)")
     print("  ✅ Ensemble learning (RandomForest + GradientBoosting + XGBoost)")
-    print("  ✅ Probability Calibration (Isotonic Regression)")
+    print("  ✅ Probability Calibration (Sigmoid / Platt scaling)")
     print("  ✅ Top 4 Weighted Training (NEW!) - 4x more data")
     print("     • 1st place: weight 1.0 (full winner signal)")
     print("     • 2nd place: weight 0.7 (strong competitive dog)")
@@ -623,6 +660,14 @@ def main():
     print("=" * 80)
     print(f"\n📝 LOG FILE: {os.path.abspath(log_file)}")
     print("=" * 80)
+
+    MODEL_TUNING_OVERRIDES = load_best_bets_tuning_overrides()
+    if MODEL_TUNING_OVERRIDES:
+        profile = MODEL_TUNING_OVERRIDES.get('applied_profile', 'custom')
+        matched = MODEL_TUNING_OVERRIDES.get('matched_predictions', 'n/a')
+        print(f"📈 Using best-bets tuning profile: {profile} (matched predictions: {matched})")
+    else:
+        print("ℹ️  No best-bets tuning overrides found; using default model parameters.")
     
     # Save models directly into models/ using the flat-file layout so that
     # run_track_ensemble_predictions.py can find them without needing a

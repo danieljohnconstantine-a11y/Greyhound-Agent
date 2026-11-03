@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-11-03T01:05:48.060152+00:00",
+  "source_reports_dir": "data5",
+  "results_root": ".",
+  "matched_predictions": 17633,
+  "overall_top_pick_win_rate": 0.2258,
+  "high_gap_sample_size": 2022,
+  "high_gap_win_rate": 0.2972,
+  "applied_profile": "conservative",
+  "rf": {
+    "n_estimators": 100,
+    "max_depth": 8,
+    "min_samples_split": 8
+  },
+  "gb": {
+    "learning_rate": 0.08,
+    "min_samples_leaf": 5,
+    "subsample": 0.75
+  },
+  "xgb": {
+    "n_estimators": 120,
+    "learning_rate": 0.08,
+    "max_depth": 3,
+    "subsample": 0.75,
+    "colsample_bytree": 0.75
+  }
+}
