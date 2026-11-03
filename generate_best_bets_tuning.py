@@ -113,7 +113,7 @@ def choose_profile(overall_win: float, high_gap_win: float, matched: int) -> Tup
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--reports-dir", default="data5")
+    ap.add_argument("--reports-dir", default="best_bets_reports")
     ap.add_argument("--results-root", default=".")
     ap.add_argument("--output-dir", default="best_bets_reports")
     args = ap.parse_args()

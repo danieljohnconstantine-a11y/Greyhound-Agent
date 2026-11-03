@@ -13,7 +13,7 @@ From repository root:
 
 ```bash
 python generate_best_bets_tuning.py \
-  --reports-dir data5 \
+  --reports-dir best_bets_reports \
   --results-root . \
   --output-dir best_bets_reports
 ```
