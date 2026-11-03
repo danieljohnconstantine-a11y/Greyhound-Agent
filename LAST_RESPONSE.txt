@@ -1,73 +1,70 @@
-Plain-English explanation of "overrides" and prediction impact
+How to improve prediction success with your current data (practical plan)
 
-You asked:
-"What does auto-load model_tuning_overrides.json mean? What override? Will this improve predictions?"
+Short answer:
+Yes — there ARE ways to improve hit rate with the data you now have.
+The key is to stop optimizing only for "overall accuracy" and optimize for "bet quality + strike rate" by confidence band and track.
 
-1) What "override" means
+What will likely improve winning most (highest impact first):
 
-Normally, train_ml_track_ensemble.py uses built-in default settings for each model.
-Example defaults are things like:
-- RandomForest: number of trees, tree depth, min samples split
-- GradientBoosting: learning rate, min samples leaf, subsample
-- XGBoost: number of trees, learning rate, depth, subsample, colsample
+1) Track-specific thresholding (instead of one global threshold)
+- Keep current models, but set different bet thresholds per track.
+- Example: only bet when model confidence >= X and gap >= Y for that specific track.
+- Why: each track has different race shape, field quality, and variance.
+- Expected benefit: fewer low-quality bets, better strike rate.
 
-An "override" just means:
-- If file exists: best_bets_reports/model_tuning_overrides.json
-- then training uses the values in that file INSTEAD of hardcoded defaults.
+2) Confidence-band policy from your own history
+- Use your best_bets_report history to define "bet bands":
+  - Band A (high edge): strongest gap/confidence bands
+  - Band B (medium edge)
+  - Band C (avoid)
+- You already have evidence that some gap buckets outperform others.
+- Expected benefit: better selection discipline and less noise betting.
 
-So:
-- with file present -> use override values
-- with file missing -> use normal defaults
+3) Time-based retraining and backtesting (walk-forward)
+- Train on older dates, test on newer dates only (no leakage).
+- Re-run monthly/fortnightly retrain windows.
+- Compare old vs new model on unseen dates before promoting.
+- Expected benefit: avoids overfitting and keeps model aligned with current form cycles.
 
-No other behavior changes.
+4) Per-track model family weighting (RF/GB/XGB)
+- Do not always weight RF/GB/XGB equally on every track.
+- Some tracks may perform better with GB-heavy or XGB-heavy blend.
+- Learn weights from validation per track and update config.
+- Expected benefit: stronger top-pick quality where one model type dominates.
 
-2) What override values are currently being applied
+5) Objective function aligned to betting outcomes
+- Evaluate by:
+  - Top-pick win rate
+  - Top-3 strike rate
+  - ROI proxy (if odds available)
+  - Calibration quality by confidence bucket
+- Do not rely only on classifier accuracy.
+- Expected benefit: tuning decisions match real betting goals.
 
-From current generated file, profile = conservative.
-Current values are:
+6) Data quality hardening (very important)
+- Strictly filter malformed outcomes (e.g., non-numeric anomalies like "Mon").
+- Keep consistent track naming and race numbering.
+- Continue excluding races without matching form PDFs.
+- Expected benefit: less label noise -> cleaner learning signal.
 
-RandomForest
-- n_estimators: 100
-- max_depth: 8
-- min_samples_split: 8
+7) Controlled bet volume (risk control)
+- Even with better models, edge is uneven by day.
+- Cap daily bets to top-N highest edge races only.
+- Expected benefit: improves realized strike rate and bankroll stability.
 
-GradientBoosting
-- learning_rate: 0.08
-- min_samples_leaf: 5
-- subsample: 0.75
+What this means for your current setup:
+- The new best_bets_reports workflow is useful.
+- But the biggest jump will come from adding:
+  1) per-track thresholds,
+  2) per-band betting rules,
+  3) walk-forward validation gate before each model release.
 
-XGBoost
-- n_estimators: 120
-- learning_rate: 0.08
-- max_depth: 3
-- subsample: 0.75
-- colsample_bytree: 0.75
+Realistic expectation:
+- You can improve practical winning probability and consistency.
+- But no model can guarantee constant improvement every run.
+- Aim for stable edge over many races, not single-day outcomes.
 
-This is more cautious than aggressive settings.
-
-3) Will this improve predictions?
-
-Honest answer: it may improve robustness, but no guaranteed lift every run.
-
-Most likely benefits:
-- Less overfitting to noisy races
-- More stable probabilities
-- Better generalization when race mix changes
-
-What it does NOT guarantee:
-- It does not guarantee higher win rate in every period/day.
-
-Best way to verify improvement:
-- Train once with overrides
-- Backtest on recent unseen dates
-- Compare to prior model on:
-  - top-pick win rate
-  - top-3 strike rate
-  - calibration by gap buckets
-
-4) Simple rule to remember
-
-- override file present = tuned params used
-- override file absent = default params used
-
-So yes: best_bets_reports is now part of the training workflow via that override file.
+If you want, next step I can implement:
+A) automatic per-track threshold file,
+B) band-based bet filter from historical gap performance,
+C) walk-forward report that says "promote model" or "reject model" before live use.
