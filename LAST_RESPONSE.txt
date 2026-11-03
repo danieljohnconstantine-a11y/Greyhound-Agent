@@ -1,71 +1,73 @@
-Greyhound-Agent Status Handoff (written because chat responses are not visible)
-Timestamp (UTC): 2026-11-03
+Plain-English explanation of "overrides" and prediction impact
 
-You asked: send response in this file so you can continue work.
+You asked:
+"What does auto-load model_tuning_overrides.json mean? What override? Will this improve predictions?"
 
-WHAT HAS BEEN COMPLETED
+1) What "override" means
 
-1) Daily results CSV imports completed (data5)
-- results_2026-10-26.csv
-- results_2026-10-27.csv
-- results_2026-10-28.csv
-- results_2026-10-29.csv
-- results_2026-10-30.csv
-- results_2026-10-31.csv
-- results_2026-11-01.csv
-- results_2026-11-02.csv
+Normally, train_ml_track_ensemble.py uses built-in default settings for each model.
+Example defaults are things like:
+- RandomForest: number of trees, tree depth, min samples split
+- GradientBoosting: learning rate, min samples leaf, subsample
+- XGBoost: number of trees, learning rate, depth, subsample, colsample
 
-Notes:
-- Track inclusion was matched against same-date form PDFs in data5.
-- Known naming conventions were respected (e.g., Hobart -> Launceston when matching MOWBG form files).
-- ABD outcomes were preserved in Winner with empty place fields.
+An "override" just means:
+- If file exists: best_bets_reports/model_tuning_overrides.json
+- then training uses the values in that file INSTEAD of hardcoded defaults.
 
-2) Best-bets tuning workflow added
-New folder:
-- best_bets_reports/
+So:
+- with file present -> use override values
+- with file missing -> use normal defaults
 
-New files/workflow:
-- generate_best_bets_tuning.py
-  - parses best_bets_report*.txt
-  - matches against results CSV files
-  - writes:
-    - best_bets_reports/model_tuning_overrides.json
-    - best_bets_reports/tuning_summary.md
-    - best_bets_reports/best_bets_report_index.csv
+No other behavior changes.
 
-Training integration:
-- train_ml_track_ensemble.py now auto-loads:
-  best_bets_reports/model_tuning_overrides.json
-  if present, and applies overrides to:
-  - RandomForest
-  - GradientBoosting
-  - XGBoost
+2) What override values are currently being applied
 
-3) Requested transfer completed
-- Moved ALL best_bets_report*.txt from data5/ into best_bets_reports/
-- Verified counts:
-  - data5 best_bets_report files: 0
-  - best_bets_reports best_bets_report files: 172
+From current generated file, profile = conservative.
+Current values are:
 
-WHAT THIS IMPROVES
+RandomForest
+- n_estimators: 100
+- max_depth: 8
+- min_samples_split: 8
 
-- Training pipeline remains the same base process, but now has optional data-driven hyperparameter overrides.
-- Retraining can adapt RF/GB/XGB settings from historical best-bets performance.
-- If overrides file is missing, training falls back to default parameters.
+GradientBoosting
+- learning_rate: 0.08
+- min_samples_leaf: 5
+- subsample: 0.75
 
-CURRENT GENERATED PROFILE (from uploaded reports)
-- matched_predictions: 17633
-- overall_top_pick_win_rate: 22.58%
-- high_gap_sample_size (>=10% gap): 2022
-- high_gap_win_rate: 29.72%
-- applied_profile: conservative
+XGBoost
+- n_estimators: 120
+- learning_rate: 0.08
+- max_depth: 3
+- subsample: 0.75
+- colsample_bytree: 0.75
 
-HOW TO RUN (recommended)
+This is more cautious than aggressive settings.
 
-1) Regenerate tuning from latest reports:
-python generate_best_bets_tuning.py --reports-dir best_bets_reports --results-root . --output-dir best_bets_reports
+3) Will this improve predictions?
 
-2) Retrain:
-python retrain_all_tracks_sigmoid.py
+Honest answer: it may improve robustness, but no guaranteed lift every run.
 
-If you still cannot see chat responses, keep using this LAST_RESPONSE.txt method and I will continue writing updates here.
+Most likely benefits:
+- Less overfitting to noisy races
+- More stable probabilities
+- Better generalization when race mix changes
+
+What it does NOT guarantee:
+- It does not guarantee higher win rate in every period/day.
+
+Best way to verify improvement:
+- Train once with overrides
+- Backtest on recent unseen dates
+- Compare to prior model on:
+  - top-pick win rate
+  - top-3 strike rate
+  - calibration by gap buckets
+
+4) Simple rule to remember
+
+- override file present = tuned params used
+- override file absent = default params used
+
+So yes: best_bets_reports is now part of the training workflow via that override file.
