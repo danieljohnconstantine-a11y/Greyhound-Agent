@@ -1,38 +1,19 @@
-Great question.
+Yes — done.
 
-Short answer:
-Using the full prediction Excel sheets for calibration will usually HELP more than best_bets_report alone — if we do it carefully.
+I have added a new workspace folder here:
+- `track_ensemble_predictions/`
+- with note file: `track_ensemble_predictions/README.md`
 
-Why it can help:
-- Excel has every dog in every race, not just top picks.
-- That gives much more calibration data per track.
-- Better for probability calibration (is 22% really 22% over time?).
-- Better for per-track behavior because sample size is much larger.
+So your next steps are exactly as you said:
 
-Why it can complicate things:
-- More data engineering (parse Excel reliably every day).
-- Need strict date controls to avoid leakage (don’t calibrate using future races).
-- Must keep schema stable (track, race, box, predicted score/probability, date).
-- More storage and processing.
+1) You manually add all historical `track_ensemble_predictions` Excel files into:
+   - `track_ensemble_predictions/`
 
-Best practice (recommended):
-1) Use BOTH sources, with different roles:
-   - Full Excel predictions = primary calibration dataset (all dogs/all races)
-   - best_bets_report = decision-layer tuning (which races to bet)
+2) Once all files are uploaded, we will create the new calibration/training procedure that:
+   - compares predictions vs actual results by track/race
+   - calibrates each track
+   - updates model training settings
 
-2) Keep training pipeline same:
-   - Do NOT change Excel output format.
-   - Add a calibration step after scoring, before final ranking export.
+3) Then you continue running the system as previous (same normal workflow/output format).
 
-3) Per-track calibration only:
-   - Build `track_calibration.json` from historical Excel predictions vs actual results.
-   - Apply per-track probability mapping (isotonic or Platt/sigmoid, whichever validates better).
-
-4) Walk-forward validation:
-   - Train/calibrate on past window, test on next period.
-   - Promote only if top-pick win rate + calibration improve on unseen dates.
-
-My recommendation:
-Yes, move calibration to full Excel prediction history (primary).
-Keep best_bets_report as secondary layer for bet selection rules.
-This gives better accuracy/stability while keeping your current workflow and report format.
+When your uploads are complete, tell me and I will implement the next procedure.
