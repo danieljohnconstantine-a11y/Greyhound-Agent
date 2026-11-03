@@ -1,70 +1,46 @@
-How to improve prediction success with your current data (practical plan)
+Yes — we can do exactly that.
+
+Your goal is correct:
+- Keep training pipeline the same
+- Keep Excel output format exactly the same
+- Use best-bets + actual results to calibrate each track
 
 Short answer:
-Yes — there ARE ways to improve hit rate with the data you now have.
-The key is to stop optimizing only for "overall accuracy" and optimize for "bet quality + strike rate" by confidence band and track.
+YES. We can add a calibration layer per track without changing your report format.
 
-What will likely improve winning most (highest impact first):
+How it should work (simple):
 
-1) Track-specific thresholding (instead of one global threshold)
-- Keep current models, but set different bet thresholds per track.
-- Example: only bet when model confidence >= X and gap >= Y for that specific track.
-- Why: each track has different race shape, field quality, and variance.
-- Expected benefit: fewer low-quality bets, better strike rate.
+1) Keep current training as-is
+- Keep RF/GB/XGB training flow unchanged.
+- Keep current Excel export structure unchanged.
 
-2) Confidence-band policy from your own history
-- Use your best_bets_report history to define "bet bands":
-  - Band A (high edge): strongest gap/confidence bands
-  - Band B (medium edge)
-  - Band C (avoid)
-- You already have evidence that some gap buckets outperform others.
-- Expected benefit: better selection discipline and less noise betting.
+2) Add per-track calibration using historical prediction vs result
+- For each track, compare:
+  - predicted rank/confidence from best_bets_report
+  - actual winner from results CSV
+- Learn calibration adjustments per track (not global).
 
-3) Time-based retraining and backtesting (walk-forward)
-- Train on older dates, test on newer dates only (no leakage).
-- Re-run monthly/fortnightly retrain windows.
-- Compare old vs new model on unseen dates before promoting.
-- Expected benefit: avoids overfitting and keeps model aligned with current form cycles.
+3) Apply calibration AFTER model scoring, BEFORE final ranking/output
+- This means we adjust probabilities/confidence per track
+- Then still output the same columns and same Excel layout.
 
-4) Per-track model family weighting (RF/GB/XGB)
-- Do not always weight RF/GB/XGB equally on every track.
-- Some tracks may perform better with GB-heavy or XGB-heavy blend.
-- Learn weights from validation per track and update config.
-- Expected benefit: stronger top-pick quality where one model type dominates.
+4) Rebuild calibration regularly
+- Recompute calibration file after new results are added.
+- Example cadence: daily or weekly retrain.
 
-5) Objective function aligned to betting outcomes
-- Evaluate by:
-  - Top-pick win rate
-  - Top-3 strike rate
-  - ROI proxy (if odds available)
-  - Calibration quality by confidence bucket
-- Do not rely only on classifier accuracy.
-- Expected benefit: tuning decisions match real betting goals.
+What this improves most:
+- Better confidence reliability per track
+- Better separation of strong vs weak races
+- More consistent top-pick strike rate
 
-6) Data quality hardening (very important)
-- Strictly filter malformed outcomes (e.g., non-numeric anomalies like "Mon").
-- Keep consistent track naming and race numbering.
-- Continue excluding races without matching form PDFs.
-- Expected benefit: less label noise -> cleaner learning signal.
+What will not change:
+- Your Excel report format
+- Your normal usage flow
 
-7) Controlled bet volume (risk control)
-- Even with better models, edge is uneven by day.
-- Cap daily bets to top-N highest edge races only.
-- Expected benefit: improves realized strike rate and bankroll stability.
+Recommended implementation path (safe):
+A) Generate `track_calibration.json` from best_bets_reports + results files
+B) Load that file in prediction stage
+C) Adjust per-track confidence scores using learned mapping
+D) Keep final exporter unchanged
 
-What this means for your current setup:
-- The new best_bets_reports workflow is useful.
-- But the biggest jump will come from adding:
-  1) per-track thresholds,
-  2) per-band betting rules,
-  3) walk-forward validation gate before each model release.
-
-Realistic expectation:
-- You can improve practical winning probability and consistency.
-- But no model can guarantee constant improvement every run.
-- Aim for stable edge over many races, not single-day outcomes.
-
-If you want, next step I can implement:
-A) automatic per-track threshold file,
-B) band-based bet filter from historical gap performance,
-C) walk-forward report that says "promote model" or "reject model" before live use.
+So yes: this is the right next step, and we can do it while preserving your existing training flow and Excel report format.
