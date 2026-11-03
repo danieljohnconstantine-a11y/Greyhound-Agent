@@ -1,46 +1,38 @@
-Yes — we can do exactly that.
-
-Your goal is correct:
-- Keep training pipeline the same
-- Keep Excel output format exactly the same
-- Use best-bets + actual results to calibrate each track
+Great question.
 
 Short answer:
-YES. We can add a calibration layer per track without changing your report format.
+Using the full prediction Excel sheets for calibration will usually HELP more than best_bets_report alone — if we do it carefully.
 
-How it should work (simple):
+Why it can help:
+- Excel has every dog in every race, not just top picks.
+- That gives much more calibration data per track.
+- Better for probability calibration (is 22% really 22% over time?).
+- Better for per-track behavior because sample size is much larger.
 
-1) Keep current training as-is
-- Keep RF/GB/XGB training flow unchanged.
-- Keep current Excel export structure unchanged.
+Why it can complicate things:
+- More data engineering (parse Excel reliably every day).
+- Need strict date controls to avoid leakage (don’t calibrate using future races).
+- Must keep schema stable (track, race, box, predicted score/probability, date).
+- More storage and processing.
 
-2) Add per-track calibration using historical prediction vs result
-- For each track, compare:
-  - predicted rank/confidence from best_bets_report
-  - actual winner from results CSV
-- Learn calibration adjustments per track (not global).
+Best practice (recommended):
+1) Use BOTH sources, with different roles:
+   - Full Excel predictions = primary calibration dataset (all dogs/all races)
+   - best_bets_report = decision-layer tuning (which races to bet)
 
-3) Apply calibration AFTER model scoring, BEFORE final ranking/output
-- This means we adjust probabilities/confidence per track
-- Then still output the same columns and same Excel layout.
+2) Keep training pipeline same:
+   - Do NOT change Excel output format.
+   - Add a calibration step after scoring, before final ranking export.
 
-4) Rebuild calibration regularly
-- Recompute calibration file after new results are added.
-- Example cadence: daily or weekly retrain.
+3) Per-track calibration only:
+   - Build `track_calibration.json` from historical Excel predictions vs actual results.
+   - Apply per-track probability mapping (isotonic or Platt/sigmoid, whichever validates better).
 
-What this improves most:
-- Better confidence reliability per track
-- Better separation of strong vs weak races
-- More consistent top-pick strike rate
+4) Walk-forward validation:
+   - Train/calibrate on past window, test on next period.
+   - Promote only if top-pick win rate + calibration improve on unseen dates.
 
-What will not change:
-- Your Excel report format
-- Your normal usage flow
-
-Recommended implementation path (safe):
-A) Generate `track_calibration.json` from best_bets_reports + results files
-B) Load that file in prediction stage
-C) Adjust per-track confidence scores using learned mapping
-D) Keep final exporter unchanged
-
-So yes: this is the right next step, and we can do it while preserving your existing training flow and Excel report format.
+My recommendation:
+Yes, move calibration to full Excel prediction history (primary).
+Keep best_bets_report as secondary layer for bet selection rules.
+This gives better accuracy/stability while keeping your current workflow and report format.
