@@ -54,6 +54,7 @@ import sys
 import os
 import argparse
 import pickle
+import subprocess
 import warnings
 from datetime import datetime
 
@@ -73,6 +74,9 @@ sys.path.insert(0, SRC_DIR)
 
 os.makedirs(MODELS_DIR, exist_ok=True)
 os.makedirs(REPORTS_DIR, exist_ok=True)
+
+TRACK_PREDICTIONS_DIR = os.path.join(REPO_ROOT, 'track_ensemble_predictions')
+BEST_BETS_REPORTS_DIR = os.path.join(REPO_ROOT, 'best_bets_reports')
 
 # ── imports ───────────────────────────────────────────────────────────────────
 import pandas as pd
@@ -477,6 +481,43 @@ def update_config(trained_tracks):
     print(f"  Updated config.pkl: {len(new_tracks)} tracks registered")
 
 
+def run_track_calibration_pretrain_step():
+    """
+    Build/refresh per-track calibration profiles from historical prediction Excel files.
+    This is safe and non-blocking: if calibration build fails, training still runs.
+    """
+    if not os.path.isdir(TRACK_PREDICTIONS_DIR):
+        print("\nNo track_ensemble_predictions folder found; skipping calibration pre-train step.")
+        return
+
+    xlsx_files = [
+        f for f in os.listdir(TRACK_PREDICTIONS_DIR)
+        if f.lower().endswith('.xlsx') and f.lower().startswith('track_ensemble_predictions')
+    ]
+    if not xlsx_files:
+        print("\nNo track_ensemble_predictions*.xlsx files found; skipping calibration pre-train step.")
+        return
+
+    os.makedirs(BEST_BETS_REPORTS_DIR, exist_ok=True)
+    cmd = [
+        sys.executable,
+        os.path.join(REPO_ROOT, 'build_track_prediction_calibration.py'),
+        '--predictions-dir', TRACK_PREDICTIONS_DIR,
+        '--results-root', REPO_ROOT,
+        '--output-dir', BEST_BETS_REPORTS_DIR,
+    ]
+
+    print("\nRunning calibration pre-train step from track_ensemble_predictions ...")
+    try:
+        proc = subprocess.run(cmd, cwd=REPO_ROOT, check=False)
+        if proc.returncode == 0:
+            print("✅ Calibration pre-train step completed.")
+        else:
+            print(f"⚠️  Calibration pre-train step failed (exit={proc.returncode}); continuing with training.")
+    except Exception as e:
+        print(f"⚠️  Calibration pre-train step error: {e}; continuing with training.")
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main():
@@ -492,6 +533,9 @@ def main():
     print("RETRAIN ALL TRACKS — SIGMOID CALIBRATION")
     print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 70)
+
+    # ── automatic calibration build from full prediction spreadsheets ─────────
+    run_track_calibration_pretrain_step()
 
     # ── load + merge training data ────────────────────────────────────────────
     print("\nLoading training data...")

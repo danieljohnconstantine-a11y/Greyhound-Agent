@@ -118,6 +118,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 MODEL_TUNING_OVERRIDES = {}
+TRACK_CALIBRATION_PROFILES = {}
 
 
 def load_best_bets_tuning_overrides(path="best_bets_reports/model_tuning_overrides.json"):
@@ -133,6 +134,32 @@ def load_best_bets_tuning_overrides(path="best_bets_reports/model_tuning_overrid
     except Exception as e:
         print(f"⚠️  Failed to load tuning overrides from {p}: {e}")
         return {}
+
+
+def load_track_calibration_profiles(path="best_bets_reports/track_calibration_profiles.json"):
+    """Load optional per-track calibration profiles built from prediction spreadsheets."""
+    p = Path(path)
+    if not p.exists():
+        return {}
+    try:
+        with p.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        print(f"✅ Loaded track calibration profiles from {p}")
+        return data if isinstance(data, dict) else {}
+    except Exception as e:
+        print(f"⚠️  Failed to load track calibration profiles from {p}: {e}")
+        return {}
+
+
+def get_track_profile(track_name):
+    """Return per-track profile payload for this track (if available)."""
+    if not isinstance(TRACK_CALIBRATION_PROFILES, dict):
+        return {}
+    per_track = TRACK_CALIBRATION_PROFILES.get("per_track", {})
+    if not isinstance(per_track, dict):
+        return {}
+    key = str(track_name).strip().lower()
+    return per_track.get(key, {})
 
 def extract_features_and_labels(race_data_list, winners_list, output_dir="models/track_ensemble"):
     """
@@ -464,10 +491,17 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         scaler: Fitted StandardScaler
         metrics: Dict with performance metrics
     """
-    # Optional best-bets-driven overrides (falls back to current defaults)
+    # Optional global overrides (best-bets) + optional per-track calibration overrides
     rf_cfg = MODEL_TUNING_OVERRIDES.get('rf', {}) if isinstance(MODEL_TUNING_OVERRIDES, dict) else {}
     gb_cfg = MODEL_TUNING_OVERRIDES.get('gb', {}) if isinstance(MODEL_TUNING_OVERRIDES, dict) else {}
     xgb_cfg = MODEL_TUNING_OVERRIDES.get('xgb', {}) if isinstance(MODEL_TUNING_OVERRIDES, dict) else {}
+    track_profile_cfg = get_track_profile(track_name)
+    if track_profile_cfg:
+        rf_cfg = {**rf_cfg, **track_profile_cfg.get('rf', {})}
+        gb_cfg = {**gb_cfg, **track_profile_cfg.get('gb', {})}
+        xgb_cfg = {**xgb_cfg, **track_profile_cfg.get('xgb', {})}
+        profile_name = track_profile_cfg.get('recommended_profile', 'custom')
+        print(f"      📈 Track calibration profile: {profile_name} ({track_name})")
 
     rf_base_estimators = int(rf_cfg.get('n_estimators', 100))
     rf_base_depth = int(rf_cfg.get('max_depth', 10))
@@ -619,6 +653,9 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         'n_positive_train': int(y_train.sum()),
         'n_positive_test': int(y_test.sum())
     }
+    if track_profile_cfg:
+        metrics['track_calibration_profile'] = track_profile_cfg.get('recommended_profile')
+        metrics['track_calibration_races'] = track_profile_cfg.get('races', 0)
     
     # Uncalibrated metrics (for comparison)
     for alg_name, pred_proba in predictions.items():
@@ -643,7 +680,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     return models, scaler, metrics
 
 def main():
-    global MODEL_TUNING_OVERRIDES
+    global MODEL_TUNING_OVERRIDES, TRACK_CALIBRATION_PROFILES
     print("=" * 80)
     print("🎯 TRACK-SPECIFIC ENSEMBLE MODEL TRAINING - TOP 4 WEIGHTED + CALIBRATION")
     print("=" * 80)
@@ -668,6 +705,11 @@ def main():
         print(f"📈 Using best-bets tuning profile: {profile} (matched predictions: {matched})")
     else:
         print("ℹ️  No best-bets tuning overrides found; using default model parameters.")
+    TRACK_CALIBRATION_PROFILES = load_track_calibration_profiles()
+    if TRACK_CALIBRATION_PROFILES.get("per_track"):
+        print(f"📊 Using per-track calibration profiles for {len(TRACK_CALIBRATION_PROFILES.get('per_track', {}))} tracks")
+    else:
+        print("ℹ️  No per-track calibration profile file found; training remains unchanged.")
     
     # Save models directly into models/ using the flat-file layout so that
     # run_track_ensemble_predictions.py can find them without needing a
