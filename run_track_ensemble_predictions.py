@@ -54,6 +54,7 @@ import pdfplumber
 # for evenly-matched races with sigmoid-calibrated models; the flag is advisory
 # only and does NOT trigger any fallback or model substitution.
 LOW_CONFIDENCE_SPREAD_THRESHOLD = 0.005  # < 0.5% probability spread
+LOW_EDGE_GAP_THRESHOLD = 1.25            # < 1.25% between top-2 dogs => no clear edge
 
 # Timing-derived features that should be filled with the race median rather
 # than 0 when missing, to avoid unfairly penalising dogs with unknown times.
@@ -500,9 +501,25 @@ def main():
                         single_race_df[f'{alg.upper()}_Score'] = np.round(arr * 100, 4)
 
                     # Low-confidence flag when all dogs' raw scores are nearly identical
-                    single_race_df['Low_Confidence'] = raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD
-                    if raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD:
-                        print(f"      ⚠️  Race {race_num} LOW_CONFIDENCE: spread={raw_spread:.4f}")
+                    sorted_race = single_race_df.sort_values('ML_Confidence', ascending=False).reset_index(drop=True)
+                    top2_gap = float(sorted_race.iloc[0]['ML_Confidence'] - sorted_race.iloc[1]['ML_Confidence']) if len(sorted_race) >= 2 else 0.0
+                    top_rf_box = int(single_race_df.loc[single_race_df['RF_Score'].idxmax(), 'Box']) if 'RF_Score' in single_race_df.columns else None
+                    top_gb_box = int(single_race_df.loc[single_race_df['GB_Score'].idxmax(), 'Box']) if 'GB_Score' in single_race_df.columns else None
+                    top_xgb_box = int(single_race_df.loc[single_race_df['XGB_Score'].idxmax(), 'Box']) if 'XGB_Score' in single_race_df.columns else None
+                    top_boxes = [b for b in (top_rf_box, top_gb_box, top_xgb_box) if b is not None]
+                    model_disagreement = len(set(top_boxes)) >= 3
+                    low_confidence = (
+                        raw_spread < LOW_CONFIDENCE_SPREAD_THRESHOLD
+                        or top2_gap < LOW_EDGE_GAP_THRESHOLD
+                        or model_disagreement
+                    )
+                    single_race_df['Low_Confidence'] = bool(low_confidence)
+                    if low_confidence:
+                        print(
+                            f"      ⚠️  Race {race_num} LOW_CONFIDENCE: "
+                            f"spread={raw_spread:.4f}, top2_gap={top2_gap:.3f}, "
+                            f"model_disagreement={'YES' if model_disagreement else 'NO'}"
+                        )
 
                     # Per-race rank (rank 1 = top pick within this race)
                     ranks = single_race_df['ML_Confidence'].rank(ascending=False, method='min').astype(int)
@@ -668,9 +685,14 @@ def main():
         # Best bets report: rank every race by the gap between 1st and 2nd place
         best_bets_path = os.path.join(output_dir, "best_bets_report.txt")
         bet_rows = []
+        skipped_low_conf = 0
         for (track, race_num), grp in df_all.groupby(['Track', 'RaceNumber'], sort=False):
             sorted_grp = grp.sort_values('ML_Confidence', ascending=False).reset_index(drop=True)
             if len(sorted_grp) < 2:
+                continue
+            is_low_conf_race = bool(sorted_grp['Low_Confidence'].iloc[0]) if 'Low_Confidence' in sorted_grp.columns else False
+            if is_low_conf_race:
+                skipped_low_conf += 1
                 continue
             first  = sorted_grp.iloc[0]
             second = sorted_grp.iloc[1]
@@ -729,6 +751,10 @@ def main():
                 f"Total: {len(bet_rows)} races\n"
             )
             f.write("=" * 80 + "\n\n")
+            if skipped_low_conf > 0:
+                f.write(f"⚠️  Confidence guardrail excluded {skipped_low_conf} low-edge race(s) from best-bet ranking.\n")
+            if not bet_rows:
+                f.write("⚠️  No race passed confidence guardrails today (all races low-edge or too contested).\n\n")
             f.write(f"{'Rank':<5} {'Track':<16} {'Race':<5} {'Gap':>8}  "
                     f"{'1st Dog':<26} {'1st%':>8}  {'2nd Dog':<26} {'2nd%':>8}\n")
             f.write(_sep + "\n")

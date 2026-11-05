@@ -1420,6 +1420,17 @@ def compute_features(df):
                      0.9 if pd.notna(m) and m >= -1 else       # Below average
                      0.8                                        # Poor recent form
         )
+        # Recency/context weighting: same factor, but stronger emphasis on very recent
+        # and currently active dogs (without requiring weather/rail-state inputs).
+        if "DLR" in df.columns:
+            dlr_num = pd.to_numeric(df["DLR"], errors="coerce")
+            recency_mult = dlr_num.apply(
+                lambda x: 1.08 if pd.notna(x) and x <= 10 else
+                         1.04 if pd.notna(x) and x <= 21 else
+                         0.98 if pd.notna(x) and x <= 45 else
+                         0.92
+            )
+            df["Last3FinishFactor"] = (df["Last3FinishFactor"] * recency_mult).clip(0.75, 1.30)
         print(f"[OK] Calculated Last3FinishFactor (1.8x weight for winners)")
     else:
         df["Last3AvgFinish"] = 0
@@ -1472,44 +1483,99 @@ def compute_features(df):
     # Front-runners in Box 1-2 win more often (they get clear running)
     # Mid-pack dogs in Box 1 often get blocked
     # ========================================================================
-    # Detect likely front-runners based on early speed
-    if "EarlySpeedIndex" in df.columns and "Box" in df.columns:
-        # Front-runner: Top 25% early speed in race
-        df["IsFrontRunner"] = df.groupby(["Track", "RaceNumber"])["EarlySpeedIndex"].transform(
-            lambda x: (x > x.quantile(0.75)) if len(x.dropna()) > 0 else False
-        )
-        
-        # Pace-Box interaction
-        # Front-runners in Box 1-2 get clear running = bonus
-        # Mid-pack in Box 1 gets blocked = penalty
-        def get_pace_box_factor(row):
-            box = row.get("Box", 4)
-            is_front_runner = row.get("IsFrontRunner", False)
-            if pd.isna(box):
-                return 1.0
-            box = int(box)
-            
-            if is_front_runner:
-                if box <= 2:
-                    return 1.10  # Front-runner on rail = clear path
-                elif box == 8:
-                    return 1.05  # Front-runner outside = good position
+    # Detect likely front-runners + local lane-pressure/interference risk
+    if "Box" in df.columns:
+        df["IsFrontRunner"] = False
+        df["InterferenceRisk"] = 0.25
+        df["PaceBoxFactor"] = 1.0
+
+        for _, race_grp in df.groupby(["Track", "RaceNumber"], sort=False):
+            idx = race_grp.index
+            g = race_grp.copy()
+
+            pace_signal = None
+            if "EarlySpeedIndex" in g.columns:
+                pace_signal = pd.to_numeric(g["EarlySpeedIndex"], errors="coerce")
+            if pace_signal is None or pace_signal.dropna().empty or pace_signal.std(ddof=0) == 0:
+                if "BestTimeSec" in g.columns:
+                    bt = pd.to_numeric(g["BestTimeSec"], errors="coerce")
+                    # Faster BestTimeSec is better, so negate.
+                    pace_signal = -bt
+            if pace_signal is None or pace_signal.dropna().empty:
+                pace_signal = pd.Series(0.0, index=g.index)
+
+            pace_mean = pace_signal.mean() if pd.notna(pace_signal.mean()) else 0.0
+            pace_std = pace_signal.std(ddof=0)
+            if not pd.notna(pace_std) or pace_std <= 1e-6:
+                pace_std = 1.0
+            pace_z = ((pace_signal - pace_mean) / pace_std).fillna(0.0)
+            g["_pace_z"] = pace_z
+
+            # Front-runners = top 30% pace in this race
+            threshold = pace_z.quantile(0.70) if len(pace_z) > 0 else 0.0
+            g["IsFrontRunner"] = pace_z >= threshold
+
+            front_boxes = set(
+                int(b) for b in g.loc[g["IsFrontRunner"], "Box"].dropna().astype(int).tolist()
+            )
+
+            pace_box_vals = []
+            risk_vals = []
+            for _, row in g.iterrows():
+                box = row.get("Box", 4)
+                if pd.isna(box):
+                    pace_box_vals.append(1.0)
+                    risk_vals.append(0.25)
+                    continue
+
+                box = int(box)
+                is_front = bool(row.get("IsFrontRunner", False))
+                my_pace = float(row.get("_pace_z", 0.0))
+
+                # Adjacent-lane pressure from neighboring boxes
+                neighbors = []
+                for b in (box - 1, box + 1):
+                    nb = g[g["Box"] == b]
+                    if not nb.empty:
+                        neighbors.append(float(nb["_pace_z"].iloc[0]))
+                neighbor_pressure = np.mean([max(0.0, n) for n in neighbors]) if neighbors else 0.0
+
+                # Contested lead if nearby lanes also have front-runners
+                nearby_front = sum(1 for fb in front_boxes if fb != box and abs(fb - box) <= 1)
+                crossing_risk = 0.60 if box in (2, 3, 6, 7) else (0.45 if box in (1, 8) else 0.50)
+
+                # Interference risk: crowded early speed + neighboring pace + crossing lanes
+                risk = (
+                    0.15
+                    + 0.20 * max(0.0, my_pace)
+                    + 0.22 * neighbor_pressure
+                    + 0.14 * nearby_front
+                    + 0.20 * crossing_risk
+                )
+                if is_front and nearby_front > 0:
+                    risk += 0.08
+                risk = float(np.clip(risk, 0.05, 0.80))
+                risk_vals.append(risk)
+
+                # Base pace/box interaction
+                if is_front:
+                    base = 1.08 if box <= 2 else (1.05 if box == 8 else 1.03)
                 else:
-                    return 1.02  # Front-runner middle = some advantage
-            else:
-                # Non front-runners
-                if box == 1:
-                    return 0.95  # Risk of getting blocked on rail
-                elif box == 3:
-                    return 0.93  # Box 3 is the trap position
-                else:
-                    return 1.0
-        
-        df["PaceBoxFactor"] = df.apply(get_pace_box_factor, axis=1)
-        front_runner_count = df["IsFrontRunner"].sum()
-        print(f"[OK] Calculated PaceBoxFactor ({front_runner_count} front-runners detected)")
+                    base = 0.95 if box == 1 else (0.93 if box == 3 else 1.0)
+
+                # Penalize fragile setups in high-contact fields
+                pace_box = base * (1.0 - 0.18 * risk)
+                pace_box_vals.append(float(np.clip(pace_box, 0.82, 1.18)))
+
+            df.loc[idx, "IsFrontRunner"] = g["IsFrontRunner"].astype(bool)
+            df.loc[idx, "InterferenceRisk"] = risk_vals
+            df.loc[idx, "PaceBoxFactor"] = pace_box_vals
+
+        front_runner_count = int(df["IsFrontRunner"].sum())
+        print(f"[OK] Calculated PaceBoxFactor with interference-risk logic ({front_runner_count} front-runners detected)")
     else:
         df["IsFrontRunner"] = False
+        df["InterferenceRisk"] = 0.25
         df["PaceBoxFactor"] = 1.0
     
     # ========================================================================
@@ -1764,35 +1830,35 @@ def compute_features(df):
     # when EarlySpeedIndex is constant or missing (e.g., no sectional timing data).
     if "EarlySpeedIndex" in df.columns:
         def _race_competitor_density(group):
-            speed_vals = group["EarlySpeedIndex"].dropna()
-            if len(speed_vals) >= 2 and speed_vals.std() > 0:
-                # Primary: proportion of above-median-speed dogs
-                return pd.Series(
-                    ((group["EarlySpeedIndex"] > group["EarlySpeedIndex"].median()
-                      ).astype(float).fillna(0.5)),
-                    index=group.index,
-                )
+            speed_vals = pd.to_numeric(group["EarlySpeedIndex"], errors="coerce").dropna()
+            if len(speed_vals) >= 2 and speed_vals.std(ddof=0) > 0:
+                # Higher density when many dogs are clustered near the top pace
+                p75 = speed_vals.quantile(0.75)
+                near_top = (pd.to_numeric(group["EarlySpeedIndex"], errors="coerce") >= (p75 * 0.97)).fillna(False)
+                return pd.Series(np.where(near_top, 0.70, 0.40), index=group.index)
             # Fallback: use BestTimeSec spread when early speed is constant/missing
             if "BestTimeSec" in group.columns:
-                time_vals = group["BestTimeSec"].dropna()
-                if len(time_vals) >= 2 and time_vals.std() > 0:
-                    # Dogs with faster-than-median times are real contenders
-                    return pd.Series(
-                        ((group["BestTimeSec"] < group["BestTimeSec"].median()
-                          ).astype(float).fillna(0.5)),
-                        index=group.index,
-                    )
+                time_vals = pd.to_numeric(group["BestTimeSec"], errors="coerce").dropna()
+                if len(time_vals) >= 2 and time_vals.std(ddof=0) > 0:
+                    p25 = time_vals.quantile(0.25)
+                    near_top = (pd.to_numeric(group["BestTimeSec"], errors="coerce") <= (p25 * 1.02)).fillna(False)
+                    return pd.Series(np.where(near_top, 0.68, 0.42), index=group.index)
             return pd.Series(0.5, index=group.index)
 
         density_parts = []
         for _, grp in df.groupby(["Track", "RaceNumber"]):
             density_parts.append(_race_competitor_density(grp))
         df["CompetitorDensity"] = pd.concat(density_parts).reindex(df.index)
-        # More competitors above median = more competitive field = harder to predict
-        df["CompetitorAdjustment"] = df["CompetitorDensity"].apply(
-            lambda d: 0.9 if pd.notna(d) and d > 0.6 else  # Very competitive field
-                     1.0 if pd.notna(d) and d > 0.4 else   # Normal field
-                     1.1                                     # Weak field = easier to pick
+        # More competitors + higher interference risk = harder race shape
+        if "InterferenceRisk" in df.columns:
+            combo = (0.65 * df["CompetitorDensity"] + 0.35 * pd.to_numeric(df["InterferenceRisk"], errors="coerce").fillna(0.25))
+        else:
+            combo = df["CompetitorDensity"]
+        df["CompetitorAdjustment"] = combo.apply(
+            lambda c: 0.86 if pd.notna(c) and c >= 0.65 else  # Highly contested
+                     0.95 if pd.notna(c) and c >= 0.52 else   # Competitive
+                     1.03 if pd.notna(c) and c >= 0.42 else   # Moderate
+                     1.10                                      # Weak field = cleaner edge
         )
         print(f"[OK] CompetitorDensity v5.3: EarlySpeedIndex primary, BestTimeSec fallback")
     else:

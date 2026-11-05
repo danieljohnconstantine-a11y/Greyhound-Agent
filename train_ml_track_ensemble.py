@@ -161,6 +161,78 @@ def get_track_profile(track_name):
     key = str(track_name).strip().lower()
     return per_track.get(key, {})
 
+
+def compute_recency_context_weights(df):
+    """Build sample-weight multipliers from recency + context (track-distance-regime)."""
+    n = len(df)
+    if n == 0:
+        return np.array([], dtype=float)
+
+    # Base fallback
+    recency_component = np.ones(n, dtype=float)
+    regime_component = np.ones(n, dtype=float)
+    context_component = np.ones(n, dtype=float)
+
+    # Date column can be Date or RaceDate depending on source pipeline
+    date_col = "Date" if "Date" in df.columns else ("RaceDate" if "RaceDate" in df.columns else None)
+    if date_col:
+        race_dates = pd.to_datetime(df[date_col], errors="coerce")
+        if race_dates.notna().any():
+            latest = race_dates.max()
+            age_days = (latest - race_dates).dt.days.fillna(365.0).clip(lower=0).astype(float)
+
+            # Stronger weight on latest 30/60/90-day windows + smooth decay
+            recency_component = (
+                0.70
+                + 0.45 * np.exp(-age_days / 120.0)
+                + 0.10 * (age_days <= 30).astype(float)
+                + 0.05 * (age_days <= 60).astype(float)
+            )
+
+            # Track-regime relevance (30/60/90 windows) by distance bucket
+            if "Distance" in df.columns:
+                d = pd.to_numeric(df["Distance"], errors="coerce").fillna(500.0)
+                dist_bucket = pd.cut(
+                    d,
+                    bins=[-np.inf, 399.999, 550.0, np.inf],
+                    labels=["SPRINT", "MIDDLE", "LONG"],
+                ).astype(str)
+            else:
+                dist_bucket = pd.Series(["MIDDLE"] * n, index=df.index)
+
+            rtc_band = None
+            if "RTC" in df.columns:
+                rtc = pd.to_numeric(df["RTC"], errors="coerce")
+                rtc_band = pd.cut(
+                    rtc.fillna(rtc.median() if rtc.notna().any() else 60.0),
+                    bins=[-np.inf, 45, 60, 75, np.inf],
+                    labels=["LOW", "MID", "HIGH", "ELITE"],
+                ).astype(str)
+
+            if rtc_band is not None:
+                context_key = dist_bucket + "|" + rtc_band
+            else:
+                context_key = dist_bucket
+
+            recent90_mask = age_days <= 90
+            recent60_mask = age_days <= 60
+            recent30_mask = age_days <= 30
+
+            total_counts = context_key.value_counts()
+            c90 = context_key[recent90_mask].value_counts()
+            c60 = context_key[recent60_mask].value_counts()
+            c30 = context_key[recent30_mask].value_counts()
+
+            s90 = context_key.map((c90 / total_counts).fillna(0.0)).fillna(0.0).to_numpy()
+            s60 = context_key.map((c60 / total_counts).fillna(0.0)).fillna(0.0).to_numpy()
+            s30 = context_key.map((c30 / total_counts).fillna(0.0)).fillna(0.0).to_numpy()
+
+            regime_component = 0.90 + 0.15 * s90 + 0.12 * s60 + 0.08 * s30
+            context_component = 0.90 + 0.22 * s60 + 0.08 * s30
+
+    combined = recency_component * regime_component * context_component
+    return np.clip(combined, 0.65, 1.65)
+
 def extract_features_and_labels(race_data_list, winners_list, output_dir="models/track_ensemble"):
     """
     Extract features and labels from race data WITH WEIGHTED TOP 4 TRAINING.
@@ -544,6 +616,9 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     X = df[feature_cols].fillna(0)
     y = df['Winner']
     sample_weights = df['SampleWeight'] if 'SampleWeight' in df.columns else np.ones(len(df))
+    recency_context_weights = compute_recency_context_weights(df)
+    if len(recency_context_weights) == len(sample_weights):
+        sample_weights = sample_weights * recency_context_weights
     
     # Convert weighted labels to binary (>0.5 = positive class for training)
     y_binary = (y > 0.5).astype(int)
@@ -653,6 +728,8 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
         'n_positive_train': int(y_train.sum()),
         'n_positive_test': int(y_test.sum())
     }
+    metrics['avg_sample_weight'] = float(np.mean(sample_weights)) if len(sample_weights) > 0 else 1.0
+    metrics['max_sample_weight'] = float(np.max(sample_weights)) if len(sample_weights) > 0 else 1.0
     if track_profile_cfg:
         metrics['track_calibration_profile'] = track_profile_cfg.get('recommended_profile')
         metrics['track_calibration_races'] = track_profile_cfg.get('races', 0)
