@@ -24,3 +24,7 @@ Place historical **track_ensemble_predictions Excel files** in this folder.
   - `track_calibration_profiles_candidate.json`
   - `track_calibration_profiles.json` (active)
   - `TRACK_CALIBRATION_REPORT.md`
+- Winner-indicator discovery artifacts are also written to `best_bets_reports/`:
+  - `winner_indicator_profiles_candidate.json`
+  - `winner_indicator_profiles.json` (active)
+  - `WINNER_INDICATOR_REPORT.md`

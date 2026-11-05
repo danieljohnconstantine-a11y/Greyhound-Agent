@@ -518,6 +518,29 @@ def run_track_calibration_pretrain_step():
         print(f"⚠️  Calibration pre-train step error: {e}; continuing with training.")
 
 
+def run_winner_indicator_pretrain_step():
+    """
+    Build/refresh stable winner-indicator profiles from historical races.
+    Safe and non-blocking: training proceeds even if this analysis fails.
+    """
+    os.makedirs(BEST_BETS_REPORTS_DIR, exist_ok=True)
+    cmd = [
+        sys.executable,
+        os.path.join(REPO_ROOT, 'build_winner_indicator_profiles.py'),
+        '--output-dir', BEST_BETS_REPORTS_DIR,
+    ]
+
+    print("\nRunning winner-indicator discovery step ...")
+    try:
+        proc = subprocess.run(cmd, cwd=REPO_ROOT, check=False)
+        if proc.returncode == 0:
+            print("✅ Winner-indicator discovery step completed.")
+        else:
+            print(f"⚠️  Winner-indicator step failed (exit={proc.returncode}); continuing with training.")
+    except Exception as e:
+        print(f"⚠️  Winner-indicator step error: {e}; continuing with training.")
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main():
@@ -536,6 +559,7 @@ def main():
 
     # ── automatic calibration build from full prediction spreadsheets ─────────
     run_track_calibration_pretrain_step()
+    run_winner_indicator_pretrain_step()
 
     # ── load + merge training data ────────────────────────────────────────────
     print("\nLoading training data...")

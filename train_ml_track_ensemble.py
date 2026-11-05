@@ -119,6 +119,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 MODEL_TUNING_OVERRIDES = {}
 TRACK_CALIBRATION_PROFILES = {}
+WINNER_INDICATOR_PROFILES = {}
 
 
 def load_best_bets_tuning_overrides(path="best_bets_reports/model_tuning_overrides.json"):
@@ -151,6 +152,21 @@ def load_track_calibration_profiles(path="best_bets_reports/track_calibration_pr
         return {}
 
 
+def load_winner_indicator_profiles(path="best_bets_reports/winner_indicator_profiles.json"):
+    """Load optional per-track indicator profiles from stability analysis."""
+    p = Path(path)
+    if not p.exists():
+        return {}
+    try:
+        with p.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        print(f"✅ Loaded winner-indicator profiles from {p}")
+        return data if isinstance(data, dict) else {}
+    except Exception as e:
+        print(f"⚠️  Failed to load winner-indicator profiles from {p}: {e}")
+        return {}
+
+
 def get_track_profile(track_name):
     """Return per-track profile payload for this track (if available)."""
     if not isinstance(TRACK_CALIBRATION_PROFILES, dict):
@@ -160,6 +176,69 @@ def get_track_profile(track_name):
         return {}
     key = str(track_name).strip().lower()
     return per_track.get(key, {})
+
+
+def get_winner_indicator_track_profile(track_name):
+    """Return per-track winner-indicator profile payload (if available)."""
+    if not isinstance(WINNER_INDICATOR_PROFILES, dict):
+        return {}
+    per_track = WINNER_INDICATOR_PROFILES.get("per_track", {})
+    if not isinstance(per_track, dict):
+        return {}
+    key = str(track_name).strip().lower()
+    return per_track.get(key, {})
+
+
+def compute_indicator_boost_weights(df, track_name):
+    """Soft sample-weight boosts from stable per-track winner-indicator combos."""
+    n = len(df)
+    if n == 0:
+        return np.array([], dtype=float)
+
+    profile = get_winner_indicator_track_profile(track_name)
+    boosts = profile.get("sample_weight_boosts", {}) if isinstance(profile, dict) else {}
+    if not boosts:
+        return np.ones(n, dtype=float)
+
+    w = np.ones(n, dtype=float)
+
+    box = pd.to_numeric(df.get("Box"), errors="coerce")
+    dlw = pd.to_numeric(df.get("DLW"), errors="coerce")
+    last3 = pd.to_numeric(df.get("Last3FinishFactor"), errors="coerce")
+    tr_sr = pd.to_numeric(df.get("TrainerStrikeRate"), errors="coerce")
+    tr_mo = pd.to_numeric(df.get("TrainerMomentum"), errors="coerce")
+    cons = pd.to_numeric(df.get("ConsistencyIndex"), errors="coerce")
+    box_wr = pd.to_numeric(df.get("TrackBoxWinRatePct"), errors="coerce")
+    risk = pd.to_numeric(df.get("InterferenceRisk"), errors="coerce")
+    pace = pd.to_numeric(df.get("PaceBoxFactor"), errors="coerce")
+    speed_pct = pd.to_numeric(df.get("BestTimePercentile"), errors="coerce")
+    early_pct = pd.to_numeric(df.get("EarlySpeedPercentile"), errors="coerce")
+
+    cond = {}
+    cond["inside_box"] = (box <= 2).fillna(False)
+    cond["recent_win_form"] = ((dlw <= 14) | (last3 >= 1.08)).fillna(False)
+    cond["strong_trainer"] = ((tr_sr >= 0.20) | (tr_mo >= 1.06)).fillna(False)
+    cond["high_consistency"] = (cons >= 0.20).fillna(False)
+    cond["strong_box_bias"] = (box_wr >= 15.0).fillna(False)
+    cond["low_interference"] = (risk <= 0.40).fillna(False)
+    cond["top_speed"] = (speed_pct >= 0.75).fillna(False)
+    cond["top_early"] = (early_pct >= 0.75).fillna(False)
+    cond["pace_edge"] = (pace >= 1.02).fillna(False)
+    cond["combo_early_inside_recent"] = cond["top_early"] & cond["inside_box"] & cond["recent_win_form"]
+    cond["combo_trainer_consistency_lowrisk"] = cond["strong_trainer"] & cond["high_consistency"] & cond["low_interference"]
+    cond["combo_speed_boxbias_lowrisk"] = cond["top_speed"] & cond["strong_box_bias"] & cond["low_interference"]
+
+    for key, mult in boosts.items():
+        if key in cond:
+            try:
+                m = float(mult)
+            except Exception:
+                continue
+            if m <= 0:
+                continue
+            w = np.where(cond[key].to_numpy(), w * m, w)
+
+    return np.clip(w, 0.80, 1.80)
 
 
 def compute_recency_context_weights(df):
@@ -619,6 +698,9 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     recency_context_weights = compute_recency_context_weights(df)
     if len(recency_context_weights) == len(sample_weights):
         sample_weights = sample_weights * recency_context_weights
+    indicator_boost_weights = compute_indicator_boost_weights(df, track_name)
+    if len(indicator_boost_weights) == len(sample_weights):
+        sample_weights = sample_weights * indicator_boost_weights
     
     # Convert weighted labels to binary (>0.5 = positive class for training)
     y_binary = (y > 0.5).astype(int)
@@ -730,6 +812,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     }
     metrics['avg_sample_weight'] = float(np.mean(sample_weights)) if len(sample_weights) > 0 else 1.0
     metrics['max_sample_weight'] = float(np.max(sample_weights)) if len(sample_weights) > 0 else 1.0
+    metrics['indicator_profile_applied'] = bool(get_winner_indicator_track_profile(track_name))
     if track_profile_cfg:
         metrics['track_calibration_profile'] = track_profile_cfg.get('recommended_profile')
         metrics['track_calibration_races'] = track_profile_cfg.get('races', 0)
@@ -757,7 +840,7 @@ def train_track_specific_ensemble(df, feature_cols, track_name):
     return models, scaler, metrics
 
 def main():
-    global MODEL_TUNING_OVERRIDES, TRACK_CALIBRATION_PROFILES
+    global MODEL_TUNING_OVERRIDES, TRACK_CALIBRATION_PROFILES, WINNER_INDICATOR_PROFILES
     print("=" * 80)
     print("🎯 TRACK-SPECIFIC ENSEMBLE MODEL TRAINING - TOP 4 WEIGHTED + CALIBRATION")
     print("=" * 80)
@@ -787,6 +870,11 @@ def main():
         print(f"📊 Using per-track calibration profiles for {len(TRACK_CALIBRATION_PROFILES.get('per_track', {}))} tracks")
     else:
         print("ℹ️  No per-track calibration profile file found; training remains unchanged.")
+    WINNER_INDICATOR_PROFILES = load_winner_indicator_profiles()
+    if WINNER_INDICATOR_PROFILES.get("per_track"):
+        print(f"🧭 Using winner-indicator stability profiles for {len(WINNER_INDICATOR_PROFILES.get('per_track', {}))} tracks")
+    else:
+        print("ℹ️  No winner-indicator profile file found; indicator weighting remains default.")
     
     # Save models directly into models/ using the flat-file layout so that
     # run_track_ensemble_predictions.py can find them without needing a
