@@ -1,37 +1,15 @@
-Implemented.
+Yes — you can still improve, and no, it’s not “all chance.”
+But there is always an irreducible randomness layer in greyhound racing (start/bump/trouble).
 
-What I changed
-- Added automatic pre-train calibration builder:
-  - `build_track_prediction_calibration.py`
-  - Reads `track_ensemble_predictions/track_ensemble_predictionsDDMMYYYY.xlsx`
-  - Matches predictions to results by `date + track + race (+ box for scoring)`
-  - Builds per-track profiles and metrics
-  - Writes:
-    - `best_bets_reports/track_calibration_profiles_candidate.json`
-    - `best_bets_reports/track_calibration_profiles.json` (active)
-    - `best_bets_reports/TRACK_CALIBRATION_REPORT.md`
-- Added promotion gate:
-  - Candidate profile is only promoted if guardrails are met (win/top-3/ECE logic).
-  - If not, previous active calibration stays in place.
-- Integrated into your existing one-command flow:
-  - `retrain_all_tracks_sigmoid.py` now runs calibration build first, then trains as normal.
-- Integrated per-track profile usage into training:
-  - `train_ml_track_ensemble.py` now loads active per-track profile and applies RF/GB/XGB per-track overrides.
-- Updated docs:
-  - `track_ensemble_predictions/README.md` with the seamless workflow.
+Most likely missed upside now is in how you use the data, not just adding more rows.
 
-Your workflow stays the same
-You still run:
-- `python retrain_all_tracks_sigmoid.py`
+High-value patterns often overlooked:
+1. Track-condition regime shifts (same track behaves differently by period/weather/rail state).
+2. Pace-shape effects (who leads first split + nearby box speed interactions).
+3. Interference risk (dogs with crossing/bumping profiles in crowded lanes).
+4. Recency weighting (last 3–5 runs at similar distance/grade matter more than old form).
+5. Price-vs-model gap (biggest edge is often when model confidence disagrees with market).
+6. Per-track/per-race calibration (which you’ve started) to avoid overconfidence on weak tracks.
 
-And you still download/copy models the same way after training.
-
-Validation
-- Python syntax check passed for updated scripts.
-- Secret scan passed.
-- CodeQL scan: 0 alerts.
-- `check_system_ready.py` still reports existing repo-level NO-GO items (pre-existing).
-
-Expected improvement
-No guaranteed lift every run, but this should improve robustness/consistency.
-Realistic range remains about ~1% to 4% absolute top-pick lift on well-covered tracks, with some tracks flat and some better.
+So: you are doing a lot right, but there is still room.
+Realistically, improvements are usually incremental (small % gains), not massive jumps, and consistency is the main win.
