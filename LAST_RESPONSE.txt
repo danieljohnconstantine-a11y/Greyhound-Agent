@@ -1,19 +1,37 @@
-Yes — done.
+Implemented.
 
-I have added a new workspace folder here:
-- `track_ensemble_predictions/`
-- with note file: `track_ensemble_predictions/README.md`
+What I changed
+- Added automatic pre-train calibration builder:
+  - `build_track_prediction_calibration.py`
+  - Reads `track_ensemble_predictions/track_ensemble_predictionsDDMMYYYY.xlsx`
+  - Matches predictions to results by `date + track + race (+ box for scoring)`
+  - Builds per-track profiles and metrics
+  - Writes:
+    - `best_bets_reports/track_calibration_profiles_candidate.json`
+    - `best_bets_reports/track_calibration_profiles.json` (active)
+    - `best_bets_reports/TRACK_CALIBRATION_REPORT.md`
+- Added promotion gate:
+  - Candidate profile is only promoted if guardrails are met (win/top-3/ECE logic).
+  - If not, previous active calibration stays in place.
+- Integrated into your existing one-command flow:
+  - `retrain_all_tracks_sigmoid.py` now runs calibration build first, then trains as normal.
+- Integrated per-track profile usage into training:
+  - `train_ml_track_ensemble.py` now loads active per-track profile and applies RF/GB/XGB per-track overrides.
+- Updated docs:
+  - `track_ensemble_predictions/README.md` with the seamless workflow.
 
-So your next steps are exactly as you said:
+Your workflow stays the same
+You still run:
+- `python retrain_all_tracks_sigmoid.py`
 
-1) You manually add all historical `track_ensemble_predictions` Excel files into:
-   - `track_ensemble_predictions/`
+And you still download/copy models the same way after training.
 
-2) Once all files are uploaded, we will create the new calibration/training procedure that:
-   - compares predictions vs actual results by track/race
-   - calibrates each track
-   - updates model training settings
+Validation
+- Python syntax check passed for updated scripts.
+- Secret scan passed.
+- CodeQL scan: 0 alerts.
+- `check_system_ready.py` still reports existing repo-level NO-GO items (pre-existing).
 
-3) Then you continue running the system as previous (same normal workflow/output format).
-
-When your uploads are complete, tell me and I will implement the next procedure.
+Expected improvement
+No guaranteed lift every run, but this should improve robustness/consistency.
+Realistic range remains about ~1% to 4% absolute top-pick lift on well-covered tracks, with some tracks flat and some better.
