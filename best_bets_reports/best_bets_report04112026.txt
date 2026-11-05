@@ -1,0 +1,139 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-04 08:10:45 (Wednesday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+⚠️  DAY CONTEXT (Wednesday): 2 major metro meeting(s) in card (Meadows/Cannington/WP). Metro Saturday fields are highly competitive — smaller gaps than provincial days are normal and expected.
+📊 GAP SUMMARY: median 2.96%  |  ≥20%: 6 race(s)  |  ≥10%: 19 race(s)  |  Total: 122 races
+================================================================================
+
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     Capalaba         R2    29.2105%  Box 2 Cool Kobe              39.2527%  Box 6 Rom Baro               10.0422%
+2     Q LAKESIDE       R14   29.1289%  Box 2 Federal Voodoo         42.1349%  Box 3 Spring Mariner         13.0060%
+3     DARWIN           R1    24.6534%  Box 1 So Naive               41.2038%  Box 7 Territory Girl         16.5504%
+4     Cannington       R4    21.2656%  Box 6 West On Leo            34.4165%  Box 8 Sonic Sydney           13.1509%
+5     BENDIGO          R8    21.0788%  Box 3 Chain Drive            40.0471%  Box 8 Paris Mash             18.9683%
+6     BALLARAT         R8    20.1554%  Box 1 Flying Ducati          32.1754%  Box 7 Aston Reeves           12.0200%
+7     BENDIGO          R1    17.6257%  Box 8 Thermal Sapphire       33.3989%  Box 2 Taltarni Grey          15.7732%
+8     NOWRA            R8    16.9681%  Box 2 Bail Jumper            32.0492%  Box 1 Bobbin' Bruno          15.0811%
+9     ROCKHAMPTON      R3    13.7902%  Box 8 Canya Azure            25.0732%  Box 1 Velocity Ziggy         11.2830%
+10    BALLARAT         R11   13.6444%  Box 1 Strasburg              27.1220%  Box 5 Paw Rival              13.4776%
+11    MURRAY BDGE STRAIGHT R2    13.5351%  Box 7 Rippin' Pedro          30.9726%  Box 5 Beast Cut Loose        17.4375%
+12    BALLARAT         R2    13.3804%  Box 3 Paw Whimsical          34.1937%  Box 2 Oza Doechii            20.8133%
+13    RICHMOND         R1    13.0442%  Box 6 Only Rumours           25.6265%  Box 8 Star Glow              12.5823%
+14    MURRAY BDGE STRAIGHT R5    12.5095%  Box 7 Freya Legend           28.5606%  Box 1 Velvet Legend          16.0511%
+15    Capalaba         R4    12.4749%  Box 1 Hara's Northerly       36.7289%  Box 8 Fragile Frankie        24.2540%
+16    Meadows          R6    11.2045%  Box 6 Power Squeeze          28.4423%  Box 2 Midnight Phantom       17.2378%
+17    Meadows          R5    11.0690%  Box 2 Money Palace           35.4930%  Box 8 Greysynd Sammy         24.4240%
+18    DARWIN           R4    10.9807%  Box 2 Zara's Secret          37.1795%  Box 1 Bluey Baby             26.1988%
+19    Q LAKESIDE       R9    10.6537%  Box 4 Summer's Scrub         26.9136%  Box 6 Unstable Mable         16.2599%
+20    DARWIN           R9     9.9556%  Box 2 Bear The Brunt         34.1551%  Box 4 Zero Control           24.1995%
+21    DARWIN           R10    9.9029%  Box 1 Zelda Chaos            32.5220%  Box 5 Enigma Go              22.6191%
+22    RICHMOND         R5     9.8006%  Box 1 Sorokin                26.8603%  Box 7 Will It Be             17.0597%
+23    BALLARAT         R9     9.4466%  Box 4 Paw Olympus            26.8785%  Box 7 Hara Hachi Bu          17.4319%
+24    DARWIN           R11    9.1825%  Box 8 Last Enigma            38.1969%  Box 2 Son Of Minya           29.0144%
+25    Meadows          R12    9.1419%  Box 7 Bounding Chief         21.0432%  Box 4 Found Treasure         11.9013%
+26    Cannington       R1     8.0307%  Box 7 Colonel The Boss       21.3950%  Box 2 She Has Luck           13.3643%
+27    BENDIGO          R5     8.0055%  Box 4 Ripper Rufus           24.6164%  Box 2 Golden Redeemer        16.6109%
+28    Q LAKESIDE       R12    7.9182%  Box 1 Dashing Turbo          17.7724%  Box 2 Spring Tara             9.8542%
+29    Cannington       R5     7.8971%  Box 1 Ned                    20.2066%  Box 2 Forever Fun            12.3095%
+30    DARWIN           R8     7.3225%  Box 8 Cockatoo Lodge         35.0127%  Box 7 Bing Bing Charm        27.6902%
+31    ROCKHAMPTON      R5     7.2055%  Box 4 Canya Rock It          21.4363%  Box 1 Fireball Ernie         14.2308%
+32    NOWRA            R3     7.1138%  Box 1 Creeping Choice        20.8390%  Box 5 Tumby Bay              13.7252%
+33    MURRAY BDGE STRAIGHT R9     6.8915%  Box 5 Gebrselassie           24.7669%  Box 1 Sir Rico               17.8754%
+34    Meadows          R11    6.8235%  Box 2 Treble Beers           35.3706%  Box 1 Tiger Rocks            28.5471%
+35    Q LAKESIDE       R11    6.6236%  Box 5 Mr. Lasso              19.0206%  Box 2 Tuki Beach             12.3970%
+36    DARWIN           R2     6.6041%  Box 8 Bingo Girl             24.8786%  Box 4 Bagot Bullet           18.2745%
+37    Meadows          R2     6.4812%  Box 5 Paw Campus             17.3022%  Box 8 Troublesome            10.8210%
+38    BENDIGO          R2     6.3883%  Box 4 Ice Candy              20.8084%  Box 1 True Rage              14.4201%
+39    BALLARAT         R12    6.1163%  Box 4 White Nile             21.3961%  Box 2 Paw Quintessa          15.2798%
+40    ROCKHAMPTON      R7     5.9701%  Box 3 Weblec Whisper         21.0725%  Box 6 Farmor Senior          15.1024%
+41    Meadows          R3     5.9527%  Box 1 Zipping Lleyton        20.0854%  Box 6 La Vida Loca           14.1327%
+42    Q LAKESIDE       R4     5.4930%  Box 7 Federal Saki           19.2518%  Box 6 Velocity Smolder       13.7588%
+43    Cannington       R6     5.4559%  Box 2 Urban Surf             20.5251%  Box 5 West On Claire         15.0692%
+44    RICHMOND         R10    5.2819%  Box 7 Tap Out Stella         17.6620%  Box 1 Barstool Dollars       12.3801%
+45    Q LAKESIDE       R2     5.2699%  Box 4 Cobblers Run           17.2477%  Box 2 Mango Beach            11.9778%
+46    Capalaba         R3     5.2167%  Box 1 Sing My Song           26.9847%  Box 8 Run Burgundy           21.7680%
+47    RICHMOND         R7     4.9685%  Box 8 True Believers         15.6721%  Box 3 Hardstyle Ruby         10.7036%
+48    Capalaba         R6     4.8492%  Box 8 Avoid The Noise        21.3827%  Box 7 Zipping Hagen          16.5335%
+49    Cannington       R10    4.6886%  Box 2 Did It Happen          26.1288%  Box 1 White Keys             21.4402%
+50    NOWRA            R2     4.4707%  Box 6 Winged Rupee           16.9904%  Box 2 Dundee Spike           12.5197%
+51    Cannington       R8     4.3831%  Box 2 Our Boy Doug           17.3672%  Box 1 Liberty Star           12.9841%
+52    MURRAY BDGE STRAIGHT R3     4.3639%  Box 2 Kick To Kick           14.1232%  Box 4 Exultant Mclaren        9.7593%
+53    Cannington       R7     4.2004%  Box 2 Scarred                17.2158%  Box 5 Natalie Keeping        13.0154%
+54    BENDIGO          R11    3.8321%  Box 1 Valletta Pearl         15.8007%  Box 7 Dark Habits            11.9686%
+55    Capalaba         R10    3.8110%  Box 7 Velocity Yin           12.9919%  Box 6 Crisis Averted          9.1809%
+56    NOWRA            R4     3.7921%  Box 2 Skedaddle Benny        16.6980%  Box 4 Creative Key           12.9059%
+57    RICHMOND         R6     3.5435%  Box 2 Sweet City Halo        23.9726%  Box 8 Hard Right             20.4291%
+58    Q LAKESIDE       R3     3.5350%  Box 1 Move On Careena        14.5640%  Box 2 Goldstar Woody         11.0290%
+59    Meadows          R4     3.5205%  Box 2 Paw Gregson            19.0237%  Box 1 Son Of Witchy          15.5032%
+60    DARWIN           R6     3.5197%  Box 2 Ritza Duane            24.7351%  Box 3 Resilient              21.2154%
+61    MURRAY BDGE STRAIGHT R1     3.0692%  Box 5 Arctic Nomad           16.8617%  Box 2 Popularize             13.7925%
+62    Capalaba         R12    2.8479%  Box 3 Lakoda Focus           16.9830%  Box 8 Simulate               14.1351%
+63    Cannington       R12    2.7084%  Box 1 Electric Kuna          20.1234%  Box 5 Aureate                17.4150%
+64    Meadows          R1     2.6620%  Box 3 Full Bore Lisa         14.5261%  Box 1 Paw Annie              11.8641%
+65    BENDIGO          R4     2.5729%  Box 4 Geraldton Crew         25.4683%  Box 2 Peaky Collinda         22.8954%
+66    Meadows          R9     2.3106%  Box 1 Imprint                19.0339%  Box 5 Cheeky Chompers        16.7233%
+67    ROCKHAMPTON      R4     2.3007%  Box 6 Cowboy's Rodeo         13.7748%  Box 2 Jester Beach           11.4741%
+68    NOWRA            R7     2.2406%  Box 7 Zulu Sharp             13.9921%  Box 2 Riley Dozer            11.7515%
+69    MURRAY BDGE STRAIGHT R6     2.2386%  Box 1 Majestic Mclaren       13.6068%  Box 3 Techno Kelli           11.3682%
+70    BENDIGO          R12    2.1122%  Box 8 Flex Factor            14.3052%  Box 2 Ritzy Ruth             12.1930%
+71    Q LAKESIDE       R7     2.1058%  Box 1 Dodgem Dash            17.3707%  Box 2 Unique Ability         15.2649%
+72    BALLARAT         R1     2.1055%  Box 1 Toot Toot Brooks       12.6505%  Box 4 Austin                 10.5450%
+73    DARWIN           R7     2.0852%  Box 2 Northern Lioness       18.9674%  Box 6 Mister Easy            16.8822%
+74    Cannington       R3     2.0294%  Box 4 Global Chat            14.2297%  Box 2 Knot On Show           12.2003%
+75    Cannington       R11    1.8541%  Box 5 Shadow Mac             14.8237%  Box 8 Burning Kuna           12.9696%
+76    BENDIGO          R10    1.7943%  Box 4 Ultimo                 16.3705%  Box 5 Darra Topaz            14.5762%
+77    RICHMOND         R9     1.7774%  Box 5 Not By Chance          13.3690%  Box 8 Cash Worth             11.5916%
+78    BALLARAT         R10    1.7605%  Box 3 Gunai Rambo            16.4790%  Box 4 Paw Olena              14.7185%
+79    NOWRA            R5     1.7344%  Box 4 Unstoppable Mist       16.1429%  Box 5 Maneuver Express       14.4085%
+80    MURRAY BDGE STRAIGHT R7     1.6841%  Box 8 Miss Piper             15.3560%  Box 4 Lefevre Rico           13.6719%
+81    Capalaba         R5     1.6776%  Box 3 Aeration               16.9397%  Box 4 Lester Banner          15.2621%
+82    Capalaba         R7     1.6396%  Box 8 Lakoda Bonnie          20.2237%  Box 5 Crystal Days           18.5841%
+83    Q LAKESIDE       R10    1.6155%  Box 1 Boom Two Down          15.3047%  Box 4 Apricot Slice          13.6892%
+84    BALLARAT         R13    1.6040%  Box 7 Saint Raine            17.4543%  Box 4 Saint Mick             15.8503%
+85    BALLARAT         R6     1.5540%  Box 4 Ellis Unit One         13.5717%  Box 3 Ritza Old Mate         12.0177%
+86    BALLARAT         R4     1.5167%  Box 6 Street Legal           14.3250%  Box 4 Paw Waldorf            12.8083%
+87    DARWIN           R3     1.4844%  Box 4 Even Backwards         17.1095%  Box 1 Control Bubba          15.6251%
+88    MURRAY BDGE STRAIGHT R8     1.3402%  Box 1 Cheat Code             13.1203%  Box 4 Zipping Windsor        11.7801%
+89    Q LAKESIDE       R1     1.3336%  Box 8 Keperra Racer          15.5656%  Box 7 Xella's Cha Cha        14.2320%
+90    Capalaba         R1     1.3035%  Box 5 Cowboy Up              13.9864%  Box 6 Typhoon George         12.6829%
+91    BALLARAT         R7     1.2954%  Box 4 Midnight Rebel         11.4464%  Box 7 Paw Ortiz              10.1510%
+92    ROCKHAMPTON      R6     1.2036%  Box 3 Opal Onyx              12.5461%  Box 1 Rapid Spitfire         11.3425%
+93    MURRAY BDGE STRAIGHT R4     1.1747%  Box 5 Noisy Gem              12.9888%  Box 8 Zinfandel Zoom         11.8141%
+94    RICHMOND         R2     1.1641%  Box 6 Rare Earth             14.3996%  Box 3 Houdini Escape         13.2355%
+95    RICHMOND         R3     1.1344%  Box 4 Glamour                13.3541%  Box 8 Ultimate Sin           12.2197%
+96    BENDIGO          R3     1.1288%  Box 5 Rocky Cabang           12.4115%  Box 4 Paw Jamila             11.2827%
+97    RICHMOND         R8     1.1118%  Box 1 Bring On Bling         14.1319%  Box 5 Well Read              13.0201%
+98    ROCKHAMPTON      R2     1.0443%  Box 6 Velocity Moonlit       14.0792%  Box 8 Julian's Jungle        13.0349%
+99    Q LAKESIDE       R6     1.0403%  Box 5 Summer's Dunay         14.0423%  Box 2 Paw Lassie             13.0020%
+100   Capalaba         R11    1.0041%  Box 8 Tarcisia               11.9797%  Box 5 Outlaw Nancy           10.9756%
+101   Meadows          R8     0.9827%  Box 8 Canya Tornado          16.1086%  Box 6 Sparring               15.1259%
+102   ROCKHAMPTON      R1     0.8719%  Box 5 Farmor Freedom         21.1920%  Box 7 Farmor Surely          20.3201%
+103   BALLARAT         R5     0.7770%  Box 2 Aston Fixer            13.0031%  Box 4 Vicky's Fury           12.2261%
+104   Q LAKESIDE       R13    0.7587%  Box 7 Louca                  12.3845%  Box 6 Federal Harry          11.6258%
+105   RICHMOND         R4     0.7373%  Box 2 Cocoa Myrtle           12.9405%  Box 4 White Tie Casino       12.2032%
+106   DARWIN           R5     0.7019%  Box 1 Little Nifty           13.6396%  Box 6 Extra Pineapple        12.9377%
+107   BENDIGO          R9     0.6921%  Box 6 Lightheartedness       18.0604%  Box 1 Blackberry Juice       17.3683%
+108   Capalaba         R8     0.6434%  Box 7 Bogie Pride            12.2786%  Box 3 Solicit                11.6352%
+109   NOWRA            R1     0.6380%  Box 2 Cumbria Lisa           14.2436%  Box 7 Zeal Legacy            13.6056%
+110   BENDIGO          R6     0.5888%  Box 2 Paw Olive              11.9578%  Box 4 Unleashing             11.3690%
+111   BALLARAT         R3     0.4769%  Box 4 Crackerjack Ash        33.8729%  Box 1 Zipping Lumina         33.3960%
+112   Meadows          R10    0.4658%  Box 1 Windorah               14.8133%  Box 4 Speedy Jude            14.3475%
+113   Cannington       R2     0.4138%  Box 4 Tooth Keeping          15.1794%  Box 5 Tide Is High           14.7656%
+114   Cannington       R9     0.3809%  Box 1 Believe In Dream       15.1870%  Box 2 Pingelly Prince        14.8061%
+115   Q LAKESIDE       R8     0.3166%  Box 5 Flaming Sapphire       12.0646%  Box 4 She's No Lady          11.7480%
+116   NOWRA            R6     0.3103%  Box 5 Not Too Proud          10.1105%  Box 8 Opo Ninja               9.8002%
+117   Capalaba         R9     0.2867%  Box 6 Milchick               12.4780%  Box 1 Satoshi                12.1913%
+118   NOWRA            R9     0.1825%  Box 2 Kung Fu Bay            18.2844%  Box 8 Zipping Violet         18.1019%
+119   Meadows          R7     0.1765%  Box 7 Wet Blanket            15.3249%  Box 8 Pure Precision         15.1484%
+120   NOWRA            R10    0.1676%  Box 3 Zipping Anya           12.2913%  Box 6 Skedaddle Marley       12.1237%
+121   BENDIGO          R7     0.1096%  Box 4 Aston Neutron          14.3263%  Box 8 Red Card               14.2167%
+122   Q LAKESIDE       R5     0.0424%  Box 8 New York Liberty       13.2487%  Box 1 Magic Mystery          13.2063%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 122
+
+🏆 BEST BET: Capalaba Race 2 - Box 2 Cool Kobe (gap: 29.2105%)
