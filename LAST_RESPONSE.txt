@@ -1,15 +1,1 @@
-Yes — you can still improve, and no, it’s not “all chance.”
-But there is always an irreducible randomness layer in greyhound racing (start/bump/trouble).
-
-Most likely missed upside now is in how you use the data, not just adding more rows.
-
-High-value patterns often overlooked:
-1. Track-condition regime shifts (same track behaves differently by period/weather/rail state).
-2. Pace-shape effects (who leads first split + nearby box speed interactions).
-3. Interference risk (dogs with crossing/bumping profiles in crowded lanes).
-4. Recency weighting (last 3–5 runs at similar distance/grade matter more than old form).
-5. Price-vs-model gap (biggest edge is often when model confidence disagrees with market).
-6. Per-track/per-race calibration (which you’ve started) to avoid overconfidence on weak tracks.
-
-So: you are doing a lot right, but there is still room.
-Realistically, improvements are usually incremental (small % gains), not massive jumps, and consistency is the main win.
+In the latest system update, we strengthened model accuracy and consistency by adding automatic pre-train calibration from historical prediction files, introducing recency/context weighting (including track-regime influence), and enhancing race-shape logic with pace/interference risk signals, while also adding stricter confidence guardrails to filter low-edge selections. We also added a stable winner-indicator discovery step with walk-forward checks and promotion gates, so only improvements are kept. Importantly, your existing workflow remains seamless (`retrain_all_tracks_sigmoid.py`), and the core output formats (`track_ensemble_predictions.xlsx` and `best_bets_report.txt`) are preserved.
