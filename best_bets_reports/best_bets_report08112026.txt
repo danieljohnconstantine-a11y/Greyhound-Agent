@@ -1,0 +1,56 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-08 09:57:15 (Sunday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 7.66%  |  ≥20%: 1 race(s)  |  ≥10%: 15 race(s)  |  Total: 39 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 56 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     HEALESVILLE      R2    25.9360%  Box 1 Wandana Lad            39.3264%  Box 4 Got Flair              13.3904%
+2     SALE             R5    19.9874%  Box 2 Paw Treacle            35.5050%  Box 1 Dr. Xanthic            15.5176%
+3     Q STRAIGHT       R11   19.1624%  Box 4 Crimson Warrior        29.9258%  Box 2 She's A Kiwi           10.7634%
+4     ROCKHAMPTON      R7    19.0959%  Box 1 Crawford Dreamer       40.9516%  Box 8 Cowboy's Rodeo         21.8557%
+5     SALE             R9    18.9860%  Box 3 Bernardo Blue          46.4675%  Box 5 Kopacki Rit            27.4815%
+6     HEALESVILLE      R7    16.7551%  Box 1 Happy And Numb         29.1478%  Box 5 Glamour Zone           12.3927%
+7     HEALESVILLE      R8    16.0635%  Box 6 Flaming Fox            34.8960%  Box 1 Mumma Easy             18.8325%
+8     Temora           R6    15.9121%  Box 4 Blue Love              37.0752%  Box 8 Her Indulgence         21.1631%
+9     Capalaba         R3    15.2047%  Box 2 Cool Kobe              26.7523%  Box 8 Pure Venom             11.5476%
+10    SALE             R1    15.1414%  Box 2 Dirty Nala             29.9290%  Box 4 Jolanna                14.7876%
+11    Capalaba         R8    14.4421%  Box 2 Barefoot Zeus          31.2529%  Box 1 Luna Art               16.8108%
+12    GAWLER           R1    14.4197%  Box 8 Binnaway Queen         34.0411%  Box 6 Popularize             19.6214%
+13    Temora           R5    13.5847%  Box 8 Prancing Pat           40.4570%  Box 5 Son Of Bianca          26.8723%
+14    HEALESVILLE      R11   12.9607%  Box 3 Occulent               34.2690%  Box 7 My Names Rocky         21.3083%
+15    GAWLER           R8    11.5295%  Box 3 Unworldly              30.9043%  Box 7 Cousin Sal             19.3748%
+16    Temora           R9     9.8851%  Box 1 Effervescence          37.6146%  Box 7 Iandra Grace           27.7295%
+17    GAWLER           R7     9.5679%  Box 4 Culburra               25.4995%  Box 2 Budgeree               15.9316%
+18    NOWRA            R5     8.9959%  Box 7 Achromatic             21.2401%  Box 8 Golfer Girl            12.2442%
+19    Q STRAIGHT       R5     7.8503%  Box 3 Atomic Beau            17.2504%  Box 4 Paw Kenneth             9.4001%
+20    Temora           R4     7.6556%  Box 2 Winlock Bobby          25.0080%  Box 1 Get On Black           17.3524%
+21    MT GAMBIER       R10    6.4112%  Box 3 Lil Rex                20.8584%  Box 1 Kia Keeping            14.4472%
+22    NOWRA            R2     6.2930%  Box 2 Fire Island            15.9589%  Box 7 Air Split               9.6659%
+23    Capalaba         R5     5.4488%  Box 4 Mayhem Gunn            16.0587%  Box 6 Rom Baro               10.6099%
+24    MT GAMBIER       R2     5.4485%  Box 1 Flying Hugo            29.8031%  Box 8 Gus Limes              24.3546%
+25    SALE             R8     5.0992%  Box 2 Drax Bale              28.0337%  Box 6 Once More              22.9345%
+26    Q STRAIGHT       R7     5.0260%  Box 1 Trustful               15.6705%  Box 5 Aston Catch            10.6445%
+27    HEALESVILLE      R5     4.5609%  Box 6 Fernley Girl           17.6415%  Box 8 Mr. Chives             13.0806%
+28    Capalaba         R7     4.5101%  Box 1 Satoshi                22.0668%  Box 5 Milchick               17.5567%
+29    GAWLER           R2     3.8403%  Box 1 Impress Bugsy          19.7114%  Box 5 Crystal Crown          15.8711%
+30    ROCKHAMPTON      R4     3.6768%  Box 1 Go Go Cambla           15.1544%  Box 6 Out The Bottle         11.4776%
+31    HEALESVILLE      R1     3.6417%  Box 2 Dimple Brandy          17.2055%  Box 6 Lander Promise         13.5638%
+32    MT GAMBIER       R5     3.3633%  Box 7 Smiley Mia             16.7499%  Box 6 Zipping Keys           13.3866%
+33    NOWRA            R4     3.2475%  Box 1 Cumbria Kai            23.4154%  Box 7 Natural Spark          20.1679%
+34    Capalaba         R2     2.7311%  Box 6 Jungle Girl            11.2098%  Box 3 Julie's Ruby            8.4787%
+35    Capalaba         R6     2.3762%  Box 3 Expelled               12.7876%  Box 6 Crisis Averted         10.4114%
+36    ROCKHAMPTON      R5     2.1637%  Box 6 Aston Hayes            15.4037%  Box 2 Waka Waka              13.2400%
+37    GAWLER           R5     2.1572%  Box 1 Dolan                  24.2740%  Box 6 Stunner                22.1168%
+38    Q STRAIGHT       R1     1.5150%  Box 1 Luna Jane              16.8674%  Box 2 Dominic                15.3524%
+39    Temora           R2     1.4072%  Box 1 Quick Quincy           12.0906%  Box 2 Count Joker            10.6834%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 39
+
+🏆 BEST BET: HEALESVILLE Race 2 - Box 1 Wandana Lad (gap: 25.9360%)
