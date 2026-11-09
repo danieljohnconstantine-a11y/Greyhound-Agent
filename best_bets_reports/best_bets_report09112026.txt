@@ -1,0 +1,61 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-09 15:56:19 (Monday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 6.86%  |  ≥20%: 0 race(s)  |  ≥10%: 15 race(s)  |  Total: 44 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 70 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     SHEPPARTON       R9    19.6562%  Box 1 Moraine Leah           29.9726%  Box 2 Kraken Reg             10.3164%
+2     HORSHAM          R11   18.0107%  Box 7 Saint Tay              29.0906%  Box 2 Paw Ortiz              11.0799%
+3     SHEPPARTON       R6    17.5501%  Box 1 Power Squeeze          42.2485%  Box 2 Moraine Bluey          24.6984%
+4     Maitland         R8    16.7588%  Box 2 Typhoon Lad            31.0578%  Box 1 Perfect Mix            14.2990%
+5     Q STRAIGHT       R10   15.6317%  Box 3 Super League           37.7127%  Box 1 Name Of Love           22.0810%
+6     Maitland         R5    15.3998%  Box 4 Zipper Bank            25.0513%  Box 3 Bring On Bling          9.6515%
+7     Angle Park       R7    14.7632%  Box 5 Echoes Of Dad          30.5671%  Box 4 Zipping Maudie         15.8039%
+8     SHEPPARTON       R3    13.6207%  Box 6 At Ease                22.0808%  Box 3 Dawn Raid               8.4601%
+9     SANDOWN          R6    12.4272%  Box 1 Compton Gypsy          52.0589%  Box 2 Paw Qwerty             39.6317%
+10    Q STRAIGHT       R4    12.2088%  Box 1 In The Jungle          24.0526%  Box 4 Hold And Spin          11.8438%
+11    SHEPPARTON       R4    12.0679%  Box 1 Fluent Action          29.2959%  Box 2 Got A Stage            17.2280%
+12    Q STRAIGHT       R5    12.0670%  Box 8 Spring Nick            31.7027%  Box 1 Sunset Dreaming        19.6357%
+13    SHEPPARTON       R12   11.6910%  Box 7 Paw Kramer             25.1935%  Box 8 Indy Grant             13.5025%
+14    HORSHAM          R5    11.5610%  Box 6 Is He Lucky            21.7153%  Box 8 Saint Raine            10.1543%
+15    CASINO           R11   10.1763%  Box 5 Kingsbrae Ebanee       22.6374%  Box 2 Annoying Aces          12.4611%
+16    Mandurah         R9     8.9335%  Box 8 Zatara Mac             23.9855%  Box 7 Junk Yard Jeff         15.0520%
+17    HORSHAM          R6     8.7755%  Box 1 Mischief Mate          21.4168%  Box 3 Eat Your Spinach       12.6413%
+18    Angle Park       R9     8.0647%  Box 2 Akela Martial          32.0340%  Box 4 Weblec Polly           23.9693%
+19    SANDOWN          R2     8.0455%  Box 5 Excited Twitch         34.6695%  Box 2 Troublesome            26.6240%
+20    HORSHAM          R8     7.7324%  Box 6 Harrow Time            20.7902%  Box 8 Luminaire              13.0578%
+21    CASINO           R7     7.6788%  Box 1 Make A Mile            19.7312%  Box 4 Hope I Can             12.0524%
+22    SHEPPARTON       R8     7.0825%  Box 1 Awesome Bandit         22.5899%  Box 3 Soft Beauty            15.5074%
+23    CASINO           R9     6.6346%  Box 1 Risky Special          22.4230%  Box 5 Line And Sinker        15.7884%
+24    CASINO           R8     6.2775%  Box 4 Lady Blazington        20.0209%  Box 6 Wilgunya Prince        13.7434%
+25    SANDOWN          R9     6.0458%  Box 2 Darnum Rain            19.7130%  Box 6 Tracking Me            13.6672%
+26    BALLARAT         R1     5.8437%  Box 6 Black Reign            22.4291%  Box 2 Pocket Evidence        16.5854%
+27    CASINO           R10    5.7609%  Box 8 Phoenix Crossing       23.7591%  Box 5 Talk Too Much          17.9982%
+28    Mandurah         R5     5.4930%  Box 2 Lil Miss Sophie        20.1651%  Box 3 Katitjin               14.6721%
+29    Angle Park       R3     4.6413%  Box 2 Terrific Shazar        21.3265%  Box 1 Kookaburra Grace       16.6852%
+30    BALLARAT         R3     4.6190%  Box 4 Crackerjack Ash        15.7970%  Box 6 Scroll Up              11.1780%
+31    SHEPPARTON       R13    4.0385%  Box 8 Lakeview Mitch         17.0600%  Box 7 Deb Cabang             13.0215%
+32    CASINO           R1     3.3662%  Box 2 Stoke And Smoke        12.1760%  Box 4 Ake's Journey           8.8098%
+33    CASINO           R3     3.2026%  Box 2 Hot Betty              18.6404%  Box 4 Emma's Eclipse         15.4378%
+34    Q STRAIGHT       R2     3.1394%  Box 3 Goldstar Leroy         11.7954%  Box 8 Goldstar Colbie         8.6560%
+35    Q STRAIGHT       R12    2.9189%  Box 8 All On Black           16.1781%  Box 7 Goldstar Foster        13.2592%
+36    SHEPPARTON       R11    2.8717%  Box 2 Ivory Mihara           15.7882%  Box 1 Got A Message          12.9165%
+37    Angle Park       R10    2.2594%  Box 4 Aurora Borealis        16.9722%  Box 2 Regal Reba             14.7128%
+38    BALLARAT         R2     2.1735%  Box 4 Paw Nina               16.6623%  Box 2 Maciek                 14.4888%
+39    SANDOWN          R8     2.0624%  Box 6 Espoir                 17.4274%  Box 4 Regal Jyle             15.3650%
+40    Mandurah         R7     2.0222%  Box 4 Win's For Fun          13.4800%  Box 6 Junk Yard Jiggle       11.4578%
+41    BALLARAT         R5     2.0009%  Box 4 Claretown Hanna        12.7472%  Box 7 Red Tears              10.7463%
+42    Angle Park       R2     1.9761%  Box 1 Calypso's Girl         21.8268%  Box 4 Forgetting             19.8507%
+43    Q STRAIGHT       R9     1.9194%  Box 3 Last Love              16.3103%  Box 7 Altona Beach           14.3909%
+44    Q STRAIGHT       R3     1.8593%  Box 6 Ballistic Bonny        12.6597%  Box 2 Gasp Gorgeous          10.8004%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 44
+
+🏆 BEST BET: SHEPPARTON Race 9 - Box 1 Moraine Leah (gap: 19.6562%)
