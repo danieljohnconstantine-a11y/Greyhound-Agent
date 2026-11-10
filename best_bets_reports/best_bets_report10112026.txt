@@ -1,0 +1,61 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-10 08:15:52 (Tuesday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 6.26%  |  ≥20%: 4 race(s)  |  ≥10%: 15 race(s)  |  Total: 44 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 87 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     GEELONG          R9    28.9248%  Box 3 Paw Rex                45.1344%  Box 7 Kade's Thunder         16.2096%
+2     GEELONG          R11   22.5179%  Box 4 Paw Judd               34.4838%  Box 2 Paw Judas              11.9659%
+3     Warragul         R1    22.3266%  Box 8 Cheer Cheer            35.1593%  Box 2 Lautaro                12.8327%
+4     GEELONG          R7    21.8223%  Box 2 Angry Chief            39.4231%  Box 6 Brookers Road          17.6008%
+5     Q PARKLANDS      R6    19.3580%  Box 5 Bentley Kristoff       31.9011%  Box 7 Watch My Six           12.5431%
+6     GEELONG          R8    16.7580%  Box 4 Sketchy Demos          28.1639%  Box 8 Lektra Damian          11.4059%
+7     TOWNSVILLE       R4    15.9367%  Box 1 Radcliff               26.0077%  Box 3 Pizza Thief            10.0710%
+8     GOSFORD          R4    15.6728%  Box 3 Torqued                29.2516%  Box 2 Despicable Margo       13.5788%
+9     Bulli            R7    15.1534%  Box 8 Opo Ninja              27.2868%  Box 2 Downhill Flyer         12.1334%
+10    Angle Park       R9    13.2718%  Box 2 He's No Diva           30.5508%  Box 5 Integrator             17.2790%
+11    Angle Park       R10   13.1353%  Box 8 Brindle Benny          34.4593%  Box 2 Todd's Luka            21.3240%
+12    HEALESVILLE      R11   11.7062%  Box 2 Boys Night             25.1136%  Box 6 Legacy Man             13.4074%
+13    GOSFORD          R1    11.6312%  Box 3 Smart Direction        22.6608%  Box 2 Exon                   11.0296%
+14    TOWNSVILLE       R10   11.3739%  Box 8 Cocoa Express          24.6469%  Box 3 Pink Car               13.2730%
+15    DARWIN           R5    10.4366%  Box 2 Stan's Dream           38.0809%  Box 1 Estrada                27.6443%
+16    GEELONG          R1     9.7504%  Box 8 Paw Blastoise          22.6184%  Box 1 Blackpool Extra        12.8680%
+17    GOSFORD          R6     9.2384%  Box 8 Tarawi Rex             23.3491%  Box 3 Ibrox Reign            14.1107%
+18    Bulli            R4     7.9695%  Box 8 Near Miss              20.8959%  Box 1 Ripper Joe             12.9264%
+19    GOSFORD          R5     7.4572%  Box 4 Reborn Dilemma         21.1117%  Box 6 Pouring Rain           13.6545%
+20    HEALESVILLE      R5     7.3361%  Box 4 Cheeky Promise         16.3095%  Box 1 Wave In Sea             8.9734%
+21    GEELONG          R3     7.2019%  Box 7 Maximum Silver         20.2434%  Box 2 Zipping Katella        13.0415%
+22    Angle Park       R1     6.3652%  Box 1 Sebon Star             21.6514%  Box 8 Cool It Miss           15.2862%
+23    Warragul         R6     6.1522%  Box 2 Elijah Rose            20.8904%  Box 1 Strasburg              14.7382%
+24    Q PARKLANDS      R11    6.0569%  Box 6 Red Rapidity           28.8154%  Box 3 Bionic Bill            22.7585%
+25    Angle Park       R5     5.5458%  Box 8 Mystic River           17.6246%  Box 9 Easy Aces              12.0788%
+26    GOSFORD          R10    5.4866%  Box 1 Bigbad Esme            17.6069%  Box 7 Reborn Spark           12.1203%
+27    Angle Park       R12    5.3387%  Box 5 Lost At Sea            36.4320%  Box 2 Sailaway Buddy         31.0933%
+28    WAGGA            R10    5.2556%  Box 7 Edge Of Faith          15.0041%  Box 5 Sycamore Cookie         9.7485%
+29    GOSFORD          R2     5.0933%  Box 4 Sapphire Lexi          23.4123%  Box 3 Ibrox Shine            18.3190%
+30    GEELONG          R5     4.7362%  Box 2 James's Entity         23.4920%  Box 1 Mini Milky             18.7558%
+31    Mandurah         R1     4.3949%  Box 2 Capstone               25.2041%  Box 1 Rippin' Paddy          20.8092%
+32    HOBART           R3     4.2382%  Box 1 Choose You             18.5653%  Box 8 Greg's Boy             14.3271%
+33    Angle Park       R8     4.1547%  Box 1 Jungle Cobra           16.7752%  Box 4 Harris Road            12.6205%
+34    HEALESVILLE      R9     3.4278%  Box 4 Hailey's Jet           19.1261%  Box 8 Fancy Faye             15.6983%
+35    WAGGA            R5     3.3757%  Box 3 Paw Yarra              13.4908%  Box 6 Grapefruit Yaeko       10.1151%
+36    HOBART           R10    3.3548%  Box 1 Buckle Up Yollie       17.4705%  Box 2 Buckle Up Arlo         14.1157%
+37    Mandurah         R6     3.3435%  Box 1 Aston Kennedy          18.3546%  Box 6 Luxio Wave             15.0111%
+38    Mandurah         R2     3.2428%  Box 7 Confrontation          15.8482%  Box 5 Zafiro                 12.6054%
+39    Mandurah         R9     2.4720%  Box 4 Just A Foreman         22.0520%  Box 5 Thumani                19.5800%
+40    GOSFORD          R9     2.0568%  Box 8 President Rolex        12.9054%  Box 1 Wildfire Panda         10.8486%
+41    HOBART           R1     1.7139%  Box 1 Atlas Danger           10.6649%  Box 7 Use Somebody            8.9510%
+42    DARWIN           R1     1.5984%  Box 8 Zero Point             20.7055%  Box 2 Tornado Ty             19.1071%
+43    Q PARKLANDS      R1     1.4284%  Box 2 Mango Beach            11.5498%  Box 1 Send It Son            10.1214%
+44    Q PARKLANDS      R8     1.2734%  Box 1 Bionic Bella           16.4790%  Box 3 Top The Lot            15.2056%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 44
+
+🏆 BEST BET: GEELONG Race 9 - Box 3 Paw Rex (gap: 28.9248%)
