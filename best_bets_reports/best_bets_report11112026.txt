@@ -1,0 +1,62 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-11 08:11:02 (Wednesday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+⚠️  DAY CONTEXT (Wednesday): 2 major metro meeting(s) in card (Meadows/Cannington/WP). Metro Saturday fields are highly competitive — smaller gaps than provincial days are normal and expected.
+📊 GAP SUMMARY: median 6.17%  |  ≥20%: 1 race(s)  |  ≥10%: 11 race(s)  |  Total: 44 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 69 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     BENDIGO          R1    21.7653%  Box 2 Thermal Sapphire       35.6459%  Box 7 Berry Hills            13.8806%
+2     Capalaba         R10   19.8130%  Box 7 Nangar Wally           32.2816%  Box 1 He's Regal             12.4686%
+3     NOWRA            R6    19.1403%  Box 3 Delusional Bev         35.1738%  Box 6 Tumby Bay              16.0335%
+4     Cannington       R6    18.0623%  Box 2 Night Lighter          29.7675%  Box 1 Deadly Power           11.7052%
+5     MURRAY BDGE STRAIGHT R6    15.9494%  Box 4 Ellsworth              33.0020%  Box 8 Red Said So            17.0526%
+6     Q STRAIGHT       R11   14.1936%  Box 4 Rusty Roy              26.9476%  Box 3 Nando Whirlwind        12.7540%
+7     ROCKHAMPTON      R8    12.5487%  Box 3 Jester Beach           23.5799%  Box 2 Best Edition           11.0312%
+8     Capalaba         R3    12.2831%  Box 3 Aim High               24.9021%  Box 7 Outlaw Nancy           12.6190%
+9     Capalaba         R4    12.0652%  Box 4 Lil Miss Ripley        23.5841%  Box 8 Lauren's Baby          11.5189%
+10    NOWRA            R1    11.1796%  Box 4 Sutton Jazz            21.9960%  Box 6 Lamar                  10.8164%
+11    Meadows          R8    10.9879%  Box 3 Repeat The Same        28.2368%  Box 1 Smelly Halle           17.2489%
+12    Q STRAIGHT       R4     9.0635%  Box 6 Slater's Gator         23.1862%  Box 2 On A Roll              14.1227%
+13    BENDIGO          R12    8.5367%  Box 7 Mcivor Jewels          17.4966%  Box 8 Eleventh Scotch         8.9599%
+14    ROCKHAMPTON      R6     7.8149%  Box 2 Out The Bottle         16.9634%  Box 8 Roy Intention           9.1485%
+15    BALLARAT         R13    7.4166%  Box 2 July She Lied          19.2453%  Box 3 Paw Wonder             11.8287%
+16    Cannington       R9     7.2396%  Box 2 Deadly Street          16.9439%  Box 6 Charos Finale           9.7043%
+17    NOWRA            R4     7.0437%  Box 4 Zipping Violet         18.3334%  Box 8 Zipping Mirabel        11.2897%
+18    MURRAY BDGE STRAIGHT R9     6.9532%  Box 3 Beast Cut Loose        21.9381%  Box 5 Freya Legend           14.9849%
+19    BALLARAT         R12    6.8609%  Box 4 Oddly Cool             19.8774%  Box 3 Solid Groove           13.0165%
+20    BENDIGO          R8     6.7690%  Box 1 Salt Speckle           17.8111%  Box 8 Scott Aliferous        11.0421%
+21    ROCKHAMPTON      R1     6.6996%  Box 5 Lemnos Lass            18.7380%  Box 7 Golden Ace             12.0384%
+22    Q STRAIGHT       R7     6.2809%  Box 6 Bossy Witch            18.5512%  Box 4 Swift Lady Luna        12.2703%
+23    BENDIGO          R3     6.0535%  Box 2 Taltarni Bodine        17.9111%  Box 1 Ripper Rufus           11.8576%
+24    Q STRAIGHT       R12    5.7551%  Box 1 Tibetan Belle          17.6913%  Box 8 Donnie Thornbury       11.9362%
+25    BENDIGO          R9     5.4599%  Box 6 Taltarni Blue          17.1287%  Box 4 Mystic Contessa        11.6688%
+26    Meadows          R4     4.6912%  Box 2 Naringal Lad           22.3861%  Box 4 Xara's Jai             17.6949%
+27    RICHMOND         R9     4.3223%  Box 4 True Believers         20.5815%  Box 3 Parisian Jet           16.2592%
+28    Meadows          R9     4.2069%  Box 4 Mighty Miss            17.5969%  Box 2 Koda                   13.3900%
+29    Meadows          R1     3.9545%  Box 1 Cairo Keeping          16.2177%  Box 8 Bernardo King          12.2632%
+30    RICHMOND         R4     3.9535%  Box 5 Exemplary              12.9832%  Box 8 True Request            9.0297%
+31    Cannington       R12    3.2660%  Box 4 Mr. Barval             13.2805%  Box 7 Graceful Dash          10.0145%
+32    RICHMOND         R12    3.2616%  Box 7 Houdini Escape         16.8122%  Box 4 Glow Stick             13.5506%
+33    RICHMOND         R7     3.1470%  Box 1 Maximus Meridius       16.9449%  Box 2 Domineering            13.7979%
+34    BALLARAT         R8     3.0851%  Box 2 Gorringe               13.3987%  Box 6 Lektra Isa             10.3136%
+35    Capalaba         R7     2.7262%  Box 2 Fragile Frankie        16.9046%  Box 8 Run Burgundy           14.1784%
+36    BALLARAT         R9     2.4914%  Box 2 Mandolin Storm         13.1288%  Box 7 Honey Stirrer          10.6374%
+37    Meadows          R2     2.4659%  Box 1 Toot Toot Brooks       17.3438%  Box 8 What Class             14.8779%
+38    Q STRAIGHT       R8     2.1212%  Box 5 Simultaneously         11.9770%  Box 4 Hard Style Miss         9.8558%
+39    BENDIGO          R10    2.1020%  Box 4 Power Edition          13.3828%  Box 8 Morning Daisy          11.2808%
+40    ROCKHAMPTON      R5     2.0329%  Box 6 Black Sequence         18.6245%  Box 1 Stand Near             16.5916%
+41    Meadows          R7     1.9326%  Box 1 Scott Vicious          14.5728%  Box 3 Berserker Viking       12.6402%
+42    Q STRAIGHT       R5     1.7159%  Box 2 Steel Caress           12.1157%  Box 6 Atomic Beau            10.3998%
+43    Q STRAIGHT       R3     1.6822%  Box 1 Dodgem Nitro           17.6312%  Box 2 Pretty Miss            15.9490%
+44    Cannington       R10    1.3043%  Box 1 Penny Pincher          10.7929%  Box 2 Intensified             9.4886%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 44
+
+🏆 BEST BET: BENDIGO Race 1 - Box 2 Thermal Sapphire (gap: 21.7653%)
