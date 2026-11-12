@@ -1,1 +1,14 @@
-In the latest system update, we strengthened model accuracy and consistency by adding automatic pre-train calibration from historical prediction files, introducing recency/context weighting (including track-regime influence), and enhancing race-shape logic with pace/interference risk signals, while also adding stricter confidence guardrails to filter low-edge selections. We also added a stable winner-indicator discovery step with walk-forward checks and promotion gates, so only improvements are kept. Importantly, your existing workflow remains seamless (`retrain_all_tracks_sigmoid.py`), and the core output formats (`track_ensemble_predictions.xlsx` and `best_bets_report.txt`) are preserved.
+Excellent set of suggestions — this is exactly the right direction.
+
+Quick reality check:
+- ✅ Can implement now: age-months peak curve, age×distance, starts-per-month, recency-vs-career deltas, box×early-speed interactions, within-race ranking/z-scores, stricter time-based CV, log-loss-first optimization.
+- ⚠️ Needs extra reliable data: true track-variant adjustment and class-drop/rise if grade/meeting variant fields aren’t consistently available in source form data.
+
+Best rollout order (highest gain, lowest risk):
+1. Within-race normalization + strict date-split CV/log-loss tuning
+2. Early-speed/box-neighbor interaction features
+3. Age/wear/decay + trajectory deltas
+4. Distance suitability ratio
+5. Track-variant and class-context once data quality is confirmed
+
+This will likely improve consistency and edge detection without breaking your current workflow/output format.
