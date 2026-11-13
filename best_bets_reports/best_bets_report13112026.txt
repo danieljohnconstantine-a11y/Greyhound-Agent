@@ -1,0 +1,65 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-13 09:25:46 (Friday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.31%  |  ≥20%: 2 race(s)  |  ≥10%: 12 race(s)  |  Total: 48 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 67 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     SANDOWN          R9    23.2122%  Box 1 Wrongly Accused        36.0065%  Box 3 Like A Rock            12.7943%
+2     Q STRAIGHT       R7    21.9008%  Box 4 No Source Found        37.9204%  Box 7 Ringbark Gus           16.0196%
+3     SANDOWN          R1    17.3043%  Box 1 Indy Melmen            31.1247%  Box 2 Weblec Joel            13.8204%
+4     Mandurah         R2    15.8274%  Box 1 Ruxley                 30.6103%  Box 7 Just A Joker           14.7829%
+5     Q STRAIGHT       R5    15.7786%  Box 8 Flights Booked         27.5263%  Box 6 She's No Lady          11.7477%
+6     SANDOWN          R5    14.4173%  Box 6 Paw Oswald             26.7626%  Box 2 Repellent              12.3453%
+7     RICHMOND         R9    14.2655%  Box 1 Freddy Wick            26.1605%  Box 3 Glamour                11.8950%
+8     Mandurah         R3    13.5233%  Box 8 Touriga                34.5120%  Box 2 Ferndale Flyer         20.9887%
+9     Q STRAIGHT       R9    12.7168%  Box 4 Bay Flyer              30.4340%  Box 1 Shimmering Light       17.7172%
+10    TOWNSVILLE       R8    11.7560%  Box 3 Ashy Bear              22.0269%  Box 4 Verruckt               10.2709%
+11    The Gardens      R7    10.8552%  Box 1 George Judy            27.9405%  Box 2 Reborn Destiny         17.0853%
+12    SANDOWN          R8    10.6020%  Box 2 Gamora Bale            22.8824%  Box 8 Promote Tilly          12.2804%
+13    The Gardens      R2     9.1738%  Box 7 Little Snitch          20.7707%  Box 5 Angel Joe              11.5969%
+14    The Gardens      R11    8.3267%  Box 4 Bring On Bling         28.2869%  Box 7 Tiger Tails            19.9602%
+15    The Gardens      R8     8.2492%  Box 1 High Degrees           23.7024%  Box 4 Huxley's Rocket        15.4532%
+16    HEALESVILLE      R11    7.7272%  Box 7 Aussie Savannah        22.2360%  Box 2 Black Tycoon           14.5088%
+17    TOWNSVILLE       R2     7.6302%  Box 6 Jakari Vera            18.8911%  Box 7 Farmor Tickin'         11.2609%
+18    CASINO           R6     7.3515%  Box 6 Sweetest Of All        28.5630%  Box 5 Integrity Lari         21.2115%
+19    Mandurah         R8     7.2186%  Box 8 Bing Bing Rocket       19.1468%  Box 1 Dixie Lad              11.9282%
+20    The Gardens      R9     6.2368%  Box 4 Barramundi Lou         15.7551%  Box 2 Minter Mulwee           9.5183%
+21    HEALESVILLE      R12    6.2151%  Box 8 Leap Of Faith          18.1813%  Box 2 Herd 'Em Up            11.9662%
+22    GEELONG          R7     5.9701%  Box 4 Fendi Express          20.3236%  Box 1 Daintree Gav           14.3535%
+23    The Gardens      R5     5.8034%  Box 3 My Monroe              15.7572%  Box 1 Zipping Viper           9.9538%
+24    The Gardens      R10    5.6579%  Box 7 Like A Porsha          17.2588%  Box 1 Imperator              11.6009%
+25    CASINO           R10    4.9541%  Box 1 Impressive Gem         22.9174%  Box 5 Talk Too Much          17.9633%
+26    HEALESVILLE      R1     4.8570%  Box 6 Having A Look          15.9503%  Box 5 Holder Promise         11.0933%
+27    HEALESVILLE      R9     4.4652%  Box 4 Boys Night             16.8057%  Box 1 Raven Force            12.3405%
+28    RICHMOND         R12    4.4470%  Box 1 Mark To Market         16.1686%  Box 5 Almost                 11.7216%
+29    TOWNSVILLE       R1     4.3470%  Box 1 Hara's Delta           24.0045%  Box 7 Velocity Finito        19.6575%
+30    CASINO           R12    4.0985%  Box 4 Polar Magic            14.5066%  Box 2 Barefoot Creeper       10.4081%
+31    Mandurah         R10    4.0740%  Box 1 Sweet Michelle         17.0990%  Box 2 Wave Of Fun            13.0250%
+32    Mandurah         R5     3.8200%  Box 1 Just A Piastri         17.2865%  Box 3 Cypher Monelli         13.4665%
+33    The Gardens      R12    3.7681%  Box 4 Tommy Tsunami          16.1930%  Box 1 Gretzky                12.4249%
+34    RICHMOND         R5     3.5755%  Box 8 Miss Down Under        15.1241%  Box 2 Corless The King       11.5486%
+35    Q STRAIGHT       R6     3.5172%  Box 6 Bailey Dutton          19.9468%  Box 8 Eternal Wish           16.4296%
+36    HEALESVILLE      R6     3.4255%  Box 6 Whatever Thrill        19.5442%  Box 2 Mystery Nell           16.1187%
+37    CASINO           R1     3.4190%  Box 4 Rage To End            31.9582%  Box 2 Princess Pudding       28.5392%
+38    GEELONG          R8     3.0998%  Box 1 Aston Guitar           14.2416%  Box 7 Bernardo Blue          11.1418%
+39    TOWNSVILLE       R10    2.8713%  Box 2 Blendon                15.0126%  Box 7 Sister Holly           12.1413%
+40    SANDOWN          R6     2.6882%  Box 4 Intimidation           20.2108%  Box 2 Mepunga Gypsy          17.5226%
+41    The Gardens      R1     2.5998%  Box 3 Clifton                15.4823%  Box 6 Fascinate Vicki        12.8825%
+42    TOWNSVILLE       R5     2.4912%  Box 4 Farmor Mystery         12.0059%  Box 8 Zipping Bubbles         9.5147%
+43    RICHMOND         R7     2.4674%  Box 5 Silent Minute          12.3296%  Box 2 Rogue Agent             9.8622%
+44    The Gardens      R6     2.2391%  Box 3 Wentworth Flyer        15.7867%  Box 6 Aunt Brandy            13.5476%
+45    HEALESVILLE      R2     1.7947%  Box 2 White Line             13.3843%  Box 5 Mirror Jams            11.5896%
+46    HEALESVILLE      R5     1.5738%  Box 1 Ghost Walker           19.8095%  Box 3 Karen's Witch          18.2357%
+47    SANDOWN          R4     1.4952%  Box 2 Mepunga Donna          12.7161%  Box 5 Without A Trace        11.2209%
+48    TOWNSVILLE       R11    1.4743%  Box 1 Canya Goose            11.3083%  Box 4 Untamed Envy            9.8340%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 48
+
+🏆 BEST BET: SANDOWN Race 9 - Box 1 Wrongly Accused (gap: 23.2122%)
