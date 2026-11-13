@@ -1,14 +1,41 @@
-Excellent set of suggestions — this is exactly the right direction.
+Great question — short answer: we cover a lot of this now, but not 100% yet.
 
-Quick reality check:
-- ✅ Can implement now: age-months peak curve, age×distance, starts-per-month, recency-vs-career deltas, box×early-speed interactions, within-race ranking/z-scores, stricter time-based CV, log-loss-first optimization.
-- ⚠️ Needs extra reliable data: true track-variant adjustment and class-drop/rise if grade/meeting variant fields aren’t consistently available in source form data.
+Current status by item:
 
-Best rollout order (highest gain, lowest risk):
-1. Within-race normalization + strict date-split CV/log-loss tuning
-2. Early-speed/box-neighbor interaction features
-3. Age/wear/decay + trajectory deltas
-4. Distance suitability ratio
-5. Track-variant and class-context once data quality is confirmed
+1) Split Times & Early Sectional vs Overall Time
+✅ YES (mostly)
+- We use SectionalSec, EarlySpeedIndex, EarlySpeedPercentile, TimeVsField, SpeedVsField, PaceBoxFactor, and InterferenceRisk.
+- This already gives strong early-speed and race-shape signal beyond final time.
 
-This will likely improve consistency and edge detection without breaking your current workflow/output format.
+2) Track Bias & Surface Condition Changes (moisture/weather/maintenance)
+⚠️ PARTIAL
+- Track box-bias and upset factors are included.
+- SurfacePreferenceFactor exists (sand/grass heuristic).
+- But live weather/track-condition variant is NOT fully integrated in main training flow (TrackConditionAdj remains neutral in core path).
+
+3) Box Draw Map Interferences / Run-Style Clashes
+✅ YES (mostly)
+- Implemented via pace map + neighbor pressure + contested lead logic + InterferenceRisk + CompetitorDensity/Adjustment.
+
+4) Trainer/Kennel Form Cycles + Short Rest
+✅ YES (good coverage)
+- TrainerStrikeRate + TrainerMomentum + DLR/FreshnessFactor + DLW/WinStreak factors are in model features.
+
+5) Grade Transitions & Class Drops
+⚠️ PARTIAL
+- GradeFactor, RTCFactor, ClassRating are included.
+- But explicit class drop/rise delta (current grade vs avg last 3 grades) is not fully built as a dedicated transition feature yet.
+
+6) Straight-to-Circle Transitions (RICS vs RICH etc.)
+⚠️ PARTIAL
+- Track-specific modeling and separate straight/circle track handling exist (e.g., Richmond vs Richmond Straight, Murray Bridge vs Murray Bridge Straight).
+- But explicit dog-level transition feature (recent straight -> now bend, and vice versa) is not yet a dedicated engineered feature.
+
+Bottom line:
+- Strongly covered: 1, 3, 4
+- Partially covered / next upgrades: 2, 5, 6
+
+If you want, next step I can implement these missing pieces directly:
+(1) true weather/track-variant adjustment in training,
+(2) explicit class rise/drop delta feature,
+(3) explicit straight↔circular transition feature per dog.
