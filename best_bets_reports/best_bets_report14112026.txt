@@ -1,0 +1,51 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-14 06:52:48 (Saturday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+⚠️  DAY CONTEXT (Saturday): 2 major metro meeting(s) in card (Meadows/Cannington/WP). Metro Saturday fields are highly competitive — smaller gaps than provincial days are normal and expected.
+📊 GAP SUMMARY: median 7.30%  |  ≥20%: 1 race(s)  |  ≥10%: 11 race(s)  |  Total: 33 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 47 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     Cannington       R4    30.2743%  Box 1 Strip Weathers         44.7713%  Box 6 Frogs Monelli          14.4970%
+2     Q PARKLANDS      R6    18.2896%  Box 1 Dalgety                29.3758%  Box 4 Zipping Desire         11.0862%
+3     GOSFORD          R7    16.6237%  Box 1 Shirley's Ethics       30.9529%  Box 2 Hera Rolex             14.3292%
+4     Cannington       R10   15.4430%  Box 1 Incredible Rogue       28.3653%  Box 6 Ramirez Monelli        12.9223%
+5     Cannington       R11   14.0412%  Box 1 Did It Happen          26.4883%  Box 2 Sassy Scarlett         12.4471%
+6     The Gardens      R4    13.3769%  Box 1 Sudden Surprise        26.0357%  Box 3 Fascinate George       12.6588%
+7     DUBBO            R10   13.2731%  Box 5 Karinya Shall Be       26.1105%  Box 3 Rick's Rosie           12.8374%
+8     Q PARKLANDS      R5    13.1876%  Box 8 Nangar Polly           30.2509%  Box 7 Blue Art               17.0633%
+9     GOSFORD          R8    13.1803%  Box 8 Not Our Fault          25.5987%  Box 1 Fascinate Suzie        12.4184%
+10    Q PARKLANDS      R11   11.6754%  Box 7 Cash Riot              22.5632%  Box 3 Row Beau               10.8878%
+11    BENDIGO          R4    10.8076%  Box 4 Chain Drive            20.0838%  Box 6 So Glamorous            9.2762%
+12    DUBBO            R8     9.7912%  Box 4 Zipping Ruger          24.3120%  Box 3 Back Tomorrow          14.5208%
+13    DUBBO            R6     9.4366%  Box 1 Peanut Keeping         27.1750%  Box 4 Zipping Jamal          17.7384%
+14    DUBBO            R9     9.1033%  Box 1 Ada Taro               25.0862%  Box 7 Zoe's Secret           15.9829%
+15    The Gardens      R12    8.2517%  Box 1 Motorhead              17.1087%  Box 8 Run Rolex               8.8570%
+16    BENDIGO          R2     8.1965%  Box 8 Geronimo Dash          23.6214%  Box 4 Justify This           15.4249%
+17    Q PARKLANDS      R9     7.2981%  Box 7 Roman Rocks            19.4860%  Box 1 Bexley                 12.1879%
+18    Meadows          R4     6.7156%  Box 1 Milly Lily             22.3630%  Box 2 Mepunga Zircon         15.6474%
+19    DUBBO            R11    6.2727%  Box 1 Orana Joel             24.8012%  Box 5 Red Rock Bloom         18.5285%
+20    The Gardens      R5     5.7737%  Box 6 Rio Stella             15.1250%  Box 3 Imogene Pass            9.3513%
+21    Meadows          R2     5.4563%  Box 8 Godzilla               16.3153%  Box 2 Zipping Lleyton        10.8590%
+22    The Gardens      R9     5.1766%  Box 4 Zipping Finnegan       18.3156%  Box 3 Sunburnt Keeper        13.1390%
+23    The Gardens      R6     4.1573%  Box 6 Jackpot Chevy          16.7681%  Box 5 Black Dazzler          12.6108%
+24    BENDIGO          R9     4.1120%  Box 4 Kopacki Rit            31.0637%  Box 3 Tick Returns           26.9517%
+25    Meadows          R9     3.8525%  Box 1 Stomper Romper         20.8299%  Box 2 Starlet Bale           16.9774%
+26    The Gardens      R8     3.6043%  Box 6 Jaw Dropper            14.0116%  Box 4 Lagrange               10.4073%
+27    GOSFORD          R3     2.8860%  Box 6 Under Anesthetic       12.1680%  Box 2 Morning Daylight        9.2820%
+28    GOSFORD          R2     2.8121%  Box 7 Princess Ada           12.0809%  Box 6 Done Dealing            9.2688%
+29    BENDIGO          R3     2.5620%  Box 4 Ripper Rufus           12.8167%  Box 6 Twice The Impact       10.2547%
+30    DUBBO            R12    2.3498%  Box 3 Southbrook Lady        14.9522%  Box 4 Go Forward Tiger       12.6024%
+31    GOSFORD          R5     2.0934%  Box 4 Exorbitant             15.7747%  Box 1 Zipping Aladdin        13.6813%
+32    Cannington       R6     1.8059%  Box 3 Gravity Monelli        25.6757%  Box 2 Silent Assassin        23.8698%
+33    BENDIGO          R11    1.5584%  Box 2 Rupee Action           13.7492%  Box 1 Paw Maud               12.1908%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 33
+
+🏆 BEST BET: Cannington Race 4 - Box 1 Strip Weathers (gap: 30.2743%)
