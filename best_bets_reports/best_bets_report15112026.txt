@@ -1,0 +1,48 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-15 08:05:45 (Sunday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.92%  |  ≥20%: 0 race(s)  |  ≥10%: 2 race(s)  |  Total: 31 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 53 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     SALE             R5    16.7506%  Box 7 Elijah Rose            30.0903%  Box 8 Dr. Hopper             13.3397%
+2     ROCKHAMPTON      R7    13.8410%  Box 1 Jester Beach           30.7475%  Box 2 Dixie Dean             16.9065%
+3     HEALESVILLE      R1     9.6264%  Box 2 Demon Days             22.3392%  Box 5 Drink Water            12.7128%
+4     Capalaba         R12    8.9579%  Box 8 Frog's Rock            22.2426%  Box 4 Banana Leclerc         13.2847%
+5     HEALESVILLE      R7     8.8512%  Box 8 Mystic Rupee           26.8175%  Box 2 I'm Maverick           17.9663%
+6     Capalaba         R9     8.8492%  Box 8 Canya Launch           22.7004%  Box 2 Flyaway Jack           13.8512%
+7     GAWLER           R8     8.0717%  Box 5 Bing Bing Slayer       20.9317%  Box 3 Sokai                  12.8600%
+8     MT GAMBIER       R1     7.6002%  Box 1 Aston Cosmic           24.9481%  Box 3 Legacy To Burn         17.3479%
+9     Capalaba         R11    7.5281%  Box 2 Hara's Mosaic          24.0251%  Box 4 Mick's Belle           16.4970%
+10    Capalaba         R8     7.4385%  Box 6 Surrealist             31.3979%  Box 1 Nangar Wally           23.9594%
+11    SALE             R2     7.3028%  Box 7 Paw Quade              20.4380%  Box 1 Secret Bliss           13.1352%
+12    GAWLER           R4     6.9700%  Box 4 Dakota Ava             26.5923%  Box 6 Binnaway Pearl         19.6223%
+13    Temora           R10    6.3039%  Box 1 Kostecki               19.1760%  Box 7 Alphonse               12.8721%
+14    Q STRAIGHT       R7     6.2537%  Box 1 Grandiose Girl         18.7336%  Box 2 Amazing Miley          12.4799%
+15    GAWLER           R7     6.0574%  Box 4 Chicken Knight         25.0597%  Box 8 Sky Keeping            19.0023%
+16    HEALESVILLE      R6     5.9154%  Box 7 Full Noise             22.7013%  Box 2 Irinka Brett           16.7859%
+17    MT GAMBIER       R6     5.4689%  Box 5 Rev Ken                20.7802%  Box 4 Compton Stella         15.3113%
+18    SALE             R10    5.1828%  Box 6 Dr.Darling             18.9443%  Box 7 Dr. Stefan             13.7615%
+19    Temora           R5     4.8601%  Box 3 Another Russian        14.2626%  Box 8 Urban Outlaw            9.4025%
+20    MT GAMBIER       R2     4.7155%  Box 1 Harry Chana            26.3863%  Box 4 Compton Lizzie         21.6708%
+21    ROCKHAMPTON      R2     4.6552%  Box 5 Velocity Miranda       23.1214%  Box 2 Galaxy Ghost           18.4662%
+22    Capalaba         R5     4.6164%  Box 8 Aim High               14.1551%  Box 2 Expelled                9.5387%
+23    Q STRAIGHT       R12    4.5280%  Box 3 Critical Moment        17.0807%  Box 1 Exhibit                12.5527%
+24    GAWLER           R6     3.5243%  Box 1 Paw Mantra             19.9410%  Box 5 Carry On Maci          16.4167%
+25    Capalaba         R4     3.4924%  Box 3 Jungle Girl            12.8414%  Box 1 Monaro Muscle           9.3490%
+26    Q STRAIGHT       R9     3.4112%  Box 4 Sand Land              14.5855%  Box 6 Nando Whirlwind        11.1743%
+27    Q STRAIGHT       R2     2.4470%  Box 2 Bernie Lou             13.0611%  Box 1 Atomic Beau            10.6141%
+28    ROCKHAMPTON      R1     2.3661%  Box 4 Milton Street          10.8810%  Box 7 Vociferous              8.5149%
+29    Capalaba         R7     2.0468%  Box 4 Milchick               14.5852%  Box 2 Lochinvar Nugget       12.5384%
+30    GAWLER           R9     1.4466%  Box 5 Terrific Lucy          17.0874%  Box 2 Brindle Warrior        15.6408%
+31    SALE             R4     1.2883%  Box 7 Loud Mouth Louie       16.8431%  Box 1 Miss My Brother        15.5548%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 31
+
+🏆 BEST BET: SALE Race 5 - Box 7 Elijah Rose (gap: 16.7506%)
