@@ -1,0 +1,53 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-16 16:17:59 (Monday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.79%  |  ≥20%: 1 race(s)  |  ≥10%: 9 race(s)  |  Total: 36 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 69 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     SANDOWN          R12   28.3238%  Box 5 Bounding Chief         43.9372%  Box 1 Mr. Teddy Bear         15.6134%
+2     DUBBO            R12   16.5823%  Box 5 Hello Hilda            28.5990%  Box 3 Swift Hank             12.0167%
+3     WARRNAMBOOL      R13   16.1578%  Box 1 Ollie Deeds            26.8737%  Box 2 Paw Olyslagers         10.7159%
+4     DUBBO            R7    14.7147%  Box 7 Faith Keeping          36.1104%  Box 8 Let's Go Jude          21.3957%
+5     Q STRAIGHT       R4    14.6866%  Box 3 Spring Nick            24.2478%  Box 7 Jet Springer            9.5612%
+6     SHEPPARTON       R2    13.1944%  Box 1 Smart Bomb             26.4437%  Box 4 Pesty                  13.2493%
+7     SANDOWN          R4    11.8818%  Box 1 Lies You Sold          27.6496%  Box 2 First Instance         15.7678%
+8     Angle Park       R9    10.5378%  Box 1 Minh Jack              28.8808%  Box 4 Rev Leon               18.3430%
+9     SHEPPARTON       R8    10.3174%  Box 8 Kiwi George            21.1789%  Box 5 Unique Star            10.8615%
+10    SANDOWN          R5     8.9771%  Box 1 Kenzie Kid             26.9417%  Box 6 Paw Kattia             17.9646%
+11    GRAFTON          R7     8.2188%  Box 4 Rigby Reign            16.6204%  Box 1 Party Anytime           8.4016%
+12    WARRNAMBOOL      R11    7.4035%  Box 7 Inga Amy               27.5459%  Box 2 Seats Two              20.1424%
+13    Angle Park       R4     7.3791%  Box 1 Toora Terry            31.3827%  Box 3 Starlight Riot         24.0036%
+14    Mandurah         R4     7.3648%  Box 1 Wild Milly             24.0384%  Box 7 Binnaway Charm         16.6736%
+15    Angle Park       R1     7.1170%  Box 1 Forgetting             23.7827%  Box 2 Pamela June            16.6657%
+16    Q STRAIGHT       R6     6.5049%  Box 1 Max's Wish             24.7849%  Box 3 Crack A Beer           18.2800%
+17    WARRNAMBOOL      R10    6.1208%  Box 3 Paw Ensley             19.9434%  Box 8 Hope Giblet            13.8226%
+18    GEELONG          R8     5.8527%  Box 4 Indy Grant             19.0627%  Box 2 Kade's Thunder         13.2100%
+19    Angle Park       R2     5.7194%  Box 3 Lady Latte             27.6425%  Box 5 Big Boots Charli       21.9231%
+20    Q STRAIGHT       R14    5.4845%  Box 3 Reiko Inferno          21.6595%  Box 7 Transcript             16.1750%
+21    GEELONG          R11    5.3060%  Box 7 Paw Judas              14.3436%  Box 8 Ruth's Commander        9.0376%
+22    Angle Park       R5     4.7111%  Box 3 Diogo Keeping          23.7856%  Box 2 Canya Guru             19.0745%
+23    Angle Park       R10    4.5478%  Box 1 Russo                  23.5311%  Box 8 Deep Purple            18.9833%
+24    Q STRAIGHT       R1     4.3300%  Box 1 Goldstar Serena        20.4155%  Box 8 Peaky Bing             16.0855%
+25    Q STRAIGHT       R12    3.9113%  Box 6 Last Love              18.8078%  Box 4 Velocity Smolder       14.8965%
+26    SHEPPARTON       R11    3.8639%  Box 6 Silent Bandit          17.3294%  Box 3 Wangaroa Wally         13.4655%
+27    SHEPPARTON       R7     3.8460%  Box 2 Word Gets Around       16.3226%  Box 8 Scott Sigma            12.4766%
+28    Q STRAIGHT       R10    3.7313%  Box 2 Professor Starr        16.0899%  Box 7 Sapphire King          12.3586%
+29    GEELONG          R1     2.7943%  Box 7 Exclamation            15.6223%  Box 1 Exquisite Lass         12.8280%
+30    WARRNAMBOOL      R4     2.7599%  Box 2 Paw Chikorita          13.7111%  Box 1 Go Harry Go            10.9512%
+31    SHEPPARTON       R5     2.6459%  Box 3 Hard Launch            17.4454%  Box 6 Jaimandy Charlie       14.7995%
+32    Angle Park       R3     2.2933%  Box 2 Josie's Lane           18.4235%  Box 7 Posh Wheels            16.1302%
+33    GRAFTON          R8     2.0933%  Box 8 Log On                 11.4256%  Box 2 Long Bay Blue           9.3323%
+34    WARRNAMBOOL      R8     2.0671%  Box 8 Out The Window         14.8783%  Box 1 Fire Tears             12.8112%
+35    GRAFTON          R10    1.9408%  Box 2 Strike A Picture       11.2710%  Box 6 Brooklyn                9.3302%
+36    Q STRAIGHT       R13    1.6938%  Box 1 Grapefruit Silly       12.1778%  Box 4 Tiggy Boodie           10.4840%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 36
+
+🏆 BEST BET: SANDOWN Race 12 - Box 5 Bounding Chief (gap: 28.3238%)
