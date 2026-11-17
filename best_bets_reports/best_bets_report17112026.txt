@@ -1,0 +1,71 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-17 08:02:42 (Tuesday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 6.27%  |  ≥20%: 2 race(s)  |  ≥10%: 13 race(s)  |  Total: 54 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 71 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     GOSFORD          R9    28.4364%  Box 2 Borrowed Times         40.0947%  Box 4 Despicable Margo       11.6583%
+2     Angle Park       R5    22.8957%  Box 2 Call For Coin          49.2177%  Box 1 Simba Rose             26.3220%
+3     WAGGA            R5    18.5821%  Box 3 Pitstone Nicky         31.0459%  Box 7 Don't Declare          12.4638%
+4     Mandurah         R6    18.1691%  Box 8 Positano               39.6145%  Box 1 Mach Speed             21.4454%
+5     DARWIN           R1    17.7827%  Box 2 Rooster Jazz           42.6458%  Box 7 Bingo Girl             24.8631%
+6     WAGGA            R2    17.5798%  Box 1 Wreny Rocket           34.8446%  Box 7 Tullamore Tom          17.2648%
+7     Q PARKLANDS      R7    16.7305%  Box 4 Got A Tiger            31.8368%  Box 1 Unique Reward          15.1063%
+8     TOWNSVILLE       R6    15.7007%  Box 6 Cocoa Express          36.9006%  Box 8 Hopefully Fast         21.1999%
+9     HOBART           R2    14.5275%  Box 1 Timmy Latimore         25.5607%  Box 8 Wah Poppit             11.0332%
+10    BALLARAT         R6    13.3102%  Box 8 Kensington Flyer       24.4630%  Box 6 Hooked And Happy       11.1528%
+11    Bulli            R6    12.2109%  Box 8 Hello Ashby            24.0356%  Box 3 Major Ted              11.8247%
+12    GOSFORD          R7    10.4937%  Box 1 Gypsy Ibrox            21.3231%  Box 8 Despicable Leo         10.8294%
+13    HORSHAM          R6    10.4726%  Box 1 Exactly Like Dad       26.7960%  Box 5 Oh Biscuit             16.3234%
+14    Q PARKLANDS      R6     9.5105%  Box 7 Blazing Early          23.4906%  Box 1 Roma Keeping           13.9801%
+15    BALLARAT         R3     9.4475%  Box 4 Bone Shaker            21.8393%  Box 7 Abracadabra            12.3918%
+16    Angle Park       R9     9.3824%  Box 4 Springvale Margi       21.2466%  Box 2 Random Sass            11.8642%
+17    HORSHAM          R11    9.0287%  Box 4 Is He Lucky            21.2586%  Box 6 Mr. Jones              12.2299%
+18    DARWIN           R7     8.8204%  Box 6 Mermaid Shimmer        24.7908%  Box 8 Burnside Hunter        15.9704%
+19    Bulli            R2     8.7383%  Box 2 Angelic Angel          17.1547%  Box 1 Fear To Excel           8.4164%
+20    GOSFORD          R10    8.2733%  Box 7 Ibrox Reign            20.7146%  Box 3 Kunda                  12.4413%
+21    BALLARAT         R7     7.0805%  Box 8 Tricky Disco           17.4282%  Box 3 Lightheartedness       10.3477%
+22    WAGGA            R8     7.0440%  Box 7 Paw Lilibet            17.4272%  Box 2 Paw Xeros              10.3832%
+23    Angle Park       R8     7.0130%  Box 1 Mafia Mistress         20.5689%  Box 4 Waikarie Koby          13.5559%
+24    TOWNSVILLE       R12    6.7566%  Box 8 Iceberg Ahead          19.9208%  Box 2 Karen Stratus          13.1642%
+25    HOBART           R6     6.3747%  Box 1 Opinions Matter        21.3245%  Box 5 Purple Sector          14.9498%
+26    HORSHAM          R3     6.3497%  Box 1 Ruxton Girl            25.8843%  Box 3 Oklahoma Bale          19.5346%
+27    WAGGA            R4     6.3316%  Box 1 Got A Setting          16.1995%  Box 6 Got A Formula           9.8679%
+28    GOSFORD          R2     6.2132%  Box 8 Caspian                17.1988%  Box 6 Reborn Rooster         10.9856%
+29    Mandurah         R3     5.9383%  Box 2 West On Brodie         28.1870%  Box 1 Confrontation          22.2487%
+30    HORSHAM          R12    5.5972%  Box 1 Mac And Cheese         20.2523%  Box 3 Rhythmic Energy        14.6551%
+31    Angle Park       R2     5.5360%  Box 1 Master Kilcoy          21.8832%  Box 4 I'm My Design          16.3472%
+32    BALLARAT         R10    5.4787%  Box 3 Scroll Up              16.9590%  Box 1 Punitive               11.4803%
+33    Warragul         R11    5.3453%  Box 3 Mr. Kia Ora            23.3925%  Box 8 Ruthless Secret        18.0472%
+34    Warragul         R7     4.9253%  Box 2 Amron Sammy            20.7036%  Box 6 Lovely Lainey          15.7783%
+35    WAGGA            R3     4.9182%  Box 3 Dynamic Jenalli        17.6920%  Box 6 Miss Dorrie            12.7738%
+36    HORSHAM          R2     4.7800%  Box 2 Aussie Baron           18.8080%  Box 5 Let's Go Thomas        14.0280%
+37    HOBART           R1     4.7061%  Box 8 Atlas Danger           13.7199%  Box 1 Luke Ross               9.0138%
+38    TOWNSVILLE       R4     4.3159%  Box 1 Lord Eddie             14.2317%  Box 7 Colonel's Ranger        9.9158%
+39    GOSFORD          R3     3.8512%  Box 2 Precious Wonder        18.1156%  Box 5 Despicable Eddy        14.2644%
+40    BALLARAT         R1     3.4206%  Box 1 Fabulous Jones         15.0655%  Box 6 Mr. Marshall           11.6449%
+41    Bulli            R4     3.4002%  Box 3 Sunny Sue              15.6899%  Box 2 Pocket Talk            12.2897%
+42    TOWNSVILLE       R13    3.1593%  Box 2 Mizuki Starline        14.9235%  Box 8 Infrasonic             11.7642%
+43    TOWNSVILLE       R1     3.1216%  Box 6 Tommy Knuckles         16.2235%  Box 1 Murcia                 13.1019%
+44    Bulli            R3     2.8424%  Box 2 Hey Bubba Louie        20.1640%  Box 8 Late In Winter         17.3216%
+45    GOSFORD          R5     2.8149%  Box 1 Zipping Yolanda        13.9733%  Box 2 Zipping Swoopes        11.1584%
+46    Angle Park       R12    2.5465%  Box 2 Mabel's Magic          24.2205%  Box 4 Let's Enjoy This       21.6740%
+47    GOSFORD          R8     2.4145%  Box 6 Bigbad Esme            19.5084%  Box 7 Pitman Go Well         17.0939%
+48    Q PARKLANDS      R8     2.2047%  Box 3 Sheriff                20.6382%  Box 1 Misty Rico             18.4335%
+49    HOBART           R4     2.1149%  Box 4 Greg's Boy             16.6157%  Box 1 Kiwi Hank              14.5008%
+50    TOWNSVILLE       R11    1.8856%  Box 1 Binnaway Mirage        13.9465%  Box 8 Sydneysider            12.0609%
+51    Q PARKLANDS      R10    1.7436%  Box 7 Imperial Audrey        19.1041%  Box 8 Tote Deor              17.3605%
+52    DARWIN           R4     1.5978%  Box 8 Stan's Dream           27.4818%  Box 2 Ghost Of Waddell       25.8840%
+53    TOWNSVILLE       R3     1.4967%  Box 8 He's Peeking           19.2053%  Box 1 Ascend Kalmia          17.7086%
+54    BALLARAT         R5     1.4077%  Box 4 Karen's Witch          12.4232%  Box 8 Marble Sunset          11.0155%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 54
+
+🏆 BEST BET: GOSFORD Race 9 - Box 2 Borrowed Times (gap: 28.4364%)
