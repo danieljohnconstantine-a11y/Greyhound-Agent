@@ -1,0 +1,57 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-18 10:39:35 (Wednesday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.32%  |  ≥20%: 1 race(s)  |  ≥10%: 11 race(s)  |  Total: 40 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 69 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     HEALESVILLE      R3    26.5113%  Box 2 Where's Logan          43.5461%  Box 8 He Looks Nice          17.0348%
+2     HEALESVILLE      R5    18.2966%  Box 1 Holder Promise         28.3892%  Box 8 Billy's View           10.0926%
+3     Cannington       R2    16.4542%  Box 1 Disarmed               28.7772%  Box 7 Consolidation          12.3230%
+4     BALLARAT         R3    15.2529%  Box 4 Man Of Courage         28.7938%  Box 3 Lakeview Mitch         13.5409%
+5     ROCKHAMPTON      R4    14.2845%  Box 1 Boulder Beach          26.8613%  Box 7 Maverick               12.5768%
+6     Cannington       R5    13.5132%  Box 1 Penny Pincher          27.1749%  Box 2 Cootamundra Lad        13.6617%
+7     HEALESVILLE      R8    12.6002%  Box 8 Impetuously            32.1552%  Box 4 Flaming Fox            19.5550%
+8     Q STRAIGHT       R6    12.4179%  Box 4 Three Mates            23.5426%  Box 6 Hold And Spin          11.1247%
+9     BALLARAT         R1    11.7926%  Box 1 Capone                 30.8854%  Box 5 Kiwi Hepburn           19.0928%
+10    HEALESVILLE      R9    11.2146%  Box 7 Dirty Lulu             28.0022%  Box 4 Lacrimal               16.7876%
+11    BENDIGO          R10   10.7409%  Box 7 Paw Manny              20.6706%  Box 4 Ethanol Vision          9.9297%
+12    ROCKHAMPTON      R5     9.9152%  Box 6 Farmor Freedom         23.1918%  Box 8 Love Note              13.2766%
+13    Capalaba         R9     8.9018%  Box 6 Big Easy Al            26.5654%  Box 2 Cashed Up Beth         17.6636%
+14    BENDIGO          R6     8.1815%  Box 2 Hard Style Robbo       21.8675%  Box 4 Collinda Ramsay        13.6860%
+15    Q STRAIGHT       R12    7.9616%  Box 2 From Now On            18.9840%  Box 4 Supreme Comander       11.0224%
+16    ROCKHAMPTON      R2     7.3959%  Box 2 Super Seaplane         19.2518%  Box 6 Tijuana Twinkle        11.8559%
+17    BENDIGO          R11    6.7605%  Box 7 Chain Drive            28.0010%  Box 4 Mcivor Jewels          21.2405%
+18    RICHMOND         R5     6.3380%  Box 2 Houdini Escape         22.5632%  Box 8 Blitz                  16.2252%
+19    RICHMOND         R7     6.2892%  Box 2 Gift Of Silence        16.2375%  Box 4 Georgina Rose           9.9483%
+20    BENDIGO          R1     5.6880%  Box 5 Tsukuyomi              15.4147%  Box 4 Scott Redacted          9.7267%
+21    BALLARAT         R4     4.9594%  Box 7 Midnight Jed           20.0363%  Box 1 Nolita                 15.0769%
+22    Q STRAIGHT       R7     4.5778%  Box 7 Madrid                 15.9072%  Box 2 Marina Bay             11.3294%
+23    Cannington       R10    4.3910%  Box 2 Crocodile Crawl        15.6703%  Box 5 Doreen Keeping         11.2793%
+24    RICHMOND         R4     3.5076%  Box 8 Sweet City Halo        19.7294%  Box 7 Anjo Princess          16.2218%
+25    NOWRA            R10    3.1419%  Box 2 Majestic Pearl         15.5052%  Box 5 Zipping Mirabel        12.3633%
+26    RICHMOND         R11    3.0843%  Box 1 Fire Hawk              14.7735%  Box 2 Side Show Bob          11.6892%
+27    Q STRAIGHT       R10    3.0439%  Box 5 Nando Whirlwind        13.7864%  Box 6 Dodgem Jet             10.7425%
+28    NOWRA            R9     2.8496%  Box 1 Natural Spark          14.9902%  Box 8 Holiday Fund           12.1406%
+29    BENDIGO          R9     2.6601%  Box 4 Morning Daisy          14.4643%  Box 1 Everglow               11.8042%
+30    NOWRA            R4     2.5762%  Box 1 Ashby Mocha            19.6989%  Box 2 After Sun              17.1227%
+31    Capalaba         R2     2.3353%  Box 6 Trooper Sure Can       12.4308%  Box 8 Download Me            10.0955%
+32    BENDIGO          R5     2.0836%  Box 7 Kraken Zack            13.9966%  Box 2 Alligator Rock         11.9130%
+33    Capalaba         R6     2.0159%  Box 8 In Her Wake            11.6577%  Box 7 Federal Blue Boy        9.6418%
+34    Capalaba         R7     1.9502%  Box 3 Zipping Alcaraz        14.7825%  Box 7 Frog's Rock            12.8323%
+35    RICHMOND         R9     1.8793%  Box 8 Mister Anatoly         15.0770%  Box 1 Domineering            13.1977%
+36    HEALESVILLE      R4     1.8150%  Box 8 Cheeky Promise         13.7559%  Box 5 White Line             11.9409%
+37    Q STRAIGHT       R14    1.8007%  Box 4 Federal Ace            13.7078%  Box 7 Paw Lassie             11.9071%
+38    Capalaba         R5     1.7867%  Box 7 Solo Rupee             10.4815%  Box 4 Risk It                 8.6948%
+39    Q STRAIGHT       R3     1.5966%  Box 5 It's Yama Time         11.3003%  Box 8 Dodgem Nitro            9.7037%
+40    MURRAY BDGE STRAIGHT R6     1.3408%  Box 2 Lefevre Rico           15.9339%  Box 8 Zipping Norris         14.5931%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 40
+
+🏆 BEST BET: HEALESVILLE Race 3 - Box 2 Where's Logan (gap: 26.5113%)
