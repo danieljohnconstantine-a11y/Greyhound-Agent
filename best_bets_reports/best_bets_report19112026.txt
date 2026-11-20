@@ -1,0 +1,67 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-19 12:07:34 (Thursday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 6.37%  |  ≥20%: 2 race(s)  |  ≥10%: 11 race(s)  |  Total: 50 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 100 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     SHEPPARTON       R9    26.1479%  Box 1 Dawn Raid              41.8397%  Box 5 Scott Matrix           15.6918%
+2     WARRNAMBOOL      R2    20.6365%  Box 2 Mischief Mate          38.7501%  Box 6 Barooga King           18.1136%
+3     HOBART           R4    19.0260%  Box 1 Whisky Barrel          33.3052%  Box 8 Worpel                 14.2792%
+4     GUNNEDAH         R2    17.2596%  Box 1 Trust A Process        38.1247%  Box 8 Urban Boy              20.8651%
+5     SHEPPARTON       R13   16.7331%  Box 2 Mosi                   30.5208%  Box 8 Bear It Is             13.7877%
+6     WARRNAMBOOL      R5    14.2359%  Box 2 Capital Currency       27.8706%  Box 8 Starship               13.6347%
+7     Angle Park       R6    12.7159%  Box 5 Fear The Dragon        26.7794%  Box 4 Woodside Johnny        14.0635%
+8     Q LAKESIDE       R8    12.3455%  Box 3 Mr. Lasso              33.5471%  Box 7 Regal Wolf             21.2016%
+9     Q PARKLANDS      R5    11.1708%  Box 1 Brownlow               27.3116%  Box 3 Lucora                 16.1408%
+10    MT GAMBIER       R4    10.7635%  Box 1 Cantara Gypsy          25.7486%  Box 8 Little Button          14.9851%
+11    MT GAMBIER       R11   10.2478%  Box 1 Miss Chapo             25.4200%  Box 2 Come On Luba           15.1722%
+12    Q PARKLANDS      R6     9.9726%  Box 5 Bartlett               25.7620%  Box 2 Classy Hunter          15.7894%
+13    GUNNEDAH         R8     9.6676%  Box 8 Hurricane Ethics       22.2402%  Box 7 Vinnie Zacapa          12.5726%
+14    GUNNEDAH         R5     9.5546%  Box 8 Maybe Yes              21.2842%  Box 2 Armatree Violet        11.7296%
+15    CASINO           R12    9.2374%  Box 4 Bandit Chloe           24.6794%  Box 1 Make And Break         15.4420%
+16    Q PARKLANDS      R3     8.9368%  Box 1 Koby Keeping           27.0758%  Box 3 Living Legend          18.1390%
+17    HOBART           R3     8.4223%  Box 2 Vista True Blue        21.9484%  Box 1 Where's Aunty          13.5261%
+18    HOBART           R10    8.3475%  Box 1 Blackpool Trip         36.1867%  Box 4 Sammy Ross             27.8392%
+19    Warragul         R4     7.7138%  Box 1 Select Ronan           19.5472%  Box 2 Paw Jerry              11.8334%
+20    GOSFORD          R11    7.4421%  Box 4 Trunkey Mick           21.0954%  Box 2 Ritzy Ethics           13.6533%
+21    CASINO           R1     7.3910%  Box 4 Princess Pudding       20.0274%  Box 5 Lottie's Dancer        12.6364%
+22    MT GAMBIER       R10    6.9184%  Box 8 Black Sabotage         26.1005%  Box 1 Compton Express        19.1821%
+23    SHEPPARTON       R11    6.8636%  Box 3 Ivory Hamada           19.2653%  Box 7 Hartland Bonnie        12.4017%
+24    SHEPPARTON       R10    6.8027%  Box 1 Sekiro                 16.9439%  Box 8 Go My Swifty           10.1412%
+25    GOSFORD          R4     6.5055%  Box 5 Hard Right             16.4276%  Box 2 Lakota Courtney         9.9221%
+26    Q LAKESIDE       R10    6.2429%  Box 8 Tusken Warrior         23.3410%  Box 7 Maddie's Lakoda        17.0981%
+27    CASINO           R2     6.1636%  Box 2 Joey The Mock          19.2850%  Box 4 Cool Mist              13.1214%
+28    HOBART           R7     5.8724%  Box 3 Red Day                24.9079%  Box 8 Lochinvar Angel        19.0355%
+29    Warragul         R11    5.3642%  Box 1 Never Surrender        14.9905%  Box 6 Paw Xela                9.6263%
+30    MT GAMBIER       R9     5.3450%  Box 8 Flash Marshall         22.6146%  Box 2 Evelyn Annie           17.2696%
+31    Angle Park       R12    5.2738%  Box 8 Dashing Steve          20.6088%  Box 1 Nod Feeny              15.3350%
+32    WARRNAMBOOL      R4     5.1725%  Box 4 Canya Blitz            18.0484%  Box 6 Aptitude               12.8759%
+33    Angle Park       R11    5.1044%  Box 1 Allinga Mercury        18.6396%  Box 5 Mini Mara              13.5352%
+34    Meadows          R3     4.8944%  Box 5 Zipping Meares         19.2785%  Box 3 Gamora Bale            14.3841%
+35    Q LAKESIDE       R9     4.8577%  Box 1 All Stripe             19.1575%  Box 2 Kairanga               14.2998%
+36    HOBART           R1     4.4830%  Box 4 Adhana Jack Jack       30.3757%  Box 1 Union                  25.8927%
+37    WARRNAMBOOL      R9     4.4256%  Box 3 Canya Kick It          20.9000%  Box 1 Kaelix Jewel           16.4744%
+38    Meadows          R6     4.0220%  Box 5 Stop And Stare         15.7729%  Box 2 Xara Navy              11.7509%
+39    WARRNAMBOOL      R12    3.9499%  Box 4 Rovaniemi              14.7252%  Box 2 Aston Newson           10.7753%
+40    CASINO           R9     3.8804%  Box 2 Ming Merciless         13.6275%  Box 6 Aces Rose               9.7471%
+41    Mandurah         R3     3.8495%  Box 5 Orana Willow           15.1194%  Box 3 Dodgy Blue             11.2699%
+42    MT GAMBIER       R5     3.8253%  Box 7 Saint Franklin         22.9875%  Box 8 Mashed Potato          19.1622%
+43    Q LAKESIDE       R2     3.7780%  Box 3 Malachi Crunch         17.9157%  Box 7 Miller's Art           14.1377%
+44    Q PARKLANDS      R2     3.3691%  Box 2 Akela Judo             15.9707%  Box 8 Gordon Keeping         12.6016%
+45    Angle Park       R7     3.2981%  Box 2 Double Helix           16.9245%  Box 4 Proclivity             13.6264%
+46    Warragul         R7     3.2631%  Box 8 Dream On Allan         20.9395%  Box 2 Urban Bites            17.6764%
+47    WARRNAMBOOL      R13    2.3303%  Box 1 Mepunga Brockie        17.8865%  Box 7 Paw Yaz                15.5562%
+48    Angle Park       R2     2.3215%  Box 2 Little Bit Chic        20.5760%  Box 1 Our Secretary          18.2545%
+49    MT GAMBIER       R3     1.7611%  Box 7 Noble Rascal           14.2524%  Box 4 French Blonde          12.4913%
+50    CASINO           R6     1.5896%  Box 2 Kooringa Ellsie        18.7511%  Box 8 Talk Too Much          17.1615%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 50
+
+🏆 BEST BET: SHEPPARTON Race 9 - Box 1 Dawn Raid (gap: 26.1479%)
