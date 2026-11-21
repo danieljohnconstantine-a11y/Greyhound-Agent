@@ -1,0 +1,45 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-21 12:00:34 (Saturday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.43%  |  ≥20%: 1 race(s)  |  ≥10%: 4 race(s)  |  Total: 28 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 50 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     SANDOWN          R12   20.6017%  Box 1 Paw Oswald             36.1679%  Box 4 Mepunga Envy           15.5662%
+2     The Gardens      R6    15.7311%  Box 7 Extreme Blue           23.0356%  Box 2 Smooth White            7.3045%
+3     DUBBO            R11   13.8188%  Box 1 Karinya Shall Be       25.8803%  Box 4 Red Rock Bloom         12.0615%
+4     GOSFORD          R3    10.7705%  Box 1 Martini Nights         31.6568%  Box 7 West Rock Casey        20.8863%
+5     The Gardens      R11    9.7764%  Box 2 Princess Docker        25.2177%  Box 3 Rockin' Mia            15.4413%
+6     Cannington       R6     8.8154%  Box 3 Gravity Monelli        28.3426%  Box 1 Aston Louise           19.5272%
+7     DUBBO            R3     8.5411%  Box 5 Nangar Chick           20.7041%  Box 4 Bobbin' Bruno          12.1630%
+8     Cannington       R1     8.4644%  Box 1 Loretta Keeping        20.0641%  Box 4 Band For Band          11.5997%
+9     DUBBO            R1     8.3494%  Box 5 Orana Gabby            18.0830%  Box 4 Red Rock Ollie          9.7336%
+10    The Gardens      R8     7.5354%  Box 5 Zipping Finnegan       21.7419%  Box 2 Sparkling Wheels       14.2065%
+11    Q PARKLANDS      R8     7.5285%  Box 3 Cash Riot              20.0603%  Box 7 Bray's Ace             12.5318%
+12    BALLARAT         R11    7.0880%  Box 1 Pretty Panama          22.8918%  Box 4 Sumo Smash             15.8038%
+13    The Gardens      R3     5.7477%  Box 6 Chloe's Comet          18.4343%  Box 8 Curyo Dancer           12.6866%
+14    GOSFORD          R1     5.4602%  Box 1 Recommission           18.6534%  Box 5 Voila                  13.1932%
+15    Cannington       R8     5.3900%  Box 2 Max Capacity           25.4507%  Box 4 Just A Sapphire        20.0607%
+16    DUBBO            R10    4.2458%  Box 6 Orana Joel             18.1057%  Box 4 Gladstone Bag          13.8599%
+17    BALLARAT         R10    4.1622%  Box 3 Bambi's Pride          18.3533%  Box 8 West End Boy           14.1911%
+18    Cannington       R5     4.1038%  Box 6 Ramirez Monelli        17.2121%  Box 1 Queen Of Kuna          13.1083%
+19    BALLARAT         R6     3.5981%  Box 5 Tricky Disco           14.3772%  Box 1 Eye Of Storm           10.7791%
+20    DUBBO            R8     3.3853%  Box 1 Cawbourne Ozzy         23.8631%  Box 8 Galba Model            20.4778%
+21    GOSFORD          R5     2.8605%  Box 1 Sorokin                21.3261%  Box 3 My Little Shark        18.4656%
+22    The Gardens      R12    2.1739%  Box 3 She's Watching         13.7598%  Box 7 Exacerbate             11.5859%
+23    DUBBO            R6     2.1559%  Box 1 Tommy Taro             25.7898%  Box 5 Go Forward Tiger       23.6339%
+24    The Gardens      R10    2.1080%  Box 1 High Degrees           13.6687%  Box 2 Rhapsody Beast         11.5607%
+25    DUBBO            R9     1.9896%  Box 1 Royal Member           13.5953%  Box 4 Hand Me Down           11.6057%
+26    SANDOWN          R3     1.8379%  Box 3 Hurricane              13.6339%  Box 8 In Moderation          11.7960%
+27    Q PARKLANDS      R7     1.7286%  Box 3 Goldstar Sandler       23.9273%  Box 6 Another Idea           22.1987%
+28    SANDOWN          R9     1.5026%  Box 1 Canya Mayhem           14.5510%  Box 2 Cleo's Star            13.0484%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 28
+
+🏆 BEST BET: SANDOWN Race 12 - Box 1 Paw Oswald (gap: 20.6017%)
