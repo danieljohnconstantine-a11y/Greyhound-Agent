@@ -1,0 +1,62 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-20 11:37:12 (Friday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.34%  |  ≥20%: 0 race(s)  |  ≥10%: 10 race(s)  |  Total: 45 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 67 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     GRAFTON          R4    19.0577%  Box 3 Bull Mundy             35.6577%  Box 8 Come On Larry          16.6000%
+2     BENDIGO          R9    17.0890%  Box 4 Max Effort             29.5547%  Box 1 Paw Zohan              12.4657%
+3     Meadows          R9    15.7373%  Box 5 We Can                 32.4639%  Box 1 What Class             16.7266%
+4     HEALESVILLE      R9    14.3191%  Box 4 Ghost Walker           32.1703%  Box 1 Can't Turn Left        17.8512%
+5     BENDIGO          R10   13.7242%  Box 8 Maximum Sunset         29.7811%  Box 2 Paw Nascent            16.0569%
+6     Meadows          R2    13.4569%  Box 5 Full Bore Lisa         33.4670%  Box 2 Lenny Jack             20.0101%
+7     Mandurah         R10   13.2379%  Box 1 Rippin' Rasputin       32.8859%  Box 8 Forever Fun            19.6480%
+8     Meadows          R1    13.0352%  Box 1 Late Entry             30.1692%  Box 7 Unique Crown           17.1340%
+9     TOWNSVILLE       R10   10.8954%  Box 2 Slim Nikita            23.0252%  Box 3 Hara's Jade            12.1298%
+10    RICHMOND         R11   10.3662%  Box 1 Rare Earth             20.3317%  Box 4 Maximus Meridius        9.9655%
+11    Q STRAIGHT       R6     9.5380%  Box 3 Lost Dragon            27.4670%  Box 2 Name Of Love           17.9290%
+12    HEALESVILLE      R12    9.0298%  Box 8 Zippi Mustang          31.3691%  Box 2 Aussie Savannah        22.3393%
+13    The Gardens      R12    8.4683%  Box 1 Roxy All Over          21.6016%  Box 6 Fascinate Josie        13.1333%
+14    GRAFTON          R2     7.7678%  Box 2 Quick Biscuit          21.4608%  Box 7 Timeless Miss          13.6930%
+15    TOWNSVILLE       R11    7.7214%  Box 8 Fly Like Potter        21.9317%  Box 1 Raymar Fox             14.2103%
+16    BENDIGO          R4     7.1520%  Box 8 Crackerjack Kev        27.2331%  Box 4 Bernardo Blue          20.0811%
+17    HEALESVILLE      R1     6.7676%  Box 4 Take A Rhino           19.0745%  Box 6 Big Darryl             12.3069%
+18    The Gardens      R1     6.0538%  Box 7 Fascinate Vicki        20.9036%  Box 5 Birmingham Tiger       14.8498%
+19    Q STRAIGHT       R11    5.8830%  Box 4 Lauren's Baby          19.0874%  Box 1 All On Black           13.2044%
+20    Meadows          R10    5.8367%  Box 2 Whisky Bella           20.8131%  Box 1 Jumbuk Wang Wang       14.9764%
+21    TOWNSVILLE       R12    5.7045%  Box 2 Miss Rosalea           14.4639%  Box 4 Reckless Ruby           8.7594%
+22    The Gardens      R8     5.4519%  Box 1 Ibrox Reign            18.4471%  Box 2 Jamati Girl            12.9952%
+23    Q STRAIGHT       R3     5.3414%  Box 8 Atomic Beau            15.6448%  Box 4 Bernie Lou             10.3034%
+24    Mandurah         R11    5.2227%  Box 4 West On Pash           23.0845%  Box 1 Lightning Byte         17.8618%
+25    HEALESVILLE      R6     4.9418%  Box 1 Elswyk Sid             18.3097%  Box 2 Preparation            13.3679%
+26    Q STRAIGHT       R4     4.4715%  Box 3 Dynamic Banjo          16.2511%  Box 7 Groot's Galaxy         11.7796%
+27    BENDIGO          R5     3.9692%  Box 2 Lady Rapid             17.2877%  Box 3 Paw Vada               13.3185%
+28    TOWNSVILLE       R8     3.9161%  Box 6 Blendon                15.4171%  Box 2 Hara's Bluey           11.5010%
+29    GOULBURN         R9     3.7680%  Box 4 Dapper Lomar           12.9978%  Box 6 Rapid Strike            9.2298%
+30    The Gardens      R10    3.3515%  Box 1 Hard Style Girl        16.0928%  Box 6 Jasper Darke           12.7413%
+31    HEALESVILLE      R4     3.3050%  Box 4 Always Speedy          14.6458%  Box 3 Rattlin' Round         11.3408%
+32    Q STRAIGHT       R9     3.2338%  Box 4 Shimmering Light       12.3764%  Box 2 Daysea's Tim            9.1426%
+33    RICHMOND         R7     3.2098%  Box 4 Torqued                20.3775%  Box 8 Both Bullets           17.1677%
+34    Mandurah         R1     2.9802%  Box 5 Ruxley                 20.1566%  Box 3 Trunkey Miss           17.1764%
+35    Mandurah         R2     2.9516%  Box 8 Watching Birds         16.6275%  Box 2 Neon Leon              13.6759%
+36    Q STRAIGHT       R1     2.8972%  Box 5 Toeing The Line        12.8275%  Box 3 Goldstar Theo           9.9303%
+37    RICHMOND         R4     2.5998%  Box 1 Active Impulse         18.5843%  Box 3 Freddy Wick            15.9845%
+38    Q STRAIGHT       R8     2.3613%  Box 5 Wolf Creek             29.3099%  Box 1 Pop Said Yes           26.9486%
+39    Q STRAIGHT       R12    2.2698%  Box 3 Go Pockets             13.5629%  Box 6 Vet Kim                11.2931%
+40    The Gardens      R2     1.9792%  Box 2 Big Red Aces           14.2093%  Box 1 Botox Chevy            12.2301%
+41    GOULBURN         R3     1.9772%  Box 5 Affable                14.2399%  Box 6 Knack                  12.2627%
+42    TOWNSVILLE       R6     1.6223%  Box 7 Miss Target            14.1518%  Box 6 Lucky Fireball         12.5295%
+43    GRAFTON          R9     1.5924%  Box 4 Nangar County          12.3620%  Box 1 Premier Bonus          10.7696%
+44    BENDIGO          R6     1.5783%  Box 1 Uruguayan Girl         11.8979%  Box 5 Brindle Road           10.3196%
+45    BENDIGO          R11    1.3830%  Box 4 Paw Elodee             12.6282%  Box 2 Honey Stirrer          11.2452%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 45
+
+🏆 BEST BET: GRAFTON Race 4 - Box 3 Bull Mundy (gap: 19.0577%)
