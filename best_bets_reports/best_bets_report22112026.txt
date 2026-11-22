@@ -1,0 +1,57 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-22 07:44:20 (Sunday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.18%  |  ≥20%: 1 race(s)  |  ≥10%: 11 race(s)  |  Total: 40 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 50 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     SALE             R10   20.0511%  Box 1 Dr. Dylan              35.1831%  Box 4 Zipping Lilo           15.1320%
+2     Q LAKESIDE       R6    17.4625%  Box 8 Sheriff                34.1679%  Box 1 High Court Judge       16.7054%
+3     HEALESVILLE      R5    15.9997%  Box 7 Mystic Rupee           31.3596%  Box 6 Bicep                  15.3599%
+4     Q LAKESIDE       R7    15.9417%  Box 2 Heroic Federer         30.9408%  Box 5 Nobby                  14.9991%
+5     Capalaba         R9    15.7731%  Box 4 Hollywood Hogan        26.8460%  Box 7 Kid You Not            11.0729%
+6     Temora           R12   13.7443%  Box 6 Tiny Bianca            29.7253%  Box 1 Elite Dom              15.9810%
+7     HEALESVILLE      R9    12.9098%  Box 5 Paw Waldo              24.1410%  Box 8 Archie Mcivor          11.2312%
+8     Temora           R1    12.4296%  Box 4 Tullamore Tom          27.0740%  Box 7 Kiando Warrior         14.6444%
+9     GAWLER           R5    12.0133%  Box 4 Long Gully Ash         29.9540%  Box 6 Chicken Knight         17.9407%
+10    GAWLER           R6    10.9802%  Box 5 Lomax Keeping          28.9713%  Box 7 Canya Guru             17.9911%
+11    Capalaba         R8    10.9774%  Box 5 Mystic Bloom           27.8069%  Box 1 Milchick               16.8295%
+12    GAWLER           R3     9.8089%  Box 5 Vista Cadmium          23.1128%  Box 7 Long Gully Beth        13.3039%
+13    ROCKHAMPTON      R3     9.0412%  Box 1 Zipping Olsen          21.3861%  Box 7 Jaggery                12.3449%
+14    NOWRA            R8     8.4379%  Box 2 Cumbria Kai            23.7368%  Box 8 Cumbria Lola           15.2989%
+15    ROCKHAMPTON      R5     8.2195%  Box 6 Out The Bottle         31.9600%  Box 3 Aston Hayes            23.7405%
+16    GAWLER           R2     7.2744%  Box 1 Binnaway Bloom         24.8369%  Box 5 Binnaway Angel         17.5625%
+17    HEALESVILLE      R4     6.8013%  Box 2 Zipping Tesfay         20.4044%  Box 5 Brimson Banner         13.6031%
+18    Q LAKESIDE       R5     5.7235%  Box 7 Dreamer                16.8787%  Box 1 Brunswick Rocket       11.1552%
+19    SALE             R5     5.5710%  Box 8 Kopacki Rit            24.6991%  Box 4 Extremity              19.1281%
+20    GAWLER           R1     5.2982%  Box 4 Echoes Of Dad          32.8746%  Box 8 Bing Bing Slayer       27.5764%
+21    Capalaba         R11    5.0567%  Box 4 Sketchy Story          18.4235%  Box 5 Frog's Rock            13.3668%
+22    Temora           R3     4.9083%  Box 7 Kiando Helena          16.1903%  Box 6 Electric Bandit        11.2820%
+23    Capalaba         R2     4.8738%  Box 6 Lucifer's Aurora       17.6485%  Box 1 Wiggle Rocket          12.7747%
+24    HEALESVILLE      R10    4.6227%  Box 6 Dirty Lulu             16.7940%  Box 1 Resonance              12.1713%
+25    Capalaba         R1     4.5396%  Box 7 Cowboy Up              13.2736%  Box 8 Tilly Time              8.7340%
+26    HEALESVILLE      R11    4.4561%  Box 1 Glasses                26.6667%  Box 8 Got Flair              22.2106%
+27    MT GAMBIER       R1     4.4495%  Box 7 Always A Smile         17.5752%  Box 4 Pick A Cadillac        13.1257%
+28    NOWRA            R6     4.3656%  Box 4 Carpark Indy           14.1721%  Box 8 Sunshine Sandy          9.8065%
+29    Q LAKESIDE       R2     4.0419%  Box 8 Moet Magic             24.4301%  Box 2 Roma Keeping           20.3882%
+30    Capalaba         R10    3.9516%  Box 1 Drink Mickeys          17.1799%  Box 2 Kingsbrae Rex          13.2283%
+31    MT GAMBIER       R10    3.6906%  Box 5 Dimora Bluey           16.4107%  Box 3 Billy Bust Up          12.7201%
+32    Q LAKESIDE       R3     3.6429%  Box 2 Ruby Shine             18.4134%  Box 1 Shot Of Whisky         14.7705%
+33    Temora           R7     2.9166%  Box 4 Ledger's Desire        15.6090%  Box 2 Paw Hart               12.6924%
+34    SALE             R7     2.6917%  Box 7 Full Noise             17.0574%  Box 4 Reality Surprise       14.3657%
+35    Temora           R5     2.1650%  Box 2 Tiggy Yana             14.8934%  Box 4 Flying Gecko           12.7284%
+36    HEALESVILLE      R7     1.9139%  Box 7 Santana Boy            14.4026%  Box 8 Low Block              12.4887%
+37    HEALESVILLE      R8     1.9009%  Box 1 Evil Eye               20.2495%  Box 7 Impetuously            18.3486%
+38    MT GAMBIER       R7     1.6403%  Box 1 Mepunga Infrared       16.9013%  Box 2 Aston Sushi            15.2610%
+39    MT GAMBIER       R4     1.5059%  Box 3 Gus Limes              26.9136%  Box 1 Mick Swagger           25.4077%
+40    Q LAKESIDE       R4     1.4944%  Box 1 Unique Reward          12.3903%  Box 4 Hara's Arya            10.8959%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 40
+
+🏆 BEST BET: SALE Race 10 - Box 1 Dr. Dylan (gap: 20.0511%)
