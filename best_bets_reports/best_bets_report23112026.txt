@@ -1,0 +1,62 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-23 09:55:08 (Monday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.61%  |  ≥20%: 4 race(s)  |  ≥10%: 11 race(s)  |  Total: 45 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 57 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     BALLARAT         R4    32.3252%  Box 4 Bun Quake              51.3315%  Box 1 Scott Aliferous        19.0063%
+2     WARRNAMBOOL      R7    25.7419%  Box 6 Paw Larry              36.7766%  Box 1 Live Forever           11.0347%
+3     SANDOWN          R2    25.4963%  Box 1 Barooga Prince         43.3617%  Box 3 Lies You Told          17.8654%
+4     SANDOWN          R11   22.9145%  Box 2 His Special            46.1675%  Box 3 Paw Cornelius          23.2530%
+5     WARRNAMBOOL      R10   19.2566%  Box 6 Ollie Deeds            35.6588%  Box 3 Saint Mick             16.4022%
+6     SANDOWN          R1    16.5786%  Box 1 Scribe                 33.7767%  Box 4 Cruise Devere          17.1981%
+7     BALLARAT         R1    16.2422%  Box 1 Tsukuyomi              43.2340%  Box 4 Mr. Marshall           26.9918%
+8     Q STRAIGHT       R2    15.1669%  Box 1 On A Roll              34.3851%  Box 4 Three Mates            19.2182%
+9     Maitland         R9    12.9321%  Box 4 Tornado Ethics         26.5015%  Box 5 Money Pit              13.5694%
+10    BALLARAT         R5    12.2247%  Box 1 Major Jealous          27.5419%  Box 3 Scroll Up              15.3172%
+11    WARRNAMBOOL      R5    11.7685%  Box 2 Dorset                 27.3100%  Box 7 Miss Outback           15.5415%
+12    SHEPPARTON       R4     9.7986%  Box 2 Aston Fontaine         27.2226%  Box 5 Paw Reya               17.4240%
+13    Mandurah         R9     9.6633%  Box 1 Zeta Prime             21.2219%  Box 2 Shinboner Smokey       11.5586%
+14    WARRNAMBOOL      R9     8.3371%  Box 8 Inga Amy               20.6686%  Box 2 Lara Moon              12.3315%
+15    BALLARAT         R2     7.8400%  Box 4 Paw Squirtle           37.8693%  Box 1 Raise And Double       30.0293%
+16    Maitland         R2     7.5797%  Box 1 Buzz Bullet            19.3267%  Box 7 Talk To Tiger          11.7470%
+17    WARRNAMBOOL      R1     7.4788%  Box 4 Star Of Night          25.7995%  Box 3 Winter Galaxy          18.3207%
+18    SANDOWN          R3     6.5433%  Box 2 Okay Boss              19.0163%  Box 4 Saint Fishy            12.4730%
+19    Q STRAIGHT       R1     6.3646%  Box 2 Secret Assassin        17.7737%  Box 8 Spanish Tempting       11.4091%
+20    GUNNEDAH         R9     6.0993%  Box 4 Ava's Milo             19.7654%  Box 8 Private Jake           13.6661%
+21    Q STRAIGHT       R10    6.0213%  Box 1 Baby Sass              14.5349%  Box 6 She's Savvy             8.5136%
+22    Maitland         R3     5.9731%  Box 5 Rowdy Syron            15.3074%  Box 4 Jungle Scene            9.3343%
+23    SANDOWN          R8     5.6113%  Box 1 Bold Assail            25.2762%  Box 4 Dazzle You             19.6649%
+24    Mandurah         R2     5.2850%  Box 8 Orana Jasper           17.7250%  Box 1 Big Girl Sal           12.4400%
+25    SHEPPARTON       R1     5.2692%  Box 2 Thermal Flash          16.5963%  Box 7 Ember                  11.3271%
+26    WARRNAMBOOL      R4     4.9796%  Box 4 Trimbole               17.1524%  Box 5 Big White Skier        12.1728%
+27    Q STRAIGHT       R8     4.9589%  Box 2 Staying Alive          15.5064%  Box 8 Luna Rose              10.5475%
+28    GRAFTON          R7     4.8219%  Box 1 Brindle Bonus          17.6837%  Box 2 Benny Trick            12.8618%
+29    Q STRAIGHT       R7     4.7045%  Box 1 Shimmering Miss        17.5019%  Box 4 Supreme Comander       12.7974%
+30    GUNNEDAH         R8     4.3494%  Box 7 Maybe Yes              14.1545%  Box 2 His Fernando            9.8051%
+31    BALLARAT         R8     4.3263%  Box 8 Angry Chief            15.7334%  Box 5 Aston Teresa           11.4071%
+32    GRAFTON          R1     4.1335%  Box 1 Belle Gambler          15.2116%  Box 6 Blazing Alice          11.0781%
+33    Mandurah         R5     3.8642%  Box 4 Major Ace              15.2564%  Box 5 Jolly Ollie            11.3922%
+34    SHEPPARTON       R10    3.2828%  Box 5 Marit Magic            13.0122%  Box 3 Ascend Hibiscus         9.7294%
+35    Maitland         R4     3.2354%  Box 2 Nangar Sky             15.1176%  Box 7 Bentley Elvis          11.8822%
+36    Maitland         R5     3.1415%  Box 5 Our Poppy June         11.0867%  Box 8 Robyn Knows             7.9452%
+37    GUNNEDAH         R2     2.5617%  Box 2 Juneau Quadrant        13.4379%  Box 1 Hacksaw Des            10.8762%
+38    BALLARAT         R11    2.4607%  Box 3 Paw Cheyenne           12.7858%  Box 1 Keijon Barny           10.3251%
+39    SHEPPARTON       R12    2.3272%  Box 2 Wangaroa Wally         12.9122%  Box 1 Paw Yuri               10.5850%
+40    GRAFTON          R11    2.2701%  Box 2 Starstruck             12.0686%  Box 5 Zabdon Skippy           9.7985%
+41    Q STRAIGHT       R4     2.2635%  Box 1 Exhibit                13.3473%  Box 2 Trustful               11.0838%
+42    Mandurah         R3     2.0893%  Box 5 Dodgy Sonny            21.5051%  Box 8 Fearless Nitro         19.4158%
+43    Maitland         R6     1.6118%  Box 1 Tractor Sam            13.8274%  Box 5 Fancy Pay Cheque       12.2156%
+44    BALLARAT         R6     1.3995%  Box 1 Gunai Rambo            15.7644%  Box 3 Beyond Easy            14.3649%
+45    BALLARAT         R3     1.2530%  Box 1 Eight Mates            12.1798%  Box 4 Tribal Advisor         10.9268%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 45
+
+🏆 BEST BET: BALLARAT Race 4 - Box 4 Bun Quake (gap: 32.3252%)
