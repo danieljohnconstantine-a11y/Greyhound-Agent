@@ -1,0 +1,68 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-24 09:41:40 (Tuesday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.30%  |  ≥20%: 2 race(s)  |  ≥10%: 7 race(s)  |  Total: 51 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 81 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     DARWIN           R1    27.0493%  Box 8 So Naive               47.7771%  Box 2 Cockatoo Lodge         20.7278%
+2     Warragul         R6    21.5066%  Box 2 Amron Sammy            38.4740%  Box 1 I'm Easy               16.9674%
+3     GEELONG          R9    14.3779%  Box 3 Mepunga Power          29.4063%  Box 2 Divot                  15.0284%
+4     GAWLER           R2    12.4286%  Box 1 Rev Leon               26.8548%  Box 2 Paducah                14.4262%
+5     GEELONG          R1    12.3727%  Box 8 Zipping Merlina        23.5864%  Box 3 Pale Green Star        11.2137%
+6     Q LAKESIDE       R8    12.2057%  Box 1 Dalgety                26.8047%  Box 3 Bentley Kristoff       14.5990%
+7     Warragul         R7    11.1774%  Box 4 Scott Sigma            23.6994%  Box 1 Brother Doom           12.5220%
+8     Q LAKESIDE       R6     9.9113%  Box 1 No Refund              25.4705%  Box 6 Paper Trail            15.5592%
+9     DARWIN           R2     9.6875%  Box 3 Escaping Time          28.4955%  Box 6 Bluey Baby             18.8080%
+10    WAGGA            R2     8.8362%  Box 8 Don't Declare          21.7188%  Box 3 One Sugar              12.8826%
+11    GAWLER           R3     8.4116%  Box 4 Sebon Knight           23.0291%  Box 6 Mombasa's Best         14.6175%
+12    DARWIN           R7     8.3768%  Box 1 Zelda Chaos            27.1273%  Box 2 Control Bubba          18.7505%
+13    GAWLER           R1     7.9366%  Box 3 Zipping Kramer         24.2526%  Box 5 Here Comes Rhea        16.3160%
+14    Bulli            R3     7.9109%  Box 4 Miss Bansky            17.0049%  Box 5 Jungle Blast            9.0940%
+15    HORSHAM          R11    7.7319%  Box 6 Urging                 19.5295%  Box 8 Paw Geldoff            11.7976%
+16    HOBART           R6     7.1999%  Box 2 On The Graph           21.4358%  Box 6 Highgate Buster        14.2359%
+17    GEELONG          R13    7.0628%  Box 4 Tricky Disco           18.8252%  Box 8 Volts                  11.7624%
+18    Mandurah         R9     6.7973%  Box 8 Supreme Zeus           23.1724%  Box 1 Awaiting               16.3751%
+19    HOBART           R9     6.7639%  Box 3 Inner West             25.7718%  Box 1 Canya All Up           19.0079%
+20    GAWLER           R11    6.4641%  Box 4 Photo Crusher          21.8798%  Box 1 Binnaway Queen         15.4157%
+21    WAGGA            R7     6.3217%  Box 7 Coco Davies            20.2342%  Box 5 Jumping Gem            13.9125%
+22    HORSHAM          R3     6.1247%  Box 1 Cry Baby Giblet        25.9485%  Box 7 Luminaire              19.8238%
+23    Q LAKESIDE       R11    6.0634%  Box 2 Tusken Warrior         19.1428%  Box 8 Bailey Dutton          13.0794%
+24    TOWNSVILLE       R3     5.8816%  Box 2 Slim Nikita            20.1083%  Box 1 Adamant Andy           14.2267%
+25    GAWLER           R6     5.5736%  Box 2 Realistically          20.9731%  Box 4 Take The Hill          15.3995%
+26    WAGGA            R1     5.2985%  Box 7 Wreny Rocket           17.0091%  Box 4 Redwood Lady           11.7106%
+27    TOWNSVILLE       R4     5.2492%  Box 4 Kasey's Way            22.8335%  Box 3 Furious Phantom        17.5843%
+28    Warragul         R2     4.9351%  Box 8 Anthology              24.6970%  Box 1 Aston Zuri             19.7619%
+29    GOSFORD          R8     4.7889%  Box 8 Billy Not Silly        17.2781%  Box 7 Bigbad Maisie          12.4892%
+30    Warragul         R9     4.6998%  Box 2 Crisp                  18.2281%  Box 7 Closed My Eyes         13.5283%
+31    GOSFORD          R6     4.6439%  Box 8 Gunnell Girl           15.5831%  Box 5 Great North            10.9392%
+32    Mandurah         R1     4.5855%  Box 3 Capstone               19.0399%  Box 4 Misbelief              14.4544%
+33    Mandurah         R2     4.2870%  Box 2 Confrontation          20.6386%  Box 3 Jolene Monelli         16.3516%
+34    GEELONG          R8     4.2858%  Box 2 Portland Fonzie        28.9916%  Box 7 Paw Matic              24.7058%
+35    GOSFORD          R2     3.9019%  Box 4 Big Fingers            17.4761%  Box 5 Blazing Bundy          13.5742%
+36    Mandurah         R5     3.8788%  Box 3 Geralt Jet             22.6724%  Box 8 Fergie's Inferno       18.7936%
+37    GAWLER           R12    3.7373%  Box 4 Dashing Darley         20.9295%  Box 2 I'm My Design          17.1922%
+38    GOSFORD          R10    3.5243%  Box 7 Lost Compass           14.1308%  Box 2 Bella Zest             10.6065%
+39    HORSHAM          R5     3.5071%  Box 2 Quick Aussie           13.7289%  Box 5 Paw Irulan             10.2218%
+40    Mandurah         R4     3.5007%  Box 2 Mach Speed             13.9114%  Box 3 Bing Bing Jet          10.4107%
+41    HORSHAM          R2     2.9461%  Box 7 Capital Currency       16.9682%  Box 1 Torpedo Giblet         14.0221%
+42    Q LAKESIDE       R5     2.9263%  Box 1 Never Giving Up        14.6939%  Box 2 Bundaleer Queen        11.7676%
+43    Mandurah         R3     2.7770%  Box 8 Jalani Monelli         15.6586%  Box 2 Smooth Sarge           12.8816%
+44    Warragul         R8     2.7451%  Box 1 Paw Quebec             15.4123%  Box 2 Paw Zhana              12.6672%
+45    GAWLER           R9     2.6445%  Box 2 Fancy In Design        17.0460%  Box 1 Sebon Prince           14.4015%
+46    WAGGA            R5     2.5508%  Box 3 Paw Lilibet            32.3643%  Box 1 Pay Time               29.8135%
+47    GAWLER           R7     2.4765%  Box 2 All The Sass           20.2415%  Box 4 Naturalism             17.7650%
+48    HORSHAM          R8     1.6987%  Box 1 Paw Lampades           11.2441%  Box 2 Moraine Damian          9.5454%
+49    Bulli            R6     1.4741%  Box 7 Downhill Flyer         11.1218%  Box 3 Celestial Moon          9.6477%
+50    TOWNSVILLE       R5     1.3201%  Box 8 White Car              12.5439%  Box 7 Bit Fancy Nancy        11.2238%
+51    HOBART           R4     1.2524%  Box 8 Zipping Largo          21.4822%  Box 7 Lester Rhode           20.2298%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 51
+
+🏆 BEST BET: DARWIN Race 1 - Box 8 So Naive (gap: 27.0493%)
