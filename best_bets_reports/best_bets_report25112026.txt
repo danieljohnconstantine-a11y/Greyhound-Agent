@@ -1,0 +1,68 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-25 10:49:15 (Wednesday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.52%  |  ≥20%: 1 race(s)  |  ≥10%: 10 race(s)  |  Total: 51 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 49 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     BENDIGO          R12   28.3448%  Box 1 Chain Drive            38.5362%  Box 3 Forged Iron            10.1914%
+2     Q LAKESIDE       R8    17.6217%  Box 4 One Last Beer          31.1475%  Box 8 Milo Davis             13.5258%
+3     Q LAKESIDE       R6    16.0577%  Box 5 Best Yet               30.6736%  Box 1 Noaki Uno              14.6159%
+4     BENDIGO          R9    14.6083%  Box 3 Not Sorry              25.8254%  Box 8 Bayini                 11.2171%
+5     ROCKHAMPTON      R1    14.5986%  Box 8 Lemnos Lass            24.4814%  Box 7 Love Note               9.8828%
+6     BENDIGO          R3    12.8008%  Box 3 Delta Devere           22.1669%  Box 2 Whodat Mustang          9.3661%
+7     Capalaba         R3    12.3047%  Box 4 Nile Keeping           26.1259%  Box 6 Midnight Monica        13.8212%
+8     Cannington       R11   11.9500%  Box 2 Burning Kuna           21.5783%  Box 1 Jayde Mccool            9.6283%
+9     MURRAY BDGE STRAIGHT R2    10.6348%  Box 1 King Toby              25.1663%  Box 8 Spring Diesel          14.5315%
+10    RICHMOND         R1    10.2816%  Box 8 Integrity Row          21.5056%  Box 1 Shut The Shop          11.2240%
+11    Cannington       R10    9.8694%  Box 1 Ashton Keeping         19.9085%  Box 7 Whacky Do              10.0391%
+12    RICHMOND         R10    9.0142%  Box 3 Anjo Princess          22.3468%  Box 5 Let's Go Jill          13.3326%
+13    NOWRA            R6     8.4780%  Box 5 Zipping Ferlazzo       20.1736%  Box 7 Orson Bob              11.6956%
+14    Cannington       R1     7.9614%  Box 5 Disarmed               22.9154%  Box 1 Bootleg Boy            14.9540%
+15    RICHMOND         R2     7.4505%  Box 4 Sweet City Halo        23.2916%  Box 2 Ace To Burn            15.8411%
+16    BALLARAT         R2     6.8825%  Box 8 Astor Ones             20.6414%  Box 1 Spend A Lot            13.7589%
+17    NOWRA            R1     6.8823%  Box 8 Abbey Rose             24.1717%  Box 7 Tennessee Jet          17.2894%
+18    BALLARAT         R5     6.7230%  Box 2 Tequila Blinder        19.3428%  Box 1 Promote Tilly          12.6198%
+19    BALLARAT         R14    6.4662%  Box 4 Paw Judd               21.2380%  Box 1 Mrs. Tiggywinkle       14.7718%
+20    Capalaba         R8     6.2339%  Box 1 Winter Whisky          20.3877%  Box 7 My Mate Nick           14.1538%
+21    Capalaba         R7     6.2119%  Box 1 Kachina Ripple         24.2761%  Box 2 Cashed Up Rhi          18.0642%
+22    BALLARAT         R13    6.2064%  Box 1 Paw Uma                23.6604%  Box 2 Zipping Tesfay         17.4540%
+23    RICHMOND         R6     6.1748%  Box 2 Canya Win Coin         20.0482%  Box 7 Charlotte's Rosie      13.8734%
+24    BALLARAT         R6     5.5628%  Box 4 Melt Max               18.4881%  Box 1 Ransom                 12.9253%
+25    Capalaba         R1     5.5560%  Box 4 Cowboy Up              19.0088%  Box 7 Lucifer's Aurora       13.4528%
+26    BENDIGO          R11    5.5211%  Box 4 Kraken Zack            14.7452%  Box 8 Call It Fate            9.2241%
+27    RICHMOND         R9     5.3632%  Box 2 Fliegen                24.6002%  Box 1 Red Hot Wren           19.2370%
+28    ROCKHAMPTON      R5     5.0964%  Box 8 Canya Azure            17.8746%  Box 6 Jester Beach           12.7782%
+29    ROCKHAMPTON      R6     4.1251%  Box 5 Super Seaplane         18.0965%  Box 3 Fiery Words            13.9714%
+30    BALLARAT         R10    4.0233%  Box 6 Morning Dawn           17.2230%  Box 8 Canya Kick It          13.1997%
+31    BALLARAT         R1     3.9112%  Box 4 Mayglass               20.4911%  Box 1 Here For Snacks        16.5799%
+32    BENDIGO          R4     3.2910%  Box 1 Taltarni Bodine        13.2714%  Box 4 Miss Bec                9.9804%
+33    Q LAKESIDE       R12    3.2822%  Box 2 Amazing Miley          15.3907%  Box 3 Dodgem Jet             12.1085%
+34    MURRAY BDGE STRAIGHT R1     3.1350%  Box 2 Terrific Benji         16.9076%  Box 5 Sticky Mango           13.7726%
+35    Capalaba         R4     3.0460%  Box 3 Drink Twisties         14.6916%  Box 7 Speedy Ben             11.6456%
+36    Cannington       R2     2.9887%  Box 2 Counterstrike          34.7208%  Box 1 Colonel The Boss       31.7321%
+37    BENDIGO          R2     2.9232%  Box 7 Tsukuyomi              12.2878%  Box 1 Justice Denied          9.3646%
+38    Cannington       R9     2.8452%  Box 1 West On Halo           13.4965%  Box 8 Global Chat            10.6513%
+39    BALLARAT         R7     2.8322%  Box 4 Paw Zuri               14.2548%  Box 2 Black Marvel           11.4226%
+40    ROCKHAMPTON      R2     2.7011%  Box 2 Edgewood               19.0232%  Box 4 Spring Oliver          16.3221%
+41    RICHMOND         R3     2.5848%  Box 4 Wolfman Sid            17.1736%  Box 2 Georgina Rose          14.5888%
+42    Q LAKESIDE       R10    2.5334%  Box 4 Redeemer's Way         25.0758%  Box 5 Axel's Run             22.5424%
+43    Cannington       R6     2.4678%  Box 1 Miss Jelly             12.8669%  Box 8 Aston Michelle         10.3991%
+44    BENDIGO          R13    2.4000%  Box 6 My Name's Evelyn       13.9231%  Box 4 Bogan Bend             11.5231%
+45    Q LAKESIDE       R5     2.2891%  Box 1 Arka Solar             12.5201%  Box 6 Madrid                 10.2310%
+46    NOWRA            R4     2.1158%  Box 5 Skedaddle Lulu         15.2658%  Box 2 Freddy Live Wire       13.1500%
+47    BENDIGO          R6     2.0728%  Box 1 Doongalla Serena       15.1012%  Box 8 Reggae Miss            13.0284%
+48    ROCKHAMPTON      R3     1.9434%  Box 1 Legends Told           17.8605%  Box 4 Dixie Dean             15.9171%
+49    Cannington       R5     1.8918%  Box 2 Tori Keeping           13.8581%  Box 4 Cootamundra Lad        11.9663%
+50    Q LAKESIDE       R4     1.6456%  Box 2 Dashing Turbo          17.0843%  Box 1 Goldstar Harmony       15.4387%
+51    Q LAKESIDE       R2     1.6236%  Box 5 Shian Kenzie           12.2583%  Box 8 Stack Of Dreams        10.6347%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 51
+
+🏆 BEST BET: BENDIGO Race 12 - Box 1 Chain Drive (gap: 28.3448%)
