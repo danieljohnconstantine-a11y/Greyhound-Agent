@@ -1,0 +1,61 @@
+================================================================================
+BEST BETS RANKING REPORT
+Generated: 2026-11-27 10:24:48 (Friday)
+Races ranked by score gap between 1st and 2nd place dogs.
+Largest gap = strongest model confidence / best bet.
+================================================================================
+📊 GAP SUMMARY: median 5.47%  |  ≥20%: 3 race(s)  |  ≥10%: 9 race(s)  |  Total: 44 races
+================================================================================
+
+⚠️  Confidence guardrail excluded 64 low-edge race(s) from best-bet ranking.
+Rank  Track            Race       Gap  1st Dog                        1st%  2nd Dog                        2nd%
+----------------------------------------------------------------------------------------------------
+1     GEELONG          R11   26.7582%  Box 1 Zari Exact             38.4883%  Box 4 Flash Dash             11.7301%
+2     Meadows          R10   26.2454%  Box 2 Bounding Chief         40.2068%  Box 7 Paw Gregson            13.9614%
+3     GRAFTON          R7    20.3650%  Box 7 Just For Kicks         34.2380%  Box 2 Log On                 13.8730%
+4     GAWLER           R4    17.3649%  Box 1 Minh Jack              35.8310%  Box 8 Cool Blue You          18.4661%
+5     The Gardens      R1    13.9137%  Box 2 Fascinate Vicki        34.9677%  Box 4 Send It Ace            21.0540%
+6     Meadows          R8    11.6582%  Box 1 Quest For Storm        24.9067%  Box 4 Greysynd Bonnie        13.2485%
+7     Q LAKESIDE       R4    11.2268%  Box 5 Sunset Dreaming        22.6900%  Box 2 Aim High               11.4632%
+8     HEALESVILLE      R10   10.3035%  Box 7 Suave                  22.4801%  Box 8 Winnaleah              12.1766%
+9     RICHMOND         R11   10.2997%  Box 1 Freddy Wick            29.3039%  Box 2 Beza Bullets           19.0042%
+10    Meadows          R5     9.4959%  Box 1 We Can                 24.0255%  Box 8 Stop And Stare         14.5296%
+11    GOULBURN         R5     9.4246%  Box 8 Clock Winder           21.6607%  Box 4 Cash And Coins         12.2361%
+12    HEALESVILLE      R2     9.2977%  Box 5 Aston Pinnacle         18.6716%  Box 8 Elusive Cazz            9.3739%
+13    GAWLER           R8     9.2805%  Box 3 Ribery                 25.6526%  Box 6 Sokai                  16.3721%
+14    Q LAKESIDE       R2     8.6590%  Box 4 Top Tier               27.9791%  Box 1 Scurrilous             19.3201%
+15    GEELONG          R4     8.4520%  Box 8 Above Them All         23.2597%  Box 3 Southern Style         14.8077%
+16    RICHMOND         R9     7.8019%  Box 1 Cry In Shame           19.2602%  Box 6 Big Bluey              11.4583%
+17    GOULBURN         R7     7.0843%  Box 4 Elite Soldier          23.6318%  Box 1 Doolan Grand           16.5475%
+18    GOULBURN         R2     6.4301%  Box 4 Manton Cobber          17.1649%  Box 2 Super Sleeper          10.7348%
+19    HEALESVILLE      R11    6.1111%  Box 1 Dim Sim Rixi           16.9310%  Box 2 Tiger Princess         10.8199%
+20    RICHMOND         R5     5.6753%  Box 1 Queen Caramel          18.5723%  Box 3 Spanish Brook          12.8970%
+21    GRAFTON          R1     5.6119%  Box 1 Bundy On Ice           16.8859%  Box 2 Blue Lomar             11.2740%
+22    RICHMOND         R10    5.5398%  Box 8 Silent Minute          19.4483%  Box 1 Mister Anatoly         13.9085%
+23    The Gardens      R10    5.4001%  Box 4 Merry Myrtle           18.2809%  Box 2 Jamaica Rum            12.8808%
+24    GOULBURN         R4     5.3043%  Box 2 Grasscutter Moe        18.0013%  Box 1 Lone Rustler           12.6970%
+25    Meadows          R3     5.2733%  Box 1 Dusen Luna             22.4807%  Box 8 Perfect Picture        17.2074%
+26    The Gardens      R12    4.7929%  Box 6 Fifty Fifty Ace        17.2677%  Box 8 Missy Mischief         12.4748%
+27    Mandurah         R6     4.3273%  Box 5 Rad Ripper             23.7438%  Box 1 Sunset Silence         19.4165%
+28    The Gardens      R3     4.0502%  Box 1 Stock's Gift           14.2767%  Box 7 Walk The Talk          10.2265%
+29    Q LAKESIDE       R1     3.9328%  Box 2 Cha Cha Sheree         13.9039%  Box 3 Pretty To See           9.9711%
+30    GAWLER           R6     3.8264%  Box 5 Izzy Letts             18.7558%  Box 2 Adhana Annie           14.9294%
+31    GRAFTON          R3     3.7070%  Box 2 Heroic Federer         18.4369%  Box 4 So Refined             14.7299%
+32    Q LAKESIDE       R6     3.5779%  Box 8 Another Scrub          23.3758%  Box 7 Kairanga               19.7979%
+33    GOULBURN         R8     3.0360%  Box 8 Giggle Hat             14.5854%  Box 4 Jacobite Battle        11.5494%
+34    HEALESVILLE      R1     2.9254%  Box 3 Raise And Double       14.7623%  Box 7 Doongalla Eve          11.8369%
+35    The Gardens      R5     2.7825%  Box 1 Alfie's Pop            12.6753%  Box 4 Able Rival              9.8928%
+36    GEELONG          R7     2.6871%  Box 6 Mandolin Storm         22.1214%  Box 1 Go Home Girl           19.4343%
+37    GEELONG          R6     2.6750%  Box 1 Devington              23.5794%  Box 6 Deep Thinker           20.9044%
+38    GOULBURN         R6     2.1501%  Box 4 Lumeah Matilda         14.1932%  Box 1 Lone Ransom            12.0431%
+39    Mandurah         R2     2.0468%  Box 7 Ruxley                 16.5696%  Box 4 Crenshaw King          14.5228%
+40    Q LAKESIDE       R8     1.9727%  Box 4 Tusken Wind            16.6215%  Box 7 Typhoon Saskia         14.6488%
+41    RICHMOND         R8     1.7035%  Box 5 Excessive Wheels       13.8670%  Box 1 Tap Out Johnny         12.1635%
+42    Mandurah         R3     1.3600%  Box 6 No Truth Here          12.1122%  Box 5 Malcolm Byte           10.7522%
+43    RICHMOND         R7     1.3027%  Box 8 Akii Alejandro         14.6361%  Box 3 Kid Power              13.3334%
+44    The Gardens      R6     1.2768%  Box 7 Starry Ethics          10.6266%  Box 6 Thrill Seeker           9.3498%
+----------------------------------------------------------------------------------------------------
+
+Total races ranked: 44
+
+🏆 BEST BET: GEELONG Race 11 - Box 1 Zari Exact (gap: 26.7582%)
